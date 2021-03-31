@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/ui/auth/login.dart';
+import 'package:tct_demographics/ui/home/homescreen.dart';
+import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
       title: appName,
       debugShowCheckedModeBanner: false,
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
         //accentColor: accentColor,
         //splashColor: primaryColor,
       ),
-      home: LoginScreen(),
+      home: HomeScreen(),
       getPages: [],
     );
   }
