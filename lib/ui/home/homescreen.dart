@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
-import 'package:tct_demographics/widgets/button_widget.dart';
+import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,13 +19,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenScreenState extends State<HomeScreen> {
-  int _currentStep = 0;
-  FocusNode mailFocusNode = new FocusNode();
-  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
+
+  List<Result> users;
   @override
   void initState(){
     super.initState();
+    users = Result.getUser();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -82,7 +81,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imgBG),
@@ -105,14 +103,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top:24.0,left: 30.0,right: 30.0,bottom: 24.0),
                         child: TextWidget(
-                          text: totalRecords,
+                          text: totalRecords + "(360)",
                           color: darkColor,
                           weight:  FontWeight.w600,
                           size: 24,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:24.0,left: 30.0,right: 30.0,bottom: 24.0),
+                        padding: const EdgeInsets.only(right:30.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -122,42 +120,27 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: Colors.black45,
+                                    style: BorderStyle.solid,
+                                    width: 1.0,
+                                  ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.search),
-                                    SizedBox(width: 10,),
-                                    TextWidget(
-                                      text: search,
-                                      color: darkColor,
-                                      weight:  FontWeight.w600,
-                                      size: 24,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 50,),
-                            InkWell(
-                              onTap: (){
-
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.filter_list_sharp),
-                                    SizedBox(width: 10,),
-                                    TextWidget(
-                                      text: filter,
-                                      color: darkColor,
-                                      weight:  FontWeight.w600,
-                                      size: 24,
-                                    ),
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.search),
+                                      SizedBox(width: 10,),
+                                      TextWidget(
+                                        text: search,
+                                        color: darkColor,
+                                        weight:  FontWeight.w800,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -168,48 +151,157 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: Colors.black45,
+                                    style: BorderStyle.solid,
+                                    width: 1.0,
+                                  ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.add),
-                                    SizedBox(width: 10,),
-                                    TextWidget(
-                                      text: addNew,
-                                      color: darkColor,
-                                      weight:  FontWeight.w600,
-                                      size: 24,
-                                    ),
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.filter_list_sharp),
+                                      SizedBox(width: 10,),
+                                      TextWidget(
+                                        text: filter,
+                                        color: darkColor,
+                                        weight:  FontWeight.w800,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 50,),
+                            InkWell(
+                              onTap: (){
+
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: Colors.black45,
+                                    style: BorderStyle.solid,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.add),
+                                      SizedBox(width: 10,),
+                                      TextWidget(
+                                        text: addNew,
+                                        color: darkColor,
+                                        weight:  FontWeight.w800,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Divider(thickness: 1.5,),
                     ],
                   ),
-                  AspectRatio(
-                    aspectRatio: 24/10,
-                    child: ListView(
-                      children:[
-                        PaginatedDataTable(
+                  Divider(height: 1,),
+                  SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: AspectRatio(
+                      aspectRatio: 24/10,
+                      child: DataTable(
                             columns: [
-                              DataColumn(label: Text('Header A')),
-                              DataColumn(label: Text('Header B')),
-                              DataColumn(label: Text('Header C')),
-                              DataColumn(label: Text('Header D')),
-                              DataColumn(label: Text('Header A')),
-                              DataColumn(label: Text('Header B')),
-                              DataColumn(label: Text('Header C')),
-                            ],
-                          source: _DataSource(context),
+                              DataColumn(label: Text(familyHead)),
+                              DataColumn(label: Text(age),numeric: true),
+                              DataColumn(label: Text(mobile),numeric: true),
+                              DataColumn(label: Text(villageCode),numeric: true),
+                              DataColumn(label: Text(zone),numeric: true),
+                              DataColumn(label: Text(status)),
+                              DataColumn(label: Text(action)),
 
+                            ],
+                            rows: users.map((users) =>
+                                DataRow(
+                                    cells: [
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.only(left:8.0),
+                                                height: 30,
+                                                width: 30,
+                                                decoration: new BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: new DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image: new AssetImage(user)
+                                                    )
+                                                )
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Text(users.familyHead)
+                                          ],
+                                        )
+                                      ),
+                                      DataCell(Text(users.age)),
+                                      DataCell(Text(users.mobile)),
+                                      DataCell(Text(users.villageCode)),
+                                      DataCell(Text(users.zone)),
+                                      DataCell(Text(users.status)),
+                                      DataCell(
+                                        Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: (){
+
+                                              },
+                                              child: Icon(Icons.edit),
+                                            ),
+                                            SizedBox(width: 20,),
+                                            InkWell(
+                                              onTap: (){
+
+                                              },
+                                              child: Icon(Icons.delete),
+                                            )
+                                          ],
+                                        )
+                                      ),
+                                    ]
+                                )
+                            ).toList(),
+                          )
+
+
+                        // child: ListView(
+                        //   children:[
+                        //     PaginatedDataTable(
+                        //       showCheckboxColumn: false,
+                        //       sortAscending: true,
+                        //         columns: [
+                        //           DataColumn(label: Text(familyHead)),
+                        //           DataColumn(label: Text(age)),
+                        //           DataColumn(label: Text(mobile)),
+                        //           DataColumn(label: Text(villageCode)),
+                        //           DataColumn(label: Text(zone)),
+                        //           DataColumn(label: Text(status)),
+                        //           DataColumn(label: Text(action)),
+                        //         ],
+                        //       source: _DataSource(context),
+                        //
+                        //   ),
+                        //   ]
+                        // ),
                       ),
-                      ]
                     ),
-                  )
+
 
                 ],
               ),
@@ -219,41 +311,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
       ),
     );
-  }
-
-
-  tapped(int step) {
-    //setState(() => _currentStep = step);
-  }
-
-  continued() {
-    // if (_currentStep < 1) {
-    //   setState(() {
-    //     if (_formKey.currentState.validate()) {
-    //       if (_formKey != null) {
-    //         _formKey.currentState.save();
-    //         _currentStep += 1;
-    //       }
-    //     }
-    //   });
-    // } else if (_currentStep >= 1) {
-    //   setState(() {
-    //     if (_stepTwoKey.currentState.validate()) {
-    //       if (_stepTwoKey != null) {
-    //         _stepTwoKey.currentState.save();
-    //
-    //       }
-    //     }
-    //   });
-    // }
-    // _currentStep < 2 ? setState(() => _currentStep += 1) : null;
-  }
-
-  cancel() {
-    // _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
-    // _stepTwoKey.currentState.reset();
-    // _formKey.currentState.reset();
-
   }
 }
 

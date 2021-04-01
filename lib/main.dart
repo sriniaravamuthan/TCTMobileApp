@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/ui/auth/login.dart';
+import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
 import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
 
@@ -32,8 +33,13 @@ class MyApp extends StatelessWidget {
         //accentColor: accentColor,
         //splashColor: primaryColor,
       ),
-      home: LoginScreen(),
-      getPages: [],
+      home: DetailScreen(),
+      getPages: [
+        GetPage(name: '/homeScreen', page: () => HomeScreen()),
+        GetPage(name: '/loginScreen', page: () => LoginScreen()),
+        GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
+        GetPage(name: '/DetailScreen', page: () => DetailScreen()),
+      ],
     );
   }
 }
