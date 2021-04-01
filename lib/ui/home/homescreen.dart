@@ -11,6 +11,7 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/models/tabledata_model.dart';
+import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -76,7 +77,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   ],
                 )
             ),
-
           ],
         ),
       ),
@@ -116,7 +116,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           children: [
                             InkWell(
                               onTap: (){
-
+                                AlertDialogWidget();
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -267,7 +267,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             SizedBox(width: 20,),
                                             InkWell(
                                               onTap: (){
+                                                setState(() {
+                                                  AlertDialogWidget(
+                                                    text: "permenantly Delete",
+                                                    onPressed: (){
+                                                      setState(() {
 
+                                                      });
+                                                    },
+                                                  );
+                                                });
                                               },
                                               child: Icon(Icons.delete),
                                             )
