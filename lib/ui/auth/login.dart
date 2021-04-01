@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(left:200.0,right: 200.0),
+            padding: const EdgeInsets.only(top:150.0,left:200.0,right: 200.0,bottom: 150.0),
             child: Card(
               elevation: 6.0,
               shape: RoundedRectangleBorder(
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     borderSide: BorderSide.none,
                                     borderRadius:
                                     BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                        bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 20,),
                               TextFormField(
                                 focusNode: mailFocusNode,
-                                textInputAction: TextInputAction.next,
+                                textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   counterText: "",

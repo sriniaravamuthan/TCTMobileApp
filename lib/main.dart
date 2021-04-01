@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         //accentColor: accentColor,
         //splashColor: primaryColor,
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
       getPages: [],
     );
   }
