@@ -12,6 +12,7 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
+import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
@@ -866,6 +867,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             content:FamilyMemberStep(),
                             isActive: _currentStep >= 0,
                             state: _currentStep >= 1 ?
+                            StepState.complete : StepState.disabled,
+                          ),
+                          Step(
+                            title: TextWidget(
+                              text: property,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                            content:PropertyDetailStep(),
+                            isActive: _currentStep >= 0,
+                            state: _currentStep >= 2 ?
                             StepState.complete : StepState.disabled,
                           )
                         ],

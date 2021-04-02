@@ -53,5 +53,23 @@ const String smartphone ="Smartphone?";
 const String community ="Community";
 const String caste ="Caste (optional)";
 
+//property
+const String statusHouse="Status of House";
+const String typeofHouse ="Type of House";
+const String toiletFacilityatHome ="Toilet Facility at Home?";
+const String ownsanyLand ="Owns any Land?";
+const String wetLandinacres ="Wet Land in acres";
+const String dryLandinacres ="Dry Land in acres";
+const String OwnsanyVehicle ="Owns any Vehicle?";
+const String NoofVehiclesOwned ="No. of Vehicles Owned";
+const String twoWheeler ="Two Wheeler";
+const String threeWheeler ="Three Wheeler";
+const String fourWheeler ="Four Wheeler";
+const String other ="Others";
+const String ownsanyLivestock ="Owns any Livestock?";
+const String livestockType ="Livestock Type";
+const String livestockCount ="Livestock Count";
+
+
 
 
