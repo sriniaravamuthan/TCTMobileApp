@@ -24,11 +24,13 @@ class _HabitsStepState extends State<HabitsStep> {
     return Form(
       key: _stepFourKey,
       child: Column(
+
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: statusHouse,
+              text: Anymemberswhosmoke,
               size: 18,
               weight: FontWeight.w600,
             ),
@@ -53,7 +55,7 @@ class _HabitsStepState extends State<HabitsStep> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: statusHouse,
+              text: AnymemberswhoDrink,
               size: 18,
               weight: FontWeight.w600,
             ),
@@ -78,7 +80,7 @@ class _HabitsStepState extends State<HabitsStep> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: statusHouse,
+              text: AnymemberswhouseTobacco,
               size: 18,
               weight: FontWeight.w600,
             ),

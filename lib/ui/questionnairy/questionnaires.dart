@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
@@ -865,7 +866,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                   size: 14,
                                   weight: FontWeight.w600,
                                 ),
-                            content:FamilyMemberStep(),
+                            content:FamilyMemberDetails(),
                             isActive: _currentStep >= 0,
                             state: _currentStep >= 1 ?
                             StepState.complete : StepState.disabled,
@@ -902,7 +903,19 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right:50.0,bottom: 50.0),
+        child: FloatingActionButton(
+          // isExtended: true,
+          child: Icon(Icons.done,size: 30,),
+          backgroundColor: primaryColor,
+          onPressed: () {
+            setState(() {
 
+            });
+          },
+        ),
       ),
     );
   }
@@ -911,8 +924,24 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   }
 
   continued() {
-    _currentStep < 2 ?
-    setState(() => _currentStep += 1): null;
+    // _currentStep < 2 ?
+    // setState(() => _currentStep += 1): null;
+    // debugPrint("_currentStep: $_currentStep");
+
+    if(_currentStep < 1){
+      setState(() {
+        _currentStep += 1;
+      });
+    }else if(_currentStep < 2){
+      setState(() {
+        _currentStep += 1;
+      });
+    }else if(_currentStep < 3){
+      setState(() {
+        _currentStep += 1;
+      });
+    }
+    debugPrint("_currentStep: $_currentStep");
   }
 
   cancel() {

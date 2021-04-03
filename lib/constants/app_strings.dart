@@ -52,6 +52,8 @@ const String email ="Email";
 const String smartphone ="Smartphone?";
 const String community ="Community";
 const String caste ="Caste (optional)";
+const String insurance="insurance";
+const String pension ="Pension";
 
 //property
 const String statusHouse="Status of House";
@@ -70,6 +72,12 @@ const String ownsanyLivestock ="Owns any Livestock?";
 const String livestockType ="Livestock Type";
 const String livestockCount ="Livestock Count";
 
+//habbit
+const String Anymemberswhosmoke="Any members who smoke?";
+const String AnymemberswhoDrink ="Any members who Drink?";
+const String AnymemberswhouseTobacco ="Any members who use Tobacco?";
+
+const String addFamilyMember="add Family Members";
 
 
 
