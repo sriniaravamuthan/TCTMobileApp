@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         //accentColor: accentColor,
         //splashColor: primaryColor,
       ),
-      home: QuestionnairesScreen(),
+      home: LoginScreen(),
       getPages: [
         GetPage(name: '/homeScreen', page: () => HomeScreen()),
         GetPage(name: '/loginScreen', page: () => LoginScreen()),

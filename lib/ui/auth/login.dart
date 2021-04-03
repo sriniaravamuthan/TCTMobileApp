@@ -15,11 +15,16 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imgBG),
             fit: BoxFit.cover,
+            colorFilter:
+            ColorFilter.mode(primaryColor.withOpacity(0.2),
+                BlendMode.dstIn),
           ),
+
         ),
         child: Align(
           alignment: Alignment.center,

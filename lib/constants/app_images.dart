@@ -6,6 +6,6 @@
  * /
  */
 
-const imgLightLogo = "assets/images/tctDumyLogo.png";
+const imgLightLogo = "assets/images/tctLogo.png";
 const imgBG = "assets/images/tctBg.png";
 const user = "assets/images/user.png";
