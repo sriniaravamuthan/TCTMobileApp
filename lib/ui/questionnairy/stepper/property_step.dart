@@ -18,6 +18,8 @@ class PropertyDetailStep extends StatefulWidget {
 
 class _PropertyDetailStepState extends State<PropertyDetailStep> {
   GlobalKey<FormState> _stepThreeKey = new GlobalKey<FormState>();
+  bool isSwitched = false;
+  var textValue = 'Yes';
   @override
   Widget build(BuildContext context) {
     return  Form(
@@ -47,57 +49,53 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
+                          child: DropdownButtonFormField<String>(
+                            isExpanded: true,
                             decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                              border: new OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderSide:
+                                BorderSide(color: lightGreyColor),
+                              ),
+
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderSide:
+                                BorderSide(color: lightGreyColor),
+                              ),
+                            ),
+                            //value: _chosenGender,
+                            validator: (value) => value == null
+                                ? 'Source Type must not be empty'
+                                : null,
+                            // onChanged: (value) =>
+                            //     setState(() => _chosenGender = value),
+                            items: <String>[
+                              'Male',
+                              'Female',
+                              'Others',
+                            ].map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: TextWidget(
+                                      text: value,
+                                      color: darkColor,
+                                      weight: FontWeight.w400,
+                                      size: 16,
+                                    ),
+                                  );
+                                }).toList(),
                           ),
                         ),
                       ],
@@ -123,57 +121,53 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
+                          child: DropdownButtonFormField<String>(
+                            isExpanded: true,
                             decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                              border: new OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderSide:
+                                BorderSide(color: lightGreyColor),
+                              ),
+
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.only(topRight :Radius.circular(50.0),
+                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderSide:
+                                BorderSide(color: lightGreyColor),
+                              ),
+                            ),
+                            //value: _chosenGender,
+                            validator: (value) => value == null
+                                ? 'Source Type must not be empty'
+                                : null,
+                            // onChanged: (value) =>
+                            //     setState(() => _chosenGender = value),
+                            items: <String>[
+                              'Male',
+                              'Female',
+                              'Others',
+                            ].map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: TextWidget(
+                                      text: value,
+                                      color: darkColor,
+                                      weight: FontWeight.w400,
+                                      size: 16,
+                                    ),
+                                  );
+                                }).toList(),
                           ),
                         ),
                       ],
@@ -200,57 +194,22 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child:Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch,
+                                value: isSwitched,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: "No",
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -281,57 +240,22 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child:Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch,
+                                value: isSwitched,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: "No",
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -514,57 +438,22 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child:Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch,
+                                value: isSwitched,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: "No",
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -975,57 +864,22 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child:Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch,
+                                value: isSwitched,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: "No",
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -1191,5 +1045,24 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
         ],
       ),
     );
+  }
+  void toggleSwitch(bool value) {
+
+    if(isSwitched == false)
+    {
+      setState(() {
+        isSwitched = true;
+        textValue = 'Switch Button is ON';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched = false;
+        textValue = 'Switch Button is OFF';
+      });
+      print('Switch Button is OFF');
+    }
   }
 }

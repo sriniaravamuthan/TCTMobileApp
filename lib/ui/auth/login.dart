@@ -179,7 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
 
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(height: 30,),
                               Material(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(40.0)),
@@ -192,12 +192,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(100.0),
                                   child: Icon(
                                     Icons.keyboard_arrow_right,
-                                    size: 50,
+                                    size: 60,
                                     color: lightColor,
                                   ),
                                 ),
                               ),
-
 
                             ],
                           ),

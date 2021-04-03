@@ -326,10 +326,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.all(10.0),
-                                                      child: TextFormField(
-                                                        textInputAction: TextInputAction.next,
-                                                        autocorrect: true,
-                                                        enableSuggestions: true,
+                                                      child: DropdownButtonFormField<String>(
+                                                        isExpanded: true,
                                                         decoration: InputDecoration(
                                                             border: new OutlineInputBorder(
                                                               borderSide: BorderSide.none,
@@ -344,20 +342,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               borderSide:
                                                               BorderSide(color: lightGreyColor),
                                                             ),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedErrorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
+
                                                             errorBorder: OutlineInputBorder(
                                                               borderRadius:
                                                               BorderRadius.only(topRight :Radius.circular(50.0),
@@ -365,18 +350,29 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               borderSide:
                                                               BorderSide(color: lightGreyColor),
                                                             ),
-                                                            fillColor: lightGreyColor),
-                                                        keyboardType: TextInputType.text,
-                                                        onSaved: (String val) {
-                                                          setState(() {});
-                                                        },
-                                                        validator: (value) {
-                                                          if (value.isEmpty) {
-                                                            debugPrint("empid :yes");
-                                                            return 'Employee Id must not be empty';
-                                                          }
-                                                          return null;
-                                                        },
+                                                            ),
+                                                        //value: _chosenGender,
+                                                        validator: (value) => value == null
+                                                            ? 'Source Type must not be empty'
+                                                            : null,
+                                                        // onChanged: (value) =>
+                                                        //     setState(() => _chosenGender = value),
+                                                        items: <String>[
+                                                          'Male',
+                                                          'Female',
+                                                          'Others',
+                                                        ].map<DropdownMenuItem<String>>(
+                                                                (String value) {
+                                                              return DropdownMenuItem<String>(
+                                                                value: value,
+                                                                child: TextWidget(
+                                                                  text: value,
+                                                                  color: darkColor,
+                                                                  weight: FontWeight.w400,
+                                                                  size: 16,
+                                                                ),
+                                                              );
+                                                            }).toList(),
                                                       ),
                                                     ),
                                                   ],
@@ -402,57 +398,53 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.all(10.0),
-                                                      child: TextFormField(
-                                                        textInputAction: TextInputAction.next,
-                                                        autocorrect: true,
-                                                        enableSuggestions: true,
+                                                      child: DropdownButtonFormField<String>(
+                                                        isExpanded: true,
                                                         decoration: InputDecoration(
-                                                            border: new OutlineInputBorder(
-                                                              borderSide: BorderSide.none,
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedErrorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            errorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            fillColor: lightGreyColor),
-                                                        keyboardType: TextInputType.text,
-                                                        onSaved: (String val) {
-                                                          setState(() {});
-                                                        },
-                                                        validator: (value) {
-                                                          if (value.isEmpty) {
-                                                            debugPrint("empid :yes");
-                                                            return 'Employee Id must not be empty';
-                                                          }
-                                                          return null;
-                                                        },
+                                                          border: new OutlineInputBorder(
+                                                            borderSide: BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                          ),
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+
+                                                          errorBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+                                                        ),
+                                                        //value: _chosenGender,
+                                                        validator: (value) => value == null
+                                                            ? 'Source Type must not be empty'
+                                                            : null,
+                                                        // onChanged: (value) =>
+                                                        //     setState(() => _chosenGender = value),
+                                                        items: <String>[
+                                                          'Male',
+                                                          'Female',
+                                                          'Others',
+                                                        ].map<DropdownMenuItem<String>>(
+                                                                (String value) {
+                                                              return DropdownMenuItem<String>(
+                                                                value: value,
+                                                                child: TextWidget(
+                                                                  text: value,
+                                                                  color: darkColor,
+                                                                  weight: FontWeight.w400,
+                                                                  size: 16,
+                                                                ),
+                                                              );
+                                                            }).toList(),
                                                       ),
                                                     ),
                                                   ],
@@ -478,57 +470,53 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.all(10.0),
-                                                      child: TextFormField(
-                                                        textInputAction: TextInputAction.next,
-                                                        autocorrect: true,
-                                                        enableSuggestions: true,
+                                                      child: DropdownButtonFormField<String>(
+                                                        isExpanded: true,
                                                         decoration: InputDecoration(
-                                                            border: new OutlineInputBorder(
-                                                              borderSide: BorderSide.none,
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedErrorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            errorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            fillColor: lightGreyColor),
-                                                        keyboardType: TextInputType.text,
-                                                        onSaved: (String val) {
-                                                          setState(() {});
-                                                        },
-                                                        validator: (value) {
-                                                          if (value.isEmpty) {
-                                                            debugPrint("empid :yes");
-                                                            return 'Employee Id must not be empty';
-                                                          }
-                                                          return null;
-                                                        },
+                                                          border: new OutlineInputBorder(
+                                                            borderSide: BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                          ),
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+
+                                                          errorBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+                                                        ),
+                                                        //value: _chosenGender,
+                                                        validator: (value) => value == null
+                                                            ? 'Source Type must not be empty'
+                                                            : null,
+                                                        // onChanged: (value) =>
+                                                        //     setState(() => _chosenGender = value),
+                                                        items: <String>[
+                                                          'Male',
+                                                          'Female',
+                                                          'Others',
+                                                        ].map<DropdownMenuItem<String>>(
+                                                                (String value) {
+                                                              return DropdownMenuItem<String>(
+                                                                value: value,
+                                                                child: TextWidget(
+                                                                  text: value,
+                                                                  color: darkColor,
+                                                                  weight: FontWeight.w400,
+                                                                  size: 16,
+                                                                ),
+                                                              );
+                                                            }).toList(),
                                                       ),
                                                     ),
                                                   ],
@@ -559,57 +547,53 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.all(10.0),
-                                                      child: TextFormField(
-                                                        textInputAction: TextInputAction.next,
-                                                        autocorrect: true,
-                                                        enableSuggestions: true,
+                                                      child: DropdownButtonFormField<String>(
+                                                        isExpanded: true,
                                                         decoration: InputDecoration(
-                                                            border: new OutlineInputBorder(
-                                                              borderSide: BorderSide.none,
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            ),
-                                                            enabledBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            focusedErrorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            errorBorder: OutlineInputBorder(
-                                                              borderRadius:
-                                                              BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                  bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                              borderSide:
-                                                              BorderSide(color: lightGreyColor),
-                                                            ),
-                                                            fillColor: lightGreyColor),
-                                                        keyboardType: TextInputType.text,
-                                                        onSaved: (String val) {
-                                                          setState(() {});
-                                                        },
-                                                        validator: (value) {
-                                                          if (value.isEmpty) {
-                                                            debugPrint("empid :yes");
-                                                            return 'Employee Id must not be empty';
-                                                          }
-                                                          return null;
-                                                        },
+                                                          border: new OutlineInputBorder(
+                                                            borderSide: BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                          ),
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+
+                                                          errorBorder: OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.only(topRight :Radius.circular(50.0),
+                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                            borderSide:
+                                                            BorderSide(color: lightGreyColor),
+                                                          ),
+                                                        ),
+                                                        //value: _chosenGender,
+                                                        validator: (value) => value == null
+                                                            ? 'Source Type must not be empty'
+                                                            : null,
+                                                        // onChanged: (value) =>
+                                                        //     setState(() => _chosenGender = value),
+                                                        items: <String>[
+                                                          'Male',
+                                                          'Female',
+                                                          'Others',
+                                                        ].map<DropdownMenuItem<String>>(
+                                                                (String value) {
+                                                              return DropdownMenuItem<String>(
+                                                                value: value,
+                                                                child: TextWidget(
+                                                                  text: value,
+                                                                  color: darkColor,
+                                                                  weight: FontWeight.w400,
+                                                                  size: 16,
+                                                                ),
+                                                              );
+                                                            }).toList(),
                                                       ),
                                                     ),
                                                   ],
@@ -868,7 +852,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       size: 14,
                                       weight: FontWeight.w600,
                                     ),
-                                content:FamilyMemberDetails(),
+                                content:FamilyMemberStep(),
                                 isActive: _currentStep >= 0,
                                 state: _currentStep >= 1 ?
                                 StepState.complete : StepState.disabled,
