@@ -22,9 +22,9 @@ class Result {
 
   static List<Result> getUser(){
     return <Result>[
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
+      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
+      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
+      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
       Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
       Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
       Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),

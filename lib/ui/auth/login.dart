@@ -3,6 +3,7 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/widgets/button_widget.dart';
+import 'package:tct_demographics/widgets/text_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,23 +21,20 @@ class _LoginScreenState extends State<LoginScreen> {
           image: DecorationImage(
             image: AssetImage(imgBG),
             fit: BoxFit.cover,
-            colorFilter:
-            ColorFilter.mode(primaryColor.withOpacity(0.2),
-                BlendMode.dstIn),
           ),
 
         ),
         child: Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(top:150.0,left:200.0,right: 200.0,bottom: 150.0),
+            padding: const EdgeInsets.only(top:120.0,left:200.0,right: 200.0,bottom: 120.0),
             child: Card(
               elevation: 6.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
               ),
               child: AspectRatio(
-                aspectRatio: 8/9,
+                aspectRatio: 12/14,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -51,18 +49,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.all(16.0),
                         child: Form(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              TextWidget(
+                                text: userName,
+                                color: darkGreyColor,
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                              SizedBox(height: 10,),
                               TextFormField(
                                 focusNode: mailFocusNode,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   counterText: "",
-                                  labelText: userName,
-                                  labelStyle: TextStyle(
-                                      color: mailFocusNode.hasFocus
-                                          ? primaryColor
-                                          : Colors.black45),
+
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -116,17 +118,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                               ),
                               SizedBox(height: 20,),
+                              TextWidget(
+                                text: password,
+                                color: darkGreyColor,
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                              SizedBox(height: 10,),
                               TextFormField(
                                 focusNode: mailFocusNode,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
                                   counterText: "",
-                                  labelText: password,
-                                  labelStyle: TextStyle(
-                                      color: mailFocusNode.hasFocus
-                                          ? primaryColor
-                                          : Colors.black45),
                                   border: new OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -179,21 +183,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
 
                               ),
-                              SizedBox(height: 30,),
-                              Material(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40.0)),
-                                elevation: 8.0,
-                                color: primaryColor,
-                                child: InkWell(
-                                  onTap: () {
+                              SizedBox(height: 20,),
+                              Align(
+                                alignment:Alignment.center,
+                                child: Material(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40.0)),
+                                  elevation: 8.0,
+                                  color: primaryColor,
+                                  child: InkWell(
+                                    onTap: () {
 
-                                  },
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right,
-                                    size: 60,
-                                    color: lightColor,
+                                    },
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      size: 60,
+                                      color: lightColor,
+                                    ),
                                   ),
                                 ),
                               ),

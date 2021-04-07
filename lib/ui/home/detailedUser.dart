@@ -128,7 +128,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 padding: const EdgeInsets.only(right:30.0),
                                 child: TextWidget(
                                   text: "*IN PROGRESS",
-                                  color: darkColor,
+                                  color: yellowColor,
                                   weight:  FontWeight.w600,
                                   size: 20,
                                 ),
@@ -150,8 +150,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                           padding: const EdgeInsets.only(left:40.0,top: 10.0,bottom: 10.0),
                                          child: TextWidget(
                                            text: location,
-                                           size: 20,
+                                           size: 16,
                                            weight: FontWeight.w800,
+                                           color: darkColor,
                                          ),
                                         ),
                                         Row(
@@ -167,6 +168,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Form No",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -174,8 +176,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "12345",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -184,6 +187,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Door No",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -191,8 +195,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Lalikuppam",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -208,6 +213,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Project Code",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -215,8 +221,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "12345",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -225,6 +232,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Street Name",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -232,8 +240,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Lalikuppam",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -249,6 +258,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Village Code",
                                                       size: 16,
+
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -256,8 +267,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "12345",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 55,),
@@ -277,6 +289,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Panchayat No",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -284,8 +297,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "12345",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -294,6 +308,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Village Name",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -301,8 +316,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Lalikuppam",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -318,6 +334,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Panchayat Code",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -325,8 +342,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "12345",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -335,6 +353,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Contact Person",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -342,8 +361,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Ramasamy",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -363,7 +383,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                           padding: const EdgeInsets.only(left:40.0,top: 10.0,bottom: 10.0),
                                           child: TextWidget(
                                             text: "Property Details".toUpperCase(),
-                                            size: 20,
+                                            size: 16,
+                                            color: darkColor,
                                             weight: FontWeight.w800,
                                           ),
                                         ),
@@ -380,6 +401,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Status Of House",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -387,8 +409,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Own House",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -397,15 +420,17 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Vehicle Details",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
-                                                      text: "Two Wheeler-1,Three Wheeler-1",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      text: "Two Wheeler-1",
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -421,6 +446,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Types Of House",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -428,8 +454,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Hut House",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 50,),
@@ -454,6 +481,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Toilet Facility In Home",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -461,8 +489,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Yes",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 55,),
@@ -473,7 +502,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(left:30.0,right: 30.0),
+                                              padding: const EdgeInsets.only(right: 30.0),
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
@@ -482,6 +511,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Wet Land In Acre",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -489,8 +519,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "2",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 10,),
@@ -499,6 +530,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Live Stock",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -506,8 +538,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "COW-2",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                 ],
@@ -523,6 +556,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Dry Land In Acre",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -530,12 +564,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "1",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
                                                   SizedBox(height: 85,),
-
 
                                                 ],
                                               ),
@@ -554,15 +588,16 @@ class _DetailScreenState extends State<DetailScreen> {
                                           padding: const EdgeInsets.only(left:40.0,top: 10.0,bottom: 10.0),
                                           child: TextWidget(
                                             text: "Habits".toUpperCase(),
-                                            size: 20,
+                                            size: 16,
+                                            color: darkColor,
                                             weight: FontWeight.w800,
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(left:30.0,right: 30.0),
+                                              padding: const EdgeInsets.only(left:30.0,right: 120.0),
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
@@ -571,6 +606,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Any members who smoke?",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -578,8 +614,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "No",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
 
@@ -587,7 +624,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(left:30.0,right: 30.0),
+                                              padding: const EdgeInsets.only(left: 60.0,right: 150.0),
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
@@ -596,6 +633,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Any members who Drink?",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -603,8 +641,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "Yes",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
 
@@ -612,7 +651,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(left:30.0,right: 30.0),
+                                              padding: const EdgeInsets.only(left: 60.0,right: 120.0),
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
@@ -621,6 +660,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     child: TextWidget(
                                                       text: "Any members who use Tobacco?",
                                                       size: 16,
+                                                      color: darkGreyColor,
                                                       weight: FontWeight.w600,
                                                     ),
                                                   ),
@@ -628,11 +668,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     padding: const EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: "No",
-                                                      size: 18,
-                                                      weight: FontWeight.w800,
+                                                      size: 16,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w700,
                                                     ),
                                                   ),
-
                                                 ],
                                               ),
                                             ),
@@ -641,12 +681,344 @@ class _DetailScreenState extends State<DetailScreen> {
                                       ],
                                     ),
                                   ),
+                                  Divider(thickness: 2,),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left:40.0,top: 10.0,bottom: 10.0),
+                                          child: TextWidget(
+                                            text: family.toUpperCase(),
+                                            size: 16,
+                                            color: darkColor,
+                                            weight: FontWeight.w800,
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: "Saravanakumar (Son)",
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "24"+"YRS"+"(15 Feb 1996),"+"Male,"+"O+"+"Married",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: mobileNumber,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "+91 8989898888",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: email+ "ID",
+                                                      color: darkGreyColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(height: 20,),
+                                                    TextWidget(
+                                                      text: "saravanakumar@gmail.com",
+                                                      color: darkColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: adhaarNumber,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "5465 4654 6688",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: educationQualification,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "BSc",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: occupation,
+                                                      color: darkGreyColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(height: 20,),
+                                                    TextWidget(
+                                                      text: "Farmer",
+                                                      color: darkColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: annualIncome,
+                                                      color: darkGreyColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(height: 20,),
+                                                    TextWidget(
+                                                      text: "60000",
+                                                      color: darkColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: smartphone,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "yes",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: physicallyChallenged,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "No",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: community,
+                                                      color: darkGreyColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(height: 20,),
+                                                    TextWidget(
+                                                      text: "MBC",
+                                                      color: darkColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: caste,
+                                                      color: darkGreyColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(height: 20,),
+                                                    TextWidget(
+                                                      text: "Agamudayar",
+                                                      color: darkColor,
+                                                      size: 16,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                )
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: insurance,
+                                                        color: darkGreyColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                      SizedBox(height: 20,),
+                                                      TextWidget(
+                                                        text: "Government,Private",
+                                                        color: darkColor,
+                                                        size: 16,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
+                                            Expanded(
+                                                child: Align(
+                                                  alignment: Alignment(-2.42,2.0),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left:40.0,top: 10),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        TextWidget(
+                                                          text: pension,
+                                                          color: darkGreyColor,
+                                                          size: 16,
+                                                          weight: FontWeight.w600,
+                                                        ),
+                                                        SizedBox(height: 20,),
+                                                        // Text(
+                                                        //   "Old age,Retirement",
+                                                        //   overflow: TextOverflow.ellipsis,
+                                                        //   style: TextStyle(
+                                                        //     color: darkColor,
+                                                        //     fontSize: 16,
+                                                        //     fontWeight: FontWeight.w700,),
+                                                        // )
+                                                        TextWidget(
+                                                          text: "Old age,Retirement",
+                                                          color: darkColor,
+                                                          size: 16,
+                                                          weight: FontWeight.w700,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
-
                           ),
-
                         ],
                       ),
                     ),

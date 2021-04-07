@@ -122,6 +122,13 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               weight:  FontWeight.w600,
                               size: 18,
                             ),
+                            // SizedBox(
+                            //   width: 100,
+                            //     child: Text(
+                            //       "*mandatory Field",
+                            //       style: TextStyle(fontSize: 16),
+                            //       maxLines: 2,
+                            //       ))
                           ],
                         ),
                       ),

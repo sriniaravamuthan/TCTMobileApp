@@ -50,7 +50,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                         Icon(Icons.language, size: 24,color: darkColor,),
                         SizedBox(width: 10,),
                         Text("English",
-                          style: TextStyle(fontSize: 18,color: darkColor),),
+                          style: TextStyle(fontSize: 18,color: darkGreyColor),),
                       ],
                     )
                 ),
@@ -107,7 +107,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                             child: TextWidget(
                               text: totalRecords + "(360)",
                               color: darkColor,
-                              weight:  FontWeight.w600,
+                              weight:  FontWeight.w500,
                               size: 24,
                             ),
                           ),
@@ -139,7 +139,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             text: search,
                                             color: darkColor,
                                             weight:  FontWeight.w800,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ],
                                       ),
@@ -170,7 +170,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             text: filter,
                                             color: darkColor,
                                             weight:  FontWeight.w800,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ],
                                       ),
@@ -201,7 +201,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             text: addNew,
                                             color: darkColor,
                                             weight:  FontWeight.w800,
-                                            size: 20,
+                                            size: 18,
                                           ),
                                         ],
                                       ),
@@ -220,13 +220,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           aspectRatio: 24/10,
                           child: DataTable(
                                 columns: [
-                                  DataColumn(label: Text(familyHead)),
-                                  DataColumn(label: Text(age),numeric: true),
-                                  DataColumn(label: Text(mobile),numeric: true),
-                                  DataColumn(label: Text(villageCode),numeric: true),
-                                  DataColumn(label: Text(zone),numeric: true),
-                                  DataColumn(label: Text(status)),
-                                  DataColumn(label: Text(action)),
+                                  DataColumn(label: TextWidget(text: familyHead,color: darkColor,size: 16,weight: FontWeight.w700,)),
+                                  DataColumn(label: TextWidget(text: age,color: darkColor,size: 16,weight: FontWeight.w700,),numeric: true),
+                                  DataColumn(label: TextWidget(text: mobile,color: darkColor,size: 16,weight: FontWeight.w700,),numeric: true),
+                                  DataColumn(label: TextWidget(text: villageCode.toUpperCase(),color: darkColor,size: 16,weight: FontWeight.w700,),numeric: true),
+                                  DataColumn(label: TextWidget(text: zone.toUpperCase(),color: darkColor,size: 16,weight: FontWeight.w700,),numeric: true),
+                                  DataColumn(label: TextWidget(text: status,color: darkColor,size: 16,weight: FontWeight.w700,)),
+                                  DataColumn(label: TextWidget(text: action,color: darkColor,size: 16,weight: FontWeight.w700,)),
 
                                 ],
                                 rows: users.map((users) =>
@@ -248,15 +248,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                     )
                                                 ),
                                                 SizedBox(width: 10,),
-                                                Text(users.familyHead)
+                                                SizedBox(
+                                                    width:150,child: TextWidget(text: users.familyHead,color: darkGreyColor,size: 16,weight: FontWeight.w600,))
                                               ],
                                             )
                                           ),
-                                          DataCell(Text(users.age)),
-                                          DataCell(Text(users.mobile)),
-                                          DataCell(Text(users.villageCode)),
-                                          DataCell(Text(users.zone)),
-                                          DataCell(Text(users.status)),
+                                          DataCell(TextWidget(text: users.age,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: users.mobile,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: users.villageCode,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: users.zone,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: users.status,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
                                           DataCell(
                                             Row(
                                               children: [
