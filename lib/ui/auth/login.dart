@@ -1,7 +1,11 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/widgets/button_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -12,17 +16,18 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   FocusNode mailFocusNode = new FocusNode();
+  GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  String userMail, userPassword;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imgBG),
             fit: BoxFit.cover,
           ),
-
         ),
         child: Align(
           alignment: Alignment.center,
@@ -48,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Form(
+                          key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -98,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 onSaved: (String val) {
                                   setState(() {
-
+                                    userMail = val;
                                   });
                                 },
                                 validator: (value) {
@@ -115,7 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // }
                                   return null;
                                 },
-
                               ),
                               SizedBox(height: 20,),
                               TextWidget(
@@ -164,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 onSaved: (String val) {
                                   setState(() {
-
+                                    userPassword = val;
                                   });
                                 },
                                 validator: (value) {
@@ -193,7 +198,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: primaryColor,
                                   child: InkWell(
                                     onTap: () {
-
+                                      setState(() {
+                                        if (_formKey.currentState.validate()) {
+                                          if (_formKey != null) {
+                                            _formKey.currentState.save();
+                                           context.read<AuthenticationService>().signIn(
+                                             email: userMail.trim(),
+                                             password: userPassword.trim()
+                                           );
+                                          }
+                                        }
+                                      });
                                     },
                                     borderRadius: BorderRadius.circular(100.0),
                                     child: Icon(
@@ -204,7 +219,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-
                             ],
                           ),
                         ),
