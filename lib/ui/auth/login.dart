@@ -186,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // }
                                   return null;
                                 },
-
                               ),
                               SizedBox(height: 20,),
                               Align(
