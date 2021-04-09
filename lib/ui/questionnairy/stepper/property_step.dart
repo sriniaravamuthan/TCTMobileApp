@@ -19,7 +19,14 @@ class PropertyDetailStep extends StatefulWidget {
 class _PropertyDetailStepState extends State<PropertyDetailStep> {
   GlobalKey<FormState> _stepThreeKey = new GlobalKey<FormState>();
   bool isSwitched = false;
-  var textValue = 'Yes';
+  bool isSwitched1 = false;
+  bool isSwitched2 = false;
+  bool isSwitched3 = false;
+  String textValue = 'No';
+  String textValue1 = 'No';
+  String textValue2 = 'No';
+  String textValue3 = 'No';
+
   @override
   Widget build(BuildContext context) {
     return  Form(
@@ -205,7 +212,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: "No",
+                                text: textValue,
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -243,15 +250,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child:Row(
                             children: [
                               Switch(
-                                onChanged: toggleSwitch,
-                                value: isSwitched,
+                                onChanged: toggleSwitch1,
+                                value: isSwitched1,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: "No",
+                                text: textValue1,
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -441,15 +448,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child:Row(
                             children: [
                               Switch(
-                                onChanged: toggleSwitch,
-                                value: isSwitched,
+                                onChanged: toggleSwitch2,
+                                value: isSwitched2,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: "No",
+                                text: textValue2,
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -867,15 +874,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child:Row(
                             children: [
                               Switch(
-                                onChanged: toggleSwitch,
-                                value: isSwitched,
+                                onChanged: toggleSwitch3,
+                                value: isSwitched3,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: "No",
+                                text: textValue3,
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -1052,7 +1059,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     {
       setState(() {
         isSwitched = true;
-        textValue = 'Switch Button is ON';
+        textValue = 'Yes';
       });
       print('Switch Button is ON');
     }
@@ -1060,7 +1067,65 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     {
       setState(() {
         isSwitched = false;
-        textValue = 'Switch Button is OFF';
+        textValue = 'No';
+      });
+      print('Switch Button is OFF');
+    }
+  }
+  void toggleSwitch1(bool value) {
+
+    if(isSwitched1 == false)
+    {
+      setState(() {
+        isSwitched1 = true;
+        textValue1 = 'Yes';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched1 = false;
+        textValue1 = 'No';
+      });
+      print('Switch Button is OFF');
+    }
+  }
+  void toggleSwitch2(bool value) {
+
+    if(isSwitched2 == false)
+    {
+      setState(() {
+        isSwitched2 = true;
+        textValue2 = 'Yes';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched2= false;
+        textValue2 = 'No';
+      });
+      print('Switch Button is OFF');
+    }
+  }
+
+  void toggleSwitch3(bool value) {
+
+    if(isSwitched3 == false)
+    {
+      setState(() {
+        isSwitched3 = true;
+        textValue3 = 'Yes';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched3 = false;
+        textValue3 = 'No';
       });
       print('Switch Button is OFF');
     }

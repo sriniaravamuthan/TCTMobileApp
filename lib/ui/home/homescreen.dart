@@ -7,6 +7,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -180,7 +181,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 SizedBox(width: 30,),
                                 InkWell(
                                   onTap: (){
-
+                                    Get.toNamed('/questionnaire');
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -219,6 +220,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                         child: AspectRatio(
                           aspectRatio: 24/10,
                           child: DataTable(
+                            showCheckboxColumn: false,
                                 columns: [
                                   DataColumn(label: TextWidget(text: familyHead,color: darkColor,size: 16,weight: FontWeight.w700,)),
                                   DataColumn(label: TextWidget(text: age,color: darkColor,size: 16,weight: FontWeight.w700,),numeric: true),
@@ -229,8 +231,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   DataColumn(label: TextWidget(text: action,color: darkColor,size: 16,weight: FontWeight.w700,)),
 
                                 ],
-                                rows: users.map((users) =>
+                                rows: users.map((usersItem) =>
                                     DataRow(
+                                        onSelectChanged: (bool selected) {
+                                          if (selected) {
+                                            Get.toNamed('/DetailScreen');
+                                            debugPrint("${usersItem.familyHead}");
+                                          }
+                                        },
                                         cells: [
                                           DataCell(
                                             Row(
@@ -249,21 +257,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                 ),
                                                 SizedBox(width: 10,),
                                                 SizedBox(
-                                                    width:150,child: TextWidget(text: users.familyHead,color: darkGreyColor,size: 16,weight: FontWeight.w600,))
+                                                    width:150,child: TextWidget(text: usersItem.familyHead,color: darkGreyColor,size: 16,weight: FontWeight.w600,))
                                               ],
                                             )
                                           ),
-                                          DataCell(TextWidget(text: users.age,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
-                                          DataCell(TextWidget(text: users.mobile,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
-                                          DataCell(TextWidget(text: users.villageCode,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
-                                          DataCell(TextWidget(text: users.zone,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
-                                          DataCell(TextWidget(text: users.status,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: usersItem.age,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: usersItem.mobile,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: usersItem.villageCode,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: usersItem.zone,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
+                                          DataCell(TextWidget(text: usersItem.status,color: darkGreyColor,size: 16,weight: FontWeight.w600,)),
                                           DataCell(
                                             Row(
                                               children: [
                                                 InkWell(
                                                   onTap: (){
-
+                                                    Get.toNamed('/questionnaire');
                                                   },
                                                   child: Icon(Icons.edit),
                                                 ),

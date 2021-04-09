@@ -18,7 +18,11 @@ class HabitsStep extends StatefulWidget {
 class _HabitsStepState extends State<HabitsStep> {
   GlobalKey<FormState> _stepFourKey = new GlobalKey<FormState>();
   bool isSwitched = false;
-  var textValue = 'Yes';
+  String textValue = 'No';
+  bool isSwitched1 = false;
+  String textValue1 = 'No';
+  bool isSwitched2 = false;
+  String textValue2 = 'No';
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -46,7 +50,7 @@ class _HabitsStepState extends State<HabitsStep> {
                 inactiveTrackColor: greyColor,
               ),
               TextWidget(
-                text: "No",
+                text: textValue,
                 size: 18,
                 weight: FontWeight.w600,
               ),
@@ -63,15 +67,15 @@ class _HabitsStepState extends State<HabitsStep> {
           Row(
             children: [
               Switch(
-                onChanged: toggleSwitch,
-                value: isSwitched,
+                onChanged: toggleSwitch1,
+                value: isSwitched1,
                 activeColor: Colors.blue,
                 activeTrackColor: greyColor,
                 inactiveThumbColor: greyColor,
                 inactiveTrackColor: greyColor,
               ),
               TextWidget(
-                text: "No",
+                text: textValue1,
                 size: 18,
                 weight: FontWeight.w600,
               ),
@@ -88,15 +92,15 @@ class _HabitsStepState extends State<HabitsStep> {
           Row(
             children: [
               Switch(
-                onChanged: toggleSwitch,
-                value: isSwitched,
+                onChanged: toggleSwitch2,
+                value: isSwitched2,
                 activeColor: Colors.blue,
                 activeTrackColor: greyColor,
                 inactiveThumbColor: greyColor,
                 inactiveTrackColor: greyColor,
               ),
               TextWidget(
-                text: "No",
+                text: textValue2,
                 size: 18,
                 weight: FontWeight.w600,
               ),
@@ -112,7 +116,7 @@ class _HabitsStepState extends State<HabitsStep> {
     {
       setState(() {
         isSwitched = true;
-        textValue = 'Switch Button is ON';
+        textValue = 'Yes';
       });
       print('Switch Button is ON');
     }
@@ -120,7 +124,47 @@ class _HabitsStepState extends State<HabitsStep> {
     {
       setState(() {
         isSwitched = false;
-        textValue = 'Switch Button is OFF';
+        textValue = 'No';
+      });
+      print('Switch Button is OFF');
+    }
+  }
+
+  void toggleSwitch1(bool value) {
+
+    if(isSwitched1 == false)
+    {
+      setState(() {
+        isSwitched1 = true;
+        textValue1 = 'Yes';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched1 = false;
+        textValue1 = 'No';
+      });
+      print('Switch Button is OFF');
+    }
+  }
+
+  void toggleSwitch2(bool value) {
+
+    if(isSwitched2 == false)
+    {
+      setState(() {
+        isSwitched2 = true;
+        textValue2 = 'Yes';
+      });
+      print('Switch Button is ON');
+    }
+    else
+    {
+      setState(() {
+        isSwitched2 = false;
+        textValue2 = 'No';
       });
       print('Switch Button is OFF');
     }

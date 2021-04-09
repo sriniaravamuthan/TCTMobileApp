@@ -7,6 +7,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -99,7 +100,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   children: [
                                     InkWell(
                                       onTap: (){
-
+                                        Get.toNamed('/homeScreen');
                                       },
                                       child: Container(
                                         height: 50,
@@ -1035,7 +1036,7 @@ class _DetailScreenState extends State<DetailScreen> {
               backgroundColor: primaryColor,
               onPressed: () {
                 setState(() {
-
+                  Get.toNamed('/questionnaire');
                 });
               },
             ),

@@ -20,10 +20,19 @@ class FamilyMemberStep extends StatefulWidget {
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
   bool isSwitched = false;
-  var textValue = 'Yes';
-  String dateofBirth;
+  bool isSwitched1 = false;
+  String textValue = 'No';
+  String textValue1 = 'No';
+  String dateOfBirthVal,relationshipVal,genderVal,maritalStatusVal,bloodGroupVal,qualificationVal,annualIncomeVal,communityVal,castVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    datePicker.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return  Form(
@@ -228,16 +237,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               BorderSide(color: lightGreyColor),
                             ),
                           ),
-                          //value: _chosenGender,
+                          value: relationshipVal,
                           validator: (value) => value == null
                               ? 'Source Type must not be empty'
                               : null,
-                          // onChanged: (value) =>
-                          //     setState(() => _chosenGender = value),
+                          onChanged: (value) =>
+                              setState(() => relationshipVal = value),
                           items: <String>[
-                            'Male',
-                            'Female',
-                            'Others',
+                            'Son',
+                            'Father',
+                            'Mother',
                           ].map<DropdownMenuItem<String>>(
                                   (String value) {
                                 return DropdownMenuItem<String>(
@@ -311,12 +320,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                         ),
                                       ),
-                                      //value: _chosenGender,
+                                      value: genderVal,
                                       validator: (value) => value == null
                                           ? 'Source Type must not be empty'
                                           : null,
-                                      // onChanged: (value) =>
-                                      //     setState(() => _chosenGender = value),
+                                      onChanged: (value) =>
+                                          setState(() => genderVal = value),
                                       items: <String>[
                                         'Male',
                                         'Female',
@@ -416,7 +425,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         datePicker.text =
                                         "${date.year}/${date.month}/${date.day}";
 
-                                        dateofBirth = datePicker.text;
+                                        dateOfBirthVal = datePicker.text;
                                       },
                                       validator: (value) {
                                         if (value.isEmpty) {
@@ -556,16 +565,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                         ),
                                       ),
-                                      //value: _chosenGender,
+                                      value: maritalStatusVal,
                                       validator: (value) => value == null
                                           ? 'Source Type must not be empty'
                                           : null,
-                                      // onChanged: (value) =>
-                                      //     setState(() => _chosenGender = value),
+                                      onChanged: (value) =>
+                                          setState(() => maritalStatusVal = value),
                                       items: <String>[
-                                        'Male',
-                                        'Female',
-                                        'Others',
+                                        'Married',
+                                        'UnMarried',
+
                                       ].map<DropdownMenuItem<String>>(
                                               (String value) {
                                             return DropdownMenuItem<String>(
@@ -628,16 +637,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                         ),
                                       ),
-                                      //value: _chosenGender,
+                                      value: bloodGroupVal,
                                       validator: (value) => value == null
                                           ? 'Source Type must not be empty'
                                           : null,
-                                      // onChanged: (value) =>
-                                      //     setState(() => _chosenGender = value),
+                                      onChanged: (value) =>
+                                          setState(() => bloodGroupVal = value),
                                       items: <String>[
-                                        'Male',
-                                        'Female',
-                                        'Others',
+                                        'A+',
+                                        'A-',
+                                        'B+',
                                       ].map<DropdownMenuItem<String>>(
                                               (String value) {
                                             return DropdownMenuItem<String>(
@@ -686,7 +695,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           inactiveTrackColor: greyColor,
                                         ),
                                         TextWidget(
-                                          text: "No",
+                                          text: textValue,
                                           size: 18,
                                           weight: FontWeight.w600,
                                         ),
@@ -1218,15 +1227,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: qualificationVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => qualificationVal = value),
                             items: <String>[
-                              'Male',
-                              'Female',
+                              'BE',
+                              'BSc',
                               'Others',
                             ].map<DropdownMenuItem<String>>(
                                     (String value) {
@@ -1366,15 +1375,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: annualIncomeVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => annualIncomeVal = value),
                             items: <String>[
-                              'Male',
-                              'Female',
+                              '60000',
+                              '80000',
                               'Others',
                             ].map<DropdownMenuItem<String>>(
                                     (String value) {
@@ -1573,15 +1582,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child:Row(
                             children: [
                               Switch(
-                                onChanged: toggleSwitch,
-                                value: isSwitched,
+                                onChanged: toggleSwitch1,
+                                value: isSwitched1,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: "No",
+                                text: textValue1,
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -1642,15 +1651,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: communityVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => communityVal = value),
                             items: <String>[
-                              'Male',
-                              'Female',
+                              'MBC',
+                              'BC',
                               'Others',
                             ].map<DropdownMenuItem<String>>(
                                     (String value) {
@@ -1714,15 +1723,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: castVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => castVal = value),
                             items: <String>[
-                              'Male',
-                              'Female',
+                              'Agamudayar',
+                              'Udayar',
                               'Others',
                             ].map<DropdownMenuItem<String>>(
                                     (String value) {
@@ -1745,7 +1754,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
               ),
             ],
           ),
-
         ],
       ),
     );
@@ -1756,17 +1764,34 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     {
       setState(() {
         isSwitched = true;
-        textValue = 'Switch Button is ON';
+        textValue = 'Yes';
       });
-      print('Switch Button is ON');
     }
     else
     {
       setState(() {
         isSwitched = false;
-        textValue = 'Switch Button is OFF';
+        textValue = 'No';
       });
-      print('Switch Button is OFF');
+      //print('Switch Button is OFF');
+    }
+  }
+  void toggleSwitch1(bool value) {
+
+    if(isSwitched1 == false)
+    {
+      setState(() {
+        isSwitched1 = true;
+        textValue1 = 'Yes';
+      });
+    }
+    else
+    {
+      setState(() {
+        isSwitched1 = false;
+        textValue1 = 'No';
+      });
+      //print('Switch Button is OFF');
     }
   }
 }

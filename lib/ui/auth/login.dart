@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   FocusNode mailFocusNode = new FocusNode();
+  FocusNode passwordFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   String userMail, userPassword;
 
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(top:120.0,left:200.0,right: 200.0,bottom: 120.0),
+            padding: const EdgeInsets.only(top:100.0,left:200.0,right: 200.0,bottom: 100.0),
             child: Card(
               elevation: 6.0,
               shape: RoundedRectangleBorder(
@@ -105,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onSaved: (String val) {
                                   setState(() {
                                     userMail = val;
+                                    debugPrint("userMail $userMail");
                                   });
                                 },
                                 validator: (value) {
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               SizedBox(height: 10,),
                               TextFormField(
-                                focusNode: mailFocusNode,
+                                focusNode: passwordFocusNode,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
@@ -170,6 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onSaved: (String val) {
                                   setState(() {
                                     userPassword = val;
+                                    debugPrint("userPassword $userPassword");
                                   });
                                 },
                                 validator: (value) {

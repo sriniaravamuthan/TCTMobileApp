@@ -26,7 +26,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   int _currentStep = 0;
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
+  String villageCodeValue,panNoVal,panCodeVal,villageNameVal;
+
   @override
   void initState(){
     super.initState();
@@ -88,7 +89,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
             ),
           ),
           body: Container(
-
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(imgBG),
@@ -122,13 +122,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               weight:  FontWeight.w600,
                               size: 18,
                             ),
-                            // SizedBox(
-                            //   width: 100,
-                            //     child: Text(
-                            //       "*mandatory Field",
-                            //       style: TextStyle(fontSize: 16),
-                            //       maxLines: 2,
-                            //       ))
                           ],
                         ),
                       ),
@@ -141,6 +134,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             onStepTapped: (step) => tapped(step),
                             onStepContinue: continued,
                             onStepCancel: cancel,
+                            // controlsBuilder: (BuildContext context,{VoidCallback? onStepContinue, VoidCallback onStepCancel}){
+                            //   return
+                            // },
                             steps: <Step>[
                               Step(
                                 title: TextWidget(
@@ -358,16 +354,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               BorderSide(color: lightGreyColor),
                                                             ),
                                                             ),
-                                                        //value: _chosenGender,
+                                                        value: villageCodeValue,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
-                                                        // onChanged: (value) =>
-                                                        //     setState(() => _chosenGender = value),
+                                                        onChanged: (value) =>
+                                                            setState(() => villageCodeValue = value),
                                                         items: <String>[
-                                                          'Male',
-                                                          'Female',
-                                                          'Others',
+                                                          'VLR',
+                                                          'VLR',
+                                                          'VLR',
                                                         ].map<DropdownMenuItem<String>>(
                                                                 (String value) {
                                                               return DropdownMenuItem<String>(
@@ -430,16 +426,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                             BorderSide(color: lightGreyColor),
                                                           ),
                                                         ),
-                                                        //value: _chosenGender,
+                                                        value: panNoVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
-                                                        // onChanged: (value) =>
-                                                        //     setState(() => _chosenGender = value),
+                                                        onChanged: (value) =>
+                                                            setState(() => panNoVal = value),
                                                         items: <String>[
-                                                          'Male',
-                                                          'Female',
-                                                          'Others',
+                                                          '1212',
+                                                          '2325',
+                                                          '6558',
                                                         ].map<DropdownMenuItem<String>>(
                                                                 (String value) {
                                                               return DropdownMenuItem<String>(
@@ -502,16 +498,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                             BorderSide(color: lightGreyColor),
                                                           ),
                                                         ),
-                                                        //value: _chosenGender,
+                                                        value: panCodeVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
-                                                        // onChanged: (value) =>
-                                                        //     setState(() => _chosenGender = value),
+                                                        onChanged: (value) =>
+                                                            setState(() => panCodeVal = value),
                                                         items: <String>[
-                                                          'Male',
-                                                          'Female',
-                                                          'Others',
+                                                          '98',
+                                                          '988',
+                                                          '999',
                                                         ].map<DropdownMenuItem<String>>(
                                                                 (String value) {
                                                               return DropdownMenuItem<String>(
@@ -579,16 +575,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                             BorderSide(color: lightGreyColor),
                                                           ),
                                                         ),
-                                                        //value: _chosenGender,
+                                                        value: villageNameVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
-                                                        // onChanged: (value) =>
-                                                        //     setState(() => _chosenGender = value),
+                                                        onChanged: (value) =>
+                                                            setState(() => villageNameVal = value),
                                                         items: <String>[
-                                                          'Male',
-                                                          'Female',
-                                                          'Others',
+                                                          'kangeyam',
+                                                          'puthupalayam',
+                                                          'nallur',
                                                         ].map<DropdownMenuItem<String>>(
                                                                 (String value) {
                                                               return DropdownMenuItem<String>(
