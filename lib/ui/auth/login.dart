@@ -48,7 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                             height: 150,
                             width: 150,
-                            child: Image.asset(imgLightLogo)),
+                            child: Image.asset(imgLightLogo),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -189,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   return null;
                                 },
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(height: 18,),
                               Align(
                                 alignment:Alignment.center,
                                 child: Material(

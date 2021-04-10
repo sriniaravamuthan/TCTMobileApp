@@ -20,6 +20,7 @@ const String property ="PROPERTY DETAILS";
 const String habits = "HABITS";
 const String checkInternet ="Check Internet Connection";
 
+//location
 const String familyHead ="FAMILY HEAD";
 const String age ="AGE";
 const String mobile ="MOBILE";

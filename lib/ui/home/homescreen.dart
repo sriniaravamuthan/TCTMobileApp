@@ -5,6 +5,7 @@
  *  Last modified 31/3/21 5:36 PM by Kanmalai.
  * /
  */
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
+import 'package:tct_demographics/ui/dialog/filter_dialog.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -150,7 +152,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 SizedBox(width: 30,),
                                 InkWell(
                                   onTap: (){
-
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return FilterDialog();
+                                        });
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -271,7 +277,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                               children: [
                                                 InkWell(
                                                   onTap: (){
-                                                    Get.toNamed('/questionnaire');
+                                                    Get.toNamed('/questionnery');
                                                   },
                                                   child: Icon(Icons.edit),
                                                 ),
@@ -279,14 +285,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                 InkWell(
                                                   onTap: (){
                                                     setState(() {
-                                                      AlertDialogWidget(
-                                                        text: "permenantly Delete",
-                                                        onPressed: (){
-                                                          setState(() {
+                                                      debugPrint("click");
 
-                                                          });
-                                                        },
-                                                      );
                                                     });
                                                   },
                                                   child: Icon(Icons.delete),
@@ -332,5 +332,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     );
   }
 }
+void AlertDialoge(){
 
+}
 

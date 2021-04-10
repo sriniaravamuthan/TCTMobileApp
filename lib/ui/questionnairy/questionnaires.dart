@@ -11,6 +11,8 @@ import 'package:flutter/services.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/models/data_model.dart';
+import 'package:tct_demographics/services/firestore_service.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
@@ -23,10 +25,13 @@ class QuestionnairesScreen extends StatefulWidget {
 }
 
 class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
+  FireStoreService api =FireStoreService();
+
   int _currentStep = 0;
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  String villageCodeValue,panNoVal,panCodeVal,villageNameVal;
+  String villageCodeVal,panchayatCodeVal,villageNameVal,streetName,contactPerson ;
+  int formNoVal,projectCodeVal,panchayatNoVal,doorNumberVal,noOfFamilyMembersVal;
 
   @override
   void initState(){
@@ -84,7 +89,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                       ],
                     )
                 ),
-
               ],
             ),
           ),
@@ -354,12 +358,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               BorderSide(color: lightGreyColor),
                                                             ),
                                                             ),
-                                                        value: villageCodeValue,
+                                                        value: villageCodeVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
                                                         onChanged: (value) =>
-                                                            setState(() => villageCodeValue = value),
+                                                            setState(() => villageCodeVal = value),
                                                         items: <String>[
                                                           'VLR',
                                                           'VLR',
@@ -426,12 +430,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                             BorderSide(color: lightGreyColor),
                                                           ),
                                                         ),
-                                                        value: panNoVal,
+                                                        //value: panchayatNoVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
-                                                        onChanged: (value) =>
-                                                            setState(() => panNoVal = value),
+                                                        // onChanged: (value) =>
+                                                        //     setState(() => panchayatNoVal = value),
                                                         items: <String>[
                                                           '1212',
                                                           '2325',
@@ -498,12 +502,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                             BorderSide(color: lightGreyColor),
                                                           ),
                                                         ),
-                                                        value: panCodeVal,
+                                                        value: panchayatCodeVal,
                                                         validator: (value) => value == null
                                                             ? 'Source Type must not be empty'
                                                             : null,
                                                         onChanged: (value) =>
-                                                            setState(() => panCodeVal = value),
+                                                            setState(() => panchayatCodeVal = value),
                                                         items: <String>[
                                                           '98',
                                                           '988',
@@ -836,10 +840,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               ),
                                             ),
                                           ),
-
                                         ],
                                       )
-
                                    ],
                                   ),
                                 ),
@@ -982,4 +984,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     setState(() => _currentStep -= 1) : null;
 
   }
+
+  void addData(){
+    api.createFamily(DemographicFamily(
+      location: Location(formNo: formNoVal,projectCode: projectCodeVal,panchayatCode: panchayatCodeVal,panchayatNo:panchayatNoVal,contactPerson:contactPerson,
+      doorNumber: doorNumberVal,noOfFamilyMembers:noOfFamilyMembersVal,streetName: streetName,villageName: villageNameVal,villagesCode:villageCodeVal),
+      // property: Property(dryLandInAcres: ,fourWheeler: ,livestockCount: ,livestockType: ,noOfVehicleOwn: ,others: ,ownLand: ,ownLivestocks: ,ownVehicle: ,statusofHouse: ,
+      // threeWheeler:,toiletFacility: ,twoWheeler: ,typeofHouse: ,wetLandInAcres: ),
+
+    )
+    );
+  }
 }
+

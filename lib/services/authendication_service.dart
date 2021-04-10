@@ -6,11 +6,15 @@
  * /
  */
 
+
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class AuthenticationService{
-  final FirebaseAuth _firebaseAuth;
 
+  final FirebaseAuth _firebaseAuth;
+  final snackBar = SnackBar(content: Text('username or password is incorrect'));
   AuthenticationService(this._firebaseAuth);
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
@@ -20,6 +24,8 @@ class AuthenticationService{
       await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       return "Signed in";
     } on FirebaseAuthException catch(e){
+      debugPrint("error ${e.message}");
+
       return e.message;
     }
   }
@@ -28,3 +34,4 @@ class AuthenticationService{
     await _firebaseAuth.signOut();
   }
 }
+

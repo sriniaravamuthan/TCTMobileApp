@@ -23,7 +23,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text(widget.text),
+      title: Text(widget.text +"Details will be deleted permanently"),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,

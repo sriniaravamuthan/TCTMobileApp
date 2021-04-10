@@ -31,7 +31,6 @@ class _TextWidgetState extends State<TextWidget> {
           fontSize: widget.size.toDouble(),
           fontStyle: FontStyle.normal,
           color: widget.color,
-
           fontWeight: widget.weight),
       overflow: TextOverflow.ellipsis,
       softWrap: true,

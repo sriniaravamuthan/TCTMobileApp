@@ -20,6 +20,8 @@ class _FilterDialogState extends State<FilterDialog> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Row(
         children: [
           Text("Filter"),
@@ -28,141 +30,200 @@ class _FilterDialogState extends State<FilterDialog> {
       ),
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text("Location"),
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('Lalipalayam'),
-                      value: this.valuefirst,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuefirst = value;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('Lala Pettai'),
-                      value: this.valuesecond,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuesecond = value;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('Edappalayam'),
-                      value: this.valuesecond,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuethird = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20,),
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text("Village Number"),
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('121354'),
-                      value: this.valuefirst,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuefirst = value;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('6546565'),
-                      value: this.valuesecond,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuesecond = value;
-                        });
-                      },
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left:20.0),
+                        child: Text("Location",style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600
+                        ),
+                        ),
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        title: const Text('Lalipalayam'),
+                        value: this.valuefirst,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuefirst = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        title: const Text('Lala Pettai'),
+                        value: this.valuesecond,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuesecond = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        title: const Text('Edappalayam'),
+                        value: this.valuesecond,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuethird = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 20,),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text("Village Number",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        title: const Text('121354'),
+                        value: this.valuefirst,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuefirst = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        title: const Text('6546565'),
+                        value: this.valuesecond,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuesecond = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text("Gender"),
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('Male'),
-                      value: this.valuefirst,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuefirst = value;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('Female'),
-                      value: this.valuesecond,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuesecond = value;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 20,),
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text("Last Updated"),
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('5.22PM 21/3/21'),
-                      value: this.valuefirst,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuefirst = value;
-                        });
-                      },
-                    ),
-                    CheckboxListTile(
-                      secondary: const Icon(Icons.alarm),
-                      title: const Text('5.22PM 21/3/21'),
-                      value: this.valuesecond,
-                      onChanged: (bool value) {
-                        setState(() {
-                          this.valuesecond = value;
-                        });
-                      },
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left:50.0),
+                        child: Text("Gender",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:50,right:80),
+                        title: const Text('Male'),
+                        value: this.valuefirst,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuefirst = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:50,right:80),
+                        title: const Text('Female'),
+                        value: this.valuesecond,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuesecond = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 80,),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text("Last Updated",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600
+                        ),),
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:10,right:30),
+                        title: const Text('5.22PM 21/3/21'),
+                        value: this.valuefirst,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuefirst = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.only(left:10,right:30),
+                        title: const Text('5.22PM 21/3/21'),
+                        value: this.valuesecond,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.valuesecond = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
 
               ],
             ),
-            OutlinedButton(
-              onPressed: (){
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.red)
+                            )
+                        )
+                    ),
+                    onPressed: (){
+                      Navigator.pop(context, false);
+                    },
+                    child: Text("Cancel"),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
 
-              },
-              child: Text("Cancel"),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                // Respond to button press
-              },
-              child: Text("Apply Filter"),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.red)
+                            )
+                        )
+                    ),
+                    onPressed: () {
+                      // Respond to button press
+                    },
+                    child: Text("Apply Filter"),
+                  ),
+                )
+              ],
             )
+
           ],
         )
       ],

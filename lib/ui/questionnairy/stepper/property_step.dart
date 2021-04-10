@@ -26,6 +26,9 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   String textValue1 = 'No';
   String textValue2 = 'No';
   String textValue3 = 'No';
+  String statusOfHouseVal,typeofHouseVal, livestockTypeVal;
+  bool toiletFacilityVal,ownLandVal,ownVehicleVal,ownLiveStocksVal;
+  int wetLandInAcresVal,dryLandInAcresVal,noOfVehicleOwnVal,twoWheelerVal,threeWheelerVal ,fourWheelerVal ,othersVal,livestockCountVal;
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +84,12 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: statusOfHouseVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => statusOfHouseVal = value),
                             items: <String>[
                               'Male',
                               'Female',
@@ -153,12 +156,12 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: _chosenGender,
+                            value: typeofHouseVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => _chosenGender = value),
+                            onChanged: (value) =>
+                                setState(() => typeofHouseVal = value),
                             items: <String>[
                               'Male',
                               'Female',
@@ -329,8 +332,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
+                            // onSaved: (String val) {
+                            //   setState(() {
+                            //     wetLandInAcresVal =val;
+                            //   });
+                            // },
+                            onSaved: (value){
+                              setState(() {
+                                wetLandInAcresVal = value as int;
+                              });
                             },
                             validator: (value) {
                               if (value.isEmpty) {

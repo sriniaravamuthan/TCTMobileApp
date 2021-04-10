@@ -23,6 +23,8 @@ class _HabitsStepState extends State<HabitsStep> {
   String textValue1 = 'No';
   bool isSwitched2 = false;
   String textValue2 = 'No';
+
+  bool anyMembersWhoSmokeVal,anyMembersWhoDrinkVal,anyMembersWhoUseTobaccoVal;
   @override
   Widget build(BuildContext context) {
     return Form(

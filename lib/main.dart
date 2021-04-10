@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
             if (projectSnap.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             }else if (projectSnap.connectionState == ConnectionState.done){
+              debugPrint("connection : ${projectSnap.connectionState}");
               return  projectSnap.data == true
                   ? GetMaterialApp(
                 title: appName,
@@ -75,34 +77,10 @@ class MyApp extends StatelessWidget {
                   GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
                   GetPage(name: '/DetailScreen', page: () => DetailScreen()),
                 ],
-              ):Material(
-                child: Container(
-                    constraints: BoxConstraints.expand(),
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(imgBG),
-                            fit: BoxFit.cover)),
-                    child: Center(
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                  child: Image.asset(
-                                    imgLightLogo,
-                                    fit: BoxFit.cover,
-                                    width: 220,
-                                    height: 220,
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: TextWidget(
-                                    text: checkInternet,
-                                    size: 18,
-
-                                    weight: FontWeight.w700),
-                              )
-                            ]))),
+              ):  MaterialApp(
+                title: appName,
+                debugShowCheckedModeBanner: false,
+                home: NetworkErrorPage(),
               );
             } else{
               return Text("Error ${projectSnap.error}");
@@ -123,6 +101,40 @@ class AuthenticationWrapper extends StatelessWidget {
       return HomeScreen();
     }
     return LoginScreen();
+  }
+}
+
+class NetworkErrorPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(imgBG),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Image.asset(imgLightLogo),
+            ),
+            SizedBox(height: 10,),
+            Container(
+              child:TextWidget(
+                text: checkInternet,
+                size: 24,
+                weight: FontWeight.w600,
+                color: lightColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
