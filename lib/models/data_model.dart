@@ -7,14 +7,16 @@
  */
 
 class DemographicFamily {
+  String uid;
   Location location;
   Property property;
   Habits habits;
   List<Family> family;
 
-  DemographicFamily({this.location, this.property, this.habits, this.family});
+  DemographicFamily({this.location, this.property, this.habits, this.family,this.uid});
 
   DemographicFamily.fromJson(Map<String, dynamic> json) {
+    uid = json['uid'];
     location = json['location'] != null
         ? new Location.fromJson(json['location'])
         : null;
@@ -45,6 +47,7 @@ class DemographicFamily {
     if (this.family != null) {
       data['family'] = this.family.map((v) => v.toJson()).toList();
     }
+    data['uid'] = this.uid;
     return data;
   }
 }
@@ -107,17 +110,17 @@ class Property {
   String typeofHouse;
   bool toiletFacility;
   bool ownLand;
-  String wetLandInAcres;
-  String dryLandInAcres;
+  int wetLandInAcres;
+  int dryLandInAcres;
   bool ownVehicle;
-  String noOfVehicleOwn;
-  String twoWheeler;
-  String threeWheeler;
-  String fourWheeler;
-  String others;
+  int noOfVehicleOwn;
+  int twoWheeler;
+  int threeWheeler;
+  int fourWheeler;
+  int others;
   bool ownLivestocks;
   String livestockType;
-  String livestockCount;
+  int livestockCount;
 
   Property(
       {this.statusofHouse,

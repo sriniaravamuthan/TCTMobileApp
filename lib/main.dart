@@ -28,13 +28,12 @@ Future<bool> check() async {
   }
   return false;
 }
+
 class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
-
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(

@@ -7,11 +7,14 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class PropertyDetailStep extends StatefulWidget {
+
+
   @override
   _PropertyDetailStepState createState() => _PropertyDetailStepState();
 }
@@ -57,7 +60,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
+                      Obx(() => Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: DropdownButtonFormField<String>(
                             isExpanded: true,
@@ -84,12 +87,12 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            value: statusOfHouseVal,
+                            value:statusOfHouseVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
                             onChanged: (value) =>
-                                setState(() => statusOfHouseVal = value),
+                                setState(() =>statusOfHouseVal = value),
                             items: <String>[
                               'Male',
                               'Female',
@@ -107,7 +110,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   );
                                 }).toList(),
                           ),
-                        ),
+                        )),
                       ],
                     ),
                   ),
@@ -1120,7 +1123,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       print('Switch Button is OFF');
     }
   }
-
   void toggleSwitch3(bool value) {
 
     if(isSwitched3 == false)
