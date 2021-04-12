@@ -60,7 +60,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                      Obx(() => Padding(
+                       Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: DropdownButtonFormField<String>(
                             isExpanded: true,
@@ -110,7 +110,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   );
                                 }).toList(),
                           ),
-                        )),
+                        ),
                       ],
                     ),
                   ),

@@ -23,18 +23,34 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text(widget.text +"Details will be deleted permanently"),
+      title: Text( "Details will be deleted permanently"),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             OutlinedButton(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)
+                      )
+                  )
+              ),
               onPressed: widget.onPressed,
               child: Text("Yes,Delete"),
             ),
             OutlinedButton(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)
+                      )
+                  )
+              ),
               onPressed: () {
-                // Respond to button press
+                Navigator.pop(context, false);
               },
               child: Text("No,Cancel"),
             )

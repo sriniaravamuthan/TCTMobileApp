@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "262608980349",
+    "project_id": "tct-app-ca81f",
+    "storage_bucket": "tct-app-ca81f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262608980349:android:101874bb7638ddf98de414",
+        "android_client_info": {
+          "package_name": "com.kanmalaitech.tct_demographics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262608980349-k2c9gcfqbaf8960v30c88dkhhn309tmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMNPgh__KAx6-H_H17QEigb_l6JWgsPDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262608980349-k2c9gcfqbaf8960v30c88dkhhn309tmv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -132,7 +132,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   children: [
                                     InkWell(
                                       onTap: (){
-                                        AlertDialogWidget();
+
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -296,6 +296,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                     InkWell(
                                                       onTap: (){
                                                         setState(() {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder: (BuildContext context) {
+                                                                return  AlertDialogWidget();
+
+                                                              });
                                                           debugPrint("click");
                                                         });
                                                       },
