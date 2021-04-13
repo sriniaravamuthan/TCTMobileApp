@@ -27,9 +27,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FractionallySizedBox(
-          widthFactor: 0.25,
+          widthFactor: 0.35,
           child: InkWell(
-            onTap: (){
+            onTap: () {
               addFamilyField();
             },
             child: Container(
@@ -42,16 +42,19 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(Icons.add),
-                    SizedBox(width: 10,),
-                    TextWidget(
-                      text: addFamilyMember.toUpperCase(),
-                      color: darkColor,
-                      weight:  FontWeight.w800,
-                      size: 20,
+                    FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: TextWidget(
+                        text: addFamilyMember.toUpperCase(),
+                        color: darkColor,
+                        weight: FontWeight.w800,
+                        size: 20,
+                      ),
                     ),
                   ],
                 ),
@@ -59,7 +62,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
             ),
           ),
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           children: [
             Expanded(
@@ -73,27 +78,27 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 0.5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                          ),
-                          child: Image.asset(imgLightLogo))
-                        ),
+                          widthFactor: 0.5,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                              ),
+                              child: Image.asset(imgLightLogo))),
                     ),
-                    ),
+                  ),
                   Expanded(
                     flex: 1,
                     child: Align(
-                      alignment: Alignment(-5.0,2.0),
+                      alignment: Alignment(-5.0, 2.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0,top: 5),
+                            padding: const EdgeInsets.only(left: 8.0, top: 5),
                             child: TextWidget(
                               text: "Saravanakumar (Son)",
                               weight: FontWeight.w800,
@@ -102,7 +107,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0,top: 5),
+                            padding: const EdgeInsets.only(left: 8.0, top: 5),
                             child: TextWidget(
                               text: "24 Yrs (15 Feb 1996)",
                               weight: FontWeight.w600,
@@ -111,7 +116,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0,top: 5),
+                            padding: const EdgeInsets.only(left: 8.0, top: 5),
                             child: TextWidget(
                               text: "Male, O+, Married",
                               weight: FontWeight.w600,
@@ -120,7 +125,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0,top: 5),
+                            padding: const EdgeInsets.only(left: 8.0, top: 5),
                             child: TextWidget(
                               text: "+91 97101 52525",
                               weight: FontWeight.w600,
@@ -129,7 +134,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left:8.0,top: 5),
+                            padding: const EdgeInsets.only(left: 8.0, top: 5),
                             child: TextWidget(
                               text: "saravanakumar@gmail.com",
                               weight: FontWeight.w600,
@@ -137,11 +142,12 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               size: 18,
                             ),
                           ),
-                          SizedBox(height: 100,)
+                          SizedBox(
+                            height: 100,
+                          )
                         ],
                       ),
                     ),
-
                   )
                 ],
               ),
@@ -165,7 +171,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "546546565654",
                             weight: FontWeight.w600,
@@ -173,7 +179,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -184,7 +189,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "IT employee",
                             weight: FontWeight.w600,
@@ -192,7 +197,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -203,7 +207,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "MBC",
                             weight: FontWeight.w600,
@@ -211,7 +215,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -222,7 +225,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "gvt,pvt",
                             weight: FontWeight.w600,
@@ -230,7 +233,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -249,7 +251,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "BE",
                             weight: FontWeight.w600,
@@ -257,7 +259,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -268,7 +269,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "RS:60,000",
                             weight: FontWeight.w600,
@@ -276,7 +277,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -287,7 +287,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "Agamudayar",
                             weight: FontWeight.w600,
@@ -295,7 +295,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
@@ -306,7 +305,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "Old Age,Retirement",
                             weight: FontWeight.w600,
@@ -314,7 +313,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -333,7 +331,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "Yes",
                             weight: FontWeight.w600,
@@ -351,7 +349,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: TextWidget(
                             text: "No",
                             weight: FontWeight.w600,
@@ -359,7 +357,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             size: 18,
                           ),
                         ),
-                        SizedBox(height: 125,)
+                        SizedBox(
+                          height: 125,
+                        )
                       ],
                     ),
                   )
@@ -367,19 +367,18 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
               ),
             )
           ],
-
         ),
-        Divider(height: 1,),
-        Visibility(
-          visible: addfamily,
-            child: FamilyMemberStep()),
+        Divider(
+          height: 1,
+        ),
+        Visibility(visible: addfamily, child: FamilyMemberStep()),
       ],
     );
   }
-  void addFamilyField(){
+
+  void addFamilyField() {
     setState(() {
       addfamily = !addfamily;
     });
   }
-
 }

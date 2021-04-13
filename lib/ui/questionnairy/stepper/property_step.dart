@@ -13,8 +13,6 @@ import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class PropertyDetailStep extends StatefulWidget {
-
-
   @override
   _PropertyDetailStepState createState() => _PropertyDetailStepState();
 }
@@ -29,13 +27,20 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   String textValue1 = 'No';
   String textValue2 = 'No';
   String textValue3 = 'No';
-  String statusOfHouseVal,typeofHouseVal, livestockTypeVal;
-  bool toiletFacilityVal,ownLandVal,ownVehicleVal,ownLiveStocksVal;
-  int wetLandInAcresVal,dryLandInAcresVal,noOfVehicleOwnVal,twoWheelerVal,threeWheelerVal ,fourWheelerVal ,othersVal,livestockCountVal;
+  String statusOfHouseVal, typeofHouseVal, livestockTypeVal;
+  bool toiletFacilityVal, ownLandVal, ownVehicleVal, ownLiveStocksVal;
+  int wetLandInAcresVal,
+      dryLandInAcresVal,
+      noOfVehicleOwnVal,
+      twoWheelerVal,
+      threeWheelerVal,
+      fourWheelerVal,
+      othersVal,
+      livestockCountVal;
 
   @override
   Widget build(BuildContext context) {
-    return  Form(
+    return Form(
       key: _stepThreeKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,55 +65,54 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                       Padding(
+                        Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: DropdownButtonFormField<String>(
                             isExpanded: true,
                             decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
-
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            value:statusOfHouseVal,
+                            value: statusOfHouseVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
                             onChanged: (value) =>
-                                setState(() =>statusOfHouseVal = value),
+                                setState(() => statusOfHouseVal = value),
                             items: <String>[
                               'Male',
                               'Female',
                               'Others',
-                            ].map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 16,
-                                    ),
-                                  );
-                                }).toList(),
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: TextWidget(
+                                  text: value,
+                                  color: darkColor,
+                                  weight: FontWeight.w400,
+                                  size: 16,
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                       ],
@@ -118,7 +122,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-3.0,2.0),
+                  alignment: Alignment.center,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -139,24 +143,24 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
-
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                             ),
                             value: typeofHouseVal,
@@ -169,18 +173,17 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               'Male',
                               'Female',
                               'Others',
-                            ].map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 16,
-                                    ),
-                                  );
-                                }).toList(),
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: TextWidget(
+                                  text: value,
+                                  color: darkColor,
+                                  weight: FontWeight.w400,
+                                  size: 16,
+                                ),
+                              );
+                            }).toList(),
                           ),
                         ),
                       ],
@@ -189,9 +192,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 ),
               ),
               Expanded(
-
                 child: Align(
-                  alignment: Alignment(-5.0,2.0),
+                  alignment: Alignment.topRight,
                   child: FractionallySizedBox(
                     widthFactor: .75,
                     child: Column(
@@ -207,7 +209,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child:Row(
+                          child: Row(
                             children: [
                               Switch(
                                 onChanged: toggleSwitch,
@@ -237,7 +239,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
             children: [
               Expanded(
                 child: Align(
-                  alignment:Alignment.topLeft,
+                  alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -253,7 +255,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child:Row(
+                          child: Row(
                             children: [
                               Switch(
                                 onChanged: toggleSwitch1,
@@ -278,7 +280,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-3.0,0.2),
+                  alignment: Alignment.center,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -301,37 +303,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -340,7 +343,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             //     wetLandInAcresVal =val;
                             //   });
                             // },
-                            onSaved: (value){
+                            onSaved: (value) {
                               setState(() {
                                 wetLandInAcresVal = value as int;
                               });
@@ -361,7 +364,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-5.0,0.2),
+                  alignment: Alignment.topRight,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -384,37 +387,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -442,7 +446,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
             children: [
               Expanded(
                 child: Align(
-                  alignment:Alignment.topLeft,
+                  alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
                     widthFactor: 0.5,
                     child: Column(
@@ -458,7 +462,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child:Row(
+                          child: Row(
                             children: [
                               Switch(
                                 onChanged: toggleSwitch2,
@@ -483,7 +487,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-3.0,0.2),
+                  alignment: Alignment.center,
                   child: FractionallySizedBox(
                     widthFactor: 0.5,
                     child: Column(
@@ -506,37 +510,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -564,7 +569,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
             children: [
               Expanded(
                 child: Align(
-                  alignment:Alignment.topLeft,
+                  alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
                     widthFactor: 1,
                     child: Column(
@@ -587,37 +592,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -641,7 +647,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               Expanded(
                 flex: 1,
                 child: FractionallySizedBox(
-                  widthFactor:1,
+                  widthFactor: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -662,37 +668,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               fillColor: lightGreyColor),
                           keyboardType: TextInputType.text,
@@ -736,37 +743,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               fillColor: lightGreyColor),
                           keyboardType: TextInputType.text,
@@ -810,37 +818,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.only(topRight :Radius.circular(50.0),
-                                    bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                borderSide:
-                                BorderSide(color: lightGreyColor),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
                               ),
                               fillColor: lightGreyColor),
                           keyboardType: TextInputType.text,
@@ -860,7 +869,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                   ),
                 ),
               )
-
             ],
           ),
           Row(
@@ -868,7 +876,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
             children: [
               Expanded(
                 child: Align(
-                  alignment:Alignment.topLeft,
+                  alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -884,7 +892,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child:Row(
+                          child: Row(
                             children: [
                               Switch(
                                 onChanged: toggleSwitch3,
@@ -909,7 +917,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-3.0,0.2),
+                  alignment: Alignment.center,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -932,37 +940,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -985,7 +994,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: Align(
-                  alignment: Alignment(-5.0,0.2),
+                  alignment: Alignment.topRight,
                   child: FractionallySizedBox(
                     widthFactor: 0.75,
                     child: Column(
@@ -1008,37 +1017,38 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             decoration: InputDecoration(
                                 border: new OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.only(topRight :Radius.circular(50.0),
-                                      bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                  borderSide:
-                                  BorderSide(color: lightGreyColor),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.text,
@@ -1061,23 +1071,19 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               )
             ],
           ),
-
         ],
       ),
     );
   }
-  void toggleSwitch(bool value) {
 
-    if(isSwitched == false)
-    {
+  void toggleSwitch(bool value) {
+    if (isSwitched == false) {
       setState(() {
         isSwitched = true;
         textValue = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched = false;
         textValue = 'No';
@@ -1085,18 +1091,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       print('Switch Button is OFF');
     }
   }
-  void toggleSwitch1(bool value) {
 
-    if(isSwitched1 == false)
-    {
+  void toggleSwitch1(bool value) {
+    if (isSwitched1 == false) {
       setState(() {
         isSwitched1 = true;
         textValue1 = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched1 = false;
         textValue1 = 'No';
@@ -1104,37 +1107,31 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       print('Switch Button is OFF');
     }
   }
-  void toggleSwitch2(bool value) {
 
-    if(isSwitched2 == false)
-    {
+  void toggleSwitch2(bool value) {
+    if (isSwitched2 == false) {
       setState(() {
         isSwitched2 = true;
         textValue2 = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
-        isSwitched2= false;
+        isSwitched2 = false;
         textValue2 = 'No';
       });
       print('Switch Button is OFF');
     }
   }
-  void toggleSwitch3(bool value) {
 
-    if(isSwitched3 == false)
-    {
+  void toggleSwitch3(bool value) {
+    if (isSwitched3 == false) {
       setState(() {
         isSwitched3 = true;
         textValue3 = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched3 = false;
         textValue3 = 'No';

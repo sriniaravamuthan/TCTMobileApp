@@ -26,16 +26,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   int _currentStep = 0;
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  String villageCodeValue,panNoVal,panCodeVal,villageNameVal;
+  String villageCodeValue, panNoVal, panCodeVal, villageNameVal;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -47,44 +48,48 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 InkWell(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.language, size: 24,color: darkColor,),
-                        SizedBox(width: 10,),
-                        Text("English",
-                          style: TextStyle(fontSize: 18,color: darkColor),),
+                        Icon(
+                          Icons.language,
+                          size: 24,
+                          color: darkColor,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "English",
+                          style: TextStyle(fontSize: 18, color: darkColor),
+                        ),
                       ],
-                    )
+                    )),
+                SizedBox(
+                  width: 50,
                 ),
-                SizedBox(width: 50,),
                 InkWell(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Text("Senthil Kumar",
-                          style: TextStyle(fontSize: 18,color: darkColor),),
-                        SizedBox(width: 10,),
+                        Text(
+                          "Senthil Kumar",
+                          style: TextStyle(fontSize: 18, color: darkColor),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Container(
-                            padding: EdgeInsets.only(left:8.0),
+                            padding: EdgeInsets.only(left: 8.0),
                             height: 30,
                             width: 30,
                             decoration: new BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: new AssetImage(user)
-                                )
-                            )
-                        )
+                                    image: new AssetImage(user))))
                       ],
-                    )
-                ),
-
+                    )),
               ],
             ),
           ),
@@ -106,26 +111,29 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:24.0,left: 30.0,right: 30.0,bottom: 24.0),
+                        padding: const EdgeInsets.only(
+                            top: 24.0, left: 30.0, right: 30.0, bottom: 24.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextWidget(
                               text: questionery,
                               color: darkColor,
-                              weight:  FontWeight.w600,
+                              weight: FontWeight.w600,
                               size: 24,
                             ),
                             TextWidget(
                               text: mandatory,
                               color: darkColor,
-                              weight:  FontWeight.w600,
+                              weight: FontWeight.w600,
                               size: 18,
                             ),
                           ],
                         ),
                       ),
-                      Divider(thickness: 1.5,),
+                      Divider(
+                        thickness: 1.5,
+                      ),
                       Expanded(
                         child: Stepper(
                           type: StepperType.horizontal,
@@ -152,18 +160,22 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Expanded(
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: FractionallySizedBox(
-                                              widthFactor:0.5,
+                                              widthFactor: 1,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: formNumber,
                                                       size: 18,
@@ -171,54 +183,111 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextFormField(
-                                                      textInputAction: TextInputAction.next,
+                                                      textInputAction:
+                                                          TextInputAction.next,
                                                       autocorrect: true,
                                                       enableSuggestions: true,
-                                                      decoration: InputDecoration(
-                                                          border: new OutlineInputBorder(
-                                                            borderSide: BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          errorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          fillColor: lightGreyColor),
-                                                      keyboardType: TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  new OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
+                                                      keyboardType:
+                                                          TextInputType.text,
                                                       onSaved: (String val) {
                                                         setState(() {});
                                                       },
                                                       validator: (value) {
                                                         if (value.isEmpty) {
-                                                          debugPrint("empid :yes");
+                                                          debugPrint(
+                                                              "empid :yes");
                                                           return 'Employee Id must not be empty';
                                                         }
                                                         return null;
@@ -232,14 +301,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         ),
                                         Expanded(
                                           child: Align(
-                                            alignment: Alignment(-3.0,0.2),
+                                            alignment: Alignment(-1.0, 0.2),
                                             child: FractionallySizedBox(
                                               widthFactor: 0.5,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: projectCode,
                                                       size: 18,
@@ -247,54 +319,111 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextFormField(
-                                                      textInputAction: TextInputAction.next,
+                                                      textInputAction:
+                                                          TextInputAction.next,
                                                       autocorrect: true,
                                                       enableSuggestions: true,
-                                                      decoration: InputDecoration(
-                                                          border: new OutlineInputBorder(
-                                                            borderSide: BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          errorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          fillColor: lightGreyColor),
-                                                      keyboardType: TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  new OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
+                                                      keyboardType:
+                                                          TextInputType.text,
                                                       onSaved: (String val) {
                                                         setState(() {});
                                                       },
                                                       validator: (value) {
                                                         if (value.isEmpty) {
-                                                          debugPrint("empid :yes");
+                                                          debugPrint(
+                                                              "empid :yes");
                                                           return 'Employee Id must not be empty';
                                                         }
                                                         return null;
@@ -309,18 +438,22 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
                                           child: Align(
-                                            alignment:Alignment.topLeft,
+                                            alignment: Alignment.topLeft,
                                             child: FractionallySizedBox(
                                               widthFactor: 0.75,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: villageCode,
                                                       size: 18,
@@ -328,54 +461,92 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: DropdownButtonFormField<String>(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
                                                       isExpanded: true,
-                                                      decoration: InputDecoration(
-                                                        border: new OutlineInputBorder(
-                                                          borderSide: BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            new OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                              BorderSide.none,
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
                                                         ),
-
-                                                        errorBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
                                                         ),
                                                       ),
                                                       value: villageCodeValue,
-                                                      validator: (value) => value == null
-                                                          ? 'Source Type must not be empty'
-                                                          : null,
+                                                      validator: (value) =>
+                                                          value == null
+                                                              ? 'Source Type must not be empty'
+                                                              : null,
                                                       onChanged: (value) =>
-                                                          setState(() => villageCodeValue = value),
+                                                          setState(() =>
+                                                              villageCodeValue =
+                                                                  value),
                                                       items: <String>[
                                                         'VLR',
                                                         'CLR',
                                                         'MLR',
-                                                      ].map<DropdownMenuItem<String>>(
-                                                              (String value) {
-                                                            return DropdownMenuItem<String>(
-                                                              value: value,
-                                                              child: TextWidget(
-                                                                text: value,
-                                                                color: darkColor,
-                                                                weight: FontWeight.w400,
-                                                                size: 16,
-                                                              ),
-                                                            );
-                                                          }).toList(),
+                                                      ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: TextWidget(
+                                                            text: value,
+                                                            color: darkColor,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            size: 16,
+                                                          ),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ],
@@ -385,14 +556,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         ),
                                         Expanded(
                                           child: Align(
-                                            alignment: Alignment(-3.0,0.2),
+                                            alignment: Alignment(-3.0, 0.2),
                                             child: FractionallySizedBox(
                                               widthFactor: 0.75,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: panchayatNo,
                                                       size: 18,
@@ -400,54 +574,91 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: DropdownButtonFormField<String>(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
                                                       isExpanded: true,
-                                                      decoration: InputDecoration(
-                                                        border: new OutlineInputBorder(
-                                                          borderSide: BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            new OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                              BorderSide.none,
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
                                                         ),
-
-                                                        errorBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
                                                         ),
                                                       ),
                                                       value: panNoVal,
-                                                      validator: (value) => value == null
-                                                          ? 'Source Type must not be empty'
-                                                          : null,
+                                                      validator: (value) =>
+                                                          value == null
+                                                              ? 'Source Type must not be empty'
+                                                              : null,
                                                       onChanged: (value) =>
-                                                          setState(() => panNoVal = value),
+                                                          setState(() =>
+                                                              panNoVal = value),
                                                       items: <String>[
                                                         '1212',
                                                         '2325',
                                                         '6558',
-                                                      ].map<DropdownMenuItem<String>>(
-                                                              (String value) {
-                                                            return DropdownMenuItem<String>(
-                                                              value: value,
-                                                              child: TextWidget(
-                                                                text: value,
-                                                                color: darkColor,
-                                                                weight: FontWeight.w400,
-                                                                size: 16,
-                                                              ),
-                                                            );
-                                                          }).toList(),
+                                                      ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: TextWidget(
+                                                            text: value,
+                                                            color: darkColor,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            size: 16,
+                                                          ),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ],
@@ -457,14 +668,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         ),
                                         Expanded(
                                           child: Align(
-                                            alignment: Alignment(-5.0,0.2),
+                                            alignment: Alignment(-5.0, 0.2),
                                             child: FractionallySizedBox(
                                               widthFactor: 0.75,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: panchayatCode,
                                                       size: 18,
@@ -472,54 +686,92 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: DropdownButtonFormField<String>(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
                                                       isExpanded: true,
-                                                      decoration: InputDecoration(
-                                                        border: new OutlineInputBorder(
-                                                          borderSide: BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            new OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                              BorderSide.none,
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
                                                         ),
-
-                                                        errorBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
                                                         ),
                                                       ),
                                                       value: panCodeVal,
-                                                      validator: (value) => value == null
-                                                          ? 'Source Type must not be empty'
-                                                          : null,
+                                                      validator: (value) =>
+                                                          value == null
+                                                              ? 'Source Type must not be empty'
+                                                              : null,
                                                       onChanged: (value) =>
-                                                          setState(() => panCodeVal = value),
+                                                          setState(() =>
+                                                              panCodeVal =
+                                                                  value),
                                                       items: <String>[
                                                         '98',
                                                         '988',
                                                         '999',
-                                                      ].map<DropdownMenuItem<String>>(
-                                                              (String value) {
-                                                            return DropdownMenuItem<String>(
-                                                              value: value,
-                                                              child: TextWidget(
-                                                                text: value,
-                                                                color: darkColor,
-                                                                weight: FontWeight.w400,
-                                                                size: 16,
-                                                              ),
-                                                            );
-                                                          }).toList(),
+                                                      ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: TextWidget(
+                                                            text: value,
+                                                            color: darkColor,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            size: 16,
+                                                          ),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ],
@@ -530,7 +782,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
                                           child: Align(
@@ -538,10 +791,13 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             child: FractionallySizedBox(
                                               widthFactor: 0.5,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: villageName,
                                                       size: 18,
@@ -549,54 +805,92 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: DropdownButtonFormField<String>(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            String>(
                                                       isExpanded: true,
-                                                      decoration: InputDecoration(
-                                                        border: new OutlineInputBorder(
-                                                          borderSide: BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        ),
-                                                        enabledBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                        border:
+                                                            new OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                              BorderSide.none,
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
                                                         ),
-
-                                                        errorBorder: OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.only(topRight :Radius.circular(50.0),
-                                                              bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          borderSide:
-                                                          BorderSide(color: lightGreyColor),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
                                                         ),
                                                       ),
                                                       value: villageNameVal,
-                                                      validator: (value) => value == null
-                                                          ? 'Source Type must not be empty'
-                                                          : null,
+                                                      validator: (value) =>
+                                                          value == null
+                                                              ? 'Source Type must not be empty'
+                                                              : null,
                                                       onChanged: (value) =>
-                                                          setState(() => villageNameVal = value),
+                                                          setState(() =>
+                                                              villageNameVal =
+                                                                  value),
                                                       items: <String>[
                                                         'kangeyam',
                                                         'puthupalayam',
                                                         'nallur',
-                                                      ].map<DropdownMenuItem<String>>(
-                                                              (String value) {
-                                                            return DropdownMenuItem<String>(
-                                                              value: value,
-                                                              child: TextWidget(
-                                                                text: value,
-                                                                color: darkColor,
-                                                                weight: FontWeight.w400,
-                                                                size: 16,
-                                                              ),
-                                                            );
-                                                          }).toList(),
+                                                      ].map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (String value) {
+                                                        return DropdownMenuItem<
+                                                            String>(
+                                                          value: value,
+                                                          child: TextWidget(
+                                                            text: value,
+                                                            color: darkColor,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            size: 16,
+                                                          ),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
                                                 ],
@@ -607,14 +901,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.all(10.0),
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
                                                 child: TextWidget(
                                                   text: streetName,
                                                   size: 18,
@@ -622,48 +919,102 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(10.0),
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
                                                 child: TextFormField(
-                                                  textInputAction: TextInputAction.next,
+                                                  textInputAction:
+                                                      TextInputAction.next,
                                                   autocorrect: true,
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
-                                                      border: new OutlineInputBorder(
-                                                        borderSide: BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.only(topRight :Radius.circular(50.0),
-                                                            bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                      ),
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.only(topRight :Radius.circular(50.0),
-                                                            bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
+                                                      border:
+                                                          new OutlineInputBorder(
                                                         borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                            BorderSide.none,
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
                                                       ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.only(topRight :Radius.circular(50.0),
-                                                            bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      focusedErrorBorder: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.only(topRight :Radius.circular(50.0),
-                                                            bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      errorBorder: OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.only(topRight :Radius.circular(50.0),
-                                                            bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      fillColor: lightGreyColor),
-                                                  keyboardType: TextInputType.text,
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      fillColor:
+                                                          lightGreyColor),
+                                                  keyboardType:
+                                                      TextInputType.text,
                                                   onSaved: (String val) {
                                                     setState(() {});
                                                   },
@@ -681,14 +1032,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         ),
                                         Expanded(
                                           child: Align(
-                                            alignment: Alignment(-1.0,0.2),
+                                            alignment: Alignment(-1.0, 0.2),
                                             child: FractionallySizedBox(
                                               widthFactor: 0.5,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: doorNumber,
                                                       size: 18,
@@ -696,54 +1050,111 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextFormField(
-                                                      textInputAction: TextInputAction.next,
+                                                      textInputAction:
+                                                          TextInputAction.next,
                                                       autocorrect: true,
                                                       enableSuggestions: true,
-                                                      decoration: InputDecoration(
-                                                          border: new OutlineInputBorder(
-                                                            borderSide: BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          errorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          fillColor: lightGreyColor),
-                                                      keyboardType: TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  new OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
+                                                      keyboardType:
+                                                          TextInputType.text,
                                                       onSaved: (String val) {
                                                         setState(() {});
                                                       },
                                                       validator: (value) {
                                                         if (value.isEmpty) {
-                                                          debugPrint("empid :yes");
+                                                          debugPrint(
+                                                              "empid :yes");
                                                           return 'Employee Id must not be empty';
                                                         }
                                                         return null;
@@ -758,18 +1169,22 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Expanded(
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: FractionallySizedBox(
-                                              widthFactor:0.5,
+                                              widthFactor: 0.5,
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextWidget(
                                                       text: contactPerson,
                                                       size: 18,
@@ -777,54 +1192,111 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(10.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     child: TextFormField(
-                                                      textInputAction: TextInputAction.next,
+                                                      textInputAction:
+                                                          TextInputAction.next,
                                                       autocorrect: true,
                                                       enableSuggestions: true,
-                                                      decoration: InputDecoration(
-                                                          border: new OutlineInputBorder(
-                                                            borderSide: BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                          ),
-                                                          enabledBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          errorBorder: OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.only(topRight :Radius.circular(50.0),
-                                                                bottomLeft:Radius.circular(50.0),bottomRight: Radius.circular(50.0) ),
-                                                            borderSide:
-                                                            BorderSide(color: lightGreyColor),
-                                                          ),
-                                                          fillColor: lightGreyColor),
-                                                      keyboardType: TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  new OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            50.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            50.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
+                                                      keyboardType:
+                                                          TextInputType.text,
                                                       onSaved: (String val) {
                                                         setState(() {});
                                                       },
                                                       validator: (value) {
                                                         if (value.isEmpty) {
-                                                          debugPrint("empid :yes");
+                                                          debugPrint(
+                                                              "empid :yes");
                                                           return 'Employee Id must not be empty';
                                                         }
                                                         return null;
@@ -836,10 +1308,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                           ),
                                         ),
-
                                       ],
                                     )
-
                                   ],
                                 ),
                               ),
@@ -855,10 +1325,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
-                              content:FamilyMemberDetails(),
+                              content: FamilyMemberDetails(),
                               isActive: _currentStep >= 0,
-                              state: _currentStep >= 1 ?
-                              StepState.complete : StepState.disabled,
+                              state: _currentStep >= 1
+                                  ? StepState.complete
+                                  : StepState.disabled,
                             ),
                             Step(
                               title: TextWidget(
@@ -867,10 +1338,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
-                              content:PropertyDetailStep(),
+                              content: PropertyDetailStep(),
                               isActive: _currentStep >= 0,
-                              state: _currentStep >= 2 ?
-                              StepState.complete : StepState.disabled,
+                              state: _currentStep >= 2
+                                  ? StepState.complete
+                                  : StepState.disabled,
                             ),
                             Step(
                               title: TextWidget(
@@ -879,10 +1351,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
-                              content:HabitsStep(),
+                              content: HabitsStep(),
                               isActive: _currentStep >= 0,
-                              state: _currentStep >= 3 ?
-                              StepState.complete : StepState.disabled,
+                              state: _currentStep >= 3
+                                  ? StepState.complete
+                                  : StepState.disabled,
                             )
                           ],
                         ),
@@ -893,32 +1366,35 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
               ),
             ),
           ),
-
           floatingActionButton: Padding(
-            padding: const EdgeInsets.only(right:50.0,bottom: 50.0),
+            padding: const EdgeInsets.only(right: 50.0, bottom: 50.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FloatingActionButton(
                   // isExtended: true,
-                  child: Icon(Icons.keyboard_arrow_right,size: 30,color: darkColor,),
+                  child: Icon(
+                    Icons.keyboard_arrow_right,
+                    size: 30,
+                    color: darkColor,
+                  ),
                   backgroundColor: lightColor,
                   onPressed: () {
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
-
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 FloatingActionButton(
                   // isExtended: true,
-                  child: Icon(Icons.done,size: 30,),
+                  child: Icon(
+                    Icons.done,
+                    size: 30,
+                  ),
                   backgroundColor: primaryColor,
                   onPressed: () {
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                 ),
               ],
@@ -928,7 +1404,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding: const EdgeInsets.only(top:38.0),
+            padding: const EdgeInsets.only(top: 38.0),
             child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
@@ -937,18 +1413,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    // decoration: BoxDecoration(
-                    //   borderRadius:
-                    //   BorderRadius.all(Radius.circular(50.0),),
-                    // ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius:
+                      //   BorderRadius.all(Radius.circular(50.0),),
+                      // ),
                       child: Image.asset(imgLightLogo)),
-                )
-            ),
+                )),
           ),
         )
       ],
     );
   }
+
   tapped(int step) {
     setState(() => _currentStep = step);
   }
@@ -958,15 +1434,15 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     // setState(() => _currentStep += 1): null;
     // debugPrint("_currentStep: $_currentStep");
 
-    if(_currentStep < 1){
+    if (_currentStep < 1) {
       setState(() {
         _currentStep += 1;
       });
-    }else if(_currentStep < 2){
+    } else if (_currentStep < 2) {
       setState(() {
         _currentStep += 1;
       });
-    }else if(_currentStep < 3){
+    } else if (_currentStep < 3) {
       setState(() {
         _currentStep += 1;
       });
@@ -978,8 +1454,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     // _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
     // _stepTwoKey.currentState.reset();
     // _formKey.currentState.reset();
-    _currentStep > 0 ?
-    setState(() => _currentStep -= 1) : null;
-
+    _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
   }
 }

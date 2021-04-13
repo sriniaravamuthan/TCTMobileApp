@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -17,8 +18,12 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight
+  ]).then((_) => runApp(MyApp()));
 }
+
 Future<bool> check() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile) {
@@ -30,73 +35,74 @@ Future<bool> check() async {
 }
 
 class MyApp extends StatelessWidget {
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
-            create: (_) => AuthenticationService(FirebaseAuth.instance),
-
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
-            create: (context)=> context.read<AuthenticationService>().authStateChanges
-        )
+            create: (context) =>
+                context.read<AuthenticationService>().authStateChanges)
       ],
       child: FutureBuilder(
           future: check(),
           builder: (context, projectSnap) {
             if (projectSnap.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
-            }else if (projectSnap.connectionState == ConnectionState.done){
+            } else if (projectSnap.connectionState == ConnectionState.done) {
               debugPrint("connection : ${projectSnap.connectionState}");
-              return  projectSnap.data == true
+              return projectSnap.data == true
                   ? GetMaterialApp(
-                title: appName,
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  // This is the theme of your application.
-                  //
-                  // Try running your application with "flutter run". You'll see the
-                  // application has a blue toolbar. Then, without quitting the app, try
-                  // changing the primarySwatch below to Colors.green and then invoke
-                  // "hot reload" (press "r" in the console where you ran "flutter run",
-                  // or simply save your changes to "hot reload" in a Flutter IDE).
-                  // Notice that the counter didn't reset back to zero; the application
-                  // is not restarted.
-                  //primaryColor: primaryColor,
-                  //accentColor: accentColor,
-                  //splashColor: primaryColor,
-                ),
-                home: AuthenticationWrapper(),
-                getPages: [
-                  GetPage(name: '/homeScreen', page: () => HomeScreen()),
-                  GetPage(name: '/loginScreen', page: () => LoginScreen()),
-                  GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
-                  GetPage(name: '/DetailScreen', page: () => DetailScreen()),
-                ],
-              ):  MaterialApp(
-                title: appName,
-                debugShowCheckedModeBanner: false,
-                home: NetworkErrorPage(),
-              );
-            } else{
+                      title: appName,
+                      debugShowCheckedModeBanner: false,
+                      theme: ThemeData(
+                          // This is the theme of your application.
+                          //
+                          // Try running your application with "flutter run". You'll see the
+                          // application has a blue toolbar. Then, without quitting the app, try
+                          // changing the primarySwatch below to Colors.green and then invoke
+                          // "hot reload" (press "r" in the console where you ran "flutter run",
+                          // or simply save your changes to "hot reload" in a Flutter IDE).
+                          // Notice that the counter didn't reset back to zero; the application
+                          // is not restarted.
+                          //primaryColor: primaryColor,
+                          //accentColor: accentColor,
+                          //splashColor: primaryColor,
+                          ),
+                      home: AuthenticationWrapper(),
+                      getPages: [
+                        GetPage(name: '/homeScreen', page: () => HomeScreen()),
+                        GetPage(
+                            name: '/loginScreen', page: () => LoginScreen()),
+                        GetPage(
+                            name: '/questionnery',
+                            page: () => QuestionnairesScreen()),
+                        GetPage(
+                            name: '/DetailScreen', page: () => DetailScreen()),
+                      ],
+                    )
+                  : MaterialApp(
+                      title: appName,
+                      debugShowCheckedModeBanner: false,
+                      home: NetworkErrorPage(),
+                    );
+            } else {
               return Text("Error ${projectSnap.error}");
             }
-          }
-      ),
+          }),
     );
   }
 }
 
 class AuthenticationWrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
 
-    if(firebaseUser != null){
+    if (firebaseUser != null) {
       return HomeScreen();
     }
     return LoginScreen();
@@ -121,9 +127,11 @@ class NetworkErrorPage extends StatelessWidget {
             Container(
               child: Image.asset(imgLightLogo),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              child:TextWidget(
+              child: TextWidget(
                 text: checkInternet,
                 size: 24,
                 weight: FontWeight.w600,
@@ -136,5 +144,3 @@ class NetworkErrorPage extends StatelessWidget {
     );
   }
 }
-
-

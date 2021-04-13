@@ -15,7 +15,8 @@ class TextWidget extends StatefulWidget {
   final Color color;
   final FontWeight weight;
 
-  const TextWidget({Key key, this.text, this.size, this.color, this.weight}) : super(key: key);
+  const TextWidget({Key key, this.text, this.size, this.color, this.weight})
+      : super(key: key);
 
   @override
   _TextWidgetState createState() => _TextWidgetState();
@@ -34,8 +35,6 @@ class _TextWidgetState extends State<TextWidget> {
           fontWeight: widget.weight),
       overflow: TextOverflow.ellipsis,
       softWrap: true,
-
     );
   }
 }
-
