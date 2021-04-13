@@ -138,9 +138,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(right: 30.0),
+                                padding: const EdgeInsets.all(4.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     InkWell(
                                       onTap: () {},
@@ -257,11 +256,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           Divider(
                             height: 1,
                           ),
-                          SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
-                            child: AspectRatio(
-                                aspectRatio: 24 / 10,
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
                                 child: DataTable(
+                                  columnSpacing: 42.0,
                                   showCheckboxColumn: false,
                                   columns: [
                                     DataColumn(
@@ -421,7 +422,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                 )),
                                               ]))
                                       .toList(),
-                                )),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),

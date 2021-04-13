@@ -17,23 +17,37 @@ class Result {
   String zone;
   String status;
 
-  Result(this.image,this.familyHead, this.age, this.mobile, this.villageCode, this.zone,
-      this.status);
+  Result(this.image, this.familyHead, this.age, this.mobile, this.villageCode,
+      this.zone, this.status);
 
-  static List<Result> getUser(){
+  static List<Result> getUser() {
     return <Result>[
-      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Thirumalai Charity Trust", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-      Result(user,"Senthil Kumar", "35", "9898989898", "VLR", "545454", "complete"),
-
-
+      Result(user, "Thirumalai Charity Trust", "35", "9898989898", "VLR",
+          "545454", "complete"),
+      Result(user, "Thirumalai Charity Trust", "35", "9898989898", "VLR",
+          "545454", "complete"),
+      Result(user, "Thirumalai Charity Trust", "35", "9898989898", "VLR",
+          "545454", "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
+      Result(user, "Senthil Kumar", "35", "9898989898", "VLR", "545454",
+          "complete"),
     ];
   }
 }
