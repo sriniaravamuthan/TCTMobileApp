@@ -16,6 +16,7 @@ import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/filter_dialog.dart';
+import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -142,7 +143,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 child: Row(
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return SearchDialog();
+                                            });
+                                      },
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius:

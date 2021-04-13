@@ -25,7 +25,6 @@ class _FilterDialogState extends State<FilterDialog> {
       title: Row(
         children: [
           Text("Filter"),
-          Text("Filter"),
         ],
       ),
       children: [
@@ -40,16 +39,16 @@ class _FilterDialogState extends State<FilterDialog> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left:20.0),
-                        child: Text("Location",style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600
-                        ),
+                        padding: EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Location",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Lalipalayam'),
                         value: this.valuefirst,
                         onChanged: (bool value) {
@@ -60,7 +59,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Lala Pettai'),
                         value: this.valuesecond,
                         onChanged: (bool value) {
@@ -71,7 +70,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Edappalayam'),
                         value: this.valuesecond,
                         onChanged: (bool value) {
@@ -80,17 +79,20 @@ class _FilterDialogState extends State<FilterDialog> {
                           });
                         },
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text("Village Number",style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600
-                        ),),
+                        child: Text(
+                          "Village Number",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('121354'),
                         value: this.valuefirst,
                         onChanged: (bool value) {
@@ -101,7 +103,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:20,right:80),
+                        contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('6546565'),
                         value: this.valuesecond,
                         onChanged: (bool value) {
@@ -118,15 +120,16 @@ class _FilterDialogState extends State<FilterDialog> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left:50.0),
-                        child: Text("Gender",style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600
-                        ),),
+                        padding: EdgeInsets.only(left: 50.0),
+                        child: Text(
+                          "Gender",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:50,right:80),
+                        contentPadding: EdgeInsets.only(left: 50, right: 80),
                         title: const Text('Male'),
                         value: this.valuefirst,
                         onChanged: (bool value) {
@@ -137,7 +140,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:50,right:80),
+                        contentPadding: EdgeInsets.only(left: 50, right: 80),
                         title: const Text('Female'),
                         value: this.valuesecond,
                         onChanged: (bool value) {
@@ -146,17 +149,20 @@ class _FilterDialogState extends State<FilterDialog> {
                           });
                         },
                       ),
-                      SizedBox(height: 80,),
+                      SizedBox(
+                        height: 80,
+                      ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text("Last Updated",style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600
-                        ),),
+                        child: Text(
+                          "Last Updated",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:10,right:30),
+                        contentPadding: EdgeInsets.only(left: 10, right: 30),
                         title: const Text('5.22PM 21/3/21'),
                         value: this.valuefirst,
                         onChanged: (bool value) {
@@ -167,7 +173,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.only(left:10,right:30),
+                        contentPadding: EdgeInsets.only(left: 10, right: 30),
                         title: const Text('5.22PM 21/3/21'),
                         value: this.valuesecond,
                         onChanged: (bool value) {
@@ -179,7 +185,6 @@ class _FilterDialogState extends State<FilterDialog> {
                     ],
                   ),
                 ),
-
               ],
             ),
             Row(
@@ -190,14 +195,12 @@ class _FilterDialogState extends State<FilterDialog> {
                   padding: const EdgeInsets.all(16.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.red)
-                            )
-                        )
-                    ),
-                    onPressed: (){
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.red)))),
+                    onPressed: () {
                       Navigator.pop(context, false);
                     },
                     child: Text("Cancel"),
@@ -205,16 +208,13 @@ class _FilterDialogState extends State<FilterDialog> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-
                   child: OutlinedButton(
                     style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.red)
-                            )
-                        )
-                    ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.red)))),
                     onPressed: () {
                       // Respond to button press
                     },
@@ -223,7 +223,6 @@ class _FilterDialogState extends State<FilterDialog> {
                 )
               ],
             )
-
           ],
         )
       ],
