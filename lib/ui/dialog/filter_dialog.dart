@@ -7,6 +7,9 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:tct_demographics/constants/app_colors.dart';
+import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FilterDialog extends StatefulWidget {
   @override
@@ -203,24 +206,46 @@ class _FilterDialogState extends State<FilterDialog> {
                     onPressed: () {
                       Navigator.pop(context, false);
                     },
-                    child: Text("Cancel"),
+                    child: TextWidget(
+                      text: cancel,
+                      color: darkColor,
+                      weight: FontWeight.w400,
+                      size: 18,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xff005aa8)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.red)))),
+                                    side: BorderSide(color: Colors.black45)))),
                     onPressed: () {
                       // Respond to button press
                     },
-                    child: Text("Apply Filter"),
+                    child: Row(
+                      children: [
+                        Icon(Icons.done),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        TextWidget(
+                          text: btn_filter,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             )
           ],

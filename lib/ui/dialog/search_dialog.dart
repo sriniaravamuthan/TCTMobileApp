@@ -6,6 +6,7 @@
  * /
  */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -17,7 +18,7 @@ class SearchDialog extends StatefulWidget {
 }
 
 class _SearchDialogState extends State<SearchDialog> {
-  String villageCodeValue, villageNameVal, panCodeVal;
+  String villageCodeValue, villageNameVal, panCodeVal, zoneVal;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -128,9 +129,9 @@ class _SearchDialogState extends State<SearchDialog> {
                   ),
                   Expanded(
                     child: Align(
-                      alignment: Alignment(-1.0, 0.2),
+                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -219,7 +220,7 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -290,9 +291,9 @@ class _SearchDialogState extends State<SearchDialog> {
                   ),
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -373,7 +374,7 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -444,9 +445,9 @@ class _SearchDialogState extends State<SearchDialog> {
                   ),
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 0.75,
+                        widthFactor: 1,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -487,12 +488,12 @@ class _SearchDialogState extends State<SearchDialog> {
                                         BorderSide(color: lightGreyColor),
                                   ),
                                 ),
-                                value: villageNameVal,
+                                value: zoneVal,
                                 validator: (value) => value == null
                                     ? 'Source Type must not be empty'
                                     : null,
                                 onChanged: (value) =>
-                                    setState(() => villageNameVal = value),
+                                    setState(() => zoneVal = value),
                                 items: <String>[
                                   'kangeyam',
                                   'puthupalayam',
@@ -534,22 +535,44 @@ class _SearchDialogState extends State<SearchDialog> {
                     onPressed: () {
                       Navigator.pop(context, false);
                     },
-                    child: Text("Cancel"),
+                    child: TextWidget(
+                      text: cancel,
+                      color: darkColor,
+                      weight: FontWeight.w400,
+                      size: 18,
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Color(0xff005aa8)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.red)))),
+                                    side: BorderSide(color: Colors.black45)))),
                     onPressed: () {
                       // Respond to button press
                     },
-                    child: Text("Search"),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        TextWidget(
+                          text: txt_search,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                          size: 18,
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],

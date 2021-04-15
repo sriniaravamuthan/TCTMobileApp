@@ -28,7 +28,7 @@ class _TextWidgetState extends State<TextWidget> {
     return Text(
       widget.text,
       maxLines: 1,
-      style: GoogleFonts.nunito(
+      style: GoogleFonts.roboto(
           fontSize: widget.size.toDouble(),
           fontStyle: FontStyle.normal,
           color: widget.color,
