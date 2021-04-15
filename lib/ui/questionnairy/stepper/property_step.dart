@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class PropertyDetailStep extends StatefulWidget {
@@ -60,7 +61,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: statusHouse,
+                            text: DemoLocalization.of(context)
+                                .translate('Status of House'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -131,7 +133,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: typeofHouse,
+                            text: DemoLocalization.of(context)
+                                .translate('Type of House'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -202,7 +205,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: toiletFacilityatHome,
+                            text: DemoLocalization.of(context)
+                                .translate('Toilet Facility at Home'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -248,7 +252,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: ownsanyLand,
+                            text: DemoLocalization.of(context)
+                                .translate('Own Land'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -289,7 +294,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: wetLandinacres,
+                            text: DemoLocalization.of(context)
+                                .translate('Wet Land Holding(In Acres)'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -373,7 +379,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: dryLandinacres,
+                            text: DemoLocalization.of(context)
+                                .translate('Dry Land Holding(In Acres)'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -455,7 +462,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: OwnsanyVehicle,
+                            text: DemoLocalization.of(context)
+                                .translate('Own Vehicle'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -496,7 +504,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: NoofVehiclesOwned,
+                            text: DemoLocalization.of(context).translate(
+                                'Number of various Motor vechicles owned'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -578,7 +587,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: twoWheeler,
+                            text: DemoLocalization.of(context)
+                                .translate('Two Wheeler'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -654,7 +664,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextWidget(
-                          text: threeWheeler,
+                          text: DemoLocalization.of(context)
+                              .translate('Three Wheeler'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -729,7 +740,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextWidget(
-                          text: fourWheeler,
+                          text: DemoLocalization.of(context)
+                              .translate('Four Wheeler'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -804,7 +816,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextWidget(
-                          text: other,
+                          text:
+                              DemoLocalization.of(context).translate('Others'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -885,7 +898,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: ownsanyLivestock,
+                            text: DemoLocalization.of(context)
+                                .translate('Livestock Details'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -926,7 +940,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: livestockType,
+                            text: DemoLocalization.of(context)
+                                .translate('Livestock Type'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1003,7 +1018,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: livestockCount,
+                            text: DemoLocalization.of(context)
+                                .translate('Livestock Count'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),

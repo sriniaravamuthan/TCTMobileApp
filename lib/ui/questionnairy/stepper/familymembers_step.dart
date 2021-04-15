@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
@@ -70,7 +71,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: name,
+                            text:
+                                DemoLocalization.of(context).translate('Name'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -146,7 +148,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextWidget(
-                          text: adhaarNumber,
+                          text: DemoLocalization.of(context)
+                              .translate('Aadhaar No'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -221,7 +224,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextWidget(
-                          text: relationship,
+                          text: DemoLocalization.of(context)
+                              .translate('Relationship method of family head'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -303,7 +307,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: gender,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Gender'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -380,7 +385,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: dateOfBirth,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Date of Birth'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -488,7 +494,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: "Age",
+                                      text: DemoLocalization.of(context)
+                                          .translate('Age'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -585,7 +592,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: maritalStatus,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Marital status'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -661,7 +669,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: bloodGroup,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Blood Group'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -738,7 +747,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
                                     child: TextWidget(
-                                      text: physicallyChallenged,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Physically challenged'),
                                       size: 18,
                                       weight: FontWeight.w600,
                                     ),
@@ -783,7 +793,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30.0),
                         child: TextWidget(
-                          text: "Photo",
+                          text: DemoLocalization.of(context)
+                              .translate('Photograph'),
                           size: 18,
                           weight: FontWeight.w600,
                         ),
@@ -824,7 +835,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: educationQualification,
+                            text: DemoLocalization.of(context)
+                                .translate('Education Qualification'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -895,7 +907,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: occupation,
+                            text: DemoLocalization.of(context)
+                                .translate('Business'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -972,7 +985,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: annualIncome,
+                            text: DemoLocalization.of(context)
+                                .translate('Business'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1048,7 +1062,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: mobileNumber,
+                            text: DemoLocalization.of(context)
+                                .translate('Mobile No'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1125,7 +1140,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: email,
+                            text:
+                                DemoLocalization.of(context).translate('Email'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1202,7 +1218,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: smartphone,
+                            text: DemoLocalization.of(context)
+                                .translate('Smart phone'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1248,7 +1265,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: community,
+                            text:
+                                DemoLocalization.of(context).translate('Caste'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),
@@ -1319,7 +1337,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text: caste,
+                            text:
+                                DemoLocalization.of(context).translate('Caste'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),

@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HabitsStep extends StatefulWidget {
@@ -24,19 +25,19 @@ class _HabitsStepState extends State<HabitsStep> {
   bool isSwitched2 = false;
   String textValue2 = 'No';
 
-  bool anyMembersWhoSmokeVal,anyMembersWhoDrinkVal,anyMembersWhoUseTobaccoVal;
+  bool anyMembersWhoSmokeVal, anyMembersWhoDrinkVal, anyMembersWhoUseTobaccoVal;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _stepFourKey,
       child: Column(
-
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: Anymemberswhosmoke,
+              text: DemoLocalization.of(context)
+                  .translate('Any Members who Smoke?'),
               size: 18,
               weight: FontWeight.w600,
             ),
@@ -61,7 +62,8 @@ class _HabitsStepState extends State<HabitsStep> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: AnymemberswhoDrink,
+              text: DemoLocalization.of(context)
+                  .translate('Any Members who Drink?'),
               size: 18,
               weight: FontWeight.w600,
             ),
@@ -86,7 +88,8 @@ class _HabitsStepState extends State<HabitsStep> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextWidget(
-              text: AnymemberswhouseTobacco,
+              text: DemoLocalization.of(context)
+                  .translate('Any Members who use Tobacco?'),
               size: 18,
               weight: FontWeight.w600,
             ),
@@ -112,18 +115,15 @@ class _HabitsStepState extends State<HabitsStep> {
       ),
     );
   }
-  void toggleSwitch(bool value) {
 
-    if(isSwitched == false)
-    {
+  void toggleSwitch(bool value) {
+    if (isSwitched == false) {
       setState(() {
         isSwitched = true;
         textValue = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched = false;
         textValue = 'No';
@@ -133,17 +133,13 @@ class _HabitsStepState extends State<HabitsStep> {
   }
 
   void toggleSwitch1(bool value) {
-
-    if(isSwitched1 == false)
-    {
+    if (isSwitched1 == false) {
       setState(() {
         isSwitched1 = true;
         textValue1 = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched1 = false;
         textValue1 = 'No';
@@ -153,17 +149,13 @@ class _HabitsStepState extends State<HabitsStep> {
   }
 
   void toggleSwitch2(bool value) {
-
-    if(isSwitched2 == false)
-    {
+    if (isSwitched2 == false) {
       setState(() {
         isSwitched2 = true;
         textValue2 = 'Yes';
       });
       print('Switch Button is ON');
-    }
-    else
-    {
+    } else {
       setState(() {
         isSwitched2 = false;
         textValue2 = 'No';
@@ -172,4 +164,3 @@ class _HabitsStepState extends State<HabitsStep> {
     }
   }
 }
-

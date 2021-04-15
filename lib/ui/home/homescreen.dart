@@ -13,6 +13,9 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/language_item.dart';
+import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/filter_dialog.dart';
@@ -28,6 +31,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   CollectionReference demographydata =
       FirebaseFirestore.instance.collection('users');
   List<Result> users;
+  Language language;
+  String dropDownLang;
   @override
   void initState() {
     super.initState();
@@ -48,24 +53,26 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.language,
-                          size: 24,
-                          color: darkColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "English",
-                          style: TextStyle(fontSize: 18, color: darkGreyColor),
-                        ),
-                      ],
-                    )),
+                DropdownButton(
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.black87,
+                  ),
+                  items: ['Tamil', 'English'].map((val) {
+                    return new DropdownMenuItem<String>(
+                      value: val,
+                      child: new Text(val),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      dropDownLang = val;
+                      _changeLanguage();
+                    });
+                    print("Language:$val");
+                  },
+                ),
                 SizedBox(
                   width: 50,
                 ),
@@ -281,7 +288,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     )),
                                     DataColumn(
                                         label: TextWidget(
-                                          text: age,
+                                          text: DemoLocalization.of(context)
+                                              .translate('Age'),
                                           color: darkColor,
                                           size: 16,
                                           weight: FontWeight.w700,
@@ -289,7 +297,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         numeric: true),
                                     DataColumn(
                                         label: TextWidget(
-                                          text: mobile,
+                                          text: DemoLocalization.of(context)
+                                              .translate('Mobile No'),
                                           color: darkColor,
                                           size: 16,
                                           weight: FontWeight.w700,
@@ -465,6 +474,19 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       ],
     );
   }
-}
 
-void AlertDialoge() {}
+  void _changeLanguage() async {
+    // Locale _temp = await setLocale(language.languageCode);
+    // SplashScreen.setLocale(context, _temp);
+
+    if (dropDownLang == "Tamil") {
+      setState(() {
+        MyApp.setLocale(context, Locale('ta', 'IN'));
+      });
+    } else {
+      setState(() {
+        MyApp.setLocale(context, Locale('en', 'US'));
+      });
+    }
+  }
+}

@@ -11,11 +11,15 @@ import 'package:flutter/services.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/language_item.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
+
+import '../../main.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
   @override
@@ -27,6 +31,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   String villageCodeValue, panNoVal, panCodeVal, villageNameVal;
+  String dropDownLang;
 
   @override
   void initState() {
@@ -47,24 +52,26 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.language,
-                          size: 24,
-                          color: darkColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "English",
-                          style: TextStyle(fontSize: 18, color: darkColor),
-                        ),
-                      ],
-                    )),
+                DropdownButton(
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.black87,
+                  ),
+                  items: ['Tamil', 'English'].map((val) {
+                    return new DropdownMenuItem<String>(
+                      value: val,
+                      child: new Text(val),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      dropDownLang = val;
+                      _changeLanguage();
+                    });
+                    print("Language:$val");
+                  },
+                ),
                 SizedBox(
                   width: 50,
                 ),
@@ -233,7 +240,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: formNumber,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate('Form No'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -369,7 +378,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: projectCode,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Project Code No'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -511,7 +523,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: villageCode,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Village Code'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -624,7 +639,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: panchayatNo,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Panchayat No'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -736,7 +754,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: panchayatCode,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Panchayat Code'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -855,7 +876,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: villageName,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Village Name'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -969,7 +993,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 padding:
                                                     const EdgeInsets.all(10.0),
                                                 child: TextWidget(
-                                                  text: streetName,
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Street Name'),
                                                   size: 18,
                                                   weight: FontWeight.w600,
                                                 ),
@@ -1100,7 +1126,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: doorNumber,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate('Door No'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -1242,7 +1270,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         const EdgeInsets.all(
                                                             10.0),
                                                     child: TextWidget(
-                                                      text: contactPerson,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Answering Person Name'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -1511,5 +1542,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     // _stepTwoKey.currentState.reset();
     // _formKey.currentState.reset();
     _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
+  }
+
+  void _changeLanguage() async {
+    // Locale _temp = await setLocale(language.languageCode);
+    // SplashScreen.setLocale(context, _temp);
+
+    if (dropDownLang == "Tamil") {
+      setState(() {
+        MyApp.setLocale(context, Locale('ta', 'IN'));
+      });
+    } else {
+      setState(() {
+        MyApp.setLocale(context, Locale('en', 'US'));
+      });
+    }
   }
 }

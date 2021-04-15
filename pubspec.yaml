@@ -35,6 +35,9 @@ dependencies:
   firebase_core: ^1.0.3
   connectivity: ^3.0.3
   cloud_firestore: ^1.0.4
+  shared_preferences: ^2.0.5
+  flutter_localizations:
+    sdk: flutter
 
 
 
@@ -56,6 +59,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/images/
+     - lib/translation/en.json
+     - lib/translation/ta.json
 
 
 
