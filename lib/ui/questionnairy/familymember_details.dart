@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -27,7 +28,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FractionallySizedBox(
-          widthFactor: 0.35,
+          widthFactor: 0.38,
           child: InkWell(
             onTap: () {
               addFamilyField();
@@ -42,19 +43,17 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(Icons.add),
-                    FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: TextWidget(
-                        text: addFamilyMember.toUpperCase(),
-                        color: darkColor,
-                        weight: FontWeight.w800,
-                        size: 20,
-                      ),
+                    TextWidget(
+                      text: DemoLocalization.of(context)
+                          .translate('Add Family Member'),
+                      color: darkColor,
+                      weight: FontWeight.w800,
+                      size: 16,
                     ),
                   ],
                 ),

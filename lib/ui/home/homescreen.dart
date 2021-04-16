@@ -338,7 +338,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     DataColumn(
                                         label: TextWidget(
                                       text: DemoLocalization.of(context)
-                                          .translate('Mobile'),
+                                          .translate('Status'),
                                       color: darkColor,
                                       size: 16,
                                       weight: FontWeight.w700,

@@ -124,13 +124,15 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextWidget(
-                              text: questionery,
+                              text: DemoLocalization.of(context)
+                                  .translate('Demographics questionnaires'),
                               color: darkColor,
                               weight: FontWeight.w600,
                               size: 24,
                             ),
                             TextWidget(
-                              text: mandatory,
+                              text: DemoLocalization.of(context)
+                                  .translate('Mandatory Fields'),
                               color: darkColor,
                               weight: FontWeight.w600,
                               size: 18,
@@ -211,7 +213,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           steps: <Step>[
                             Step(
                               title: TextWidget(
-                                text: "Location",
+                                text: DemoLocalization.of(context)
+                                    .translate('Location'),
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w600,
@@ -1273,7 +1276,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       text: DemoLocalization.of(
                                                               context)
                                                           .translate(
-                                                              'Answering Person Name'),
+                                                              'Contact Person'),
                                                       size: 18,
                                                       weight: FontWeight.w600,
                                                     ),
@@ -1407,7 +1410,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             ),
                             Step(
                               title: TextWidget(
-                                text: family,
+                                text: DemoLocalization.of(context)
+                                    .translate('Family Members'),
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w600,
@@ -1420,7 +1424,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             ),
                             Step(
                               title: TextWidget(
-                                text: property,
+                                text: DemoLocalization.of(context)
+                                    .translate('Property Details'),
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w600,
@@ -1433,7 +1438,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             ),
                             Step(
                               title: TextWidget(
-                                text: habits,
+                                text: DemoLocalization.of(context)
+                                    .translate('Habits'),
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w600,

@@ -1258,15 +1258,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.50,
+                    widthFactor: 0.75,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
-                            text:
-                                DemoLocalization.of(context).translate('Caste'),
+                            text: DemoLocalization.of(context)
+                                .translate('Community'),
                             size: 18,
                             weight: FontWeight.w600,
                           ),

@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class AlertDialogWidget extends StatefulWidget {
@@ -24,7 +25,13 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Details will be deleted permanently"),
+      title: TextWidget(
+        text: DemoLocalization.of(context)
+            .translate('Details will be deleted permanently'),
+        color: darkGreyColor,
+        weight: FontWeight.w400,
+        size: 18,
+      ),
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -39,7 +46,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                             side: BorderSide(color: Colors.red)))),
                 onPressed: widget.onPressed,
                 child: TextWidget(
-                  text: "Yes, Delete",
+                  text: DemoLocalization.of(context).translate('Yes,Delete'),
                   color: darkColor,
                   weight: FontWeight.w400,
                   size: 18,
@@ -62,7 +69,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                   Navigator.pop(context, false);
                 },
                 child: TextWidget(
-                  text: "No, Cancel",
+                  text: DemoLocalization.of(context).translate('No, Cancel'),
                   color: lightColor,
                   weight: FontWeight.w400,
                   size: 18,

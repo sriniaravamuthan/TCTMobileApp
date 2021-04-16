@@ -54,7 +54,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -198,7 +198,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: FractionallySizedBox(
-                    widthFactor: .75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -891,7 +891,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

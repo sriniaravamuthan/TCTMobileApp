@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FilterDialog extends StatefulWidget {
@@ -37,7 +38,12 @@ class _FilterDialogState extends State<FilterDialog> {
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       title: Row(
         children: [
-          Text("Filter"),
+          TextWidget(
+            text: DemoLocalization.of(context).translate('Filter'),
+            color: darkColor,
+            size: 16,
+            weight: FontWeight.w700,
+          ),
         ],
       ),
       children: [
@@ -53,10 +59,12 @@ class _FilterDialogState extends State<FilterDialog> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          "Location",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Location'),
+                          color: darkColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       CheckboxListTile(
@@ -97,10 +105,12 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(
-                          "Village Number",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Village Code'),
+                          color: darkColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       CheckboxListTile(
@@ -134,10 +144,12 @@ class _FilterDialogState extends State<FilterDialog> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(left: 50.0),
-                        child: Text(
-                          "Gender",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                        child: TextWidget(
+                          text:
+                              DemoLocalization.of(context).translate('Gender'),
+                          color: darkColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       CheckboxListTile(
@@ -167,10 +179,12 @@ class _FilterDialogState extends State<FilterDialog> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Text(
-                          "Last Updated",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Last Updated'),
+                          color: darkColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       CheckboxListTile(
@@ -217,7 +231,7 @@ class _FilterDialogState extends State<FilterDialog> {
                       Navigator.pop(context, false);
                     },
                     child: TextWidget(
-                      text: cancel,
+                      text: DemoLocalization.of(context).translate('cancel'),
                       color: darkColor,
                       weight: FontWeight.w400,
                       size: 18,
@@ -247,7 +261,8 @@ class _FilterDialogState extends State<FilterDialog> {
                           width: 10,
                         ),
                         TextWidget(
-                          text: btn_filter,
+                          text: DemoLocalization.of(context)
+                              .translate('Apply Filter'),
                           color: lightColor,
                           weight: FontWeight.w400,
                           size: 18,

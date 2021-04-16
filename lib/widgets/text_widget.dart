@@ -27,7 +27,7 @@ class _TextWidgetState extends State<TextWidget> {
   Widget build(BuildContext context) {
     return Text(
       widget.text,
-      maxLines: 1,
+      maxLines: 2,
       style: GoogleFonts.roboto(
           fontSize: widget.size.toDouble(),
           fontStyle: FontStyle.normal,
