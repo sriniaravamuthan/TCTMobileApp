@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class SearchDialog extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SearchDialogState extends State<SearchDialog> {
       title: Row(
         children: [
           TextWidget(
-            text: search,
+            text: DemoLocalization.of(context).translate('Search'),
             size: 18,
             weight: FontWeight.w600,
           ),
@@ -42,7 +43,7 @@ class _SearchDialogState extends State<SearchDialog> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -50,14 +51,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: name,
+                                text: DemoLocalization.of(context)
+                                    .translate('Name'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -131,14 +133,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: mobile,
+                                text: DemoLocalization.of(context)
+                                    .translate('Name'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -212,7 +215,7 @@ class _SearchDialogState extends State<SearchDialog> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -220,14 +223,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: villageCode,
+                                text: DemoLocalization.of(context)
+                                    .translate('Village Code'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -293,14 +297,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: villageName,
+                                text: DemoLocalization.of(context)
+                                    .translate('Village Name'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -366,7 +371,7 @@ class _SearchDialogState extends State<SearchDialog> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 4),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -374,14 +379,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: panchayatCode,
+                                text: DemoLocalization.of(context)
+                                    .translate('Panchayat Code'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -447,14 +453,15 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Align(
                       alignment: Alignment.topRight,
                       child: FractionallySizedBox(
-                        widthFactor: 1,
+                        widthFactor: 0.75,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
-                                text: zone,
+                                text: DemoLocalization.of(context)
+                                    .translate('Zone'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),
@@ -536,7 +543,7 @@ class _SearchDialogState extends State<SearchDialog> {
                       Navigator.pop(context, false);
                     },
                     child: TextWidget(
-                      text: cancel,
+                      text: DemoLocalization.of(context).translate('cancel'),
                       color: darkColor,
                       weight: FontWeight.w400,
                       size: 18,
@@ -566,7 +573,8 @@ class _SearchDialogState extends State<SearchDialog> {
                           width: 10,
                         ),
                         TextWidget(
-                          text: txt_search,
+                          text:
+                              DemoLocalization.of(context).translate('Search'),
                           color: lightColor,
                           weight: FontWeight.w400,
                           size: 18,

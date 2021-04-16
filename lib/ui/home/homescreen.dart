@@ -110,7 +110,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               }
 
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text("Loading");
+                return Center(child: CircularProgressIndicator());
               }
               return Container(
                 decoration: BoxDecoration(
@@ -129,143 +129,155 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                     child: Container(
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 24.0,
-                                    left: 30.0,
-                                    right: 30.0,
-                                    bottom: 24.0),
-                                child: TextWidget(
-                                  text: totalRecords + "(360)",
-                                  color: darkColor,
-                                  weight: FontWeight.w500,
-                                  size: 24,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 40.0, left: 4, right: 4),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 24.0,
+                                      left: 30.0,
+                                      right: 30.0,
+                                      bottom: 24.0),
+                                  child: TextWidget(
+                                    text:
+                                        "${DemoLocalization.of(context).translate('TotalRecords')}" +
+                                            " " "${(350)}",
+                                    color: darkColor,
+                                    weight: FontWeight.w500,
+                                    size: 24,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return SearchDialog();
-                                            });
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return SearchDialog();
+                                              });
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.search),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              TextWidget(
-                                                text: search,
-                                                color: darkColor,
-                                                weight: FontWeight.w800,
-                                                size: 18,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return FilterDialog();
-                                            });
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.filter_list_sharp),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              TextWidget(
-                                                text: filter,
-                                                color: darkColor,
-                                                weight: FontWeight.w800,
-                                                size: 18,
-                                              ),
-                                            ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.search),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Search'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 18,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.toNamed('/questionnery');
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return FilterDialog();
+                                              });
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            children: [
-                                              Icon(Icons.add),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              TextWidget(
-                                                text: addNew,
-                                                color: darkColor,
-                                                weight: FontWeight.w800,
-                                                size: 18,
-                                              ),
-                                            ],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.filter_list_sharp),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Filter'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 18,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        width: 30,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.toNamed('/questionnery');
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.add),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Add New'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 18,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           Divider(
                             height: 1,
@@ -281,7 +293,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   columns: [
                                     DataColumn(
                                         label: TextWidget(
-                                      text: familyHead,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Family Head'),
                                       color: darkColor,
                                       size: 16,
                                       weight: FontWeight.w700,
@@ -306,7 +319,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         numeric: true),
                                     DataColumn(
                                         label: TextWidget(
-                                          text: villageCode.toUpperCase(),
+                                          text: DemoLocalization.of(context)
+                                              .translate('Village Code'),
                                           color: darkColor,
                                           size: 16,
                                           weight: FontWeight.w700,
@@ -314,7 +328,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         numeric: true),
                                     DataColumn(
                                         label: TextWidget(
-                                          text: zone.toUpperCase(),
+                                          text: DemoLocalization.of(context)
+                                              .translate('Zone'),
                                           color: darkColor,
                                           size: 16,
                                           weight: FontWeight.w700,
@@ -322,14 +337,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         numeric: true),
                                     DataColumn(
                                         label: TextWidget(
-                                      text: status,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Mobile'),
                                       color: darkColor,
                                       size: 16,
                                       weight: FontWeight.w700,
                                     )),
                                     DataColumn(
                                         label: TextWidget(
-                                      text: action,
+                                      text: DemoLocalization.of(context)
+                                          .translate('Action'),
                                       color: darkColor,
                                       size: 16,
                                       weight: FontWeight.w700,

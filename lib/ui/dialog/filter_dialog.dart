@@ -17,9 +17,19 @@ class FilterDialog extends StatefulWidget {
 }
 
 class _FilterDialogState extends State<FilterDialog> {
-  bool valuefirst = false;
-  bool valuesecond = false;
-  bool valuethird = false;
+  bool locationfirst = false;
+  bool locationsecond = false;
+  bool locationthird = false;
+
+  bool genderfirst = false;
+  bool gendersecond = false;
+
+  bool villagefirst = false;
+  bool villagesecond = false;
+
+  bool lastUpdatefirst = false;
+  bool lastUpdatesecond = false;
+
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
@@ -53,10 +63,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Lalipalayam'),
-                        value: this.valuefirst,
+                        value: this.locationfirst,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuefirst = value;
+                            this.locationfirst = value;
                           });
                         },
                       ),
@@ -64,10 +74,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Lala Pettai'),
-                        value: this.valuesecond,
+                        value: this.locationsecond,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuesecond = value;
+                            this.locationsecond = value;
                           });
                         },
                       ),
@@ -75,10 +85,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('Edappalayam'),
-                        value: this.valuesecond,
+                        value: this.locationthird,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuethird = value;
+                            this.locationthird = value;
                           });
                         },
                       ),
@@ -97,10 +107,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('121354'),
-                        value: this.valuefirst,
+                        value: this.villagefirst,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuefirst = value;
+                            this.villagefirst = value;
                           });
                         },
                       ),
@@ -108,10 +118,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 20, right: 80),
                         title: const Text('6546565'),
-                        value: this.valuesecond,
+                        value: this.villagesecond,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuesecond = value;
+                            this.villagesecond = value;
                           });
                         },
                       ),
@@ -134,10 +144,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 50, right: 80),
                         title: const Text('Male'),
-                        value: this.valuefirst,
+                        value: this.genderfirst,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuefirst = value;
+                            this.genderfirst = value;
                           });
                         },
                       ),
@@ -145,10 +155,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 50, right: 80),
                         title: const Text('Female'),
-                        value: this.valuesecond,
+                        value: this.gendersecond,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuesecond = value;
+                            this.gendersecond = value;
                           });
                         },
                       ),
@@ -167,10 +177,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 10, right: 30),
                         title: const Text('5.22PM 21/3/21'),
-                        value: this.valuefirst,
+                        value: this.lastUpdatefirst,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuefirst = value;
+                            this.lastUpdatefirst = value;
                           });
                         },
                       ),
@@ -178,10 +188,10 @@ class _FilterDialogState extends State<FilterDialog> {
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.only(left: 10, right: 30),
                         title: const Text('5.22PM 21/3/21'),
-                        value: this.valuesecond,
+                        value: this.lastUpdatesecond,
                         onChanged: (bool value) {
                           setState(() {
-                            this.valuesecond = value;
+                            this.lastUpdatesecond = value;
                           });
                         },
                       ),
