@@ -6,15 +6,15 @@
  * /
  */
 
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
-import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
-import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
@@ -32,18 +32,24 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   String villageCodeValue, panNoVal, panCodeVal, villageNameVal;
   String dropDownLang;
+  var villageSuggestion = TextEditingController();
+  List villageCodeList = [];
+  var height, width;
 
   @override
   void initState() {
-    super.initState();
+    _getVillageCode(villageSuggestion.text);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Scaffold(
@@ -118,8 +124,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 24.0, left: 30.0, right: 30.0, bottom: 24.0),
+                        padding: EdgeInsets.only(
+                          top: (height) * 0.05,
+                          left: (width) * 0.02,
+                          right: (width) * 0.02,
+                          bottom: (height) * 0.03,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -128,14 +138,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                   .translate('Demographics questionnaires'),
                               color: darkColor,
                               weight: FontWeight.w600,
-                              size: 24,
+                              size: 18,
                             ),
                             TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Mandatory Fields'),
                               color: darkColor,
                               weight: FontWeight.w600,
-                              size: 18,
+                              size: 16,
                             ),
                           ],
                         ),
@@ -535,94 +545,163 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child:
-                                                        DropdownButtonFormField<
-                                                            String>(
-                                                      isExpanded: true,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Column(
+                                                        children: [
+                                                          AutoCompleteTextField(
+                                                              controller:
+                                                                  villageSuggestion,
+                                                              clearOnSubmit:
+                                                                  false,
+                                                              itemSubmitted:
+                                                                  (item) {
+                                                                villageSuggestion
+                                                                        .text =
+                                                                    item;
+                                                              },
+                                                              suggestions:
+                                                                  villageCodeList,
+                                                              style: TextStyle(
+                                                                color: Color(
+                                                                    0xFF222222),
+                                                                fontSize: 16,
+                                                              ),
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                border:
+                                                                    new OutlineInputBorder(
+                                                                  borderRadius: BorderRadius.only(
+                                                                      topRight:
+                                                                          Radius.circular(
+                                                                              50.0),
+                                                                      bottomLeft:
+                                                                          Radius.circular(
+                                                                              50.0),
+                                                                      bottomRight:
+                                                                          Radius.circular(
+                                                                              50.0)),
+                                                                ),
+                                                              ),
+                                                              itemBuilder:
+                                                                  (context,
+                                                                      item) {
+                                                                return new Padding(
+                                                                    padding:
+                                                                        EdgeInsets.all(
+                                                                            8.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text:
+                                                                          item,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 18,
+                                                                      weight: FontWeight
+                                                                          .w600,
+                                                                    ));
+                                                              },
+                                                              itemSorter:
+                                                                  (a, b) {
+                                                                return a
+                                                                    .compareTo(
+                                                                        b);
+                                                              },
+                                                              itemFilter: (item,
+                                                                  query) {
+                                                                return item
+                                                                    .toLowerCase()
+                                                                    .startsWith(
+                                                                        query
+                                                                            .toLowerCase());
+                                                              })
+                                                        ],
+                                                      )
+                                                      //     DropdownButtonFormField<
+                                                      //         String>(
+                                                      //   isExpanded: true,
+                                                      //   decoration:
+                                                      //       InputDecoration(
+                                                      //     border:
+                                                      //         new OutlineInputBorder(
+                                                      //       borderSide:
+                                                      //           BorderSide.none,
+                                                      //       borderRadius: BorderRadius.only(
+                                                      //           topRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomLeft: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0)),
+                                                      //     ),
+                                                      //     enabledBorder:
+                                                      //         OutlineInputBorder(
+                                                      //       borderRadius: BorderRadius.only(
+                                                      //           topRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomLeft: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0)),
+                                                      //       borderSide: BorderSide(
+                                                      //           color:
+                                                      //               lightGreyColor),
+                                                      //     ),
+                                                      //     errorBorder:
+                                                      //         OutlineInputBorder(
+                                                      //       borderRadius: BorderRadius.only(
+                                                      //           topRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomLeft: Radius
+                                                      //               .circular(
+                                                      //                   50.0),
+                                                      //           bottomRight: Radius
+                                                      //               .circular(
+                                                      //                   50.0)),
+                                                      //       borderSide: BorderSide(
+                                                      //           color:
+                                                      //               lightGreyColor),
+                                                      //     ),
+                                                      //   ),
+                                                      //   value: villageCodeValue,
+                                                      //   validator: (value) =>
+                                                      //       value == null
+                                                      //           ? 'Source Type must not be empty'
+                                                      //           : null,
+                                                      //   onChanged: (value) =>
+                                                      //       setState(() =>
+                                                      //           villageCodeValue =
+                                                      //               value),
+                                                      //   items: <String>[
+                                                      //     'VLR',
+                                                      //     'CLR',
+                                                      //     'MLR',
+                                                      //   ].map<
+                                                      //           DropdownMenuItem<
+                                                      //               String>>(
+                                                      //       (String value) {
+                                                      //     return DropdownMenuItem<
+                                                      //         String>(
+                                                      //       value: value,
+                                                      //       child: TextWidget(
+                                                      //         text: value,
+                                                      //         color: darkColor,
+                                                      //         weight:
+                                                      //             FontWeight.w400,
+                                                      //         size: 16,
+                                                      //       ),
+                                                      //     );
+                                                      //   }).toList(),
+                                                      // ),
                                                       ),
-                                                      value: villageCodeValue,
-                                                      validator: (value) =>
-                                                          value == null
-                                                              ? 'Source Type must not be empty'
-                                                              : null,
-                                                      onChanged: (value) =>
-                                                          setState(() =>
-                                                              villageCodeValue =
-                                                                  value),
-                                                      items: <String>[
-                                                        'VLR',
-                                                        'CLR',
-                                                        'MLR',
-                                                      ].map<
-                                                              DropdownMenuItem<
-                                                                  String>>(
-                                                          (String value) {
-                                                        return DropdownMenuItem<
-                                                            String>(
-                                                          value: value,
-                                                          child: TextWidget(
-                                                            text: value,
-                                                            color: darkColor,
-                                                            weight:
-                                                                FontWeight.w400,
-                                                            size: 16,
-                                                          ),
-                                                        );
-                                                      }).toList(),
-                                                    ),
-                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1506,11 +1585,13 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                      // decoration: BoxDecoration(
-                      //   borderRadius:
-                      //   BorderRadius.all(Radius.circular(50.0),),
-                      // ),
-                      child: Image.asset(imgLightLogo)),
+                    child: Image.asset(
+                      imgLightLogo,
+                      fit: BoxFit.contain,
+                      height: height / 9,
+                      width: width / 20,
+                    ),
+                  ),
                 )),
           ),
         )
@@ -1563,5 +1644,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         MyApp.setLocale(context, Locale('en', 'US'));
       });
     }
+  }
+
+  Future<List<dynamic>> _getVillageCode(String text) {
+    debugPrint(
+        "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).where(collectionVillageCode, isEqualTo: text)}");
+    // FirebaseFirestore.instance
+    //      .collection('villageCode')
+    //      .where('villageCode', isEqualTo: text)
+    //      .snapshots();
   }
 }

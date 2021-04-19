@@ -6,6 +6,7 @@
  * /
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -40,6 +41,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   bool physicallyChallengeVal, smartphoneVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
+  TextEditingController genderController = TextEditingController();
+  String gender = "";
 
   @override
   void dispose() {
@@ -315,59 +318,76 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
-                                    child: DropdownButtonFormField<String>(
-                                      isExpanded: true,
+                                    child: TextField(
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _getGender(value);
+                                        });
+                                      },
+                                      controller: genderController,
                                       decoration: InputDecoration(
                                         border: new OutlineInputBorder(
-                                          borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(50.0),
                                               bottomLeft: Radius.circular(50.0),
                                               bottomRight:
                                                   Radius.circular(50.0)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
                                         ),
                                       ),
-                                      value: genderVal,
-                                      validator: (value) => value == null
-                                          ? 'Source Type must not be empty'
-                                          : null,
-                                      onChanged: (value) =>
-                                          setState(() => genderVal = value),
-                                      items: <String>[
-                                        'Male',
-                                        'Female',
-                                        'Others',
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: TextWidget(
-                                            text: value,
-                                            color: darkColor,
-                                            weight: FontWeight.w400,
-                                            size: 16,
-                                          ),
-                                        );
-                                      }).toList(),
                                     ),
+                                    // DropdownButtonFormField<String>(
+                                    //   isExpanded: true,
+                                    //   decoration: InputDecoration(
+                                    //     border: new OutlineInputBorder(
+                                    //       borderSide: BorderSide.none,
+                                    //       borderRadius: BorderRadius.only(
+                                    //           topRight: Radius.circular(50.0),
+                                    //           bottomLeft: Radius.circular(50.0),
+                                    //           bottomRight:
+                                    //               Radius.circular(50.0)),
+                                    //     ),
+                                    //     enabledBorder: OutlineInputBorder(
+                                    //       borderRadius: BorderRadius.only(
+                                    //           topRight: Radius.circular(50.0),
+                                    //           bottomLeft: Radius.circular(50.0),
+                                    //           bottomRight:
+                                    //               Radius.circular(50.0)),
+                                    //       borderSide:
+                                    //           BorderSide(color: lightGreyColor),
+                                    //     ),
+                                    //     errorBorder: OutlineInputBorder(
+                                    //       borderRadius: BorderRadius.only(
+                                    //           topRight: Radius.circular(50.0),
+                                    //           bottomLeft: Radius.circular(50.0),
+                                    //           bottomRight:
+                                    //               Radius.circular(50.0)),
+                                    //       borderSide:
+                                    //           BorderSide(color: lightGreyColor),
+                                    //     ),
+                                    //   ),
+                                    //   value: genderVal,
+                                    //   validator: (value) => value == null
+                                    //       ? 'Source Type must not be empty'
+                                    //       : null,
+                                    //   onChanged: (value) =>
+                                    //       setState(() => genderVal = value),
+                                    //   items: <String>[
+                                    //     'Male',
+                                    //     'Female',
+                                    //     'Others',
+                                    //   ].map<DropdownMenuItem<String>>(
+                                    //       (String value) {
+                                    //     return DropdownMenuItem<String>(
+                                    //       value: value,
+                                    //       child: TextWidget(
+                                    //         text: value,
+                                    //         color: darkColor,
+                                    //         weight: FontWeight.w400,
+                                    //         size: 16,
+                                    //       ),
+                                    //     );
+                                    //   }).toList(),
+                                    // ),
                                   ),
                                 ],
                               ),
@@ -1433,5 +1453,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       });
       //print('Switch Button is OFF');
     }
+  }
+
+  void _getGender(String value) {
+    debugPrint(
+        "gender:${FirebaseFirestore.instance.collection('gender').doc()}");
   }
 }
