@@ -15,4 +15,4 @@ const darkColor = Color(0xFF222222);
 const darkGreyColor = Color(0xFF565655);
 const greyColor = Color(0xFFCCCCCC);
 const yellowColor = Color(0xFFECA400);
-
+const errorColor = Color(0xFFe84545);
