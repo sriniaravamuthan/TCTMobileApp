@@ -53,7 +53,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                           .translate('Add Family Member'),
                       color: darkColor,
                       weight: FontWeight.w800,
-                      size: 16,
+                      size: 14,
                     ),
                   ],
                 ),
@@ -102,7 +102,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               text: "Saravanakumar (Son)",
                               weight: FontWeight.w800,
                               color: darkColor,
-                              size: 18,
+                              size: 14,
                             ),
                           ),
                           Padding(
@@ -111,7 +111,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               text: "24 Yrs (15 Feb 1996)",
                               weight: FontWeight.w600,
                               color: darkColor,
-                              size: 18,
+                              size: 14,
                             ),
                           ),
                           Padding(
@@ -120,7 +120,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               text: "Male, O+, Married",
                               weight: FontWeight.w600,
                               color: darkColor,
-                              size: 18,
+                              size: 14,
                             ),
                           ),
                           Padding(
@@ -129,7 +129,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               text: "+91 97101 52525",
                               weight: FontWeight.w600,
                               color: darkColor,
-                              size: 18,
+                              size: 14,
                             ),
                           ),
                           Padding(
@@ -138,7 +138,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               text: "saravanakumar@gmail.com",
                               weight: FontWeight.w600,
                               color: darkColor,
-                              size: 18,
+                              size: 14,
                             ),
                           ),
                           SizedBox(
@@ -166,7 +166,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: adhaarNumber,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -175,7 +175,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "546546565654",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -184,7 +184,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: occupation,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -193,7 +193,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "IT employee",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -202,7 +202,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: community,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -211,7 +211,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "MBC",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -220,7 +220,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: insurance,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -229,7 +229,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "gvt,pvt",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                       ],
@@ -246,7 +246,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: educationQualification,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -255,7 +255,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "BE",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -264,7 +264,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: annualIncome,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -273,7 +273,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "RS:60,000",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -282,7 +282,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: caste,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -291,7 +291,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "Agamudayar",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -309,7 +309,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "Old Age,Retirement",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                       ],
@@ -326,7 +326,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: smartphone,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -344,7 +344,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: physicallyChallenged,
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 16,
+                            size: 14,
                           ),
                         ),
                         Padding(
@@ -353,7 +353,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             text: "No",
                             weight: FontWeight.w600,
                             color: darkColor,
-                            size: 18,
+                            size: 14,
                           ),
                         ),
                         SizedBox(

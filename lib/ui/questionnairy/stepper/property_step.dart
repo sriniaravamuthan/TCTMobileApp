@@ -7,9 +7,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -63,7 +61,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Status of House'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -111,7 +109,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),
@@ -126,7 +124,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -135,7 +133,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Type of House'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -183,7 +181,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),
@@ -207,7 +205,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Toilet Facility at Home'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -225,7 +223,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               ),
                               TextWidget(
                                 text: textValue,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
@@ -245,7 +243,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -254,7 +252,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Own Land'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -272,7 +270,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               ),
                               TextWidget(
                                 text: textValue1,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
@@ -287,7 +285,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -296,7 +294,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Wet Land Holding(In Acres)'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -372,7 +370,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -381,7 +379,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Dry Land Holding(In Acres)'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -455,7 +453,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.5,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -464,7 +462,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Own Vehicle'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -482,7 +480,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               ),
                               TextWidget(
                                 text: textValue2,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
@@ -497,7 +495,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.5,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -506,7 +504,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context).translate(
                                 'Number of various Motor vechicles owned'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -589,7 +587,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Two Wheeler'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -666,7 +664,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Three Wheeler'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -742,7 +740,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Four Wheeler'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -818,7 +816,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: TextWidget(
                           text:
                               DemoLocalization.of(context).translate('Others'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -900,7 +898,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Details'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -918,7 +916,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               ),
                               TextWidget(
                                 text: textValue3,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
@@ -933,7 +931,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -942,7 +940,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Type'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1011,7 +1009,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1020,7 +1018,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Count'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),

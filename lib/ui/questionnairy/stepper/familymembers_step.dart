@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -36,8 +35,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       mailVal,
       communityVal,
       castVal,
+      annualIncomeVal,
       photoVal;
-  int aadharNumberVal, ageVal, annualIncomeVal, mobileNumberVal;
+  int aadharNumberVal, ageVal, mobileNumberVal;
   bool physicallyChallengeVal, smartphoneVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
@@ -76,7 +76,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Name'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -153,7 +153,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Aadhaar No'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -229,7 +229,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Relationship method of family head'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -277,7 +277,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 text: value,
                                 color: darkColor,
                                 weight: FontWeight.w400,
-                                size: 16,
+                                size: 14,
                               ),
                             );
                           }).toList(),
@@ -312,7 +312,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Gender'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -407,7 +407,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Date of Birth'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -516,7 +516,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Age'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -614,7 +614,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Marital status'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -667,7 +667,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             text: value,
                                             color: darkColor,
                                             weight: FontWeight.w400,
-                                            size: 16,
+                                            size: 14,
                                           ),
                                         );
                                       }).toList(),
@@ -691,7 +691,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Blood Group'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -745,7 +745,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             text: value,
                                             color: darkColor,
                                             weight: FontWeight.w400,
-                                            size: 16,
+                                            size: 14,
                                           ),
                                         );
                                       }).toList(),
@@ -769,7 +769,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Physically challenged'),
-                                      size: 18,
+                                      size: 14,
                                       weight: FontWeight.w600,
                                     ),
                                   ),
@@ -787,7 +787,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         ),
                                         TextWidget(
                                           text: textValue,
-                                          size: 18,
+                                          size: 14,
                                           weight: FontWeight.w600,
                                         ),
                                       ],
@@ -815,7 +815,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Photograph'),
-                          size: 18,
+                          size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
@@ -848,7 +848,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -857,7 +857,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Education Qualification'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -905,7 +905,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),
@@ -920,7 +920,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -929,7 +929,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Business'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -998,7 +998,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1006,8 +1006,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
-                                .translate('Business'),
-                            size: 18,
+                                .translate('Annual Income'),
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1038,16 +1038,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 borderSide: BorderSide(color: lightGreyColor),
                               ),
                             ),
-                            //value: annualIncomeVal,
+                            value: annualIncomeVal,
                             validator: (value) => value == null
                                 ? 'Source Type must not be empty'
                                 : null,
-                            // onChanged: (value) =>
-                            //     setState(() => annualIncomeVal = value),
+                            onChanged: (value) =>
+                                setState(() => annualIncomeVal = value),
                             items: <String>[
-                              '60000',
-                              '80000',
-                              'Others',
+                              '1,00,000',
+                              '1,50,000',
+                              '3,00,000',
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -1055,7 +1055,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),
@@ -1075,7 +1075,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1084,7 +1084,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Mobile No'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1153,7 +1153,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1162,7 +1162,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Email'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1231,7 +1231,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1240,7 +1240,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Smart phone'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1258,7 +1258,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               ),
                               TextWidget(
                                 text: textValue1,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ],
@@ -1278,7 +1278,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1287,7 +1287,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Community'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1335,7 +1335,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),
@@ -1350,7 +1350,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 child: Align(
                   alignment: Alignment.center,
                   child: FractionallySizedBox(
-                    widthFactor: 0.70,
+                    widthFactor: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1359,7 +1359,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Caste'),
-                            size: 18,
+                            size: 14,
                             weight: FontWeight.w600,
                           ),
                         ),
@@ -1407,7 +1407,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   text: value,
                                   color: darkColor,
                                   weight: FontWeight.w400,
-                                  size: 16,
+                                  size: 14,
                                 ),
                               );
                             }).toList(),

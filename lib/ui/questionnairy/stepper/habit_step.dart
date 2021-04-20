@@ -7,7 +7,6 @@
  */
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -38,7 +37,7 @@ class _HabitsStepState extends State<HabitsStep> {
             child: TextWidget(
               text: DemoLocalization.of(context)
                   .translate('Any Members who Smoke?'),
-              size: 18,
+              size: 14,
               weight: FontWeight.w600,
             ),
           ),
@@ -54,7 +53,7 @@ class _HabitsStepState extends State<HabitsStep> {
               ),
               TextWidget(
                 text: textValue,
-                size: 18,
+                size: 14,
                 weight: FontWeight.w600,
               ),
             ],
@@ -64,7 +63,7 @@ class _HabitsStepState extends State<HabitsStep> {
             child: TextWidget(
               text: DemoLocalization.of(context)
                   .translate('Any Members who Drink?'),
-              size: 18,
+              size: 14,
               weight: FontWeight.w600,
             ),
           ),
@@ -80,7 +79,7 @@ class _HabitsStepState extends State<HabitsStep> {
               ),
               TextWidget(
                 text: textValue1,
-                size: 18,
+                size: 14,
                 weight: FontWeight.w600,
               ),
             ],
@@ -90,7 +89,7 @@ class _HabitsStepState extends State<HabitsStep> {
             child: TextWidget(
               text: DemoLocalization.of(context)
                   .translate('Any Members who use Tobacco?'),
-              size: 18,
+              size: 14,
               weight: FontWeight.w600,
             ),
           ),
@@ -106,7 +105,7 @@ class _HabitsStepState extends State<HabitsStep> {
               ),
               TextWidget(
                 text: textValue2,
-                size: 18,
+                size: 14,
                 weight: FontWeight.w600,
               ),
             ],
