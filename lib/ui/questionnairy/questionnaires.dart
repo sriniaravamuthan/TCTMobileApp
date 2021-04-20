@@ -122,7 +122,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   borderRadius: BorderRadius.circular(25.0),
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(

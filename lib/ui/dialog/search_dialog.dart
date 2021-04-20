@@ -9,7 +9,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -141,7 +140,7 @@ class _SearchDialogState extends State<SearchDialog> {
                               padding: const EdgeInsets.all(10.0),
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
-                                    .translate('Name'),
+                                    .translate('Mobile'),
                                 size: 18,
                                 weight: FontWeight.w600,
                               ),

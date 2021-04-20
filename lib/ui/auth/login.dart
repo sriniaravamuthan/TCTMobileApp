@@ -4,7 +4,6 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
-import 'package:tct_demographics/widgets/button_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -121,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               validator: (value) {
                                 if (value.isEmpty) {
-                                  return 'Enter a  mobile or email!';
+                                  return 'Enter a Email!';
                                 }
                                 // else if(value.isNotEmpty){
                                 //     Pattern pattern =
@@ -196,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               validator: (value) {
                                 if (value.isEmpty) {
-                                  return 'Enter a  mobile or email!';
+                                  return 'Enter a  Password!';
                                 }
                                 // else if(value.isNotEmpty){
                                 //     Pattern pattern =

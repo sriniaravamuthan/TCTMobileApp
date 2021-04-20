@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -19,6 +21,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  String dropDownLang;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -29,24 +33,26 @@ class _DetailScreenState extends State<DetailScreen> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.language,
-                          size: 24,
-                          color: darkColor,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "English",
-                          style: TextStyle(fontSize: 18, color: darkColor),
-                        ),
-                      ],
-                    )),
+                DropdownButton(
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.black87,
+                  ),
+                  items: ['Tamil', 'English'].map((val) {
+                    return new DropdownMenuItem<String>(
+                      value: val,
+                      child: new Text(val),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      dropDownLang = val;
+                      _changeLanguage();
+                    });
+                    print("Language:$val");
+                  },
+                ),
                 SizedBox(
                   width: 50,
                 ),
@@ -110,11 +116,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                         Get.toNamed('/homeScreen');
                                       },
                                       child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 40,
+                                          width: 40,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(50),
+                                                BorderRadius.circular(24),
                                             border: Border.all(
                                               color: Colors.black45,
                                               style: BorderStyle.solid,
@@ -123,7 +129,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           ),
                                           child: Icon(
                                             Icons.keyboard_arrow_left,
-                                            size: 30,
+                                            size: 24,
                                           )),
                                     ),
                                     SizedBox(
@@ -133,7 +139,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       text: "Senthil Kumar",
                                       color: darkColor,
                                       weight: FontWeight.w600,
-                                      size: 24,
+                                      size: 18,
                                     ),
                                   ],
                                 ),
@@ -144,7 +150,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   text: "*IN PROGRESS",
                                   color: yellowColor,
                                   weight: FontWeight.w600,
-                                  size: 20,
+                                  size: 18,
                                 ),
                               ),
                             ],
@@ -167,7 +173,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                           padding: const EdgeInsets.only(
                                               left: 16.0, top: 16),
                                           child: TextWidget(
-                                            text: location,
+                                            text: DemoLocalization.of(context)
+                                                .translate('Location'),
                                             size: 16,
                                             weight: FontWeight.w800,
                                             color: darkColor,
@@ -175,276 +182,352 @@ class _DetailScreenState extends State<DetailScreen> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(16.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Form No",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "12345",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Door No",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Lalikuppam",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Project Code",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "12345",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Street Name",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Lalikuppam",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 30.0, right: 60.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Village Code",
-                                                        size: 16,
-                                                        color: darkGreyColor,
-                                                        weight: FontWeight.w600,
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Form No'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "12345",
-                                                        size: 16,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w700,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12345",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 55,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                    ),
-                                                  ],
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Door No'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 30.0, right: 60.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Panchayat No",
-                                                        size: 16,
-                                                        color: darkGreyColor,
-                                                        weight: FontWeight.w600,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Project Code No'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "12345",
-                                                        size: 16,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w700,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12345",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Village Name",
-                                                        size: 16,
-                                                        color: darkGreyColor,
-                                                        weight: FontWeight.w600,
+                                                      SizedBox(
+                                                        height: 10,
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Lalikuppam",
-                                                        size: 16,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w700,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Street Name'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Lalikuppam",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 30.0, right: 60.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Panchayat Code",
-                                                        size: 16,
-                                                        color: darkGreyColor,
-                                                        weight: FontWeight.w600,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Village Code'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "12345",
-                                                        size: 16,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w700,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12345",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Contact Person",
-                                                        size: 16,
-                                                        color: darkGreyColor,
-                                                        weight: FontWeight.w600,
+                                                      SizedBox(
+                                                        height: 43,
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: TextWidget(
-                                                        text: "Ramasamy",
-                                                        size: 16,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w700,
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
                                                       ),
-                                                    ),
-                                                  ],
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Panchayat No'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12345",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Village Name'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Lalikuppam",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Panchayat Code'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "12345",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Contact Person'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Ramasamy",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         )
                                       ],
@@ -460,252 +543,320 @@ class _DetailScreenState extends State<DetailScreen> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 16.0, top: 16),
+                                              left: 16.0, top: 16.0),
                                           child: TextWidget(
-                                            text: "Property Details"
+                                            text: DemoLocalization.of(context)
+                                                .translate('Property Details')
                                                 .toUpperCase(),
                                             size: 16,
                                             color: darkColor,
                                             weight: FontWeight.w800,
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Status Of House",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Own House",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Vehicle Details",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Two Wheeler-1",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: TextWidget(
-                                                    text: "Types Of House",
-                                                    size: 16,
-                                                    color: darkGreyColor,
-                                                    weight: FontWeight.w600,
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Status of House'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Own Land'),
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text:
+                                                              "Vehicle Details",
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Two Wheeler-1",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: TextWidget(
-                                                    text: "Hut House",
-                                                    size: 16,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text:
+                                                              "Types Of House",
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Hut House",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 43,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 50,
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Toilet Facility at Home'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Yes",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 43,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.all(8.0),
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Wet Land Holding(In Acres)'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "2",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Livestock Details'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "COW-2",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.all(8.0),
+                                                      const EdgeInsets.only(
+                                                          left: 24,
+                                                          right: 8,
+                                                          bottom: 8),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Dry Land Holding(In Acres)'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "1",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 72,
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0, right: 30.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text:
-                                                          "Toilet Facility In Home",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Yes",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 55,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 30.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Wet Land In Acre",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "2",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Live Stock",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "COW-2",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0, right: 60.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Dry Land In Acre",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "1",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 85,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         )
                                       ],
                                     ),
@@ -724,116 +875,132 @@ class _DetailScreenState extends State<DetailScreen> {
                                             top: 16.0,
                                           ),
                                           child: TextWidget(
-                                            text: "Habits".toUpperCase(),
+                                            text: DemoLocalization.of(context)
+                                                .translate('Habits')
+                                                .toUpperCase(),
                                             size: 16,
                                             color: darkColor,
                                             weight: FontWeight.w800,
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text:
-                                                          "Any members who smoke?",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Any Members who Smoke?'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "No",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "No",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: DemoLocalization
+                                                                  .of(context)
+                                                              .translate(
+                                                                  'Any Members who Drink?'),
+                                                          size: 14,
+                                                          color: darkGreyColor,
+                                                          weight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: TextWidget(
+                                                          text: "Yes",
+                                                          size: 14,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: TextWidget(
+                                                        text: DemoLocalization
+                                                                .of(context)
+                                                            .translate(
+                                                                'Any Members who use Tobacco?'),
+                                                        size: 14,
+                                                        color: darkGreyColor,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: TextWidget(
+                                                        text: "No",
+                                                        size: 14,
+                                                        color: darkColor,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text:
-                                                          "Any members who Drink?",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "Yes",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 60.0, right: 120.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text:
-                                                          "Any members who use Tobacco?",
-                                                      size: 16,
-                                                      color: darkGreyColor,
-                                                      weight: FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: TextWidget(
-                                                      text: "No",
-                                                      size: 16,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         )
                                       ],
                                     ),
@@ -862,334 +1029,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: "Saravanakumar (Son)",
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "24" +
-                                                        "YRS" +
-                                                        "(15 Feb 1996)," +
-                                                        "Male," +
-                                                        "O+" +
-                                                        "Married",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: mobileNumber,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "+91 8989898888",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                TextWidget(
-                                                  text: email + "ID",
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextWidget(
-                                                  text:
-                                                      "saravanakumar@gmail.com",
-                                                  color: darkColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ],
-                                            )),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: adhaarNumber,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "5465 4654 6688",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text:
-                                                        educationQualification,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "BSc",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                TextWidget(
-                                                  text: occupation,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextWidget(
-                                                  text: "Farmer",
-                                                  color: darkColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ],
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                TextWidget(
-                                                  text: annualIncome,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextWidget(
-                                                  text: "60000",
-                                                  color: darkColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ],
-                                            )),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: smartphone,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "yes",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: physicallyChallenged,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "No",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                TextWidget(
-                                                  text: community,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextWidget(
-                                                  text: "MBC",
-                                                  color: darkColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ],
-                                            )),
-                                            Expanded(
-                                                child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                TextWidget(
-                                                  text: caste,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                TextWidget(
-                                                  text: "Agamudayar",
-                                                  color: darkColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ],
-                                            )),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TextWidget(
-                                                    text: insurance,
-                                                    color: darkGreyColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  TextWidget(
-                                                    text: "Government,Private",
-                                                    color: darkColor,
-                                                    size: 16,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                            Expanded(
-                                                child: Align(
-                                              alignment: Alignment(-2.42, 2.0),
-                                              child: Padding(
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(16.0),
                                                 child: Column(
@@ -1197,33 +1043,459 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     TextWidget(
-                                                      text: pension,
+                                                      text:
+                                                          "Saravanakumar (Son)",
                                                       color: darkGreyColor,
-                                                      size: 16,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "24" +
+                                                          "YRS" +
+                                                          "(15 Feb 1996)," +
+                                                          "Male," +
+                                                          "O+" +
+                                                          "Married",
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Mobile No'),
+                                                      color: darkGreyColor,
+                                                      size: 14,
                                                       weight: FontWeight.w600,
                                                     ),
                                                     SizedBox(
                                                       height: 20,
                                                     ),
-                                                    // Text(
-                                                    //   "Old age,Retirement",
-                                                    //   overflow: TextOverflow.ellipsis,
-                                                    //   style: TextStyle(
-                                                    //     color: darkColor,
-                                                    //     fontSize: 16,
-                                                    //     fontWeight: FontWeight.w700,),
-                                                    // )
                                                     TextWidget(
-                                                      text:
-                                                          "Old age,Retirement",
+                                                      text: "+91 8989898888",
                                                       color: darkColor,
-                                                      size: 16,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextWidget(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate('Email'),
+                                                    color: darkGreyColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextWidget(
+                                                    text:
+                                                        "saravanakumar@gmail.com",
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w700,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Aadhaar No'),
+                                                      color: darkGreyColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "5465 4654 6688",
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Education Qualification'),
+                                                      color: darkGreyColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "BSc",
+                                                      color: darkColor,
+                                                      size: 14,
                                                       weight: FontWeight.w700,
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            )),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextWidget(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate('Business'),
+                                                    color: darkGreyColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextWidget(
+                                                    text: "Farmer",
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w700,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextWidget(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate(
+                                                            'Annual Income'),
+                                                    color: darkGreyColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextWidget(
+                                                    text: "60000",
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w700,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Smart phone'),
+                                                      color: darkGreyColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "yes",
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Physically challenged'),
+                                                      color: darkGreyColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text: "No",
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextWidget(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate('Community'),
+                                                    color: darkGreyColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextWidget(
+                                                    text: "MBC",
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w700,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  TextWidget(
+                                                    text: caste,
+                                                    color: darkGreyColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  TextWidget(
+                                                    text: "Agamudayar",
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w700,
+                                                  ),
+                                                ],
+                                              )),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextWidget(
+                                                      text: insurance,
+                                                      color: darkGreyColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    TextWidget(
+                                                      text:
+                                                          "Government,Private",
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ),
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 24,
+                                                  right: 8,
+                                                  bottom: 2),
+                                              child: Expanded(
+                                                  child: Align(
+                                                alignment:
+                                                    Alignment(-2.42, 2.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      TextWidget(
+                                                        text: pension,
+                                                        color: darkGreyColor,
+                                                        size: 14,
+                                                        weight: FontWeight.w600,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      // Text(
+                                                      //   "Old age,Retirement",
+                                                      //   overflow: TextOverflow.ellipsis,
+                                                      //   style: TextStyle(
+                                                      //     color: darkColor,
+                                                      //     fontSize: 16,
+                                                      //     fontWeight: FontWeight.w700,),
+                                                      // )
+                                                      TextWidget(
+                                                        text:
+                                                            "Old age,Retirement",
+                                                        color: darkColor,
+                                                        size: 14,
+                                                        weight: FontWeight.w700,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )),
+                                            ),
                                           ],
                                         )
                                       ],
@@ -1278,5 +1550,20 @@ class _DetailScreenState extends State<DetailScreen> {
         )
       ],
     );
+  }
+
+  void _changeLanguage() async {
+    // Locale _temp = await setLocale(language.languageCode);
+    // SplashScreen.setLocale(context, _temp);
+
+    if (dropDownLang == "Tamil") {
+      setState(() {
+        MyApp.setLocale(context, Locale('ta', 'IN'));
+      });
+    } else {
+      setState(() {
+        MyApp.setLocale(context, Locale('en', 'US'));
+      });
+    }
   }
 }
