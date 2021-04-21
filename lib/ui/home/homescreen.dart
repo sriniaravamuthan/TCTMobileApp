@@ -12,8 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
-import 'package:tct_demographics/constants/shared_preference.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
@@ -144,157 +142,145 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 24.0,
-                                        left: 30.0,
-                                        right: 30.0,
-                                        bottom: 24.0),
+                                        top: 24.0, left: 30.0, bottom: 24.0),
                                     child: TextWidget(
                                       text:
                                           "${DemoLocalization.of(context).translate('TotalRecords')}" +
                                               " " "${(350)}",
                                       color: darkColor,
                                       weight: FontWeight.w500,
-                                      size: 18,
+                                      size: 16,
                                     ),
                                   ),
                                 ),
-                                Expanded(
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return SearchDialog();
-                                                  });
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                border: Border.all(
-                                                  color: Colors.black45,
-                                                  style: BorderStyle.solid,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.search),
-                                                    SizedBox(
-                                                      width: 16,
-                                                    ),
-                                                    TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate('Search'),
-                                                      color: darkColor,
-                                                      weight: FontWeight.w800,
-                                                      size: 16,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: (width) * 0.06,
+                                      right: (width) * 0.02),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return SearchDialog();
+                                              });
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return FilterDialog();
-                                                  });
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                border: Border.all(
-                                                  color: Colors.black45,
-                                                  style: BorderStyle.solid,
-                                                  width: 1.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(6.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.search),
+                                                SizedBox(
+                                                  width: 5,
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons
-                                                        .filter_list_sharp),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate('Filter'),
-                                                      color: darkColor,
-                                                      weight: FontWeight.w800,
-                                                      size: 16,
-                                                    ),
-                                                  ],
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Search'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 14,
                                                 ),
-                                              ),
+                                              ],
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Get.toNamed('/questionnery');
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                border: Border.all(
-                                                  color: Colors.black45,
-                                                  style: BorderStyle.solid,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Icon(Icons.add),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate('Add New'),
-                                                      color: darkColor,
-                                                      weight: FontWeight.w800,
-                                                      size: 16,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return FilterDialog();
+                                              });
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(6.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.filter_list_sharp),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Filter'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 14,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.toNamed('/questionnery');
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(6.0),
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.add),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Add New'),
+                                                  color: darkColor,
+                                                  weight: FontWeight.w800,
+                                                  size: 14,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -306,105 +292,135 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           Expanded(
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: DataTable(
-                                  columnSpacing: 42.0,
-                                  showCheckboxColumn: false,
-                                  columns: [
-                                    DataColumn(
-                                        label: TextWidget(
-                                      text: DemoLocalization.of(context)
-                                          .translate('Family Head'),
-                                      color: darkColor,
-                                      size: 16,
-                                      weight: FontWeight.w700,
-                                    )),
-                                    DataColumn(
-                                        label: TextWidget(
-                                          text: DemoLocalization.of(context)
-                                              .translate('Age'),
-                                          color: darkColor,
-                                          size: 16,
-                                          weight: FontWeight.w700,
+                              child: DataTable(
+                                columnSpacing: 10.0,
+                                showCheckboxColumn: false,
+                                columns: [
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 100,
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Family Head'),
+                                        color: darkColor,
+                                        size: 16,
+                                        weight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  )),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Age'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
                                         ),
-                                        numeric: true),
-                                    DataColumn(
-                                        label: TextWidget(
-                                          text: DemoLocalization.of(context)
-                                              .translate('Mobile No'),
-                                          color: darkColor,
-                                          size: 16,
-                                          weight: FontWeight.w700,
+                                      ),
+                                      numeric: true),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Mobile No'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
                                         ),
-                                        numeric: true),
-                                    DataColumn(
-                                        label: TextWidget(
-                                          text: DemoLocalization.of(context)
-                                              .translate('Village Code'),
-                                          color: darkColor,
-                                          size: 16,
-                                          weight: FontWeight.w700,
+                                      ),
+                                      numeric: true),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Village Code'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
                                         ),
-                                        numeric: true),
-                                    DataColumn(
-                                        label: TextWidget(
-                                          text: DemoLocalization.of(context)
-                                              .translate('Zone'),
-                                          color: darkColor,
-                                          size: 16,
-                                          weight: FontWeight.w700,
+                                      ),
+                                      numeric: true),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Zone'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
                                         ),
-                                        numeric: true),
-                                    DataColumn(
-                                        label: TextWidget(
-                                      text: DemoLocalization.of(context)
-                                          .translate('Status'),
-                                      color: darkColor,
-                                      size: 16,
-                                      weight: FontWeight.w700,
-                                    )),
-                                    DataColumn(
-                                        label: TextWidget(
-                                      text: DemoLocalization.of(context)
-                                          .translate('Action'),
-                                      color: darkColor,
-                                      size: 16,
-                                      weight: FontWeight.w700,
-                                    )),
-                                  ],
-                                  rows: users
-                                      .map((usersItem) => DataRow(
-                                              onSelectChanged: (bool selected) {
-                                                if (selected) {
-                                                  Get.toNamed('/DetailScreen');
-                                                  debugPrint(
-                                                      "${usersItem.familyHead}");
-                                                }
-                                              },
-                                              cells: [
-                                                DataCell(Row(
-                                                  children: [
-                                                    Container(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 8.0),
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: new BoxDecoration(
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            image: new DecorationImage(
-                                                                fit:
-                                                                    BoxFit.fill,
-                                                                image:
-                                                                    new AssetImage(
-                                                                        user)))),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    SizedBox(
-                                                        width: 150,
+                                      ),
+                                      numeric: true),
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 100,
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Status'),
+                                        color: darkColor,
+                                        size: 16,
+                                        weight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  )),
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 100,
+                                    child: Center(
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Action'),
+                                        color: darkColor,
+                                        size: 16,
+                                        weight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  )),
+                                ],
+                                rows: users
+                                    .map((usersItem) => DataRow(
+                                            onSelectChanged: (bool selected) {
+                                              if (selected) {
+                                                Get.toNamed('/DetailScreen');
+                                                debugPrint(
+                                                    "${usersItem.familyHead}");
+                                              }
+                                            },
+                                            cells: [
+                                              DataCell(Row(
+                                                children: [
+                                                  // Container(
+                                                  //     padding: EdgeInsets.only(
+                                                  //         left: 8.0),
+                                                  //     height: 30,
+                                                  //     width: 30,
+                                                  //     decoration: new BoxDecoration(
+                                                  //         shape:
+                                                  //             BoxShape.circle,
+                                                  //         image: new DecorationImage(
+                                                  //             fit: BoxFit.fill,
+                                                  //             image:
+                                                  //                 new AssetImage(
+                                                  //                     user)))),
+
+                                                  SizedBox(
+                                                      width: 100,
+                                                      child: Center(
                                                         child: TextWidget(
                                                           text: usersItem
                                                               .familyHead,
@@ -412,71 +428,103 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                           size: 16,
                                                           weight:
                                                               FontWeight.w600,
-                                                        ))
-                                                  ],
-                                                )),
-                                                DataCell(TextWidget(
-                                                  text: usersItem.age,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                                DataCell(TextWidget(
-                                                  text: usersItem.mobile,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                                DataCell(TextWidget(
-                                                  text: usersItem.villageCode,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                                DataCell(TextWidget(
-                                                  text: usersItem.zone,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                                DataCell(TextWidget(
-                                                  text: usersItem.status,
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                                DataCell(Row(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () {
-                                                        Get.toNamed(
-                                                            '/questionnery');
-                                                      },
-                                                      child: Icon(Icons.edit),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 20,
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (BuildContext
-                                                                      context) {
-                                                                return AlertDialogWidget();
-                                                              });
-                                                          debugPrint("click");
-                                                        });
-                                                      },
-                                                      child: Icon(Icons.delete),
-                                                    )
-                                                  ],
-                                                )),
-                                              ]))
-                                      .toList(),
-                                ),
+                                                        ),
+                                                      ))
+                                                ],
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem.age,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem.mobile,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem.villageCode,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem.zone,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem.status,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 100,
+                                                child: Center(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          Get.toNamed(
+                                                              '/questionnery');
+                                                        },
+                                                        child: Icon(Icons.edit),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (BuildContext
+                                                                        context) {
+                                                                  return AlertDialogWidget();
+                                                                });
+                                                            debugPrint("click");
+                                                          });
+                                                        },
+                                                        child:
+                                                            Icon(Icons.delete),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              )),
+                                            ]))
+                                    .toList(),
                               ),
                             ),
                           ),

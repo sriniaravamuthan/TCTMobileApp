@@ -35,6 +35,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   var villageSuggestion = TextEditingController();
   List villageCodeList = ["AAR", "ADR", "ARD"];
   var height, width;
+  ScrollController _scrollController = new ScrollController();
 
   @override
   void initState() {
@@ -156,7 +157,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                     Expanded(
                       child: Stepper(
                         type: StepperType.horizontal,
-                        physics: ScrollPhysics(),
+                        physics: ClampingScrollPhysics(),
                         currentStep: this._currentStep,
                         onStepTapped: (step) => tapped(step),
                         // onStepContinue: continued,
@@ -1503,6 +1504,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
               ),
             ),
           ),
+
           // floatingActionButton: Padding(
           //   padding: const EdgeInsets.only(right: 50.0, bottom: 50.0),
           //   child: Column(
