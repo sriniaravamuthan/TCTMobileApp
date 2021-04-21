@@ -166,6 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
                                 maxLength: 16,
+                                obscureText: true,
                                 focusNode: passwordFocusNode,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.text,

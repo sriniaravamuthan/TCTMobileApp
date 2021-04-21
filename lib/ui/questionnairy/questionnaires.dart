@@ -165,60 +165,55 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                         controlsBuilder: (BuildContext context,
                             {VoidCallback onStepContinue,
                             VoidCallback onStepCancel}) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 50.0, bottom: 50.0),
-                                child: Column(
-                                  children: [
-                                    FloatingActionButton(
-                                      // isExtended: true,
-                                      child: Icon(
-                                        Icons.keyboard_arrow_left,
-                                        size: 30,
-                                        color: darkColor,
-                                      ),
-                                      backgroundColor: lightColor,
-                                      onPressed: () {
-                                        cancel();
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    FloatingActionButton(
-                                      // isExtended: true,
-                                      child: Icon(
-                                        Icons.keyboard_arrow_right,
-                                        size: 30,
-                                        color: darkColor,
-                                      ),
-                                      backgroundColor: lightColor,
-                                      onPressed: () {
-                                        continued();
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    FloatingActionButton(
-                                      // isExtended: true,
-                                      child: Icon(
-                                        Icons.done,
-                                        size: 30,
-                                      ),
-                                      backgroundColor: primaryColor,
-                                      onPressed: () {
-                                        setState(() {});
-                                      },
-                                    ),
-                                  ],
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(right: 10, bottom: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                FloatingActionButton(
+                                  // isExtended: true,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_left,
+                                    size: 30,
+                                    color: darkColor,
+                                  ),
+                                  backgroundColor: lightColor,
+                                  onPressed: () {
+                                    cancel();
+                                  },
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FloatingActionButton(
+                                  // isExtended: true,
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    size: 30,
+                                    color: darkColor,
+                                  ),
+                                  backgroundColor: lightColor,
+                                  onPressed: () {
+                                    continued();
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                FloatingActionButton(
+                                  // isExtended: true,
+                                  child: Icon(
+                                    Icons.done,
+                                    size: 30,
+                                  ),
+                                  backgroundColor: primaryColor,
+                                  onPressed: () {
+                                    setState(() {});
+                                  },
+                                ),
+                              ],
+                            ),
                           );
                         },
                         steps: <Step>[
@@ -1567,7 +1562,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   }
 
   tapped(int step) {
-    setState(() => _currentStep = step);
+    if (step > _currentStep) {
+      setState(() => _currentStep = step);
+    }
   }
 
   continued() {

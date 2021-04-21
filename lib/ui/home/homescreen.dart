@@ -6,6 +6,7 @@
  * /
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/tabledata_model.dart';
+import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/filter_dialog.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
@@ -79,19 +81,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   },
                 ),
                 SizedBox(
-                  width: 50,
+                  width: 20,
                 ),
                 InkWell(
                     onTap: () {},
                     child: Row(
                       children: [
-                        Text(
-                          "Senthil Kumar",
-                          style: TextStyle(fontSize: 18, color: darkColor),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
                         Container(
                             padding: EdgeInsets.only(left: 8.0),
                             height: 30,
@@ -100,9 +95,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: new AssetImage(user))))
+                                    image: new AssetImage(user)))),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Senthil Kumar",
+                          style: TextStyle(fontSize: 16, color: darkColor),
+                        ),
                       ],
                     )),
+                SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    AuthenticationService(FirebaseAuth.instance).signOut();
+                  },
+                  child: Icon(
+                    Icons.power_settings_new_outlined,
+                    color: darkColor,
+                  ),
+                )
               ],
             ),
           ),

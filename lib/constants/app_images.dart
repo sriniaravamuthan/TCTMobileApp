@@ -9,4 +9,4 @@
 const imgLightLogo = "assets/images/tctLogo.png";
 const imgBG = "assets/images/Loginbg.png";
 const user = "assets/images/user.png";
-const userSquare ="assets/images/userSquare.jpg";
+const userSquare = "assets/images/userSquare.jpg";
