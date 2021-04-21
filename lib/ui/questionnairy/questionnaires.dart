@@ -8,12 +8,14 @@
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
@@ -75,25 +77,19 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   onChanged: (val) {
                     setState(() {
                       dropDownLang = val;
+
                       _changeLanguage();
                     });
                     print("Language:$val");
                   },
                 ),
                 SizedBox(
-                  width: 50,
+                  width: 20,
                 ),
                 InkWell(
                     onTap: () {},
                     child: Row(
                       children: [
-                        Text(
-                          "Senthil Kumar",
-                          style: TextStyle(fontSize: 18, color: darkColor),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
                         Container(
                             padding: EdgeInsets.only(left: 8.0),
                             height: 30,
@@ -102,9 +98,28 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 shape: BoxShape.circle,
                                 image: new DecorationImage(
                                     fit: BoxFit.fill,
-                                    image: new AssetImage(user))))
+                                    image: new AssetImage(user)))),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Senthil Kumar",
+                          style: TextStyle(fontSize: 16, color: darkColor),
+                        ),
                       ],
                     )),
+                SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    AuthenticationService(FirebaseAuth.instance).signOut();
+                  },
+                  child: Icon(
+                    Icons.power_settings_new_outlined,
+                    color: darkColor,
+                  ),
+                )
               ],
             ),
           ),
@@ -126,10 +141,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: (height) * 0.05,
+                        top: (height) * 0.02,
                         left: (width) * 0.02,
                         right: (width) * 0.02,
-                        bottom: (height) * 0.03,
+                        bottom: (height) * 0.02,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +154,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 .translate('Demographics questionnaires'),
                             color: darkColor,
                             weight: FontWeight.w600,
-                            size: 18,
+                            size: 16,
                           ),
                           TextWidget(
                             text: DemoLocalization.of(context)
@@ -169,48 +184,57 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             padding:
                                 const EdgeInsets.only(right: 10, bottom: 10.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                FloatingActionButton(
-                                  // isExtended: true,
-                                  child: Icon(
-                                    Icons.keyboard_arrow_left,
-                                    size: 30,
-                                    color: darkColor,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: FloatingActionButton(
+                                    // isExtended: true,
+                                    child: Icon(
+                                      Icons.keyboard_arrow_left,
+                                      size: 30,
+                                      color: darkColor,
+                                    ),
+                                    backgroundColor: lightColor,
+                                    onPressed: () {
+                                      cancel();
+                                    },
                                   ),
-                                  backgroundColor: lightColor,
-                                  onPressed: () {
-                                    cancel();
-                                  },
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                FloatingActionButton(
-                                  // isExtended: true,
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right,
-                                    size: 30,
-                                    color: darkColor,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: FloatingActionButton(
+                                    // isExtended: true,
+                                    child: Icon(
+                                      Icons.keyboard_arrow_right,
+                                      size: 30,
+                                      color: darkColor,
+                                    ),
+                                    backgroundColor: lightColor,
+                                    onPressed: () {
+                                      continued();
+                                    },
                                   ),
-                                  backgroundColor: lightColor,
-                                  onPressed: () {
-                                    continued();
-                                  },
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
-                                FloatingActionButton(
-                                  // isExtended: true,
-                                  child: Icon(
-                                    Icons.done,
-                                    size: 30,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: FloatingActionButton(
+                                    // isExtended: true,
+                                    child: Icon(
+                                      Icons.done,
+                                      size: 30,
+                                    ),
+                                    backgroundColor: primaryColor,
+                                    onPressed: () {
+                                      setState(() {});
+                                    },
                                   ),
-                                  backgroundColor: primaryColor,
-                                  onPressed: () {
-                                    setState(() {});
-                                  },
                                 ),
                               ],
                             ),
@@ -244,8 +268,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(
                                                             context)
@@ -255,8 +279,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
                                                   child: TextFormField(
                                                     textInputAction:
                                                         TextInputAction.next,
@@ -366,16 +390,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ),
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment(-1.0, 0.2),
+                                          alignment: Alignment.center,
                                           child: FractionallySizedBox(
-                                            widthFactor: 0.5,
+                                            widthFactor: 1,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(
                                                             context)
@@ -386,8 +410,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
                                                   child: TextFormField(
                                                     textInputAction:
                                                         TextInputAction.next,
@@ -495,15 +519,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment.topLeft,
+                                          alignment: Alignment.topRight,
                                           child: FractionallySizedBox(
                                             widthFactor: 1,
                                             child: Column(
@@ -511,8 +529,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(
                                                             context)
@@ -525,7 +543,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 Padding(
                                                     padding:
                                                         const EdgeInsets.all(
-                                                            10.0),
+                                                            4.0),
                                                     child: Column(
                                                       children: [
                                                         AutoCompleteTextField(
@@ -681,10 +699,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment(-3.0, 0.2),
+                                          alignment: Alignment.topLeft,
                                           child: FractionallySizedBox(
                                             widthFactor: 1,
                                             child: Column(
@@ -799,7 +823,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ),
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment(-5.0, 0.2),
+                                          alignment: Alignment.center,
                                           child: FractionallySizedBox(
                                             widthFactor: 1,
                                             child: Column(
@@ -911,6 +935,122 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                           ),
                                         ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: FractionallySizedBox(
+                                            widthFactor: 1,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: TextWidget(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate(
+                                                            'Village Name'),
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child:
+                                                      DropdownButtonFormField<
+                                                          String>(
+                                                    isExpanded: true,
+                                                    decoration: InputDecoration(
+                                                      border:
+                                                          new OutlineInputBorder(
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius: BorderRadius
+                                                            .only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                    ),
+                                                    value: villageNameVal,
+                                                    validator: (value) => value ==
+                                                            null
+                                                        ? 'Source Type must not be empty'
+                                                        : null,
+                                                    onChanged: (value) =>
+                                                        setState(() =>
+                                                            villageNameVal =
+                                                                value),
+                                                    items: <String>[
+                                                      'kangeyam',
+                                                      'puthupalayam',
+                                                      'nallur',
+                                                    ].map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: TextWidget(
+                                                          text: value,
+                                                          color: darkColor,
+                                                          weight:
+                                                              FontWeight.w400,
+                                                          size: 14,
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -922,7 +1062,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         child: Align(
                                           alignment: Alignment.topLeft,
                                           child: FractionallySizedBox(
-                                            widthFactor: 0.5,
+                                            widthFactor: 1,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1034,12 +1174,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
                                       Expanded(
                                         child: Column(
                                           crossAxisAlignment:
@@ -1174,9 +1308,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ),
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment(-1.0, 0.2),
+                                          alignment: Alignment.topRight,
                                           child: FractionallySizedBox(
-                                            widthFactor: 0.5,
+                                            widthFactor: 1,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1301,7 +1435,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      )
                                     ],
                                   ),
                                   Row(
