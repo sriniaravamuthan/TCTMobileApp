@@ -22,9 +22,12 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   String dropDownLang;
+  var height, width;
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Scaffold(
@@ -104,33 +107,38 @@ class _DetailScreenState extends State<DetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 24.0,
-                                    left: 30.0,
-                                    right: 30.0,
-                                    bottom: 24.0),
+                                padding: EdgeInsets.only(
+                                  top: (height) * 0.02,
+                                  left: (width) * 0.02,
+                                  right: (width) * 0.02,
+                                  bottom: (height) * 0.02,
+                                ),
                                 child: Row(
                                   children: [
                                     InkWell(
                                       onTap: () {
                                         Get.toNamed('/homeScreen');
                                       },
-                                      child: Container(
-                                          height: 40,
-                                          width: 40,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(24),
-                                            border: Border.all(
-                                              color: Colors.black45,
-                                              style: BorderStyle.solid,
-                                              width: 1.0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8.0),
+                                        child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
+                                              border: Border.all(
+                                                color: Colors.black45,
+                                                style: BorderStyle.solid,
+                                                width: 1.0,
+                                              ),
                                             ),
-                                          ),
-                                          child: Icon(
-                                            Icons.keyboard_arrow_left,
-                                            size: 24,
-                                          )),
+                                            child: Icon(
+                                              Icons.keyboard_arrow_left,
+                                              size: 20,
+                                            )),
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 10,

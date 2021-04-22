@@ -6,6 +6,7 @@
  * /
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,68 +57,79 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         Scaffold(
           appBar: AppBar(
             backgroundColor: lightColor,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                DropdownButton(
-                  underline: SizedBox(),
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.black87,
-                  ),
-                  items: ['Tamil', 'English'].map((val) {
-                    return new DropdownMenuItem<String>(
-                      value: val,
-                      child: new Text(val),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      dropDownLang = val;
+            title: DoubleBackToCloseApp(
+              snackBar: SnackBar(
+                  backgroundColor: errorColor,
+                  elevation: 6,
+                  content: TextWidget(
+                    text: 'Tap back again to leave',
+                    color: lightColor,
+                    weight: FontWeight.w600,
+                    size: 16,
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DropdownButton(
+                    underline: SizedBox(),
+                    icon: Icon(
+                      Icons.language,
+                      color: Colors.black87,
+                    ),
+                    items: ['Tamil', 'English'].map((val) {
+                      return new DropdownMenuItem<String>(
+                        value: val,
+                        child: new Text(val),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        dropDownLang = val;
 
-                      _changeLanguage();
-                    });
-                    print("Language:$val");
-                  },
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            height: 30,
-                            width: 30,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new AssetImage(user)))),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Senthil Kumar",
-                          style: TextStyle(fontSize: 16, color: darkColor),
-                        ),
-                      ],
-                    )),
-                SizedBox(
-                  width: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut();
-                  },
-                  child: Icon(
-                    Icons.power_settings_new_outlined,
-                    color: darkColor,
+                        _changeLanguage();
+                      });
+                      print("Language:$val");
+                    },
                   ),
-                )
-              ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(left: 8.0),
+                              height: 30,
+                              width: 30,
+                              decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: new AssetImage(user)))),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Senthil Kumar",
+                            style: TextStyle(fontSize: 16, color: darkColor),
+                          ),
+                        ],
+                      )),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      AuthenticationService(FirebaseAuth.instance).signOut();
+                    },
+                    child: Icon(
+                      Icons.power_settings_new_outlined,
+                      color: darkColor,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           body: StreamBuilder<QuerySnapshot>(

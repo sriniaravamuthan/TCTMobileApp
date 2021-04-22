@@ -6,18 +6,15 @@
  * /
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tct_demographics/models/data_model.dart';
-import 'package:tct_demographics/services/authendication_service.dart';
 
-class FireStoreService{
-
-  CollectionReference demographicData = FirebaseFirestore.instance.collection('demographicData');
- // Map familyData;
-  Future<DemographicFamily> createFamily(DemographicFamily demographicFamily){
-
-    Map<String,dynamic> data = {
+class FireStoreService {
+  CollectionReference demographicData =
+      FirebaseFirestore.instance.collection('demographicData');
+  // Map familyData;
+  Future<DemographicFamily> createFamily(DemographicFamily demographicFamily) {
+    Map<String, dynamic> data = {
       "CreatedBy": demographicFamily.uid,
       "Location": {
         'formNo': demographicFamily.location.formNo,
@@ -31,7 +28,7 @@ class FireStoreService{
         'contactPerson': demographicFamily.location.contactPerson,
         'noOfFamilyMembers': demographicFamily.location.noOfFamilyMembers
       },
-      "Property" : {
+      "Property": {
         'statusofHouse': demographicFamily.property.statusofHouse,
         'typeofHouse': demographicFamily.property.statusofHouse,
         'toiletFacility': demographicFamily.property.statusofHouse,
@@ -49,47 +46,38 @@ class FireStoreService{
         'livestockCount': demographicFamily.property.statusofHouse
       },
       "habit": {
-        'anyMembersWhoSmoke' : demographicFamily.habits.anyMembersWhoDrink,
-        'anyMembersWhoDrink' : demographicFamily.habits.anyMembersWhoDrink,
-        'anyMembersWhoUseTobacco' : demographicFamily.habits.anyMembersWhoDrink
+        'anyMembersWhoSmoke': demographicFamily.habits.anyMembersWhoDrink,
+        'anyMembersWhoDrink': demographicFamily.habits.anyMembersWhoDrink,
+        'anyMembersWhoUseTobacco': demographicFamily.habits.anyMembersWhoDrink
       },
-      "familyMembers":[
+      "familyMembers": [
         {
-          "name" : demographicFamily.family[0].name,
-          "aadharNumber" : demographicFamily.family[0].aadharNumber,
-          "relationship" : demographicFamily.family[0].relationship,
-          "gender" : demographicFamily.family[0].gender,
-          "dob" : demographicFamily.family[0].dob,
-          "age" : demographicFamily.family[0].age,
-          "maritalStatus " : demographicFamily.family[0].maritalStatus,
-          "bloodGroup" : demographicFamily.family[0].bloodGroup,
-          "physicallyChallenge" : demographicFamily.family[0].physicallyChallenge,
-          "education" : demographicFamily.family[0].education,
-          "occupation" : demographicFamily.family[0].occupation,
-          "annualIncome" : demographicFamily.family[0].annualIncome,
-          "mobileNumber" : demographicFamily.family[0].mobileNumber,
-          "mail" : demographicFamily.family[0].mail,
-          "smartphone" : demographicFamily.family[0].smartphone,
-          "community" : demographicFamily.family[0].community,
-          "caste" : demographicFamily.family[0].caste,
-          "photo" : demographicFamily.family[0].photo
+          "name": demographicFamily.family[0].name,
+          "aadharNumber": demographicFamily.family[0].aadharNumber,
+          "relationship": demographicFamily.family[0].relationship,
+          "gender": demographicFamily.family[0].gender,
+          "dob": demographicFamily.family[0].dob,
+          "age": demographicFamily.family[0].age,
+          "maritalStatus ": demographicFamily.family[0].maritalStatus,
+          "bloodGroup": demographicFamily.family[0].bloodGroup,
+          "physicallyChallenge":
+              demographicFamily.family[0].physicallyChallenge,
+          "education": demographicFamily.family[0].education,
+          "occupation": demographicFamily.family[0].occupation,
+          "annualIncome": demographicFamily.family[0].annualIncome,
+          "mobileNumber": demographicFamily.family[0].mobileNumber,
+          "mail": demographicFamily.family[0].mail,
+          "smartphone": demographicFamily.family[0].smartphone,
+          "community": demographicFamily.family[0].community,
+          "caste": demographicFamily.family[0].caste,
+          "photo": demographicFamily.family[0].photo
         }
       ]
     };
 
-    return demographicData.add(data)
-    .then((value) => debugPrint("addedSuccess"))
-    .catchError((error)=>debugPrint("failed to add"));
-
+    return demographicData
+        .add(data)
+        .then((value) => debugPrint("addedSuccess"))
+        .catchError((error) => debugPrint("failed to add"));
   }
-
-  // Future <List<DemographicFamily>>FetchFamily(){
-  //   demographicData.snapshots().listen((event) {
-  //     familyData = event.docs[0].data();
-  //
-  //   });
-  //
-  // }
-
-
 }

@@ -6,6 +6,7 @@
  * /
  */
 
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -24,6 +25,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   bool isSwitched1 = false;
   String textValue = 'No';
   String textValue1 = 'No';
+  var genderController = TextEditingController();
+  List genderList = [];
+
   String nameVal,
       relationshipVal,
       genderVal,
@@ -41,8 +45,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   bool physicallyChallengeVal, smartphoneVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
-  TextEditingController genderController = TextEditingController();
   String gender = "";
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -301,14 +309,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       children: [
                         Expanded(
                           child: Align(
-                            alignment: Alignment.topLeft,
+                            alignment: Alignment.topRight,
                             child: FractionallySizedBox(
                               widthFactor: 1,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(4.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Gender'),
@@ -317,83 +325,242 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: TextField(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _getGender(value);
-                                        });
-                                      },
-                                      controller: genderController,
-                                      decoration: InputDecoration(
-                                        border: new OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                        ),
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Column(
+                                        children: [
+                                          AutoCompleteTextField(
+                                              controller: genderController,
+                                              clearOnSubmit: false,
+                                              itemSubmitted: (item) {
+                                                genderController.text = item;
+                                              },
+                                              suggestions: genderList,
+                                              style: TextStyle(
+                                                color: Color(0xFF222222),
+                                                fontSize: 16,
+                                              ),
+                                              decoration: InputDecoration(
+                                                border: new OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                ),
+                                              ),
+                                              itemBuilder: (context, item) {
+                                                return new Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: TextWidget(
+                                                      text: item,
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ));
+                                              },
+                                              itemSorter: (a, b) {
+                                                return a.compareTo(b);
+                                              },
+                                              itemFilter: (item, query) {
+                                                return item
+                                                    .toLowerCase()
+                                                    .startsWith(
+                                                        query.toLowerCase());
+                                              })
+                                        ],
+                                      )
+                                      //     DropdownButtonFormField<
+                                      //         String>(
+                                      //   isExpanded: true,
+                                      //   decoration:
+                                      //       InputDecoration(
+                                      //     border:
+                                      //         new OutlineInputBorder(
+                                      //       borderSide:
+                                      //           BorderSide.none,
+                                      //       borderRadius: BorderRadius.only(
+                                      //           topRight: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomLeft: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomRight: Radius
+                                      //               .circular(
+                                      //                   50.0)),
+                                      //     ),
+                                      //     enabledBorder:
+                                      //         OutlineInputBorder(
+                                      //       borderRadius: BorderRadius.only(
+                                      //           topRight: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomLeft: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomRight: Radius
+                                      //               .circular(
+                                      //                   50.0)),
+                                      //       borderSide: BorderSide(
+                                      //           color:
+                                      //               lightGreyColor),
+                                      //     ),
+                                      //     errorBorder:
+                                      //         OutlineInputBorder(
+                                      //       borderRadius: BorderRadius.only(
+                                      //           topRight: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomLeft: Radius
+                                      //               .circular(
+                                      //                   50.0),
+                                      //           bottomRight: Radius
+                                      //               .circular(
+                                      //                   50.0)),
+                                      //       borderSide: BorderSide(
+                                      //           color:
+                                      //               lightGreyColor),
+                                      //     ),
+                                      //   ),
+                                      //   value: villageCodeValue,
+                                      //   validator: (value) =>
+                                      //       value == null
+                                      //           ? 'Source Type must not be empty'
+                                      //           : null,
+                                      //   onChanged: (value) =>
+                                      //       setState(() =>
+                                      //           villageCodeValue =
+                                      //               value),
+                                      //   items: <String>[
+                                      //     'VLR',
+                                      //     'CLR',
+                                      //     'MLR',
+                                      //   ].map<
+                                      //           DropdownMenuItem<
+                                      //               String>>(
+                                      //       (String value) {
+                                      //     return DropdownMenuItem<
+                                      //         String>(
+                                      //       value: value,
+                                      //       child: TextWidget(
+                                      //         text: value,
+                                      //         color: darkColor,
+                                      //         weight:
+                                      //             FontWeight.w400,
+                                      //         size: 16,
+                                      //       ),
+                                      //     );
+                                      //   }).toList(),
+                                      // ),
                                       ),
-                                    ),
-                                    // DropdownButtonFormField<String>(
-                                    //   isExpanded: true,
-                                    //   decoration: InputDecoration(
-                                    //     border: new OutlineInputBorder(
-                                    //       borderSide: BorderSide.none,
-                                    //       borderRadius: BorderRadius.only(
-                                    //           topRight: Radius.circular(50.0),
-                                    //           bottomLeft: Radius.circular(50.0),
-                                    //           bottomRight:
-                                    //               Radius.circular(50.0)),
-                                    //     ),
-                                    //     enabledBorder: OutlineInputBorder(
-                                    //       borderRadius: BorderRadius.only(
-                                    //           topRight: Radius.circular(50.0),
-                                    //           bottomLeft: Radius.circular(50.0),
-                                    //           bottomRight:
-                                    //               Radius.circular(50.0)),
-                                    //       borderSide:
-                                    //           BorderSide(color: lightGreyColor),
-                                    //     ),
-                                    //     errorBorder: OutlineInputBorder(
-                                    //       borderRadius: BorderRadius.only(
-                                    //           topRight: Radius.circular(50.0),
-                                    //           bottomLeft: Radius.circular(50.0),
-                                    //           bottomRight:
-                                    //               Radius.circular(50.0)),
-                                    //       borderSide:
-                                    //           BorderSide(color: lightGreyColor),
-                                    //     ),
-                                    //   ),
-                                    //   value: genderVal,
-                                    //   validator: (value) => value == null
-                                    //       ? 'Source Type must not be empty'
-                                    //       : null,
-                                    //   onChanged: (value) =>
-                                    //       setState(() => genderVal = value),
-                                    //   items: <String>[
-                                    //     'Male',
-                                    //     'Female',
-                                    //     'Others',
-                                    //   ].map<DropdownMenuItem<String>>(
-                                    //       (String value) {
-                                    //     return DropdownMenuItem<String>(
-                                    //       value: value,
-                                    //       child: TextWidget(
-                                    //         text: value,
-                                    //         color: darkColor,
-                                    //         weight: FontWeight.w400,
-                                    //         size: 16,
-                                    //       ),
-                                    //     );
-                                    //   }).toList(),
-                                    // ),
-                                  ),
                                 ],
                               ),
                             ),
                           ),
                         ),
+
+                        // Expanded(
+                        //   child: Align(
+                        //     alignment: Alignment.topLeft,
+                        //     child: FractionallySizedBox(
+                        //       widthFactor: 1,
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           Padding(
+                        //             padding: const EdgeInsets.all(10.0),
+                        //             child: TextWidget(
+                        //               text: DemoLocalization.of(context)
+                        //                   .translate('Gender'),
+                        //               size: 14,
+                        //               weight: FontWeight.w600,
+                        //             ),
+                        //           ),
+                        //           Padding(
+                        //             padding: const EdgeInsets.all(10.0),
+                        //             child: TextField(
+                        //               onChanged: (value) {
+                        //                 setState(() {
+                        //                   getData(value);
+                        //                 });
+                        //               },
+                        //               controller: genderController,
+                        //               decoration: InputDecoration(
+                        //                 border: new OutlineInputBorder(
+                        //                   borderRadius: BorderRadius.only(
+                        //                       topRight: Radius.circular(50.0),
+                        //                       bottomLeft: Radius.circular(50.0),
+                        //                       bottomRight:
+                        //                           Radius.circular(50.0)),
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //             // DropdownButtonFormField<String>(
+                        //             //   isExpanded: true,
+                        //             //   decoration: InputDecoration(
+                        //             //     border: new OutlineInputBorder(
+                        //             //       borderSide: BorderSide.none,
+                        //             //       borderRadius: BorderRadius.only(
+                        //             //           topRight: Radius.circular(50.0),
+                        //             //           bottomLeft: Radius.circular(50.0),
+                        //             //           bottomRight:
+                        //             //               Radius.circular(50.0)),
+                        //             //     ),
+                        //             //     enabledBorder: OutlineInputBorder(
+                        //             //       borderRadius: BorderRadius.only(
+                        //             //           topRight: Radius.circular(50.0),
+                        //             //           bottomLeft: Radius.circular(50.0),
+                        //             //           bottomRight:
+                        //             //               Radius.circular(50.0)),
+                        //             //       borderSide:
+                        //             //           BorderSide(color: lightGreyColor),
+                        //             //     ),
+                        //             //     errorBorder: OutlineInputBorder(
+                        //             //       borderRadius: BorderRadius.only(
+                        //             //           topRight: Radius.circular(50.0),
+                        //             //           bottomLeft: Radius.circular(50.0),
+                        //             //           bottomRight:
+                        //             //               Radius.circular(50.0)),
+                        //             //       borderSide:
+                        //             //           BorderSide(color: lightGreyColor),
+                        //             //     ),
+                        //             //   ),
+                        //             //   value: genderVal,
+                        //             //   validator: (value) => value == null
+                        //             //       ? 'Source Type must not be empty'
+                        //             //       : null,
+                        //             //   onChanged: (value) =>
+                        //             //       setState(() => genderVal = value),
+                        //             //   items: <String>[
+                        //             //     'Male',
+                        //             //     'Female',
+                        //             //     'Others',
+                        //             //   ].map<DropdownMenuItem<String>>(
+                        //             //       (String value) {
+                        //             //     return DropdownMenuItem<String>(
+                        //             //       value: value,
+                        //             //       child: TextWidget(
+                        //             //         text: value,
+                        //             //         color: darkColor,
+                        //             //         weight: FontWeight.w400,
+                        //             //         size: 16,
+                        //             //       ),
+                        //             //     );
+                        //             //   }).toList(),
+                        //             // ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Expanded(
                           child: Align(
                             alignment: Alignment.center,
@@ -1091,6 +1258,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: TextFormField(
+                            maxLength: 10,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
@@ -1131,7 +1299,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.number,
                             onSaved: (String val) {
                               setState(() {});
                             },
@@ -1455,8 +1623,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     }
   }
 
-  void _getGender(String value) {
-    debugPrint(
-        "gender:${FirebaseFirestore.instance.collection('gender').doc()}");
+  Future<void> getData() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('gender').get();
+    // Get data from docs and convert map to List
+    genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    print("gender:$genderList");
+    genderList.forEach((element) {
+      print("gender1:$element");
+    });
   }
 }

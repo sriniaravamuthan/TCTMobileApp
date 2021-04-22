@@ -37,6 +37,7 @@ dependencies:
   cloud_firestore: ^1.0.5
   shared_preferences: ^2.0.5
   autocomplete_textfield: ^1.7.3
+  double_back_to_close_app: ^2.0.1
   flutter_localizations:
     sdk: flutter
 

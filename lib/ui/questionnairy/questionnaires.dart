@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -32,16 +33,26 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   int _currentStep = 0;
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  String villageCodeValue, panNoVal, panCodeVal, villageNameVal;
+  FocusNode familyMemFocus = new FocusNode();
+
+  String formNo,
+      projectCode,
+      villageCodeValue,
+      panNoVal,
+      panCodeVal,
+      villageNameVal,
+      streetName,
+      doorNumber,
+      contactPerson;
   String dropDownLang;
-  var villageSuggestion = TextEditingController();
+  var villageController = TextEditingController();
   List villageCodeList = ["AAR", "ADR", "ARD"];
   var height, width;
   ScrollController _scrollController = new ScrollController();
 
   @override
   void initState() {
-    _getVillageCode(villageSuggestion.text);
+    _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -53,13 +64,28 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return Stack(
-      children: [
-        Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: lightColor,
-            title: Row(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: lightColor,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  child: Image.asset(
+                    imgLightLogo,
+                    fit: BoxFit.contain,
+                    height: height / 11,
+                    width: width / 20,
+                  ),
+                ),
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 DropdownButton(
@@ -122,40 +148,72 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                 )
               ],
             ),
+          ],
+        ),
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imgBG),
+            fit: BoxFit.cover,
           ),
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(imgBG),
-                fit: BoxFit.cover,
-              ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 8,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.0),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Card(
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: (height) * 0.02,
-                        left: (width) * 0.02,
-                        right: (width) * 0.02,
-                        bottom: (height) * 0.02,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: (height) * 0.02,
+                    left: (width) * 0.02,
+                    right: (width) * 0.02,
+                    bottom: (height) * 0.02,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 8),
+                              child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(24),
+                                    border: Border.all(
+                                      color: Colors.black45,
+                                      style: BorderStyle.solid,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_left,
+                                    size: 20,
+                                  )),
+                            ),
+                          ),
                           TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Demographics questionnaires'),
                             color: darkColor,
                             weight: FontWeight.w600,
                             size: 16,
-                          ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
                           TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Mandatory Fields'),
@@ -165,1038 +223,1138 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           ),
                         ],
                       ),
-                    ),
-                    Divider(
-                      thickness: 1.5,
-                    ),
-                    Expanded(
-                      child: Stepper(
-                        type: StepperType.horizontal,
-                        physics: ClampingScrollPhysics(),
-                        currentStep: this._currentStep,
-                        onStepTapped: (step) => tapped(step),
-                        // onStepContinue: continued,
-                        // onStepCancel: cancel,
-                        controlsBuilder: (BuildContext context,
-                            {VoidCallback onStepContinue,
-                            VoidCallback onStepCancel}) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.only(right: 10, bottom: 10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FloatingActionButton(
-                                    // isExtended: true,
-                                    child: Icon(
-                                      Icons.keyboard_arrow_left,
-                                      size: 30,
-                                      color: darkColor,
-                                    ),
-                                    backgroundColor: lightColor,
-                                    onPressed: () {
-                                      cancel();
-                                    },
-                                  ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Stepper(
+                    type: StepperType.horizontal,
+                    physics: ClampingScrollPhysics(),
+                    currentStep: this._currentStep,
+                    onStepTapped: (step) => tapped(step),
+                    // onStepContinue: continued,
+                    // onStepCancel: cancel,
+                    controlsBuilder: (BuildContext context,
+                        {VoidCallback onStepContinue,
+                        VoidCallback onStepCancel}) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10, bottom: 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.keyboard_arrow_left,
+                                  size: 30,
+                                  color: darkColor,
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FloatingActionButton(
-                                    // isExtended: true,
-                                    child: Icon(
-                                      Icons.keyboard_arrow_right,
-                                      size: 30,
-                                      color: darkColor,
-                                    ),
-                                    backgroundColor: lightColor,
-                                    onPressed: () {
-                                      continued();
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FloatingActionButton(
-                                    // isExtended: true,
-                                    child: Icon(
-                                      Icons.done,
-                                      size: 30,
-                                    ),
-                                    backgroundColor: primaryColor,
-                                    onPressed: () {
-                                      setState(() {});
-                                    },
-                                  ),
-                                ),
-                              ],
+                                backgroundColor: lightColor,
+                                onPressed: () {
+                                  cancel();
+                                },
+                              ),
                             ),
-                          );
-                        },
-                        steps: <Step>[
-                          Step(
-                            title: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Location'),
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w600,
+                            SizedBox(
+                              height: 10,
                             ),
-                            content: Form(
-                              key: _formKey,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  size: 30,
+                                  color: darkColor,
+                                ),
+                                backgroundColor: lightColor,
+                                onPressed: () {
+                                  continued();
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.done,
+                                  size: 30,
+                                ),
+                                backgroundColor: primaryColor,
+                                onPressed: () {
+                                  setState(() {
+                                    if (_formKey.currentState.validate()) {
+                                      if (_formKey != null) {
+                                        _formKey.currentState.save();
+                                        addData();
+                                      }
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    steps: <Step>[
+                      Step(
+                        title: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Location'),
+                          color: darkColor,
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                        content: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate('Form No'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.next,
-                                                    autocorrect: true,
-                                                    enableSuggestions: true,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                            lightGreyColor),
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    onSaved: (String val) {
-                                                      setState(() {});
-                                                    },
-                                                    validator: (value) {
-                                                      if (value.isEmpty) {
-                                                        debugPrint(
-                                                            "empid :yes");
-                                                        return 'Employee Id must not be empty';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Project Code No'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.next,
-                                                    autocorrect: true,
-                                                    enableSuggestions: true,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                            lightGreyColor),
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    onSaved: (String val) {
-                                                      setState(() {});
-                                                    },
-                                                    validator: (value) {
-                                                      if (value.isEmpty) {
-                                                        debugPrint(
-                                                            "empid :yes");
-                                                        return 'Employee Id must not be empty';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Village Code'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
-                                                    child: Column(
-                                                      children: [
-                                                        AutoCompleteTextField(
-                                                            controller:
-                                                                villageSuggestion,
-                                                            clearOnSubmit:
-                                                                false,
-                                                            itemSubmitted:
-                                                                (item) {
-                                                              villageSuggestion
-                                                                  .text = item;
-                                                            },
-                                                            suggestions:
-                                                                villageCodeList,
-                                                            style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF222222),
-                                                              fontSize: 16,
-                                                            ),
-                                                            decoration:
-                                                                InputDecoration(
-                                                              border:
-                                                                  new OutlineInputBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topRight:
-                                                                        Radius.circular(
-                                                                            50.0),
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            50.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            50.0)),
-                                                              ),
-                                                            ),
-                                                            itemBuilder:
-                                                                (context,
-                                                                    item) {
-                                                              return new Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              8.0),
-                                                                  child:
-                                                                      TextWidget(
-                                                                    text: item,
-                                                                    color:
-                                                                        darkColor,
-                                                                    size: 14,
-                                                                    weight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ));
-                                                            },
-                                                            itemSorter: (a, b) {
-                                                              return a
-                                                                  .compareTo(b);
-                                                            },
-                                                            itemFilter:
-                                                                (item, query) {
-                                                              return item
-                                                                  .toLowerCase()
-                                                                  .startsWith(query
-                                                                      .toLowerCase());
-                                                            })
-                                                      ],
-                                                    )
-                                                    //     DropdownButtonFormField<
-                                                    //         String>(
-                                                    //   isExpanded: true,
-                                                    //   decoration:
-                                                    //       InputDecoration(
-                                                    //     border:
-                                                    //         new OutlineInputBorder(
-                                                    //       borderSide:
-                                                    //           BorderSide.none,
-                                                    //       borderRadius: BorderRadius.only(
-                                                    //           topRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomLeft: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0)),
-                                                    //     ),
-                                                    //     enabledBorder:
-                                                    //         OutlineInputBorder(
-                                                    //       borderRadius: BorderRadius.only(
-                                                    //           topRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomLeft: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0)),
-                                                    //       borderSide: BorderSide(
-                                                    //           color:
-                                                    //               lightGreyColor),
-                                                    //     ),
-                                                    //     errorBorder:
-                                                    //         OutlineInputBorder(
-                                                    //       borderRadius: BorderRadius.only(
-                                                    //           topRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomLeft: Radius
-                                                    //               .circular(
-                                                    //                   50.0),
-                                                    //           bottomRight: Radius
-                                                    //               .circular(
-                                                    //                   50.0)),
-                                                    //       borderSide: BorderSide(
-                                                    //           color:
-                                                    //               lightGreyColor),
-                                                    //     ),
-                                                    //   ),
-                                                    //   value: villageCodeValue,
-                                                    //   validator: (value) =>
-                                                    //       value == null
-                                                    //           ? 'Source Type must not be empty'
-                                                    //           : null,
-                                                    //   onChanged: (value) =>
-                                                    //       setState(() =>
-                                                    //           villageCodeValue =
-                                                    //               value),
-                                                    //   items: <String>[
-                                                    //     'VLR',
-                                                    //     'CLR',
-                                                    //     'MLR',
-                                                    //   ].map<
-                                                    //           DropdownMenuItem<
-                                                    //               String>>(
-                                                    //       (String value) {
-                                                    //     return DropdownMenuItem<
-                                                    //         String>(
-                                                    //       value: value,
-                                                    //       child: TextWidget(
-                                                    //         text: value,
-                                                    //         color: darkColor,
-                                                    //         weight:
-                                                    //             FontWeight.w400,
-                                                    //         size: 16,
-                                                    //       ),
-                                                    //     );
-                                                    //   }).toList(),
-                                                    // ),
-                                                    ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Panchayat No'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child:
-                                                      DropdownButtonFormField<
-                                                          String>(
-                                                    isExpanded: true,
-                                                    decoration: InputDecoration(
-                                                      border:
-                                                          new OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                    ),
-                                                    value: panNoVal,
-                                                    validator: (value) => value ==
-                                                            null
-                                                        ? 'Source Type must not be empty'
-                                                        : null,
-                                                    onChanged: (value) =>
-                                                        setState(() =>
-                                                            panNoVal = value),
-                                                    items: <String>[
-                                                      '1212',
-                                                      '2325',
-                                                      '6558',
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: TextWidget(
-                                                          text: value,
-                                                          color: darkColor,
-                                                          weight:
-                                                              FontWeight.w400,
-                                                          size: 14,
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Panchayat Code'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child:
-                                                      DropdownButtonFormField<
-                                                          String>(
-                                                    isExpanded: true,
-                                                    decoration: InputDecoration(
-                                                      border:
-                                                          new OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                    ),
-                                                    value: panCodeVal,
-                                                    validator: (value) => value ==
-                                                            null
-                                                        ? 'Source Type must not be empty'
-                                                        : null,
-                                                    onChanged: (value) =>
-                                                        setState(() =>
-                                                            panCodeVal = value),
-                                                    items: <String>[
-                                                      '98',
-                                                      '988',
-                                                      '999',
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: TextWidget(
-                                                          text: value,
-                                                          color: darkColor,
-                                                          weight:
-                                                              FontWeight.w400,
-                                                          size: 14,
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Village Name'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child:
-                                                      DropdownButtonFormField<
-                                                          String>(
-                                                    isExpanded: true,
-                                                    decoration: InputDecoration(
-                                                      border:
-                                                          new OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                    ),
-                                                    value: villageNameVal,
-                                                    validator: (value) => value ==
-                                                            null
-                                                        ? 'Source Type must not be empty'
-                                                        : null,
-                                                    onChanged: (value) =>
-                                                        setState(() =>
-                                                            villageNameVal =
-                                                                value),
-                                                    items: <String>[
-                                                      'kangeyam',
-                                                      'puthupalayam',
-                                                      'nallur',
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: TextWidget(
-                                                          text: value,
-                                                          color: darkColor,
-                                                          weight:
-                                                              FontWeight.w400,
-                                                          size: 14,
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Village Name'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child:
-                                                      DropdownButtonFormField<
-                                                          String>(
-                                                    isExpanded: true,
-                                                    decoration: InputDecoration(
-                                                      border:
-                                                          new OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                    ),
-                                                    value: villageNameVal,
-                                                    validator: (value) => value ==
-                                                            null
-                                                        ? 'Source Type must not be empty'
-                                                        : null,
-                                                    onChanged: (value) =>
-                                                        setState(() =>
-                                                            villageNameVal =
-                                                                value),
-                                                    items: <String>[
-                                                      'kangeyam',
-                                                      'puthupalayam',
-                                                      'nallur',
-                                                    ].map<
-                                                            DropdownMenuItem<
-                                                                String>>(
-                                                        (String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: value,
-                                                        child: TextWidget(
-                                                          text: value,
-                                                          color: darkColor,
-                                                          weight:
-                                                              FontWeight.w400,
-                                                          size: 14,
-                                                        ),
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
+                                children: [
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.all(2.0),
                                               child: TextWidget(
-                                                text: DemoLocalization.of(
-                                                        context)
-                                                    .translate('Street Name'),
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate('Form No'),
                                                 size: 14,
                                                 weight: FontWeight.w600,
                                               ),
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.all(4.0),
                                               child: TextFormField(
                                                 textInputAction:
                                                     TextInputAction.next,
-                                                autocorrect: true,
+                                                enableSuggestions: true,
+                                                decoration: InputDecoration(
+                                                    border:
+                                                        new OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    fillColor: lightGreyColor),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onSaved: (String val) {
+                                                  setState(() {
+                                                    formNo = val;
+                                                  });
+                                                },
+                                                // validator: (value) {
+                                                //   if (value.isEmpty) {
+                                                //     debugPrint(
+                                                //         "empid :yes");
+                                                //     return 'Employee Id must not be empty';
+                                                //   }
+                                                //   return null;
+                                                // },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate(
+                                                            'Project Code No'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                enableSuggestions: true,
+                                                decoration: InputDecoration(
+                                                    border:
+                                                        new OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    fillColor: lightGreyColor),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onSaved: (String val) {
+                                                  setState(() {
+                                                    projectCode = val;
+                                                  });
+                                                },
+                                                // validator: (value) {
+                                                //   if (value.isEmpty) {
+                                                //     debugPrint(
+                                                //         "empid :yes");
+                                                //     return 'Employee Id must not be empty';
+                                                //   }
+                                                //   return null;
+                                                // },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Village Code'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: Column(
+                                                  children: [
+                                                    AutoCompleteTextField(
+                                                        controller:
+                                                            villageController,
+                                                        clearOnSubmit: false,
+                                                        itemSubmitted: (item) {
+                                                          villageController
+                                                              .text = item;
+                                                        },
+                                                        suggestions:
+                                                            villageCodeList,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Color(0xFF222222),
+                                                          fontSize: 16,
+                                                        ),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          border:
+                                                              new OutlineInputBorder(
+                                                            borderRadius: BorderRadius.only(
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        50.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        50.0)),
+                                                          ),
+                                                        ),
+                                                        itemBuilder:
+                                                            (context, item) {
+                                                          return new Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(8.0),
+                                                              child: TextWidget(
+                                                                text: item,
+                                                                color:
+                                                                    darkColor,
+                                                                size: 14,
+                                                                weight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ));
+                                                        },
+                                                        itemSorter: (a, b) {
+                                                          return a.compareTo(b);
+                                                        },
+                                                        itemFilter:
+                                                            (item, query) {
+                                                          return item
+                                                              .toLowerCase()
+                                                              .startsWith(query
+                                                                  .toLowerCase());
+                                                        })
+                                                  ],
+                                                )
+                                                //     DropdownButtonFormField<
+                                                //         String>(
+                                                //   isExpanded: true,
+                                                //   decoration:
+                                                //       InputDecoration(
+                                                //     border:
+                                                //         new OutlineInputBorder(
+                                                //       borderSide:
+                                                //           BorderSide.none,
+                                                //       borderRadius: BorderRadius.only(
+                                                //           topRight: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomLeft: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomRight: Radius
+                                                //               .circular(
+                                                //                   50.0)),
+                                                //     ),
+                                                //     enabledBorder:
+                                                //         OutlineInputBorder(
+                                                //       borderRadius: BorderRadius.only(
+                                                //           topRight: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomLeft: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomRight: Radius
+                                                //               .circular(
+                                                //                   50.0)),
+                                                //       borderSide: BorderSide(
+                                                //           color:
+                                                //               lightGreyColor),
+                                                //     ),
+                                                //     errorBorder:
+                                                //         OutlineInputBorder(
+                                                //       borderRadius: BorderRadius.only(
+                                                //           topRight: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomLeft: Radius
+                                                //               .circular(
+                                                //                   50.0),
+                                                //           bottomRight: Radius
+                                                //               .circular(
+                                                //                   50.0)),
+                                                //       borderSide: BorderSide(
+                                                //           color:
+                                                //               lightGreyColor),
+                                                //     ),
+                                                //   ),
+                                                //   value: villageCodeValue,
+                                                //   validator: (value) =>
+                                                //       value == null
+                                                //           ? 'Source Type must not be empty'
+                                                //           : null,
+                                                //   onChanged: (value) =>
+                                                //       setState(() =>
+                                                //           villageCodeValue =
+                                                //               value),
+                                                //   items: <String>[
+                                                //     'VLR',
+                                                //     'CLR',
+                                                //     'MLR',
+                                                //   ].map<
+                                                //           DropdownMenuItem<
+                                                //               String>>(
+                                                //       (String value) {
+                                                //     return DropdownMenuItem<
+                                                //         String>(
+                                                //       value: value,
+                                                //       child: TextWidget(
+                                                //         text: value,
+                                                //         color: darkColor,
+                                                //         weight:
+                                                //             FontWeight.w400,
+                                                //         size: 16,
+                                                //       ),
+                                                //     );
+                                                //   }).toList(),
+                                                // ),
+                                                ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Panchayat No'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: DropdownButtonFormField<
+                                                  String>(
+                                                isExpanded: true,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      new OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                ),
+                                                value: panNoVal,
+                                                // validator: (value) => value ==
+                                                //         null
+                                                //     ? 'Source Type must not be empty'
+                                                //     : null,
+                                                onChanged: (value) => setState(
+                                                    () => panNoVal = value),
+                                                items: <String>[
+                                                  '1212',
+                                                  '2325',
+                                                  '6558',
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: TextWidget(
+                                                      text: value,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                      size: 14,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate(
+                                                            'Panchayat Code'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: DropdownButtonFormField<
+                                                  String>(
+                                                isExpanded: true,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      new OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                ),
+                                                value: panCodeVal,
+                                                // validator: (value) => value ==
+                                                //         null
+                                                //     ? 'Source Type must not be empty'
+                                                //     : null,
+                                                onChanged: (value) => setState(
+                                                    () => panCodeVal = value),
+                                                items: <String>[
+                                                  '98',
+                                                  '988',
+                                                  '999',
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: TextWidget(
+                                                      text: value,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                      size: 14,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Village Name'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: DropdownButtonFormField<
+                                                  String>(
+                                                isExpanded: true,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      new OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                ),
+                                                value: villageNameVal,
+                                                // validator: (value) => value ==
+                                                //         null
+                                                //     ? 'Source Type must not be empty'
+                                                //     : null,
+                                                onChanged: (value) => setState(
+                                                    () =>
+                                                        villageNameVal = value),
+                                                items: <String>[
+                                                  'kangeyam',
+                                                  'puthupalayam',
+                                                  'nallur',
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: TextWidget(
+                                                      text: value,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                      size: 14,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Village Name'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: DropdownButtonFormField<
+                                                  String>(
+                                                isExpanded: true,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      new OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    50.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    50.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                ),
+                                                value: villageNameVal,
+                                                // validator: (value) => value ==
+                                                //         null
+                                                //     ? 'Source Type must not be empty'
+                                                //     : null,
+                                                onChanged: (value) => setState(
+                                                    () =>
+                                                        villageNameVal = value),
+                                                items: <String>[
+                                                  'kangeyam',
+                                                  'puthupalayam',
+                                                  'nallur',
+                                                ].map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: TextWidget(
+                                                      text: value,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                      size: 14,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Street Name'),
+                                            size: 14,
+                                            weight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: TextFormField(
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            enableSuggestions: true,
+                                            decoration: InputDecoration(
+                                                border: new OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
+                                                ),
+                                                fillColor: lightGreyColor),
+                                            keyboardType: TextInputType.text,
+                                            onSaved: (String val) {
+                                              setState(() {});
+                                            },
+                                            // validator: (value) {
+                                            //   if (value.isEmpty) {
+                                            //     debugPrint("empid :yes");
+                                            //     return 'Employee Id must not be empty';
+                                            //   }
+                                            //   return null;
+                                            // },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topRight,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate('Door No'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.next,
                                                 enableSuggestions: true,
                                                 decoration: InputDecoration(
                                                     border:
@@ -1294,404 +1452,405 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 onSaved: (String val) {
                                                   setState(() {});
                                                 },
-                                                validator: (value) {
-                                                  if (value.isEmpty) {
-                                                    debugPrint("empid :yes");
-                                                    return 'Employee Id must not be empty';
-                                                  }
-                                                  return null;
-                                                },
+                                                // validator: (value) {
+                                                //   if (value.isEmpty) {
+                                                //     debugPrint(
+                                                //         "empid :yes");
+                                                //     return 'Employee Id must not be empty';
+                                                //   }
+                                                //   return null;
+                                                // },
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate('Door No'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.next,
-                                                    autocorrect: true,
-                                                    enableSuggestions: true,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                            lightGreyColor),
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    onSaved: (String val) {
-                                                      setState(() {});
-                                                    },
-                                                    validator: (value) {
-                                                      if (value.isEmpty) {
-                                                        debugPrint(
-                                                            "empid :yes");
-                                                        return 'Employee Id must not be empty';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.topLeft,
-                                          child: FractionallySizedBox(
-                                            widthFactor: 0.5,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate(
-                                                            'Contact Person'),
-                                                    size: 14,
-                                                    weight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: TextFormField(
-                                                    textInputAction:
-                                                        TextInputAction.next,
-                                                    autocorrect: true,
-                                                    enableSuggestions: true,
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderSide:
-                                                              BorderSide.none,
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                                  lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                            lightGreyColor),
-                                                    keyboardType:
-                                                        TextInputType.text,
-                                                    onSaved: (String val) {
-                                                      setState(() {});
-                                                    },
-                                                    validator: (value) {
-                                                      if (value.isEmpty) {
-                                                        debugPrint(
-                                                            "empid :yes");
-                                                        return 'Employee Id must not be empty';
-                                                      }
-                                                      return null;
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   )
                                 ],
                               ),
-                            ),
-                            isActive: _currentStep >= 0,
-                            state: _currentStep >= 0
-                                ? StepState.complete
-                                : StepState.disabled,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate(
+                                                            'Contact Person'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                enableSuggestions: true,
+                                                decoration: InputDecoration(
+                                                    border:
+                                                        new OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    fillColor: lightGreyColor),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onSaved: (String val) {
+                                                  setState(() {});
+                                                },
+                                                // validator: (value) {
+                                                //   if (value.isEmpty) {
+                                                //     debugPrint(
+                                                //         "empid :yes");
+                                                //     return 'Employee Id must not be empty';
+                                                //   }
+                                                //   return null;
+                                                // },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(2.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate(
+                                                        'Number of Family Members'),
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                enableSuggestions: true,
+                                                decoration: InputDecoration(
+                                                    border:
+                                                        new OutlineInputBorder(
+                                                      borderSide:
+                                                          BorderSide.none,
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      50.0),
+                                                              bottomLeft:
+                                                                  Radius
+                                                                      .circular(
+                                                                          50.0),
+                                                              bottomRight: Radius
+                                                                  .circular(
+                                                                      50.0)),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              lightGreyColor),
+                                                    ),
+                                                    fillColor: lightGreyColor),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                onSaved: (String val) {
+                                                  setState(() {});
+                                                },
+                                                // validator: (value) {
+                                                //   if (value.isEmpty) {
+                                                //     debugPrint(
+                                                //         "empid :yes");
+                                                //     return 'Employee Id must not be empty';
+                                                //   }
+                                                //   return null;
+                                                // },
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
-                          Step(
-                            title: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Members'),
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                            content: FamilyMemberDetails(),
-                            isActive: _currentStep >= 0,
-                            state: _currentStep >= 1
-                                ? StepState.complete
-                                : StepState.disabled,
-                          ),
-                          Step(
-                            title: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Property Details'),
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                            content: PropertyDetailStep(),
-                            isActive: _currentStep >= 0,
-                            state: _currentStep >= 2
-                                ? StepState.complete
-                                : StepState.disabled,
-                          ),
-                          Step(
-                            title: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Habits'),
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                            content: HabitsStep(),
-                            isActive: _currentStep >= 0,
-                            state: _currentStep >= 3
-                                ? StepState.complete
-                                : StepState.disabled,
-                          )
-                        ],
+                        ),
+                        isActive: _currentStep >= 0,
+                        state: _currentStep >= 0
+                            ? StepState.complete
+                            : StepState.disabled,
                       ),
-                    )
-                  ],
-                ),
-              ),
+                      Step(
+                        title: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Family Members'),
+                          color: darkColor,
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                        content: FamilyMemberDetails(),
+                        isActive: _currentStep >= 0,
+                        state: _currentStep >= 1
+                            ? StepState.complete
+                            : StepState.disabled,
+                      ),
+                      Step(
+                        title: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Property Details'),
+                          color: darkColor,
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                        content: PropertyDetailStep(),
+                        isActive: _currentStep >= 0,
+                        state: _currentStep >= 2
+                            ? StepState.complete
+                            : StepState.disabled,
+                      ),
+                      Step(
+                        title: TextWidget(
+                          text:
+                              DemoLocalization.of(context).translate('Habits'),
+                          color: darkColor,
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                        content: HabitsStep(),
+                        isActive: _currentStep >= 0,
+                        state: _currentStep >= 3
+                            ? StepState.complete
+                            : StepState.disabled,
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-
-          // floatingActionButton: Padding(
-          //   padding: const EdgeInsets.only(right: 50.0, bottom: 50.0),
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.end,
-          //     children: [
-          //       FloatingActionButton(
-          //         // isExtended: true,
-          //         child: Icon(
-          //           Icons.keyboard_arrow_right,
-          //           size: 30,
-          //           color: darkColor,
-          //         ),
-          //         backgroundColor: lightColor,
-          //         onPressed: () {
-          //           setState(() {});
-          //         },
-          //       ),
-          //       SizedBox(
-          //         height: 10,
-          //       ),
-          //       FloatingActionButton(
-          //         // isExtended: true,
-          //         child: Icon(
-          //           Icons.done,
-          //           size: 30,
-          //         ),
-          //         backgroundColor: primaryColor,
-          //         onPressed: () {
-          //           setState(() {});
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 38.0),
-            child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                elevation: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    child: Image.asset(
-                      imgLightLogo,
-                      fit: BoxFit.contain,
-                      height: height / 9,
-                      width: width / 20,
-                    ),
-                  ),
-                )),
-          ),
-        )
-      ],
+      ),
+
+      // floatingActionButton: Padding(
+      //   padding: const EdgeInsets.only(right: 50.0, bottom: 50.0),
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       FloatingActionButton(
+      //         // isExtended: true,
+      //         child: Icon(
+      //           Icons.keyboard_arrow_right,
+      //           size: 30,
+      //           color: darkColor,
+      //         ),
+      //         backgroundColor: lightColor,
+      //         onPressed: () {
+      //           setState(() {});
+      //         },
+      //       ),
+      //       SizedBox(
+      //         height: 10,
+      //       ),
+      //       FloatingActionButton(
+      //         // isExtended: true,
+      //         child: Icon(
+      //           Icons.done,
+      //           size: 30,
+      //         ),
+      //         backgroundColor: primaryColor,
+      //         onPressed: () {
+      //           setState(() {});
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
@@ -1751,5 +1910,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     //      .collection('villageCode')
     //      .where('villageCode', isEqualTo: text)
     //      .snapshots();
+  }
+
+  void addData() {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection('demographicData');
+    collectionReference.add({
+      'location': {
+        "formNo ": formNo,
+        "projectCode ": projectCode,
+        "villagesCode ": villageController.text
+      }
+    });
   }
 }

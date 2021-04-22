@@ -85,3 +85,5 @@ const String addFamilyMember = "add Family Members";
 
 const String cancel = "Cancel";
 const String btn_filter = "Apply Filter";
+const String btn_logout = "Logout";
+
