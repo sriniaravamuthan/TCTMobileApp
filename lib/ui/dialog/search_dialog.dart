@@ -550,7 +550,7 @@ class _SearchDialogState extends State<SearchDialog> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
                         shape:
@@ -570,7 +570,7 @@ class _SearchDialogState extends State<SearchDialog> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: OutlinedButton(
                     style: ButtonStyle(
                         foregroundColor:
@@ -588,6 +588,9 @@ class _SearchDialogState extends State<SearchDialog> {
                     child: Row(
                       children: [
                         Icon(Icons.search),
+                        SizedBox(
+                          width: 10,
+                        ),
                         TextWidget(
                           text:
                               DemoLocalization.of(context).translate('Search'),

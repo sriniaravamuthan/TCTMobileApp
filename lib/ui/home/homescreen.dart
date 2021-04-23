@@ -68,7 +68,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+                padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 60),
                 child: Container(
                   child: Image.asset(
                     imgLightLogo,

@@ -71,7 +71,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                flex: 2,
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
@@ -80,7 +79,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Name'),
@@ -88,8 +87,94 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autocorrect: true,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Aadhaar No'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -144,8 +229,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             },
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -157,21 +242,21 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(2.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
-                              .translate('Aadhaar No'),
+                              .translate('Relationship method of family head'),
                           size: 14,
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          textInputAction: TextInputAction.next,
-                          autocorrect: true,
-                          enableSuggestions: true,
-                          decoration: InputDecoration(
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: DropdownButtonFormField<String>(
+                            isExpanded: true,
+                            decoration: InputDecoration(
                               border: new OutlineInputBorder(
                                 borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.only(
@@ -186,20 +271,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     bottomRight: Radius.circular(50.0)),
                                 borderSide: BorderSide(color: lightGreyColor),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
                               errorBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(50.0),
@@ -207,88 +278,29 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     bottomRight: Radius.circular(50.0)),
                                 borderSide: BorderSide(color: lightGreyColor),
                               ),
-                              fillColor: lightGreyColor),
-                          keyboardType: TextInputType.text,
-                          onSaved: (String val) {
-                            setState(() {});
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              debugPrint("empid :yes");
-                              return 'Employee Id must not be empty';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: FractionallySizedBox(
-                  widthFactor: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Relationship method of family head'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: DropdownButtonFormField<String>(
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
+                            value: relationshipVal,
+                            validator: (value) => value == null
+                                ? 'Source Type must not be empty'
+                                : null,
+                            onChanged: (value) =>
+                                setState(() => relationshipVal = value),
+                            items: <String>[
+                              'Son',
+                              'Father',
+                              'Mother',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: TextWidget(
+                                  text: value,
+                                  color: darkColor,
+                                  weight: FontWeight.w400,
+                                  size: 14,
+                                ),
+                              );
+                            }).toList(),
                           ),
-                          value: relationshipVal,
-                          validator: (value) => value == null
-                              ? 'Source Type must not be empty'
-                              : null,
-                          onChanged: (value) =>
-                              setState(() => relationshipVal = value),
-                          items: <String>[
-                            'Son',
-                            'Father',
-                            'Mother',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: TextWidget(
-                                text: value,
-                                color: darkColor,
-                                weight: FontWeight.w400,
-                                size: 14,
-                              ),
-                            );
-                          }).toList(),
                         ),
                       ),
                     ],
@@ -316,7 +328,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Gender'),
@@ -324,142 +336,136 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       weight: FontWeight.w600,
                                     ),
                                   ),
-                                  Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Column(
-                                        children: [
-                                          AutoCompleteTextField(
-                                              controller: genderController,
-                                              clearOnSubmit: false,
-                                              itemSubmitted: (item) {
-                                                genderController.text = item;
-                                              },
-                                              suggestions: genderList,
-                                              style: TextStyle(
-                                                color: Color(0xFF222222),
-                                                fontSize: 16,
+                                  SizedBox(
+                                    height: 58,
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: AutoCompleteTextField(
+                                            controller: genderController,
+                                            clearOnSubmit: false,
+                                            itemSubmitted: (item) {
+                                              genderController.text = item;
+                                            },
+                                            suggestions: genderList,
+                                            style: TextStyle(
+                                              color: Color(0xFF222222),
+                                              fontSize: 16,
+                                            ),
+                                            decoration: InputDecoration(
+                                              border: new OutlineInputBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(50.0),
+                                                    bottomLeft:
+                                                        Radius.circular(50.0),
+                                                    bottomRight:
+                                                        Radius.circular(50.0)),
                                               ),
-                                              decoration: InputDecoration(
-                                                border: new OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  50.0),
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  50.0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  50.0)),
-                                                ),
-                                              ),
-                                              itemBuilder: (context, item) {
-                                                return new Padding(
-                                                    padding:
-                                                        EdgeInsets.all(8.0),
-                                                    child: TextWidget(
-                                                      text: item,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                      weight: FontWeight.w600,
-                                                    ));
-                                              },
-                                              itemSorter: (a, b) {
-                                                return a.compareTo(b);
-                                              },
-                                              itemFilter: (item, query) {
-                                                return item
-                                                    .toLowerCase()
-                                                    .startsWith(
-                                                        query.toLowerCase());
-                                              })
-                                        ],
-                                      )
-                                      //     DropdownButtonFormField<
-                                      //         String>(
-                                      //   isExpanded: true,
-                                      //   decoration:
-                                      //       InputDecoration(
-                                      //     border:
-                                      //         new OutlineInputBorder(
-                                      //       borderSide:
-                                      //           BorderSide.none,
-                                      //       borderRadius: BorderRadius.only(
-                                      //           topRight: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomLeft: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomRight: Radius
-                                      //               .circular(
-                                      //                   50.0)),
-                                      //     ),
-                                      //     enabledBorder:
-                                      //         OutlineInputBorder(
-                                      //       borderRadius: BorderRadius.only(
-                                      //           topRight: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomLeft: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomRight: Radius
-                                      //               .circular(
-                                      //                   50.0)),
-                                      //       borderSide: BorderSide(
-                                      //           color:
-                                      //               lightGreyColor),
-                                      //     ),
-                                      //     errorBorder:
-                                      //         OutlineInputBorder(
-                                      //       borderRadius: BorderRadius.only(
-                                      //           topRight: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomLeft: Radius
-                                      //               .circular(
-                                      //                   50.0),
-                                      //           bottomRight: Radius
-                                      //               .circular(
-                                      //                   50.0)),
-                                      //       borderSide: BorderSide(
-                                      //           color:
-                                      //               lightGreyColor),
-                                      //     ),
-                                      //   ),
-                                      //   value: villageCodeValue,
-                                      //   validator: (value) =>
-                                      //       value == null
-                                      //           ? 'Source Type must not be empty'
-                                      //           : null,
-                                      //   onChanged: (value) =>
-                                      //       setState(() =>
-                                      //           villageCodeValue =
-                                      //               value),
-                                      //   items: <String>[
-                                      //     'VLR',
-                                      //     'CLR',
-                                      //     'MLR',
-                                      //   ].map<
-                                      //           DropdownMenuItem<
-                                      //               String>>(
-                                      //       (String value) {
-                                      //     return DropdownMenuItem<
-                                      //         String>(
-                                      //       value: value,
-                                      //       child: TextWidget(
-                                      //         text: value,
-                                      //         color: darkColor,
-                                      //         weight:
-                                      //             FontWeight.w400,
-                                      //         size: 16,
-                                      //       ),
-                                      //     );
-                                      //   }).toList(),
-                                      // ),
-                                      ),
+                                            ),
+                                            itemBuilder: (context, item) {
+                                              return new Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextWidget(
+                                                    text: item,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ));
+                                            },
+                                            itemSorter: (a, b) {
+                                              return a.compareTo(b);
+                                            },
+                                            itemFilter: (item, query) {
+                                              return item
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                      query.toLowerCase());
+                                            })
+                                        //     DropdownButtonFormField<
+                                        //         String>(
+                                        //   isExpanded: true,
+                                        //   decoration:
+                                        //       InputDecoration(
+                                        //     border:
+                                        //         new OutlineInputBorder(
+                                        //       borderSide:
+                                        //           BorderSide.none,
+                                        //       borderRadius: BorderRadius.only(
+                                        //           topRight: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomLeft: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomRight: Radius
+                                        //               .circular(
+                                        //                   50.0)),
+                                        //     ),
+                                        //     enabledBorder:
+                                        //         OutlineInputBorder(
+                                        //       borderRadius: BorderRadius.only(
+                                        //           topRight: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomLeft: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomRight: Radius
+                                        //               .circular(
+                                        //                   50.0)),
+                                        //       borderSide: BorderSide(
+                                        //           color:
+                                        //               lightGreyColor),
+                                        //     ),
+                                        //     errorBorder:
+                                        //         OutlineInputBorder(
+                                        //       borderRadius: BorderRadius.only(
+                                        //           topRight: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomLeft: Radius
+                                        //               .circular(
+                                        //                   50.0),
+                                        //           bottomRight: Radius
+                                        //               .circular(
+                                        //                   50.0)),
+                                        //       borderSide: BorderSide(
+                                        //           color:
+                                        //               lightGreyColor),
+                                        //     ),
+                                        //   ),
+                                        //   value: villageCodeValue,
+                                        //   validator: (value) =>
+                                        //       value == null
+                                        //           ? 'Source Type must not be empty'
+                                        //           : null,
+                                        //   onChanged: (value) =>
+                                        //       setState(() =>
+                                        //           villageCodeValue =
+                                        //               value),
+                                        //   items: <String>[
+                                        //     'VLR',
+                                        //     'CLR',
+                                        //     'MLR',
+                                        //   ].map<
+                                        //           DropdownMenuItem<
+                                        //               String>>(
+                                        //       (String value) {
+                                        //     return DropdownMenuItem<
+                                        //         String>(
+                                        //       value: value,
+                                        //       child: TextWidget(
+                                        //         text: value,
+                                        //         color: darkColor,
+                                        //         weight:
+                                        //             FontWeight.w400,
+                                        //         size: 16,
+                                        //       ),
+                                        //     );
+                                        //   }).toList(),
+                                        // ),
+                                        ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -570,7 +576,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Date of Birth'),
@@ -578,91 +584,99 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       weight: FontWeight.w600,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: TextFormField(
-                                      textInputAction: TextInputAction.next,
-                                      autocorrect: true,
-                                      controller: datePicker,
-                                      enableSuggestions: true,
-                                      decoration: InputDecoration(
-                                          border: new OutlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          fillColor: lightGreyColor),
-                                      keyboardType: TextInputType.text,
-                                      onSaved: (String val) {
-                                        setState(() {});
-                                      },
-                                      onTap: () async {
-                                        FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
+                                  SizedBox(
+                                    height: 58,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.next,
+                                        autocorrect: true,
+                                        controller: datePicker,
+                                        enableSuggestions: true,
+                                        decoration: InputDecoration(
+                                            border: new OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            fillColor: lightGreyColor),
+                                        keyboardType: TextInputType.text,
+                                        onSaved: (String val) {
+                                          setState(() {});
+                                        },
+                                        onTap: () async {
+                                          FocusScope.of(context)
+                                              .requestFocus(new FocusNode());
 
-                                        date = await showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2022));
+                                          date = await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2022));
 
-                                        datePicker.text =
-                                            "${date.year}/${date.month}/${date.day}";
+                                          datePicker.text =
+                                              "${date.year}/${date.month}/${date.day}";
 
-                                        dateOfBirthVal = datePicker.text;
-                                      },
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          debugPrint("empid :yes");
-                                          return 'Employee Id must not be empty';
-                                        }
-                                        return null;
-                                      },
+                                          dateOfBirthVal = datePicker.text;
+                                        },
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            debugPrint("empid :yes");
+                                            return 'Employee Id must not be empty';
+                                          }
+                                          return null;
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -679,7 +693,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Age'),
@@ -687,75 +701,83 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       weight: FontWeight.w600,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: TextFormField(
-                                      textInputAction: TextInputAction.next,
-                                      autocorrect: true,
-                                      enableSuggestions: true,
-                                      decoration: InputDecoration(
-                                          border: new OutlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(50.0),
-                                                bottomLeft:
-                                                    Radius.circular(50.0),
-                                                bottomRight:
-                                                    Radius.circular(50.0)),
-                                            borderSide: BorderSide(
-                                                color: lightGreyColor),
-                                          ),
-                                          fillColor: lightGreyColor),
-                                      keyboardType: TextInputType.text,
-                                      onSaved: (String val) {
-                                        setState(() {});
-                                      },
-                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          debugPrint("empid :yes");
-                                          return 'Employee Id must not be empty';
-                                        }
-                                        return null;
-                                      },
+                                  SizedBox(
+                                    height: 58,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: TextFormField(
+                                        textInputAction: TextInputAction.next,
+                                        autocorrect: true,
+                                        enableSuggestions: true,
+                                        decoration: InputDecoration(
+                                            border: new OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.only(
+                                                  topRight:
+                                                      Radius.circular(50.0),
+                                                  bottomLeft:
+                                                      Radius.circular(50.0),
+                                                  bottomRight:
+                                                      Radius.circular(50.0)),
+                                              borderSide: BorderSide(
+                                                  color: lightGreyColor),
+                                            ),
+                                            fillColor: lightGreyColor),
+                                        keyboardType: TextInputType.text,
+                                        onSaved: (String val) {
+                                          setState(() {});
+                                        },
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            debugPrint("empid :yes");
+                                            return 'Employee Id must not be empty';
+                                          }
+                                          return null;
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -777,7 +799,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Marital status'),
@@ -785,59 +807,65 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       weight: FontWeight.w600,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: DropdownButtonFormField<String>(
-                                      isExpanded: true,
-                                      decoration: InputDecoration(
-                                        border: new OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
-                                        ),
-                                      ),
-                                      value: maritalStatusVal,
-                                      validator: (value) => value == null
-                                          ? 'Source Type must not be empty'
-                                          : null,
-                                      onChanged: (value) => setState(
-                                          () => maritalStatusVal = value),
-                                      items: <String>[
-                                        'Married',
-                                        'UnMarried',
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: TextWidget(
-                                            text: value,
-                                            color: darkColor,
-                                            weight: FontWeight.w400,
-                                            size: 14,
+                                  SizedBox(
+                                    height: 58,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: DropdownButtonFormField<String>(
+                                        isExpanded: true,
+                                        decoration: InputDecoration(
+                                          border: new OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
                                           ),
-                                        );
-                                      }).toList(),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                        ),
+                                        value: maritalStatusVal,
+                                        validator: (value) => value == null
+                                            ? 'Source Type must not be empty'
+                                            : null,
+                                        onChanged: (value) => setState(
+                                            () => maritalStatusVal = value),
+                                        items: <String>[
+                                          'Married',
+                                          'UnMarried',
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: TextWidget(
+                                              text: value,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                              size: 14,
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -854,7 +882,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Blood Group'),
@@ -862,60 +890,66 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       weight: FontWeight.w600,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: DropdownButtonFormField<String>(
-                                      isExpanded: true,
-                                      decoration: InputDecoration(
-                                        border: new OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(50.0),
-                                              bottomLeft: Radius.circular(50.0),
-                                              bottomRight:
-                                                  Radius.circular(50.0)),
-                                          borderSide:
-                                              BorderSide(color: lightGreyColor),
-                                        ),
-                                      ),
-                                      value: bloodGroupVal,
-                                      validator: (value) => value == null
-                                          ? 'Source Type must not be empty'
-                                          : null,
-                                      onChanged: (value) =>
-                                          setState(() => bloodGroupVal = value),
-                                      items: <String>[
-                                        'A+',
-                                        'A-',
-                                        'B+',
-                                      ].map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: TextWidget(
-                                            text: value,
-                                            color: darkColor,
-                                            weight: FontWeight.w400,
-                                            size: 14,
+                                  SizedBox(
+                                    height: 58,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: DropdownButtonFormField<String>(
+                                        isExpanded: true,
+                                        decoration: InputDecoration(
+                                          border: new OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
                                           ),
-                                        );
-                                      }).toList(),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(50.0),
+                                                bottomLeft:
+                                                    Radius.circular(50.0),
+                                                bottomRight:
+                                                    Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                        ),
+                                        value: bloodGroupVal,
+                                        validator: (value) => value == null
+                                            ? 'Source Type must not be empty'
+                                            : null,
+                                        onChanged: (value) => setState(
+                                            () => bloodGroupVal = value),
+                                        items: <String>[
+                                          'A+',
+                                          'A-',
+                                          'B+',
+                                        ].map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: TextWidget(
+                                              text: value,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                              size: 14,
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -932,7 +966,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Physically challenged'),
@@ -941,7 +975,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(4.0),
                                     child: Row(
                                       children: [
                                         Switch(
@@ -978,7 +1012,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 30.0),
+                        padding: const EdgeInsets.only(left: 2.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Photograph'),
@@ -986,11 +1020,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 30.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: Container(
                             height: 150,
                             width: 150,
@@ -998,9 +1029,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50))),
                             child: Image.asset(userSquare)),
-                      ),
-                      SizedBox(
-                        height: 50,
                       ),
                     ],
                   ),
@@ -1020,7 +1048,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Education Qualification'),
@@ -1028,54 +1056,57 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                            ),
-                            value: qualificationVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => qualificationVal = value),
-                            items: <String>[
-                              'BE',
-                              'BSc',
-                              'Others',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
-                              );
-                            }).toList(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                              ),
+                              value: qualificationVal,
+                              validator: (value) => value == null
+                                  ? 'Source Type must not be empty'
+                                  : null,
+                              onChanged: (value) =>
+                                  setState(() => qualificationVal = value),
+                              items: <String>[
+                                'BE',
+                                'BSc',
+                                'Others',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ],
@@ -1092,7 +1123,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Business'),
@@ -1100,60 +1131,67 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autocorrect: true,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -1170,7 +1208,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Annual Income'),
@@ -1178,54 +1216,57 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                            ),
-                            value: annualIncomeVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => annualIncomeVal = value),
-                            items: <String>[
-                              '1,00,000',
-                              '1,50,000',
-                              '3,00,000',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
-                              );
-                            }).toList(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                              ),
+                              value: annualIncomeVal,
+                              validator: (value) => value == null
+                                  ? 'Source Type must not be empty'
+                                  : null,
+                              onChanged: (value) =>
+                                  setState(() => annualIncomeVal = value),
+                              items: <String>[
+                                '1,00,000',
+                                '1,50,000',
+                                '3,00,000',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ],
@@ -1247,7 +1288,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Mobile No'),
@@ -1255,61 +1296,67 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            maxLength: 10,
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.number,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autocorrect: true,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.number,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -1326,7 +1373,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Email'),
@@ -1334,60 +1381,67 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autocorrect: true,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -1404,7 +1458,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Smart phone'),
@@ -1412,24 +1466,27 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              Switch(
-                                onChanged: toggleSwitch1,
-                                value: isSwitched1,
-                                activeColor: Colors.blue,
-                                activeTrackColor: greyColor,
-                                inactiveThumbColor: greyColor,
-                                inactiveTrackColor: greyColor,
-                              ),
-                              TextWidget(
-                                text: textValue1,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              ),
-                            ],
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Row(
+                              children: [
+                                Switch(
+                                  onChanged: toggleSwitch1,
+                                  value: isSwitched1,
+                                  activeColor: Colors.blue,
+                                  activeTrackColor: greyColor,
+                                  inactiveThumbColor: greyColor,
+                                  inactiveTrackColor: greyColor,
+                                ),
+                                TextWidget(
+                                  text: textValue1,
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -1451,7 +1508,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Community'),
@@ -1459,54 +1516,57 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                            ),
-                            value: communityVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => communityVal = value),
-                            items: <String>[
-                              'MBC',
-                              'BC',
-                              'Others',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
-                              );
-                            }).toList(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                              ),
+                              value: communityVal,
+                              validator: (value) => value == null
+                                  ? 'Source Type must not be empty'
+                                  : null,
+                              onChanged: (value) =>
+                                  setState(() => communityVal = value),
+                              items: <String>[
+                                'MBC',
+                                'BC',
+                                'Others',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ],
@@ -1523,7 +1583,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text:
                                 DemoLocalization.of(context).translate('Caste'),
@@ -1531,54 +1591,57 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                            ),
-                            value: castVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => castVal = value),
-                            items: <String>[
-                              'Agamudayar',
-                              'Udayar',
-                              'Others',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
+                        SizedBox(
+                          height: 58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
                                 ),
-                              );
-                            }).toList(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                              ),
+                              value: castVal,
+                              validator: (value) => value == null
+                                  ? 'Source Type must not be empty'
+                                  : null,
+                              onChanged: (value) =>
+                                  setState(() => castVal = value),
+                              items: <String>[
+                                'Agamudayar',
+                                'Udayar',
+                                'Others',
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
                       ],
