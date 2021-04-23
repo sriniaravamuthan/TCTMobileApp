@@ -159,11 +159,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: Card(
             elevation: 8,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
+              borderRadius: BorderRadius.circular(16.0),
             ),
             child: Column(
               children: [
