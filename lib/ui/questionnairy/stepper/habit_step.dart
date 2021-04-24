@@ -29,88 +29,105 @@ class _HabitsStepState extends State<HabitsStep> {
   Widget build(BuildContext context) {
     return Form(
       key: _stepFourKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Expanded(
+flex: 1,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: TextWidget(
+                    text: DemoLocalization.of(context)
+                        .translate('Any Members who Smoke?'),
+                    size: 14,
+                    weight: FontWeight.w600,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Switch(
+                      onChanged: toggleSwitch,
+                      value: isSwitched,
+                      activeColor: Colors.blue,
+                      activeTrackColor: greyColor,
+                      inactiveThumbColor: greyColor,
+                      inactiveTrackColor: greyColor,
+                    ),
+                    TextWidget(
+                      text: textValue,
+                      size: 14,
+                      weight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+Column(
+  children: [
+    Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: TextWidget(
+          text: DemoLocalization.of(context)
+              .translate('Any Members who Drink?'),
+          size: 14,
+          weight: FontWeight.w600,
+        ),
+    ),
+    Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextWidget(
-              text: DemoLocalization.of(context)
-                  .translate('Any Members who Smoke?'),
-              size: 14,
-              weight: FontWeight.w600,
-            ),
+          Switch(
+            onChanged: toggleSwitch1,
+            value: isSwitched1,
+            activeColor: Colors.blue,
+            activeTrackColor: greyColor,
+            inactiveThumbColor: greyColor,
+            inactiveTrackColor: greyColor,
           ),
-          Row(
-            children: [
-              Switch(
-                onChanged: toggleSwitch,
-                value: isSwitched,
-                activeColor: Colors.blue,
-                activeTrackColor: greyColor,
-                inactiveThumbColor: greyColor,
-                inactiveTrackColor: greyColor,
-              ),
-              TextWidget(
-                text: textValue,
-                size: 14,
-                weight: FontWeight.w600,
-              ),
-            ],
+          TextWidget(
+            text: textValue1,
+            size: 14,
+            weight: FontWeight.w600,
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextWidget(
-              text: DemoLocalization.of(context)
-                  .translate('Any Members who Drink?'),
-              size: 14,
-              weight: FontWeight.w600,
-            ),
-          ),
-          Row(
-            children: [
-              Switch(
-                onChanged: toggleSwitch1,
-                value: isSwitched1,
-                activeColor: Colors.blue,
-                activeTrackColor: greyColor,
-                inactiveThumbColor: greyColor,
-                inactiveTrackColor: greyColor,
-              ),
-              TextWidget(
-                text: textValue1,
-                size: 14,
-                weight: FontWeight.w600,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextWidget(
-              text: DemoLocalization.of(context)
-                  .translate('Any Members who use Tobacco?'),
-              size: 14,
-              weight: FontWeight.w600,
-            ),
-          ),
-          Row(
-            children: [
-              Switch(
-                onChanged: toggleSwitch2,
-                value: isSwitched2,
-                activeColor: Colors.blue,
-                activeTrackColor: greyColor,
-                inactiveThumbColor: greyColor,
-                inactiveTrackColor: greyColor,
-              ),
-              TextWidget(
-                text: textValue2,
-                size: 14,
-                weight: FontWeight.w600,
-              ),
-            ],
-          )
         ],
+    ),
+  ],
+),
+           Column(
+             children: [
+               Padding(
+                 padding: const EdgeInsets.all(10.0),
+                 child: TextWidget(
+                   text: DemoLocalization.of(context)
+                       .translate('Any Members who use Tobacco?'),
+                   size: 14,
+                   weight: FontWeight.w600,
+                 ),
+               ),
+               Row(
+                 children: [
+                   Switch(
+                     onChanged: toggleSwitch2,
+                     value: isSwitched2,
+                     activeColor: Colors.blue,
+                     activeTrackColor: greyColor,
+                     inactiveThumbColor: greyColor,
+                     inactiveTrackColor: greyColor,
+                   ),
+                   TextWidget(
+                     text: textValue2,
+                     size: 14,
+                     weight: FontWeight.w600,
+                   ),
+                 ],
+               )
+             ],
+           )
+
+          ],
+        ),
       ),
     );
   }
