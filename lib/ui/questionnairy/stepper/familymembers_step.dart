@@ -1356,7 +1356,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.phone,
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
@@ -1441,7 +1441,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.emailAddress,
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
