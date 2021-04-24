@@ -226,7 +226,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                               text: DemoLocalization.of(context)
                                                   .translate('Search'),
                                               color: darkColor,
-                                              weight: FontWeight.w800,
+                                              weight: FontWeight.w700,
                                               size: 14,
                                             ),
                                           ],
@@ -302,7 +302,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                               text: DemoLocalization.of(context)
                                                   .translate('Add New'),
                                               color: darkColor,
-                                              weight: FontWeight.w800,
+                                              weight: FontWeight.w700,
                                               size: 14,
                                             ),
                                           ],
