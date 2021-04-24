@@ -13,6 +13,10 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FamilyMemberStep extends StatefulWidget {
   @override
@@ -47,12 +51,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   String gender = "";
+  File _image;
+  final picker = ImagePicker();
+
   @override
   void initState() {
     getData();
     super.initState();
   }
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
 
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
   @override
   void dispose() {
     // TODO: implement dispose
@@ -1031,15 +1048,22 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 4.0),
-                          child: Container(
-                              height: 150,
-                              width: 150,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50))),
-                              child: Image.asset(userSquare)),
+                        InkWell(
+                          onTap: (){
+                            getImage();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: Container(
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50))),
+                                child:  _image == null
+                                    ?Image.asset(imgCamera)
+                                    : Image.file(_image)),
+                          ),
                         ),
                       ],
                     ),
