@@ -495,58 +495,60 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child: SizedBox(
+                            width: 100,
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.number,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -578,6 +580,87 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
+                          child: SizedBox(
+                            width: 100,
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.number,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Three Wheeler'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: SizedBox(
+                          width: 100,
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -619,7 +702,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.number,
                             onSaved: (String val) {
                               setState(() {});
                             },
@@ -631,82 +714,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               return null;
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: FractionallySizedBox(
-                  widthFactor: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Three Wheeler'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          textInputAction: TextInputAction.next,
-                          autocorrect: true,
-                          enableSuggestions: true,
-                          decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              fillColor: lightGreyColor),
-                          keyboardType: TextInputType.text,
-                          onSaved: (String val) {
-                            setState(() {});
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              debugPrint("empid :yes");
-                              return 'Employee Id must not be empty';
-                            }
-                            return null;
-                          },
                         ),
                       ),
                     ],
@@ -731,58 +738,61 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          textInputAction: TextInputAction.next,
-                          autocorrect: true,
-                          enableSuggestions: true,
-                          decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              fillColor: lightGreyColor),
-                          keyboardType: TextInputType.text,
-                          onSaved: (String val) {
-                            setState(() {});
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              debugPrint("empid :yes");
-                              return 'Employee Id must not be empty';
-                            }
-                            return null;
-                          },
+                        child: SizedBox(
+                          width: 100,
+                          child: TextFormField(
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                debugPrint("empid :yes");
+                                return 'Employee Id must not be empty';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -807,58 +817,61 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          textInputAction: TextInputAction.next,
-                          autocorrect: true,
-                          enableSuggestions: true,
-                          decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(50.0),
-                                    bottomLeft: Radius.circular(50.0),
-                                    bottomRight: Radius.circular(50.0)),
-                                borderSide: BorderSide(color: lightGreyColor),
-                              ),
-                              fillColor: lightGreyColor),
-                          keyboardType: TextInputType.text,
-                          onSaved: (String val) {
-                            setState(() {});
-                          },
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              debugPrint("empid :yes");
-                              return 'Employee Id must not be empty';
-                            }
-                            return null;
-                          },
+                        child: SizedBox(
+                          width: 100,
+                          child: TextFormField(
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                border: new OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(50.0),
+                                      bottomLeft: Radius.circular(50.0),
+                                      bottomRight: Radius.circular(50.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                debugPrint("empid :yes");
+                                return 'Employee Id must not be empty';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                       ),
                     ],
