@@ -49,9 +49,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   List villageCodeList = ["AAR", "ADR", "ARD"];
   var height, width;
   ScrollController _scrollController = new ScrollController();
-
+  List value;
   @override
   void initState() {
+    value=[];
     _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -1945,13 +1946,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     }
   }
 
-  Future<List<dynamic>> _getVillageCode(String text) {
+   _getVillageCode(String text) {
     debugPrint(
-        "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).where(collectionVillageCode, isEqualTo: text)}");
-    // FirebaseFirestore.instance
-    //      .collection('villageCode')
-    //      .where('villageCode', isEqualTo: text)
-    //      .snapshots();
+        "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).snapshots()}");
+    FirebaseFirestore.instance.collection(collectionVillageCode).snapshots();
+    // get().then((querySnapshot){
+    //   print("VillageCodeList2:$querySnapshot");
+    //
+    //   querySnapshot.docs.forEach((element){
+    //     print("VillageCodeList:$element}");
+    //
+    //      value = element['villageCode'];
+    //       print("VillageCodelist:$value}");
+    //   });
+    // });
   }
 
   void addData() {

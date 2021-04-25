@@ -6,6 +6,8 @@
  * /
  */
 
+import 'dart:collection';
+
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String textValue1 = 'No';
   var genderController = TextEditingController();
   TextEditingController ageController = TextEditingController();
-
+  List<dynamic> values;
   List genderList = [];
     String nameVal,
       relationshipVal,
@@ -56,6 +58,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
   @override
   void initState() {
+    values=[];
     getData();
     super.initState();
   }
@@ -366,7 +369,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               itemSubmitted: (item) {
                                                 genderController.text = item;
                                               },
-                                              suggestions: genderList,
+                                              suggestions: values,
                                               style: TextStyle(
                                                 color: Color(0xFF222222),
                                                 fontSize: 16,
@@ -1727,10 +1730,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('gender').get();
     // Get data from docs and convert map to List
+
     genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
     print("gender:$genderList");
     genderList.forEach((element) {
-      print("gender1:$element");
+      LinkedHashMap<String, dynamic> data = element['gender'];
+     values = data.values.toList();
+
+      print("gender1:${ values.last}");
     });
   }
   calculateAge(DateTime date) {

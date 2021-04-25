@@ -217,33 +217,36 @@ class AuthenticationWrapper extends StatelessWidget {
 class NetworkErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(imgBG),
-          fit: BoxFit.cover,
+    return Material(
+
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imgBG),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: Image.asset(imgLightLogo),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: TextWidget(
-                text: checkInternet,
-                size: 24,
-                weight: FontWeight.w600,
-                color: lightColor,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                child: Image.asset(imgLightLogo),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                child: TextWidget(
+                  text: checkInternet,
+                  size: 24,
+                  weight: FontWeight.w600,
+                  color: lightColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
