@@ -6,8 +6,6 @@
  * /
  */
 
-
-
 class Result {
   String familyHead;
   String age;

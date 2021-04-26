@@ -63,54 +63,56 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: DropdownButtonFormField<String>(
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
-                          ),
-                          value: statusOfHouseVal,
-                          validator: (value) => value == null
-                              ? 'Source Type must not be empty'
-                              : null,
-                          onChanged: (value) =>
-                              setState(() => statusOfHouseVal = value),
-                          items: <String>[
-                            'Male',
-                            'Female',
-                            'Others',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: TextWidget(
-                                text: value,
-                                color: darkColor,
-                                weight: FontWeight.w400,
-                                size: 14,
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: DropdownButtonFormField<String>(
+                            isExpanded: true,
+                            decoration: InputDecoration(
+                              border: new OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
-                            );
-                          }).toList(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                            ),
+                            value: statusOfHouseVal,
+                            validator: (value) => value == null
+                                ? 'Source Type must not be empty'
+                                : null,
+                            onChanged: (value) =>
+                                setState(() => statusOfHouseVal = value),
+                            items: <String>[
+                              'Own House',
+                              'Rented House',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: TextWidget(
+                                  text: value,
+                                  color: darkColor,
+                                  weight: FontWeight.w400,
+                                  size: 14,
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ],
@@ -132,54 +134,57 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: DropdownButtonFormField<String>(
-                          isExpanded: true,
-                          decoration: InputDecoration(
-                            border: new OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(50.0),
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0)),
-                              borderSide: BorderSide(color: lightGreyColor),
-                            ),
-                          ),
-                          value: typeofHouseVal,
-                          validator: (value) => value == null
-                              ? 'Source Type must not be empty'
-                              : null,
-                          onChanged: (value) =>
-                              setState(() => typeofHouseVal = value),
-                          items: <String>[
-                            'Male',
-                            'Female',
-                            'Others',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: TextWidget(
-                                text: value,
-                                color: darkColor,
-                                weight: FontWeight.w400,
-                                size: 14,
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: DropdownButtonFormField<String>(
+                            isExpanded: true,
+                            decoration: InputDecoration(
+                              border: new OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
                               ),
-                            );
-                          }).toList(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                            ),
+                            value: typeofHouseVal,
+                            validator: (value) => value == null
+                                ? 'Source Type must not be empty'
+                                : null,
+                            onChanged: (value) =>
+                                setState(() => typeofHouseVal = value),
+                            items: <String>[
+                              'Thatched',
+                              'Tiled',
+                              'Terrace',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: TextWidget(
+                                  text: value,
+                                  color: darkColor,
+                                  weight: FontWeight.w400,
+                                  size: 14,
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ],
@@ -201,24 +206,27 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Row(
-                          children: [
-                            Switch(
-                              onChanged: toggleSwitch,
-                              value: isSwitched,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
-                            ),
-                            TextWidget(
-                              text: textValue,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ],
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch,
+                                value: isSwitched,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: textValue,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -240,24 +248,27 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Row(
-                          children: [
-                            Switch(
-                              onChanged: toggleSwitch1,
-                              value: isSwitched1,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
-                            ),
-                            TextWidget(
-                              text: textValue1,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ],
+                      SizedBox(
+                        height: 58,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            children: [
+                              Switch(
+                                onChanged: toggleSwitch1,
+                                value: isSwitched1,
+                                activeColor: Colors.blue,
+                                activeTrackColor: greyColor,
+                                inactiveThumbColor: greyColor,
+                                inactiveTrackColor: greyColor,
+                              ),
+                              TextWidget(
+                                text: textValue1,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -287,96 +298,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         SizedBox(
+                          height: 70,
                           width: 100,
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: TextFormField(
-                              maxLength: 2,
-                              textInputAction: TextInputAction.next,
-                              autocorrect: true,
-                              enableSuggestions: true,
-                              decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              keyboardType: TextInputType.text,
-                              // onSaved: (String val) {
-                              //   setState(() {
-                              //     wetLandInAcresVal =val;
-                              //   });
-                              // },
-                              onSaved: (value) {
-                                setState(() {
-                                  wetLandInAcresVal = value as int;
-                                });
-                              },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  debugPrint("empid :yes");
-                                  return 'Employee Id must not be empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: FractionallySizedBox(
-                  widthFactor: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Dry Land Holding(In Acres)'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
                           child: TextFormField(
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
@@ -419,9 +342,16 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
+                            keyboardType: TextInputType.number,
+                            // onSaved: (String val) {
+                            //   setState(() {
+                            //     wetLandInAcresVal =val;
+                            //   });
+                            // },
+                            onSaved: (value) {
+                              setState(() {
+                                wetLandInAcresVal = value as int;
+                              });
                             },
                             validator: (value) {
                               if (value.isEmpty) {
@@ -431,6 +361,83 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               return null;
                             },
                           ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Dry Land Holding(In Acres)'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        height: 70,
+                        child: TextFormField(
+                          maxLength: 2,
+                          textInputAction: TextInputAction.next,
+                          autocorrect: true,
+                          enableSuggestions: true,
+                          decoration: InputDecoration(
+                              border: new OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(50.0),
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0)),
+                                borderSide: BorderSide(color: lightGreyColor),
+                              ),
+                              fillColor: lightGreyColor),
+                          keyboardType: TextInputType.number,
+                          onSaved: (String val) {
+                            setState(() {});
+                          },
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              debugPrint("empid :yes");
+                              return 'Employee Id must not be empty';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
@@ -497,6 +504,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           padding: const EdgeInsets.all(4.0),
                           child: SizedBox(
                             width: 100,
+                            height: 58,
                             child: TextFormField(
                               textInputAction: TextInputAction.next,
                               enableSuggestions: true,
@@ -513,28 +521,32 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               keyboardType: TextInputType.number,
@@ -582,6 +594,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           padding: const EdgeInsets.all(4.0),
                           child: SizedBox(
                             width: 100,
+                            height: 58,
                             child: TextFormField(
                               textInputAction: TextInputAction.next,
                               enableSuggestions: true,
@@ -598,28 +611,32 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               keyboardType: TextInputType.number,
@@ -661,6 +678,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.all(4.0),
                         child: SizedBox(
                           width: 100,
+                          height: 58,
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -740,6 +758,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.all(4.0),
                         child: SizedBox(
                           width: 100,
+                          height: 58,
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -819,6 +838,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.all(4.0),
                         child: SizedBox(
                           width: 100,
+                          height: 58,
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -944,58 +964,65 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: TextFormField(
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+                          child: SizedBox(
+                            height: 58,
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autocorrect: true,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {});
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  debugPrint("empid :yes");
+                                  return 'Employee Id must not be empty';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -1012,7 +1039,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Count'),
@@ -1021,7 +1048,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
