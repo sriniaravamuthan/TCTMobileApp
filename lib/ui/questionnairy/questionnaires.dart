@@ -6,6 +6,8 @@
  * /
  */
 
+import 'dart:collection';
+
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +36,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   FocusNode familyMemFocus = new FocusNode();
+  List<dynamic> values;
 
   String formNo,
       projectCode,
@@ -52,7 +55,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   List value;
   @override
   void initState() {
-    value=[];
+    value = [];
     _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -1946,10 +1949,22 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     }
   }
 
-   _getVillageCode(String text) {
+  Future<void> _getVillageCode(String text) async {
     debugPrint(
         "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).snapshots()}");
-    FirebaseFirestore.instance.collection(collectionVillageCode).snapshots();
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection('demographicData').get();
+    // Get data from docs and convert map to List
+    print("villageCodeList2:$querySnapshot");
+
+    villageCodeList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    print("villageCodeList:$villageCodeList");
+    villageCodeList.forEach((element) {
+      LinkedHashMap<String, dynamic> data = element['location'];
+      values = data.values.toList();
+
+      print("villageCodeList1:${values.last}");
+    });
     // get().then((querySnapshot){
     //   print("VillageCodeList2:$querySnapshot");
     //

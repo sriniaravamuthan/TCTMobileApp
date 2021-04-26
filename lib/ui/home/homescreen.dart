@@ -5,6 +5,8 @@
  *  Last modified 31/3/21 5:36 PM by Kanmalai.
  * /
  */
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -35,7 +38,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   Language language;
   String dropDownLang;
   var height, width;
-
+  String name;
+  int age;
+  LinkedHashMap<String, dynamic> data;
   @override
   void initState() {
     super.initState();
@@ -146,7 +151,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: demographydata.snapshots(),
+        stream: firestoreInstance.collection('demographicData').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
@@ -154,7 +159,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
-          }
+          } else
+            print("dataUser:${snapshot.data.docs}");
+          var family = snapshot.data.docs.map((doc) => doc.data()).toList();
+          debugPrint("family:$family");
+          family.forEach((element) {
+            data = element['familyMembers'];
+            debugPrint("familyhead2:${data['name']}");
+
+            if (data != null) {
+              name = data['name'];
+              age = data['age'];
+            }
+
+            debugPrint("familyhead:$data");
+          });
+          // snapshot.data.docs.map((usersItem) {
+          //   List<dynamic> markMap = usersItem['familyMembers'];
+          //   markMap.forEach((element) {
+          //     name = element['name'];
+          //     debugPrint("familyhead:$name");
+          //   });
+          // });
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -452,8 +478,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                   width: 100,
                                                   child: Center(
                                                     child: TextWidget(
-                                                      text:
-                                                          usersItem.familyHead,
+                                                      text: name,
                                                       color: darkGreyColor,
                                                       size: 16,
                                                       weight: FontWeight.w600,
@@ -465,7 +490,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             width: 100,
                                             child: Center(
                                               child: TextWidget(
-                                                text: usersItem.age,
+                                                text: age.toString(),
                                                 color: darkGreyColor,
                                                 size: 16,
                                                 weight: FontWeight.w600,

@@ -7,18 +7,17 @@
  */
 
 import 'dart:collection';
+import 'dart:io';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class FamilyMemberStep extends StatefulWidget {
   @override
@@ -31,11 +30,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   bool isSwitched1 = false;
   String textValue = 'No';
   String textValue1 = 'No';
+  double minPrice = 0;
+  double maxPrice = 100;
+  double _lowerValue = 0;
+  double _upperValue = 100;
   var genderController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
   List genderList = [];
-    String nameVal,
+  String nameVal,
       relationshipVal,
       genderVal,
       dateOfBirthVal,
@@ -58,10 +61,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
   @override
   void initState() {
-    values=[];
+    values = [];
     getData();
     super.initState();
   }
+
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
@@ -73,6 +77,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       }
     });
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -104,8 +109,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: TextWidget(
-                              text:
-                                  DemoLocalization.of(context).translate('Name'),
+                              text: DemoLocalization.of(context)
+                                  .translate('Name'),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -215,28 +220,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               keyboardType: TextInputType.text,
@@ -267,8 +276,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Relationship method of family head'),
+                            text: DemoLocalization.of(context).translate(
+                                'Relationship method of family head'),
                             size: 14,
                             weight: FontWeight.w600,
                           ),
@@ -376,18 +385,23 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               ),
                                               decoration: InputDecoration(
                                                 border: new OutlineInputBorder(
-                                                  borderRadius: BorderRadius.only(
-                                                      topRight:
-                                                          Radius.circular(50.0),
-                                                      bottomLeft:
-                                                          Radius.circular(50.0),
-                                                      bottomRight:
-                                                          Radius.circular(50.0)),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
                                                 ),
                                               ),
                                               itemBuilder: (context, item) {
                                                 return new Padding(
-                                                    padding: EdgeInsets.all(8.0),
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
                                                     child: TextWidget(
                                                       text: item,
                                                       color: darkColor,
@@ -675,9 +689,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               fillColor: lightGreyColor),
                                           keyboardType: TextInputType.text,
                                           onSaved: (String val) {
-                                            setState(() {
-
-                                            });
+                                            setState(() {});
                                           },
                                           onTap: () async {
                                             FocusScope.of(context)
@@ -694,7 +706,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
                                             dateOfBirthVal = datePicker.text;
                                             calculateAge(date);
-
                                           },
                                           validator: (value) {
                                             if (value.isEmpty) {
@@ -797,8 +808,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           keyboardType: TextInputType.text,
                                           onSaved: (String val) {
                                             setState(() {
-                                              ageController.text=val;
-
+                                              ageController.text = val;
                                             });
                                           },
                                           validator: (value) {
@@ -848,7 +858,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             border: new OutlineInputBorder(
                                               borderSide: BorderSide.none,
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -856,7 +867,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -866,7 +878,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -931,7 +944,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             border: new OutlineInputBorder(
                                               borderSide: BorderSide.none,
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -939,7 +953,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -949,7 +964,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.only(
-                                                  topRight: Radius.circular(50.0),
+                                                  topRight:
+                                                      Radius.circular(50.0),
                                                   bottomLeft:
                                                       Radius.circular(50.0),
                                                   bottomRight:
@@ -1052,7 +1068,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                         ),
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             getImage();
                           },
                           child: Padding(
@@ -1063,8 +1079,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50))),
-                                child:  _image == null
-                                    ?Image.asset(imgCamera)
+                                child: _image == null
+                                    ? Image.asset(imgCamera)
                                     : Image.file(_image)),
                           ),
                         ),
@@ -1113,14 +1129,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                 ),
                                 value: qualificationVal,
@@ -1273,14 +1291,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                 ),
                                 value: annualIncomeVal,
@@ -1413,8 +1433,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: TextWidget(
-                              text:
-                                  DemoLocalization.of(context).translate('Email'),
+                              text: DemoLocalization.of(context)
+                                  .translate('Email'),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -1573,14 +1593,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                 ),
                                 value: communityVal,
@@ -1623,8 +1645,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: TextWidget(
-                              text:
-                                  DemoLocalization.of(context).translate('Caste'),
+                              text: DemoLocalization.of(context)
+                                  .translate('Caste'),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -1648,14 +1670,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(50.0),
                                         bottomLeft: Radius.circular(50.0),
                                         bottomRight: Radius.circular(50.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                 ),
                                 value: castVal,
@@ -1728,21 +1752,22 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   Future<void> getData() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('gender').get();
+        await firestoreInstance.collection('gender').get();
     // Get data from docs and convert map to List
 
     genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
     print("gender:$genderList");
     genderList.forEach((element) {
       LinkedHashMap<String, dynamic> data = element['gender'];
-     values = data.values.toList();
+      values = data.values.toList();
 
-      print("gender1:${ values.last}");
+      print("gender1:${values.last}");
     });
   }
+
   calculateAge(DateTime date) {
     DateTime currentDate = DateTime.now();
-     ageVal = currentDate.year - date.year;
+    ageVal = currentDate.year - date.year;
     int month1 = currentDate.month;
     int month2 = date.month;
     if (month2 > month1) {
@@ -1754,7 +1779,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         ageVal--;
       }
     }
-    ageController.text=ageVal.toString();
+    ageController.text = ageVal.toString();
     debugPrint("Age:$ageVal");
     return ageVal;
   }
