@@ -36,10 +36,17 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   double _lowerValue = 0;
   double _upperValue = 100;
   var genderController = TextEditingController();
+  var relationController = TextEditingController();
+  var educationController = TextEditingController();
+
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
   List genderList;
-  List stringList;
+  List genderListLang;
+  List relationList;
+  List relationLangList;
+  List educationList;
+  List educationLangList;
   String nameVal,
       relationshipVal,
       genderVal,
@@ -53,7 +60,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       castVal,
       annualIncomeVal,
       photoVal;
-  LinkedHashMap<String, dynamic> data;
 
   int aadharNumberVal, ageVal, mobileNumberVal;
   bool physicallyChallengeVal, smartphoneVal;
@@ -67,7 +73,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   @override
   void initState() {
     genderList = [];
-    stringList = [];
+    genderListLang = [];
+    relationList = [];
+    relationLangList = [];
+    educationList = [];
+    educationLangList = [];
     getLanguage();
     super.initState();
   }
@@ -93,7 +103,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("stringList1$stringList");
+    debugPrint("stringList1$genderListLang");
     return Form(
       key: _stepTwoKey,
       child: Padding(
@@ -293,53 +303,46 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           height: 58,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: DropdownButtonFormField<String>(
-                              isExpanded: true,
-                              decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
+                            child: AutoCompleteTextField(
+                                controller: relationController,
+                                clearOnSubmit: false,
+                                itemSubmitted: (item) {
+                                  relationController.text = item;
+                                  debugPrint(
+                                      "stringList1:${relationController.text}");
+                                },
+                                suggestions: relationLangList,
+                                style: TextStyle(
+                                  color: Color(0xFF222222),
+                                  fontSize: 16,
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(50.0),
-                                      bottomLeft: Radius.circular(50.0),
-                                      bottomRight: Radius.circular(50.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                              ),
-                              value: relationshipVal,
-                              validator: (value) => value == null
-                                  ? 'Source Type must not be empty'
-                                  : null,
-                              onChanged: (value) =>
-                                  setState(() => relationshipVal = value),
-                              items: <String>[
-                                'Son',
-                                'Father',
-                                'Mother',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: TextWidget(
-                                    text: value,
-                                    color: darkColor,
-                                    weight: FontWeight.w400,
-                                    size: 14,
+                                decoration: InputDecoration(
+                                  border: new OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(50.0),
+                                        bottomLeft: Radius.circular(50.0),
+                                        bottomRight: Radius.circular(50.0)),
                                   ),
-                                );
-                              }).toList(),
-                            ),
+                                ),
+                                itemBuilder: (context, item) {
+                                  return new Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: TextWidget(
+                                        text: item,
+                                        color: darkColor,
+                                        size: 14,
+                                        weight: FontWeight.w600,
+                                      ));
+                                },
+                                itemSorter: (a, b) {
+                                  return a.compareTo(b);
+                                },
+                                itemFilter: (item, query) {
+                                  debugPrint("genderItem:$item");
+                                  return item
+                                      .toLowerCase()
+                                      .startsWith(query.toLowerCase());
+                                }),
                           ),
                         ),
                       ],
@@ -387,7 +390,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 debugPrint(
                                                     "stringList1:${genderController.text}");
                                               },
-                                              suggestions: stringList,
+                                              suggestions: genderListLang,
                                               style: TextStyle(
                                                 color: Color(0xFF222222),
                                                 fontSize: 16,
@@ -422,121 +425,18 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 return a.compareTo(b);
                                               },
                                               itemFilter: (item, query) {
+                                                debugPrint("genderItem:$item");
                                                 return item
                                                     .toLowerCase()
                                                     .startsWith(
                                                         query.toLowerCase());
-                                              })
-                                          // DropdownButtonFormField<String>(
-                                          //   isExpanded: true,
-                                          //   decoration: InputDecoration(
-                                          //     border: new OutlineInputBorder(
-                                          //       borderSide: BorderSide.none,
-                                          //       borderRadius: BorderRadius.only(
-                                          //           topRight:
-                                          //               Radius.circular(50.0),
-                                          //           bottomLeft:
-                                          //               Radius.circular(50.0),
-                                          //           bottomRight:
-                                          //               Radius.circular(50.0)),
-                                          //     ),
-                                          //     enabledBorder: OutlineInputBorder(
-                                          //       borderRadius: BorderRadius.only(
-                                          //           topRight:
-                                          //               Radius.circular(50.0),
-                                          //           bottomLeft:
-                                          //               Radius.circular(50.0),
-                                          //           bottomRight:
-                                          //               Radius.circular(50.0)),
-                                          //       borderSide: BorderSide(
-                                          //           color: lightGreyColor),
-                                          //     ),
-                                          //     errorBorder: OutlineInputBorder(
-                                          //       borderRadius: BorderRadius.only(
-                                          //           topRight:
-                                          //               Radius.circular(50.0),
-                                          //           bottomLeft:
-                                          //               Radius.circular(50.0),
-                                          //           bottomRight:
-                                          //               Radius.circular(50.0)),
-                                          //       borderSide: BorderSide(
-                                          //           color: lightGreyColor),
-                                          //     ),
-                                          //   ),
-                                          //   value: genderVal,
-                                          //   validator: (value) => value == null
-                                          //       ? 'Source Type must not be empty'
-                                          //       : null,
-                                          //   onChanged: (value) =>
-                                          //       setState(() => genderVal = value),
-                                          //   items: <String>[
-                                          //     'Male',
-                                          //     'Female',
-                                          //     'Others',
-                                          //   ].map<DropdownMenuItem<String>>(
-                                          //       (String value) {
-                                          //     return DropdownMenuItem<String>(
-                                          //       value: value,
-                                          //       child: TextWidget(
-                                          //         text: value,
-                                          //         color: darkColor,
-                                          //         weight: FontWeight.w400,
-                                          //         size: 16,
-                                          //       ),
-                                          //     );
-                                          //   }).toList(),
-                                          // ),
-                                          ),
+                                              })),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
                           ),
-
-                          // Expanded(
-                          //   child: Align(
-                          //     alignment: Alignment.topLeft,
-                          //     child: FractionallySizedBox(
-                          //       widthFactor: 1,
-                          //       child: Column(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(10.0),
-                          //             child: TextWidget(
-                          //               text: DemoLocalization.of(context)
-                          //                   .translate('Gender'),
-                          //               size: 14,
-                          //               weight: FontWeight.w600,
-                          //             ),
-                          //           ),
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(10.0),
-                          //             child: TextField(
-                          //               onChanged: (value) {
-                          //                 setState(() {
-                          //                   getData(value);
-                          //                 });
-                          //               },
-                          //               controller: genderController,
-                          //               decoration: InputDecoration(
-                          //                 border: new OutlineInputBorder(
-                          //                   borderRadius: BorderRadius.only(
-                          //                       topRight: Radius.circular(50.0),
-                          //                       bottomLeft: Radius.circular(50.0),
-                          //                       bottomRight:
-                          //                           Radius.circular(50.0)),
-                          //                 ),
-                          //               ),
-                          //             ),
-
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Expanded(
                             child: Align(
                               alignment: Alignment.center,
@@ -1047,55 +947,46 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                              child: AutoCompleteTextField(
+                                  controller: educationController,
+                                  clearOnSubmit: false,
+                                  itemSubmitted: (item) {
+                                    educationController.text = item;
+                                    debugPrint(
+                                        "stringList1:${educationController.text}");
+                                  },
+                                  suggestions: educationLangList,
+                                  style: TextStyle(
+                                    color: Color(0xFF222222),
+                                    fontSize: 16,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
-                                value: qualificationVal,
-                                validator: (value) => value == null
-                                    ? 'Source Type must not be empty'
-                                    : null,
-                                onChanged: (value) =>
-                                    setState(() => qualificationVal = value),
-                                items: <String>[
-                                  'BE',
-                                  'BSc',
-                                  'Others',
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 14,
+                                  decoration: InputDecoration(
+                                    border: new OutlineInputBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(50.0),
+                                          bottomLeft: Radius.circular(50.0),
+                                          bottomRight: Radius.circular(50.0)),
                                     ),
-                                  );
-                                }).toList(),
-                              ),
+                                  ),
+                                  itemBuilder: (context, item) {
+                                    return new Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: TextWidget(
+                                          text: item,
+                                          color: darkColor,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        ));
+                                  },
+                                  itemSorter: (a, b) {
+                                    return a.compareTo(b);
+                                  },
+                                  itemFilter: (item, query) {
+                                    debugPrint("genderItem:$item");
+                                    return item
+                                        .toLowerCase()
+                                        .startsWith(query.toLowerCase());
+                                  }),
                             ),
                           ),
                         ],
@@ -1690,21 +1581,51 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     }
   }
 
-  getData(String text) async {
+  getGender() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-        await firestoreInstance.collection('gender').get();
-    // Get data from docs and convert map to List
-
+        await firestoreInstance.collection(collectionGender).get();
     genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
     genderList.forEach((element) {
-      data = element['gender'];
-      debugPrint("genderdata:$data");
+      LinkedHashMap<String, dynamic> genderData = element[collectionGender];
+      debugPrint("genderdata:$genderData");
+      if (genderData != null) {
+        gender = genderData[language];
+        genderListLang.add(gender);
+        debugPrint("stringList:$genderListLang");
+      }
+    });
+  }
 
-      if (data != null) {
-        gender = data[language];
-        stringList.add(gender);
-        debugPrint("stringList:$stringList");
+  getRelationShip() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionRelation).get();
+    relationList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    relationList.forEach((element) {
+      LinkedHashMap<String, dynamic> relationData = element[mapRelation];
+      debugPrint("relationData:$relationData");
+      if (relationData != null) {
+        relationshipVal = relationData[language];
+        relationLangList.add(relationshipVal);
+        debugPrint("relationLangList:$relationLangList");
+      }
+    });
+  }
+
+  getEducation() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionEducation).get();
+    educationList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    educationList.forEach((element) {
+      LinkedHashMap<String, dynamic> educationData =
+          element[collectionEducation];
+      debugPrint("educationData:$educationData");
+      if (educationData != null) {
+        qualificationVal = educationData[language];
+        educationLangList.add(qualificationVal);
+        debugPrint("educationLangList:$educationLangList");
       }
     });
   }
@@ -1731,6 +1652,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
-    getData(genderController.text);
+    getGender();
+    getRelationShip();
+    getEducation();
   }
 }

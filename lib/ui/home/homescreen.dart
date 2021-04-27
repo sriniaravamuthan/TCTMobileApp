@@ -24,6 +24,7 @@ import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -604,10 +605,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     if (dropDownLang == "Tamil") {
       setState(() {
         MyApp.setLocale(context, Locale('ta', 'IN'));
+        SharedPref().setStringPref(SharedPref().language, 'ta');
       });
     } else {
       setState(() {
         MyApp.setLocale(context, Locale('en', 'US'));
+        SharedPref().setStringPref(SharedPref().language, 'en');
       });
     }
   }
