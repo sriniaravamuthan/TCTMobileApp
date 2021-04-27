@@ -13,7 +13,8 @@ class DemographicFamily {
   Habits habits;
   List<Family> family;
 
-  DemographicFamily({this.location, this.property, this.habits, this.family,this.uid});
+  DemographicFamily(
+      {this.location, this.property, this.habits, this.family, this.uid});
 
   DemographicFamily.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
@@ -24,7 +25,7 @@ class DemographicFamily {
         ? new Property.fromJson(json['property'])
         : null;
     habits =
-    json['habits'] != null ? new Habits.fromJson(json['habits']) : null;
+        json['habits'] != null ? new Habits.fromJson(json['habits']) : null;
     if (json['family'] != null) {
       family = new List<Family>();
       json['family'].forEach((v) {
@@ -53,7 +54,7 @@ class DemographicFamily {
 }
 
 class Location {
-  int formNo;
+  String formNo;
   int projectCode;
   String villagesCode;
   int panchayatNo;
@@ -66,15 +67,15 @@ class Location {
 
   Location(
       {this.formNo,
-        this.projectCode,
-        this.villagesCode,
-        this.panchayatNo,
-        this.panchayatCode,
-        this.villageName,
-        this.streetName,
-        this.doorNumber,
-        this.contactPerson,
-        this.noOfFamilyMembers});
+      this.projectCode,
+      this.villagesCode,
+      this.panchayatNo,
+      this.panchayatCode,
+      this.villageName,
+      this.streetName,
+      this.doorNumber,
+      this.contactPerson,
+      this.noOfFamilyMembers});
 
   Location.fromJson(Map<String, dynamic> json) {
     formNo = json['formNo'];
@@ -124,20 +125,20 @@ class Property {
 
   Property(
       {this.statusofHouse,
-        this.typeofHouse,
-        this.toiletFacility,
-        this.ownLand,
-        this.wetLandInAcres,
-        this.dryLandInAcres,
-        this.ownVehicle,
-        this.noOfVehicleOwn,
-        this.twoWheeler,
-        this.threeWheeler,
-        this.fourWheeler,
-        this.others,
-        this.ownLivestocks,
-        this.livestockType,
-        this.livestockCount});
+      this.typeofHouse,
+      this.toiletFacility,
+      this.ownLand,
+      this.wetLandInAcres,
+      this.dryLandInAcres,
+      this.ownVehicle,
+      this.noOfVehicleOwn,
+      this.twoWheeler,
+      this.threeWheeler,
+      this.fourWheeler,
+      this.others,
+      this.ownLivestocks,
+      this.livestockType,
+      this.livestockCount});
 
   Property.fromJson(Map<String, dynamic> json) {
     statusofHouse = json['statusofHouse '];
@@ -185,8 +186,8 @@ class Habits {
 
   Habits(
       {this.anyMembersWhoSmoke,
-        this.anyMembersWhoDrink,
-        this.anyMembersWhoUseTobacco});
+      this.anyMembersWhoDrink,
+      this.anyMembersWhoUseTobacco});
 
   Habits.fromJson(Map<String, dynamic> json) {
     anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
@@ -225,23 +226,23 @@ class Family {
 
   Family(
       {this.name,
-        this.aadharNumber,
-        this.relationship,
-        this.gender,
-        this.dob,
-        this.age,
-        this.maritalStatus,
-        this.bloodGroup,
-        this.physicallyChallenge,
-        this.education,
-        this.occupation,
-        this.annualIncome,
-        this.mobileNumber,
-        this.mail,
-        this.smartphone,
-        this.community,
-        this.caste,
-        this.photo});
+      this.aadharNumber,
+      this.relationship,
+      this.gender,
+      this.dob,
+      this.age,
+      this.maritalStatus,
+      this.bloodGroup,
+      this.physicallyChallenge,
+      this.education,
+      this.occupation,
+      this.annualIncome,
+      this.mobileNumber,
+      this.mail,
+      this.smartphone,
+      this.community,
+      this.caste,
+      this.photo});
 
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];

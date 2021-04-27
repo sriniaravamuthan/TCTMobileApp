@@ -9,6 +9,7 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +17,7 @@ import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
@@ -36,7 +38,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var genderController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
-  List genderList = [];
+  List genderList;
+  List stringList;
   String nameVal,
       relationshipVal,
       genderVal,
@@ -50,6 +53,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       castVal,
       annualIncomeVal,
       photoVal;
+  LinkedHashMap<String, dynamic> data;
+
   int aadharNumberVal, ageVal, mobileNumberVal;
   bool physicallyChallengeVal, smartphoneVal;
   TextEditingController datePicker = TextEditingController();
@@ -57,11 +62,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String gender = "";
   File _image;
   final picker = ImagePicker();
+  String language;
 
   @override
   void initState() {
-    values = [];
-    getData();
+    genderList = [];
+    stringList = [];
+    getLanguage();
     super.initState();
   }
 
@@ -79,13 +86,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     datePicker.dispose();
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("stringList1$stringList");
     return Form(
       key: _stepTwoKey,
       child: Padding(
@@ -370,67 +378,115 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: DropdownButtonFormField<String>(
-                                          isExpanded: true,
-                                          decoration: InputDecoration(
-                                            border: new OutlineInputBorder(
-                                              borderSide: BorderSide.none,
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                          ),
-                                          value: genderVal,
-                                          validator: (value) => value == null
-                                              ? 'Source Type must not be empty'
-                                              : null,
-                                          onChanged: (value) =>
-                                              setState(() => genderVal = value),
-                                          items: <String>[
-                                            'Male',
-                                            'Female',
-                                            'Others',
-                                          ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: TextWidget(
-                                                text: value,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                                size: 16,
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: AutoCompleteTextField(
+                                              controller: genderController,
+                                              clearOnSubmit: false,
+                                              itemSubmitted: (item) {
+                                                genderController.text = item;
+                                                debugPrint(
+                                                    "stringList1:${genderController.text}");
+                                              },
+                                              suggestions: stringList,
+                                              style: TextStyle(
+                                                color: Color(0xFF222222),
+                                                fontSize: 16,
                                               ),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
+                                              decoration: InputDecoration(
+                                                border: new OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0)),
+                                                ),
+                                              ),
+                                              itemBuilder: (context, item) {
+                                                return new Padding(
+                                                    padding:
+                                                        EdgeInsets.all(8.0),
+                                                    child: TextWidget(
+                                                      text: item,
+                                                      color: darkColor,
+                                                      size: 14,
+                                                      weight: FontWeight.w600,
+                                                    ));
+                                              },
+                                              itemSorter: (a, b) {
+                                                return a.compareTo(b);
+                                              },
+                                              itemFilter: (item, query) {
+                                                return item
+                                                    .toLowerCase()
+                                                    .startsWith(
+                                                        query.toLowerCase());
+                                              })
+                                          // DropdownButtonFormField<String>(
+                                          //   isExpanded: true,
+                                          //   decoration: InputDecoration(
+                                          //     border: new OutlineInputBorder(
+                                          //       borderSide: BorderSide.none,
+                                          //       borderRadius: BorderRadius.only(
+                                          //           topRight:
+                                          //               Radius.circular(50.0),
+                                          //           bottomLeft:
+                                          //               Radius.circular(50.0),
+                                          //           bottomRight:
+                                          //               Radius.circular(50.0)),
+                                          //     ),
+                                          //     enabledBorder: OutlineInputBorder(
+                                          //       borderRadius: BorderRadius.only(
+                                          //           topRight:
+                                          //               Radius.circular(50.0),
+                                          //           bottomLeft:
+                                          //               Radius.circular(50.0),
+                                          //           bottomRight:
+                                          //               Radius.circular(50.0)),
+                                          //       borderSide: BorderSide(
+                                          //           color: lightGreyColor),
+                                          //     ),
+                                          //     errorBorder: OutlineInputBorder(
+                                          //       borderRadius: BorderRadius.only(
+                                          //           topRight:
+                                          //               Radius.circular(50.0),
+                                          //           bottomLeft:
+                                          //               Radius.circular(50.0),
+                                          //           bottomRight:
+                                          //               Radius.circular(50.0)),
+                                          //       borderSide: BorderSide(
+                                          //           color: lightGreyColor),
+                                          //     ),
+                                          //   ),
+                                          //   value: genderVal,
+                                          //   validator: (value) => value == null
+                                          //       ? 'Source Type must not be empty'
+                                          //       : null,
+                                          //   onChanged: (value) =>
+                                          //       setState(() => genderVal = value),
+                                          //   items: <String>[
+                                          //     'Male',
+                                          //     'Female',
+                                          //     'Others',
+                                          //   ].map<DropdownMenuItem<String>>(
+                                          //       (String value) {
+                                          //     return DropdownMenuItem<String>(
+                                          //       value: value,
+                                          //       child: TextWidget(
+                                          //         text: value,
+                                          //         color: darkColor,
+                                          //         weight: FontWeight.w400,
+                                          //         size: 16,
+                                          //       ),
+                                          //     );
+                                          //   }).toList(),
+                                          // ),
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -1634,19 +1690,22 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     }
   }
 
-  Future<void> getData() async {
+  getData(String text) async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
         await firestoreInstance.collection('gender').get();
     // Get data from docs and convert map to List
 
     genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    print("gender:$genderList");
     genderList.forEach((element) {
-      LinkedHashMap<String, dynamic> data = element['gender'];
-      values = data.values.toList();
+      data = element['gender'];
+      debugPrint("genderdata:$data");
 
-      print("gender1:${values.last}");
+      if (data != null) {
+        gender = data[language];
+        stringList.add(gender);
+        debugPrint("stringList:$stringList");
+      }
     });
   }
 
@@ -1667,5 +1726,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     ageController.text = ageVal.toString();
     debugPrint("Age:$ageVal");
     return ageVal;
+  }
+
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+    getData(genderController.text);
   }
 }

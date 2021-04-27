@@ -17,10 +17,12 @@ import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 import '../../main.dart';
@@ -36,7 +38,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   FocusNode familyMemFocus = new FocusNode();
   List<dynamic> values;
-
+  DemographicFamily demographicFamily;
   String formNo,
       projectCode,
       villageCodeValue,
@@ -55,6 +57,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   @override
   void initState() {
     value = [];
+    demographicFamily = DemographicFamily();
     _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -441,7 +444,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.text,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      formNo = val;
+                                                      demographicFamily.location
+                                                          .formNo = val;
+                                                      debugPrint(
+                                                          "formNo:${demographicFamily.location.formNo}");
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -684,10 +690,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     ),
                                                   ),
                                                   value: villageCodeValue,
-                                                  validator: (value) => value ==
-                                                          null
-                                                      ? 'Source Type must not be empty'
-                                                      : null,
+                                                  // validator: (value) => value ==
+                                                  //         null
+                                                  //     ? 'Source Type must not be empty'
+                                                  //     : null,
                                                   onChanged: (value) =>
                                                       setState(() =>
                                                           villageCodeValue =
@@ -1944,10 +1950,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     if (dropDownLang == "Tamil") {
       setState(() {
         MyApp.setLocale(context, Locale('ta', 'IN'));
+        SharedPref().setStringPref(SharedPref().language, 'ta');
       });
     } else {
       setState(() {
         MyApp.setLocale(context, Locale('en', 'US'));
+        SharedPref().setStringPref(SharedPref().language, 'en');
       });
     }
   }
@@ -1985,7 +1993,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         FirebaseFirestore.instance.collection('demographicData');
     collectionReference.add({
       'location': {
-        "formNo ": formNo,
+        "formNo ": demographicFamily.location.formNo,
         "projectCode ": projectCode,
         "villagesCode ": villageController.text
       }

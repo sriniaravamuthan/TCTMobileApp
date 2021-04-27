@@ -1,10 +1,11 @@
 /*
  * *
- *  Created by Gayathri , Kanmalai Technologies Pvt. Ltd on 4/2/21 6:30 PM.
+ *  Created by welcome, Kanmalai Technologies Pvt. Ltd on 2/20/21 10:44 AM.
  *  Copyright (c) 2021. All rights reserved.
- *  Last modified 4/2/21 2:36 PM by welcome.
+ *  Last modified 2/20/21 9:58 AM by welcome.
  * /
  */
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
@@ -19,16 +20,5 @@ class SharedPref {
   getStringPref(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(key) ?? "";
-  }
-
-  setIntegerPref(String key, int value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(key, value);
-    return true;
-  }
-
-  getIntegerPref(String key) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(key) ?? "";
   }
 }
