@@ -36,13 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: EdgeInsets.only(
                 top: (height) * 0.05,
-                left: (height) * 0.4,
-                right: (height) * 0.4,
+                left: (width) * 0.30,
+                right: (width) * 0.30,
                 bottom: (height) * 0.05),
             child: Card(
               elevation: 6.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
+                borderRadius: BorderRadius.circular(16.0),
               ),
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -52,8 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Center(
                         child: Container(
-                          height: 80,
-                          width: 80,
+                          height: 70,
+                          width: 70,
                           child: SvgPicture.asset(
                             svgTctLogo,
                             semanticsLabel: "Logo",
@@ -74,151 +74,147 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: TextWidget(
                                 text: userName,
                                 color: darkGreyColor,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ),
                             SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                maxLength: 50,
-                                focusNode: mailFocusNode,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                onSaved: (String val) {
-                                  setState(() {
-                                    userMail = val;
-                                    debugPrint("userMail $userMail");
-                                  });
-                                },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Enter a Email!';
-                                  }
-                                  // else if(value.isNotEmpty){
-                                  //     Pattern pattern =
-                                  //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                  //     RegExp regex = new RegExp(pattern);
-                                  //     if(!regex.hasMatch(value)){
-                                  //       return 'Enter a valid mail!';
-                                  //     }
-                                  // }
-                                  return null;
-                                },
+                              height: 88,
+                              width: width / 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextFormField(
+                                  maxLength: 50,
+                                  focusNode: mailFocusNode,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  onSaved: (String val) {
+                                    setState(() {
+                                      userMail = val;
+                                      debugPrint("userMail $userMail");
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter a Email!';
+                                    }
+                                    // else if(value.isNotEmpty){
+                                    //     Pattern pattern =
+                                    //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    //     RegExp regex = new RegExp(pattern);
+                                    //     if(!regex.hasMatch(value)){
+                                    //       return 'Enter a valid mail!';
+                                    //     }
+                                    // }
+                                    return null;
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: TextWidget(
                                 text: password,
                                 color: darkGreyColor,
-                                size: 18,
+                                size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ),
                             SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                maxLength: 16,
-                                obscureText: true,
-                                focusNode: passwordFocusNode,
-                                textInputAction: TextInputAction.done,
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                onSaved: (String val) {
-                                  setState(() {
-                                    userPassword = val;
-                                    debugPrint("userPassword $userPassword");
-                                  });
-                                },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Enter a  Password!';
-                                  }
-                                  // else if(value.isNotEmpty){
-                                  //     Pattern pattern =
-                                  //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                  //     RegExp regex = new RegExp(pattern);
-                                  //     if(!regex.hasMatch(value)){
-                                  //       return 'Enter a valid mail!';
-                                  //     }
-                                  // }
-                                  return null;
-                                },
+                              height: 88,
+                              width: width / 2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextFormField(
+                                  maxLength: 16,
+                                  obscureText: true,
+                                  focusNode: passwordFocusNode,
+                                  textInputAction: TextInputAction.done,
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  onSaved: (String val) {
+                                    setState(() {
+                                      userPassword = val;
+                                      debugPrint("userPassword $userPassword");
+                                    });
+                                  },
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter a  Password!';
+                                    }
+                                    // else if(value.isNotEmpty){
+                                    //     Pattern pattern =
+                                    //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    //     RegExp regex = new RegExp(pattern);
+                                    //     if(!regex.hasMatch(value)){
+                                    //       return 'Enter a valid mail!';
+                                    //     }
+                                    // }
+                                    return null;
+                                  },
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 18,
                             ),
                             Align(
                               alignment: Alignment.center,
@@ -246,7 +242,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(100.0),
                                   child: Icon(
                                     Icons.keyboard_arrow_right,
-                                    size: 60,
+                                    size: 50,
                                     color: lightColor,
                                   ),
                                 ),

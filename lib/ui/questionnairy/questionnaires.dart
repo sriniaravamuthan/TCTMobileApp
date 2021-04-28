@@ -256,70 +256,67 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                     controlsBuilder: (BuildContext context,
                         {VoidCallback onStepContinue,
                         VoidCallback onStepCancel}) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 10, bottom: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FloatingActionButton(
-                                // isExtended: true,
-                                child: Icon(
-                                  Icons.keyboard_arrow_left,
-                                  size: 30,
-                                  color: darkColor,
-                                ),
-                                backgroundColor: lightColor,
-                                onPressed: () {
-                                  cancel();
-                                },
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: FloatingActionButton(
+                              // isExtended: true,
+                              child: Icon(
+                                Icons.keyboard_arrow_left,
+                                size: 30,
+                                color: darkColor,
                               ),
+                              backgroundColor: lightColor,
+                              onPressed: () {
+                                cancel();
+                              },
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FloatingActionButton(
-                                // isExtended: true,
-                                child: Icon(
-                                  Icons.keyboard_arrow_right,
-                                  size: 30,
-                                  color: darkColor,
-                                ),
-                                backgroundColor: lightColor,
-                                onPressed: () {
-                                  continued();
-                                },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: FloatingActionButton(
+                              // isExtended: true,
+                              child: Icon(
+                                Icons.keyboard_arrow_right,
+                                size: 30,
+                                color: darkColor,
                               ),
+                              backgroundColor: lightColor,
+                              onPressed: () {
+                                continued();
+                              },
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: FloatingActionButton(
-                                // isExtended: true,
-                                child: Icon(
-                                  Icons.done,
-                                  size: 30,
-                                ),
-                                backgroundColor: primaryColor,
-                                onPressed: () {
-                                  setState(() {
-                                    if (_formKey.currentState.validate()) {
-                                      if (_formKey != null) {
-                                        _formKey.currentState.save();
-                                        addData();
-                                      }
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: FloatingActionButton(
+                              // isExtended: true,
+                              child: Icon(
+                                Icons.done,
+                                size: 30,
+                              ),
+                              backgroundColor: primaryColor,
+                              onPressed: () {
+                                setState(() {
+                                  if (_formKey.currentState.validate()) {
+                                    if (_formKey != null) {
+                                      _formKey.currentState.save();
+                                      addData();
                                     }
-                                  });
-                                },
-                              ),
+                                  }
+                                });
+                              },
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       );
                     },
                     steps: <Step>[
