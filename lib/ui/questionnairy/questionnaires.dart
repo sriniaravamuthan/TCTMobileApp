@@ -13,6 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -86,20 +87,23 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: lightColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 100),
-              child: Container(
-                child: Image.asset(
-                  imgLightLogo,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  svgTctLogo,
+                  semanticsLabel: "Logo",
+                  height: height / 12,
+                  width: width / 12,
                   fit: BoxFit.contain,
-                  height: height / 11,
-                  width: width / 20,
+                  allowDrawingOutsideViewBox: true,
                 ),
-              ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -174,7 +178,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(8.0),
           child: Card(
             elevation: 8,
             shape: RoundedRectangleBorder(

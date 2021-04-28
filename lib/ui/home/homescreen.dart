@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -60,6 +61,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: lightColor,
+        automaticallyImplyLeading: false,
         title: DoubleBackToCloseApp(
           snackBar: SnackBar(
               backgroundColor: errorColor,
@@ -73,16 +75,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0, bottom: 16, left: 60),
-                child: Container(
-                  child: Image.asset(
-                    imgLightLogo,
-                    fit: BoxFit.contain,
-                    height: height / 11,
-                    width: width / 20,
-                  ),
-                ),
+              SvgPicture.asset(
+                svgTctLogo,
+                semanticsLabel: "Logo",
+                height: height / 12,
+                width: width / 12,
+                fit: BoxFit.contain,
+                allowDrawingOutsideViewBox: true,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -166,7 +165,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           debugPrint("family:$family");
           family.forEach((element) {
             data = element['familyMembers'];
-            debugPrint("familyhead2:${data['name']}");
+            // debugPrint("familyhead2:${data['name']}");
 
             if (data != null) {
               name = data['name'];
@@ -190,7 +189,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(8.0),
               child: Card(
                 elevation: 8,
                 shape: RoundedRectangleBorder(
@@ -477,13 +476,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
                                               SizedBox(
                                                   width: 100,
-                                                  child: Center(
-                                                    child: TextWidget(
-                                                      text: name,
-                                                      color: darkGreyColor,
-                                                      size: 16,
-                                                      weight: FontWeight.w600,
-                                                    ),
+                                                  child: TextWidget(
+                                                    text: name,
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
                                                   ))
                                             ],
                                           )),

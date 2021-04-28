@@ -1,4 +1,4 @@
- /*
+/*
  * *
  *  Created by Dharmaraj, Kanmalai Technologies Pvt. Ltd on 3/4/21 2:21 PM.
  *  Copyright (c) 2021. All rights reserved.
@@ -7,6 +7,7 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -21,9 +22,13 @@ class FamilyMemberDetails extends StatefulWidget {
 
 class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   bool addfamily = false;
+  var height, width;
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -67,18 +72,17 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
             Container(),
           ],
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50.0),
-                      bottomLeft: Radius.circular(50.0),
-                      bottomRight: Radius.circular(50.0)),
-                ),
-                child: Image.asset(imgLightLogo)),
+            SvgPicture.asset(
+              svgTctLogo,
+              semanticsLabel: "Logo",
+              height: height / 10,
+              width: width / 10,
+              fit: BoxFit.contain,
+              allowDrawingOutsideViewBox: true,
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -129,8 +133,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                       size: 14,
                     ),
                   ),
-                  SizedBox(height: 58,)
-
+                  SizedBox(
+                    height: 58,
+                  )
                 ],
               ),
             ),
@@ -140,7 +145,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.all(2.0),
+                    padding: EdgeInsets.all(2.0),
                     child: TextWidget(
                       text: adhaarNumber,
                       weight: FontWeight.w800,
@@ -334,7 +339,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                       size: 14,
                     ),
                   ),
-SizedBox(height: 80,)
+                  SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             )

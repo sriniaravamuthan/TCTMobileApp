@@ -25,14 +25,10 @@ class _SearchDialogState extends State<SearchDialog> {
     return SimpleDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      title: Row(
-        children: [
-          TextWidget(
-            text: DemoLocalization.of(context).translate('Search'),
-            size: 16,
-            weight: FontWeight.w600,
-          ),
-        ],
+      title: TextWidget(
+        text: DemoLocalization.of(context).translate('Search'),
+        size: 16,
+        weight: FontWeight.w600,
       ),
       children: [
         Divider(
@@ -49,90 +45,6 @@ class _SearchDialogState extends State<SearchDialog> {
                   Expanded(
                     child: Align(
                       alignment: Alignment.topLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: 1,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: TextWidget(
-                                text: DemoLocalization.of(context)
-                                    .translate('Name'),
-                                size: 14,
-                                weight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 58,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  enableSuggestions: true,
-                                  decoration: InputDecoration(
-                                      border: new OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
-                                        borderSide:
-                                            BorderSide(color: lightGreyColor),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
-                                        borderSide:
-                                            BorderSide(color: lightGreyColor),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
-                                        borderSide:
-                                            BorderSide(color: lightGreyColor),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
-                                        borderSide:
-                                            BorderSide(color: lightGreyColor),
-                                      ),
-                                      fillColor: lightGreyColor),
-                                  keyboardType: TextInputType.text,
-                                  onSaved: (String val) {
-                                    setState(() {});
-                                  },
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      debugPrint("empid :yes");
-                                      return 'Employee Id must not be empty';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         child: Column(
@@ -214,17 +126,9 @@ class _SearchDialogState extends State<SearchDialog> {
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         child: Column(
@@ -300,9 +204,17 @@ class _SearchDialogState extends State<SearchDialog> {
                       ),
                     ),
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         child: Column(
@@ -377,18 +289,10 @@ class _SearchDialogState extends State<SearchDialog> {
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                  ),
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topRight,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         child: Column(
@@ -463,10 +367,18 @@ class _SearchDialogState extends State<SearchDialog> {
                         ),
                       ),
                     ),
-                  ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.topLeft,
                       child: FractionallySizedBox(
                         widthFactor: 1,
                         child: Column(
@@ -483,6 +395,7 @@ class _SearchDialogState extends State<SearchDialog> {
                             ),
                             SizedBox(
                               height: 58,
+                              width: 200,
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: DropdownButtonFormField<String>(
@@ -541,7 +454,7 @@ class _SearchDialogState extends State<SearchDialog> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

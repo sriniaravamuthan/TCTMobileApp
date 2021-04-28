@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -53,9 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                           height: 80,
                           width: 80,
-                          child: Image.asset(
-                            imgLightLogo,
+                          child: SvgPicture.asset(
+                            svgTctLogo,
+                            semanticsLabel: "Logo",
+                            height: height / 12,
+                            width: width / 12,
                             fit: BoxFit.contain,
+                            allowDrawingOutsideViewBox: true,
                           ),
                         ),
                       ),

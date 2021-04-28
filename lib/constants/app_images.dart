@@ -10,4 +10,5 @@ const imgLightLogo = "assets/images/tctLogo.png";
 const imgBG = "assets/images/Loginbg.png";
 const user = "assets/images/user.png";
 const userSquare = "assets/images/userSquare.jpg";
-const imgCamera="assets/images/imgCamera.png";
+const imgCamera = "assets/images/imgCamera.png";
+const svgTctLogo = "assets/svg/tctLogo.svg";

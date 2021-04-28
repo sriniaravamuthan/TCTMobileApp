@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -215,10 +216,14 @@ class AuthenticationWrapper extends StatelessWidget {
 }
 
 class NetworkErrorPage extends StatelessWidget {
+  var height, width;
+
   @override
   Widget build(BuildContext context) {
-    return Material(
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
 
+    return Material(
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -231,8 +236,13 @@ class NetworkErrorPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image.asset(imgLightLogo),
+              SvgPicture.asset(
+                svgTctLogo,
+                semanticsLabel: "Logo",
+                height: height / 12,
+                width: width / 12,
+                fit: BoxFit.contain,
+                allowDrawingOutsideViewBox: true,
               ),
               SizedBox(
                 height: 10,
