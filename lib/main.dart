@@ -12,6 +12,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/auth/login.dart';
+import 'package:tct_demographics/ui/auth/splash_screen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
 import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
@@ -101,21 +102,8 @@ class _MyAppState extends State<MyApp> {
                         }
                         return supportedLocales.first;
                       },
-                      theme: ThemeData(
-                          // This is the theme of your application.
-                          //
-                          // Try running your application with "flutter run". You'll see the
-                          // application has a blue toolbar. Then, without quitting the app, try
-                          // changing the primarySwatch below to Colors.green and then invoke
-                          // "hot reload" (press "r" in the console where you ran "flutter run",
-                          // or simply save your changes to "hot reload" in a Flutter IDE).
-                          // Notice that the counter didn't reset back to zero; the application
-                          // is not restarted.
-                          //primaryColor: primaryColor,
-                          //accentColor: accentColor,
-                          //splashColor: primaryColor,
-                          ),
-                      home: AuthenticationWrapper(),
+                      theme: ThemeData(),
+                      home: SplashScreen(),
                       getPages: [
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
                         GetPage(
@@ -203,17 +191,18 @@ class _MyAppState extends State<MyApp> {
 //   }
 // }
 
-class AuthenticationWrapper extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      return HomeScreen();
-    }
-    return LoginScreen();
-  }
-}
+// class AuthenticationWrapper extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final firebaseUser = context.watch<User>();
+//
+//     if (firebaseUser != null) {
+//       return HomeScreen();
+//     } else {
+//       return LoginScreen();
+//     }
+//   }
+// }
 
 class NetworkErrorPage extends StatelessWidget {
   var height, width;

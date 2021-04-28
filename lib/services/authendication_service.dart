@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -45,5 +46,7 @@ class AuthenticationService {
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
+    SharedPref().setStringPref(SharedPref().language, "");
+    Get.toNamed('/loginScreen');
   }
 }

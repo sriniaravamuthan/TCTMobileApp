@@ -6,9 +6,15 @@
  * /
  */
 
+import 'dart:collection';
+
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class PropertyDetailStep extends StatefulWidget {
@@ -26,6 +32,9 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   String textValue1 = 'No';
   String textValue2 = 'No';
   String textValue3 = 'No';
+  var statusHouseController = TextEditingController();
+  var typeHouseController = TextEditingController();
+
   String statusOfHouseVal, typeofHouseVal, livestockTypeVal;
   bool toiletFacilityVal, ownLandVal, ownVehicleVal, ownLiveStocksVal;
   int wetLandInAcresVal,
@@ -36,6 +45,20 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       fourWheelerVal,
       othersVal,
       livestockCountVal;
+  String language;
+  List statusHouseList;
+  List statusHouseListLang;
+  List typeHouseList;
+  List typeHouseListLang;
+  @override
+  void initState() {
+    statusHouseList = [];
+    statusHouseListLang = [];
+    typeHouseList = [];
+    typeHouseListLang = [];
+    getLanguage();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,56 +90,69 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         height: 58,
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            value: statusOfHouseVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => statusOfHouseVal = value),
-                            items: <String>[
-                              'Own House',
-                              'Rented House',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
-                                ),
-                              );
-                            }).toList(),
-                          ),
+                          child: AutoCompleteTextField(
+                              controller: statusHouseController,
+                              clearOnSubmit: false,
+                              itemSubmitted: (item) {
+                                statusHouseController.text = item;
+                                debugPrint(
+                                    "stringList1:${statusHouseController.text}");
+                              },
+                              suggestions: statusHouseListLang,
+                              style: TextStyle(
+                                color: Color(0xFF222222),
+                                fontSize: 16,
+                              ),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              itemBuilder: (context, item) {
+                                return new Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TextWidget(
+                                      text: item,
+                                      color: darkColor,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    ));
+                              },
+                              itemSorter: (a, b) {
+                                return a.compareTo(b);
+                              },
+                              itemFilter: (item, query) {
+                                debugPrint("genderItem:$item");
+                                return item
+                                    .toLowerCase()
+                                    .startsWith(query.toLowerCase());
+                              }),
                         ),
                       ),
                     ],
@@ -142,57 +178,69 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         height: 58,
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            value: typeofHouseVal,
-                            validator: (value) => value == null
-                                ? 'Source Type must not be empty'
-                                : null,
-                            onChanged: (value) =>
-                                setState(() => typeofHouseVal = value),
-                            items: <String>[
-                              'Thatched',
-                              'Tiled',
-                              'Terrace',
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: TextWidget(
-                                  text: value,
-                                  color: darkColor,
-                                  weight: FontWeight.w400,
-                                  size: 14,
-                                ),
-                              );
-                            }).toList(),
-                          ),
+                          child: AutoCompleteTextField(
+                              controller: typeHouseController,
+                              clearOnSubmit: false,
+                              itemSubmitted: (item) {
+                                typeHouseController.text = item;
+                                debugPrint(
+                                    "stringList1:${typeHouseController.text}");
+                              },
+                              suggestions: typeHouseListLang,
+                              style: TextStyle(
+                                color: Color(0xFF222222),
+                                fontSize: 16,
+                              ),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              itemBuilder: (context, item) {
+                                return new Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TextWidget(
+                                      text: item,
+                                      color: darkColor,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    ));
+                              },
+                              itemSorter: (a, b) {
+                                return a.compareTo(b);
+                              },
+                              itemFilter: (item, query) {
+                                debugPrint("genderItem:$item");
+                                return item
+                                    .toLowerCase()
+                                    .startsWith(query.toLowerCase());
+                              }),
                         ),
                       ),
                     ],
@@ -1031,6 +1079,46 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
         ],
       ),
     );
+  }
+
+  getStatusHouse() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionStatusHouse).get();
+    statusHouseList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    statusHouseList.forEach((element) {
+      LinkedHashMap<String, dynamic> statusHouseData = element[mapStatusHouse];
+      debugPrint("statusHouseData:$statusHouseData");
+      if (statusHouseData != null) {
+        statusOfHouseVal = statusHouseData[language];
+        statusHouseListLang.add(statusOfHouseVal);
+        debugPrint("stringList:$statusHouseListLang");
+      }
+    });
+  }
+
+  getTypeHouse() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionTypeHouse).get();
+    typeHouseList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    typeHouseList.forEach((element) {
+      LinkedHashMap<String, dynamic> typeHouseData =
+          element[collectionTypeHouse];
+      debugPrint("typeHouseData:$typeHouseData");
+      if (typeHouseData != null) {
+        typeofHouseVal = typeHouseData[language];
+        typeHouseListLang.add(typeofHouseVal);
+        debugPrint("stringList:$typeHouseListLang");
+      }
+    });
+  }
+
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+    getStatusHouse();
+    getTypeHouse();
   }
 
   void toggleSwitch(bool value) {

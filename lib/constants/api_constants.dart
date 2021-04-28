@@ -7,3 +7,6 @@ const String collectionGender = "gender";
 const String collectionRelation = "relationshipFamily";
 const String mapRelation = "relationShip";
 const String collectionEducation = "education";
+const String collectionStatusHouse = "statusHouseType";
+const String mapStatusHouse = "statusHouse";
+const String collectionTypeHouse = "typeHouse";

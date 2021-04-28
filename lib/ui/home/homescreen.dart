@@ -92,7 +92,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                       Icons.language,
                       color: Colors.black87,
                     ),
-                    items: ['Tamil', 'English'].map((val) {
+                    items: ['தமிழ்', 'English'].map((val) {
                       return new DropdownMenuItem<String>(
                         value: val,
                         child: new Text(val),
@@ -599,7 +599,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);
 
-    if (dropDownLang == "Tamil") {
+    if (dropDownLang == "தமிழ்") {
       setState(() {
         MyApp.setLocale(context, Locale('ta', 'IN'));
         SharedPref().setStringPref(SharedPref().language, 'ta');
