@@ -150,7 +150,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                              const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -224,7 +225,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         SizedBox(
                           height: 58,
                           child: Padding(
-                            padding: const EdgeInsets.all(4.0),
+                            padding:
+                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                             child: TextFormField(
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
@@ -297,7 +299,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         SizedBox(
                           height: 58,
                           child: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding:
+                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                             child: AutoCompleteTextField(
                                 controller: relationController,
                                 clearOnSubmit: false,
@@ -399,7 +402,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                          padding: const EdgeInsets.all(2.0),
+                                          padding:
+                                          const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                                           child: AutoCompleteTextField(
                                               controller: genderController,
                                               clearOnSubmit: false,
@@ -505,7 +509,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
+                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -596,9 +600,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 58,
+                                      height: 54,
+                                      width: 120,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
+                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                         child: TextFormField(
                                           controller: ageController,
                                           textInputAction: TextInputAction.next,
@@ -682,7 +687,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(1.0),
+                                        padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
                                         child: AutoCompleteTextField(
                                             controller: maritalController,
                                             clearOnSubmit: false,
@@ -773,7 +778,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
+                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                         child: AutoCompleteTextField(
                                             controller: bloodGrpController,
                                             clearOnSubmit: false,
@@ -911,9 +916,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             getImage();
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
+                            padding:
+                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                             child: Container(
-                                height: 150,
+                                height: 140,
                                 width: 150,
                                 decoration: BoxDecoration(
                                     borderRadius:
@@ -952,7 +958,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                              const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                               child: AutoCompleteTextField(
                                   controller: educationController,
                                   clearOnSubmit: false,
@@ -1043,7 +1050,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                               child: AutoCompleteTextField(
                                   controller: businessController,
                                   clearOnSubmit: false,
@@ -1134,7 +1142,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding:
+                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
@@ -1223,7 +1232,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 75,
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding:
+                              const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -1299,7 +1309,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -1380,7 +1391,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(4.0),
+                              padding:
+                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                               child: Row(
                                 children: [
                                   Switch(
@@ -1430,7 +1442,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding:
+                              const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
@@ -1513,7 +1526,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding:
+                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(

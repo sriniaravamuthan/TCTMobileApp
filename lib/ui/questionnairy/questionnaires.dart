@@ -361,7 +361,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -469,7 +469,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -573,7 +573,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                   padding:
-                                                      const EdgeInsets.all(2.0),
+                                                  const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                                   child: AutoCompleteTextField(
                                                       controller:
                                                           villageCodeController,
@@ -707,7 +707,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                                                 child: DropdownButtonFormField<
                                                     String>(
                                                   isExpanded: true,
@@ -823,7 +823,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                                 child: DropdownButtonFormField<
                                                     String>(
                                                   isExpanded: true,
@@ -938,7 +938,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                                 child: AutoCompleteTextField(
                                                     controller:
                                                         villageNameController,
@@ -1066,7 +1066,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         SizedBox(
                                           height: 58,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
+                                            padding:
+                                            const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                                             child: TextFormField(
                                               textInputAction:
                                                   TextInputAction.next,
@@ -1144,7 +1145,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                           children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(2.0),
+                                              const EdgeInsets.all(2.0),
                                               child: TextWidget(
                                                 text:
                                                     DemoLocalization.of(context)
@@ -1157,7 +1158,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -1260,7 +1262,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -1348,7 +1350,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                     child: Align(
                                       alignment: Alignment.topLeft,
                                       child: FractionallySizedBox(
-                                        widthFactor: 1,
+                                        widthFactor: 0.25,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -1367,10 +1369,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                             SizedBox(
                                               height: 58,
-                                              width: 250,
+                                              width: 120,
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.all(2.0),
+                                                const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.done,
