@@ -10,3 +10,6 @@ const String collectionEducation = "education";
 const String collectionStatusHouse = "statusHouseType";
 const String mapStatusHouse = "statusHouse";
 const String collectionTypeHouse = "typeHouse";
+const String collectionMaritalStatus = "MaritalStatus";
+const String collectionBusiness = "business";
+

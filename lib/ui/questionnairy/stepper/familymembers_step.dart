@@ -38,6 +38,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var genderController = TextEditingController();
   var relationController = TextEditingController();
   var educationController = TextEditingController();
+  var maritalController = TextEditingController();
+  var businessController = TextEditingController();
 
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
@@ -47,6 +49,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   List relationLangList;
   List educationList;
   List educationLangList;
+  List maritalList;
+  List maritalLangList;
+  List businessList;
+  List businessLangList;
   String nameVal,
       relationshipVal,
       genderVal,
@@ -78,6 +84,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     relationLangList = [];
     educationList = [];
     educationLangList = [];
+    maritalList = [];
+    maritalLangList = [];
+    businessList = [];
+    businessLangList = [];
     getLanguage();
     super.initState();
   }
@@ -667,63 +677,70 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
-                                        child: DropdownButtonFormField<String>(
-                                          isExpanded: true,
-                                          decoration: InputDecoration(
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide.none,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              fillColor: lightGreyColor),
-                                          value: maritalStatusVal,
-                                          validator: (value) => value == null
-                                              ? 'Source Type must not be empty'
-                                              : null,
-                                          onChanged: (value) => setState(
-                                              () => maritalStatusVal = value),
-                                          items: <String>[
-                                            'Married',
-                                            'UnMarried',
-                                          ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: TextWidget(
-                                                text: value,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                                size: 14,
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
+                                        padding: const EdgeInsets.all(1.0),
+                                        child: AutoCompleteTextField(
+                                            controller: maritalController,
+                                            clearOnSubmit: false,
+                                            itemSubmitted: (item) {
+                                              maritalController.text = item;
+                                              debugPrint(
+                                                  "maritalController:${maritalController.text}");
+                                            },
+                                            suggestions: maritalLangList,
+                                            style: TextStyle(
+                                              color: Color(0xFF222222),
+                                              fontSize: 16,
+                                            ),
+                                            decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                ),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                focusedErrorBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                fillColor: lightGreyColor),
+                                            itemBuilder: (context, item) {
+                                              return new Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextWidget(
+                                                    text: item,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ));
+                                            },
+                                            itemSorter: (a, b) {
+                                              return a.compareTo(b);
+                                            },
+                                            itemFilter: (item, query) {
+                                              debugPrint("genderItem:$item");
+                                              return item
+                                                  .toLowerCase()
+                                                  .startsWith(query.toLowerCase());
+                                            }),
                                       ),
                                     ),
                                   ],
@@ -1017,53 +1034,69 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: TextFormField(
-                                textInputAction: TextInputAction.next,
-                                autocorrect: true,
-                                enableSuggestions: true,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                keyboardType: TextInputType.text,
-                                onSaved: (String val) {
-                                  setState(() {});
-                                },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Employee Id must not be empty';
-                                  }
-                                  return null;
-                                },
-                              ),
+                              child: AutoCompleteTextField(
+                                  controller: businessController,
+                                  clearOnSubmit: false,
+                                  itemSubmitted: (item) {
+                                    businessController.text = item;
+                                    debugPrint(
+                                        "businessController:${businessController.text}");
+                                  },
+                                  suggestions: businessLangList,
+                                  style: TextStyle(
+                                    color: Color(0xFF222222),
+                                    fontSize: 16,
+                                  ),
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  itemBuilder: (context, item) {
+                                    return new Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: TextWidget(
+                                          text: item,
+                                          color: darkColor,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        ));
+                                  },
+                                  itemSorter: (a, b) {
+                                    return a.compareTo(b);
+                                  },
+                                  itemFilter: (item, query) {
+                                    debugPrint("genderItem:$item");
+                                    return item
+                                        .toLowerCase()
+                                        .startsWith(query.toLowerCase());
+                                  }),
                             ),
                           ),
                         ],
@@ -1619,6 +1652,38 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       }
     });
   }
+  getMaritalStatus() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionMaritalStatus).get();
+    maritalList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    maritalList.forEach((element) {
+      LinkedHashMap<String, dynamic> maritalData =
+          element[collectionMaritalStatus];
+      debugPrint("maritalData:$maritalData");
+      if (maritalData != null) {
+        maritalStatusVal = maritalData[language];
+        maritalLangList.add(maritalStatusVal);
+        debugPrint("maritalLangList:$maritalLangList");
+      }
+    });
+  }
+  getBusiness() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionBusiness).get();
+    businessList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    businessList.forEach((element) {
+      LinkedHashMap<String, dynamic> businessData =
+          element[collectionBusiness];
+      debugPrint("businessData:$businessData");
+      if (businessData != null) {
+        occupationVal = businessData[language];
+        businessLangList.add(occupationVal);
+        debugPrint("businessLangList:$businessLangList");
+      }
+    });
+  }
 
   calculateAge(DateTime date) {
     DateTime currentDate = DateTime.now();
@@ -1645,5 +1710,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getGender();
     getRelationShip();
     getEducation();
+    getMaritalStatus();
+    getBusiness();
   }
 }
