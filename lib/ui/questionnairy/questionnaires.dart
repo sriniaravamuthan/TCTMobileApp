@@ -371,85 +371,50 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
                                                       border:
-                                                          new OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
@@ -514,85 +479,50 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
                                                       border:
-                                                          new OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
@@ -664,20 +594,62 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       ),
                                                       decoration:
                                                           InputDecoration(
-                                                        border:
-                                                            new OutlineInputBorder(
-                                                          borderRadius: BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                        ),
-                                                      ),
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
@@ -743,60 +715,57 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     String>(
                                                   isExpanded: true,
                                                   decoration: InputDecoration(
-                                                    border:
-                                                        new OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                      borderSide: BorderSide(
-                                                          color:
-                                                              lightGreyColor),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                      borderSide: BorderSide(
-                                                          color:
-                                                              lightGreyColor),
-                                                    ),
-                                                  ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      fillColor:
+                                                          lightGreyColor),
                                                   value: panNoVal,
                                                   // validator: (value) => value ==
                                                   //         null
@@ -862,60 +831,57 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     String>(
                                                   isExpanded: true,
                                                   decoration: InputDecoration(
-                                                    border:
-                                                        new OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                    ),
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                      borderSide: BorderSide(
-                                                          color:
-                                                              lightGreyColor),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      50.0),
-                                                              bottomLeft:
-                                                                  Radius
-                                                                      .circular(
-                                                                          50.0),
-                                                              bottomRight: Radius
-                                                                  .circular(
-                                                                      50.0)),
-                                                      borderSide: BorderSide(
-                                                          color:
-                                                              lightGreyColor),
-                                                    ),
-                                                  ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                        borderSide:
+                                                            BorderSide.none,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                      ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      fillColor:
+                                                          lightGreyColor),
                                                   value: panCodeVal,
                                                   // validator: (value) => value ==
                                                   //         null
@@ -993,21 +959,62 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       fontSize: 16,
                                                     ),
                                                     decoration: InputDecoration(
-                                                      border:
-                                                          new OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
-                                                      ),
-                                                    ),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide.none,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                            lightGreyColor),
                                                     itemBuilder:
                                                         (context, item) {
                                                       return new Padding(
@@ -1068,82 +1075,46 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   TextInputAction.next,
                                               enableSuggestions: true,
                                               decoration: InputDecoration(
-                                                  border:
-                                                      new OutlineInputBorder(
+                                                  border: OutlineInputBorder(
                                                     borderSide: BorderSide.none,
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
                                                   ),
                                                   enabledBorder:
                                                       OutlineInputBorder(
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
                                                     borderSide: BorderSide(
                                                         color: lightGreyColor),
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
                                                     borderSide: BorderSide(
                                                         color: lightGreyColor),
                                                   ),
                                                   focusedErrorBorder:
                                                       OutlineInputBorder(
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
                                                     borderSide: BorderSide(
                                                         color: lightGreyColor),
                                                   ),
                                                   errorBorder:
                                                       OutlineInputBorder(
-                                                    borderRadius: BorderRadius
-                                                        .only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0)),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
                                                     borderSide: BorderSide(
                                                         color: lightGreyColor),
                                                   ),
@@ -1196,85 +1167,50 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
                                                       border:
-                                                          new OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
@@ -1334,85 +1270,50 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
                                                       border:
-                                                          new OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
@@ -1479,85 +1380,50 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
                                                       border:
-                                                          new OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderSide:
                                                             BorderSide.none,
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       focusedErrorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),
                                                       ),
                                                       errorBorder:
                                                           OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .only(
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        50.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        50.0)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                         borderSide: BorderSide(
                                                             color:
                                                                 lightGreyColor),

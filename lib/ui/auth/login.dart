@@ -89,47 +89,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                  counterText: "",
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 onSaved: (String val) {
                                   setState(() {
                                     userMail = val;
@@ -176,47 +165,36 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.text,
                                 decoration: InputDecoration(
-                                  counterText: "",
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 onSaved: (String val) {
                                   setState(() {
                                     userPassword = val;

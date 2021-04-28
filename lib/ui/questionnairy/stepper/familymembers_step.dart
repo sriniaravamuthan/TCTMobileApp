@@ -141,42 +141,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 autocorrect: true,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
@@ -225,42 +215,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               autocorrect: true,
                               enableSuggestions: true,
                               decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
+                                  border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
                                         BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
                                         BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
                                         BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
                                         BorderSide(color: lightGreyColor),
                                   ),
@@ -317,13 +297,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   fontSize: 16,
                                 ),
                                 decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
                                   return new Padding(
                                       padding: EdgeInsets.all(8.0),
@@ -396,20 +399,50 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 fontSize: 16,
                                               ),
                                               decoration: InputDecoration(
-                                                border: new OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  50.0),
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  50.0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  50.0)),
-                                                ),
-                                              ),
+                                                  border: OutlineInputBorder(
+                                                    borderSide: BorderSide.none,
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0)),
+                                                    borderSide: BorderSide(
+                                                        color: lightGreyColor),
+                                                  ),
+                                                  fillColor: lightGreyColor),
                                               itemBuilder: (context, item) {
                                                 return new Padding(
                                                     padding:
@@ -464,58 +497,33 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           controller: datePicker,
                                           enableSuggestions: true,
                                           decoration: InputDecoration(
-                                              border: new OutlineInputBorder(
+                                              border: OutlineInputBorder(
                                                 borderSide: BorderSide.none,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                               ),
                                               enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
@@ -582,58 +590,33 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           autocorrect: true,
                                           enableSuggestions: true,
                                           decoration: InputDecoration(
-                                              border: new OutlineInputBorder(
+                                              border: OutlineInputBorder(
                                                 borderSide: BorderSide.none,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                               ),
                                               enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               focusedErrorBorder:
                                                   OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
                                               errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight:
-                                                        Radius.circular(50.0),
-                                                    bottomLeft:
-                                                        Radius.circular(50.0),
-                                                    bottomRight:
-                                                        Radius.circular(50.0)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
                                                 borderSide: BorderSide(
                                                     color: lightGreyColor),
                                               ),
@@ -688,39 +671,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         child: DropdownButtonFormField<String>(
                                           isExpanded: true,
                                           decoration: InputDecoration(
-                                            border: new OutlineInputBorder(
-                                              borderSide: BorderSide.none,
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                          ),
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              fillColor: lightGreyColor),
                                           value: maritalStatusVal,
                                           validator: (value) => value == null
                                               ? 'Source Type must not be empty'
@@ -774,39 +755,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         child: DropdownButtonFormField<String>(
                                           isExpanded: true,
                                           decoration: InputDecoration(
-                                            border: new OutlineInputBorder(
-                                              borderSide: BorderSide.none,
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(50.0),
-                                                  bottomLeft:
-                                                      Radius.circular(50.0),
-                                                  bottomRight:
-                                                      Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: lightGreyColor),
-                                            ),
-                                          ),
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              fillColor: lightGreyColor),
                                           value: bloodGroupVal,
                                           validator: (value) => value == null
                                               ? 'Source Type must not be empty'
@@ -961,13 +940,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     fontSize: 16,
                                   ),
                                   decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                    ),
-                                  ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
                                   itemBuilder: (context, item) {
                                     return new Padding(
                                         padding: EdgeInsets.all(8.0),
@@ -1020,42 +1022,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 autocorrect: true,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
@@ -1103,30 +1095,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 value: annualIncomeVal,
                                 validator: (value) => value == null
                                     ? 'Source Type must not be empty'
@@ -1189,42 +1187,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 maxLength: 10,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
@@ -1274,42 +1262,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 autocorrect: true,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
@@ -1413,30 +1391,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 value: communityVal,
                                 validator: (value) => value == null
                                     ? 'Source Type must not be empty'
@@ -1490,30 +1474,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(50.0),
-                                        bottomLeft: Radius.circular(50.0),
-                                        bottomRight: Radius.circular(50.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
                                 value: castVal,
                                 validator: (value) => value == null
                                     ? 'Source Type must not be empty'

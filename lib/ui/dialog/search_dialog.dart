@@ -67,42 +67,32 @@ class _SearchDialogState extends State<SearchDialog> {
                                   textInputAction: TextInputAction.next,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
-                                      border: new OutlineInputBorder(
+                                      border: OutlineInputBorder(
                                         borderSide: BorderSide.none,
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                       ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
                                             BorderSide(color: lightGreyColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
                                             BorderSide(color: lightGreyColor),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
                                             BorderSide(color: lightGreyColor),
                                       ),
                                       errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topRight: Radius.circular(50.0),
-                                            bottomLeft: Radius.circular(50.0),
-                                            bottomRight: Radius.circular(50.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
                                             BorderSide(color: lightGreyColor),
                                       ),
@@ -150,30 +140,36 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: DropdownButtonFormField<String>(
                                   isExpanded: true,
                                   decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                  ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
                                   value: villageCodeValue,
                                   validator: (value) => value == null
                                       ? 'Source Type must not be empty'
@@ -236,30 +232,36 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: DropdownButtonFormField<String>(
                                   isExpanded: true,
                                   decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                  ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
                                   value: villageNameVal,
                                   validator: (value) => value == null
                                       ? 'Source Type must not be empty'
@@ -314,30 +316,36 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: DropdownButtonFormField<String>(
                                   isExpanded: true,
                                   decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                  ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
                                   value: panCodeVal,
                                   validator: (value) => value == null
                                       ? 'Source Type must not be empty'
@@ -401,30 +409,36 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: DropdownButtonFormField<String>(
                                   isExpanded: true,
                                   decoration: InputDecoration(
-                                    border: new OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(50.0),
-                                          bottomLeft: Radius.circular(50.0),
-                                          bottomRight: Radius.circular(50.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                  ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
                                   value: zoneVal,
                                   validator: (value) => value == null
                                       ? 'Source Type must not be empty'
