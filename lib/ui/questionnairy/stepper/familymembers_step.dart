@@ -40,6 +40,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var educationController = TextEditingController();
   var maritalController = TextEditingController();
   var businessController = TextEditingController();
+  var bloodGrpController = TextEditingController();
 
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
@@ -53,6 +54,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   List maritalLangList;
   List businessList;
   List businessLangList;
+  List bloodGrpList;
+  List bloodGrpLangList;
   String nameVal,
       relationshipVal,
       genderVal,
@@ -88,6 +91,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     maritalLangList = [];
     businessList = [];
     businessLangList = [];
+    bloodGrpList = [];
+    bloodGrpLangList = [];
     getLanguage();
     super.initState();
   }
@@ -769,63 +774,68 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       height: 58,
                                       child: Padding(
                                         padding: const EdgeInsets.all(2.0),
-                                        child: DropdownButtonFormField<String>(
-                                          isExpanded: true,
-                                          decoration: InputDecoration(
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide.none,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0)),
-                                                borderSide: BorderSide(
-                                                    color: lightGreyColor),
-                                              ),
-                                              fillColor: lightGreyColor),
-                                          value: bloodGroupVal,
-                                          validator: (value) => value == null
-                                              ? 'Source Type must not be empty'
-                                              : null,
-                                          onChanged: (value) => setState(
-                                              () => bloodGroupVal = value),
-                                          items: <String>[
-                                            'A+',
-                                            'A-',
-                                            'B+',
-                                          ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: TextWidget(
-                                                text: value,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                                size: 14,
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
+                                        child: AutoCompleteTextField(
+                                            controller: bloodGrpController,
+                                            clearOnSubmit: false,
+                                            itemSubmitted: (item) {
+                                              bloodGrpController.text = item;
+                                              debugPrint(
+                                                  "bloodGrpController:${bloodGrpController.text}");
+                                            },
+                                            suggestions: bloodGrpLangList,
+                                            style: TextStyle(
+                                              color: Color(0xFF222222),
+                                              fontSize: 16,
+                                            ),
+                                            decoration: InputDecoration(
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                ),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                focusedErrorBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10.0)),
+                                                  borderSide:
+                                                  BorderSide(color: lightGreyColor),
+                                                ),
+                                                fillColor: lightGreyColor),
+                                            itemBuilder: (context, item) {
+                                              return new Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextWidget(
+                                                    text: item,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ));
+                                            },
+                                            itemSorter: (a, b) {
+                                              return a.compareTo(b);
+                                            },
+                                            itemFilter: (item, query) {
+                                              return item
+                                                  .toLowerCase()
+                                                  .startsWith(query.toLowerCase());
+                                            }),
                                       ),
                                     ),
                                   ],
@@ -1685,6 +1695,24 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     });
   }
 
+  getBloodGroup() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionBloodGroup).get();
+    bloodGrpList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    debugPrint("bloodGrpList:$bloodGrpList");
+
+    bloodGrpList.forEach((element) {
+      final bloodGrpData =
+          element[collectionBloodGroup];
+      debugPrint("bloodGrpData:$bloodGrpData");
+      if (bloodGrpData != null) {
+        bloodGrpLangList.add(bloodGrpData);
+        debugPrint("bloodGrpLangList:$bloodGrpLangList");
+      }
+    });
+  }
+
   calculateAge(DateTime date) {
     DateTime currentDate = DateTime.now();
     ageVal = currentDate.year - date.year;
@@ -1712,5 +1740,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getEducation();
     getMaritalStatus();
     getBusiness();
+    getBloodGroup();
   }
 }

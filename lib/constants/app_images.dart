@@ -12,3 +12,5 @@ const user = "assets/images/user.png";
 const userSquare = "assets/images/userSquare.jpg";
 const imgCamera = "assets/images/imgCamera.png";
 const svgTctLogo = "assets/svg/tctLogo.svg";
+const svgComplete = "assets/svg/complete.svg";
+const svgInProgress = "assets/svg/inprogress.svg";

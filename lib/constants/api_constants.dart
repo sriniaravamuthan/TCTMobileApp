@@ -12,4 +12,5 @@ const String mapStatusHouse = "statusHouse";
 const String collectionTypeHouse = "typeHouse";
 const String collectionMaritalStatus = "MaritalStatus";
 const String collectionBusiness = "business";
+const String collectionBloodGroup= "bloodGroup";
 
