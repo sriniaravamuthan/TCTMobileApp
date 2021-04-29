@@ -89,7 +89,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                           child: AutoCompleteTextField(
                               controller: statusHouseController,
                               clearOnSubmit: false,
@@ -177,7 +178,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              right: 16.0, top: 2.0, bottom: 2.0),
                           child: AutoCompleteTextField(
                               controller: typeHouseController,
                               clearOnSubmit: false,
@@ -265,7 +267,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              right: 16.0, top: 2.0, bottom: 2.0),
                           child: Row(
                             children: [
                               Switch(
@@ -307,7 +310,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              right: 16.0, top: 2.0, bottom: 2.0),
                           child: Row(
                             children: [
                               Switch(
@@ -354,16 +358,18 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         SizedBox(
-                          height: 70,
+                          height: 58,
                           width: 100,
                           child: Padding(
-                            padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                            padding: const EdgeInsets.only(
+                                left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
                               enableSuggestions: true,
                               decoration: InputDecoration(
+                                  counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -372,22 +378,26 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               keyboardType: TextInputType.number,
@@ -433,15 +443,17 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       SizedBox(
                         width: 100,
-                        height: 70,
+                        height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              right: 16.0, top: 2.0, bottom: 2.0),
                           child: TextFormField(
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
                             decoration: InputDecoration(
+                                counterText: "",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius:
@@ -502,7 +514,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                        padding: const EdgeInsets.only(
+                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                         child: Row(
                           children: [
                             Switch(
@@ -548,37 +561,40 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             width: 100,
                             height: 58,
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
+                                maxLength: 2,
                                 textInputAction: TextInputAction.next,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
+                                    counterText: "",
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
                                           BorderSide(color: lightGreyColor),
                                     ),
@@ -626,14 +642,17 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                           child: SizedBox(
                             width: 100,
                             height: 58,
                             child: TextFormField(
+                              maxLength: 2,
                               textInputAction: TextInputAction.next,
                               enableSuggestions: true,
                               decoration: InputDecoration(
+                                  counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -700,15 +719,18 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                        padding: const EdgeInsets.only(
+                            right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
                             decoration: InputDecoration(
+                                counterText: "",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius:
@@ -770,15 +792,18 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                        padding: const EdgeInsets.only(
+                            right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
                             decoration: InputDecoration(
+                                counterText: "",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius:
@@ -840,16 +865,18 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
-
+                        padding: const EdgeInsets.only(
+                            right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
                             decoration: InputDecoration(
+                                counterText: "",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius:
@@ -893,12 +920,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+              ),
               Expanded(
                 child: Align(
                   alignment: Alignment.topLeft,
@@ -917,7 +939,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                          padding: const EdgeInsets.only(
+                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                           child: Row(
                             children: [
                               Switch(
@@ -940,102 +963,33 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     ),
                   ),
                 ),
-              ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
               Expanded(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Livestock Type'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Livestock Type'),
+                          size: 14,
+                          weight: FontWeight.w600,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
-                          child: SizedBox(
-                            height: 58,
-                            child: TextFormField(
-                              textInputAction: TextInputAction.next,
-                              autocorrect: true,
-                              enableSuggestions: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              keyboardType: TextInputType.text,
-                              onSaved: (String val) {
-                                setState(() {});
-                              },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  debugPrint("empid :yes");
-                                  return 'Employee Id must not be empty';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Livestock Count'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
-
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0, top: 2.0, bottom: 2.0),
+                        child: SizedBox(
+                          height: 58,
+                          width: 250,
                           child: TextFormField(
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -1080,8 +1034,78 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             },
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Livestock Count'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0, top: 2.0, bottom: 2.0),
+                        child: SizedBox(
+                          width: 250,
+                          height: 58,
+                          child: TextFormField(
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.text,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                debugPrint("empid :yes");
+                                return 'Employee Id must not be empty';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )

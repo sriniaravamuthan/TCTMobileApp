@@ -681,11 +681,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         padding: const EdgeInsets.only(
                                             right: 16.0, top: 2.0, bottom: 2.0),
                                         child: TextFormField(
+                                          maxLength: 2,
                                           controller: ageController,
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
                                           enableSuggestions: true,
                                           decoration: InputDecoration(
+                                              counterText: "",
                                               border: OutlineInputBorder(
                                                 borderSide: BorderSide.none,
                                                 borderRadius: BorderRadius.all(

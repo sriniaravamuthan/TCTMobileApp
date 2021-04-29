@@ -1689,41 +1689,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
           ),
         ),
       ),
-
-      // floatingActionButton: Padding(
-      //   padding: const EdgeInsets.only(right: 50.0, bottom: 50.0),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.end,
-      //     children: [
-      //       FloatingActionButton(
-      //         // isExtended: true,
-      //         child: Icon(
-      //           Icons.keyboard_arrow_right,
-      //           size: 30,
-      //           color: darkColor,
-      //         ),
-      //         backgroundColor: lightColor,
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       ),
-      //       SizedBox(
-      //         height: 10,
-      //       ),
-      //       FloatingActionButton(
-      //         // isExtended: true,
-      //         child: Icon(
-      //           Icons.done,
-      //           size: 30,
-      //         ),
-      //         backgroundColor: primaryColor,
-      //         onPressed: () {
-      //           setState(() {});
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 
@@ -1814,7 +1779,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         "formNo ": demographicFamily.location.formNo,
         "projectCode ": projectCode,
         // "villagesCode ": villageController.text
-      }
+      },
     });
   }
 
