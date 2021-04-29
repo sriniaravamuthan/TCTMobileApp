@@ -28,10 +28,22 @@ class FamilyMemberStep extends StatefulWidget {
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
-  bool isSwitched = false;
-  bool isSwitched1 = false;
+  bool isPhysical = false;
+  bool isSmartPhone = false;
+  bool isGovt = false;
+  bool isInsurance = false;
+  bool isOldAge = false;
+  bool isWidowed = false;
+  bool isRetirement = false;
+
   String textValue = 'No';
   String textValue1 = 'No';
+  String textGovt = 'No';
+  String textInsurance = 'No';
+  String textOldAge = 'No';
+  String textWidowed = 'No';
+  String textRetirement = 'No';
+
   double minPrice = 0;
   double maxPrice = 100;
   double _lowerValue = 0;
@@ -968,7 +980,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         children: [
                                           Switch(
                                             onChanged: toggleSwitch,
-                                            value: isSwitched,
+                                            value: isPhysical,
                                             activeColor: Colors.blue,
                                             activeTrackColor: greyColor,
                                             inactiveThumbColor: greyColor,
@@ -1497,7 +1509,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 children: [
                                   Switch(
                                     onChanged: toggleSwitch1,
-                                    value: isSwitched1,
+                                    value: isSmartPhone,
                                     activeColor: Colors.blue,
                                     activeTrackColor: greyColor,
                                     inactiveThumbColor: greyColor,
@@ -1715,8 +1727,243 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context).translate(
+                                  'Government Insurance/Health Insurance?'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: Row(
+                                children: [
+                                  Switch(
+                                    onChanged: toggleGovt,
+                                    value: isGovt,
+                                    activeColor: Colors.blue,
+                                    activeTrackColor: greyColor,
+                                    inactiveThumbColor: greyColor,
+                                    inactiveTrackColor: greyColor,
+                                  ),
+                                  TextWidget(
+                                    text: textGovt,
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context).translate(
+                                  'Private Insurance/Health Insurance?'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: Row(
+                                children: [
+                                  Switch(
+                                    onChanged: toggleInsurance,
+                                    value: isInsurance,
+                                    activeColor: Colors.blue,
+                                    activeTrackColor: greyColor,
+                                    inactiveThumbColor: greyColor,
+                                    inactiveTrackColor: greyColor,
+                                  ),
+                                  TextWidget(
+                                    text: textInsurance,
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Old age Pension?'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: Row(
+                                children: [
+                                  Switch(
+                                    onChanged: toggleOldAge,
+                                    value: isOldAge,
+                                    activeColor: Colors.blue,
+                                    activeTrackColor: greyColor,
+                                    inactiveThumbColor: greyColor,
+                                    inactiveTrackColor: greyColor,
+                                  ),
+                                  TextWidget(
+                                    text: textOldAge,
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Widowed Pension?'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: Row(
+                                children: [
+                                  Switch(
+                                    onChanged: toggleWidowed,
+                                    value: isWidowed,
+                                    activeColor: Colors.blue,
+                                    activeTrackColor: greyColor,
+                                    inactiveThumbColor: greyColor,
+                                    inactiveTrackColor: greyColor,
+                                  ),
+                                  TextWidget(
+                                    text: textWidowed,
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Retirement Pension?'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: Row(
+                                children: [
+                                  Switch(
+                                    onChanged: toggleRetirement,
+                                    value: isRetirement,
+                                    activeColor: Colors.blue,
+                                    activeTrackColor: greyColor,
+                                    inactiveThumbColor: greyColor,
+                                    inactiveTrackColor: greyColor,
+                                  ),
+                                  TextWidget(
+                                    text: textRetirement,
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -1724,14 +1971,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   }
 
   void toggleSwitch(bool value) {
-    if (isSwitched == false) {
+    if (isPhysical == false) {
       setState(() {
-        isSwitched = true;
+        isPhysical = true;
         textValue = 'Yes';
       });
     } else {
       setState(() {
-        isSwitched = false;
+        isPhysical = false;
         textValue = 'No';
       });
       //print('Switch Button is OFF');
@@ -1739,15 +1986,90 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   }
 
   void toggleSwitch1(bool value) {
-    if (isSwitched1 == false) {
+    if (isSmartPhone == false) {
       setState(() {
-        isSwitched1 = true;
+        isSmartPhone = true;
         textValue1 = 'Yes';
       });
     } else {
       setState(() {
-        isSwitched1 = false;
+        isSmartPhone = false;
         textValue1 = 'No';
+      });
+      //print('Switch Button is OFF');
+    }
+  }
+
+  void toggleGovt(bool value) {
+    if (isGovt == false) {
+      setState(() {
+        isGovt = true;
+        textGovt = 'Yes';
+      });
+    } else {
+      setState(() {
+        isGovt = false;
+        textGovt = 'No';
+      });
+      //print('Switch Button is OFF');
+    }
+  }
+
+  void toggleInsurance(bool value) {
+    if (isInsurance == false) {
+      setState(() {
+        isInsurance = true;
+        textInsurance = 'Yes';
+      });
+    } else {
+      setState(() {
+        isInsurance = false;
+        textInsurance = 'No';
+      });
+      //print('Switch Button is OFF');
+    }
+  }
+
+  void toggleOldAge(bool value) {
+    if (isOldAge == false) {
+      setState(() {
+        isOldAge = true;
+        textOldAge = 'Yes';
+      });
+    } else {
+      setState(() {
+        isOldAge = false;
+        textOldAge = 'No';
+      });
+      //print('Switch Button is OFF');
+    }
+  }
+
+  void toggleWidowed(bool value) {
+    if (isWidowed == false) {
+      setState(() {
+        isWidowed = true;
+        textWidowed = 'Yes';
+      });
+    } else {
+      setState(() {
+        isWidowed = false;
+        textWidowed = 'No';
+      });
+      //print('Switch Button is OFF');
+    }
+  }
+
+  void toggleRetirement(bool value) {
+    if (isRetirement == false) {
+      setState(() {
+        isRetirement = true;
+        textRetirement = 'Yes';
+      });
+    } else {
+      setState(() {
+        isRetirement = false;
+        textRetirement = 'No';
       });
       //print('Switch Button is OFF');
     }
