@@ -531,11 +531,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                           DataCell(SizedBox(
                                             width: 100,
                                             child: Center(
-                                              child: TextWidget(
-                                                text: usersItem.status,
-                                                color: darkGreyColor,
-                                                size: 16,
-                                                weight: FontWeight.w600,
+                                              child: SvgPicture.asset(
+                                                svgComplete,
+                                                semanticsLabel: "Logo",
+                                                height: height / 20,
+                                                width: width / 20,
+                                                fit: BoxFit.contain,
+                                                allowDrawingOutsideViewBox:
+                                                    true,
                                               ),
                                             ),
                                           )),

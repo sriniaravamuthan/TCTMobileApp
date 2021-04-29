@@ -36,7 +36,7 @@ class _HabitsStepState extends State<HabitsStep> {
           children: [
             Expanded(
               child: FractionallySizedBox(
-                widthFactor: 1,
+                widthFactor: 1.05,
                 child: Column(
                   children: [
                     Padding(
@@ -49,6 +49,7 @@ class _HabitsStepState extends State<HabitsStep> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Switch(
                           onChanged: toggleSwitch,
@@ -71,7 +72,7 @@ class _HabitsStepState extends State<HabitsStep> {
             ),
             Expanded(
               child: FractionallySizedBox(
-                widthFactor: 1,
+                widthFactor: 1.05,
                 child: Column(
                   children: [
                     Padding(
@@ -84,6 +85,7 @@ class _HabitsStepState extends State<HabitsStep> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Switch(
                           onChanged: toggleSwitch1,
@@ -106,7 +108,7 @@ class _HabitsStepState extends State<HabitsStep> {
             ),
             Expanded(
               child: FractionallySizedBox(
-                widthFactor: 1,
+                widthFactor: 1.05,
                 child: Column(
                   children: [
                     Padding(
@@ -119,6 +121,7 @@ class _HabitsStepState extends State<HabitsStep> {
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Switch(
                           onChanged: toggleSwitch2,
