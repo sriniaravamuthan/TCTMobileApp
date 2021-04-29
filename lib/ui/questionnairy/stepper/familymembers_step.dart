@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -140,18 +141,29 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Name'),
-                              size: 14,
-                              weight: FontWeight.w600,
+                            child: RichText(
+                              text: TextSpan(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Name'),
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: darkColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w600),
+                                  children: [
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 14.0),
+                                    ),
+                                  ]),
                             ),
                           ),
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  left: 2, right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -225,8 +237,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         SizedBox(
                           height: 58,
                           child: Padding(
-                            padding:
-                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                            padding: const EdgeInsets.only(
+                                right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
@@ -289,18 +301,29 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context).translate(
-                                'Relationship method of family head'),
-                            size: 14,
-                            weight: FontWeight.w600,
+                          child: RichText(
+                            text: TextSpan(
+                                text: DemoLocalization.of(context).translate(
+                                    'Relationship method of family head'),
+                                style: GoogleFonts.roboto(
+                                    fontSize: 14,
+                                    color: darkColor,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600),
+                                children: [
+                                  TextSpan(
+                                    text: ' *',
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 14.0),
+                                  ),
+                                ]),
                           ),
                         ),
                         SizedBox(
                           height: 58,
                           child: Padding(
-                            padding:
-                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                            padding: const EdgeInsets.only(
+                                right: 16.0, top: 2.0, bottom: 2.0),
                             child: AutoCompleteTextField(
                                 controller: relationController,
                                 clearOnSubmit: false,
@@ -392,18 +415,33 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Gender'),
-                                        size: 14,
-                                        weight: FontWeight.w600,
+                                      child: RichText(
+                                        text: TextSpan(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Gender'),
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14,
+                                                color: darkColor,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                text: ' *',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 14.0),
+                                              ),
+                                            ]),
                                       ),
                                     ),
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                          padding:
-                                          const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                                          padding: const EdgeInsets.only(
+                                              left: 2,
+                                              right: 16.0,
+                                              top: 2.0,
+                                              bottom: 2.0),
                                           child: AutoCompleteTextField(
                                               controller: genderController,
                                               clearOnSubmit: false,
@@ -499,17 +537,30 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Date of Birth'),
-                                        size: 14,
-                                        weight: FontWeight.w600,
+                                      child: RichText(
+                                        text: TextSpan(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Date of Birth'),
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14,
+                                                color: darkColor,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                text: ' *',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 14.0),
+                                              ),
+                                            ]),
                                       ),
                                     ),
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                        padding: const EdgeInsets.only(
+                                            right: 16.0, top: 2.0, bottom: 2.0),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -592,18 +643,31 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Age'),
-                                        size: 14,
-                                        weight: FontWeight.w600,
+                                      child: RichText(
+                                        text: TextSpan(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Age'),
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14,
+                                                color: darkColor,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                text: ' *',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 14.0),
+                                              ),
+                                            ]),
                                       ),
                                     ),
                                     SizedBox(
                                       height: 54,
                                       width: 120,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                        padding: const EdgeInsets.only(
+                                            right: 16.0, top: 2.0, bottom: 2.0),
                                         child: TextFormField(
                                           controller: ageController,
                                           textInputAction: TextInputAction.next,
@@ -687,7 +751,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                                        padding: const EdgeInsets.only(
+                                            left: 2.0,
+                                            right: 16.0,
+                                            top: 2.0,
+                                            bottom: 2.0),
                                         child: AutoCompleteTextField(
                                             controller: maritalController,
                                             clearOnSubmit: false,
@@ -704,32 +772,45 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
                                                 ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
-                                                focusedErrorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
                                                 errorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
                                                 fillColor: lightGreyColor),
                                             itemBuilder: (context, item) {
@@ -749,7 +830,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               debugPrint("genderItem:$item");
                                               return item
                                                   .toLowerCase()
-                                                  .startsWith(query.toLowerCase());
+                                                  .startsWith(
+                                                      query.toLowerCase());
                                             }),
                                       ),
                                     ),
@@ -778,7 +860,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     SizedBox(
                                       height: 58,
                                       child: Padding(
-                                        padding: const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                        padding: const EdgeInsets.only(
+                                            right: 16.0, top: 2.0, bottom: 2.0),
                                         child: AutoCompleteTextField(
                                             controller: bloodGrpController,
                                             clearOnSubmit: false,
@@ -795,32 +878,45 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
                                                 ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
-                                                focusedErrorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
                                                 errorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10.0)),
-                                                  borderSide:
-                                                  BorderSide(color: lightGreyColor),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                  borderSide: BorderSide(
+                                                      color: lightGreyColor),
                                                 ),
                                                 fillColor: lightGreyColor),
                                             itemBuilder: (context, item) {
@@ -839,7 +935,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             itemFilter: (item, query) {
                                               return item
                                                   .toLowerCase()
-                                                  .startsWith(query.toLowerCase());
+                                                  .startsWith(
+                                                      query.toLowerCase());
                                             }),
                                       ),
                                     ),
@@ -916,8 +1013,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             getImage();
                           },
                           child: Padding(
-                            padding:
-                            const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                            padding: const EdgeInsets.only(
+                                right: 16.0, top: 2.0, bottom: 2.0),
                             child: Container(
                                 height: 140,
                                 width: 150,
@@ -958,8 +1055,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  left: 2, right: 16.0, top: 2.0, bottom: 2.0),
                               child: AutoCompleteTextField(
                                   controller: educationController,
                                   clearOnSubmit: false,
@@ -1050,8 +1147,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: AutoCompleteTextField(
                                   controller: businessController,
                                   clearOnSubmit: false,
@@ -1075,25 +1172,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
                                   itemBuilder: (context, item) {
@@ -1142,8 +1239,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
@@ -1232,8 +1329,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 75,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  left: 2.0,
+                                  right: 16.0,
+                                  top: 2.0,
+                                  bottom: 2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -1309,8 +1409,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -1391,8 +1491,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: Row(
                                 children: [
                                   Switch(
@@ -1432,18 +1532,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Community'),
-                              size: 14,
-                              weight: FontWeight.w600,
+                            child: RichText(
+                              text: TextSpan(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Section'),
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: darkColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w600),
+                                  children: [
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 14.0),
+                                    ),
+                                  ]),
                             ),
                           ),
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(left:2.0,right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  left: 2.0,
+                                  right: 16.0,
+                                  top: 2.0,
+                                  bottom: 2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
@@ -1516,18 +1630,29 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Caste'),
-                              size: 14,
-                              weight: FontWeight.w600,
+                            child: RichText(
+                              text: TextSpan(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Caste'),
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: darkColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w600),
+                                  children: [
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 14.0),
+                                    ),
+                                  ]),
                             ),
                           ),
                           SizedBox(
                             height: 58,
                             child: Padding(
-                              padding:
-                              const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
                               child: DropdownButtonFormField<String>(
                                 isExpanded: true,
                                 decoration: InputDecoration(
@@ -1676,6 +1801,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       }
     });
   }
+
   getMaritalStatus() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
@@ -1692,14 +1818,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       }
     });
   }
+
   getBusiness() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
         await firestoreInstance.collection(collectionBusiness).get();
     businessList = querySnapshot.docs.map((doc) => doc.data()).toList();
     businessList.forEach((element) {
-      LinkedHashMap<String, dynamic> businessData =
-          element[collectionBusiness];
+      LinkedHashMap<String, dynamic> businessData = element[collectionBusiness];
       debugPrint("businessData:$businessData");
       if (businessData != null) {
         occupationVal = businessData[language];
@@ -1717,8 +1843,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     debugPrint("bloodGrpList:$bloodGrpList");
 
     bloodGrpList.forEach((element) {
-      final bloodGrpData =
-          element[collectionBloodGroup];
+      final bloodGrpData = element[collectionBloodGroup];
       debugPrint("bloodGrpData:$bloodGrpData");
       if (bloodGrpData != null) {
         bloodGrpLangList.add(bloodGrpData);

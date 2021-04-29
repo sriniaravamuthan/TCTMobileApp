@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -41,6 +42,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   FocusNode familyMemFocus = new FocusNode();
   List<dynamic> values;
   DemographicFamily demographicFamily;
+  bool isCancel = false;
   String language,
       formNo,
       projectCode,
@@ -54,6 +56,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   String dropDownLang;
   var villageNameController = TextEditingController();
   var villageCodeController = TextEditingController();
+  var panCodeController = TextEditingController();
+  var panNoController = TextEditingController();
 
   List villageCodeList;
   var height, width;
@@ -233,12 +237,25 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                       ),
                       Row(
                         children: [
-                          TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Mandatory Fields'),
-                            color: darkColor,
-                            weight: FontWeight.w600,
-                            size: 16,
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: RichText(
+                              text: TextSpan(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Mandatory Fields'),
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: darkColor,
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.w600),
+                                  children: [
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 14.0),
+                                    ),
+                                  ]),
+                            ),
                           ),
                         ],
                       ),
@@ -259,21 +276,23 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_left,
-                                size: 30,
-                                color: darkColor,
-                              ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                cancel();
-                              },
-                            ),
-                          ),
+                          isCancel
+                              ? Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: FloatingActionButton(
+                                    // isExtended: true,
+                                    child: Icon(
+                                      Icons.keyboard_arrow_left,
+                                      size: 30,
+                                      color: darkColor,
+                                    ),
+                                    backgroundColor: lightColor,
+                                    onPressed: () {
+                                      cancel();
+                                    },
+                                  ),
+                                )
+                              : Container(),
                           SizedBox(
                             height: 10,
                           ),
@@ -360,13 +379,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 2,
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: TextFormField(
+                                                  maxLength: 4,
                                                   textInputAction:
                                                       TextInputAction.next,
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
+                                                      counterText: "",
                                                       border:
                                                           OutlineInputBorder(
                                                         borderSide:
@@ -419,7 +443,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       fillColor:
                                                           lightGreyColor),
                                                   keyboardType:
-                                                      TextInputType.text,
+                                                      TextInputType.number,
                                                   onSaved: (String val) {
                                                     setState(() {
                                                       demographicFamily.location
@@ -468,13 +492,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                                padding: const EdgeInsets.only(
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: TextFormField(
+                                                  maxLength: 1,
                                                   textInputAction:
                                                       TextInputAction.next,
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
+                                                      counterText: "",
                                                       border:
                                                           OutlineInputBorder(
                                                         borderSide:
@@ -527,7 +555,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       fillColor:
                                                           lightGreyColor),
                                                   keyboardType:
-                                                      TextInputType.text,
+                                                      TextInputType.number,
                                                   onSaved: (String val) {
                                                     setState(() {
                                                       projectCode = val;
@@ -561,19 +589,37 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(
-                                                        context)
-                                                    .translate('Village Code'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate(
+                                                            'Village Code'),
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
                                                   padding:
-                                                  const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                                      const EdgeInsets.only(
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: AutoCompleteTextField(
                                                       controller:
                                                           villageCodeController,
@@ -695,102 +741,130 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(
-                                                        context)
-                                                    .translate('Panchayat No'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate(
+                                                            'Panchayat No'),
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
-                                                child: DropdownButtonFormField<
-                                                    String>(
-                                                  isExpanded: true,
-                                                  decoration: InputDecoration(
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                          lightGreyColor),
-                                                  value: panNoVal,
-                                                  // validator: (value) => value ==
-                                                  //         null
-                                                  //     ? 'Source Type must not be empty'
-                                                  //     : null,
-                                                  onChanged: (value) =>
-                                                      setState(() =>
-                                                          panNoVal = value),
-                                                  items: <String>[
-                                                    '1212',
-                                                    '2325',
-                                                    '6558',
-                                                  ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: TextWidget(
-                                                        text: value,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w400,
-                                                        size: 14,
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                ),
+                                                padding: const EdgeInsets.only(
+                                                    left: 2,
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
+                                                child: AutoCompleteTextField(
+                                                    controller: panNoController,
+                                                    clearOnSubmit: false,
+                                                    itemSubmitted: (item) {
+                                                      panNoController.text =
+                                                          item;
+                                                    },
+                                                    suggestions:
+                                                        villageCodeList,
+                                                    style: TextStyle(
+                                                      color: Color(0xFF222222),
+                                                      fontSize: 16,
+                                                    ),
+                                                    decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide.none,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                            lightGreyColor),
+                                                    itemBuilder:
+                                                        (context, item) {
+                                                      return new Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: TextWidget(
+                                                            text: item,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                            weight:
+                                                                FontWeight.w600,
+                                                          ));
+                                                    },
+                                                    itemSorter: (a, b) {
+                                                      return a.compareTo(b);
+                                                    },
+                                                    itemFilter: (item, query) {
+                                                      return item
+                                                          .toLowerCase()
+                                                          .startsWith(query
+                                                              .toLowerCase());
+                                                    }),
                                               ),
                                             ),
                                           ],
@@ -810,103 +884,130 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    DemoLocalization.of(context)
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
                                                         .translate(
                                                             'Panchayat Code'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
-                                                child: DropdownButtonFormField<
-                                                    String>(
-                                                  isExpanded: true,
-                                                  decoration: InputDecoration(
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderSide:
-                                                            BorderSide.none,
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                          lightGreyColor),
-                                                  value: panCodeVal,
-                                                  // validator: (value) => value ==
-                                                  //         null
-                                                  //     ? 'Source Type must not be empty'
-                                                  //     : null,
-                                                  onChanged: (value) =>
-                                                      setState(() =>
-                                                          panCodeVal = value),
-                                                  items: <String>[
-                                                    '98',
-                                                    '988',
-                                                    '999',
-                                                  ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: TextWidget(
-                                                        text: value,
-                                                        color: darkColor,
-                                                        weight: FontWeight.w400,
-                                                        size: 14,
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                ),
+                                                padding: const EdgeInsets.only(
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
+                                                child: AutoCompleteTextField(
+                                                    controller:
+                                                        panCodeController,
+                                                    clearOnSubmit: false,
+                                                    itemSubmitted: (item) {
+                                                      panCodeController.text =
+                                                          item;
+                                                    },
+                                                    suggestions:
+                                                        villageCodeList,
+                                                    style: TextStyle(
+                                                      color: Color(0xFF222222),
+                                                      fontSize: 16,
+                                                    ),
+                                                    decoration: InputDecoration(
+                                                        border:
+                                                            OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide.none,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                                  lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                            lightGreyColor),
+                                                    itemBuilder:
+                                                        (context, item) {
+                                                      return new Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                          child: TextWidget(
+                                                            text: item,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                            weight:
+                                                                FontWeight.w600,
+                                                          ));
+                                                    },
+                                                    itemSorter: (a, b) {
+                                                      return a.compareTo(b);
+                                                    },
+                                                    itemFilter: (item, query) {
+                                                      return item
+                                                          .toLowerCase()
+                                                          .startsWith(query
+                                                              .toLowerCase());
+                                                    }),
                                               ),
                                             ),
                                           ],
@@ -926,19 +1027,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(
-                                                        context)
-                                                    .translate('Village Name'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
+                                                        .translate(
+                                                            'Village Name'),
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                                padding: const EdgeInsets.only(
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: AutoCompleteTextField(
                                                     controller:
                                                         villageNameController,
@@ -1056,18 +1174,35 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(2.0),
-                                          child: TextWidget(
-                                            text: DemoLocalization.of(context)
-                                                .translate('Street Name'),
-                                            size: 14,
-                                            weight: FontWeight.w600,
+                                          child: RichText(
+                                            text: TextSpan(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Street Name'),
+                                                style: GoogleFonts.roboto(
+                                                    fontSize: 14,
+                                                    color: darkColor,
+                                                    fontStyle: FontStyle.normal,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                                children: [
+                                                  TextSpan(
+                                                    text: ' *',
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontSize: 14.0),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                         SizedBox(
                                           height: 58,
                                           child: Padding(
-                                            padding:
-                                            const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 2,
+                                                right: 16.0,
+                                                top: 2.0,
+                                                bottom: 2.0),
                                             child: TextFormField(
                                               textInputAction:
                                                   TextInputAction.next,
@@ -1145,21 +1280,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                           children: [
                                             Padding(
                                               padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    DemoLocalization.of(context)
+                                                  const EdgeInsets.all(2.0),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
                                                         .translate('Door No'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
-
+                                                padding: const EdgeInsets.only(
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -1249,20 +1399,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    DemoLocalization.of(context)
+                                              child: RichText(
+                                                text: TextSpan(
+                                                    text: DemoLocalization.of(
+                                                            context)
                                                         .translate(
                                                             'Contact Person'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
+                                                    style: GoogleFonts.roboto(
+                                                        fontSize: 14,
+                                                        color: darkColor,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: ' *',
+                                                        style: TextStyle(
+                                                            color: Colors.red,
+                                                            fontSize: 14.0),
+                                                      ),
+                                                    ]),
                                               ),
                                             ),
                                             SizedBox(
                                               height: 58,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(right: 16.0,top:2.0,bottom:2.0),
+                                                padding: const EdgeInsets.only(
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: TextFormField(
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -1371,13 +1537,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               height: 58,
                                               width: 120,
                                               child: Padding(
-                                                padding:
-                                                const EdgeInsets.only(left:2,right: 16.0,top:2.0,bottom:2.0),
+                                                padding: const EdgeInsets.only(
+                                                    left: 2,
+                                                    right: 16.0,
+                                                    top: 2.0,
+                                                    bottom: 2.0),
                                                 child: TextFormField(
+                                                  maxLength: 2,
                                                   textInputAction:
                                                       TextInputAction.done,
                                                   enableSuggestions: true,
                                                   decoration: InputDecoration(
+                                                      counterText: "",
                                                       border:
                                                           OutlineInputBorder(
                                                         borderSide:
@@ -1566,7 +1737,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     // _currentStep < 2 ?
     // setState(() => _currentStep += 1): null;
     // debugPrint("_currentStep: $_currentStep");
-
+    isCancel = true;
     if (_currentStep < 1) {
       setState(() {
         _currentStep += 1;
@@ -1587,7 +1758,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     // _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
     // _stepTwoKey.currentState.reset();
     // _formKey.currentState.reset();
-    _currentStep > 0 ? setState(() => _currentStep -= 1) : null;
+    _currentStep > 0
+        ? setState(() {
+            _currentStep -= 1;
+          })
+        : null;
   }
 
   void _changeLanguage() async {
