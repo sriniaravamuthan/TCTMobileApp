@@ -395,7 +395,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   numeric: true),
                               DataColumn(
                                   label: SizedBox(
-                                    width: 100,
+                                    width: 140,
                                     child: Center(
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)

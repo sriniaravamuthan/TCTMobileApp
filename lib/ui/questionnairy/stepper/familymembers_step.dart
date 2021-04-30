@@ -54,6 +54,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var maritalController = TextEditingController();
   var businessController = TextEditingController();
   var bloodGrpController = TextEditingController();
+  var sectionController = TextEditingController();
 
   TextEditingController ageController = TextEditingController();
   List<dynamic> values;
@@ -69,6 +70,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   List businessLangList;
   List bloodGrpList;
   List bloodGrpLangList;
+  List sectionList;
+  List sectionLangList;
   String nameVal,
       relationshipVal,
       genderVal,
@@ -106,6 +109,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     businessLangList = [];
     bloodGrpList = [];
     bloodGrpLangList = [];
+    sectionList = [];
+    sectionLangList = [];
     getLanguage();
     super.initState();
   }
@@ -1572,61 +1577,69 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   right: 16.0,
                                   top: 2.0,
                                   bottom: 2.0),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                value: communityVal,
-                                validator: (value) => value == null
-                                    ? 'Source Type must not be empty'
-                                    : null,
-                                onChanged: (value) =>
-                                    setState(() => communityVal = value),
-                                items: <String>[
-                                  'MBC',
-                                  'BC',
-                                  'Others',
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 14,
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
+                              child: AutoCompleteTextField(
+                                  controller: sectionController,
+                                  clearOnSubmit: false,
+                                  itemSubmitted: (item) {
+                                    sectionController.text = item;
+                                    debugPrint(
+                                        "sectionController:${sectionController.text}");
+                                  },
+                                  suggestions: sectionLangList,
+                                  style: TextStyle(
+                                    color: Color(0xFF222222),
+                                    fontSize: 16,
+                                  ),
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  itemBuilder: (context, item) {
+                                    return new Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: TextWidget(
+                                          text: item,
+                                          color: darkColor,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        ));
+                                  },
+                                  itemSorter: (a, b) {
+                                    return a.compareTo(b);
+                                  },
+                                  itemFilter: (item, query) {
+                                    debugPrint("genderItem:$item");
+                                    return item
+                                        .toLowerCase()
+                                        .startsWith(query.toLowerCase());
+                                  }),
                             ),
                           ),
                         ],
@@ -1667,8 +1680,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
+                              child: TextFormField(
+                                textInputAction: TextInputAction.next,
+                                autocorrect: true,
+                                enableSuggestions: true,
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
@@ -1700,27 +1715,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
-                                value: castVal,
-                                validator: (value) => value == null
-                                    ? 'Source Type must not be empty'
-                                    : null,
-                                onChanged: (value) =>
-                                    setState(() => castVal = value),
-                                items: <String>[
-                                  'Agamudayar',
-                                  'Udayar',
-                                  'Others',
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 14,
-                                    ),
-                                  );
-                                }).toList(),
+                                keyboardType: TextInputType.text,
+                                onSaved: (String val) {
+                                  setState(() {});
+                                },
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Enter a  Caste';
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ),
@@ -2159,6 +2163,22 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     });
   }
 
+  getSection() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionSection).get();
+    sectionList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    sectionList.forEach((element) {
+      LinkedHashMap<String, dynamic> sectionData = element[collectionSection];
+      debugPrint("sectionData:$sectionData");
+      if (sectionData != null) {
+        communityVal = sectionData[language];
+        sectionLangList.add(communityVal);
+        debugPrint("sectionLangList:$sectionLangList");
+      }
+    });
+  }
+
   getBloodGroup() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
@@ -2204,5 +2224,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getMaritalStatus();
     getBusiness();
     getBloodGroup();
+    getSection();
   }
 }

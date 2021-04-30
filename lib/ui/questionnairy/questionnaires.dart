@@ -115,26 +115,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                DropdownButton(
-                  underline: SizedBox(),
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.black87,
-                  ),
-                  items: ['Tamil', 'English'].map((val) {
-                    return new DropdownMenuItem<String>(
-                      value: val,
-                      child: new Text(val),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      dropDownLang = val;
-                      _changeLanguage();
-                    });
-                    print("Language:$val");
-                  },
-                ),
                 SizedBox(
                   width: 20,
                 ),
