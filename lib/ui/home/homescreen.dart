@@ -407,20 +407,20 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   numeric: true),
-                              DataColumn(
-                                  label: SizedBox(
-                                    width: 100,
-                                    child: Center(
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Zone'),
-                                        color: darkColor,
-                                        size: 16,
-                                        weight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  numeric: true),
+                              // DataColumn(
+                              //     label: SizedBox(
+                              //       width: 100,
+                              //       child: Center(
+                              //         child: TextWidget(
+                              //           text: DemoLocalization.of(context)
+                              //               .translate('Zone'),
+                              //           color: darkColor,
+                              //           size: 16,
+                              //           weight: FontWeight.w700,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     numeric: true),
                               DataColumn(
                                   label: SizedBox(
                                 width: 100,
@@ -517,17 +517,17 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           )),
-                                          DataCell(SizedBox(
-                                            width: 100,
-                                            child: Center(
-                                              child: TextWidget(
-                                                text: usersItem.zone,
-                                                color: darkGreyColor,
-                                                size: 16,
-                                                weight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          )),
+                                          // DataCell(SizedBox(
+                                          //   width: 100,
+                                          //   child: Center(
+                                          //     child: TextWidget(
+                                          //       text: usersItem.zone,
+                                          //       color: darkGreyColor,
+                                          //       size: 16,
+                                          //       weight: FontWeight.w600,
+                                          //     ),
+                                          //   ),
+                                          // )),
                                           DataCell(SizedBox(
                                             width: 100,
                                             child: Center(
