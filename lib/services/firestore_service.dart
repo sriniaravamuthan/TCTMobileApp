@@ -71,9 +71,15 @@ class FireStoreService {
           "community": demographicFamily.family[0].community,
           "caste": demographicFamily.family[0].caste,
           "photo": demographicFamily.family[0].photo
-        }
+    // "govtInsurance":
+    // "privateInsurance":
+    // "oldPension":
+    // "widowedPension":
+    // "retirementPension":
+    }
       ]
     };
+
 
     return demographicData
         .add(data)
