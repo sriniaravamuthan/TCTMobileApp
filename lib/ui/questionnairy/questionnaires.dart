@@ -1800,6 +1800,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     demographicFamily.location = location;
     // demographicFamily.family = familyList;
     // collectionReference.add(demographicFamily.toJson());
+    debugPrint("demographicData:$demographicFamily");
 
     FireStoreService fireStoreService = new FireStoreService();
     fireStoreService.createFamily(demographicFamily);

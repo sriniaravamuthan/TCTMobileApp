@@ -87,5 +87,9 @@
   "cancel": "ரத்துசெய்",
   "Yes,Delete": "ஆம், நீக்கு",
   "No, Cancel": "இல்லை, ரத்துசெய்",
-  "Number of Family Members":"குடும்ப உறுப்பினர்களின் எண்ணிக்கை"
+  "Number of Family Members":"குடும்ப உறுப்பினர்களின் எண்ணிக்கை",
+  "Pension": "ஓய்வூதியம்",
+  "Insurance": "காப்பீடு",
+  "Vehicle Details": "வாகன விவரங்கள்"
+
 }

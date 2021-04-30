@@ -6,6 +6,7 @@
  * /
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tct_demographics/models/data_model.dart';
 
@@ -15,7 +16,7 @@ class FireStoreService {
   // Map familyData;
   Future<DemographicFamily> createFamily(DemographicFamily demographicFamily) {
     Map<String, dynamic> data = {
-      "CreatedBy": demographicFamily.uid,
+      "CreatedBy": FirebaseAuth.instance.currentUser.uid,
       "Location": {
         'formNo': demographicFamily.location.formNo,
         'projectCode': demographicFamily.location.projectCode,
@@ -71,15 +72,14 @@ class FireStoreService {
           "community": demographicFamily.family[0].community,
           "caste": demographicFamily.family[0].caste,
           "photo": demographicFamily.family[0].photo
-    // "govtInsurance":
-    // "privateInsurance":
-    // "oldPension":
-    // "widowedPension":
-    // "retirementPension":
-    }
+          // "govtInsurance":
+          // "privateInsurance":
+          // "oldPension":
+          // "widowedPension":
+          // "retirementPension":
+        }
       ]
     };
-
 
     return demographicData
         .add(data)

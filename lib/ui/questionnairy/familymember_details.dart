@@ -33,7 +33,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             InkWell(
               onTap: () {
@@ -69,7 +69,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 ),
               ),
             ),
-            Container(),
           ],
         ),
         Row(
