@@ -11,9 +11,12 @@ import 'dart:io';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -124,6 +127,23 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       } else {
         print('No image selected.');
       }
+    });
+  }
+
+  Future uploadFile() async {
+    firebase_storage.Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('tct/${Path.basename(_image.path)}}');
+    print('path:$storageReference');
+
+    firebase_storage.UploadTask uploadTask = storageReference.putFile(_image);
+    print('File Uploaded');
+    firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
+
+    setState(() {
+      print("Profile Picture uploaded");
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
     });
   }
 
@@ -1968,6 +1988,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    uploadFile();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: Colors.black45,
+                        style: BorderStyle.solid,
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context).translate('Save'),
+                        color: darkColor,
+                        weight: FontWeight.w700,
+                        size: 14,
+                      ),
+                    ),
+                  ),
+                ),
+                Container()
               ],
             )
           ],
