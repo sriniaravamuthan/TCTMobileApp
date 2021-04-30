@@ -7,11 +7,11 @@
  */
 
 class DemographicFamily {
-  String uid;
-  Location location;
-  Property property;
-  Habits habits;
-  List<Family> family;
+  String uid = "";
+  Location location = new Location();
+  Property property = new Property();
+  Habits habits = new Habits();
+  List<Family> family = [];
 
   DemographicFamily(
       {this.location, this.property, this.habits, this.family, this.uid});
@@ -54,16 +54,16 @@ class DemographicFamily {
 }
 
 class Location {
-  String formNo;
-  int projectCode;
-  String villagesCode;
-  int panchayatNo;
-  String panchayatCode;
-  String villageName;
-  String streetName;
-  int doorNumber;
-  String contactPerson;
-  int noOfFamilyMembers;
+  String formNo = "";
+  int projectCode = 0;
+  String villagesCode = "";
+  int panchayatNo = 0;
+  String panchayatCode = "";
+  String villageName = "";
+  String streetName = "";
+  int doorNumber = 0;
+  String contactPerson = "";
+  int noOfFamilyMembers = 0;
 
   Location(
       {this.formNo,
@@ -107,21 +107,21 @@ class Location {
 }
 
 class Property {
-  String statusofHouse;
-  String typeofHouse;
-  bool toiletFacility;
-  bool ownLand;
-  int wetLandInAcres;
-  int dryLandInAcres;
-  bool ownVehicle;
-  int noOfVehicleOwn;
-  int twoWheeler;
-  int threeWheeler;
-  int fourWheeler;
-  int others;
-  bool ownLivestocks;
-  String livestockType;
-  int livestockCount;
+  String statusofHouse = "";
+  String typeofHouse = "";
+  bool toiletFacility = true;
+  bool ownLand = false;
+  int wetLandInAcres = 0;
+  int dryLandInAcres = 0;
+  bool ownVehicle = false;
+  int noOfVehicleOwn = 0;
+  int twoWheeler = 0;
+  int threeWheeler = 0;
+  int fourWheeler = 0;
+  int others = 0;
+  bool ownLivestocks = false;
+  String livestockType = "";
+  int livestockCount = 0;
 
   Property(
       {this.statusofHouse,
@@ -180,9 +180,9 @@ class Property {
 }
 
 class Habits {
-  bool anyMembersWhoSmoke;
-  bool anyMembersWhoDrink;
-  bool anyMembersWhoUseTobacco;
+  bool anyMembersWhoSmoke = false;
+  bool anyMembersWhoDrink = false;
+  bool anyMembersWhoUseTobacco = false;
 
   Habits(
       {this.anyMembersWhoSmoke,
@@ -205,24 +205,24 @@ class Habits {
 }
 
 class Family {
-  String name;
-  int aadharNumber;
-  String relationship;
-  String gender;
-  String dob;
-  int age;
-  String maritalStatus;
-  String bloodGroup;
-  bool physicallyChallenge;
-  String education;
-  String occupation;
-  int annualIncome;
-  int mobileNumber;
-  String mail;
-  bool smartphone;
-  String community;
-  String caste;
-  String photo;
+  String name = "";
+  int aadharNumber = 0;
+  String relationship = "";
+  String gender = "";
+  String dob = "";
+  int age = 0;
+  String maritalStatus = "";
+  String bloodGroup = "";
+  bool physicallyChallenge = false;
+  String education = "";
+  String occupation = "";
+  int annualIncome = 0;
+  int mobileNumber = 0;
+  String mail = "";
+  bool smartphone = false;
+  String community = "";
+  String caste = "";
+  String photo = "";
 
   Family(
       {this.name,

@@ -22,6 +22,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
+import 'package:tct_demographics/services/firestore_service.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
@@ -41,7 +42,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   FocusNode familyMemFocus = new FocusNode();
   List<dynamic> values;
-  DemographicFamily demographicFamily;
   bool isCancel = false;
   String language,
       formNo,
@@ -52,12 +52,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       villageNameVal,
       streetName,
       doorNumber,
-      contactPerson;
+      contactPerson,
+      noOfFamily;
   String dropDownLang;
   var villageNameController = TextEditingController();
   var villageCodeController = TextEditingController();
   var panCodeController = TextEditingController();
   var panNoController = TextEditingController();
+
+  Family family = new Family();
+  List familyList = [];
 
   List villageCodeList;
   var height, width;
@@ -73,7 +77,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     villageNameList = [];
     villageNameLangList = [];
     villageCodeList = [];
-    demographicFamily = DemographicFamily();
     getLanguage();
     // _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
@@ -446,10 +449,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.number,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      demographicFamily.location
-                                                          .formNo = val;
-                                                      debugPrint(
-                                                          "formNo:${demographicFamily.location.formNo}");
+                                                      // demographicFamily.location.formNo = val;
+                                                      formNo = val;
+                                                      // debugPrint("formNo:${demographicFamily.location.formNo}");
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -1254,7 +1256,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   fillColor: lightGreyColor),
                                               keyboardType: TextInputType.text,
                                               onSaved: (String val) {
-                                                setState(() {});
+                                                setState(() {
+                                                  streetName = val;
+                                                });
                                               },
                                               // validator: (value) {
                                               //   if (value.isEmpty) {
@@ -1369,7 +1373,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   keyboardType:
                                                       TextInputType.text,
                                                   onSaved: (String val) {
-                                                    setState(() {});
+                                                    setState(() {
+                                                      doorNumber = val;
+                                                    });
                                                   },
                                                   // validator: (value) {
                                                   //   if (value.isEmpty) {
@@ -1488,7 +1494,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   keyboardType:
                                                       TextInputType.text,
                                                   onSaved: (String val) {
-                                                    setState(() {});
+                                                    setState(() {
+                                                      contactPerson = val;
+                                                    });
                                                   },
                                                   // validator: (value) {
                                                   //   if (value.isEmpty) {
@@ -1603,7 +1611,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   keyboardType:
                                                       TextInputType.number,
                                                   onSaved: (String val) {
-                                                    setState(() {});
+                                                    setState(() {
+                                                      noOfFamily = val;
+                                                    });
                                                   },
                                                   // validator: (value) {
                                                   //   if (value.isEmpty) {
@@ -1774,13 +1784,40 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   void addData() {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('demographicData');
-    collectionReference.add({
+    DemographicFamily demographicFamily = new DemographicFamily();
+    Location location = new Location(
+        formNo: formNo,
+        projectCode: int.parse(projectCode),
+        villagesCode: villageCodeController.text,
+        panchayatNo: int.parse(panNoController.text),
+        panchayatCode: panCodeController.text,
+        villageName: villageNameController.text,
+        streetName: streetName,
+        doorNumber: int.parse(doorNumber),
+        contactPerson: contactPerson,
+        noOfFamilyMembers: int.parse(noOfFamily));
+
+    demographicFamily.location = location;
+    // demographicFamily.family = familyList;
+    // collectionReference.add(demographicFamily.toJson());
+
+    FireStoreService fireStoreService = new FireStoreService();
+    fireStoreService.createFamily(demographicFamily);
+
+    /*collectionReference.add({
       'location': {
-        "formNo ": demographicFamily.location.formNo,
+        "formNo ": formNo,
         "projectCode ": projectCode,
-        // "villagesCode ": villageController.text
+        "villagesCode" : villageCodeController.text,
+        "panchayatNo" : panNoController.text,
+        "panchayatCode" : panCodeController.text,
+        "villageName" : villageNameController.text,
+        "streetName" : streetName,
+        "doorNo" : doorNumber,
+        "contactPerson" : contactPerson,
+        "noOfFamily" : noOfFamily,
       },
-    });
+    });*/
   }
 
   getVillageName() async {
