@@ -8,23 +8,44 @@
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HabitsStep extends StatefulWidget {
+  DemographicFamily demographicFamily;
+
+  HabitsStep(this.demographicFamily);
+
   @override
-  _HabitsStepState createState() => _HabitsStepState();
+  _HabitsStepState createState() => _HabitsStepState(demographicFamily);
 }
 
 class _HabitsStepState extends State<HabitsStep> {
   GlobalKey<FormState> _stepFourKey = new GlobalKey<FormState>();
-  bool isSwitched = false;
-  String textValue = 'No';
-  bool isSwitched1 = false;
-  String textValue1 = 'No';
-  bool isSwitched2 = false;
-  String textValue2 = 'No';
+  String textSmoke = 'No';
+  String textDrink = 'No';
+  String textTobacco = 'No';
+  DemographicFamily demographicFamily;
+  Habits habits = new Habits();
 
-  bool anyMembersWhoSmokeVal, anyMembersWhoDrinkVal, anyMembersWhoUseTobaccoVal;
+  _HabitsStepState(this.demographicFamily);
+
+  @override
+  void initState() {
+    if (demographicFamily.habits == null) {
+      habits.anyMembersWhoUseTobacco = false;
+      habits.anyMembersWhoDrink = false;
+      habits.anyMembersWhoSmoke = false;
+      demographicFamily.habits = habits;
+    } else {
+      habits = demographicFamily.habits;
+      if (habits.anyMembersWhoSmoke == true) textSmoke = "Yes";
+      if (habits.anyMembersWhoDrink == true) textDrink = "Yes";
+      if (habits.anyMembersWhoUseTobacco == true) textTobacco = "Yes";
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,14 +74,14 @@ class _HabitsStepState extends State<HabitsStep> {
                       children: [
                         Switch(
                           onChanged: toggleSwitch,
-                          value: isSwitched,
+                          value: habits.anyMembersWhoSmoke,
                           activeColor: Colors.blue,
                           activeTrackColor: greyColor,
                           inactiveThumbColor: greyColor,
                           inactiveTrackColor: greyColor,
                         ),
                         TextWidget(
-                          text: textValue,
+                          text: textSmoke,
                           size: 14,
                           weight: FontWeight.w600,
                         ),
@@ -89,14 +110,14 @@ class _HabitsStepState extends State<HabitsStep> {
                       children: [
                         Switch(
                           onChanged: toggleSwitch1,
-                          value: isSwitched1,
+                          value: habits.anyMembersWhoDrink,
                           activeColor: Colors.blue,
                           activeTrackColor: greyColor,
                           inactiveThumbColor: greyColor,
                           inactiveTrackColor: greyColor,
                         ),
                         TextWidget(
-                          text: textValue1,
+                          text: textDrink,
                           size: 14,
                           weight: FontWeight.w600,
                         ),
@@ -125,14 +146,14 @@ class _HabitsStepState extends State<HabitsStep> {
                       children: [
                         Switch(
                           onChanged: toggleSwitch2,
-                          value: isSwitched2,
+                          value: habits.anyMembersWhoUseTobacco,
                           activeColor: Colors.blue,
                           activeTrackColor: greyColor,
                           inactiveThumbColor: greyColor,
                           inactiveTrackColor: greyColor,
                         ),
                         TextWidget(
-                          text: textValue2,
+                          text: textTobacco,
                           size: 14,
                           weight: FontWeight.w600,
                         ),
@@ -149,48 +170,48 @@ class _HabitsStepState extends State<HabitsStep> {
   }
 
   void toggleSwitch(bool value) {
-    if (isSwitched == false) {
+    if (habits.anyMembersWhoSmoke == false) {
       setState(() {
-        isSwitched = true;
-        textValue = 'Yes';
+        textSmoke = 'Yes';
+        habits.anyMembersWhoSmoke = true;
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched = false;
-        textValue = 'No';
+        textSmoke = 'No';
+        habits.anyMembersWhoSmoke = false;
       });
       print('Switch Button is OFF');
     }
   }
 
   void toggleSwitch1(bool value) {
-    if (isSwitched1 == false) {
+    if (habits.anyMembersWhoDrink == false) {
       setState(() {
-        isSwitched1 = true;
-        textValue1 = 'Yes';
+        textDrink = 'Yes';
+        habits.anyMembersWhoDrink = true;
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched1 = false;
-        textValue1 = 'No';
+        textDrink = 'No';
+        habits.anyMembersWhoDrink = false;
       });
       print('Switch Button is OFF');
     }
   }
 
   void toggleSwitch2(bool value) {
-    if (isSwitched2 == false) {
+    if (habits.anyMembersWhoUseTobacco == false) {
       setState(() {
-        isSwitched2 = true;
-        textValue2 = 'Yes';
+        textTobacco = 'Yes';
+        habits.anyMembersWhoUseTobacco = true;
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched2 = false;
-        textValue2 = 'No';
+        textTobacco = 'No';
+        habits.anyMembersWhoUseTobacco = false;
       });
       print('Switch Button is OFF');
     }

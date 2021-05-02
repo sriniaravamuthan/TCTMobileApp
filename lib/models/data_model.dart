@@ -217,12 +217,17 @@ class Family {
   String education = "";
   String occupation = "";
   int annualIncome = 0;
-  int mobileNumber = 0;
+  String mobileNumber = "";
   String mail = "";
   bool smartphone = false;
   String community = "";
   String caste = "";
   String photo = "";
+  String govtInsurance = "";
+  String privateInsurance = "";
+  String oldPension = "";
+  String widowedPension = "";
+  String retirementPension = "";
 
   Family(
       {this.name,

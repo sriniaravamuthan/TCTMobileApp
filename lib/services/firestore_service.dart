@@ -47,9 +47,9 @@ class FireStoreService {
         'livestockCount': demographicFamily.property.statusofHouse
       },
       "habit": {
-        'anyMembersWhoSmoke': demographicFamily.habits.anyMembersWhoDrink,
+        'anyMembersWhoSmoke': demographicFamily.habits.anyMembersWhoSmoke,
         'anyMembersWhoDrink': demographicFamily.habits.anyMembersWhoDrink,
-        'anyMembersWhoUseTobacco': demographicFamily.habits.anyMembersWhoDrink
+        'anyMembersWhoUseTobacco': demographicFamily.habits.anyMembersWhoUseTobacco
       },
       "familyMembers": [
         {
@@ -71,12 +71,12 @@ class FireStoreService {
           "smartphone": demographicFamily.family[0].smartphone,
           "community": demographicFamily.family[0].community,
           "caste": demographicFamily.family[0].caste,
-          "photo": demographicFamily.family[0].photo
-          // "govtInsurance":
-          // "privateInsurance":
-          // "oldPension":
-          // "widowedPension":
-          // "retirementPension":
+          "photo": demographicFamily.family[0].photo,
+          "govtInsurance": demographicFamily.family[0].govtInsurance,
+          "privateInsurance": demographicFamily.family[0].privateInsurance,
+          "oldPension": demographicFamily.family[0].oldPension,
+          "widowedPension": demographicFamily.family[0].widowedPension,
+          "retirementPension": demographicFamily.family[0].retirementPension,
         }
       ]
     };

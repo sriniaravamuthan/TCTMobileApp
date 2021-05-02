@@ -40,9 +40,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   Language language;
   String dropDownLang;
   var height, width;
-  String name;
-  int age;
+  String name = "";
+  int age = 0;
   LinkedHashMap<String, dynamic> data;
+
+  String mobileNo;
+
   @override
   void initState() {
     super.initState();
@@ -153,20 +156,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       body: StreamBuilder<QuerySnapshot>(
         stream: firestoreInstance.collection('demographicData').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.hasError) return Text('Something went wrong');
+          if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
-          } else
-            print("dataUser:${snapshot.data.docs}");
+
+          print("dataUser:${snapshot.data.docs}");
           var family = snapshot.data.docs.map((doc) => doc.data()).toList();
           debugPrint("family:$family");
           family.forEach((element) {
             data = element['familyMembers'];
             // debugPrint("familyhead2:${data['name']}");
-
             if (data != null) {
               name = data['name'];
               age = data['age'];
@@ -228,7 +227,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return SearchDialog();
+                                            return SearchDialog(
+                                                search, clearSearch);
+                                            // return _navigateAndDisplaySelection(context);
                                           });
                                     },
                                     child: Container(
@@ -306,6 +307,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: () {
                                       Get.toNamed('/questionnery');
+                                      // Navigator.pushReplacementNamed(context, "/questionnery");
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -552,8 +554,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                 children: [
                                                   InkWell(
                                                     onTap: () {
-                                                      Get.toNamed(
-                                                          '/questionnery');
+                                                      Get.toNamed('/questionnery');
+                                                      // Navigator.pushReplacementNamed(context, "/questionnery");
                                                     },
                                                     child: Icon(
                                                       Icons.edit,
@@ -613,5 +615,41 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         SharedPref().setStringPref(SharedPref().language, 'en');
       });
     }
+  }
+
+  void clearSearch() {
+    setState(() {});
+  }
+
+  void search(String mobileNo, villageCode, villageName, panchayatCode) {
+    print("GET_______" + mobileNo + " " + villageCode + " " + villageName + " " + panchayatCode);
+
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("demographicData");
+    if(mobileNo != "") {
+      // collectionReference.where("family.mobileNumber", arrayContains: mobileNo);
+      //  TODO  ::  ::  Need to check this condition
+      collectionReference.orderBy("family").where("mobileNumber", isEqualTo: mobileNo);
+    } else if (villageCode != "") {
+      collectionReference.where("location.villagesCode", isEqualTo: int.parse(villageCode));
+    } else if (panchayatCode != null) {
+      collectionReference.where("location.panchayatCode", isEqualTo: int.parse(panchayatCode));
+    } else {
+      return;
+    }
+
+    FutureBuilder<DocumentSnapshot>(
+      future: collectionReference.doc().get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          data.forEach((key, value) {
+            print("DATAAAAAAAAAA___"+ key + " : " + value);
+          });
+          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
+        }
+        return Text("loading");
+      },
+    );
   }
 }

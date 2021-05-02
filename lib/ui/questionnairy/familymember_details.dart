@@ -12,17 +12,72 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberDetails extends StatefulWidget {
+  DemographicFamily demographicFamily;
+
+  FamilyMemberDetails(this.demographicFamily);
+
   @override
-  _FamilyMemberDetailsState createState() => _FamilyMemberDetailsState();
+  _FamilyMemberDetailsState createState() =>
+      _FamilyMemberDetailsState(demographicFamily);
 }
 
 class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   bool addfamily = false;
   var height, width;
+
+  DemographicFamily demographicFamily;
+
+  Family family = new Family();
+  List<Family> familyList = [];
+
+  String physicallyChallenged = 'No';
+  String smartPhone = 'No';
+  String govtInsurance = 'No';
+  String privateInsurance = 'No';
+  String oldAgePension = 'No';
+  String widowedPension = 'No';
+  String retirementPension = 'No';
+
+  int familyMemberCount = 0;
+
+  _FamilyMemberDetailsState(this.demographicFamily);
+
+  @override
+  void initState() {
+    if (demographicFamily.family != null) {
+      familyList = demographicFamily.family;
+
+      familyList.forEach((element) {
+        if (element.physicallyChallenge) physicallyChallenged = "Yes";
+        if (element.smartphone) smartPhone = "Yes";
+        /*if(element.) govtInsurance = "Yes";
+        if(element.) privateInsurance = "Yes";
+        if(element.) oldAgePension = "Yes";
+        if(element.) widowedPension = "Yes";
+        if(element.) retirementPension = "Yes";*/
+      });
+
+      /*statusHouseController.text = property.statusofHouse;
+      stockCountController.text = property.livestockCount.toString();*/
+    } else {
+      familyList.forEach((element) {
+        element.physicallyChallenge = false;
+        element.smartphone = false;
+        /*element.physicallyChallenge = false;
+        element.physicallyChallenge = false;
+        element.physicallyChallenge = false;
+        element.physicallyChallenge = false;
+        element.physicallyChallenge = false;*/
+      });
+      demographicFamily.family = familyList;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

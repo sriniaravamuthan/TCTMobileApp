@@ -38,44 +38,33 @@ class QuestionnairesScreen extends StatefulWidget {
 
 class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   int _currentStep = 0;
-  FocusNode mailFocusNode = new FocusNode();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  FocusNode familyMemFocus = new FocusNode();
-  List<dynamic> values;
   bool isCancel = false;
-  String language,
-      formNo,
-      projectCode,
-      villageCodeValue,
-      panNoVal,
-      panCodeVal,
-      villageNameVal,
-      streetName,
-      doorNumber,
-      contactPerson,
-      noOfFamily;
-  String dropDownLang;
-  var villageNameController = TextEditingController();
-  var villageCodeController = TextEditingController();
-  var panCodeController = TextEditingController();
-  var panNoController = TextEditingController();
+  DemographicFamily demographicFamily = new DemographicFamily();
+  String language;
 
-  Family family = new Family();
-  List familyList = [];
+  Location location = new Location();
 
-  List villageCodeList;
+  var fromNoController,
+      projectCodeController,
+      streetNameController,
+      doorNoController,
+      contactPersonController,
+      noOfFamilyPersonController;
+
+  var villageNameController;
+  var villageCodeController;
+  var panchayatCodeController = TextEditingController();
+  var panchayatNoController = TextEditingController();
+
+  List<QueryDocumentSnapshot> snap;
+  List villageCodeList, villageNameList, originalVillageCodeList = [], originalVillageNameList = [];
+  List<String> panchayatCodeList = [], panchayatNoList = [];
   var height, width;
-  ScrollController _scrollController = new ScrollController();
-  List value;
-  List villageNameList;
-  List villageNameLangList;
-  LinkedHashMap<String, dynamic> villageNameData;
 
   @override
   void initState() {
-    value = [];
     villageNameList = [];
-    villageNameLangList = [];
     villageCodeList = [];
     getLanguage();
     // _getVillageCode(villageController.text);
@@ -83,12 +72,46 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+    fromNoController = TextEditingController();
+    projectCodeController = TextEditingController();
+    streetNameController = TextEditingController();
+    doorNoController = TextEditingController();
+    contactPersonController = TextEditingController();
+    noOfFamilyPersonController = TextEditingController();
+    villageNameController = TextEditingController();
+    villageCodeController = TextEditingController();
+
+    if (demographicFamily.location != null) {
+      location = demographicFamily.location;
+
+      fromNoController.text = location.formNo;
+      projectCodeController.text = location.projectCode;
+      streetNameController.text = location.streetName;
+      doorNoController.text = location.doorNumber;
+      contactPersonController.text = location.contactPerson;
+      noOfFamilyPersonController.text = location.noOfFamilyMembers;
+      villageNameController.text = location.villageName;
+      villageCodeController.text = location.villagesCode;
+      panchayatCodeController.text = location.panchayatCode;
+      panchayatNoController.text = location.panchayatNo.toString();
+    } else {
+      location.formNo = "";
+      location.villagesCode = "";
+      location.panchayatCode = "";
+      location.villageName = "";
+      location.streetName = "";
+      location.contactPerson = "";
+      location.projectCode = 0;
+      location.panchayatNo = 0;
+      location.doorNumber = 0;
+      location.noOfFamilyMembers = 0;
+    }
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("villageNameLangList1:$villageNameLangList");
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -308,11 +331,15 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               backgroundColor: primaryColor,
                               onPressed: () {
                                 setState(() {
-                                  if (_formKey.currentState.validate()) {
-                                    if (_formKey != null) {
+                                  // addData();
+                                  if (_formKey != null &&
+                                      _formKey.currentState != null) {
+                                    if (_formKey.currentState.validate()) {
                                       _formKey.currentState.save();
                                       addData();
                                     }
+                                  } else {
+                                    _showToast(context);
                                   }
                                 });
                               },
@@ -368,6 +395,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: TextFormField(
+                                                  controller: fromNoController,
                                                   maxLength: 4,
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -430,7 +458,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   onSaved: (String val) {
                                                     setState(() {
                                                       // demographicFamily.location.formNo = val;
-                                                      formNo = val;
+                                                      location.formNo = val;
+                                                      fromNoController.text =
+                                                          val;
                                                       // debugPrint("formNo:${demographicFamily.location.formNo}");
                                                     });
                                                   },
@@ -479,6 +509,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: TextFormField(
+                                                  controller:
+                                                      projectCodeController,
                                                   maxLength: 1,
                                                   textInputAction:
                                                       TextInputAction.next,
@@ -540,7 +572,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.number,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      projectCode = val;
+                                                      location.projectCode =
+                                                          int.parse(val);
+                                                      projectCodeController
+                                                          .text = val;
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -603,18 +638,29 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                           top: 2.0,
                                                           bottom: 2.0),
                                                   child: AutoCompleteTextField(
-                                                      controller:
-                                                          villageCodeController,
+                                                      controller: villageCodeController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
-                                                        villageCodeController
-                                                            .text = item;
+                                                        setState(() {
+                                                          villageCodeController.text = item;
+                                                          for(int i = 0; i < originalVillageCodeList.length; i++) {
+                                                            if (item == originalVillageCodeList[i]) {
+                                                                panchayatCodeController.text = panchayatCodeList[i];
+                                                                panchayatNoController.text = panchayatNoList[i];
+                                                              break;
+                                                            }
+                                                          }
+                                                          for(int i = 0; i < villageCodeList.length; i++) {
+                                                            if (item == villageCodeList[i]) {
+                                                                villageNameController.text = villageNameList[i];
+                                                              break;
+                                                            }
+                                                          }
+                                                        });
                                                       },
-                                                      suggestions:
-                                                          villageCodeList,
+                                                      suggestions: villageCodeList,
                                                       style: TextStyle(
-                                                        color:
-                                                            Color(0xFF222222),
+                                                        color: Color(0xFF222222),
                                                         fontSize: 16,
                                                       ),
                                                       decoration:
@@ -673,8 +719,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                                         color:
                                                                             lightGreyColor),
                                                               ),
-                                                              fillColor:
-                                                                  lightGreyColor),
+                                                              fillColor: lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
@@ -692,12 +737,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       itemSorter: (a, b) {
                                                         return a.compareTo(b);
                                                       },
-                                                      itemFilter:
-                                                          (item, query) {
+                                                      itemFilter: (item, query) {
                                                         return item
                                                             .toLowerCase()
-                                                            .startsWith(query
-                                                                .toLowerCase());
+                                                            .startsWith(query.toLowerCase());
                                                       })),
                                             ),
                                           ],
@@ -755,14 +798,30 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller: panNoController,
+                                                    controller: panchayatNoController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      panNoController.text =
-                                                          item;
+                                                      panchayatNoController.text = item;
+                                                      setState(() {
+                                                        villageNameController.text = "";
+                                                        villageCodeController.text = "";
+                                                        villageCodeList.clear();
+                                                        villageNameList.clear();
+                                                        snap.forEach((element) {
+                                                          if(element.data()["panchayatNo"].toString() == item) {
+                                                            villageCodeList.add(element.data()["villageCode"].toString());
+                                                            villageNameList.add(element.data()["villageName"][language].toString());
+                                                          }
+                                                        });
+                                                        for(int i = 0; i < panchayatNoList.length; i++) {
+                                                          if (item == panchayatNoList[i]) {
+                                                            panchayatCodeController.text = panchayatCodeList[i];
+                                                            break;
+                                                          }
+                                                        }
+                                                      });
                                                     },
-                                                    suggestions:
-                                                        villageCodeList,
+                                                    suggestions: panchayatNoList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -897,15 +956,30 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller:
-                                                        panCodeController,
+                                                    controller: panchayatCodeController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      panCodeController.text =
-                                                          item;
+                                                      panchayatCodeController.text = item;
+                                                      setState(() {
+                                                        villageNameController.text = "";
+                                                        villageCodeController.text = "";
+                                                        villageCodeList.clear();
+                                                        villageNameList.clear();
+                                                        snap.forEach((element) {
+                                                          if(element.data()["panchayatCode"].toString() == item) {
+                                                            villageCodeList.add(element.data()["villageCode"].toString());
+                                                            villageNameList.add(element.data()["villageName"][language].toString());
+                                                          }
+                                                        });
+                                                        for(int i = 0; i < panchayatCodeList.length; i++) {
+                                                          if (item == panchayatCodeList[i]) {
+                                                            panchayatNoController.text = panchayatNoList[i];
+                                                            break;
+                                                          }
+                                                        }
+                                                      });
                                                     },
-                                                    suggestions:
-                                                        villageCodeList,
+                                                    suggestions: panchayatCodeList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -987,8 +1061,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     itemFilter: (item, query) {
                                                       return item
                                                           .toLowerCase()
-                                                          .startsWith(query
-                                                              .toLowerCase());
+                                                          .startsWith(query.toLowerCase());
                                                     }),
                                               ),
                                             ),
@@ -1040,17 +1113,27 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller:
-                                                        villageNameController,
+                                                    controller: villageNameController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      villageNameController
-                                                          .text = item;
-                                                      debugPrint(
-                                                          "stringList1:${villageNameController.text}");
+                                                      villageNameController.text = item;
+                                                      setState(() {
+                                                        for(int i = 0; i < originalVillageNameList.length; i++) {
+                                                          if (item == originalVillageNameList[i]) {
+                                                              panchayatCodeController.text = panchayatCodeList[i];
+                                                              panchayatNoController.text = panchayatNoList[i];
+                                                            break;
+                                                          }
+                                                        }
+                                                        for(int i = 0; i < villageNameList.length; i++) {
+                                                          if (item == villageNameList[i]) {
+                                                              villageCodeController.text = villageCodeList[i];
+                                                            break;
+                                                          }
+                                                        }
+                                                      });
                                                     },
-                                                    suggestions:
-                                                        villageNameLangList,
+                                                    suggestions: villageNameList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -1186,6 +1269,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 top: 2.0,
                                                 bottom: 2.0),
                                             child: TextFormField(
+                                              controller: streetNameController,
                                               textInputAction:
                                                   TextInputAction.next,
                                               enableSuggestions: true,
@@ -1237,7 +1321,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               keyboardType: TextInputType.text,
                                               onSaved: (String val) {
                                                 setState(() {
-                                                  streetName = val;
+                                                  location.streetName = val;
+                                                  streetNameController.text =
+                                                      val;
                                                 });
                                               },
                                               // validator: (value) {
@@ -1295,6 +1381,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: TextFormField(
+                                                  controller: doorNoController,
                                                   textInputAction:
                                                       TextInputAction.next,
                                                   enableSuggestions: true,
@@ -1354,7 +1441,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.text,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      doorNumber = val;
+                                                      location.doorNumber =
+                                                          int.parse(val);
+                                                      doorNoController.text =
+                                                          val;
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -1416,6 +1506,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: TextFormField(
+                                                  controller:
+                                                      contactPersonController,
                                                   textInputAction:
                                                       TextInputAction.next,
                                                   enableSuggestions: true,
@@ -1475,7 +1567,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.text,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      contactPerson = val;
+                                                      location.contactPerson =
+                                                          val;
+                                                      contactPersonController
+                                                          .text = val;
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -1531,6 +1626,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: TextFormField(
+                                                  controller:
+                                                      noOfFamilyPersonController,
                                                   maxLength: 2,
                                                   textInputAction:
                                                       TextInputAction.done,
@@ -1592,7 +1689,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.number,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      noOfFamily = val;
+                                                      location.noOfFamilyMembers =
+                                                          int.parse(val);
+                                                      noOfFamilyPersonController
+                                                          .text = val;
                                                     });
                                                   },
                                                   // validator: (value) {
@@ -1637,7 +1737,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           size: 14,
                           weight: FontWeight.w600,
                         ),
-                        content: FamilyMemberDetails(),
+                        content: FamilyMemberDetails(demographicFamily),
                         isActive: _currentStep >= 0,
                         state: _currentStep >= 1
                             ? StepState.complete
@@ -1651,7 +1751,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           size: 14,
                           weight: FontWeight.w600,
                         ),
-                        content: PropertyDetailStep(),
+                        content: PropertyDetailStep(demographicFamily),
                         isActive: _currentStep >= 0,
                         state: _currentStep >= 2
                             ? StepState.complete
@@ -1665,7 +1765,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           size: 14,
                           weight: FontWeight.w600,
                         ),
-                        content: HabitsStep(),
+                        content: HabitsStep(demographicFamily),
                         isActive: _currentStep >= 0,
                         state: _currentStep >= 3
                             ? StepState.complete
@@ -1720,24 +1820,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         : null;
   }
 
-  void _changeLanguage() async {
-    // Locale _temp = await setLocale(language.languageCode);
-    // SplashScreen.setLocale(context, _temp);
-
-    if (dropDownLang == "Tamil") {
-      setState(() {
-        MyApp.setLocale(context, Locale('ta', 'IN'));
-        SharedPref().setStringPref(SharedPref().language, 'ta');
-      });
-    } else {
-      setState(() {
-        MyApp.setLocale(context, Locale('en', 'US'));
-        SharedPref().setStringPref(SharedPref().language, 'en');
-      });
-    }
-  }
-
-  Future<void> _getVillageCode(String text) async {
+  /*Future<void> _getVillageCode(String text) async {
     debugPrint(
         "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).snapshots()}");
     QuerySnapshot querySnapshot =
@@ -1753,57 +1836,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
       print("villageCodeList1:${values.last}");
     });
-  }
+  }*/
 
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
-    getVillageName();
+    getVillageDetails(language);
+    // getVillageName();
   }
 
   void addData() {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection('demographicData');
-    DemographicFamily demographicFamily = new DemographicFamily();
-    Location location = new Location(
-        formNo: formNo,
-        projectCode: int.parse(projectCode),
-        villagesCode: villageCodeController.text,
-        panchayatNo: int.parse(panNoController.text),
-        panchayatCode: panCodeController.text,
-        villageName: villageNameController.text,
-        streetName: streetName,
-        doorNumber: int.parse(doorNumber),
-        contactPerson: contactPerson,
-        noOfFamilyMembers: int.parse(noOfFamily));
+    location.formNo = fromNoController.text;
+    location.projectCode = int.parse(projectCodeController.text);
+    location.streetName = streetNameController.text;
+    location.doorNumber = int.parse(doorNoController.text);
+    location.contactPerson = contactPersonController.text;
+    location.noOfFamilyMembers = int.parse(noOfFamilyPersonController.text);
+
+    location.villagesCode = villageCodeController.text;
+    location.panchayatNo = int.parse(panchayatNoController.text);
+    location.panchayatCode = panchayatCodeController.text;
+    location.villageName = villageNameController.text;
 
     demographicFamily.location = location;
-    // demographicFamily.family = familyList;
-    // collectionReference.add(demographicFamily.toJson());
-    debugPrint("demographicData:$demographicFamily");
 
     FireStoreService fireStoreService = new FireStoreService();
     fireStoreService.createFamily(demographicFamily);
-
-    /*collectionReference.add({
-      'location': {
-        "formNo ": formNo,
-        "projectCode ": projectCode,
-        "villagesCode" : villageCodeController.text,
-        "panchayatNo" : panNoController.text,
-        "panchayatCode" : panCodeController.text,
-        "villageName" : villageNameController.text,
-        "streetName" : streetName,
-        "doorNo" : doorNumber,
-        "contactPerson" : contactPerson,
-        "noOfFamily" : noOfFamily,
-      },
-    });*/
   }
 
-  getVillageName() async {
-    QuerySnapshot querySnapshot =
-        await firestoreInstance.collection(collectionVillageName).get();
+  /*getVillageName() async {
+    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
     villageNameList = querySnapshot.docs.map((doc) => doc.data()).toList();
     villageNameList.forEach((element) {
       villageNameData = element[collectionVillageName];
@@ -1816,5 +1878,40 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         debugPrint("villageNameLangList:$villageNameLangList");
       }
     });
+  }*/
+
+  getVillageDetails(String language) async {
+    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
+    setState(() {
+      snap = querySnapshot.docs;
+
+      var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
+      var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+      var panchayatNoDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
+
+      villageCodeDoc.forEach((element) {
+        villageCodeList.add(element.toString());
+        originalVillageCodeList.add(element.toString());
+      });
+      villageNameDoc.forEach((element) {
+        villageNameList.add(element.toString());
+        originalVillageNameList.add(element.toString());
+      });
+      panchayatCodeDoc.forEach((element) {
+        panchayatCodeList.add(element.toString());
+      });
+      panchayatNoDoc.forEach((element) {
+        panchayatNoList.add(element.toString());
+      });
+    });
+  }
+
+  void _showToast(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('All fields are required'),
+      ),
+    );
   }
 }

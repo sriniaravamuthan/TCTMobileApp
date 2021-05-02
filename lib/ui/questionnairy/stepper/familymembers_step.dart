@@ -25,6 +25,7 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
+
   @override
   _FamilyMemberStepState createState() => _FamilyMemberStepState();
 }
@@ -51,6 +52,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   double maxPrice = 100;
   double _lowerValue = 0;
   double _upperValue = 100;
+
   var genderController = TextEditingController();
   var relationController = TextEditingController();
   var educationController = TextEditingController();

@@ -14,42 +14,51 @@ import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class PropertyDetailStep extends StatefulWidget {
+  DemographicFamily demographicFamily;
+
+  PropertyDetailStep(this.demographicFamily);
+
   @override
-  _PropertyDetailStepState createState() => _PropertyDetailStepState();
+  _PropertyDetailStepState createState() =>
+      _PropertyDetailStepState(demographicFamily);
 }
 
 class _PropertyDetailStepState extends State<PropertyDetailStep> {
+  DemographicFamily demographicFamily;
+  Property property = new Property();
   GlobalKey<FormState> _stepThreeKey = new GlobalKey<FormState>();
-  bool isSwitched = false;
-  bool isSwitched1 = false;
-  bool isSwitched2 = false;
-  bool isSwitched3 = false;
-  String textValue = 'No';
-  String textValue1 = 'No';
-  String textValue2 = 'No';
-  String textValue3 = 'No';
+  String toilet = 'No';
+  String land = 'No';
+  String vehicle = 'No';
+  String liveStock = 'No';
+
   var statusHouseController = TextEditingController();
   var typeHouseController = TextEditingController();
+  var wetLandController = TextEditingController();
+  var dryLandController = TextEditingController();
+  var motorVehicleController = TextEditingController();
+  var twoWheelerController = TextEditingController();
+  var threeWheelerController = TextEditingController();
+  var fourWheelerController = TextEditingController();
+  var othersController = TextEditingController();
+  var stockTypeController = TextEditingController();
+  var stockCountController = TextEditingController();
 
   String statusOfHouseVal, typeofHouseVal, livestockTypeVal;
-  bool toiletFacilityVal, ownLandVal, ownVehicleVal, ownLiveStocksVal;
-  int wetLandInAcresVal,
-      dryLandInAcresVal,
-      noOfVehicleOwnVal,
-      twoWheelerVal,
-      threeWheelerVal,
-      fourWheelerVal,
-      othersVal,
-      livestockCountVal;
+
   String language;
   List statusHouseList;
   List statusHouseListLang;
   List typeHouseList;
   List typeHouseListLang;
+
+  _PropertyDetailStepState(this.demographicFamily);
+
   @override
   void initState() {
     statusHouseList = [];
@@ -57,6 +66,41 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     typeHouseList = [];
     typeHouseListLang = [];
     getLanguage();
+
+    if (demographicFamily.property != null) {
+      property = demographicFamily.property;
+
+      if (property.toiletFacility) toilet = "Yes";
+      if (property.ownLand) land = "Yes";
+      if (property.ownVehicle) vehicle = "Yes";
+      if (property.ownLivestocks) liveStock = "Yes";
+
+      statusHouseController.text = property.statusofHouse;
+      typeHouseController.text = property.typeofHouse;
+
+      wetLandController.text = property.wetLandInAcres.toString();
+      dryLandController.text = property.dryLandInAcres.toString();
+      motorVehicleController.text = property.noOfVehicleOwn.toString();
+      twoWheelerController.text = property.twoWheeler.toString();
+      threeWheelerController.text = property.threeWheeler.toString();
+      fourWheelerController.text = property.fourWheeler.toString();
+      othersController.text = property.others.toString();
+      stockTypeController.text = property.livestockType.toString();
+      stockCountController.text = property.livestockCount.toString();
+    } else {
+      property.toiletFacility = false;
+      property.ownLand = false;
+      property.ownVehicle = false;
+      property.ownLivestocks = false;
+
+      property.statusofHouse = "";
+      property.typeofHouse = "";
+
+      property.wetLandInAcres = 0;
+      property.dryLandInAcres = 0;
+      demographicFamily.property = property;
+    }
+
     super.initState();
   }
 
@@ -96,8 +140,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               clearOnSubmit: false,
                               itemSubmitted: (item) {
                                 statusHouseController.text = item;
-                                debugPrint(
-                                    "stringList1:${statusHouseController.text}");
+                                property.statusofHouse = item;
                               },
                               suggestions: statusHouseListLang,
                               style: TextStyle(
@@ -185,8 +228,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               clearOnSubmit: false,
                               itemSubmitted: (item) {
                                 typeHouseController.text = item;
-                                debugPrint(
-                                    "stringList1:${typeHouseController.text}");
+                                property.typeofHouse = item;
                               },
                               suggestions: typeHouseListLang,
                               style: TextStyle(
@@ -273,14 +315,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             children: [
                               Switch(
                                 onChanged: toggleSwitch,
-                                value: isSwitched,
+                                value: property.toiletFacility,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: textValue,
+                                text: toilet,
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
@@ -316,14 +358,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             children: [
                               Switch(
                                 onChanged: toggleSwitch1,
-                                value: isSwitched1,
+                                value: property.ownLand,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: textValue1,
+                                text: land,
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
@@ -364,8 +406,12 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             padding: const EdgeInsets.only(
                                 left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
+                              controller: wetLandController,
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
+                              onChanged: (value) {
+                                property.wetLandInAcres = int.parse(value);
+                              },
                               autocorrect: true,
                               enableSuggestions: true,
                               decoration: InputDecoration(
@@ -408,7 +454,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               // },
                               onSaved: (value) {
                                 setState(() {
-                                  wetLandInAcresVal = value as int;
+                                  property.wetLandInAcres = int.parse(value);
+                                  wetLandController.text = value;
                                 });
                               },
                               validator: (value) {
@@ -448,6 +495,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           padding: const EdgeInsets.only(
                               right: 16.0, top: 2.0, bottom: 2.0),
                           child: TextFormField(
+                            controller: dryLandController,
+                            onChanged: (value) {
+                              property.dryLandInAcres = int.parse(value);
+                            },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -520,14 +571,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           children: [
                             Switch(
                               onChanged: toggleSwitch2,
-                              value: isSwitched2,
+                              value: property.ownVehicle,
                               activeColor: Colors.blue,
                               activeTrackColor: greyColor,
                               inactiveThumbColor: greyColor,
                               inactiveTrackColor: greyColor,
                             ),
                             TextWidget(
-                              text: textValue2,
+                              text: vehicle,
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -564,6 +615,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
+                                controller: motorVehicleController,
+                                onChanged: (value) {
+                                  property.noOfVehicleOwn = int.parse(value);
+                                },
                                 maxLength: 2,
                                 textInputAction: TextInputAction.next,
                                 enableSuggestions: true,
@@ -648,6 +703,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             width: 100,
                             height: 58,
                             child: TextFormField(
+                              controller: twoWheelerController,
+                              onChanged: (value) {
+                                property.twoWheeler = int.parse(value);
+                              },
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
                               enableSuggestions: true,
@@ -725,6 +784,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            controller: threeWheelerController,
+                            onChanged: (value) {
+                              property.threeWheeler = int.parse(value);
+                            },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -798,6 +861,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            controller: fourWheelerController,
+                            onChanged: (value) {
+                              property.fourWheeler = int.parse(value);
+                            },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -871,6 +938,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           width: 100,
                           height: 58,
                           child: TextFormField(
+                            controller: othersController,
+                            onChanged: (value) {
+                              property.others = int.parse(value);
+                            },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -945,14 +1016,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             children: [
                               Switch(
                                 onChanged: toggleSwitch3,
-                                value: isSwitched3,
+                                value: property.ownLivestocks,
                                 activeColor: Colors.blue,
                                 activeTrackColor: greyColor,
                                 inactiveThumbColor: greyColor,
                                 inactiveTrackColor: greyColor,
                               ),
                               TextWidget(
-                                text: textValue3,
+                                text: liveStock,
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
@@ -991,6 +1062,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           height: 58,
                           width: 250,
                           child: TextFormField(
+                            controller: stockTypeController,
+                            onChanged: (value) {
+                              property.livestockType = value;
+                            },
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
@@ -1061,6 +1136,10 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           width: 250,
                           height: 58,
                           child: TextFormField(
+                            controller: stockCountController,
+                            onChanged: (value) {
+                              property.livestockCount = int.parse(value);
+                            },
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
@@ -1157,64 +1236,64 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   }
 
   void toggleSwitch(bool value) {
-    if (isSwitched == false) {
+    if (property.toiletFacility == false) {
       setState(() {
-        isSwitched = true;
-        textValue = 'Yes';
+        property.toiletFacility = true;
+        toilet = 'Yes';
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched = false;
-        textValue = 'No';
+        property.toiletFacility = false;
+        toilet = 'No';
       });
       print('Switch Button is OFF');
     }
   }
 
   void toggleSwitch1(bool value) {
-    if (isSwitched1 == false) {
+    if (property.ownLand == false) {
       setState(() {
-        isSwitched1 = true;
-        textValue1 = 'Yes';
+        property.ownLand = true;
+        land = 'Yes';
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched1 = false;
-        textValue1 = 'No';
+        property.ownLand = false;
+        land = 'No';
       });
       print('Switch Button is OFF');
     }
   }
 
   void toggleSwitch2(bool value) {
-    if (isSwitched2 == false) {
+    if (property.ownVehicle == false) {
       setState(() {
-        isSwitched2 = true;
-        textValue2 = 'Yes';
+        property.ownVehicle = true;
+        vehicle = 'Yes';
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched2 = false;
-        textValue2 = 'No';
+        property.ownVehicle = false;
+        vehicle = 'No';
       });
       print('Switch Button is OFF');
     }
   }
 
   void toggleSwitch3(bool value) {
-    if (isSwitched3 == false) {
+    if (property.ownLivestocks == false) {
       setState(() {
-        isSwitched3 = true;
-        textValue3 = 'Yes';
+        property.ownLivestocks = true;
+        liveStock = 'Yes';
       });
       print('Switch Button is ON');
     } else {
       setState(() {
-        isSwitched3 = false;
-        textValue3 = 'No';
+        property.ownLivestocks = false;
+        liveStock = 'No';
       });
       print('Switch Button is OFF');
     }
