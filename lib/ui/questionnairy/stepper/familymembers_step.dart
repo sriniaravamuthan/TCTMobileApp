@@ -16,6 +16,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as Path;
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -650,9 +651,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 initialDate: DateTime.now(),
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2022));
+                                            String dateFormat = DateFormat(" d-MMMM-y").format(date);
 
-                                            datePicker.text =
-                                                "${date.day}/${date.month}/${date.year}";
+                                            datePicker.text = dateFormat;
 
                                             dateOfBirthVal = datePicker.text;
                                             calculateAge(date);
@@ -660,7 +661,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           validator: (value) {
                                             if (value.isEmpty) {
                                               debugPrint("empid :yes");
-                                              return 'Employee Id must not be empty';
+                                              return 'Date of Birth must not be empty';
                                             }
                                             return null;
                                           },
