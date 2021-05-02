@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class SearchDialog extends StatefulWidget {
@@ -33,10 +34,10 @@ class _SearchDialogState extends State<SearchDialog> {
   var villageCodeController = TextEditingController();
   var villageNameController = TextEditingController();
   var panchayatCodeController = TextEditingController();
-
+String language;
   @override
   void initState() {
-    getVillageDetails();
+    getLanguage();
     super.initState();
   }
 
@@ -85,12 +86,14 @@ class _SearchDialogState extends State<SearchDialog> {
                                 padding: const EdgeInsets.all(4.0),
                                 child: TextFormField(
                                   controller: mobileNoController,
+                                  maxLength: 10,
                                   /*onChanged: (value) {
                                     mobileNoController.text = value;
                                   },*/
                                   textInputAction: TextInputAction.next,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
+                                    counterText: "",
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide.none,
                                         borderRadius: BorderRadius.all(
@@ -121,16 +124,11 @@ class _SearchDialogState extends State<SearchDialog> {
                                         BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
-                                  keyboardType: TextInputType.text,
+                                  keyboardType: TextInputType.phone,
                                   onSaved: (String val) {
-                                    setState(() {});
-                                  },
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      debugPrint("empid :yes");
-                                      return 'Employee Id must not be empty';
-                                    }
-                                    return null;
+                                    setState(() {
+                                      mobileNoController.text=val;
+                                    });
                                   },
                                 ),
                               ),
@@ -392,7 +390,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                         snap.forEach((element) {
                                           if(element.data()["panchayatCode"].toString() == item) {
                                             villageCodeList.add(element.data()["villageCode"].toString());
-                                            villageNameList.add(element.data()["villageName"]["en"].toString());
+                                            villageNameList.add(element.data()["villageName"][language].toString());
                                           }
                                         });
                                       });
@@ -653,8 +651,14 @@ class _SearchDialogState extends State<SearchDialog> {
       ],
     );
   }
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+    getVillageDetails(language);
+    // getVillageName();
+  }
 
-  Future<void> getVillageDetails() async {
+  Future<void> getVillageDetails(String language) async {
     QuerySnapshot querySnapshot =
     await firestoreInstance.collection(collectionVillageName).get();
     setState(() {
@@ -663,7 +667,7 @@ class _SearchDialogState extends State<SearchDialog> {
       snap = querySnapshot.docs;
 
       var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
-      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"]["en"]).toList();
+      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
       var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
 
       villageCodeDoc.forEach((element) {
