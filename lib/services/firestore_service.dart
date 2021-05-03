@@ -49,7 +49,10 @@ class FireStoreService {
       "habit": {
         'anyMembersWhoSmoke': demographicFamily.habits.anyMembersWhoSmoke,
         'anyMembersWhoDrink': demographicFamily.habits.anyMembersWhoDrink,
-        'anyMembersWhoUseTobacco': demographicFamily.habits.anyMembersWhoUseTobacco
+        'anyMembersWhoUseTobacco': demographicFamily.habits.anyMembersWhoUseTobacco,
+        'isVaccinationDone': demographicFamily.habits.isVaccinationDone,
+        'firstDose': demographicFamily.habits.firstDose,
+        'secondDose': demographicFamily.habits.secondDose
       },
       "familyMembers": [
         {

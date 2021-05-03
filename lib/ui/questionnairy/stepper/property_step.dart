@@ -70,10 +70,33 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     if (demographicFamily.property != null) {
       property = demographicFamily.property;
 
-      if (property.toiletFacility) toilet = "Yes";
-      if (property.ownLand) land = "Yes";
-      if (property.ownVehicle) vehicle = "Yes";
-      if (property.ownLivestocks) liveStock = "Yes";
+      if (property.toiletFacility == 0)
+        toilet = "Not Answer";
+      else if (property.toiletFacility == 1)
+        toilet = "No";
+      else
+        toilet = "Yes";
+
+      if (property.ownLand == 0)
+        land = "Not Answer";
+      else if (property.ownLand == 1)
+        land = "No";
+      else
+        land = "Yes";
+
+      if (property.ownVehicle == 0)
+        vehicle = "Not Answer";
+      else if (property.ownVehicle == 1)
+        vehicle = "No";
+      else
+        vehicle = "Yes";
+
+      if (property.ownLivestocks == 0)
+        liveStock = "Not Answer";
+      else if (property.ownLivestocks == 1)
+        liveStock = "No";
+      else
+        liveStock = "Yes";
 
       statusHouseController.text = property.statusofHouse;
       typeHouseController.text = property.typeofHouse;
@@ -88,16 +111,21 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       stockTypeController.text = property.livestockType.toString();
       stockCountController.text = property.livestockCount.toString();
     } else {
-      property.toiletFacility = false;
-      property.ownLand = false;
-      property.ownVehicle = false;
-      property.ownLivestocks = false;
-
+      property.wetLandInAcres = "";
+      property.dryLandInAcres = "";
+      property.noOfVehicleOwn = "";
+      property.twoWheeler = "";
+      property.threeWheeler = "";
+      property.fourWheeler = "";
+      property.toiletFacility = 0;
+      property.ownLand = 0;
+      property.ownVehicle = 0;
+      property.ownLivestocks = 0;
       property.statusofHouse = "";
       property.typeofHouse = "";
-
-      property.wetLandInAcres = 0;
-      property.dryLandInAcres = 0;
+      property.others = "";
+      property.livestockType = "";
+      property.livestockCount = "";
       demographicFamily.property = property;
     }
 
@@ -311,21 +339,36 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Row(
+                          child: Column(
                             children: [
-                              Switch(
-                                onChanged: toggleSwitch,
-                                value: property.toiletFacility,
-                                activeColor: Colors.blue,
-                                activeTrackColor: greyColor,
-                                inactiveThumbColor: greyColor,
-                                inactiveTrackColor: greyColor,
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: property.toiletFacility,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleToilet(value);
+                                  },
+                                ),
                               ),
                               TextWidget(
                                 text: toilet,
                                 size: 14,
                                 weight: FontWeight.w600,
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -354,21 +397,36 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Row(
+                          child: Column(
                             children: [
-                              Switch(
-                                onChanged: toggleSwitch1,
-                                value: property.ownLand,
-                                activeColor: Colors.blue,
-                                activeTrackColor: greyColor,
-                                inactiveThumbColor: greyColor,
-                                inactiveTrackColor: greyColor,
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: property.ownLand,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleOwnLand(value);
+                                  },
+                                ),
                               ),
                               TextWidget(
                                 text: land,
                                 size: 14,
                                 weight: FontWeight.w600,
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -410,7 +468,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
                               onChanged: (value) {
-                                property.wetLandInAcres = int.parse(value);
+                                property.wetLandInAcres = value;
                               },
                               autocorrect: true,
                               enableSuggestions: true,
@@ -454,7 +512,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               // },
                               onSaved: (value) {
                                 setState(() {
-                                  property.wetLandInAcres = int.parse(value);
+                                  property.wetLandInAcres = value;
                                   wetLandController.text = value;
                                 });
                               },
@@ -497,7 +555,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: dryLandController,
                             onChanged: (value) {
-                              property.dryLandInAcres = int.parse(value);
+                              property.dryLandInAcres = value;
                             },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
@@ -567,21 +625,36 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                        child: Row(
+                        child: Column(
                           children: [
-                            Switch(
-                              onChanged: toggleSwitch2,
-                              value: property.ownVehicle,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: property.ownVehicle,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleOwnVehicle(value);
+                                },
+                              ),
                             ),
                             TextWidget(
                               text: vehicle,
                               size: 14,
                               weight: FontWeight.w600,
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -617,7 +690,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               child: TextFormField(
                                 controller: motorVehicleController,
                                 onChanged: (value) {
-                                  property.noOfVehicleOwn = int.parse(value);
+                                  property.noOfVehicleOwn = value;
                                 },
                                 maxLength: 2,
                                 textInputAction: TextInputAction.next,
@@ -705,7 +778,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             child: TextFormField(
                               controller: twoWheelerController,
                               onChanged: (value) {
-                                property.twoWheeler = int.parse(value);
+                                property.twoWheeler = value;
                               },
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
@@ -786,7 +859,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: threeWheelerController,
                             onChanged: (value) {
-                              property.threeWheeler = int.parse(value);
+                              property.threeWheeler = value;
                             },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
@@ -863,7 +936,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: fourWheelerController,
                             onChanged: (value) {
-                              property.fourWheeler = int.parse(value);
+                              property.fourWheeler = value;
                             },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
@@ -940,7 +1013,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: othersController,
                             onChanged: (value) {
-                              property.others = int.parse(value);
+                              property.others = value;
                             },
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
@@ -992,6 +1065,11 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                   ),
                 ),
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
               Expanded(
                 child: Align(
                   alignment: Alignment.topLeft,
@@ -1012,21 +1090,36 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Row(
+                          child: Column(
                             children: [
-                              Switch(
-                                onChanged: toggleSwitch3,
-                                value: property.ownLivestocks,
-                                activeColor: Colors.blue,
-                                activeTrackColor: greyColor,
-                                inactiveThumbColor: greyColor,
-                                inactiveTrackColor: greyColor,
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: property.ownLivestocks,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleOwnLivestocks(value);
+                                  },
+                                ),
                               ),
                               TextWidget(
                                 text: liveStock,
                                 size: 14,
                                 weight: FontWeight.w600,
-                              ),
+                              )
                             ],
                           ),
                         ),
@@ -1034,12 +1127,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+              ),
               Expanded(
                 child: FractionallySizedBox(
                   widthFactor: 0.75,
@@ -1138,7 +1226,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: stockCountController,
                             onChanged: (value) {
-                              property.livestockCount = int.parse(value);
+                              property.livestockCount = value;
                             },
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -1235,67 +1323,52 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     getTypeHouse();
   }
 
-  void toggleSwitch(bool value) {
-    if (property.toiletFacility == false) {
-      setState(() {
-        property.toiletFacility = true;
-        toilet = 'Yes';
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        property.toiletFacility = false;
-        toilet = 'No';
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleToilet(double value) {
+    property.toiletFacility = value;
+    setState(() {
+      if(value==0)
+        toilet='Not Answer';
+      else if(value==1)
+        toilet='No';
+      else
+        toilet='Yes';
+    });
   }
 
-  void toggleSwitch1(bool value) {
-    if (property.ownLand == false) {
-      setState(() {
-        property.ownLand = true;
-        land = 'Yes';
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        property.ownLand = false;
-        land = 'No';
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleOwnLand(double value) {
+    property.ownLand = value;
+    setState(() {
+      if(value==0)
+        land='Not Answer';
+      else if(value==1)
+        land='No';
+      else
+        land='Yes';
+    });
   }
 
-  void toggleSwitch2(bool value) {
-    if (property.ownVehicle == false) {
-      setState(() {
-        property.ownVehicle = true;
-        vehicle = 'Yes';
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        property.ownVehicle = false;
-        vehicle = 'No';
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleOwnVehicle(double value) {
+    property.ownVehicle = value;
+    setState(() {
+      if(value==0)
+        vehicle='Not Answer';
+      else if(value==1)
+        vehicle='No';
+      else
+        vehicle='Yes';
+    });
   }
 
-  void toggleSwitch3(bool value) {
-    if (property.ownLivestocks == false) {
-      setState(() {
-        property.ownLivestocks = true;
-        liveStock = 'Yes';
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        property.ownLivestocks = false;
-        liveStock = 'No';
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleOwnLivestocks(double value) {
+    property.ownLivestocks = value;
+    setState(() {
+      if(value==0)
+        liveStock='Not Answer';
+      else if(value==1)
+        liveStock='No';
+      else
+        liveStock='Yes';
+    });
   }
+
 }

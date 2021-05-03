@@ -109,19 +109,19 @@ class Location {
 class Property {
   String statusofHouse = "";
   String typeofHouse = "";
-  bool toiletFacility = true;
-  bool ownLand = false;
-  int wetLandInAcres = 0;
-  int dryLandInAcres = 0;
-  bool ownVehicle = false;
-  int noOfVehicleOwn = 0;
-  int twoWheeler = 0;
-  int threeWheeler = 0;
-  int fourWheeler = 0;
-  int others = 0;
-  bool ownLivestocks = false;
+  double toiletFacility = 0;
+  double ownLand = 0;
+  String wetLandInAcres = "";
+  String dryLandInAcres = "";
+  double ownVehicle = 0;
+  String noOfVehicleOwn = "";
+  String twoWheeler = "";
+  String threeWheeler = "";
+  String fourWheeler = "";
+  String others = "";
+  double ownLivestocks = 0;
   String livestockType = "";
-  int livestockCount = 0;
+  String livestockCount = "";
 
   Property(
       {this.statusofHouse,
@@ -180,19 +180,29 @@ class Property {
 }
 
 class Habits {
-  bool anyMembersWhoSmoke = false;
-  bool anyMembersWhoDrink = false;
-  bool anyMembersWhoUseTobacco = false;
+  double anyMembersWhoSmoke = 0;
+  double anyMembersWhoDrink = 0;
+  double anyMembersWhoUseTobacco = 0;
+  double isVaccinationDone = 0;
+  String firstDose;
+  String secondDose;
 
   Habits(
       {this.anyMembersWhoSmoke,
       this.anyMembersWhoDrink,
-      this.anyMembersWhoUseTobacco});
+      this.anyMembersWhoUseTobacco,
+      this.isVaccinationDone,
+      this.firstDose,
+      this.secondDose
+      });
 
   Habits.fromJson(Map<String, dynamic> json) {
     anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
     anyMembersWhoDrink = json['anyMembersWhoDrink '];
     anyMembersWhoUseTobacco = json['anyMembersWhoUseTobacco'];
+    isVaccinationDone = json['isVaccinationDone'];
+    firstDose = json['firstDose'];
+    secondDose = json['secondDose'];
   }
 
   Map<String, dynamic> toJson() {
@@ -200,6 +210,9 @@ class Habits {
     data['anyMembersWhoSmoke'] = this.anyMembersWhoSmoke;
     data['anyMembersWhoDrink '] = this.anyMembersWhoDrink;
     data['anyMembersWhoUseTobacco'] = this.anyMembersWhoUseTobacco;
+    data['isVaccinationDone'] = this.isVaccinationDone;
+    data['firstDose'] = this.firstDose;
+    data['secondDose'] = this.secondDose;
     return data;
   }
 }

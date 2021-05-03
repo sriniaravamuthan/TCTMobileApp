@@ -24,16 +24,14 @@ class HabitsStep extends StatefulWidget {
 
 class _HabitsStepState extends State<HabitsStep> {
   GlobalKey<FormState> _stepFourKey = new GlobalKey<FormState>();
-  String textSmoke = 'No';
-  String textDrink = 'No';
-  String textTobacco = 'No';
+  String textSmoke = 'Not Answer';
+  String textDrink = 'Not Answer';
+  String textTobacco = 'Not Answer';
   String textVaccine = 'Not Answer';
-
-  String firstDoseVal,secondDoseVal;
 
   DemographicFamily demographicFamily;
   Habits habits = new Habits();
-  double _value = 0;
+  double drinkValue = 0;
   TextEditingController firstDosePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   TextEditingController secondDosePicker = TextEditingController();
@@ -42,15 +40,48 @@ class _HabitsStepState extends State<HabitsStep> {
   @override
   void initState() {
     if (demographicFamily.habits == null) {
-      habits.anyMembersWhoUseTobacco = false;
-      habits.anyMembersWhoDrink = false;
-      habits.anyMembersWhoSmoke = false;
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoUseTobacco = 0;
+      habits.isVaccinationDone = 0;
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoDrink = 0;
+      habits.anyMembersWhoSmoke = 0;
       demographicFamily.habits = habits;
     } else {
       habits = demographicFamily.habits;
-      if (habits.anyMembersWhoSmoke == true) textSmoke = "Yes";
-      if (habits.anyMembersWhoDrink == true) textDrink = "Yes";
-      if (habits.anyMembersWhoUseTobacco == true) textTobacco = "Yes";
+
+      firstDosePicker.text = habits.firstDose;
+      secondDosePicker.text = habits.secondDose;
+
+      if (habits.anyMembersWhoSmoke == 0)
+        textSmoke = "Not Answer";
+      else if (habits.anyMembersWhoSmoke == 1)
+        textSmoke = "No";
+      else
+        textSmoke = "Yes";
+
+      if (habits.anyMembersWhoDrink == 0)
+        textDrink = "Not Answer";
+      else if (habits.anyMembersWhoDrink == 1)
+        textDrink = "No";
+      else
+        textDrink = "Yes";
+
+      if (habits.anyMembersWhoUseTobacco == 0)
+        textTobacco = "Not Answer";
+      else if (habits.anyMembersWhoUseTobacco == 1)
+        textTobacco = "No";
+      else
+        textTobacco = "Yes";
+
+      if (habits.isVaccinationDone == 0)
+        textVaccine = "Not Answer";
+      else if (habits.isVaccinationDone == 1)
+        textVaccine = "No";
+      else
+        textVaccine = "Yes";
     }
     super.initState();
   }
@@ -80,22 +111,36 @@ class _HabitsStepState extends State<HabitsStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
                           children: [
-                            Switch(
-                              onChanged: toggleSwitch,
-                              value: habits.anyMembersWhoSmoke,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: habits.anyMembersWhoSmoke,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch(value);
+                                },
+                              ),
                             ),
                             TextWidget(
                               text: textSmoke,
                               size: 14,
                               weight: FontWeight.w600,
-                            ),
+                            )
                           ],
                         ),
                       ],
@@ -116,22 +161,36 @@ class _HabitsStepState extends State<HabitsStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
                           children: [
-                            Switch(
-                              onChanged: toggleSwitch1,
-                              value: habits.anyMembersWhoDrink,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: habits.anyMembersWhoDrink,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch1(value);
+                                },
+                              ),
                             ),
                             TextWidget(
                               text: textDrink,
                               size: 14,
                               weight: FontWeight.w600,
-                            ),
+                            )
                           ],
                         ),
                       ],
@@ -152,24 +211,38 @@ class _HabitsStepState extends State<HabitsStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Column(
                           children: [
-                            Switch(
-                              onChanged: toggleSwitch2,
-                              value: habits.anyMembersWhoUseTobacco,
-                              activeColor: Colors.blue,
-                              activeTrackColor: greyColor,
-                              inactiveThumbColor: greyColor,
-                              inactiveTrackColor: greyColor,
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: habits.anyMembersWhoUseTobacco,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch2(value);
+                                },
+                              ),
                             ),
                             TextWidget(
                               text: textTobacco,
                               size: 14,
                               weight: FontWeight.w600,
-                            ),
+                            )
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -211,32 +284,12 @@ class _HabitsStepState extends State<HabitsStep> {
                                       RoundSliderOverlayShape(overlayRadius: 28.0),
                                 ),
                                 child: Slider(
-                                  value: _value,
+                                  value: habits.isVaccinationDone,
                                   min: 0,
                                   max: 2,
                                   divisions: 2,
                                   onChanged: (value) {
-                                    if(value==0){
-                                      setState(() {
-
-                                        textVaccine='Not Answer';
-                                        _value = value;
-
-
-                                      });
-                                    }else if(value==1){
-                                      setState(() {
-                                        textVaccine='No';
-                                        _value = value;
-
-                                      });
-                                    }else{setState(() {
-                                      textVaccine='Yes';
-                                      _value = value;
-
-                                    });
-                                    }
-
+                                    toggleSwitch3(value);
                                   },
                                 ),
                               ),
@@ -314,19 +367,15 @@ class _HabitsStepState extends State<HabitsStep> {
                                   setState(() {});
                                 },
                                 onTap: () async {
-                                  FocusScope.of(context)
-                                      .requestFocus(new FocusNode());
-
+                                  FocusScope.of(context).requestFocus(new FocusNode());
                                   date = await showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat = DateFormat(" d-MMMM-y").format(date);
-
+                                  habits.firstDose = dateFormat;
                                   firstDosePicker.text =dateFormat;
-
-                                  firstDoseVal = firstDosePicker.text;
                                 },
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -415,9 +464,8 @@ class _HabitsStepState extends State<HabitsStep> {
                                       lastDate: DateTime(2022));
                                   String dateFormat = DateFormat(" d-MMMM-y").format(date);
                                   secondDosePicker.text =dateFormat;
+                                  habits.secondDose =dateFormat;
                                   // "${date.day}/${date.month}/${date.year}";
-
-                                  secondDoseVal = secondDosePicker.text;
                                 },
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -443,52 +491,52 @@ class _HabitsStepState extends State<HabitsStep> {
     );
   }
 
-  void toggleSwitch(bool value) {
-    if (habits.anyMembersWhoSmoke == false) {
-      setState(() {
-        textSmoke = 'Yes';
-        habits.anyMembersWhoSmoke = true;
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        textSmoke = 'No';
-        habits.anyMembersWhoSmoke = false;
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleSwitch(double value) {
+    habits.anyMembersWhoSmoke = value;
+    setState(() {
+      if(value==0)
+          textSmoke='Not Answer';
+      else if(value==1)
+          textSmoke='No';
+      else
+        textSmoke='Yes';
+    });
   }
 
-  void toggleSwitch1(bool value) {
-    if (habits.anyMembersWhoDrink == false) {
-      setState(() {
-        textDrink = 'Yes';
-        habits.anyMembersWhoDrink = true;
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        textDrink = 'No';
-        habits.anyMembersWhoDrink = false;
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleSwitch1(double value) {
+    habits.anyMembersWhoDrink = value;
+    setState(() {
+      if(value==0)
+          textDrink='Not Answer';
+      else if(value==1)
+          textDrink='No';
+      else
+        textDrink='Yes';
+    });
   }
 
-  void toggleSwitch2(bool value) {
-    if (habits.anyMembersWhoUseTobacco == false) {
-      setState(() {
-        textTobacco = 'Yes';
-        habits.anyMembersWhoUseTobacco = true;
-      });
-      print('Switch Button is ON');
-    } else {
-      setState(() {
-        textTobacco = 'No';
-        habits.anyMembersWhoUseTobacco = false;
-      });
-      print('Switch Button is OFF');
-    }
+  void toggleSwitch2(double value) {
+    habits.anyMembersWhoUseTobacco = value;
+    setState(() {
+      if(value==0)
+        textTobacco='Not Answer';
+      else if(value==1)
+        textTobacco='No';
+      else
+        textTobacco='Yes';
+    });
+  }
+
+  void toggleSwitch3(double value) {
+    habits.isVaccinationDone = value;
+    setState(() {
+      if(value==0)
+        textVaccine='Not Answer';
+      else if(value==1)
+        textVaccine='No';
+      else
+        textVaccine='Yes';
+    });
   }
 
 }
