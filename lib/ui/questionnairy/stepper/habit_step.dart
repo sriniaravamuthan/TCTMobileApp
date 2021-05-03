@@ -377,13 +377,7 @@ class _HabitsStepState extends State<HabitsStep> {
                                   habits.firstDose = dateFormat;
                                   firstDosePicker.text =dateFormat;
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Date of Birth must not be empty';
-                                  }
-                                  return null;
-                                },
+
                               ),
                             ),
                           ),
@@ -467,13 +461,7 @@ class _HabitsStepState extends State<HabitsStep> {
                                   habits.secondDose =dateFormat;
                                   // "${date.day}/${date.month}/${date.year}";
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Date of Birth must not be empty';
-                                  }
-                                  return null;
-                                },
+
                               ),
                             ),
                           ),

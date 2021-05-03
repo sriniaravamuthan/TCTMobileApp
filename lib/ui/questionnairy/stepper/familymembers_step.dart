@@ -243,13 +243,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Employee Id must not be empty';
-                                  }
-                                  return null;
-                                },
+
                               ),
                             ),
                           ),
@@ -280,10 +274,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             padding: const EdgeInsets.only(
                                 right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
+                              maxLength: 12,
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
                               enableSuggestions: true,
                               decoration: InputDecoration(
+                                counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -314,17 +310,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
-                              keyboardType: TextInputType.text,
+                              keyboardType: TextInputType.number,
                               onSaved: (String val) {
                                 setState(() {});
                               },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  debugPrint("empid :yes");
-                                  return 'Employee Id must not be empty';
-                                }
-                                return null;
-                              },
+
                             ),
                           ),
                         ),
@@ -658,13 +648,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             dateOfBirthVal = datePicker.text;
                                             calculateAge(date);
                                           },
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              debugPrint("empid :yes");
-                                              return 'Date of Birth must not be empty';
-                                            }
-                                            return null;
-                                          },
+
                                         ),
                                       ),
                                     ),
@@ -752,13 +736,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             setState(() {
                                               ageController.text = val;
                                             });
-                                          },
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              debugPrint("empid :yes");
-                                              return 'Employee Id must not be empty';
-                                            }
-                                            return null;
                                           },
                                         ),
                                       ),
@@ -1317,9 +1294,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                     fillColor: lightGreyColor),
                                 value: annualIncomeVal,
-                                validator: (value) => value == null
-                                    ? 'Source Type must not be empty'
-                                    : null,
+
                                 onChanged: (value) =>
                                     setState(() => annualIncomeVal = value),
                                 items: <String>[
@@ -1382,6 +1357,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 maxLength: 10,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
+                                  counterText: "",
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.all(
@@ -1416,13 +1392,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Employee Id must not be empty';
-                                  }
-                                  return null;
-                                },
+
                               ),
                             ),
                           ),
@@ -1493,9 +1463,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   setState(() {});
                                 },
                                 validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Enter a  mobile or email!';
-                                  } else if (value.isNotEmpty) {
+                                  if (value.isNotEmpty) {
                                     Pattern pattern =
                                         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                                     RegExp regex = new RegExp(pattern);
@@ -1741,12 +1709,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 keyboardType: TextInputType.text,
                                 onSaved: (String val) {
                                   setState(() {});
-                                },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'Enter a  Caste';
-                                  }
-                                  return null;
                                 },
                               ),
                             ),

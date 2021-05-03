@@ -510,13 +510,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   wetLandController.text = value;
                                 });
                               },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  debugPrint("empid :yes");
-                                  return 'Employee Id must not be empty';
-                                }
-                                return null;
-                              },
+
                             ),
                           ),
                         ),
@@ -587,13 +581,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
@@ -725,13 +713,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    debugPrint("empid :yes");
-                                    return 'Employee Id must not be empty';
-                                  }
-                                  return null;
-                                },
+
                               ),
                             ),
                           ),
@@ -813,13 +795,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               onSaved: (String val) {
                                 setState(() {});
                               },
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  debugPrint("empid :yes");
-                                  return 'Employee Id must not be empty';
-                                }
-                                return null;
-                              },
+
                             ),
                           ),
                         ),
@@ -891,13 +867,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
@@ -968,13 +938,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
@@ -1045,13 +1009,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
@@ -1182,13 +1140,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
@@ -1256,13 +1208,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                debugPrint("empid :yes");
-                                return 'Employee Id must not be empty';
-                              }
-                              return null;
-                            },
+
                           ),
                         ),
                       ),
