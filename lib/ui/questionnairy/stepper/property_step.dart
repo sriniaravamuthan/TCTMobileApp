@@ -334,43 +334,40 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
-                        height: 58,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Column(
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: property.toiletFacility,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleToilet(value);
-                                  },
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
+                        child: Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
                               ),
-                              TextWidget(
-                                text: toilet,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
+                              child: Slider(
+                                value:  property.toiletFacility,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleToilet(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: toilet,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
                         ),
                       ),
                     ],
@@ -392,49 +389,46 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
-                        height: 58,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Column(
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: property.ownLand,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleOwnLand(value);
-                                  },
-                                ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
+                        child: Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
                               ),
-                              TextWidget(
-                                text: land,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
+                              child: Slider(
+                                value:  property.ownLand,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleOwnLand(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: land,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Row(
