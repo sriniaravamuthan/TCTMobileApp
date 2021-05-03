@@ -50,7 +50,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String physicallyChallenge = 'Not Answer';
   var educationController = TextEditingController();
   var occupationController = TextEditingController();
-  var annualIncomeController = TextEditingController();
+  String annualIncomeVal = "";
   var mobileNumberController = TextEditingController();
   var mailController = TextEditingController();
   String smartphone = 'Not Answer';
@@ -64,26 +64,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String retirementPension = 'Not Answer';
 
   List<dynamic> values;
-  List genderList = [];
-  List genderListLang = [];
-  List relationList = [];
-  List relationLangList = [];
-  List educationList = [];
-  List educationLangList = [];
-  List maritalList = [];
-  List maritalLangList = [];
-  List businessList = [];
-  List businessLangList = [];
-  List bloodGrpList = [];
-  List bloodGrpLangList = [];
-  List sectionList = [];
-  List sectionLangList = [];
-  String relationshipVal,
-      maritalStatusVal,
-      qualificationVal,
-      occupationVal,
-      communityVal,
-      annualIncomeVal;
+  List genderList = [],genderListLang = [],relationList = [],relationLangList = [],educationList = [],educationLangList = [],maritalList = [],
+      maritalLangList = [],businessList = [],businessLangList = [],bloodGrpList = [],bloodGrpLangList = [],sectionList = [],sectionLangList = [];
+  String relationshipVal, maritalStatusVal, qualificationVal, occupationVal, communityVal;
   int ageVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
@@ -134,7 +117,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.physicallyChallenge = getSwitchValues(physicallyChallenge);
     family.education = educationController.text;
     family.occupation = occupationController.text;
-    family.annualIncome = annualIncomeController.text;
+    family.annualIncome = annualIncomeVal;
     family.mobileNumber = mobileNumberController.text;
     family.mail = mailController.text;
     family.smartphone = getSwitchValues(smartphone);
@@ -222,6 +205,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2, right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
+                                controller: nameController,
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
                                 enableSuggestions: true,
@@ -291,6 +275,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             padding: const EdgeInsets.only(
                                 right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
+                              controller: aadharNumberController,
                               maxLength: 12,
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
@@ -1372,6 +1357,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   top: 2.0,
                                   bottom: 2.0),
                               child: TextFormField(
+                                controller: mobileNumberController,
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
                                 maxLength: 10,
@@ -1444,6 +1430,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
+                                controller: mailController,
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
                                 enableSuggestions: true,
@@ -1705,6 +1692,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
                               child: TextFormField(
+                                controller: casteController,
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
                                 enableSuggestions: true,

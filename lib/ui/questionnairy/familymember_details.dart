@@ -429,7 +429,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
 
   void refreshFamilyList(Family family) {
     setState(() {
-
+      familyList.add(family);
+      addFamilyField();
+      print("GET______" + family.toString());
     });
   }
 
