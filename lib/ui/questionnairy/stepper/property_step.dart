@@ -326,7 +326,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.only(top:4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Toilet Facility at Home'),
@@ -334,41 +334,37 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                        child: Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                value:  property.toiletFacility,
-                                min: 0,
-                                max: 2,
-                                divisions: 2,
-                                onChanged: (value) {
-                                  toggleToilet(value);
-                                },
-                              ),
+                      Column(
+                        children: [
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: primaryColor,
+                              inactiveTrackColor: Colors.lightBlueAccent,
+                              trackShape: RectangularSliderTrackShape(),
+                              trackHeight: 4.0,
+                              thumbColor: primaryColor,
+                              thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              overlayColor: Colors.white.withAlpha(32),
+                              overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
-                            TextWidget(
-                              text: toilet,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            )
-                          ],
-                        ),
+                            child: Slider(
+                              value:  property.toiletFacility,
+                              min: 0,
+                              max: 2,
+                              divisions: 2,
+                              onChanged: (value) {
+                                toggleToilet(value);
+                              },
+                            ),
+                          ),
+                          TextWidget(
+                            text: toilet,
+                            size: 14,
+                            weight: FontWeight.w600,
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -381,7 +377,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.only(top:4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Own Land'),
@@ -389,41 +385,37 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                        child: Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                value:  property.ownLand,
-                                min: 0,
-                                max: 2,
-                                divisions: 2,
-                                onChanged: (value) {
-                                  toggleOwnLand(value);
-                                },
-                              ),
+                      Column(
+                        children: [
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: primaryColor,
+                              inactiveTrackColor: Colors.lightBlueAccent,
+                              trackShape: RectangularSliderTrackShape(),
+                              trackHeight: 4.0,
+                              thumbColor: primaryColor,
+                              thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              overlayColor: Colors.white.withAlpha(32),
+                              overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
-                            TextWidget(
-                              text: land,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            )
-                          ],
-                        ),
+                            child: Slider(
+                              value:  property.ownLand,
+                              min: 0,
+                              max: 2,
+                              divisions: 2,
+                              onChanged: (value) {
+                                toggleOwnLand(value);
+                              },
+                            ),
+                          ),
+                          TextWidget(
+                            text: land,
+                            size: 14,
+                            weight: FontWeight.w600,
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -596,7 +588,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.only(top:4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Own Vehicle'),
@@ -604,41 +596,37 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           weight: FontWeight.w600,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                        child: Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                value: property.ownVehicle,
-                                min: 0,
-                                max: 2,
-                                divisions: 2,
-                                onChanged: (value) {
-                                  toggleOwnVehicle(value);
-                                },
-                              ),
+                      Column(
+                        children: [
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: primaryColor,
+                              inactiveTrackColor: Colors.lightBlueAccent,
+                              trackShape: RectangularSliderTrackShape(),
+                              trackHeight: 4.0,
+                              thumbColor: primaryColor,
+                              thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              overlayColor: Colors.white.withAlpha(32),
+                              overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
-                            TextWidget(
-                              text: vehicle,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            )
-                          ],
-                        ),
+                            child: Slider(
+                              value: property.ownVehicle,
+                              min: 0,
+                              max: 2,
+                              divisions: 2,
+                              onChanged: (value) {
+                                toggleOwnVehicle(value);
+                              },
+                            ),
+                          ),
+                          TextWidget(
+                            text: vehicle,
+                            size: 14,
+                            weight: FontWeight.w600,
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -1031,7 +1019,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(2.0),
+                          padding: const EdgeInsets.only(top:4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Details'),
@@ -1039,41 +1027,37 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             weight: FontWeight.w600,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
-                          child: Column(
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: property.ownLivestocks,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleOwnLivestocks(value);
-                                  },
-                                ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
                               ),
-                              TextWidget(
-                                text: liveStock,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
+                              child: Slider(
+                                value: property.ownLivestocks,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleOwnLivestocks(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: liveStock,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
                         ),
                       ],
                     ),

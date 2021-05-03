@@ -103,7 +103,7 @@ class _HabitsStepState extends State<HabitsStep> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(top:4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Any Members who Smoke?'),
@@ -153,7 +153,7 @@ class _HabitsStepState extends State<HabitsStep> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(top:4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Any Members who Drink?'),
@@ -203,7 +203,7 @@ class _HabitsStepState extends State<HabitsStep> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.only(top:4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Any Members who use Tobacco?'),
@@ -261,7 +261,7 @@ class _HabitsStepState extends State<HabitsStep> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.only(top:4.0),
                             child: TextWidget(
                               text: "Vaccination Done?",
                               size: 14,
