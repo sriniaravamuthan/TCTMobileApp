@@ -50,7 +50,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String physicallyChallenge = 'Not Answer';
   var educationController = TextEditingController();
   var occupationController = TextEditingController();
-  String annualIncomeVal = "";
+  String annualIncomeVal;
   var mobileNumberController = TextEditingController();
   var mailController = TextEditingController();
   String smartphone = 'Not Answer';
@@ -1274,25 +1274,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 value: annualIncomeVal,
