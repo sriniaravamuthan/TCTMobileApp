@@ -20,7 +20,6 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
-import 'package:tct_demographics/models/tabledata_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
@@ -42,7 +41,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   Language language;
   String dropDownLang;
   var height, width;
-
+  User currentUser;
+  String userName;
   String name = "";
   int age = 0;
 
@@ -52,6 +52,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   void initState() {
     // users = Result.getUser();
     users = [];
+    currentUser = FirebaseAuth.instance.currentUser;
+    if(currentUser.displayName!=null){
+      userName=currentUser.displayName;
+    }
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -133,7 +137,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                             width: 10,
                           ),
                           Text(
-                            "Senthil Kumar",
+                            userName,
                             style: TextStyle(fontSize: 16, color: darkColor),
                           ),
                         ],
@@ -171,13 +175,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             debugPrint("familyhead2:${data['name']}");
             if (data != null) {
               users.add(data);
-              debugPrint("UserList:${users.length}");
+              debugPrint("userList:$users}");
+              debugPrint("familyhead:$data");
 
               // name = data['name'];
               // age = data['age'];
             }
 
-            debugPrint("familyhead:$data");
           });
           // snapshot.data.docs.map((usersItem) {
           //   List<dynamic> markMap = usersItem['familyMembers'];

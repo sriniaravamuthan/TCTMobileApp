@@ -965,7 +965,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(2.0),
+                                      padding: const EdgeInsets.only(top:4.0),
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
                                             .translate('Physically challenged'),
@@ -973,40 +973,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         weight: FontWeight.w600,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Column(
-                                        children: [
-                                          SliderTheme(
-                                            data: SliderTheme.of(context).copyWith(
-                                              activeTrackColor: primaryColor,
-                                              inactiveTrackColor: Colors.lightBlueAccent,
-                                              trackShape: RectangularSliderTrackShape(),
-                                              trackHeight: 4.0,
-                                              thumbColor: primaryColor,
-                                              thumbShape:
-                                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                              overlayColor: Colors.white.withAlpha(32),
-                                              overlayShape:
-                                              RoundSliderOverlayShape(overlayRadius: 28.0),
-                                            ),
-                                            child: Slider(
-                                              value: family.physicallyChallenge,
-                                              min: 0,
-                                              max: 2,
-                                              divisions: 2,
-                                              onChanged: (value) {
-                                                togglePhysicallyChallenge(value);
-                                              },
-                                            ),
+                                    Column(
+                                      children: [
+                                        SliderTheme(
+                                          data: SliderTheme.of(context).copyWith(
+                                            activeTrackColor: primaryColor,
+                                            inactiveTrackColor: Colors.lightBlueAccent,
+                                            trackShape: RectangularSliderTrackShape(),
+                                            trackHeight: 4.0,
+                                            thumbColor: primaryColor,
+                                            thumbShape:
+                                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                            overlayColor: Colors.white.withAlpha(32),
+                                            overlayShape:
+                                            RoundSliderOverlayShape(overlayRadius: 28.0),
                                           ),
-                                          TextWidget(
-                                            text: physicallyChallenge,
-                                            size: 14,
-                                            weight: FontWeight.w600,
-                                          )
-                                        ],
-                                      ),
+                                          child: Slider(
+                                            value: family.physicallyChallenge,
+                                            min: 0,
+                                            max: 2,
+                                            divisions: 2,
+                                            onChanged: (value) {
+                                              togglePhysicallyChallenge(value);
+                                            },
+                                          ),
+                                        ),
+                                        TextWidget(
+                                          text: physicallyChallenge,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -1489,66 +1486,56 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Smart phone'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top:4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Smart phone'),
+                            size: 14,
+                            weight: FontWeight.w600,
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Column(
-                                children: [
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
-                                      trackShape: RectangularSliderTrackShape(),
-                                      trackHeight: 4.0,
-                                      thumbColor: primaryColor,
-                                      thumbShape:
-                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                      overlayColor: Colors.white.withAlpha(32),
-                                      overlayShape:
-                                      RoundSliderOverlayShape(overlayRadius: 28.0),
-                                    ),
-                                    child: Slider(
-                                      value: family.smartphone,
-                                      min: 0,
-                                      max: 2,
-                                      divisions: 2,
-                                      onChanged: (value) {
-                                        toggleSmartphone(value);
-                                      },
-                                    ),
-                                  ),
-                                  TextWidget(
-                                    text: smartphone,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  )
-                                ],
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value:  family.smartphone,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSmartphone(value);
+                                },
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                            TextWidget(
+                              text: smartphone,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Row(
@@ -1740,63 +1727,53 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context).translate(
-                                  'Government Insurance/Health Insurance?'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top:4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context).translate(
+                                'Government Insurance/Health Insurance?'),
+                            size: 14,
+                            weight: FontWeight.w600,
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Column(
-                                children: [
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
-                                      trackShape: RectangularSliderTrackShape(),
-                                      trackHeight: 4.0,
-                                      thumbColor: primaryColor,
-                                      thumbShape:
-                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                      overlayColor: Colors.white.withAlpha(32),
-                                      overlayShape:
-                                      RoundSliderOverlayShape(overlayRadius: 28.0),
-                                    ),
-                                    child: Slider(
-                                      value: family.govtInsurance,
-                                      min: 0,
-                                      max: 2,
-                                      divisions: 2,
-                                      onChanged: (value) {
-                                        toggleGovtInsurance(value);
-                                      },
-                                    ),
-                                  ),
-                                  TextWidget(
-                                    text: govtInsurance,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  )
-                                ],
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape:
+                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.govtInsurance,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleGovtInsurance(value);
+                                },
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                            TextWidget(
+                              text: govtInsurance,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 )
@@ -1822,43 +1799,40 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               weight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Column(
-                                children: [
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
-                                      trackShape: RectangularSliderTrackShape(),
-                                      trackHeight: 4.0,
-                                      thumbColor: primaryColor,
-                                      thumbShape:
-                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                      overlayColor: Colors.white.withAlpha(32),
-                                      overlayShape:
-                                      RoundSliderOverlayShape(overlayRadius: 28.0),
-                                    ),
-                                    child: Slider(
-                                      value: family.privateInsurance,
-                                      min: 0,
-                                      max: 2,
-                                      divisions: 2,
-                                      onChanged: (value) {
-                                        togglePrivateInsurance(value);
-                                      },
-                                    ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                right: 16.0, top: 2.0, bottom: 2.0),
+                            child: Column(
+                              children: [
+                                SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    activeTrackColor: primaryColor,
+                                    inactiveTrackColor: Colors.lightBlueAccent,
+                                    trackShape: RectangularSliderTrackShape(),
+                                    trackHeight: 4.0,
+                                    thumbColor: primaryColor,
+                                    thumbShape:
+                                    RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                    overlayColor: Colors.white.withAlpha(32),
+                                    overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 28.0),
                                   ),
-                                  TextWidget(
-                                    text: privateInsurance,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  )
-                                ],
-                              ),
+                                  child: Slider(
+                                    value: family.privateInsurance,
+                                    min: 0,
+                                    max: 2,
+                                    divisions: 2,
+                                    onChanged: (value) {
+                                      togglePrivateInsurance(value);
+                                    },
+                                  ),
+                                ),
+                                TextWidget(
+                                  text: privateInsurance,
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                )
+                              ],
                             ),
                           ),
                         ],
@@ -1875,7 +1849,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.only(top:4.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Old age Pension?'),
@@ -1883,44 +1857,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               weight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Column(
-                                children: [
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
-                                      trackShape: RectangularSliderTrackShape(),
-                                      trackHeight: 4.0,
-                                      thumbColor: primaryColor,
-                                      thumbShape:
-                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                      overlayColor: Colors.white.withAlpha(32),
-                                      overlayShape:
-                                      RoundSliderOverlayShape(overlayRadius: 28.0),
-                                    ),
-                                    child: Slider(
-                                      value: family.oldPension,
-                                      min: 0,
-                                      max: 2,
-                                      divisions: 2,
-                                      onChanged: (value) {
-                                        toggleOldPension(value);
-                                      },
-                                    ),
-                                  ),
-                                  TextWidget(
-                                    text: oldPension,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  )
-                                ],
+                          Column(
+                            children: [
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: family.oldPension,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleOldPension(value);
+                                  },
+                                ),
                               ),
-                            ),
+                              TextWidget(
+                                text: oldPension,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -1936,7 +1903,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.only(top:4.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Widowed Pension?'),
@@ -1944,44 +1911,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               weight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Column(
-                                children: [
-                                  SliderTheme(
-                                    data: SliderTheme.of(context).copyWith(
-                                      activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
-                                      trackShape: RectangularSliderTrackShape(),
-                                      trackHeight: 4.0,
-                                      thumbColor: primaryColor,
-                                      thumbShape:
-                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                      overlayColor: Colors.white.withAlpha(32),
-                                      overlayShape:
-                                      RoundSliderOverlayShape(overlayRadius: 28.0),
-                                    ),
-                                    child: Slider(
-                                      value: family.widowedPension,
-                                      min: 0,
-                                      max: 2,
-                                      divisions: 2,
-                                      onChanged: (value) {
-                                        toggleWidowedPension(value);
-                                      },
-                                    ),
-                                  ),
-                                  TextWidget(
-                                    text: widowedPension,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  )
-                                ],
+                          Column(
+                            children: [
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape:
+                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: family.widowedPension,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleWidowedPension(value);
+                                  },
+                                ),
                               ),
-                            ),
+                              TextWidget(
+                                text: widowedPension,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -1994,12 +1954,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     child: FractionallySizedBox(
                       widthFactor: 1,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(top:4.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding: const EdgeInsets.only(top:4.0),
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
                                     .translate('Retirement Pension?'),
@@ -2007,43 +1967,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 weight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(
-                              height: 58,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 16.0, top: 2.0, bottom: 2.0),
-                                child: Column(
-                                  children: [
-                                    SliderTheme(
-                                      data: SliderTheme.of(context).copyWith(
-                                        activeTrackColor: primaryColor,
-                                        inactiveTrackColor: Colors.lightBlueAccent,
-                                        trackShape: RectangularSliderTrackShape(),
-                                        trackHeight: 4.0,
-                                        thumbColor: primaryColor,
-                                        thumbShape:
-                                        RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                        overlayColor: Colors.white.withAlpha(32),
-                                        overlayShape:
-                                        RoundSliderOverlayShape(overlayRadius: 28.0),
-                                      ),
-                                      child: Slider(
-                                        value: family.retirementPension,
-                                        min: 0,
-                                        max: 2,
-                                        divisions: 2,
-                                        onChanged: (value) {
-                                          toggleRetirementPension(value);
-                                        },
-                                      ),
-                                    ),
-                                    TextWidget(
-                                      text: retirementPension,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    )
-                                  ],
+                            Column(
+                              children: [
+                                SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    activeTrackColor: primaryColor,
+                                    inactiveTrackColor: Colors.lightBlueAccent,
+                                    trackShape: RectangularSliderTrackShape(),
+                                    trackHeight: 4.0,
+                                    thumbColor: primaryColor,
+                                    thumbShape:
+                                    RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                    overlayColor: Colors.white.withAlpha(32),
+                                    overlayShape:
+                                    RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  ),
+                                  child: Slider(
+                                    value: family.retirementPension,
+                                    min: 0,
+                                    max: 2,
+                                    divisions: 2,
+                                    onChanged: (value) {
+                                      toggleRetirementPension(value);
+                                    },
+                                  ),
                                 ),
-                              ),
+                                TextWidget(
+                                  text: retirementPension,
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                )
+                              ],
                             ),
                           ],
                         ),
