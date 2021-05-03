@@ -22,78 +22,69 @@ import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
 
+  Function refreshFamilyList;
+  Family family;
+  FamilyMemberStep(this.family, this.refreshFamilyList);
+
   @override
-  _FamilyMemberStepState createState() => _FamilyMemberStepState();
+  _FamilyMemberStepState createState() => _FamilyMemberStepState(family);
 }
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
-  bool isPhysical = false;
-  bool isSmartPhone = false;
-  bool isGovt = false;
-  bool isInsurance = false;
-  bool isOldAge = false;
-  bool isWidowed = false;
-  bool isRetirement = false;
 
-  String textValue = 'No';
-  String textValue1 = 'No';
-  String textGovt = 'No';
-  String textInsurance = 'No';
-  String textOldAge = 'No';
-  String textWidowed = 'No';
-  String textRetirement = 'No';
-
-  double minPrice = 0;
-  double maxPrice = 100;
-  double _lowerValue = 0;
-  double _upperValue = 100;
-
+  var nameController = TextEditingController();
+  var aadharNumberController = TextEditingController();
+  var relationshipController = TextEditingController();
   var genderController = TextEditingController();
-  var relationController = TextEditingController();
+  var dobController = TextEditingController();
+  var ageController = TextEditingController();
+  var maritalStatusController = TextEditingController();
+  var bloodGroupController = TextEditingController();
+  String physicallyChallenge = 'Not Answer';
   var educationController = TextEditingController();
-  var maritalController = TextEditingController();
-  var businessController = TextEditingController();
-  var bloodGrpController = TextEditingController();
-  var sectionController = TextEditingController();
+  var occupationController = TextEditingController();
+  var annualIncomeController = TextEditingController();
+  var mobileNumberController = TextEditingController();
+  var mailController = TextEditingController();
+  String smartphone = 'Not Answer';
+  var communityController = TextEditingController();
+  var casteController = TextEditingController();
+  var photoController = TextEditingController();
+  String govtInsurance = 'Not Answer';
+  String privateInsurance = 'Not Answer';
+  String oldPension = 'Not Answer';
+  String widowedPension = 'Not Answer';
+  String retirementPension = 'Not Answer';
 
-  TextEditingController ageController = TextEditingController();
   List<dynamic> values;
-  List genderList;
-  List genderListLang;
-  List relationList;
-  List relationLangList;
-  List educationList;
-  List educationLangList;
-  List maritalList;
-  List maritalLangList;
-  List businessList;
-  List businessLangList;
-  List bloodGrpList;
-  List bloodGrpLangList;
-  List sectionList;
-  List sectionLangList;
-  String nameVal,
-      relationshipVal,
-      genderVal,
-      dateOfBirthVal,
+  List genderList = [];
+  List genderListLang = [];
+  List relationList = [];
+  List relationLangList = [];
+  List educationList = [];
+  List educationLangList = [];
+  List maritalList = [];
+  List maritalLangList = [];
+  List businessList = [];
+  List businessLangList = [];
+  List bloodGrpList = [];
+  List bloodGrpLangList = [];
+  List sectionList = [];
+  List sectionLangList = [];
+  String relationshipVal,
       maritalStatusVal,
-      bloodGroupVal,
       qualificationVal,
       occupationVal,
-      mailVal,
       communityVal,
-      castVal,
-      annualIncomeVal,
-      photoVal;
-
-  int aadharNumberVal, ageVal, mobileNumberVal;
-  bool physicallyChallengeVal, smartphoneVal;
+      annualIncomeVal;
+  int ageVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   String gender = "";
@@ -101,22 +92,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   final picker = ImagePicker();
   String language;
 
+  Family family;
+
+  _FamilyMemberStepState(this.family);
+
   @override
   void initState() {
-    genderList = [];
-    genderListLang = [];
-    relationList = [];
-    relationLangList = [];
-    educationList = [];
-    educationLangList = [];
-    maritalList = [];
-    maritalLangList = [];
-    businessList = [];
-    businessLangList = [];
-    bloodGrpList = [];
-    bloodGrpLangList = [];
-    sectionList = [];
-    sectionLangList = [];
     getLanguage();
     super.initState();
   }
@@ -133,7 +114,43 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     });
   }
 
+  double getSwitchValues(String value) {
+    if (value == "Yes")
+      return 2;
+    else if (value == "No")
+      return 1;
+    return 0;
+  }
+
   Future uploadFile() async {
+    family.name = nameController.text;
+    family.aadharNumber = aadharNumberController.text;
+    family.relationship = relationshipController.text;
+    family.gender = genderController.text;
+    family.dob = dobController.text;
+    family.age = double.parse(ageController.text);
+    family.maritalStatus = maritalStatusController.text;
+    family.bloodGroup = bloodGroupController.text;
+    family.physicallyChallenge = getSwitchValues(physicallyChallenge);
+    family.education = educationController.text;
+    family.occupation = occupationController.text;
+    family.annualIncome = annualIncomeController.text;
+    family.mobileNumber = mobileNumberController.text;
+    family.mail = mailController.text;
+    family.smartphone = getSwitchValues(smartphone);
+    family.community = communityController.text;
+    family.caste = casteController.text;
+    family.photo = photoController.text;
+    family.govtInsurance = getSwitchValues(govtInsurance);
+    family.privateInsurance = getSwitchValues(privateInsurance);
+    family.oldPension = getSwitchValues(oldPension);
+    family.widowedPension = getSwitchValues(widowedPension);
+    family.retirementPension = getSwitchValues(retirementPension);
+
+    widget.refreshFamilyList(family);
+    if(_image == null) {
+      return;
+    }
     firebase_storage.Reference storageReference = FirebaseStorage.instance
         .ref()
         .child('tct/${Path.basename(_image.path)}}');
@@ -355,12 +372,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             padding: const EdgeInsets.only(
                                 right: 16.0, top: 2.0, bottom: 2.0),
                             child: AutoCompleteTextField(
-                                controller: relationController,
+                                controller: relationshipController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
-                                  relationController.text = item;
-                                  debugPrint(
-                                      "stringList1:${relationController.text}");
+                                  relationshipController.text = item;
                                 },
                                 suggestions: relationLangList,
                                 style: TextStyle(
@@ -412,7 +427,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  debugPrint("genderItem:$item");
                                   return item
                                       .toLowerCase()
                                       .startsWith(query.toLowerCase());
@@ -477,8 +491,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               clearOnSubmit: false,
                                               itemSubmitted: (item) {
                                                 genderController.text = item;
-                                                debugPrint(
-                                                    "stringList1:${genderController.text}");
+                                                debugPrint("stringList1:${genderController.text}");
                                               },
                                               suggestions: genderListLang,
                                               style: TextStyle(
@@ -642,10 +655,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2022));
                                             String dateFormat = DateFormat(" d-MMMM-y").format(date);
-
                                             datePicker.text = dateFormat;
-
-                                            dateOfBirthVal = datePicker.text;
+                                            dobController.text = datePicker.text;
                                             calculateAge(date);
                                           },
 
@@ -776,12 +787,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             top: 2.0,
                                             bottom: 2.0),
                                         child: AutoCompleteTextField(
-                                            controller: maritalController,
+                                            controller: maritalStatusController,
                                             clearOnSubmit: false,
                                             itemSubmitted: (item) {
-                                              maritalController.text = item;
-                                              debugPrint(
-                                                  "maritalController:${maritalController.text}");
+                                              maritalStatusController.text = item;
                                             },
                                             suggestions: maritalLangList,
                                             style: TextStyle(
@@ -882,12 +891,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         padding: const EdgeInsets.only(
                                             right: 16.0, top: 2.0, bottom: 2.0),
                                         child: AutoCompleteTextField(
-                                            controller: bloodGrpController,
+                                            controller: bloodGroupController,
                                             clearOnSubmit: false,
                                             itemSubmitted: (item) {
-                                              bloodGrpController.text = item;
-                                              debugPrint(
-                                                  "bloodGrpController:${bloodGrpController.text}");
+                                              bloodGroupController.text = item;
                                             },
                                             suggestions: bloodGrpLangList,
                                             style: TextStyle(
@@ -983,21 +990,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(4.0),
-                                      child: Row(
+                                      child: Column(
                                         children: [
-                                          Switch(
-                                            onChanged: toggleSwitch,
-                                            value: isPhysical,
-                                            activeColor: Colors.blue,
-                                            activeTrackColor: greyColor,
-                                            inactiveThumbColor: greyColor,
-                                            inactiveTrackColor: greyColor,
+                                          SliderTheme(
+                                            data: SliderTheme.of(context).copyWith(
+                                              activeTrackColor: primaryColor,
+                                              inactiveTrackColor: Colors.lightBlueAccent,
+                                              trackShape: RectangularSliderTrackShape(),
+                                              trackHeight: 4.0,
+                                              thumbColor: primaryColor,
+                                              thumbShape:
+                                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                              overlayColor: Colors.white.withAlpha(32),
+                                              overlayShape:
+                                              RoundSliderOverlayShape(overlayRadius: 28.0),
+                                            ),
+                                            child: Slider(
+                                              value: family.physicallyChallenge,
+                                              min: 0,
+                                              max: 2,
+                                              divisions: 2,
+                                              onChanged: (value) {
+                                                togglePhysicallyChallenge(value);
+                                              },
+                                            ),
                                           ),
                                           TextWidget(
-                                            text: textValue,
+                                            text: physicallyChallenge,
                                             size: 14,
                                             weight: FontWeight.w600,
-                                          ),
+                                          )
                                         ],
                                       ),
                                     ),
@@ -1169,12 +1191,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
                               child: AutoCompleteTextField(
-                                  controller: businessController,
+                                  controller: occupationController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
-                                    businessController.text = item;
-                                    debugPrint(
-                                        "businessController:${businessController.text}");
+                                    occupationController.text = item;
                                   },
                                   suggestions: businessLangList,
                                   style: TextStyle(
@@ -1503,21 +1523,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Switch(
-                                    onChanged: toggleSwitch1,
-                                    value: isSmartPhone,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape:
+                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape:
+                                      RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.smartphone,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        toggleSmartphone(value);
+                                      },
+                                    ),
                                   ),
                                   TextWidget(
-                                    text: textValue1,
+                                    text: smartphone,
                                     size: 14,
                                     weight: FontWeight.w600,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -1569,12 +1604,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   top: 2.0,
                                   bottom: 2.0),
                               child: AutoCompleteTextField(
-                                  controller: sectionController,
+                                  controller: communityController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
-                                    sectionController.text = item;
-                                    debugPrint(
-                                        "sectionController:${sectionController.text}");
+                                    communityController.text = item;
                                   },
                                   suggestions: sectionLangList,
                                   style: TextStyle(
@@ -1740,21 +1773,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Switch(
-                                    onChanged: toggleGovt,
-                                    value: isGovt,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape:
+                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape:
+                                      RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.govtInsurance,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        toggleGovtInsurance(value);
+                                      },
+                                    ),
                                   ),
                                   TextWidget(
-                                    text: textGovt,
+                                    text: govtInsurance,
                                     size: 14,
                                     weight: FontWeight.w600,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -1791,21 +1839,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Switch(
-                                    onChanged: toggleInsurance,
-                                    value: isInsurance,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape:
+                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape:
+                                      RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.privateInsurance,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        togglePrivateInsurance(value);
+                                      },
+                                    ),
                                   ),
                                   TextWidget(
-                                    text: textInsurance,
+                                    text: privateInsurance,
                                     size: 14,
                                     weight: FontWeight.w600,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -1837,21 +1900,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Switch(
-                                    onChanged: toggleOldAge,
-                                    value: isOldAge,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape:
+                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape:
+                                      RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.oldPension,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        toggleOldPension(value);
+                                      },
+                                    ),
                                   ),
                                   TextWidget(
-                                    text: textOldAge,
+                                    text: oldPension,
                                     size: 14,
                                     weight: FontWeight.w600,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -1883,21 +1961,36 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  Switch(
-                                    onChanged: toggleWidowed,
-                                    value: isWidowed,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
+                                  SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape:
+                                      RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape:
+                                      RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.widowedPension,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        toggleWidowedPension(value);
+                                      },
+                                    ),
                                   ),
                                   TextWidget(
-                                    text: textWidowed,
+                                    text: widowedPension,
                                     size: 14,
                                     weight: FontWeight.w600,
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -1912,43 +2005,60 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     alignment: Alignment.topRight,
                     child: FractionallySizedBox(
                       widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Retirement Pension?'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
-                              child: Row(
-                                children: [
-                                  Switch(
-                                    onChanged: toggleRetirement,
-                                    value: isRetirement,
-                                    activeColor: Colors.blue,
-                                    activeTrackColor: greyColor,
-                                    inactiveThumbColor: greyColor,
-                                    inactiveTrackColor: greyColor,
-                                  ),
-                                  TextWidget(
-                                    text: textRetirement,
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Retirement Pension?'),
+                                size: 14,
+                                weight: FontWeight.w600,
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 58,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 16.0, top: 2.0, bottom: 2.0),
+                                child: Column(
+                                  children: [
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: primaryColor,
+                                        inactiveTrackColor: Colors.lightBlueAccent,
+                                        trackShape: RectangularSliderTrackShape(),
+                                        trackHeight: 4.0,
+                                        thumbColor: primaryColor,
+                                        thumbShape:
+                                        RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                        overlayColor: Colors.white.withAlpha(32),
+                                        overlayShape:
+                                        RoundSliderOverlayShape(overlayRadius: 28.0),
+                                      ),
+                                      child: Slider(
+                                        value: family.retirementPension,
+                                        min: 0,
+                                        max: 2,
+                                        divisions: 2,
+                                        onChanged: (value) {
+                                          toggleRetirementPension(value);
+                                        },
+                                      ),
+                                    ),
+                                    TextWidget(
+                                      text: retirementPension,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -1991,109 +2101,88 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     );
   }
 
-  void toggleSwitch(bool value) {
-    if (isPhysical == false) {
-      setState(() {
-        isPhysical = true;
-        textValue = 'Yes';
-      });
-    } else {
-      setState(() {
-        isPhysical = false;
-        textValue = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void togglePhysicallyChallenge(double value) {
+    family.physicallyChallenge = value;
+    setState(() {
+      if(value==0)
+        physicallyChallenge='Not Answer';
+      else if(value==1)
+        physicallyChallenge='No';
+      else
+        physicallyChallenge='Yes';
+    });
   }
 
-  void toggleSwitch1(bool value) {
-    if (isSmartPhone == false) {
-      setState(() {
-        isSmartPhone = true;
-        textValue1 = 'Yes';
-      });
-    } else {
-      setState(() {
-        isSmartPhone = false;
-        textValue1 = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void toggleSmartphone(double value) {
+    family.smartphone = value;
+    setState(() {
+      if(value==0)
+        smartphone='Not Answer';
+      else if(value==1)
+        smartphone='No';
+      else
+        smartphone='Yes';
+    });
   }
 
-  void toggleGovt(bool value) {
-    if (isGovt == false) {
-      setState(() {
-        isGovt = true;
-        textGovt = 'Yes';
-      });
-    } else {
-      setState(() {
-        isGovt = false;
-        textGovt = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void toggleGovtInsurance(double value) {
+    family.govtInsurance = value;
+    setState(() {
+      if(value==0)
+        govtInsurance='Not Answer';
+      else if(value==1)
+        govtInsurance='No';
+      else
+        govtInsurance='Yes';
+    });
   }
 
-  void toggleInsurance(bool value) {
-    if (isInsurance == false) {
-      setState(() {
-        isInsurance = true;
-        textInsurance = 'Yes';
-      });
-    } else {
-      setState(() {
-        isInsurance = false;
-        textInsurance = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void togglePrivateInsurance(double value) {
+    family.privateInsurance = value;
+    setState(() {
+      if(value==0)
+        privateInsurance='Not Answer';
+      else if(value==1)
+        privateInsurance='No';
+      else
+        privateInsurance='Yes';
+    });
   }
 
-  void toggleOldAge(bool value) {
-    if (isOldAge == false) {
-      setState(() {
-        isOldAge = true;
-        textOldAge = 'Yes';
-      });
-    } else {
-      setState(() {
-        isOldAge = false;
-        textOldAge = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void toggleOldPension(double value) {
+    family.oldPension = value;
+    setState(() {
+      if(value==0)
+        oldPension='Not Answer';
+      else if(value==1)
+        oldPension='No';
+      else
+        oldPension='Yes';
+    });
   }
 
-  void toggleWidowed(bool value) {
-    if (isWidowed == false) {
-      setState(() {
-        isWidowed = true;
-        textWidowed = 'Yes';
-      });
-    } else {
-      setState(() {
-        isWidowed = false;
-        textWidowed = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void toggleWidowedPension(double value) {
+    family.widowedPension = value;
+    setState(() {
+      if(value==0)
+        widowedPension='Not Answer';
+      else if(value==1)
+        widowedPension='No';
+      else
+        widowedPension='Yes';
+    });
   }
 
-  void toggleRetirement(bool value) {
-    if (isRetirement == false) {
-      setState(() {
-        isRetirement = true;
-        textRetirement = 'Yes';
-      });
-    } else {
-      setState(() {
-        isRetirement = false;
-        textRetirement = 'No';
-      });
-      //print('Switch Button is OFF');
-    }
+  void toggleRetirementPension(double value) {
+    family.retirementPension = value;
+    setState(() {
+      if(value==0)
+        retirementPension = 'Not Answer';
+      else if(value==1)
+        retirementPension='No';
+      else
+        retirementPension='Yes';
+    });
   }
 
   getGender() async {
@@ -2241,4 +2330,5 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getBloodGroup();
     getSection();
   }
+
 }

@@ -219,28 +219,28 @@ class Habits {
 
 class Family {
   String name = "";
-  int aadharNumber = 0;
+  String aadharNumber = "";
   String relationship = "";
   String gender = "";
   String dob = "";
-  int age = 0;
+  double age = 0;
   String maritalStatus = "";
   String bloodGroup = "";
-  bool physicallyChallenge = false;
+  double physicallyChallenge = 0;
   String education = "";
   String occupation = "";
-  int annualIncome = 0;
+  String annualIncome = "";
   String mobileNumber = "";
   String mail = "";
-  bool smartphone = false;
+  double smartphone = 0;
   String community = "";
   String caste = "";
   String photo = "";
-  String govtInsurance = "";
-  String privateInsurance = "";
-  String oldPension = "";
-  String widowedPension = "";
-  String retirementPension = "";
+  double govtInsurance = 0;
+  double privateInsurance = 0;
+  double oldPension = 0;
+  double widowedPension = 0;
+  double retirementPension = 0;
 
   Family(
       {this.name,
