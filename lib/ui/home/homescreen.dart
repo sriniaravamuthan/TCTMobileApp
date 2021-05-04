@@ -6,6 +6,7 @@
  * /
  */
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,11 +34,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
-  CollectionReference demographydata =
-      FirebaseFirestore.instance.collection('users');
+  CollectionReference demographydata =   FirebaseFirestore.instance.collection('users');
 
   // List<Result> users;
-  List users;
+  List users = [];
   Language language;
   String dropDownLang;
   var height, width;
@@ -51,7 +51,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // users = Result.getUser();
-    users = [];
     currentUser = FirebaseAuth.instance.currentUser;
     if(currentUser.displayName!=null){
       userName=currentUser.displayName;
@@ -167,29 +166,19 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
 
-          print("dataUser:${snapshot.data.docs}");
           var family = snapshot.data.docs.map((doc) => doc.data()).toList();
-          debugPrint("family:$family");
           family.forEach((element) {
             final data = element['familyMembers'];
-            debugPrint("familyhead2:${data['name']}");
+
+            //  TODO  ::  ::  Need to make this data dynamic ie., from firestore
+            if (data["mobileNumber"] == null)
+              data["mobileNumber"] = "9876543210";
+            data["villageCode"] = "ABC";
+
             if (data != null) {
               users.add(data);
-              debugPrint("userList:$users}");
-              debugPrint("familyhead:$data");
-
-              // name = data['name'];
-              // age = data['age'];
             }
-
           });
-          // snapshot.data.docs.map((usersItem) {
-          //   List<dynamic> markMap = usersItem['familyMembers'];
-          //   markMap.forEach((element) {
-          //     name = element['name'];
-          //     debugPrint("familyhead:$name");
-          //   });
-          // });
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -692,7 +681,19 @@ class DataTableRow extends DataTableSource {
 
   @override
   DataRow getRow(int index) {
-    debugPrint("FamilyName:${users[0]['name']}");
+    if (index >= users.length)
+      return DataRow(
+          cells: [
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
+          ]
+      );
+
+    debugPrint("FamilyName:${users[index]['name']}");
     return DataRow.byIndex(
         index: index,
         onSelectChanged: (bool selected) {
@@ -720,7 +721,7 @@ class DataTableRow extends DataTableSource {
               SizedBox(
                   width: 100,
                   child: TextWidget(
-                    text: users[0]['name'],
+                    text: users[index]['name'],
                     color: darkGreyColor,
                     size: 16,
                     weight: FontWeight.w600,
@@ -731,7 +732,7 @@ class DataTableRow extends DataTableSource {
             width: 100,
             child: Center(
               child: TextWidget(
-                text: users[0]['age'].toString(),
+                text: users[index]['age'].toString(),
                 color: darkGreyColor,
                 size: 16,
                 weight: FontWeight.w600,
@@ -742,7 +743,7 @@ class DataTableRow extends DataTableSource {
             width: 100,
             child: Center(
               child: TextWidget(
-                text: "7867985466",
+                text: users[index]['mobileNumber'],
                 color: darkGreyColor,
                 size: 16,
                 weight: FontWeight.w600,
@@ -753,7 +754,7 @@ class DataTableRow extends DataTableSource {
             width: 100,
             child: Center(
               child: TextWidget(
-                text: "AAR",
+                text: users[index]['villageCode'],
                 color: darkGreyColor,
                 size: 16,
                 weight: FontWeight.w600,
@@ -843,4 +844,5 @@ class DataTableRow extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+
 }
