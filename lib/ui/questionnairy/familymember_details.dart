@@ -75,46 +75,49 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
     debugPrint("FamilyMember:$familyList");
     return Column(
       children: [
-        Container(
-          height: 40,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                onTap: () {
-                  addFamilyField();
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: Colors.black45,
-                      style: BorderStyle.solid,
-                      width: 1.0,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    addFamilyField();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: Colors.black45,
+                        style: BorderStyle.solid,
+                        width: 1.0,
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(Icons.add),
-                        FittedBox(
-                          fit: BoxFit.cover,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Add Family Member'),
-                            color: darkColor,
-                            weight: FontWeight.w700,
-                            size: 14,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(Icons.add),
+                          FittedBox(
+                            fit: BoxFit.cover,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Add Family Member'),
+                              color: darkColor,
+                              weight: FontWeight.w700,
+                              size: 14,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Visibility(
@@ -129,11 +132,11 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 //
                 //       return
                 ListView.builder(
-              itemCount: 3,
+              itemCount: familyList.length,
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                debugPrint("familyList:${familyList[index].name}");
+                debugPrint("familyList:${familyList}");
                 return Column(
                   children: [
                     Row(
@@ -155,7 +158,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "Saravanakumar (Son)",
+                                  text: familyList[index].name,
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -164,7 +167,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "24 Yrs (15 Feb 1996)",
+                                  text:
+                                      " ${familyList[index].age.toString()},${familyList[index].dob.toString()}",
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -173,7 +177,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "Male, O+, Married",
+                                  text:
+                                      "${familyList[index].gender} ,${familyList[index].bloodGroup} , ${familyList[index].maritalStatus} ",
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -182,7 +187,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "+91 97101 52525",
+                                  text: familyList[index].mobileNumber,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -191,7 +196,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "saravanakumar@gmail.com",
+                                  text: familyList[index].mail,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -220,7 +225,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "546546565654",
+                                  text: familyList[index].aadharNumber,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -238,7 +243,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "IT employee",
+                                  text: familyList[index].occupation,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -254,7 +259,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                               ),
                               TextWidget(
-                                text: "MBC",
+                                text: familyList[index].community,
                                 weight: FontWeight.w400,
                                 color: darkColor,
                                 size: 14,
@@ -298,7 +303,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "BE",
+                                  text: familyList[index].education,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -316,7 +321,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "RS:60,000",
+                                  text: familyList[index].annualIncome,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -334,7 +339,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "Agamudayar",
+                                  text: familyList[index].caste,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -379,7 +384,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "Yes",
+                                  text: familyList[index].smartphone.toString(),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -397,7 +402,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "No",
+                                  text: familyList[index].smartphone.toString(),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
