@@ -14,4 +14,6 @@ const String collectionMaritalStatus = "MaritalStatus";
 const String collectionBusiness = "business";
 const String collectionBloodGroup = "bloodGroup";
 const String collectionSection = "section";
-const String mapFamilyMembers="familyMembers";
+const String mapFamilyMembers = "familyMembers";
+const String collectionAnnualIncome = "annualIncome";
+const String mapAnnualIncome = "income";

@@ -6,7 +6,6 @@
  * /
  */
 
-import 'dart:collection';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,8 +27,6 @@ import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
-
-import '../../main.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
   @override
@@ -58,7 +55,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   var panchayatNoController = TextEditingController();
 
   List<QueryDocumentSnapshot> snap;
-  List villageCodeList, villageNameList, originalVillageCodeList = [], originalVillageNameList = [];
+  List villageCodeList,
+      villageNameList,
+      originalVillageCodeList = [],
+      originalVillageNameList = [];
   List<String> panchayatCodeList = [], panchayatNoList = [];
   var height, width;
 
@@ -338,9 +338,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       _formKey.currentState.save();
                                       addData();
                                     }
-                                  } else {
-                                    _showToast(context);
                                   }
+                                  // else {
+                                  //   _showToast(context);
+                                  // }
                                 });
                               },
                             ),
@@ -638,29 +639,54 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                           top: 2.0,
                                                           bottom: 2.0),
                                                   child: AutoCompleteTextField(
-                                                      controller: villageCodeController,
+                                                      controller:
+                                                          villageCodeController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
                                                         setState(() {
-                                                          villageCodeController.text = item;
-                                                          for(int i = 0; i < originalVillageCodeList.length; i++) {
-                                                            if (item == originalVillageCodeList[i]) {
-                                                                panchayatCodeController.text = panchayatCodeList[i];
-                                                                panchayatNoController.text = panchayatNoList[i];
+                                                          villageCodeController
+                                                              .text = item;
+                                                          for (int i = 0;
+                                                              i <
+                                                                  originalVillageCodeList
+                                                                      .length;
+                                                              i++) {
+                                                            if (item ==
+                                                                originalVillageCodeList[
+                                                                    i]) {
+                                                              panchayatCodeController
+                                                                      .text =
+                                                                  panchayatCodeList[
+                                                                      i];
+                                                              panchayatNoController
+                                                                      .text =
+                                                                  panchayatNoList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
-                                                          for(int i = 0; i < villageCodeList.length; i++) {
-                                                            if (item == villageCodeList[i]) {
-                                                                villageNameController.text = villageNameList[i];
+                                                          for (int i = 0;
+                                                              i <
+                                                                  villageCodeList
+                                                                      .length;
+                                                              i++) {
+                                                            if (item ==
+                                                                villageCodeList[
+                                                                    i]) {
+                                                              villageNameController
+                                                                      .text =
+                                                                  villageNameList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
                                                         });
                                                       },
-                                                      suggestions: villageCodeList,
+                                                      suggestions:
+                                                          villageCodeList,
                                                       style: TextStyle(
-                                                        color: Color(0xFF222222),
+                                                        color:
+                                                            Color(0xFF222222),
                                                         fontSize: 16,
                                                       ),
                                                       decoration:
@@ -719,7 +745,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                                         color:
                                                                             lightGreyColor),
                                                               ),
-                                                              fillColor: lightGreyColor),
+                                                              fillColor:
+                                                                  lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
@@ -737,10 +764,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       itemSorter: (a, b) {
                                                         return a.compareTo(b);
                                                       },
-                                                      itemFilter: (item, query) {
+                                                      itemFilter:
+                                                          (item, query) {
                                                         return item
                                                             .toLowerCase()
-                                                            .startsWith(query.toLowerCase());
+                                                            .startsWith(query
+                                                                .toLowerCase());
                                                       })),
                                             ),
                                           ],
@@ -798,30 +827,58 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller: panchayatNoController,
+                                                    controller:
+                                                        panchayatNoController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      panchayatNoController.text = item;
+                                                      panchayatNoController
+                                                          .text = item;
                                                       setState(() {
-                                                        villageNameController.text = "";
-                                                        villageCodeController.text = "";
+                                                        villageNameController
+                                                            .text = "";
+                                                        villageCodeController
+                                                            .text = "";
                                                         villageCodeList.clear();
                                                         villageNameList.clear();
                                                         snap.forEach((element) {
-                                                          if(element.data()["panchayatNo"].toString() == item) {
-                                                            villageCodeList.add(element.data()["villageCode"].toString());
-                                                            villageNameList.add(element.data()["villageName"][language].toString());
+                                                          if (element
+                                                                  .data()[
+                                                                      "panchayatNo"]
+                                                                  .toString() ==
+                                                              item) {
+                                                            villageCodeList.add(
+                                                                element
+                                                                    .data()[
+                                                                        "villageCode"]
+                                                                    .toString());
+                                                            villageNameList.add(
+                                                                element
+                                                                    .data()[
+                                                                        "villageName"]
+                                                                        [
+                                                                        language]
+                                                                    .toString());
                                                           }
                                                         });
-                                                        for(int i = 0; i < panchayatNoList.length; i++) {
-                                                          if (item == panchayatNoList[i]) {
-                                                            panchayatCodeController.text = panchayatCodeList[i];
+                                                        for (int i = 0;
+                                                            i <
+                                                                panchayatNoList
+                                                                    .length;
+                                                            i++) {
+                                                          if (item ==
+                                                              panchayatNoList[
+                                                                  i]) {
+                                                            panchayatCodeController
+                                                                    .text =
+                                                                panchayatCodeList[
+                                                                    i];
                                                             break;
                                                           }
                                                         }
                                                       });
                                                     },
-                                                    suggestions: panchayatNoList,
+                                                    suggestions:
+                                                        panchayatNoList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -956,30 +1013,58 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller: panchayatCodeController,
+                                                    controller:
+                                                        panchayatCodeController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      panchayatCodeController.text = item;
+                                                      panchayatCodeController
+                                                          .text = item;
                                                       setState(() {
-                                                        villageNameController.text = "";
-                                                        villageCodeController.text = "";
+                                                        villageNameController
+                                                            .text = "";
+                                                        villageCodeController
+                                                            .text = "";
                                                         villageCodeList.clear();
                                                         villageNameList.clear();
                                                         snap.forEach((element) {
-                                                          if(element.data()["panchayatCode"].toString() == item) {
-                                                            villageCodeList.add(element.data()["villageCode"].toString());
-                                                            villageNameList.add(element.data()["villageName"][language].toString());
+                                                          if (element
+                                                                  .data()[
+                                                                      "panchayatCode"]
+                                                                  .toString() ==
+                                                              item) {
+                                                            villageCodeList.add(
+                                                                element
+                                                                    .data()[
+                                                                        "villageCode"]
+                                                                    .toString());
+                                                            villageNameList.add(
+                                                                element
+                                                                    .data()[
+                                                                        "villageName"]
+                                                                        [
+                                                                        language]
+                                                                    .toString());
                                                           }
                                                         });
-                                                        for(int i = 0; i < panchayatCodeList.length; i++) {
-                                                          if (item == panchayatCodeList[i]) {
-                                                            panchayatNoController.text = panchayatNoList[i];
+                                                        for (int i = 0;
+                                                            i <
+                                                                panchayatCodeList
+                                                                    .length;
+                                                            i++) {
+                                                          if (item ==
+                                                              panchayatCodeList[
+                                                                  i]) {
+                                                            panchayatNoController
+                                                                    .text =
+                                                                panchayatNoList[
+                                                                    i];
                                                             break;
                                                           }
                                                         }
                                                       });
                                                     },
-                                                    suggestions: panchayatCodeList,
+                                                    suggestions:
+                                                        panchayatCodeList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -1061,7 +1146,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     itemFilter: (item, query) {
                                                       return item
                                                           .toLowerCase()
-                                                          .startsWith(query.toLowerCase());
+                                                          .startsWith(query
+                                                              .toLowerCase());
                                                     }),
                                               ),
                                             ),
@@ -1113,27 +1199,51 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
-                                                    controller: villageNameController,
+                                                    controller:
+                                                        villageNameController,
                                                     clearOnSubmit: false,
                                                     itemSubmitted: (item) {
-                                                      villageNameController.text = item;
+                                                      villageNameController
+                                                          .text = item;
                                                       setState(() {
-                                                        for(int i = 0; i < originalVillageNameList.length; i++) {
-                                                          if (item == originalVillageNameList[i]) {
-                                                              panchayatCodeController.text = panchayatCodeList[i];
-                                                              panchayatNoController.text = panchayatNoList[i];
+                                                        for (int i = 0;
+                                                            i <
+                                                                originalVillageNameList
+                                                                    .length;
+                                                            i++) {
+                                                          if (item ==
+                                                              originalVillageNameList[
+                                                                  i]) {
+                                                            panchayatCodeController
+                                                                    .text =
+                                                                panchayatCodeList[
+                                                                    i];
+                                                            panchayatNoController
+                                                                    .text =
+                                                                panchayatNoList[
+                                                                    i];
                                                             break;
                                                           }
                                                         }
-                                                        for(int i = 0; i < villageNameList.length; i++) {
-                                                          if (item == villageNameList[i]) {
-                                                              villageCodeController.text = villageCodeList[i];
+                                                        for (int i = 0;
+                                                            i <
+                                                                villageNameList
+                                                                    .length;
+                                                            i++) {
+                                                          if (item ==
+                                                              villageNameList[
+                                                                  i]) {
+                                                            villageCodeController
+                                                                    .text =
+                                                                villageCodeList[
+                                                                    i];
                                                             break;
                                                           }
                                                         }
                                                       });
                                                     },
-                                                    suggestions: villageNameList,
+                                                    suggestions:
+                                                        villageNameList,
                                                     style: TextStyle(
                                                       color: Color(0xFF222222),
                                                       fontSize: 16,
@@ -1862,6 +1972,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     FireStoreService fireStoreService = new FireStoreService();
     fireStoreService.createFamily(demographicFamily);
+    debugPrint("demographicFamily:${demographicFamily.location}");
   }
 
   /*getVillageName() async {
@@ -1881,14 +1992,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   }*/
 
   getVillageDetails(String language) async {
-    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionVillageName).get();
     setState(() {
       snap = querySnapshot.docs;
 
-      var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
-      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
-      var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
-      var panchayatNoDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
+      var villageCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+      var villageNameDoc = querySnapshot.docs
+          .map((doc) => doc.data()["villageName"][language])
+          .toList();
+      var panchayatCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+      var panchayatNoDoc =
+          querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
 
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());

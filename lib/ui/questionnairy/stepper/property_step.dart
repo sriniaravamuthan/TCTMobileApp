@@ -69,6 +69,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
 
     if (demographicFamily.property != null) {
       property = demographicFamily.property;
+      debugPrint("property:${demographicFamily.property}");
 
       if (property.toiletFacility == 0)
         toilet = "Not Answer";
@@ -326,7 +327,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:4.0),
+                        padding: const EdgeInsets.only(top: 4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Toilet Facility at Home'),
@@ -343,14 +344,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               trackShape: RectangularSliderTrackShape(),
                               trackHeight: 4.0,
                               thumbColor: primaryColor,
-                              thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 12.0),
                               overlayColor: Colors.white.withAlpha(32),
                               overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
                             child: Slider(
-                              value:  property.toiletFacility,
+                              value: property.toiletFacility,
                               min: 0,
                               max: 2,
                               divisions: 2,
@@ -377,7 +378,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:4.0),
+                        padding: const EdgeInsets.only(top: 4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Own Land'),
@@ -394,14 +395,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               trackShape: RectangularSliderTrackShape(),
                               trackHeight: 4.0,
                               thumbColor: primaryColor,
-                              thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 12.0),
                               overlayColor: Colors.white.withAlpha(32),
                               overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
                             child: Slider(
-                              value:  property.ownLand,
+                              value: property.ownLand,
                               min: 0,
                               max: 2,
                               divisions: 2,
@@ -502,7 +503,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   wetLandController.text = value;
                                 });
                               },
-
                             ),
                           ),
                         ),
@@ -573,7 +573,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -588,7 +587,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top:4.0),
+                        padding: const EdgeInsets.only(top: 4.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Own Vehicle'),
@@ -605,11 +604,11 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               trackShape: RectangularSliderTrackShape(),
                               trackHeight: 4.0,
                               thumbColor: primaryColor,
-                              thumbShape:
-                              RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                              thumbShape: RoundSliderThumbShape(
+                                  enabledThumbRadius: 12.0),
                               overlayColor: Colors.white.withAlpha(32),
                               overlayShape:
-                              RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  RoundSliderOverlayShape(overlayRadius: 28.0),
                             ),
                             child: Slider(
                               value: property.ownVehicle,
@@ -701,7 +700,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-
                               ),
                             ),
                           ),
@@ -783,7 +781,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               onSaved: (String val) {
                                 setState(() {});
                               },
-
                             ),
                           ),
                         ),
@@ -855,7 +852,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -926,7 +922,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -997,7 +992,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -1019,7 +1013,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top:4.0),
+                          padding: const EdgeInsets.only(top: 4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Details'),
@@ -1036,11 +1030,11 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 trackShape: RectangularSliderTrackShape(),
                                 trackHeight: 4.0,
                                 thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
                                 value: property.ownLivestocks,
@@ -1124,7 +1118,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -1192,7 +1185,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onSaved: (String val) {
                               setState(() {});
                             },
-
                           ),
                         ),
                       ),
@@ -1250,49 +1242,48 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   void toggleToilet(double value) {
     property.toiletFacility = value;
     setState(() {
-      if(value==0)
-        toilet='Not Answer';
-      else if(value==1)
-        toilet='No';
+      if (value == 0)
+        toilet = 'Not Answer';
+      else if (value == 1)
+        toilet = 'No';
       else
-        toilet='Yes';
+        toilet = 'Yes';
     });
   }
 
   void toggleOwnLand(double value) {
     property.ownLand = value;
     setState(() {
-      if(value==0)
-        land='Not Answer';
-      else if(value==1)
-        land='No';
+      if (value == 0)
+        land = 'Not Answer';
+      else if (value == 1)
+        land = 'No';
       else
-        land='Yes';
+        land = 'Yes';
     });
   }
 
   void toggleOwnVehicle(double value) {
     property.ownVehicle = value;
     setState(() {
-      if(value==0)
-        vehicle='Not Answer';
-      else if(value==1)
-        vehicle='No';
+      if (value == 0)
+        vehicle = 'Not Answer';
+      else if (value == 1)
+        vehicle = 'No';
       else
-        vehicle='Yes';
+        vehicle = 'Yes';
     });
   }
 
   void toggleOwnLivestocks(double value) {
     property.ownLivestocks = value;
     setState(() {
-      if(value==0)
-        liveStock='Not Answer';
-      else if(value==1)
-        liveStock='No';
+      if (value == 0)
+        liveStock = 'Not Answer';
+      else if (value == 1)
+        liveStock = 'No';
       else
-        liveStock='Yes';
+        liveStock = 'Yes';
     });
   }
-
 }

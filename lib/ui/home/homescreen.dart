@@ -6,7 +6,6 @@
  * /
  */
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +33,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
-  CollectionReference demographydata =   FirebaseFirestore.instance.collection('users');
+  CollectionReference demographydata =
+      FirebaseFirestore.instance.collection('users');
 
   // List<Result> users;
   List users = [];
@@ -42,7 +42,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String dropDownLang;
   var height, width;
   User currentUser;
-  String userName;
+  String userName = "";
   String name = "";
   int age = 0;
 
@@ -52,8 +52,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   void initState() {
     // users = Result.getUser();
     currentUser = FirebaseAuth.instance.currentUser;
-    if(currentUser.displayName!=null){
-      userName=currentUser.displayName;
+    if (currentUser.displayName != null) {
+      userName = currentUser.displayName;
     }
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -169,14 +169,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           var family = snapshot.data.docs.map((doc) => doc.data()).toList();
           family.forEach((element) {
             final data = element['familyMembers'];
-
-            //  TODO  ::  ::  Need to make this data dynamic ie., from firestore
-            if (data["mobileNumber"] == null)
-              data["mobileNumber"] = "9876543210";
-            data["villageCode"] = "ABC";
+            if (data["mobileNumber"] == null) data["mobileNumber"] = "";
+            data["villageCode"] = "";
 
             if (data != null) {
               users.add(data);
+              debugPrint("userList:$users");
             }
           });
           return Container(
@@ -682,16 +680,38 @@ class DataTableRow extends DataTableSource {
   @override
   DataRow getRow(int index) {
     if (index >= users.length)
-      return DataRow(
-          cells: [
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-            DataCell(TextWidget(text: "", size: 16, weight: FontWeight.w600,)),
-          ]
-      );
+      return DataRow(cells: [
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+      ]);
 
     debugPrint("FamilyName:${users[index]['name']}");
     return DataRow.byIndex(
@@ -704,20 +724,6 @@ class DataTableRow extends DataTableSource {
         cells: [
           DataCell(Row(
             children: [
-              // Container(
-              //     padding: EdgeInsets.only(
-              //         left: 8.0),familyHead
-              //     height: 30,
-              //     width: 30,
-              //     decoration: new BoxDecoration(
-              //         shape:
-              //             BoxShape.circle,
-              //         image: new DecorationImage(
-              //             fit: BoxFit.fill,
-              //             image:
-              //                 new AssetImage(
-              //                     user)))),
-
               SizedBox(
                   width: 100,
                   child: TextWidget(
@@ -793,7 +799,9 @@ class DataTableRow extends DataTableSource {
                 children: [
                   InkWell(
                     onTap: () {
-                      Get.toNamed('/questionnery');
+                      Get.toNamed(
+                        '/questionnery',
+                      );
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(
@@ -823,17 +831,7 @@ class DataTableRow extends DataTableSource {
               ),
             ),
           )),
-        ]
-
-        //     cells: [
-        //   DataCell(Text("#cell$index")),
-        //   DataCell(Text("#cell$index")),
-        //   DataCell(Text("#cell$index")),
-        //   DataCell(Text("#cell$index")),
-        //   DataCell(Text("#cell$index")),
-        //   DataCell(Text("#cell$index")),
-        // ]
-        );
+        ]);
   }
 
   @override
@@ -844,5 +842,4 @@ class DataTableRow extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
-
 }

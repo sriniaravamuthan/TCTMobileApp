@@ -27,7 +27,6 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
-
   Function refreshFamilyList;
   Family family;
   FamilyMemberStep(this.family, this.refreshFamilyList);
@@ -50,6 +49,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String physicallyChallenge = 'Not Answer';
   var educationController = TextEditingController();
   var occupationController = TextEditingController();
+  var annualController = TextEditingController();
+
   String annualIncomeVal;
   var mobileNumberController = TextEditingController();
   var mailController = TextEditingController();
@@ -64,9 +65,27 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String retirementPension = 'Not Answer';
 
   List<dynamic> values;
-  List genderList = [],genderListLang = [],relationList = [],relationLangList = [],educationList = [],educationLangList = [],maritalList = [],
-      maritalLangList = [],businessList = [],businessLangList = [],bloodGrpList = [],bloodGrpLangList = [],sectionList = [],sectionLangList = [];
-  String relationshipVal, maritalStatusVal, qualificationVal, occupationVal, communityVal;
+  List genderList = [],
+      genderListLang = [],
+      relationList = [],
+      relationLangList = [],
+      educationList = [],
+      educationLangList = [],
+      maritalList = [],
+      maritalLangList = [],
+      businessList = [],
+      businessLangList = [],
+      incomeList = [],
+      incomeListLang = [],
+      bloodGrpList = [],
+      bloodGrpLangList = [],
+      sectionList = [],
+      sectionLangList = [];
+  String relationshipVal,
+      maritalStatusVal,
+      qualificationVal,
+      occupationVal,
+      communityVal;
   int ageVal;
   TextEditingController datePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
@@ -100,8 +119,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   double getSwitchValues(String value) {
     if (value == "Yes")
       return 2;
-    else if (value == "No")
-      return 1;
+    else if (value == "No") return 1;
     return 0;
   }
 
@@ -131,7 +149,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.retirementPension = getSwitchValues(retirementPension);
 
     widget.refreshFamilyList(family);
-    if(_image == null) {
+    if (_image == null) {
       return;
     }
     firebase_storage.Reference storageReference = FirebaseStorage.instance
@@ -244,7 +262,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-
                               ),
                             ),
                           ),
@@ -281,7 +298,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               autocorrect: true,
                               enableSuggestions: true,
                               decoration: InputDecoration(
-                                counterText: "",
+                                  counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
@@ -316,7 +333,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               onSaved: (String val) {
                                 setState(() {});
                               },
-
                             ),
                           ),
                         ),
@@ -476,7 +492,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               clearOnSubmit: false,
                                               itemSubmitted: (item) {
                                                 genderController.text = item;
-                                                debugPrint("stringList1:${genderController.text}");
+                                                debugPrint(
+                                                    "stringList1:${genderController.text}");
                                               },
                                               suggestions: genderListLang,
                                               style: TextStyle(
@@ -639,12 +656,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 initialDate: DateTime.now(),
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2022));
-                                            String dateFormat = DateFormat(" d-MMMM-y").format(date);
+                                            String dateFormat =
+                                                DateFormat(" d-MMMM-y")
+                                                    .format(date);
                                             datePicker.text = dateFormat;
-                                            dobController.text = datePicker.text;
+                                            dobController.text =
+                                                datePicker.text;
                                             calculateAge(date);
                                           },
-
                                         ),
                                       ),
                                     ),
@@ -775,7 +794,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             controller: maritalStatusController,
                                             clearOnSubmit: false,
                                             itemSubmitted: (item) {
-                                              maritalStatusController.text = item;
+                                              maritalStatusController.text =
+                                                  item;
                                             },
                                             suggestions: maritalLangList,
                                             style: TextStyle(
@@ -965,7 +985,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top:4.0),
+                                      padding: const EdgeInsets.only(top: 4.0),
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
                                             .translate('Physically challenged'),
@@ -976,17 +996,22 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     Column(
                                       children: [
                                         SliderTheme(
-                                          data: SliderTheme.of(context).copyWith(
+                                          data:
+                                              SliderTheme.of(context).copyWith(
                                             activeTrackColor: primaryColor,
-                                            inactiveTrackColor: Colors.lightBlueAccent,
-                                            trackShape: RectangularSliderTrackShape(),
+                                            inactiveTrackColor:
+                                                Colors.lightBlueAccent,
+                                            trackShape:
+                                                RectangularSliderTrackShape(),
                                             trackHeight: 4.0,
                                             thumbColor: primaryColor,
-                                            thumbShape:
-                                            RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                                            overlayColor: Colors.white.withAlpha(32),
+                                            thumbShape: RoundSliderThumbShape(
+                                                enabledThumbRadius: 12.0),
+                                            overlayColor:
+                                                Colors.white.withAlpha(32),
                                             overlayShape:
-                                            RoundSliderOverlayShape(overlayRadius: 28.0),
+                                                RoundSliderOverlayShape(
+                                                    overlayRadius: 28.0),
                                           ),
                                           child: Slider(
                                             value: family.physicallyChallenge,
@@ -1262,59 +1287,67 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
-                              child: DropdownButtonFormField<String>(
-                                isExpanded: true,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                value: annualIncomeVal,
-
-                                onChanged: (value) =>
-                                    setState(() => annualIncomeVal = value),
-                                items: <String>[
-                                  '1,00,000',
-                                  '1,50,000',
-                                  '3,00,000',
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: TextWidget(
-                                      text: value,
-                                      color: darkColor,
-                                      weight: FontWeight.w400,
-                                      size: 14,
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
+                              child: AutoCompleteTextField(
+                                  controller: annualController,
+                                  clearOnSubmit: false,
+                                  itemSubmitted: (item) {
+                                    annualController.text = item;
+                                  },
+                                  suggestions: incomeListLang,
+                                  style: TextStyle(
+                                    color: Color(0xFF222222),
+                                    fontSize: 16,
+                                  ),
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  itemBuilder: (context, item) {
+                                    return new Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: TextWidget(
+                                          text: item,
+                                          color: darkColor,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        ));
+                                  },
+                                  itemSorter: (a, b) {
+                                    return a.compareTo(b);
+                                  },
+                                  itemFilter: (item, query) {
+                                    debugPrint("genderItem:$item");
+                                    return item
+                                        .toLowerCase()
+                                        .startsWith(query.toLowerCase());
+                                  }),
                             ),
                           ),
                         ],
@@ -1360,7 +1393,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 maxLength: 10,
                                 enableSuggestions: true,
                                 decoration: InputDecoration(
-                                  counterText: "",
+                                    counterText: "",
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius: BorderRadius.all(
@@ -1395,7 +1428,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
-
                               ),
                             ),
                           ),
@@ -1492,7 +1524,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top:4.0),
+                          padding: const EdgeInsets.only(top: 4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Smart phone'),
@@ -1509,14 +1541,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 trackShape: RectangularSliderTrackShape(),
                                 trackHeight: 4.0,
                                 thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
-                                value:  family.smartphone,
+                                value: family.smartphone,
                                 min: 0,
                                 max: 2,
                                 divisions: 2,
@@ -1733,7 +1765,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top:4.0),
+                          padding: const EdgeInsets.only(top: 4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context).translate(
                                 'Government Insurance/Health Insurance?'),
@@ -1750,11 +1782,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 trackShape: RectangularSliderTrackShape(),
                                 trackHeight: 4.0,
                                 thumbColor: primaryColor,
-                                thumbShape:
-                                RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
                                 value: family.govtInsurance,
@@ -1811,11 +1843,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     trackShape: RectangularSliderTrackShape(),
                                     trackHeight: 4.0,
                                     thumbColor: primaryColor,
-                                    thumbShape:
-                                    RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: 12.0),
                                     overlayColor: Colors.white.withAlpha(32),
-                                    overlayShape:
-                                    RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: 28.0),
                                   ),
                                   child: Slider(
                                     value: family.privateInsurance,
@@ -1849,7 +1881,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:4.0),
+                            padding: const EdgeInsets.only(top: 4.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Old age Pension?'),
@@ -1866,11 +1898,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   trackShape: RectangularSliderTrackShape(),
                                   trackHeight: 4.0,
                                   thumbColor: primaryColor,
-                                  thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
                                   overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
                                 ),
                                 child: Slider(
                                   value: family.oldPension,
@@ -1903,7 +1935,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:4.0),
+                            padding: const EdgeInsets.only(top: 4.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Widowed Pension?'),
@@ -1920,11 +1952,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   trackShape: RectangularSliderTrackShape(),
                                   trackHeight: 4.0,
                                   thumbColor: primaryColor,
-                                  thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
                                   overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 28.0),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
                                 ),
                                 child: Slider(
                                   value: family.widowedPension,
@@ -1954,12 +1986,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     child: FractionallySizedBox(
                       widthFactor: 1,
                       child: Padding(
-                        padding: const EdgeInsets.only(top:4.0),
+                        padding: const EdgeInsets.only(top: 4.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top:4.0),
+                              padding: const EdgeInsets.only(top: 4.0),
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
                                     .translate('Retirement Pension?'),
@@ -1976,11 +2008,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     trackShape: RectangularSliderTrackShape(),
                                     trackHeight: 4.0,
                                     thumbColor: primaryColor,
-                                    thumbShape:
-                                    RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: 12.0),
                                     overlayColor: Colors.white.withAlpha(32),
-                                    overlayShape:
-                                    RoundSliderOverlayShape(overlayRadius: 28.0),
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: 28.0),
                                   ),
                                   child: Slider(
                                     value: family.retirementPension,
@@ -2046,84 +2078,84 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   void togglePhysicallyChallenge(double value) {
     family.physicallyChallenge = value;
     setState(() {
-      if(value==0)
-        physicallyChallenge='Not Answer';
-      else if(value==1)
-        physicallyChallenge='No';
+      if (value == 0)
+        physicallyChallenge = 'Not Answer';
+      else if (value == 1)
+        physicallyChallenge = 'No';
       else
-        physicallyChallenge='Yes';
+        physicallyChallenge = 'Yes';
     });
   }
 
   void toggleSmartphone(double value) {
     family.smartphone = value;
     setState(() {
-      if(value==0)
-        smartphone='Not Answer';
-      else if(value==1)
-        smartphone='No';
+      if (value == 0)
+        smartphone = 'Not Answer';
+      else if (value == 1)
+        smartphone = 'No';
       else
-        smartphone='Yes';
+        smartphone = 'Yes';
     });
   }
 
   void toggleGovtInsurance(double value) {
     family.govtInsurance = value;
     setState(() {
-      if(value==0)
-        govtInsurance='Not Answer';
-      else if(value==1)
-        govtInsurance='No';
+      if (value == 0)
+        govtInsurance = 'Not Answer';
+      else if (value == 1)
+        govtInsurance = 'No';
       else
-        govtInsurance='Yes';
+        govtInsurance = 'Yes';
     });
   }
 
   void togglePrivateInsurance(double value) {
     family.privateInsurance = value;
     setState(() {
-      if(value==0)
-        privateInsurance='Not Answer';
-      else if(value==1)
-        privateInsurance='No';
+      if (value == 0)
+        privateInsurance = 'Not Answer';
+      else if (value == 1)
+        privateInsurance = 'No';
       else
-        privateInsurance='Yes';
+        privateInsurance = 'Yes';
     });
   }
 
   void toggleOldPension(double value) {
     family.oldPension = value;
     setState(() {
-      if(value==0)
-        oldPension='Not Answer';
-      else if(value==1)
-        oldPension='No';
+      if (value == 0)
+        oldPension = 'Not Answer';
+      else if (value == 1)
+        oldPension = 'No';
       else
-        oldPension='Yes';
+        oldPension = 'Yes';
     });
   }
 
   void toggleWidowedPension(double value) {
     family.widowedPension = value;
     setState(() {
-      if(value==0)
-        widowedPension='Not Answer';
-      else if(value==1)
-        widowedPension='No';
+      if (value == 0)
+        widowedPension = 'Not Answer';
+      else if (value == 1)
+        widowedPension = 'No';
       else
-        widowedPension='Yes';
+        widowedPension = 'Yes';
     });
   }
 
   void toggleRetirementPension(double value) {
     family.retirementPension = value;
     setState(() {
-      if(value==0)
+      if (value == 0)
         retirementPension = 'Not Answer';
-      else if(value==1)
-        retirementPension='No';
+      else if (value == 1)
+        retirementPension = 'No';
       else
-        retirementPension='Yes';
+        retirementPension = 'Yes';
     });
   }
 
@@ -2209,6 +2241,21 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     });
   }
 
+  getIncome() async {
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionAnnualIncome).get();
+    incomeList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    incomeList.forEach((element) {
+      final incomeData = element[mapAnnualIncome];
+      debugPrint("sectionData:$incomeData");
+      if (incomeData != null) {
+        incomeListLang.add(incomeData);
+        debugPrint("incomeListLang:$incomeListLang");
+      }
+    });
+  }
+
   getSection() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
@@ -2271,6 +2318,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getBusiness();
     getBloodGroup();
     getSection();
+    getIncome();
   }
-
 }
