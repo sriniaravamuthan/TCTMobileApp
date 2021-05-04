@@ -178,7 +178,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
                                   text:
-                                      "${familyList[index].gender} ,${familyList[index].bloodGroup} , ${familyList[index].maritalStatus} ",
+                                      "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus} ",
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -321,7 +321,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].annualIncome,
+                                  text:
+                                      familyList[index].annualIncome.toString(),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,

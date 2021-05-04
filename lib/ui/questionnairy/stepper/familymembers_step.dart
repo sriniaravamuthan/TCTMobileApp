@@ -135,7 +135,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.physicallyChallenge = getSwitchValues(physicallyChallenge);
     family.education = educationController.text;
     family.occupation = occupationController.text;
-    family.annualIncome = annualIncomeVal;
+    family.annualIncome = annualController.text;
     family.mobileNumber = mobileNumberController.text;
     family.mail = mailController.text;
     family.smartphone = getSwitchValues(smartphone);

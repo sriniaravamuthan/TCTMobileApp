@@ -1181,7 +1181,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.number,
                             onSaved: (String val) {
                               setState(() {});
                             },
