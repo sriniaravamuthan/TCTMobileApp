@@ -129,7 +129,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.relationship = relationshipController.text;
     family.gender = genderController.text;
     family.dob = dobController.text;
-    family.age = double.parse(ageController.text);
+    family.age = int.tryParse(ageController.text);
     family.maritalStatus = maritalStatusController.text;
     family.bloodGroup = bloodGroupController.text;
     family.physicallyChallenge = getSwitchValues(physicallyChallenge);

@@ -193,8 +193,7 @@ class Habits {
       this.anyMembersWhoUseTobacco,
       this.isVaccinationDone,
       this.firstDose,
-      this.secondDose
-      });
+      this.secondDose});
 
   Habits.fromJson(Map<String, dynamic> json) {
     anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
@@ -223,7 +222,7 @@ class Family {
   String relationship = "";
   String gender = "";
   String dob = "";
-  double age = 0;
+  int age = 0;
   String maritalStatus = "";
   String bloodGroup = "";
   double physicallyChallenge = 0;
