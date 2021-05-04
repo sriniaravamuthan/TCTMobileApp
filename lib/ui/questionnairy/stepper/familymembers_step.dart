@@ -57,7 +57,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String smartphone = 'Not Answer';
   var communityController = TextEditingController();
   var casteController = TextEditingController();
-  var photoController = TextEditingController();
+  // var photoController = TextEditingController();
   String govtInsurance = 'Not Answer';
   String privateInsurance = 'Not Answer';
   String oldPension = 'Not Answer';
@@ -141,17 +141,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.smartphone = getSwitchValues(smartphone);
     family.community = communityController.text;
     family.caste = casteController.text;
-    family.photo = photoController.text;
     family.govtInsurance = getSwitchValues(govtInsurance);
     family.privateInsurance = getSwitchValues(privateInsurance);
     family.oldPension = getSwitchValues(oldPension);
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
 
-    widget.refreshFamilyList(family);
-    if (_image == null) {
-      return;
-    }
     firebase_storage.Reference storageReference = FirebaseStorage.instance
         .ref()
         .child('tct/${Path.basename(_image.path)}}');
@@ -161,11 +156,19 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     print('File Uploaded');
     firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
 
-    setState(() {
+    String picUrl = "";
+    taskSnapshot.ref.getDownloadURL().then((value) => {
+      picUrl = value
+    });
+    print("GET________" + picUrl);
+
+    family.photo = picUrl;
+    widget.refreshFamilyList(family);
+    /*setState(() {
       print("Profile Picture uploaded");
       Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-    });
+    });*/
   }
 
   @override
