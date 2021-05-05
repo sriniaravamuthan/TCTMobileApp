@@ -56,6 +56,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   List<QueryDocumentSnapshot> snap;
   List villageCodeList,
       villageNameList,
+      demoList = [],
+      demoLanList = [],
       originalVillageCodeList = [],
       originalVillageNameList = [];
   List<String> panchayatCodeList = [], panchayatNoList = [];
@@ -65,6 +67,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   void initState() {
     villageNameList = [];
     villageCodeList = [];
+
+    DocumentReference villageReference =
+        FirebaseFirestore.instance.collection('villageName').doc("12");
+    Map<String, dynamic> data = {
+      'income': villageReference,
+    };
+    FirebaseFirestore.instance
+        .collection('demoRef')
+        .add(data)
+        .then((value) => print("Added Successfully with reference"))
+        .catchError((error) => print("Failed to add data with reference"));
+
     getLanguage();
     // _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
@@ -101,10 +115,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       location.streetName = "";
       location.contactPerson = "";
       location.contactNumber = "";
-      location.projectCode = 0;
-      location.panchayatNo = 0;
-      location.doorNumber = 0;
-      location.noOfFamilyMembers = 0;
+      location.projectCode = "";
+      location.panchayatNo = "";
+      location.noOfFamilyMembers = "";
     }
 
     super.initState();
@@ -574,7 +587,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   onSaved: (String val) {
                                                     setState(() {
                                                       location.projectCode =
-                                                          int.parse(val);
+                                                          val;
                                                       projectCodeController
                                                           .text = val;
                                                     });
@@ -1551,8 +1564,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       TextInputType.text,
                                                   onSaved: (String val) {
                                                     setState(() {
-                                                      location.doorNumber =
-                                                          int.parse(val);
+                                                      location.doorNumber = val;
                                                       doorNoController.text =
                                                           val;
                                                     });
@@ -1800,7 +1812,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                   onSaved: (String val) {
                                                     setState(() {
                                                       location.noOfFamilyMembers =
-                                                          int.parse(val);
+                                                          val;
                                                       noOfFamilyPersonController
                                                           .text = val;
                                                     });
@@ -1952,56 +1964,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
     getVillageDetails(language);
-    // getVillageName();
+    getDemoRef();
   }
 
   void addData() {
     location.formNo = fromNoController.text;
-    location.projectCode = int.parse(projectCodeController.text);
+    location.projectCode = projectCodeController.text;
     location.streetName = streetNameController.text;
-    location.doorNumber = int.parse(doorNoController.text);
+    location.doorNumber = doorNoController.text;
     location.contactPerson = contactPersonController.text;
-    location.noOfFamilyMembers = int.parse(noOfFamilyPersonController.text);
+    location.noOfFamilyMembers = noOfFamilyPersonController.text;
 
     location.villagesCode = villageCodeController.text;
-    location.panchayatNo = int.parse(panchayatNoController.text);
+    location.panchayatNo = panchayatNoController.text;
     location.panchayatCode = panchayatCodeController.text;
     location.villageName = villageNameController.text;
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
-        if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
-          location.contactNumber = demographicFamily.family[i].mobileNumber;
-          break;
-        }
+      if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
+        location.contactNumber = demographicFamily.family[i].mobileNumber;
+        break;
+      }
     }
 
     demographicFamily.location = location;
 
     FireStoreService fireStoreService = new FireStoreService();
-    fireStoreService.createFamily(demographicFamily).then((value) => {
-      if (value)
-        debugPrint("addedSuccess")
-      else
-        print("failed to add")
-    });
+    fireStoreService.createFamily(demographicFamily).then((value) =>
+        {if (value) debugPrint("addedSuccess") else print("failed to add")});
     debugPrint("demographicFamily:${demographicFamily.location}");
   }
-
-  /*getVillageName() async {
-    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
-    villageNameList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    villageNameList.forEach((element) {
-      villageNameData = element[collectionVillageName];
-      debugPrint("villageNameData:$villageNameData");
-      if (villageNameData != null) {
-        villageNameVal = villageNameData[language];
-        villageCodeValue = villageNameData['villageCode'];
-        villageNameLangList.add(villageNameVal);
-        villageCodeList.add(villageCodeValue);
-        debugPrint("villageNameLangList:$villageNameLangList");
-      }
-    });
-  }*/
 
   getVillageDetails(String language) async {
     QuerySnapshot querySnapshot =
@@ -2033,6 +2025,27 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       panchayatNoDoc.forEach((element) {
         panchayatNoList.add(element.toString());
       });
+    });
+  }
+
+  void getDemoRef() async {
+    FirebaseFirestore.instance
+        .doc('villageName/12')
+        .get()
+        .then((value) => print("demo:${value['villageName']}"));
+
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection('demoRef').get();
+    demoList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    debugPrint("demoList:$demoList");
+
+    demoList.forEach((element) {
+      final demoListData = element['income'];
+      debugPrint("demoListData:$demoListData");
+      if (demoListData != null) {
+        demoLanList.add(demoListData);
+        debugPrint("demoLanList:$demoLanList");
+      }
     });
   }
 

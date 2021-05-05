@@ -55,15 +55,15 @@ class DemographicFamily {
 
 class Location {
   String formNo = "";
-  int projectCode = 0;
+  String projectCode = "";
   String villagesCode = "";
-  int panchayatNo = 0;
+  String panchayatNo = "";
   String panchayatCode = "";
   String villageName = "";
   String streetName = "";
-  int doorNumber = 0;
+  String doorNumber = "";
   String contactPerson = "";
-  int noOfFamilyMembers = 0;
+  String noOfFamilyMembers = "";
   String contactNumber = "";
 
   Location(
