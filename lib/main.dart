@@ -12,6 +12,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/auth/login.dart';
+import 'package:tct_demographics/ui/auth/splash_screen.dart';
 import 'package:tct_demographics/ui/home/dashboardScreen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> {
                         return supportedLocales.first;
                       },
                       theme: ThemeData(),
-                      home: DashboardScreen(),
+                      home: SplashScreen(),
                       getPages: [
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
                         GetPage(

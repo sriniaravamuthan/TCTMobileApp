@@ -46,11 +46,14 @@ class FireStoreService {
     });
     return familyList;
   }
-
-  // Map familyData;
+ String getTime() {
+   return new DateTime.now().toString();
+ }
+ // Map familyData;
   Future<bool> createFamily(DemographicFamily demographicFamily) {
     Map<String, dynamic> data = {
       "CreatedBy": FirebaseAuth.instance.currentUser.uid,
+      "createdDate":getTime(),
       "Location": {
         'formNo': demographicFamily.location.formNo,
         'projectCode': demographicFamily.location.projectCode,

@@ -128,20 +128,23 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
               physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                debugPrint("familyList:${familyList}");
+                debugPrint("familyPhoto:${familyList[index].photo}");
                 return Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SvgPicture.asset(
-                          svgTctLogo,
-                          semanticsLabel: "Logo",
-                          height: height / 10,
+                        Image.network(familyList[index].photo.toString(), height: height / 10,
                           width: width / 10,
-                          fit: BoxFit.contain,
-                          allowDrawingOutsideViewBox: true,
-                        ),
+                          fit: BoxFit.contain),
+                        // SvgPicture.asset(
+                        //   svgTctLogo,
+                        //   semanticsLabel: "Logo",
+                        //   height: height / 10,
+                        //   width: width / 10,
+                        //   fit: BoxFit.contain,
+                        //   allowDrawingOutsideViewBox: true,
+                        // ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
