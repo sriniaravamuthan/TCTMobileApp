@@ -188,8 +188,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                 data["mobileNumber"] = family[i]["mobileNumber"];
                 data["age"] = family[i]["age"];
+                break;
               }
             }
+            if (data["age"] == null)
+              data["age"] = "";
 
             if (data != null) {
               users.add(data);

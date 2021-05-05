@@ -50,14 +50,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   void initState() {
     if (demographicFamily.family != null) {
       familyList = demographicFamily.family;
-
-      /*familyList.forEach((element) {
-        if (element.physicallyChallenge) physicallyChallenged = "Yes";
-        if (element.smartphone) smartPhone = "Yes";
-      });*/
-
-      /*statusHouseController.text = property.statusofHouse;
-      stockCountController.text = property.livestockCount.toString();*/
     } else {
       familyList.forEach((element) {
         element.physicallyChallenge = 0;

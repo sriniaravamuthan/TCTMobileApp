@@ -120,6 +120,44 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       location.noOfFamilyMembers = "";
     }
 
+    if (demographicFamily.property == null) {
+      Property property = new Property();
+      property.wetLandInAcres = "";
+      property.dryLandInAcres = "";
+      property.noOfVehicleOwn = "";
+      property.twoWheeler = "";
+      property.threeWheeler = "";
+      property.fourWheeler = "";
+      property.toiletFacility = 0;
+      property.ownLand = 0;
+      property.ownVehicle = 0;
+      property.ownLivestocks = 0;
+      property.statusofHouse = "";
+      property.typeofHouse = "";
+      property.others = "";
+      property.livestockType = "";
+      property.livestockCount = "";
+      demographicFamily.property = property;
+    }
+
+    if (demographicFamily.habits == null) {
+      Habits habits = new Habits();
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoUseTobacco = 0;
+      habits.isVaccinationDone = 0;
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoDrink = 0;
+      habits.anyMembersWhoSmoke = 0;
+      demographicFamily.habits = habits;
+    }
+
+    if (demographicFamily.family == null) {
+      List<Family> familyList = [];
+      demographicFamily.family = familyList;
+    }
+
     super.initState();
   }
 

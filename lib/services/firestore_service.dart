@@ -7,12 +7,46 @@
  */
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tct_demographics/models/data_model.dart';
 
 class FireStoreService {
   CollectionReference demographicData =
       FirebaseFirestore.instance.collection('demographicData');
+
+  List<Map<String, dynamic>> createFamilyList(
+      DemographicFamily demographicFamily) {
+    List<Map<String, dynamic>> familyList = [];
+    demographicFamily.family.forEach((element) {
+      var map = {
+        "name": element.name,
+        "aadharNumber": element.aadharNumber,
+        "relationship": element.relationship,
+        "gender": element.gender,
+        "dob": element.dob,
+        "age": element.age,
+        "maritalStatus ": element.maritalStatus,
+        "bloodGroup": element.bloodGroup,
+        "physicallyChallenge": element.physicallyChallenge,
+        "education": element.education,
+        "occupation": element.occupation,
+        "annualIncome": element.annualIncome,
+        "mobileNumber": element.mobileNumber,
+        "mail": element.mail,
+        "smartphone": element.smartphone,
+        "community": element.community,
+        "caste": element.caste,
+        "photo": element.photo,
+        "govtInsurance": element.govtInsurance,
+        "privateInsurance": element.privateInsurance,
+        "oldPension": element.oldPension,
+        "widowedPension": element.widowedPension,
+        "retirementPension": element.retirementPension,
+      };
+      familyList.add(map);
+    });
+    return familyList;
+  }
+
   // Map familyData;
   Future<bool> createFamily(DemographicFamily demographicFamily) {
     Map<String, dynamic> data = {
@@ -56,33 +90,7 @@ class FireStoreService {
         'firstDose': demographicFamily.habits.firstDose,
         'secondDose': demographicFamily.habits.secondDose
       },
-      "familyMembers": [
-        {
-          "name": demographicFamily.family[0].name,
-          "aadharNumber": demographicFamily.family[0].aadharNumber,
-          "relationship": demographicFamily.family[0].relationship,
-          "gender": demographicFamily.family[0].gender,
-          "dob": demographicFamily.family[0].dob,
-          "age": demographicFamily.family[0].age,
-          "maritalStatus ": demographicFamily.family[0].maritalStatus,
-          "bloodGroup": demographicFamily.family[0].bloodGroup,
-          "physicallyChallenge": demographicFamily.family[0].physicallyChallenge,
-          "education": demographicFamily.family[0].education,
-          "occupation": demographicFamily.family[0].occupation,
-          "annualIncome": demographicFamily.family[0].annualIncome,
-          "mobileNumber": demographicFamily.family[0].mobileNumber,
-          "mail": demographicFamily.family[0].mail,
-          "smartphone": demographicFamily.family[0].smartphone,
-          "community": demographicFamily.family[0].community,
-          "caste": demographicFamily.family[0].caste,
-          "photo": demographicFamily.family[0].photo,
-          "govtInsurance": demographicFamily.family[0].govtInsurance,
-          "privateInsurance": demographicFamily.family[0].privateInsurance,
-          "oldPension": demographicFamily.family[0].oldPension,
-          "widowedPension": demographicFamily.family[0].widowedPension,
-          "retirementPension": demographicFamily.family[0].retirementPension,
-        }
-      ]
+      "familyMembers": createFamilyList(demographicFamily)
     };
 
     return demographicData
