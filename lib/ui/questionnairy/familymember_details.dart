@@ -168,7 +168,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
                                   text:
-                                      " ${familyList[index].age.toString()},${familyList[index].dob.toString()}",
+                                      "${familyList[index].age.toString()},${familyList[index].dob.toString()}",
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,

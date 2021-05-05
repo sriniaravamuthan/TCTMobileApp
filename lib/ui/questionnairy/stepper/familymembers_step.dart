@@ -147,22 +147,23 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
 
-    firebase_storage.Reference storageReference = FirebaseStorage.instance
-        .ref()
-        .child('tct/${Path.basename(_image.path)}}');
-    print('path:$storageReference');
+    if (_image != null) {
+      firebase_storage.Reference storageReference = FirebaseStorage.instance
+          .ref()
+          .child('tct/${Path.basename(_image.path)}}');
+      print('path:$storageReference');
 
-    firebase_storage.UploadTask uploadTask = storageReference.putFile(_image);
-    print('File Uploaded');
-    firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
+      firebase_storage.UploadTask uploadTask = storageReference.putFile(_image);
+      print('File Uploaded');
+      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
 
-    String picUrl = "";
-    taskSnapshot.ref.getDownloadURL().then((value) => {
-      picUrl = value
-    });
-    print("GET________" + picUrl);
-
-    family.photo = picUrl;
+      String picUrl = "";
+      taskSnapshot.ref.getDownloadURL().then((value) => {
+        picUrl = value
+      });
+      print("GET________" + picUrl);
+      family.photo = picUrl;
+    }
     widget.refreshFamilyList(family);
     /*setState(() {
       print("Profile Picture uploaded");
@@ -174,7 +175,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   @override
   void dispose() {
     datePicker.dispose();
-
     super.dispose();
   }
 

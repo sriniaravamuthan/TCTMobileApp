@@ -100,6 +100,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       location.villageName = "";
       location.streetName = "";
       location.contactPerson = "";
+      location.contactNumber = "";
       location.projectCode = 0;
       location.panchayatNo = 0;
       location.doorNumber = 0;
@@ -330,14 +331,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               backgroundColor: primaryColor,
                               onPressed: () {
                                 setState(() {
-                                  // addData();
-                                  if (_formKey != null &&
+                                  addData();
+                                  /*if (_formKey != null &&
                                       _formKey.currentState != null) {
                                     if (_formKey.currentState.validate()) {
                                       _formKey.currentState.save();
                                       addData();
                                     }
-                                  }
+                                  }*/
                                   // else {
                                   //   _showToast(context);
                                   // }
@@ -1967,10 +1968,22 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.panchayatCode = panchayatCodeController.text;
     location.villageName = villageNameController.text;
 
+    for (int i = 0; i < demographicFamily.family.length; i++) {
+        if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
+          location.contactNumber = demographicFamily.family[i].mobileNumber;
+          break;
+        }
+    }
+
     demographicFamily.location = location;
 
     FireStoreService fireStoreService = new FireStoreService();
-    fireStoreService.createFamily(demographicFamily);
+    fireStoreService.createFamily(demographicFamily).then((value) => {
+      if (value)
+        debugPrint("addedSuccess")
+      else
+        print("failed to add")
+    });
     debugPrint("demographicFamily:${demographicFamily.location}");
   }
 

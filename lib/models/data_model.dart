@@ -64,6 +64,7 @@ class Location {
   int doorNumber = 0;
   String contactPerson = "";
   int noOfFamilyMembers = 0;
+  String contactNumber = "";
 
   Location(
       {this.formNo,
@@ -75,7 +76,8 @@ class Location {
       this.streetName,
       this.doorNumber,
       this.contactPerson,
-      this.noOfFamilyMembers});
+      this.noOfFamilyMembers,
+      this.contactNumber});
 
   Location.fromJson(Map<String, dynamic> json) {
     formNo = json['formNo'];
@@ -87,6 +89,7 @@ class Location {
     streetName = json['streetName '];
     doorNumber = json['doorNumber '];
     contactPerson = json['contactPerson '];
+    contactNumber = json['contactNumber'];
     noOfFamilyMembers = json['noOfFamilyMembers '];
   }
 
@@ -101,6 +104,7 @@ class Location {
     data['streetName '] = this.streetName;
     data['doorNumber '] = this.doorNumber;
     data['contactPerson '] = this.contactPerson;
+    data['contactNumber'] = this.contactNumber;
     data['noOfFamilyMembers '] = this.noOfFamilyMembers;
     return data;
   }

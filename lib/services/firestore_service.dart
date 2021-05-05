@@ -14,7 +14,7 @@ class FireStoreService {
   CollectionReference demographicData =
       FirebaseFirestore.instance.collection('demographicData');
   // Map familyData;
-  Future<DemographicFamily> createFamily(DemographicFamily demographicFamily) {
+  Future<bool> createFamily(DemographicFamily demographicFamily) {
     Map<String, dynamic> data = {
       "CreatedBy": FirebaseAuth.instance.currentUser.uid,
       "Location": {
@@ -27,6 +27,7 @@ class FireStoreService {
         'streetName': demographicFamily.location.streetName,
         'doorNumber': demographicFamily.location.doorNumber,
         'contactPerson': demographicFamily.location.contactPerson,
+        'contactNumber': demographicFamily.location.contactNumber,
         'noOfFamilyMembers': demographicFamily.location.noOfFamilyMembers
       },
       "Property": {
@@ -65,8 +66,7 @@ class FireStoreService {
           "age": demographicFamily.family[0].age,
           "maritalStatus ": demographicFamily.family[0].maritalStatus,
           "bloodGroup": demographicFamily.family[0].bloodGroup,
-          "physicallyChallenge":
-              demographicFamily.family[0].physicallyChallenge,
+          "physicallyChallenge": demographicFamily.family[0].physicallyChallenge,
           "education": demographicFamily.family[0].education,
           "occupation": demographicFamily.family[0].occupation,
           "annualIncome": demographicFamily.family[0].annualIncome,
@@ -87,7 +87,7 @@ class FireStoreService {
 
     return demographicData
         .add(data)
-        .then((value) => debugPrint("addedSuccess"))
-        .catchError((error) => debugPrint("failed to add"));
+        .then((value) => true)
+        .catchError((error) => false);
   }
 }

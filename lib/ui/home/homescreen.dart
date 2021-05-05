@@ -6,6 +6,8 @@
  * /
  */
 
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -168,13 +170,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           var family = snapshot.data.docs.map((doc) => doc.data()).toList();
           family.forEach((element) {
-            final data = element['familyMembers'];
-            if (data["mobileNumber"] == null) data["mobileNumber"] = "";
-            data["villageCode"] = "";
+            final List family = element['familyMembers'];
+
+            final data = new HashMap();
+            data["name"] = element["Location"]["contactPerson"];
+            data["mobileNumber"] = element["Location"]["contactNumber"];
+            data["villageCode"] = element["Location"]["villagesCode"];
+            for(int i=0; i<family.length;i++) {
+              if(family[i]["mobileNumber"]  == data["mobileNumber"]) {
+                data["mobileNumber"] = family[i]["mobileNumber"];
+                data["age"] = family[i]["age"];
+              }
+            }
 
             if (data != null) {
               users.add(data);
-              debugPrint("userList:$users");
             }
           });
           return Container(
@@ -640,9 +650,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     if (mobileNo != "") {
       // collectionReference.where("family.mobileNumber", arrayContains: mobileNo);
       //  TODO  ::  ::  Need to check this condition
-      collectionReference
-          .orderBy("family")
-          .where("mobileNumber", isEqualTo: mobileNo);
+      // collectionReference.orderBy("family").where("mobileNumber", isEqualTo: mobileNo);
+      collectionReference.where("location.contactNumber", isEqualTo: mobileNo);
     } else if (villageCode != "") {
       collectionReference.where("location.villagesCode",
           isEqualTo: int.parse(villageCode));
