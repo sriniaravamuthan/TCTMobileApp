@@ -36,7 +36,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   Family family = new Family();
   List<Family> familyList = [];
 
-  String physicallyChallenged = 'No';
+  String physicallyChallenge = 'No';
   String smartPhone = 'No';
   String govtInsurance = 'No';
   String privateInsurance = 'No';
@@ -403,7 +403,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].smartphone.toString(),
+                                  text: familyList[index]
+                                      .physicallyChallenge
+                                      .toString(),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,

@@ -158,9 +158,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
 
       String picUrl = "";
-      taskSnapshot.ref.getDownloadURL().then((value) => {
-        picUrl = value
-      });
+      taskSnapshot.ref.getDownloadURL().then((value) => {picUrl = value});
       print("GET________" + picUrl);
       family.photo = picUrl;
     }
@@ -1382,7 +1380,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             ),
                           ),
                           SizedBox(
-                            height: 75,
+                            height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   left: 2.0,
@@ -2042,35 +2040,44 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    uploadFile();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        color: Colors.black45,
-                        style: BorderStyle.solid,
-                        width: 1.0,
+            Padding(
+              padding: const EdgeInsets.only(top: 24.0, left: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      uploadFile();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.black45,
+                          style: BorderStyle.solid,
+                          width: 1.0,
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(6.0),
-                      child: TextWidget(
-                        text: DemoLocalization.of(context).translate('Save'),
-                        color: darkColor,
-                        weight: FontWeight.w700,
-                        size: 14,
+                      child: Row(
+                        children: [
+                          Icon(Icons.done),
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Save'),
+                              color: darkColor,
+                              weight: FontWeight.w700,
+                              size: 14,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ),
-                Container()
-              ],
+                  Container()
+                ],
+              ),
             )
           ],
         ),

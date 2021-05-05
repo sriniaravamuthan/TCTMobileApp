@@ -445,8 +445,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           ),
                         ),
                         SizedBox(
-                          height: 58,
-                          width: 100,
+                          height: 50,
+                          width: 150,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
@@ -527,8 +527,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                       ),
                       SizedBox(
-                        width: 100,
-                        height: 58,
+                        width: 150,
+                        height: 50,
                         child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16.0, top: 2.0, bottom: 2.0),
@@ -651,8 +651,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: SizedBox(
-                            width: 100,
-                            height: 58,
+                            width: 150,
+                            height: 50,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
@@ -735,8 +735,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           padding: const EdgeInsets.only(
                               left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                           child: SizedBox(
-                            width: 100,
-                            height: 58,
+                            width: 150,
+                            height: 50,
                             child: TextFormField(
                               controller: twoWheelerController,
                               onChanged: (value) {
@@ -809,8 +809,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.only(
                             right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
-                          width: 100,
-                          height: 58,
+                          width: 150,
+                          height: 50,
                           child: TextFormField(
                             controller: threeWheelerController,
                             onChanged: (value) {
@@ -879,8 +879,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.only(
                             right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
-                          width: 100,
-                          height: 58,
+                          width: 150,
+                          height: 50,
                           child: TextFormField(
                             controller: fourWheelerController,
                             onChanged: (value) {
@@ -949,8 +949,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.only(
                             right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
-                          width: 100,
-                          height: 58,
+                          width: 150,
+                          height: 50,
                           child: TextFormField(
                             controller: othersController,
                             onChanged: (value) {
@@ -1077,7 +1077,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.only(
                             right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
-                          height: 58,
+                          height: 50,
                           width: 250,
                           child: TextFormField(
                             controller: stockTypeController,
@@ -1145,7 +1145,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             right: 16.0, top: 2.0, bottom: 2.0),
                         child: SizedBox(
                           width: 250,
-                          height: 58,
+                          height: 50,
                           child: TextFormField(
                             controller: stockCountController,
                             onChanged: (value) {
@@ -1191,6 +1191,9 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     ],
                   ),
                 ),
+              ),
+              Container(
+                width: 220,
               )
             ],
           ),

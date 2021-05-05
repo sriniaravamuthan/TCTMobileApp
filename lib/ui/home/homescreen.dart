@@ -43,20 +43,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   Language language;
   String dropDownLang;
   var height, width;
-  User currentUser;
   String userName = "";
-  String name = "";
+  String userMail = "";
   int age = 0;
 
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
 
   @override
   void initState() {
-    // users = Result.getUser();
-    currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser.displayName != null) {
-      userName = currentUser.displayName;
+    if (firebaseAuth.currentUser != null) {
+      userName = firebaseAuth.currentUser.displayName;
+      userMail = firebaseAuth.currentUser.email;
+      debugPrint("userEmail:$userMail");
     }
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -137,10 +138,17 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text(
-                            userName,
-                            style: TextStyle(fontSize: 16, color: darkColor),
-                          ),
+                          userMail != null
+                              ? Text(
+                                  userMail,
+                                  style:
+                                      TextStyle(fontSize: 16, color: darkColor),
+                                )
+                              : Text(
+                                  userName,
+                                  style:
+                                      TextStyle(fontSize: 16, color: darkColor),
+                                ),
                         ],
                       )),
                   SizedBox(
@@ -176,8 +184,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             data["name"] = element["Location"]["contactPerson"];
             data["mobileNumber"] = element["Location"]["contactNumber"];
             data["villageCode"] = element["Location"]["villagesCode"];
-            for(int i=0; i<family.length;i++) {
-              if(family[i]["mobileNumber"]  == data["mobileNumber"]) {
+            for (int i = 0; i < family.length; i++) {
+              if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                 data["mobileNumber"] = family[i]["mobileNumber"];
                 data["age"] = family[i]["age"];
               }
