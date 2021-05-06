@@ -69,6 +69,7 @@ flutter:
      - assets/svg/
      - lib/translation/en.json
      - lib/translation/ta.json
+     - assets/json/
 
 
 

@@ -105,7 +105,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       noOfFamilyPersonController.text = location.noOfFamilyMembers;
 
       fillVillageData(location.villageName);
-
     } else {
       location.formNo = "";
       location.villagesCode = "";
@@ -877,6 +876,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
                                                     controller:
                                                         panchayatNoController,
                                                     clearOnSubmit: false,
@@ -1063,6 +1064,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     top: 2.0,
                                                     bottom: 2.0),
                                                 child: AutoCompleteTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
                                                     controller:
                                                         panchayatCodeController,
                                                     clearOnSubmit: false,
@@ -2022,9 +2025,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     String refPath = "";
     DocumentReference documentReference;
-    for(int i=0; i< snap.length; i++) {
-      if(snap[i].data()["villageCode"].toString() == villageCodeController.text) {
-        documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
+    for (int i = 0; i < snap.length; i++) {
+      if (snap[i].data()["villageCode"].toString() ==
+          villageCodeController.text) {
+        documentReference =
+            firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
         refPath = documentReference.path;
         break;
       }
@@ -2050,14 +2055,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   }
 
   getVillageDetails(String language) async {
-    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
+    QuerySnapshot querySnapshot =
+        await firestoreInstance.collection(collectionVillageName).get();
     setState(() {
       snap = querySnapshot.docs;
 
-      var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
-      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
-      var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
-      var panchayatNoDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
+      var villageCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+      var villageNameDoc = querySnapshot.docs
+          .map((doc) => doc.data()["villageName"][language])
+          .toList();
+      var panchayatCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+      var panchayatNoDoc =
+          querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
 
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());

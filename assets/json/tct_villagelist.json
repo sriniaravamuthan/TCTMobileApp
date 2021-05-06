@@ -1,0 +1,3466 @@
+[{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b0"
+  },
+  "villageName": {
+    "en": "Aiyagoundanur",
+    "ta": "ஆயகவுண்டணூர்"
+  },
+  "villageCode": "AGR",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b1"
+  },
+  "villageName": {
+    "en": "Ammorpalli",
+    "ta": "அம்மூர்பள்ளி"
+  },
+  "villageCode": "AMP",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b2"
+  },
+  "villageName": {
+    "en": "Ammorpalli Colony",
+    "ta": "அம்மூர்பள்ளி காலனி"
+  },
+  "villageCode": "APC",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b3"
+  },
+  "villageName": {
+    "en": "Balmudur",
+    "ta": "பாலமுதூர்"
+  },
+  "villageCode": "BMR",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b4"
+  },
+  "villageName": {
+    "en": "C.N.Pattarai",
+    "ta": "சி எண் பட்டரை"
+  },
+  "villageCode": "CNP",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b5"
+  },
+  "villageName": {
+    "en": "C.N.Pattarai Arunthathi",
+    "ta": "சி எண் பட்டரை அருந்ததி"
+  },
+  "villageCode": "CNA",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b6"
+  },
+  "villageName": {
+    "en": "C.N.Pattarai Colony",
+    "ta": "சி எண் பட்டரை காலனி"
+  },
+  "villageCode": "CNC",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b7"
+  },
+  "villageName": {
+    "en": "Chinnamittur",
+    "ta": "சின்னமீட்டூர்"
+  },
+  "villageCode": "CMR",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b8"
+  },
+  "villageName": {
+    "en": "Chinnamittur Arunthathi",
+    "ta": "சின்னமீட்டூர்அருந்ததி"
+  },
+  "villageCode": "CMA",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96b9"
+  },
+  "villageName": {
+    "en": "Chinnaramanathapuram",
+    "ta": "சின்ன ராமநாதபுரம்"
+  },
+  "villageCode": "CRP",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ba"
+  },
+  "villageName": {
+    "en": "Devindrapuram",
+    "ta": "தேவேந்திரபுரம்"
+  },
+  "villageCode": "DPM",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96bb"
+  },
+  "villageName": {
+    "en": "Diguvapalli",
+    "ta": "திகுவபள்ளி"
+  },
+  "villageCode": "DPI",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96bc"
+  },
+  "villageName": {
+    "en": "Elayanellore",
+    "ta": "இளையநல்லூர்"
+  },
+  "villageCode": "ENR",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96bd"
+  },
+  "villageName": {
+    "en": "Elayanellore Colony",
+    "ta": "இளையநல்லூர் காலனி"
+  },
+  "villageCode": "ENC",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96be"
+  },
+  "villageName": {
+    "en": "Eranthankal",
+    "ta": "ஏரந்தாங்கள்"
+  },
+  "villageCode": "ETL",
+  "panchayatCode": 11,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96bf"
+  },
+  "villageName": {
+    "en": "Eranthankal Colony",
+    "ta": "ஏரந்தாங்கள்காலனி"
+  },
+  "villageCode": "ETC",
+  "panchayatCode": 11,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c0"
+  },
+  "villageName": {
+    "en": "Eranthankal Mottur",
+    "ta": "ஏரந்தாங்கள் மோட்டூர்"
+  },
+  "villageCode": "ETM",
+  "panchayatCode": 11,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c1"
+  },
+  "villageName": {
+    "en": "Eranthankal Panthoppu",
+    "ta": "ஏரந்தாங்கள் பனந்தோப்பு"
+  },
+  "villageCode": "ETP",
+  "panchayatCode": 11,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c2"
+  },
+  "villageName": {
+    "en": "G.R.Kottai",
+    "ta": "ஜி. ஆர். கோட்டை"
+  },
+  "villageCode": "GRK",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c3"
+  },
+  "villageName": {
+    "en": "Gandhinagr (Mk)",
+    "ta": "காந்தி நகர்"
+  },
+  "villageCode": "GNM",
+  "panchayatCode": 30,
+  "panchayatNo": 24
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c4"
+  },
+  "villageName": {
+    "en": "Gundalore",
+    "ta": "குண்டலூர்"
+  },
+  "villageCode": "GLR",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c5"
+  },
+  "villageName": {
+    "en": "Gundalore Colony",
+    "ta": "குண்டலூர் காலனி"
+  },
+  "villageCode": "GLC",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c6"
+  },
+  "villageName": {
+    "en": "Gurunathapuram",
+    "ta": "குருநாதபுரம்"
+  },
+  "villageCode": "GNP",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c7"
+  },
+  "villageName": {
+    "en": "Jengalpalli",
+    "ta": "ஜங்கால்பள்ளி"
+  },
+  "villageCode": "JPI",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c8"
+  },
+  "villageName": {
+    "en": "K.R.Thangal",
+    "ta": "கே.ஆர்.தாங்கள்"
+  },
+  "villageCode": "KRT",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96c9"
+  },
+  "villageName": {
+    "en": "K.R.Thangal Arunthathi",
+    "ta": "கே.ஆர்.தாங்கள்அருந்ததி"
+  },
+  "villageCode": "KTA",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ca"
+  },
+  "villageName": {
+    "en": "Kandipedu",
+    "ta": "கண்டிப்பேடு"
+  },
+  "villageCode": "KPU",
+  "panchayatCode": 15,
+  "panchayatNo": 7
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96cb"
+  },
+  "villageName": {
+    "en": "Kandipedu Colony",
+    "ta": "கண்டிப்பேடு காலனி"
+  },
+  "villageCode": "KAN",
+  "panchayatCode": 15,
+  "panchayatNo": 7
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96cc"
+  },
+  "villageName": {
+    "en": "Kannigapuram",
+    "ta": "கன்னிகாபுரம்"
+  },
+  "villageCode": "KP1",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96cd"
+  },
+  "villageName": {
+    "en": "Kn Kattoor",
+    "ta": "கே.என்.காட்டூர்"
+  },
+  "villageCode": "KNK",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ce"
+  },
+  "villageName": {
+    "en": "Koduganthangal",
+    "ta": "கோடுக்கந்தாங்கள்"
+  },
+  "villageCode": "KTL",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96cf"
+  },
+  "villageName": {
+    "en": "Koduganthangal Colony",
+    "ta": "கோடுக்கந்தாங்கள் காலனி"
+  },
+  "villageCode": "KTC",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d0"
+  },
+  "villageName": {
+    "en": "Konderipallai Kandipedu",
+    "ta": "கொண்டேரிபள்ளி கண்டிப்பேடு"
+  },
+  "villageCode": "KDP",
+  "panchayatCode": 15,
+  "panchayatNo": 7
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d1"
+  },
+  "villageName": {
+    "en": "Konderipalli Arunthathi Colony",
+    "ta": "கொண்டேரிபள்ளி அருந்ததி காலனி"
+  },
+  "villageCode": "KAC",
+  "panchayatCode": 15,
+  "panchayatNo": 7
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d2"
+  },
+  "villageName": {
+    "en": "Kothandaramapuram",
+    "ta": "கோதந்தராமாபுரம்"
+  },
+  "villageCode": "KTP",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d3"
+  },
+  "villageName": {
+    "en": "Krishnagoundanur",
+    "ta": "கிருஷ்ணகவுண்டணூர்"
+  },
+  "villageCode": "KGR",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d4"
+  },
+  "villageName": {
+    "en": "Mahimandalam",
+    "ta": "மகிமண்டலம்"
+  },
+  "villageCode": "MHM",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d5"
+  },
+  "villageName": {
+    "en": "Mahimandalam Colony",
+    "ta": "மகிமண்டலம் காலனி"
+  },
+  "villageCode": "MMC",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d6"
+  },
+  "villageName": {
+    "en": "Malligapuram",
+    "ta": "மல்லிகாபுரம்"
+  },
+  "villageCode": "MGP",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d7"
+  },
+  "villageName": {
+    "en": "Melbodinatham",
+    "ta": "மேல்போடிநத்தம்"
+  },
+  "villageCode": "MBN",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d8"
+  },
+  "villageName": {
+    "en": "Melkattor",
+    "ta": "மேலகாட்டூர்"
+  },
+  "villageCode": "MKR",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96d9"
+  },
+  "villageName": {
+    "en": "Mettupalayam",
+    "ta": "மேட்டுபபாளையம்"
+  },
+  "villageCode": "MTP",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96da"
+  },
+  "villageName": {
+    "en": "Mithanatham",
+    "ta": "மித்தநத்தம்"
+  },
+  "villageCode": "MNM",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96db"
+  },
+  "villageName": {
+    "en": "Mithanatham Colony",
+    "ta": "மித்தநத்தம் காலனி"
+  },
+  "villageCode": "MNC",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96dc"
+  },
+  "villageName": {
+    "en": "Moongeleri",
+    "ta": "மூங்கிலேரி"
+  },
+  "villageCode": "MLI",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96dd"
+  },
+  "villageName": {
+    "en": "Mutharasikuppam",
+    "ta": "முத்தரசிக்;குப்பம்"
+  },
+  "villageCode": "MTR",
+  "panchayatCode": 30,
+  "panchayatNo": 24
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96de"
+  },
+  "villageName": {
+    "en": "Mutharasikuppam Colony",
+    "ta": "முத்தரசிக்;குப்பம் காலனி"
+  },
+  "villageCode": "MTC",
+  "panchayatCode": 30,
+  "panchayatNo": 24
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96df"
+  },
+  "villageName": {
+    "en": "Olandikadigai",
+    "ta": "ஓலன்கண்டிகை"
+  },
+  "villageCode": "OKG",
+  "panchayatCode": 1,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e0"
+  },
+  "villageName": {
+    "en": "Periyabodinatham",
+    "ta": "பெரியபோடிநத்தம்"
+  },
+  "villageCode": "PBN",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e1"
+  },
+  "villageName": {
+    "en": "Periyamittur",
+    "ta": "பெரியமீட்டூர்"
+  },
+  "villageCode": "PMR",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e2"
+  },
+  "villageName": {
+    "en": "Periyaramanathpuram",
+    "ta": "பெரியராமநாதபுரம்"
+  },
+  "villageCode": "PRM",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e3"
+  },
+  "villageName": {
+    "en": "Perumalgoundanur",
+    "ta": "பெருமாளகவுண்டனுர்"
+  },
+  "villageCode": "PGR",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e4"
+  },
+  "villageName": {
+    "en": "Puduhur (Mn)",
+    "ta": "பூதூர்"
+  },
+  "villageCode": "PMN",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e5"
+  },
+  "villageName": {
+    "en": "Serkadu",
+    "ta": "சேர்காடு"
+  },
+  "villageCode": "SKU",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e6"
+  },
+  "villageName": {
+    "en": "Serkaducolony",
+    "ta": "சேர்காடு காலனி"
+  },
+  "villageCode": "SKC",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e7"
+  },
+  "villageName": {
+    "en": "Sevedanthangal",
+    "ta": "செவிதந்தாங்கள்"
+  },
+  "villageCode": "STL",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e8"
+  },
+  "villageName": {
+    "en": "Shanthinagar",
+    "ta": "சாந்தி நகர்"
+  },
+  "villageCode": "SHN",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96e9"
+  },
+  "villageName": {
+    "en": "Stalinngar",
+    "ta": "ஸ்தாலின் நகர்"
+  },
+  "villageCode": "STN",
+  "panchayatCode": 40,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ea"
+  },
+  "villageName": {
+    "en": "Thathiredipalli",
+    "ta": "தாதிரெட்டிபள்ளி"
+  },
+  "villageCode": "TRP",
+  "panchayatCode": 24,
+  "panchayatNo": 20
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96eb"
+  },
+  "villageName": {
+    "en": "Vallaikalmedu",
+    "ta": "வெள்ளைகல் மேடு"
+  },
+  "villageCode": "VKM",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ec"
+  },
+  "villageName": {
+    "en": "Vanniyakattor",
+    "ta": "வாணியக்காட்டூர்"
+  },
+  "villageCode": "VKR",
+  "panchayatCode": 10,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ed"
+  },
+  "villageName": {
+    "en": "Vinnampalli",
+    "ta": "விண்ணம்பள்ளி"
+  },
+  "villageCode": "VNP",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ee"
+  },
+  "villageName": {
+    "en": "Vinnampalli Colony",
+    "ta": "விண்ணம்பள்ளி காலனி"
+  },
+  "villageCode": "VNC",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ef"
+  },
+  "villageName": {
+    "en": "Abdulla Puram",
+    "ta": "அப்துல்லாபுரம்"
+  },
+  "villageCode": "APM",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f0"
+  },
+  "villageName": {
+    "en": "Abdulla Puram Colony",
+    "ta": "அப்துல்லாபுரம் காலனி"
+  },
+  "villageCode": "ABD",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f1"
+  },
+  "villageName": {
+    "en": "Annanagar Veppalai",
+    "ta": "அண்ணாநகர் வெப்பாளை"
+  },
+  "villageCode": "ANV",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f2"
+  },
+  "villageName": {
+    "en": "Bodireddiyur",
+    "ta": "போடிரெட்டியூர்"
+  },
+  "villageCode": "BRU",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f3"
+  },
+  "villageName": {
+    "en": "Chinnakeesakuppam",
+    "ta": "சின்னகீசப்குப்பம்"
+  },
+  "villageCode": "CKK",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f4"
+  },
+  "villageName": {
+    "en": "Chinnaperumalkuppam",
+    "ta": "சின்னபெருமாள்குப்பம்"
+  },
+  "villageCode": "CPK",
+  "panchayatCode": 49,
+  "panchayatNo": 41
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f5"
+  },
+  "villageName": {
+    "en": "Chinnaperumalkuppam Colony",
+    "ta": "சின்னபெருமாள்குப்பம் காலனி"
+  },
+  "villageCode": "CPC",
+  "panchayatCode": 35,
+  "panchayatNo": 29
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f6"
+  },
+  "villageName": {
+    "en": "Chinnavallimalai",
+    "ta": "சின்ன வள்ளிமலை"
+  },
+  "villageCode": "CVM",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f7"
+  },
+  "villageName": {
+    "en": "Edayakuppam",
+    "ta": "இடையகுப்பம்"
+  },
+  "villageCode": "EKM",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f8"
+  },
+  "villageName": {
+    "en": "Edayakuppam Colony",
+    "ta": "இடையகுப்பம் காலனி"
+  },
+  "villageCode": "EKC",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96f9"
+  },
+  "villageName": {
+    "en": "Erukkampattu",
+    "ta": "எருக்கம்பட்டு"
+  },
+  "villageCode": "EPU",
+  "panchayatCode": 12,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96fa"
+  },
+  "villageName": {
+    "en": "Erukkampattu Colony",
+    "ta": "எருக்கம்பட்டு காலனி"
+  },
+  "villageCode": "EPC",
+  "panchayatCode": 12,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96fb"
+  },
+  "villageName": {
+    "en": "K.N.Palayam",
+    "ta": "கே.என்.பாளையம்"
+  },
+  "villageCode": "KNP",
+  "panchayatCode": 20,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96fc"
+  },
+  "villageName": {
+    "en": "K.N.Palayam Colony",
+    "ta": "கே.என்.பாளையம் காலனி"
+  },
+  "villageCode": "KNC",
+  "panchayatCode": 20,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96fd"
+  },
+  "villageName": {
+    "en": "Kalivarthangal",
+    "ta": "காலிவர்தாங்கள்"
+  },
+  "villageCode": "KVT",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96fe"
+  },
+  "villageName": {
+    "en": "Kalivarthangal Arunthathi",
+    "ta": "காலிவர்தாங்கள்அருந்ததி"
+  },
+  "villageCode": "KVA",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f96ff"
+  },
+  "villageName": {
+    "en": "Kokkeri",
+    "ta": "கொக்கேரி"
+  },
+  "villageCode": "KKI",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9700"
+  },
+  "villageName": {
+    "en": "Kokkeri Arunthathi",
+    "ta": "கொக்கேரி அருந்ததி"
+  },
+  "villageCode": "KKT",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9701"
+  },
+  "villageName": {
+    "en": "Kottanatham",
+    "ta": "கோட்டநத்தம்"
+  },
+  "villageCode": "KNM",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9702"
+  },
+  "villageName": {
+    "en": "Kugaiyanalore",
+    "ta": "குகையநல்லுர்"
+  },
+  "villageCode": "KUR",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9703"
+  },
+  "villageName": {
+    "en": "Kugaiyanalore Colony",
+    "ta": "குகையநல்லுர்காலனி"
+  },
+  "villageCode": "KGN",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9704"
+  },
+  "villageName": {
+    "en": "Kugaiyanalore New Colony",
+    "ta": "குகையநல்லுர் நியூ காலனி"
+  },
+  "villageCode": "KUN",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9705"
+  },
+  "villageName": {
+    "en": "Kuppureddiyur",
+    "ta": "குப்பரெட்டியுர்"
+  },
+  "villageCode": "KRR",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9706"
+  },
+  "villageName": {
+    "en": "Kuppureddiyur Arunthathi",
+    "ta": "குப்பரெட்டியுர்அருந்ததி"
+  },
+  "villageCode": "KRA",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9707"
+  },
+  "villageName": {
+    "en": "Manthangal",
+    "ta": "மாந்தாங்கள்"
+  },
+  "villageCode": "MT2",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9708"
+  },
+  "villageName": {
+    "en": "Mathandakuppam",
+    "ta": "மாதாந்தக்குப்பம்"
+  },
+  "villageCode": "MTK",
+  "panchayatCode": 27,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9709"
+  },
+  "villageName": {
+    "en": "Mathandakuppam Colony",
+    "ta": "மாதாந்தக்குப்பம் காலனி"
+  },
+  "villageCode": "MKC",
+  "panchayatCode": 27,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970a"
+  },
+  "villageName": {
+    "en": "Mathandakuppam Kattor",
+    "ta": "மாதாந்தக்குப்பம் காட்டூர்"
+  },
+  "villageCode": "MKK",
+  "panchayatCode": 27,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970b"
+  },
+  "villageName": {
+    "en": "Melmanthangal",
+    "ta": "மேல்மாந்தாங்கள்"
+  },
+  "villageCode": "MML",
+  "panchayatCode": 21,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970c"
+  },
+  "villageName": {
+    "en": "Melpadi",
+    "ta": "மேல்பாடி"
+  },
+  "villageCode": "MPI",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970d"
+  },
+  "villageName": {
+    "en": "Melpadi Colony",
+    "ta": "மேல்பாடிகாலனி"
+  },
+  "villageCode": "MLP",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970e"
+  },
+  "villageName": {
+    "en": "Melpadi Eb",
+    "ta": "மேல்பாடி இ.பி"
+  },
+  "villageCode": "MEB",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f970f"
+  },
+  "villageName": {
+    "en": "Paramasathu",
+    "ta": "பரமசாத்து"
+  },
+  "villageCode": "PSU",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9710"
+  },
+  "villageName": {
+    "en": "Paramasathu Colony",
+    "ta": "பரமசாத்து காலனி"
+  },
+  "villageCode": "PSC",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9711"
+  },
+  "villageName": {
+    "en": "Paramasathu Naduvur",
+    "ta": "பரமசாத்து நடுவூர்"
+  },
+  "villageCode": "PSN",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9712"
+  },
+  "villageName": {
+    "en": "Perriyakeesakuppam",
+    "ta": "பெரியகீசக்குப்பம்"
+  },
+  "villageCode": "PYK",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9713"
+  },
+  "villageName": {
+    "en": "Perumalkuppam",
+    "ta": "பெருமாள் குப்பம்"
+  },
+  "villageCode": "PMP",
+  "panchayatCode": 35,
+  "panchayatNo": 29
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9714"
+  },
+  "villageName": {
+    "en": "Perumalkuppam Karai",
+    "ta": "பெருமாள் குப்பம் கரை"
+  },
+  "villageCode": "PKK",
+  "panchayatCode": 35,
+  "panchayatNo": 29
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9715"
+  },
+  "villageName": {
+    "en": "Perumalkuppam kattoor",
+    "ta": "பெருமாள் குப்பம் காட்டூர்"
+  },
+  "villageCode": "PMK",
+  "panchayatCode": 35,
+  "panchayatNo": 29
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9716"
+  },
+  "villageName": {
+    "en": "Pooniyaboomi",
+    "ta": "புன்னியபூமி"
+  },
+  "villageCode": "PBI",
+  "panchayatCode": 13,
+  "panchayatNo": 6
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9717"
+  },
+  "villageName": {
+    "en": "Ramakrishnapuram",
+    "ta": "ராமகிருஷ்ணாபுரம்"
+  },
+  "villageCode": "RKP",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9718"
+  },
+  "villageName": {
+    "en": "Saravanapuram",
+    "ta": "சரவனாபுரம்"
+  },
+  "villageCode": "SVM",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9719"
+  },
+  "villageName": {
+    "en": "Sivanur",
+    "ta": "சிவானூர்"
+  },
+  "villageCode": "SIV",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971a"
+  },
+  "villageName": {
+    "en": "Sivanur Arunthathi",
+    "ta": "சிவானூர்அருந்ததி"
+  },
+  "villageCode": "SAT",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971b"
+  },
+  "villageName": {
+    "en": "Sivanur Colony",
+    "ta": "சிவானூர் காலனி"
+  },
+  "villageCode": "SIC",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971c"
+  },
+  "villageName": {
+    "en": "Sivapuram",
+    "ta": "சிவபுரம்"
+  },
+  "villageCode": "SVP",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971d"
+  },
+  "villageName": {
+    "en": "Somanathapuram",
+    "ta": "சோமநாதபுரம்"
+  },
+  "villageCode": "SMP",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971e"
+  },
+  "villageName": {
+    "en": "Srinivasapuram",
+    "ta": "சீனிவாசபுரம்"
+  },
+  "villageCode": "SPM",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f971f"
+  },
+  "villageName": {
+    "en": "Srinivasapuram Arunthathiu",
+    "ta": "சீனிவாசபுரம் அருந்ததி"
+  },
+  "villageCode": "SPA",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9720"
+  },
+  "villageName": {
+    "en": "Sripathnallore",
+    "ta": "ஸ்ரீ பாத நல்லூர்"
+  },
+  "villageCode": "SPN",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9721"
+  },
+  "villageName": {
+    "en": "Thengal (Pon)",
+    "ta": "தெங்கால் பொன்னை"
+  },
+  "villageCode": "TGP",
+  "panchayatCode": 42,
+  "panchayatNo": 28
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9722"
+  },
+  "villageName": {
+    "en": "Thengal Ashramam",
+    "ta": "தெங்கால் ஆசிரமம்"
+  },
+  "villageCode": "TAM",
+  "panchayatCode": 42,
+  "panchayatNo": 28
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9723"
+  },
+  "villageName": {
+    "en": "Thengal Colony",
+    "ta": "தெங்கால் காலனி"
+  },
+  "villageCode": "TC2",
+  "panchayatCode": 42,
+  "panchayatNo": 28
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9724"
+  },
+  "villageName": {
+    "en": "Thenpalli",
+    "ta": "தேன்பள்ளி"
+  },
+  "villageCode": "TPI",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9725"
+  },
+  "villageName": {
+    "en": "Thenpalli Arunthathi",
+    "ta": "தேன்பள்ளி அருந்ததி"
+  },
+  "villageCode": "TPA",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9726"
+  },
+  "villageName": {
+    "en": "Thenpalli Colony",
+    "ta": "தேன்பள்ளி காலனி"
+  },
+  "villageCode": "TPC",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9727"
+  },
+  "villageName": {
+    "en": "Thundukarai",
+    "ta": "துண்டுக்கரை"
+  },
+  "villageCode": "TKR",
+  "panchayatCode": 28,
+  "panchayatNo": 22
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9728"
+  },
+  "villageName": {
+    "en": "Vallimalai Arunthathi",
+    "ta": "வள்ளிமலை அருந்ததி"
+  },
+  "villageCode": "VMA",
+  "panchayatCode": 45,
+  "panchayatNo": 42
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9729"
+  },
+  "villageName": {
+    "en": "Vallimalai Colony",
+    "ta": "வள்ளிமலை காலனி"
+  },
+  "villageCode": "VMC",
+  "panchayatCode": 45,
+  "panchayatNo": 42
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972a"
+  },
+  "villageName": {
+    "en": "Vallimamali",
+    "ta": "வள்ளிமலை"
+  },
+  "villageCode": "VMI",
+  "panchayatCode": 45,
+  "panchayatNo": 42
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972b"
+  },
+  "villageName": {
+    "en": "Veera Nthagal",
+    "ta": "வீரந்தாங்கல்"
+  },
+  "villageCode": "VTL",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972c"
+  },
+  "villageName": {
+    "en": "Venkatapuram",
+    "ta": "வெங்காடபுரம்"
+  },
+  "villageCode": "VPM",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972d"
+  },
+  "villageName": {
+    "en": "Venkatapuram Arunthathi",
+    "ta": "வெங்காடபுரம் அருந்ததி"
+  },
+  "villageCode": "VKA",
+  "panchayatCode": 43,
+  "panchayatNo": 39
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972e"
+  },
+  "villageName": {
+    "en": "Veppalai",
+    "ta": "வெப்பாலை"
+  },
+  "villageCode": "VEP",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f972f"
+  },
+  "villageName": {
+    "en": "Veppalai Colony",
+    "ta": "வெப்பாலை காலனி"
+  },
+  "villageCode": "VEC",
+  "panchayatCode": 48,
+  "panchayatNo": 45
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9730"
+  },
+  "villageName": {
+    "en": "Athigavariur",
+    "ta": "ஆத்திங்கவாரியூர்"
+  },
+  "villageCode": "AVR",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9731"
+  },
+  "villageName": {
+    "en": "Avalrangapalli",
+    "ta": "ஆவல்ரங்கபள்ளி"
+  },
+  "villageCode": "ARP",
+  "panchayatCode": 6,
+  "panchayatNo": 2
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9732"
+  },
+  "villageName": {
+    "en": "B.V.Kanigai",
+    "ta": "பி.வி.கண்டிகை"
+  },
+  "villageCode": "BVK",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9733"
+  },
+  "villageName": {
+    "en": "Balapuram",
+    "ta": "பாலாபுரம்"
+  },
+  "villageCode": "BPM",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9734"
+  },
+  "villageName": {
+    "en": "Balayankuppam",
+    "ta": "பாளையங்குப்பம்"
+  },
+  "villageCode": "BKM",
+  "panchayatCode": 7,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9735"
+  },
+  "villageName": {
+    "en": "Balayankuppam Colony",
+    "ta": "பாளையங்குப்பம் காலனி"
+  },
+  "villageCode": "BKC",
+  "panchayatCode": 7,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9736"
+  },
+  "villageName": {
+    "en": "Chinna Oddenery",
+    "ta": "சின்ன ஒட்டனேரி"
+  },
+  "villageCode": "COD",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9737"
+  },
+  "villageName": {
+    "en": "Chitrampudhur",
+    "ta": "சத்திரம்புதூர்"
+  },
+  "villageCode": "CHP",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9738"
+  },
+  "villageName": {
+    "en": "Chitrampudhur Arunthathiyar Colony",
+    "ta": "சத்திரம்புதூர்அருந்ததியர் காலனி"
+  },
+  "villageCode": "CHA",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9739"
+  },
+  "villageName": {
+    "en": "Chitrampudhur Colony",
+    "ta": "சத்திரம்புதூர் காலனி"
+  },
+  "villageCode": "CHC",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973a"
+  },
+  "villageName": {
+    "en": "Chitrampudhur Celon Colony",
+    "ta": "சத்திரம்புதூர் சிலோன் காலனி"
+  },
+  "villageCode": "CCC",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973b"
+  },
+  "villageName": {
+    "en": "Devakanikapuram",
+    "ta": "தேவகன்னிகாபுரம்"
+  },
+  "villageCode": "DKP",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973c"
+  },
+  "villageName": {
+    "en": "Dhanalakshmi Nagar",
+    "ta": "தனலஷ்மி நகர்"
+  },
+  "villageCode": "DLN",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973d"
+  },
+  "villageName": {
+    "en": "Embalalore",
+    "ta": "எம்பலூர்"
+  },
+  "villageCode": "ELL",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973e"
+  },
+  "villageName": {
+    "en": "Gvn Kandigai",
+    "ta": "ஜீ.வி.என். கண்டிகை"
+  },
+  "villageCode": "GVN",
+  "panchayatCode": 7,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f973f"
+  },
+  "villageName": {
+    "en": "Kamarajapuram Palleri",
+    "ta": "காமராஜபுரம் பள்ளேரி"
+  },
+  "villageCode": "KPP",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9740"
+  },
+  "villageName": {
+    "en": "Kannigapuram",
+    "ta": "கன்னிகாபுரம்"
+  },
+  "villageCode": "KP3",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9741"
+  },
+  "villageName": {
+    "en": "Keeraisathu",
+    "ta": "கீரைசாத்து"
+  },
+  "villageCode": "KSU",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9742"
+  },
+  "villageName": {
+    "en": "Keeraisathu Arunthahthi",
+    "ta": "கீரைசாத்து அருந்ததி"
+  },
+  "villageCode": "KSA",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9743"
+  },
+  "villageName": {
+    "en": "Keeraisathu Colony",
+    "ta": "கீரைசாத்து காலனி"
+  },
+  "villageCode": "KSC",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9744"
+  },
+  "villageName": {
+    "en": "Kil Palleri",
+    "ta": "கீழ் பள்ளேரி"
+  },
+  "villageCode": "KPL",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9745"
+  },
+  "villageName": {
+    "en": "Kodarapalli",
+    "ta": "கோடார்பள்ளி"
+  },
+  "villageCode": "KOP",
+  "panchayatCode": 7,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9746"
+  },
+  "villageName": {
+    "en": "Kodarapalli Colony",
+    "ta": "கோடார்பள்ளி காலனி"
+  },
+  "villageCode": "KOC",
+  "panchayatCode": 7,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9747"
+  },
+  "villageName": {
+    "en": "Kodiyur",
+    "ta": "கோடியூர்"
+  },
+  "villageCode": "KDR",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9748"
+  },
+  "villageName": {
+    "en": "Kondakuppam",
+    "ta": "கொண்டகுப்பம்"
+  },
+  "villageCode": "KOK",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9749"
+  },
+  "villageName": {
+    "en": "Kondakuppam Colony",
+    "ta": "கொண்டகுப்பம் காலனி"
+  },
+  "villageCode": "KKC",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974a"
+  },
+  "villageName": {
+    "en": "Kondareddipalli",
+    "ta": "கொண்டரெட்டிபள்ளி"
+  },
+  "villageCode": "KRP",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974b"
+  },
+  "villageName": {
+    "en": "Kovillaloor",
+    "ta": "கோவிலலூர்"
+  },
+  "villageCode": "KLL",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974c"
+  },
+  "villageName": {
+    "en": "Kumananthangal",
+    "ta": "குமணந்தாங்கல்"
+  },
+  "villageCode": "KUT",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974d"
+  },
+  "villageName": {
+    "en": "Kumananthangal Colony",
+    "ta": "குமணந்தாங்கல் காலனி"
+  },
+  "villageCode": "KNT",
+  "panchayatCode": 19,
+  "panchayatNo": 10
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974e"
+  },
+  "villageName": {
+    "en": "Kumarakunda",
+    "ta": "குமரக்குண்டா"
+  },
+  "villageCode": "KKU",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f974f"
+  },
+  "villageName": {
+    "en": "Kumarakunda Arunthathi",
+    "ta": "குமரக்குண்டா அருந்ததி"
+  },
+  "villageCode": "KKA",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9750"
+  },
+  "villageName": {
+    "en": "Kumarakunda Irrular Colony",
+    "ta": "குமரக்குண்டா இருலர் காலனி"
+  },
+  "villageCode": "KIC",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9751"
+  },
+  "villageName": {
+    "en": "Kuravankudisai",
+    "ta": "குரவன்குடிசை"
+  },
+  "villageCode": "KKD",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9752"
+  },
+  "villageName": {
+    "en": "L.N.Puram",
+    "ta": "எல்.என்.புரம்"
+  },
+  "villageCode": "LNP",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9753"
+  },
+  "villageName": {
+    "en": "M.S.Kandigai",
+    "ta": "எம்.எஸ். கண்டிகை"
+  },
+  "villageCode": "MSK",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9754"
+  },
+  "villageName": {
+    "en": "Mel Palleri",
+    "ta": "மேல் பள்ளேரி"
+  },
+  "villageCode": "MPL",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9755"
+  },
+  "villageName": {
+    "en": "Milagaikuppam",
+    "ta": "மிளகாய்குப்பம்"
+  },
+  "villageCode": "MIK",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9756"
+  },
+  "villageName": {
+    "en": "Milagaikuppam Arunthathil",
+    "ta": "மிளகாய்குப்பம் அருந்ததி"
+  },
+  "villageCode": "MIA",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9757"
+  },
+  "villageName": {
+    "en": "Muthiyalpalli",
+    "ta": "முத்தியால்பள்ளி"
+  },
+  "villageCode": "MUP",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9758"
+  },
+  "villageName": {
+    "en": "N.P.N.Palayam",
+    "ta": "என்.பி.என். பாளையம்"
+  },
+  "villageCode": "NPN",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9759"
+  },
+  "villageName": {
+    "en": "Narayanapuram",
+    "ta": "நாராயணபுரம்"
+  },
+  "villageCode": "NRY",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975a"
+  },
+  "villageName": {
+    "en": "Oddenery",
+    "ta": "ஒட்டனேரி"
+  },
+  "villageCode": "ODR",
+  "panchayatCode": 41,
+  "panchayatNo": 36
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975b"
+  },
+  "villageName": {
+    "en": "Oddenery (V)",
+    "ta": "ஒட்டனேரி (விநாயகபுரம்)"
+  },
+  "villageCode": "ODV",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975c"
+  },
+  "villageName": {
+    "en": "Oddenery Irrular Colony",
+    "ta": "ஒட்டனேரி இருளர் காலனி"
+  },
+  "villageCode": "OIC",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975d"
+  },
+  "villageName": {
+    "en": "Oddeneryarunthathi",
+    "ta": "ஒட்டனேரி அருந்ததி"
+  },
+  "villageCode": "ODA",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975e"
+  },
+  "villageName": {
+    "en": "P.N.Palayam",
+    "ta": "பி.என். பாளையம்"
+  },
+  "villageCode": "PNP",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f975f"
+  },
+  "villageName": {
+    "en": "P.N.Palayam Arunthathi",
+    "ta": "பி.என். பாளையம் அருந்ததி"
+  },
+  "villageCode": "PPA",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9760"
+  },
+  "villageName": {
+    "en": "P.N.Palayam Colony",
+    "ta": "பி.என். பாளையம் காலனி"
+  },
+  "villageCode": "PNC",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9761"
+  },
+  "villageName": {
+    "en": "Palleri",
+    "ta": "பள்ளேரி"
+  },
+  "villageCode": "PLR",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9762"
+  },
+  "villageName": {
+    "en": "Palleri Arunthathi",
+    "ta": "பள்ளேரி அருந்ததி"
+  },
+  "villageCode": "PLA",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9763"
+  },
+  "villageName": {
+    "en": "Palleri Colony",
+    "ta": "பள்ளேரி காலனி"
+  },
+  "villageCode": "PLC",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9764"
+  },
+  "villageName": {
+    "en": "Palleri Irrular Colony",
+    "ta": "பள்ளேரி இருலர் காலனி"
+  },
+  "villageCode": "PLI",
+  "panchayatCode": 33,
+  "panchayatNo": 21
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9765"
+  },
+  "villageName": {
+    "en": "Papangulam (Kodiyur)",
+    "ta": "பாப்பாங்குளம் (கோடியூர்)"
+  },
+  "villageCode": "PPK",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9766"
+  },
+  "villageName": {
+    "en": "Ponnai",
+    "ta": "பொன்னை"
+  },
+  "villageCode": "PON",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9767"
+  },
+  "villageName": {
+    "en": "Ponnai Colony",
+    "ta": "பொன்னை காலனி"
+  },
+  "villageCode": "POC",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9768"
+  },
+  "villageName": {
+    "en": "Ponnai Pudhur",
+    "ta": "பொன்னை புதூர்"
+  },
+  "villageCode": "PPR",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9769"
+  },
+  "villageName": {
+    "en": "Ponnai Pudhur Arunthathi",
+    "ta": "பொன்னை புதூர் கூட் ரோடு"
+  },
+  "villageCode": "PNA",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976a"
+  },
+  "villageName": {
+    "en": "Raghavaredddiyur",
+    "ta": "ராகவரெட்டியூர்"
+  },
+  "villageCode": "RRD",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976b"
+  },
+  "villageName": {
+    "en": "S.N.Palayam",
+    "ta": "எஸ்.என்.பாளையம்"
+  },
+  "villageCode": "SPY",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976c"
+  },
+  "villageName": {
+    "en": "S.N.Palayam Arunthathi",
+    "ta": "எஸ்.என்.பாளையம் அருந்ததி"
+  },
+  "villageCode": "SNA",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976d"
+  },
+  "villageName": {
+    "en": "S.N.Palayam Boyur Colony",
+    "ta": "எஸ்.என்.பாளையம்போயர் காலனி"
+  },
+  "villageCode": "SNB",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976e"
+  },
+  "villageName": {
+    "en": "S.N.Palayam Colony",
+    "ta": "எஸ்.என்.பாளையம் காலனி"
+  },
+  "villageCode": "SNC",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f976f"
+  },
+  "villageName": {
+    "en": "Sengalnatham",
+    "ta": "செங்கால்நத்தம்"
+  },
+  "villageCode": "SNM",
+  "panchayatCode": 34,
+  "panchayatNo": 27
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9770"
+  },
+  "villageName": {
+    "en": "T.K.Pudhur",
+    "ta": "டி.கே.புதூர்"
+  },
+  "villageCode": "TKP",
+  "panchayatCode": 41,
+  "panchayatNo": 36
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9771"
+  },
+  "villageName": {
+    "en": "T.S.Palli",
+    "ta": "டி.எஸ். பள்ளி"
+  },
+  "villageCode": "TSP",
+  "panchayatCode": 36,
+  "panchayatNo": 30
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9772"
+  },
+  "villageName": {
+    "en": "Tagarakuppam",
+    "ta": "தகரக்குப்பம்"
+  },
+  "villageCode": "TGM",
+  "panchayatCode": 41,
+  "panchayatNo": 36
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9773"
+  },
+  "villageName": {
+    "en": "Tagarakuppam Colony",
+    "ta": "தகரக்குப்பம் காலனி"
+  },
+  "villageCode": "TKC",
+  "panchayatCode": 41,
+  "panchayatNo": 36
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9774"
+  },
+  "villageName": {
+    "en": "Theeyarkuppam",
+    "ta": "தீயார்குப்பம"
+  },
+  "villageCode": "TKM",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9775"
+  },
+  "villageName": {
+    "en": "Theeyarkuppam Kuttu Road",
+    "ta": "தீயார்குப்பம் கூட் ரோடு"
+  },
+  "villageCode": "TYK",
+  "panchayatCode": 18,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9776"
+  },
+  "villageName": {
+    "en": "Vasur",
+    "ta": "வசூர்"
+  },
+  "villageCode": "VSR",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9777"
+  },
+  "villageName": {
+    "en": "Vasur Arunthathi",
+    "ta": "வசூர் அருந்ததி"
+  },
+  "villageCode": "VSA",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9778"
+  },
+  "villageName": {
+    "en": "Vasur Colony",
+    "ta": "வசூர் காலனி"
+  },
+  "villageCode": "VSC",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9779"
+  },
+  "villageName": {
+    "en": "Vasur Puliyanthoppu",
+    "ta": "வசூர் புளியந்தோப்பு"
+  },
+  "villageCode": "VSP",
+  "panchayatCode": 47,
+  "panchayatNo": 35
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977a"
+  },
+  "villageName": {
+    "en": "Agravaram New",
+    "ta": "புதிய அக்ராவரம்"
+  },
+  "villageCode": "AVN",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977b"
+  },
+  "villageName": {
+    "en": "Agravaram Old",
+    "ta": "பழைய அக்ராவரம்"
+  },
+  "villageCode": "AVO",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977c"
+  },
+  "villageName": {
+    "en": "Annanagar Malaimedu",
+    "ta": "அண்ணாநகர்மலைமேடு"
+  },
+  "villageCode": "ANM",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977d"
+  },
+  "villageName": {
+    "en": "Egambaranellore",
+    "ta": "ஏகாம்பரநல்லூர்"
+  },
+  "villageCode": "EGN",
+  "panchayatCode": 9,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977e"
+  },
+  "villageName": {
+    "en": "Egambaranellore Colony",
+    "ta": "ஏகாம்பரநல்லூர் காலனி"
+  },
+  "villageCode": "EGC",
+  "panchayatCode": 9,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f977f"
+  },
+  "villageName": {
+    "en": "Egambaranellore X Road",
+    "ta": "ஏகாம்பரநல்லூர் கூட் ரோடு"
+  },
+  "villageCode": "EXR",
+  "panchayatCode": 17,
+  "panchayatNo": 9
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9780"
+  },
+  "villageName": {
+    "en": "J.J.Nagar ( Rnpuram )",
+    "ta": "ஜே.ஜே. நகர்; ரகுநாதபுரம்"
+  },
+  "villageCode": "JJR",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9781"
+  },
+  "villageName": {
+    "en": "J.J.Nagar Malaimedu",
+    "ta": "ஜே.ஜே.நகர் மலைமேடு"
+  },
+  "villageCode": "JJM",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9782"
+  },
+  "villageName": {
+    "en": "Kathrikuppam",
+    "ta": "கத்தாரிக்குப்பம்"
+  },
+  "villageCode": "KKM",
+  "panchayatCode": 17,
+  "panchayatNo": 9
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9783"
+  },
+  "villageName": {
+    "en": "Krishnapuram",
+    "ta": "கிருஷ்ணாபுரம்"
+  },
+  "villageCode": "KPM",
+  "panchayatCode": 26,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9784"
+  },
+  "villageName": {
+    "en": "Krishnapuram Arunthathi",
+    "ta": "கிருஷ்ணாபுரம் அருந்ததி"
+  },
+  "villageCode": "KPA",
+  "panchayatCode": 26,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9785"
+  },
+  "villageName": {
+    "en": "Lalapattai",
+    "ta": "லாலாபேட்டை"
+  },
+  "villageCode": "LLP",
+  "panchayatCode": 23,
+  "panchayatNo": 11
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9786"
+  },
+  "villageName": {
+    "en": "M.G.R Nagar Malaimedu",
+    "ta": "எம்.ஜி.ஆர். நகர் மலைமேடு"
+  },
+  "villageCode": "MMM",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9787"
+  },
+  "villageName": {
+    "en": "Marudampakkam Colony",
+    "ta": "மருதம்பாக்கம் காலனி"
+  },
+  "villageCode": "MRP",
+  "panchayatCode": 26,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9788"
+  },
+  "villageName": {
+    "en": "Marudampakkm",
+    "ta": "மருதம்பாக்கம்"
+  },
+  "villageCode": "MDP",
+  "panchayatCode": 26,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9789"
+  },
+  "villageName": {
+    "en": "Nellikuppam",
+    "ta": "நெல்லிக்குப்பம்"
+  },
+  "villageCode": "NKP",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978a"
+  },
+  "villageName": {
+    "en": "Nellikuppam Mottur",
+    "ta": "நெல்லிக்குப்பம் மோட்டூர்"
+  },
+  "villageCode": "NKM",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978b"
+  },
+  "villageName": {
+    "en": "Nurukkamparai",
+    "ta": "நுருக்கம்பாறை"
+  },
+  "villageCode": "NPI",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978c"
+  },
+  "villageName": {
+    "en": "Pillayarkuppam",
+    "ta": "பிள்ளையார்குப்பம்"
+  },
+  "villageCode": "PKM",
+  "panchayatCode": 26,
+  "panchayatNo": 14
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978d"
+  },
+  "villageName": {
+    "en": "Raghunathpuram",
+    "ta": "ரகுநாதபுரம்"
+  },
+  "villageCode": "RPM",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978e"
+  },
+  "villageName": {
+    "en": "Thakkampalayam",
+    "ta": "தக்காம்பாளையம்"
+  },
+  "villageCode": "TPM",
+  "panchayatCode": 9,
+  "panchayatNo": 5
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f978f"
+  },
+  "villageName": {
+    "en": "Thiruvalluvar Nagar",
+    "ta": "திருவள்ளுவர் நகர்"
+  },
+  "villageCode": "TV4",
+  "panchayatCode": 29,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9790"
+  },
+  "villageName": {
+    "en": "Allikulam Mettu Colony",
+    "ta": "அல்லிக்குளம் மேட்டுக் காலனி"
+  },
+  "villageCode": "AMC",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9791"
+  },
+  "villageName": {
+    "en": "Ammoor",
+    "ta": "அம்மூர்"
+  },
+  "villageCode": "AMR",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9792"
+  },
+  "villageName": {
+    "en": "Ammoor Allikulam",
+    "ta": "அம்மூர்அல்லிக்குளம்"
+  },
+  "villageCode": "AAK",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9793"
+  },
+  "villageName": {
+    "en": "Ammoor Allikulam Colony",
+    "ta": "அம்மூர் அல்லிக்குளம் காலனி"
+  },
+  "villageCode": "AAC",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9794"
+  },
+  "villageName": {
+    "en": "Ammoor Bairavar Colony",
+    "ta": "அம்மூர் பைரவர் காலனி"
+  },
+  "villageCode": "ABC",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9795"
+  },
+  "villageName": {
+    "en": "Ammoor Narasingapuram",
+    "ta": "அம்மூர்நரசிங்கபுரம்"
+  },
+  "villageCode": "ANP",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9796"
+  },
+  "villageName": {
+    "en": "Ammoor Samathuvapuram",
+    "ta": "அம்மூர்"
+  },
+  "villageCode": "ASP",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9797"
+  },
+  "villageName": {
+    "en": "Ammor Kottu Road",
+    "ta": "அம்மூர்கூட் ரோடு"
+  },
+  "villageCode": "AXR",
+  "panchayatCode": 2,
+  "panchayatNo": 37
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9798"
+  },
+  "villageName": {
+    "en": "Chettithangal",
+    "ta": "செட்டிதாங்கல்"
+  },
+  "villageCode": "CTL",
+  "panchayatCode": 8,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f9799"
+  },
+  "villageName": {
+    "en": "Edapalayam",
+    "ta": "எடபாளையம்"
+  },
+  "villageCode": "EPM",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979a"
+  },
+  "villageName": {
+    "en": "Lallaikuppam",
+    "ta": "லாலிக்குப்பம்"
+  },
+  "villageCode": "LLK",
+  "panchayatCode": 14,
+  "panchayatNo": 8
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979b"
+  },
+  "villageName": {
+    "en": "Manikkanagar",
+    "ta": "மாணிக்கநகர்"
+  },
+  "villageCode": "MKN",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979c"
+  },
+  "villageName": {
+    "en": "Manthangal",
+    "ta": "மாந்தாங்கல்"
+  },
+  "villageCode": "MT5",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979d"
+  },
+  "villageName": {
+    "en": "Manthangal Gandhinagar",
+    "ta": "மாந்தாங்கல் காந்திநகர்"
+  },
+  "villageCode": "MGN",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979e"
+  },
+  "villageName": {
+    "en": "Manthangal Mottur",
+    "ta": "மாந்தாங்கல் மோட்டூர்"
+  },
+  "villageCode": "MMR",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f979f"
+  },
+  "villageName": {
+    "en": "Manthangal Ponniamman Nagar",
+    "ta": "மாந்தாங்கல் பொன்னியம்மன் நகர்"
+  },
+  "villageCode": "MPN",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a0"
+  },
+  "villageName": {
+    "en": "Oldchettithangal",
+    "ta": "பழைய செட்டிதாங்கல்"
+  },
+  "villageCode": "OCT",
+  "panchayatCode": 8,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a1"
+  },
+  "villageName": {
+    "en": "Tamilannaiveedhi",
+    "ta": "தமிழன்னை வீதி"
+  },
+  "villageCode": "TAV",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a2"
+  },
+  "villageName": {
+    "en": "Thandalam",
+    "ta": "தண்டலம்"
+  },
+  "villageCode": "TDM",
+  "panchayatCode": 8,
+  "panchayatNo": 4
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a3"
+  },
+  "villageName": {
+    "en": "Vanapadi",
+    "ta": "வானாபாடி"
+  },
+  "villageCode": "VPI",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a4"
+  },
+  "villageName": {
+    "en": "Vanapadi Arunthathi",
+    "ta": "வானாபாடி அருந்ததி"
+  },
+  "villageCode": "VPA",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a5"
+  },
+  "villageName": {
+    "en": "Voc Nagar (Vanapadi)",
+    "ta": "வி.ஓ.சி நகர் (வானாபாடி)"
+  },
+  "villageCode": "VOV",
+  "panchayatCode": 46,
+  "panchayatNo": 33
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a6"
+  },
+  "villageName": {
+    "en": "Ambedkarnagar",
+    "ta": "அம்பேத்கர் நகர்"
+  },
+  "villageCode": "ANA",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a7"
+  },
+  "villageName": {
+    "en": "Anna Nagar",
+    "ta": "அண்ணாநகர்"
+  },
+  "villageCode": "ANN",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a8"
+  },
+  "villageName": {
+    "en": "Avarakarai",
+    "ta": "அவரக்கரை"
+  },
+  "villageCode": "AVK",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97a9"
+  },
+  "villageName": {
+    "en": "Avarakarai Colony",
+    "ta": "அவரக்கரை காலனி"
+  },
+  "villageCode": "AVC",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97aa"
+  },
+  "villageName": {
+    "en": "Bhel Mandpam Colony",
+    "ta": "பெல்மண்டபம் காலனி"
+  },
+  "villageCode": "BMC",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ab"
+  },
+  "villageName": {
+    "en": "Errikodi Pulliyanthangal",
+    "ta": "ஏரிகோடி புளியந்தாங்கல்"
+  },
+  "villageCode": "EPT",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ac"
+  },
+  "villageName": {
+    "en": "Indiranagar",
+    "ta": "இந்திராநகர்"
+  },
+  "villageCode": "INN",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ad"
+  },
+  "villageName": {
+    "en": "Iob Nagar",
+    "ta": "ஐ.ஓ.பி. நுகர்"
+  },
+  "villageCode": "ION",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ae"
+  },
+  "villageName": {
+    "en": "Kamarajar Nagar",
+    "ta": "காமராஜர் நகர்"
+  },
+  "villageCode": "KMN",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97af"
+  },
+  "villageName": {
+    "en": "M.G.R.Nagar",
+    "ta": "எம்.ஜி.ஆர். நகர்"
+  },
+  "villageCode": "MNA",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b0"
+  },
+  "villageName": {
+    "en": "Maniyampattu",
+    "ta": "மணியம்பட்டு"
+  },
+  "villageCode": "MPU",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b1"
+  },
+  "villageName": {
+    "en": "Maniyampattu Colony",
+    "ta": "மணியம்பட்டு காலனி"
+  },
+  "villageCode": "MPC",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b2"
+  },
+  "villageName": {
+    "en": "Mettuthengal",
+    "ta": "மேட்டுத்தெங்கால்"
+  },
+  "villageCode": "MTG",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b3"
+  },
+  "villageName": {
+    "en": "Narasigapuram",
+    "ta": "நரசிங்கபுரம்"
+  },
+  "villageCode": "NRS",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b4"
+  },
+  "villageName": {
+    "en": "Periyathangal",
+    "ta": "பெரியந்தாங்கல்"
+  },
+  "villageCode": "PTG",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b5"
+  },
+  "villageName": {
+    "en": "Ponnampattu",
+    "ta": "பொன்;னம்பட்டு"
+  },
+  "villageCode": "PPU",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b6"
+  },
+  "villageName": {
+    "en": "Ponnampattu Arumuganagar",
+    "ta": "பொன்னம்பட்டு ஆறுமுகநகர்"
+  },
+  "villageCode": "PPT",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b7"
+  },
+  "villageName": {
+    "en": "Pulliyangannu",
+    "ta": "புளியங்கண்ணு"
+  },
+  "villageCode": "PKU",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b8"
+  },
+  "villageName": {
+    "en": "Pulliyanthangal",
+    "ta": "புளியந்தாங்கல்"
+  },
+  "villageCode": "PYG",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97b9"
+  },
+  "villageName": {
+    "en": "Rajivgandhinagar",
+    "ta": "இராஜீவ்காந்தி நகர்"
+  },
+  "villageCode": "RNA",
+  "panchayatCode": 25,
+  "panchayatNo": 12
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ba"
+  },
+  "villageName": {
+    "en": "Sipcot",
+    "ta": "சிப்காட்"
+  },
+  "villageCode": "SIP",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97bb"
+  },
+  "villageName": {
+    "en": "Swaminagar",
+    "ta": "சுவாமி நகர்"
+  },
+  "villageCode": "SWN",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97bc"
+  },
+  "villageName": {
+    "en": "Thengal (Sip)",
+    "ta": "தெங்கால்(சிப்காட்)"
+  },
+  "villageCode": "TGS",
+  "panchayatCode": 42,
+  "panchayatNo": 28
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97bd"
+  },
+  "villageName": {
+    "en": "Thengal Colony",
+    "ta": "தெங்கால் காலனி"
+  },
+  "villageCode": "TC6",
+  "panchayatCode": 42,
+  "panchayatNo": 28
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97be"
+  },
+  "villageName": {
+    "en": "Thiruvalluvar Nagar",
+    "ta": "திருவள்ளுவர் நகர்"
+  },
+  "villageCode": "TV6",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97bf"
+  },
+  "villageName": {
+    "en": "Thiruvika Nagar",
+    "ta": "திரு.விக.நகர்"
+  },
+  "villageCode": "TVN",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c0"
+  },
+  "villageName": {
+    "en": "Vadakal",
+    "ta": "வடகால்"
+  },
+  "villageCode": "VKL",
+  "panchayatCode": 31,
+  "panchayatNo": 18
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c1"
+  },
+  "villageName": {
+    "en": "Voc Nagar (Sipcot)",
+    "ta": "வி.ஓ.சி நகர் ( சிப்காட்)"
+  },
+  "villageCode": "VOS",
+  "panchayatCode": 32,
+  "panchayatNo": 19
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c2"
+  },
+  "villageName": {
+    "en": "Karai",
+    "ta": "காரை"
+  },
+  "villageCode": "KRI",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c3"
+  },
+  "villageName": {
+    "en": "Karai Nehru Nagar",
+    "ta": "காரை நேரு நகர்"
+  },
+  "villageCode": "KNN",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c4"
+  },
+  "villageName": {
+    "en": "Karai Burma Colony",
+    "ta": "காரை பர்மா காலனி"
+  },
+  "villageCode": "KBC",
+  "panchayatCode": 37,
+  "panchayatNo": 101
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c5"
+  },
+  "villageName": {
+    "en": "Ammundi",
+    "ta": "அம்முண்டி"
+  },
+  "villageCode": "AMD",
+  "panchayatCode": 3,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c6"
+  },
+  "villageName": {
+    "en": "Arimuthu Mottur",
+    "ta": "ஆரிமுத்து மோட்டூர்"
+  },
+  "villageCode": "AMM",
+  "panchayatCode": 4,
+  "panchayatNo": 2
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c7"
+  },
+  "villageName": {
+    "en": "Arumparuthi",
+    "ta": "அரும்பருத்தி"
+  },
+  "villageCode": "API",
+  "panchayatCode": 5,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c8"
+  },
+  "villageName": {
+    "en": "Bhel Anna Nagar",
+    "ta": "பெல் அண்ணா நகர்"
+  },
+  "villageCode": "BAN",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97c9"
+  },
+  "villageName": {
+    "en": "Eb X Road",
+    "ta": "ஈபி கூட் ரோடு"
+  },
+  "villageCode": "EBX",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ca"
+  },
+  "villageName": {
+    "en": "Gandhinagar",
+    "ta": "காந்திநகர்"
+  },
+  "villageCode": "GNA",
+  "panchayatCode": 5,
+  "panchayatNo": 3
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97cb"
+  },
+  "villageName": {
+    "en": "Indira Kudiiyiruppu",
+    "ta": "இந்திராநகர்"
+  },
+  "villageCode": "IKY",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97cc"
+  },
+  "villageName": {
+    "en": "Kamarajapuram Colony Thiruvalam",
+    "ta": "கம்பராஜபுரம் காலனி திருவலம்"
+  },
+  "villageCode": "KPC",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97cd"
+  },
+  "villageName": {
+    "en": "Kamarajapuram Thiruvalam",
+    "ta": "கம்பராஜபுரம் திருவலம்"
+  },
+  "villageCode": "KTN",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ce"
+  },
+  "villageName": {
+    "en": "Karanambut Colony",
+    "ta": "கார்ணாம்பட்டு காலனி"
+  },
+  "villageCode": "KNB",
+  "panchayatCode": 16,
+  "panchayatNo": 11
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97cf"
+  },
+  "villageName": {
+    "en": "Karanambut",
+    "ta": "கார்ணாம்பட்டு"
+  },
+  "villageCode": "KPT",
+  "panchayatCode": 16,
+  "panchayatNo": 11
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d0"
+  },
+  "villageName": {
+    "en": "Kausik Nagar",
+    "ta": "கௌசிக்நகர்"
+  },
+  "villageCode": "KSN",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d1"
+  },
+  "villageName": {
+    "en": "Kuppathamottur",
+    "ta": "குப்பத்தாமோட்டூர்"
+  },
+  "villageCode": "KMR",
+  "panchayatCode": 22,
+  "panchayatNo": 13
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d2"
+  },
+  "villageName": {
+    "en": "Kuppathamottur Colony",
+    "ta": "குப்பத்தாமோட்டூர் காலனி"
+  },
+  "villageCode": "KMC",
+  "panchayatCode": 22,
+  "panchayatNo": 13
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d3"
+  },
+  "villageName": {
+    "en": "Mettupalayam",
+    "ta": "மேட்டுப்பாளையம்"
+  },
+  "villageCode": "MPM",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d4"
+  },
+  "villageName": {
+    "en": "Namakkalmottur",
+    "ta": "நாமக்கல்மோட்டூர்"
+  },
+  "villageCode": "NAM",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d5"
+  },
+  "villageName": {
+    "en": "Pallavanagar",
+    "ta": "பல்லவர்நகர்"
+  },
+  "villageCode": "PVA",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d6"
+  },
+  "villageName": {
+    "en": "Ponnai X Road",
+    "ta": "பொன்னை கூட் ரோடு"
+  },
+  "villageCode": "PXR",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d7"
+  },
+  "villageName": {
+    "en": "Puratchithalivarnagar",
+    "ta": "புரட்சிதலைவர் நகர்"
+  },
+  "villageCode": "PTN",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d8"
+  },
+  "villageName": {
+    "en": "S N Puthur Annanagar",
+    "ta": "எஸ். என் புதூர்அண்ணாநகர்"
+  },
+  "villageCode": "SNP",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97d9"
+  },
+  "villageName": {
+    "en": "S.N.Puthur",
+    "ta": "எஸ். என் புதூர்"
+  },
+  "villageCode": "SPR",
+  "panchayatCode": 39,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97da"
+  },
+  "villageName": {
+    "en": "Samathuvapuram Sugarmill",
+    "ta": "சமத்துவபுரம் சுகர்மில்"
+  },
+  "villageCode": "SPS",
+  "panchayatCode": 39,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97db"
+  },
+  "villageName": {
+    "en": "Seekarajapuram",
+    "ta": "சீக்கராஜபுரம்"
+  },
+  "villageCode": "SRP",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97dc"
+  },
+  "villageName": {
+    "en": "Seekarajapuram Parai",
+    "ta": "சீக்கராஜபுரம் பாறை"
+  },
+  "villageCode": "SPP",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97dd"
+  },
+  "villageName": {
+    "en": "Seekarapuram Colony",
+    "ta": "சீக்கராஜபுரம் காலணி"
+  },
+  "villageCode": "SRC",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97de"
+  },
+  "villageName": {
+    "en": "Seekarapuram Mottur",
+    "ta": "சீக்கராஜபுரம் மோட்டூர்"
+  },
+  "villageCode": "SRM",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97df"
+  },
+  "villageName": {
+    "en": "Seekarapuram Mottur Arunththi",
+    "ta": "சீக்கராஜபுரம் மோட்டூர்அருந்ததி"
+  },
+  "villageCode": "SMA",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e0"
+  },
+  "villageName": {
+    "en": "Sembarayanellore",
+    "ta": "செம்பராயநல்லூர்"
+  },
+  "villageCode": "SER",
+  "panchayatCode": 39,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e1"
+  },
+  "villageName": {
+    "en": "Sembarayanellore Colony",
+    "ta": "செம்பராயநல்லூர் காலனி"
+  },
+  "villageCode": "SEC",
+  "panchayatCode": 39,
+  "panchayatNo": 16
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e2"
+  },
+  "villageName": {
+    "en": "Sivanandanagar",
+    "ta": "சிவானந்த நகர்"
+  },
+  "villageCode": "SIN",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e3"
+  },
+  "villageName": {
+    "en": "Sriramnagar",
+    "ta": "ஸ்ரீராம்நகர்"
+  },
+  "villageCode": "SRN",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e4"
+  },
+  "villageName": {
+    "en": "Thendral Nagar",
+    "ta": "தென்றல் நகர்"
+  },
+  "villageCode": "TRN",
+  "panchayatCode": 38,
+  "panchayatNo": 26
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e5"
+  },
+  "villageName": {
+    "en": "Thirupakuttai",
+    "ta": "திருபாகுட்டை"
+  },
+  "villageCode": "TKI",
+  "panchayatCode": 4,
+  "panchayatNo": 2
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e6"
+  },
+  "villageName": {
+    "en": "Thirupakuttai Annanagar",
+    "ta": "திருப்பாகுட்டை அண்ணாநகர்"
+  },
+  "villageCode": "TKA",
+  "panchayatCode": 4,
+  "panchayatNo": 2
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e7"
+  },
+  "villageName": {
+    "en": "Thiruvalam",
+    "ta": "திருவலம்"
+  },
+  "villageCode": "TVM",
+  "panchayatCode": 44,
+  "panchayatNo": 23
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e8"
+  },
+  "villageName": {
+    "en": "Thopalamottur",
+    "ta": "தொப்பலா மோட்டூர்"
+  },
+  "villageCode": "TMR",
+  "panchayatCode": 3,
+  "panchayatNo": 1
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97e9"
+  },
+  "villageName": {
+    "en": "Velnagar",
+    "ta": "வேல் நகர்"
+  },
+  "villageCode": "VNA",
+  "panchayatCode": 4,
+  "panchayatNo": 2
+},{
+  "_id": {
+    "$oid": "60926f261f1fb2393c6f97ea"
+  },
+  "villageName": {
+    "en": "ALWARHTNAGAL",
+    "ta": "ஆழ்வார்தாங்கல்"
+  },
+  "villageCode": "ATL",
+  "panchayatCode": 16,
+  "panchayatNo": 11
+}]

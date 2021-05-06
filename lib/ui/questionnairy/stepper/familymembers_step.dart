@@ -1289,6 +1289,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
                               child: AutoCompleteTextField(
+                                  keyboardType: TextInputType.number,
                                   controller: annualController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {

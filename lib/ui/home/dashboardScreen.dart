@@ -1,3 +1,5 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +28,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   String userName = "";
   String userMail = "";
   int age = 0;
-
+  List jsonResult;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final firestoreInstance = FirebaseFirestore.instance;
+
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -35,11 +39,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
+    /* WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getJson();
+    });*/
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+
     super.initState();
   }
 
@@ -193,4 +201,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
       });
     }
   }
+
+/*
+  getJson() async {
+    String data =
+        await rootBundle.loadString('assets/json/tct_villagelist.json');
+    jsonResult = json.decode(data);
+    debugPrint("${jsonResult.length}");
+    jsonResult.forEach((element) {
+      String villageCode = element['villageCode'];
+      int panchayatCode = element['panchayatCode'];
+      int panchayatNo = element['panchayatNo'];
+      String villageNameTa = element['villageName']['ta'];
+      String villageNameEn = element['villageName']['en'];
+
+      debugPrint("Get_____ :$villageCode");
+      debugPrint("Get_____ :$panchayatCode");
+      debugPrint("Get_____ :$panchayatNo");
+      debugPrint("Get_____ :$villageNameEn");
+      debugPrint("Get_____ :$villageNameTa");
+
+      firestoreInstance
+          .collection(collectionVillageName)
+          .add({
+            "villageCode": villageCode,
+            "panchayatCode": panchayatCode,
+            "panchayatNo": panchayatNo,
+            "villageName": {"en": villageNameEn, "ta": villageNameTa}
+          })
+          .then((value) => debugPrint("Village Details Added Successfully"))
+          .catchError((error) => debugPrint("Village Details Failed to add"));
+    });
+  }
+*/
 }
