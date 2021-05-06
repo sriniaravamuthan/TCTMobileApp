@@ -103,10 +103,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       doorNoController.text = location.doorNumber;
       contactPersonController.text = location.contactPerson;
       noOfFamilyPersonController.text = location.noOfFamilyMembers;
-      villageNameController.text = location.villageName;
-      villageCodeController.text = location.villagesCode;
-      panchayatCodeController.text = location.panchayatCode;
-      panchayatNoController.text = location.panchayatNo.toString();
+
+      fillVillageData(location.villageName);
+
     } else {
       location.formNo = "";
       location.villagesCode = "";
@@ -2005,6 +2004,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     getDemoRef();
   }
 
+  void fillVillageData(var village) async {
+    DocumentSnapshot snapShot = await firestoreInstance.doc(village.path).get();
+    villageNameController.text = snapShot["villageName"][language].toString();
+    villageCodeController.text = snapShot["villageCode"].toString();
+    panchayatCodeController.text = snapShot["panchayatCode"].toString();
+    panchayatNoController.text = snapShot["panchayatNo"].toString();
+  }
+
   void addData() {
     location.formNo = fromNoController.text;
     location.projectCode = projectCodeController.text;
@@ -2013,10 +2020,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.contactPerson = contactPersonController.text;
     location.noOfFamilyMembers = noOfFamilyPersonController.text;
 
-    location.villagesCode = villageCodeController.text;
-    location.panchayatNo = panchayatNoController.text;
-    location.panchayatCode = panchayatCodeController.text;
-    location.villageName = villageNameController.text;
+    String refPath = "";
+    DocumentReference documentReference;
+    for(int i=0; i< snap.length; i++) {
+      if(snap[i].data()["villageCode"].toString() == villageCodeController.text) {
+        documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
+        refPath = documentReference.path;
+        break;
+      }
+    }
+
+    location.villagesCode = documentReference;
+    location.panchayatNo = documentReference;
+    location.panchayatCode = documentReference;
+    location.villageName = documentReference;
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
@@ -2030,24 +2047,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     FireStoreService fireStoreService = new FireStoreService();
     fireStoreService.createFamily(demographicFamily).then((value) =>
         {if (value) debugPrint("addedSuccess") else print("failed to add")});
-    debugPrint("demographicFamily:${demographicFamily.location}");
   }
 
   getVillageDetails(String language) async {
-    QuerySnapshot querySnapshot =
-        await firestoreInstance.collection(collectionVillageName).get();
+    QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).get();
     setState(() {
       snap = querySnapshot.docs;
 
-      var villageCodeDoc =
-          querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
-      var villageNameDoc = querySnapshot.docs
-          .map((doc) => doc.data()["villageName"][language])
-          .toList();
-      var panchayatCodeDoc =
-          querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
-      var panchayatNoDoc =
-          querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
+      var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
+      var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+      var panchayatNoDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
 
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());

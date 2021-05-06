@@ -56,10 +56,10 @@ class DemographicFamily {
 class Location {
   String formNo = "";
   String projectCode = "";
-  String villagesCode = "";
-  String panchayatNo = "";
-  String panchayatCode = "";
-  String villageName = "";
+  var villagesCode;
+  var panchayatNo;
+  var panchayatCode;
+  var villageName;
   String streetName = "";
   String doorNumber = "";
   String contactPerson = "";

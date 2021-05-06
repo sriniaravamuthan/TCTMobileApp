@@ -65,6 +65,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  Future<String> getVillageCode(var village) async {
+    DocumentSnapshot snapShot = await firestoreInstance.doc(village.path).get();
+    String sac= snapShot["villageCode"].toString();
+    print("GET______________" + sac);
+    return snapShot["villageCode"].toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -172,7 +179,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             final data = new HashMap();
             data["name"] = element["Location"]["contactPerson"];
             data["mobileNumber"] = element["Location"]["contactNumber"];
-            data["villageCode"] = element["Location"]["villagesCode"];
+            // data["villageCode"] = element["Location"]["villagesCode"];
+            data["villageCode"] = getVillageCode(element["Location"]["villagesCode"]);
             for (int i = 0; i < family.length; i++) {
               if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                 data["mobileNumber"] = family[i]["mobileNumber"];
