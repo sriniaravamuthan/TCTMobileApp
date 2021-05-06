@@ -50,6 +50,12 @@
  "Any Members who Drink?":"Any Members Who Drink?",
   "Any Members who use Tobacco?":"Any Members Who Use Tobacco?",
 
+ "Private": "Private",
+ "Government": "Government",
+ "Old Age": "Old Age",
+ "Retirement": "Retirement",
+ "Widowed Pension": "Widowed",
+
  "Thirumalai Charity Trust":"Thirumalai Charity Trust",
  "User Name":"User Name",
  "Password":"Password",
@@ -75,6 +81,7 @@
  "Add Family Member":"Add Family Member",
  "Yes":"Yes",
  "No":"No",
+ "Not Answer":"Not Answer",
  "Last Updated":"Last Updated",
  "Cancel":"Cancel",
  "Apply Filter":"Apply Filter",

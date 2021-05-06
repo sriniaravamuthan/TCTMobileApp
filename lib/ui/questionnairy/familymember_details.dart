@@ -36,14 +36,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   Family family = new Family();
   List<Family> familyList = [];
 
-  String physicallyChallenge = 'No';
-  String smartPhone = 'No';
-  String govtInsurance = 'No';
-  String privateInsurance = 'No';
-  String oldAgePension = 'No';
-  String widowedPension = 'No';
-  String retirementPension = 'No';
-
   _FamilyMemberDetailsState(this.demographicFamily);
 
   @override
@@ -134,17 +126,17 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.network(familyList[index].photo.toString(), height: height / 10,
+                        /*Image.network(familyList[index].photo.toString(), height: height / 10,
                           width: width / 10,
-                          fit: BoxFit.contain),
-                        // SvgPicture.asset(
-                        //   svgTctLogo,
-                        //   semanticsLabel: "Logo",
-                        //   height: height / 10,
-                        //   width: width / 10,
-                        //   fit: BoxFit.contain,
-                        //   allowDrawingOutsideViewBox: true,
-                        // ),
+                          fit: BoxFit.contain),*/
+                        SvgPicture.asset(
+                          svgTctLogo,
+                          semanticsLabel: "Logo",
+                          height: height / 10,
+                          width: width / 10,
+                          fit: BoxFit.contain,
+                          allowDrawingOutsideViewBox: true,
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -271,7 +263,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "gvt,pvt",
+                                  text: getInsurance(familyList[index]),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -353,7 +345,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: "Old Age,Retirement",
+                                  text: getPension(familyList[index]),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -380,7 +372,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].smartphone.toString(),
+                                  text: getSliderValue(familyList[index].smartphone),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -398,9 +390,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index]
-                                      .physicallyChallenge
-                                      .toString(),
+                                  text: getSliderValue(familyList[index].physicallyChallenge),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -472,7 +462,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
     setState(() {
       familyList.add(family);
       addFamilyField();
-      print("GET______" + family.toString());
     });
   }
 
@@ -481,4 +470,43 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       addfamily = !addfamily;
     });
   }
+
+  String getInsurance(Family family) {
+    String insurance = "";
+    if (family.privateInsurance == 2)
+      insurance += DemoLocalization.of(context).translate('Private');
+    if (family.govtInsurance == 2) {
+      if (insurance != "")
+        insurance += ", ";
+      insurance += DemoLocalization.of(context).translate('Government');
+    }
+    return insurance;
+  }
+
+  String getPension(Family family) {
+    String pension = "";
+    if (family.oldPension == 2)
+      pension += DemoLocalization.of(context).translate('Old Age');
+    if (family.retirementPension == 2) {
+      if (pension != "")
+        pension += ", ";
+      pension += DemoLocalization.of(context).translate('Retirement');
+    }
+    if (family.widowedPension == 2) {
+      if (pension != "")
+        pension += ", ";
+      pension += DemoLocalization.of(context).translate('Widowed Pension');
+    }
+    return pension;
+  }
+
+  String getSliderValue(double value) {
+    if (value == 2)
+      return DemoLocalization.of(context).translate('Yes');
+    else if (value == 1)
+      return  DemoLocalization.of(context).translate('No');
+    else
+      return "";
+  }
+
 }
