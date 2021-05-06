@@ -9,7 +9,6 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +45,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String userName = "";
   String userMail = "";
   int age = 0;
+  String villageCodeRef;
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
@@ -66,10 +66,15 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   Future<String> getVillageCode(var village) async {
-    DocumentSnapshot snapShot = await firestoreInstance.doc(village.path).get();
-    String sac= snapShot["villageCode"].toString();
-    print("GET______________" + sac);
-    return snapShot["villageCode"].toString();
+    FirebaseFirestore.instance.doc(village).get().then((value) {
+      villageCodeRef = value['villageCode'];
+      print("demo:$villageCodeRef");
+    });
+    // return villageCodeRef;
+    // DocumentSnapshot snapShot = await firestoreInstance.doc(village).get();
+    // String sac = snapShot["villageCode"].toString();
+    // print("GET______________" + sac);
+    // return sac;
   }
 
   @override
@@ -180,7 +185,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             data["name"] = element["Location"]["contactPerson"];
             data["mobileNumber"] = element["Location"]["contactNumber"];
             // data["villageCode"] = element["Location"]["villagesCode"];
-            data["villageCode"] = getVillageCode(element["Location"]["villagesCode"]);
+            // data["villageCode"] =
+            //     getVillageCode(element["Location"]["villagesCode"]);
+
             for (int i = 0; i < family.length; i++) {
               if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                 data["mobileNumber"] = family[i]["mobileNumber"];
@@ -188,8 +195,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 break;
               }
             }
-            if (data["age"] == null)
-              data["age"] = "";
+            if (data["age"] == null) data["age"] = "";
 
             if (data != null) {
               users.add(data);
@@ -741,7 +747,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen');
+            Get.toNamed('/DetailScreen', arguments: users);
           }
         },
         cells: [
@@ -785,7 +791,7 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: TextWidget(
-              text: users[index]['villageCode'],
+              text: "BMR",
               color: darkGreyColor,
               size: 16,
               weight: FontWeight.w600,
