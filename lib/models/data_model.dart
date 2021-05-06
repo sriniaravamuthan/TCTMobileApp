@@ -27,7 +27,7 @@ class DemographicFamily {
     habits =
         json['habits'] != null ? new Habits.fromJson(json['habits']) : null;
     if (json['family'] != null) {
-      family = new List<Family>();
+      family = List<Family>();
       json['family'].forEach((v) {
         family.add(new Family.fromJson(v));
       });

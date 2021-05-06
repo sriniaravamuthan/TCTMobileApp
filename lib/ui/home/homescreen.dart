@@ -45,8 +45,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String userName = "";
   String userMail = "";
   int age = 0;
-  String villageCodeRef;
-
+  String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
 
@@ -65,10 +64,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  Future<String> getVillageCode(var village) async {
-    FirebaseFirestore.instance.doc(village).get().then((value) {
-      villageCodeRef = value['villageCode'];
-      print("demo:$villageCodeRef");
+  Future<String> getVillageCode(DocumentReference village) async {
+    debugPrint("village:${village.path}");
+    return await FirebaseFirestore.instance
+        .doc(village.path)
+        .get()
+        .then((value) {
+      debugPrint("Village Result: ${value['villageCode']}");
+      return value['villageCode'];
     });
     // return villageCodeRef;
     // DocumentSnapshot snapShot = await firestoreInstance.doc(village).get();
@@ -176,31 +179,43 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
-
           var family = snapshot.data.docs.map((doc) => doc.data()).toList();
-          family.forEach((element) {
-            final List family = element['familyMembers'];
+          debugPrint("family : ${family}");
 
-            final data = new HashMap();
-            data["name"] = element["Location"]["contactPerson"];
-            data["mobileNumber"] = element["Location"]["contactNumber"];
-            // data["villageCode"] = element["Location"]["villagesCode"];
-            // data["villageCode"] =
-            //     getVillageCode(element["Location"]["villagesCode"]);
+          if (snapshot.connectionState == ConnectionState.active)
+            family.forEach((element) {
+              final List family = element['familyMembers'];
 
-            for (int i = 0; i < family.length; i++) {
-              if (family[i]["mobileNumber"] == data["mobileNumber"]) {
-                data["mobileNumber"] = family[i]["mobileNumber"];
-                data["age"] = family[i]["age"];
-                break;
+              HashMap data = new HashMap();
+              data["name"] = element["Location"]["contactPerson"];
+              data["mobileNumber"] = element["Location"]["contactNumber"];
+              // data["villageCode"] = element["Location"]["villagesCode"];
+              // data["villageCode"] =
+              //     getVillageCode(element["Location"]["villagesCode"])
+              //         .then((value) => value);
+              DocumentReference reference = element["Location"]["villagesCode"];
+              data["villageCode"] = FirebaseFirestore.instance
+                  .doc(reference.path)
+                  .get()
+                  .then((value) {
+                debugPrint("Village Result: ${value['villageCode']}");
+                return value['villageCode'];
+              });
+              debugPrint("Village : ${data["villageCode"]}");
+
+              for (int i = 0; i < family.length; i++) {
+                if (family[i]["mobileNumber"] == data["mobileNumber"]) {
+                  data["mobileNumber"] = family[i]["mobileNumber"];
+                  data["age"] = family[i]["age"];
+                  break;
+                }
               }
-            }
-            if (data["age"] == null) data["age"] = "";
+              if (data["age"] == null) data["age"] = "";
 
-            if (data != null) {
-              users.add(data);
-            }
-          });
+              if (data != null) {
+                users.add(data);
+              }
+            });
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -652,6 +667,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   void clearSearch() {
+    users.clear();
     setState(() {});
   }
 
@@ -664,6 +680,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         villageName +
         " " +
         panchayatCode);
+    users.clear();
 
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection("demographicData");
@@ -747,7 +764,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: users);
+            Get.toNamed('/DetailScreen', arguments: users[index]);
           }
         },
         cells: [
@@ -791,7 +808,7 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: TextWidget(
-              text: "BMR",
+              text: users[index]['villageCode'].toString(),
               color: darkGreyColor,
               size: 16,
               weight: FontWeight.w600,
