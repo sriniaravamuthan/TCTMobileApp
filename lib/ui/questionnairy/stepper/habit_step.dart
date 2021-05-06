@@ -23,10 +23,10 @@ class HabitsStep extends StatefulWidget {
 
 class _HabitsStepState extends State<HabitsStep> {
   GlobalKey<FormState> _stepFourKey = new GlobalKey<FormState>();
-  String textSmoke = 'Not Answer';
-  String textDrink = 'Not Answer';
-  String textTobacco = 'Not Answer';
-  String textVaccine = 'Not Answer';
+  String textSmoke = "";
+  String textDrink = "";
+  String textTobacco = "";
+  String textVaccine = "";
 
   DemographicFamily demographicFamily;
   Habits habits = new Habits();
@@ -38,6 +38,12 @@ class _HabitsStepState extends State<HabitsStep> {
 
   @override
   void initState() {
+
+    textSmoke = DemoLocalization.of(context).translate('Not Answer');
+    textDrink = DemoLocalization.of(context).translate('Not Answer');
+    textTobacco = DemoLocalization.of(context).translate('Not Answer');
+    textVaccine = DemoLocalization.of(context).translate('Not Answer');
+
     if (demographicFamily.habits == null) {
       habits.firstDose = "";
       habits.secondDose = "";
@@ -55,32 +61,32 @@ class _HabitsStepState extends State<HabitsStep> {
       secondDosePicker.text = habits.secondDose;
 
       if (habits.anyMembersWhoSmoke == 0)
-        textSmoke = "Not Answer";
+        textSmoke = DemoLocalization.of(context).translate('Not Answer');
       else if (habits.anyMembersWhoSmoke == 1)
-        textSmoke = "No";
+        textSmoke = DemoLocalization.of(context).translate('No');
       else
-        textSmoke = "Yes";
+        textSmoke = DemoLocalization.of(context).translate('Yes');
 
       if (habits.anyMembersWhoDrink == 0)
-        textDrink = "Not Answer";
+        textDrink = DemoLocalization.of(context).translate('Not Answer');
       else if (habits.anyMembersWhoDrink == 1)
-        textDrink = "No";
+        textDrink = DemoLocalization.of(context).translate('No');
       else
-        textDrink = "Yes";
+        textDrink = DemoLocalization.of(context).translate('Yes');
 
       if (habits.anyMembersWhoUseTobacco == 0)
-        textTobacco = "Not Answer";
+        textTobacco = DemoLocalization.of(context).translate('Not Answer');
       else if (habits.anyMembersWhoUseTobacco == 1)
-        textTobacco = "No";
+        textTobacco = DemoLocalization.of(context).translate('No');
       else
-        textTobacco = "Yes";
+        textTobacco = DemoLocalization.of(context).translate('Yes');
 
       if (habits.isVaccinationDone == 0)
-        textVaccine = "Not Answer";
+        textVaccine = DemoLocalization.of(context).translate('Not Answer');
       else if (habits.isVaccinationDone == 1)
-        textVaccine = "No";
+        textVaccine = DemoLocalization.of(context).translate('No');
       else
-        textVaccine = "Yes";
+        textVaccine = DemoLocalization.of(context).translate('Yes');
     }
     super.initState();
   }
@@ -480,11 +486,11 @@ class _HabitsStepState extends State<HabitsStep> {
     habits.anyMembersWhoSmoke = value;
     setState(() {
       if (value == 0)
-        textSmoke = 'Not Answer';
+        textSmoke = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        textSmoke = 'No';
+        textSmoke = DemoLocalization.of(context).translate('No');
       else
-        textSmoke = 'Yes';
+        textSmoke = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -492,11 +498,11 @@ class _HabitsStepState extends State<HabitsStep> {
     habits.anyMembersWhoDrink = value;
     setState(() {
       if (value == 0)
-        textDrink = 'Not Answer';
+        textDrink = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        textDrink = 'No';
+        textDrink = DemoLocalization.of(context).translate('No');
       else
-        textDrink = 'Yes';
+        textDrink = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -504,11 +510,11 @@ class _HabitsStepState extends State<HabitsStep> {
     habits.anyMembersWhoUseTobacco = value;
     setState(() {
       if (value == 0)
-        textTobacco = 'Not Answer';
+        textTobacco = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        textTobacco = 'No';
+        textTobacco = DemoLocalization.of(context).translate('No');
       else
-        textTobacco = 'Yes';
+        textTobacco = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -516,11 +522,11 @@ class _HabitsStepState extends State<HabitsStep> {
     habits.isVaccinationDone = value;
     setState(() {
       if (value == 0)
-        textVaccine = 'Not Answer';
+        textVaccine = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        textVaccine = 'No';
+        textVaccine = DemoLocalization.of(context).translate('No');
       else
-        textVaccine = 'Yes';
+        textVaccine = DemoLocalization.of(context).translate('Yes');
     });
   }
 }

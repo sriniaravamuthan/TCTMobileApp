@@ -2108,11 +2108,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     });
   }
 
-  void _showToast(BuildContext context) {
+  void showToast(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('All fields are required'),
       ),
     );
   }
+
 }

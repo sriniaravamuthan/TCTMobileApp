@@ -46,7 +46,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var ageController = TextEditingController();
   var maritalStatusController = TextEditingController();
   var bloodGroupController = TextEditingController();
-  String physicallyChallenge = 'Not Answer';
+  String physicallyChallenge = "";
   var educationController = TextEditingController();
   var occupationController = TextEditingController();
   var annualController = TextEditingController();
@@ -54,15 +54,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String annualIncomeVal;
   var mobileNumberController = TextEditingController();
   var mailController = TextEditingController();
-  String smartphone = 'Not Answer';
+  String smartphone = "";
   var communityController = TextEditingController();
   var casteController = TextEditingController();
   // var photoController = TextEditingController();
-  String govtInsurance = 'Not Answer';
-  String privateInsurance = 'Not Answer';
-  String oldPension = 'Not Answer';
-  String widowedPension = 'Not Answer';
-  String retirementPension = 'Not Answer';
+  String govtInsurance = "";
+  String privateInsurance = "";
+  String oldPension = "";
+  String widowedPension = "";
+  String retirementPension = "";
 
   List<dynamic> values;
   List genderList = [],
@@ -117,9 +117,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   }
 
   double getSwitchValues(String value) {
-    if (value == "Yes")
+    if (value == DemoLocalization.of(context).translate('Yes'))
       return 2;
-    else if (value == "No") return 1;
+    else if (value == DemoLocalization.of(context).translate('No')) return 1;
     return 0;
   }
 
@@ -2090,11 +2090,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.physicallyChallenge = value;
     setState(() {
       if (value == 0)
-        physicallyChallenge = 'Not Answer';
+        physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        physicallyChallenge = 'No';
+        physicallyChallenge = DemoLocalization.of(context).translate('No');
       else
-        physicallyChallenge = 'Yes';
+        physicallyChallenge = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2102,11 +2102,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.smartphone = value;
     setState(() {
       if (value == 0)
-        smartphone = 'Not Answer';
+        smartphone = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        smartphone = 'No';
+        smartphone = smartphone = DemoLocalization.of(context).translate('No');
       else
-        smartphone = 'Yes';
+        smartphone = smartphone = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2114,11 +2114,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.govtInsurance = value;
     setState(() {
       if (value == 0)
-        govtInsurance = 'Not Answer';
+        govtInsurance = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        govtInsurance = 'No';
+        govtInsurance = DemoLocalization.of(context).translate('No');
       else
-        govtInsurance = 'Yes';
+        govtInsurance = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2126,11 +2126,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.privateInsurance = value;
     setState(() {
       if (value == 0)
-        privateInsurance = 'Not Answer';
+        privateInsurance = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        privateInsurance = 'No';
+        privateInsurance = DemoLocalization.of(context).translate('No');
       else
-        privateInsurance = 'Yes';
+        privateInsurance = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2138,11 +2138,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.oldPension = value;
     setState(() {
       if (value == 0)
-        oldPension = 'Not Answer';
+        oldPension = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        oldPension = 'No';
+        oldPension = DemoLocalization.of(context).translate('No');
       else
-        oldPension = 'Yes';
+        oldPension = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2150,11 +2150,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.widowedPension = value;
     setState(() {
       if (value == 0)
-        widowedPension = 'Not Answer';
+        widowedPension = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        widowedPension = 'No';
+        widowedPension = DemoLocalization.of(context).translate('No');
       else
-        widowedPension = 'Yes';
+        widowedPension = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2162,11 +2162,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.retirementPension = value;
     setState(() {
       if (value == 0)
-        retirementPension = 'Not Answer';
+        retirementPension = DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
-        retirementPension = 'No';
+        retirementPension = DemoLocalization.of(context).translate('No');
       else
-        retirementPension = 'Yes';
+        retirementPension = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2322,6 +2322,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
+    smartphone = DemoLocalization.of(context).translate('Not Answer');
+    physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
+    govtInsurance = DemoLocalization.of(context).translate('Not Answer');
+    privateInsurance = DemoLocalization.of(context).translate('Not Answer');
+    oldPension = DemoLocalization.of(context).translate('Not Answer');
+    widowedPension = DemoLocalization.of(context).translate('Not Answer');
+    retirementPension = DemoLocalization.of(context).translate('Not Answer');
     getGender();
     getRelationShip();
     getEducation();
@@ -2330,5 +2337,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getBloodGroup();
     getSection();
     getIncome();
+    setState(() {});
   }
 }
