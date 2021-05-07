@@ -14,6 +14,7 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -25,7 +26,7 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   String dropDownLang;
   var height, width;
-  var demographicList;
+  DemographicFamily demographicList=DemographicFamily();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String userName = "";
   String userMail = "";
@@ -38,7 +39,7 @@ class _DetailScreenState extends State<DetailScreen> {
       debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
     demographicList = Get.arguments;
-    debugPrint("demographicList:${demographicList['formNo']}");
+    debugPrint("demographicList:${demographicList.location.formNo}");
     super.initState();
   }
 
