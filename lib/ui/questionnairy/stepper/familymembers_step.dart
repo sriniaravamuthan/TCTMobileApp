@@ -96,6 +96,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
   Family family;
 
+  bool isLoading = false;
+
   _FamilyMemberStepState(this.family);
 
   @override
@@ -151,23 +153,24 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
           .ref()
           .child('tct/${Path.basename(_image.path)}}');
-      print('path:$storageReference');
 
-      firebase_storage.UploadTask uploadTask = storageReference.putFile(_image);
-      print('File Uploaded');
-      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.snapshot;
+      TaskSnapshot snapshot = await storageReference.putFile(_image);
 
       String picUrl = "";
-      taskSnapshot.ref.getDownloadURL().then((value) => {picUrl = value});
-      print("GET________" + picUrl);
+      if (snapshot.state == TaskState.success) {
+        final String downloadUrl = await snapshot.ref.getDownloadURL();
+        picUrl = downloadUrl;
+        final snackBar = SnackBar(content: Text('Upload successful'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        print('Error from image repo ${snapshot.state.toString()}');
+      }
       family.photo = picUrl;
     }
+    setState(() {
+      this.isLoading = false;
+    });
     widget.refreshFamilyList(family);
-    /*setState(() {
-      print("Profile Picture uploaded");
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-    });*/
   }
 
   @override
@@ -2048,6 +2051,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 children: [
                   InkWell(
                     onTap: () {
+                      setState(() {
+                        this.isLoading = true;
+                      });
                       uploadFile();
                     },
                     child: Container(
@@ -2076,6 +2082,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       ),
                     ),
                   ),
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : Visibility(visible: false, child: Text("Saving")),
                   Container()
                 ],
               ),
@@ -2339,4 +2348,5 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getIncome();
     setState(() {});
   }
+
 }

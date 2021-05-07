@@ -33,7 +33,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
 
   DemographicFamily demographicFamily;
 
-  Family family = new Family();
   List<Family> familyList = [];
 
   _FamilyMemberDetailsState(this.demographicFamily);
@@ -126,17 +125,15 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        /*Image.network(familyList[index].photo.toString(), height: height / 10,
-                          width: width / 10,
-                          fit: BoxFit.contain),*/
-                        SvgPicture.asset(
+                        Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain),
+                        /*SvgPicture.asset(
                           svgTctLogo,
                           semanticsLabel: "Logo",
                           height: height / 10,
                           width: width / 10,
                           fit: BoxFit.contain,
                           allowDrawingOutsideViewBox: true,
-                        ),
+                        ),*/
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(

@@ -71,34 +71,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       property = demographicFamily.property;
       debugPrint("property:${demographicFamily.property}");
 
-      if (property.toiletFacility == 0)
-        toilet = DemoLocalization.of(context).translate('Not Answer');
-      else if (property.toiletFacility == 1)
-        toilet = DemoLocalization.of(context).translate('No');
-      else
-        toilet = DemoLocalization.of(context).translate('Yes');
-
-      if (property.ownLand == 0)
-        land = DemoLocalization.of(context).translate('Not Answer');
-      else if (property.ownLand == 1)
-        land = DemoLocalization.of(context).translate('No');
-      else
-        land = DemoLocalization.of(context).translate('Yes');
-
-      if (property.ownVehicle == 0)
-        vehicle = DemoLocalization.of(context).translate('Not Answer');
-      else if (property.ownVehicle == 1)
-        vehicle = DemoLocalization.of(context).translate('No');
-      else
-        vehicle = DemoLocalization.of(context).translate('Yes');
-
-      if (property.ownLivestocks == 0)
-        liveStock = DemoLocalization.of(context).translate('Not Answer');
-      else if (property.ownLivestocks == 1)
-        liveStock = DemoLocalization.of(context).translate('No');
-      else
-        liveStock = DemoLocalization.of(context).translate('Yes');
-
       statusHouseController.text = property.statusofHouse;
       typeHouseController.text = property.typeofHouse;
 
@@ -1242,6 +1214,53 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     land = DemoLocalization.of(context).translate('Not Answer');
     vehicle = DemoLocalization.of(context).translate('Not Answer');
     liveStock = DemoLocalization.of(context).translate('Not Answer');
+
+    if (demographicFamily.property != null) {
+      property = demographicFamily.property;
+      debugPrint("property:${demographicFamily.property}");
+
+      if (property.toiletFacility == 0)
+        toilet = DemoLocalization.of(context).translate('Not Answer');
+      else if (property.toiletFacility == 1)
+        toilet = DemoLocalization.of(context).translate('No');
+      else
+        toilet = DemoLocalization.of(context).translate('Yes');
+
+      if (property.ownLand == 0)
+        land = DemoLocalization.of(context).translate('Not Answer');
+      else if (property.ownLand == 1)
+        land = DemoLocalization.of(context).translate('No');
+      else
+        land = DemoLocalization.of(context).translate('Yes');
+
+      if (property.ownVehicle == 0)
+        vehicle = DemoLocalization.of(context).translate('Not Answer');
+      else if (property.ownVehicle == 1)
+        vehicle = DemoLocalization.of(context).translate('No');
+      else
+        vehicle = DemoLocalization.of(context).translate('Yes');
+
+      if (property.ownLivestocks == 0)
+        liveStock = DemoLocalization.of(context).translate('Not Answer');
+      else if (property.ownLivestocks == 1)
+        liveStock = DemoLocalization.of(context).translate('No');
+      else
+        liveStock = DemoLocalization.of(context).translate('Yes');
+
+      statusHouseController.text = property.statusofHouse;
+      typeHouseController.text = property.typeofHouse;
+
+      wetLandController.text = property.wetLandInAcres.toString();
+      dryLandController.text = property.dryLandInAcres.toString();
+      motorVehicleController.text = property.noOfVehicleOwn.toString();
+      twoWheelerController.text = property.twoWheeler.toString();
+      threeWheelerController.text = property.threeWheeler.toString();
+      fourWheelerController.text = property.fourWheeler.toString();
+      othersController.text = property.others.toString();
+      stockTypeController.text = property.livestockType.toString();
+      stockCountController.text = property.livestockCount.toString();
+    }
+
     getStatusHouse();
     getTypeHouse();
 
@@ -1256,7 +1275,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       else if (value == 1)
         toilet = DemoLocalization.of(context).translate('No');
       else
-        DemoLocalization.of(context).translate('Yes');
+        toilet = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -1268,7 +1287,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       else if (value == 1)
         land = DemoLocalization.of(context).translate('No');
       else
-        DemoLocalization.of(context).translate('Yes');
+        land = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -1280,7 +1299,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       else if (value == 1)
         vehicle = DemoLocalization.of(context).translate('No');
       else
-        DemoLocalization.of(context).translate('Yes');
+        vehicle = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -1292,7 +1311,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       else if (value == 1)
         liveStock = DemoLocalization.of(context).translate('No');
       else
-        DemoLocalization.of(context).translate('Yes');
+        liveStock = DemoLocalization.of(context).translate('Yes');
     });
   }
+
 }

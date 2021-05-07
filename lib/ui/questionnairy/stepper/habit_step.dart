@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HabitsStep extends StatefulWidget {
@@ -35,31 +36,18 @@ class _HabitsStepState extends State<HabitsStep> {
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   TextEditingController secondDosePicker = TextEditingController();
   _HabitsStepState(this.demographicFamily);
+  String language = "";
 
-  @override
-  void initState() {
-
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
     textSmoke = DemoLocalization.of(context).translate('Not Answer');
     textDrink = DemoLocalization.of(context).translate('Not Answer');
     textTobacco = DemoLocalization.of(context).translate('Not Answer');
     textVaccine = DemoLocalization.of(context).translate('Not Answer');
 
-    if (demographicFamily.habits == null) {
-      habits.firstDose = "";
-      habits.secondDose = "";
-      habits.anyMembersWhoUseTobacco = 0;
-      habits.isVaccinationDone = 0;
-      habits.firstDose = "";
-      habits.secondDose = "";
-      habits.anyMembersWhoDrink = 0;
-      habits.anyMembersWhoSmoke = 0;
-      demographicFamily.habits = habits;
-    } else {
+    if (demographicFamily.habits != null) {
       habits = demographicFamily.habits;
-
-      firstDosePicker.text = habits.firstDose;
-      secondDosePicker.text = habits.secondDose;
-
       if (habits.anyMembersWhoSmoke == 0)
         textSmoke = DemoLocalization.of(context).translate('Not Answer');
       else if (habits.anyMembersWhoSmoke == 1)
@@ -87,6 +75,29 @@ class _HabitsStepState extends State<HabitsStep> {
         textVaccine = DemoLocalization.of(context).translate('No');
       else
         textVaccine = DemoLocalization.of(context).translate('Yes');
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+
+    getLanguage();
+
+    if (demographicFamily.habits == null) {
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoUseTobacco = 0;
+      habits.isVaccinationDone = 0;
+      habits.firstDose = "";
+      habits.secondDose = "";
+      habits.anyMembersWhoDrink = 0;
+      habits.anyMembersWhoSmoke = 0;
+      demographicFamily.habits = habits;
+    } else {
+      habits = demographicFamily.habits;
+      firstDosePicker.text = habits.firstDose;
+      secondDosePicker.text = habits.secondDose;
     }
     super.initState();
   }
