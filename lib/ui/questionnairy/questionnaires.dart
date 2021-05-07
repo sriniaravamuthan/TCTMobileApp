@@ -1430,76 +1430,67 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                           height: 58,
                                           child: Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 2,
-                                                right: 16.0,
-                                                top: 2.0,
-                                                bottom: 2.0),
-                                            child: TextFormField(
-                                              controller: streetNameController,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              enableSuggestions: true,
-                                              decoration: InputDecoration(
-                                                  border: OutlineInputBorder(
-                                                    borderSide: BorderSide.none,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: lightGreyColor),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: lightGreyColor),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: lightGreyColor),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                    borderSide: BorderSide(
-                                                        color: lightGreyColor),
-                                                  ),
-                                                  fillColor: lightGreyColor),
-                                              keyboardType: TextInputType.text,
-                                              onSaved: (String val) {
-                                                setState(() {
-                                                  location.streetName = val;
-                                                  streetNameController.text =
-                                                      val;
-                                                });
-                                              },
-                                              // validator: (value) {
-                                              //   if (value.isEmpty) {
-                                              //     debugPrint("empid :yes");
-                                              //     return 'Employee Id must not be empty';
-                                              //   }
-                                              //   return null;
-                                              // },
-                                            ),
+                                                right: 16.0, top: 2.0, bottom: 2.0),
+                                            child: AutoCompleteTextField(
+                                                controller: streetNameController,
+                                                clearOnSubmit: false,
+                                                itemSubmitted: (item) {
+                                                  streetNameController.text = item;
+                                                },
+                                                // suggestions: relationLangList,
+                                                style: TextStyle(
+                                                  color: Color(0xFF222222),
+                                                  fontSize: 16,
+                                                ),
+                                                decoration: InputDecoration(
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide.none,
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(10.0)),
+                                                    ),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(10.0)),
+                                                      borderSide:
+                                                      BorderSide(color: lightGreyColor),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(10.0)),
+                                                      borderSide:
+                                                      BorderSide(color: lightGreyColor),
+                                                    ),
+                                                    focusedErrorBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(10.0)),
+                                                      borderSide:
+                                                      BorderSide(color: lightGreyColor),
+                                                    ),
+                                                    errorBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(10.0)),
+                                                      borderSide:
+                                                      BorderSide(color: lightGreyColor),
+                                                    ),
+                                                    fillColor: lightGreyColor),
+                                                itemBuilder: (context, item) {
+                                                  return new Padding(
+                                                      padding: EdgeInsets.all(8.0),
+                                                      child: TextWidget(
+                                                        text: item,
+                                                        color: darkColor,
+                                                        size: 14,
+                                                        weight: FontWeight.w600,
+                                                      ));
+                                                },
+                                                itemSorter: (a, b) {
+                                                  return a.compareTo(b);
+                                                },
+                                                itemFilter: (item, query) {
+                                                  return item
+                                                      .toLowerCase()
+                                                      .startsWith(query.toLowerCase());
+                                                }),
                                           ),
                                         ),
                                       ],
