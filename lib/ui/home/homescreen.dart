@@ -50,7 +50,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
   DemographicFamily demographicData=DemographicFamily();
-  Location locationList=Location();
+
+
   List<Family> _familyList=[];
   List<DemographicFamily> _demographicList=[];
 
@@ -173,6 +174,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           debugPrint("family : ${family}");
 
           if (snapshot.connectionState == ConnectionState.active)
+
             family.forEach((element) {
               List family = element['familyMembers'];
 
@@ -203,7 +205,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 }
               }
               if (data["age"] == null) data["age"] = "";
-
+              Location locationList=Location();
+              Property propertyList=Property();
+              Habits habitsList=Habits();
+              Family _family=Family();
+              List<Family> _familyList=[];
               locationList.contactPerson = element["Location"]["contactPerson"];
               locationList.contactNumber = element["Location"]["contactNumber"];
               locationList.doorNumber =
@@ -222,36 +228,67 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               locationList.villagesCode = element["Location"]["villagesCode"];
 
               for (int i = 0; i < family.length; i++) {
-                family[i]["aadharNumber"] = data["aadharNumber"];
-                family[i]["age"] = data["age"].toString();
-                family[i]["annualIncome"] = data["annualIncome"];
-                family[i]["bloodGroup"] = data["bloodGroup"];
-                family[i]["caste"] = data["caste"];
-                family[i]["community"] = data["community"];
-                family[i]["dob"] = data["dob"];
-                family[i]["education"] = data["education"];
-                family[i]["gender"] = data["gender"];
-                family[i]["govtInsurance"] = data["govtInsurance"].toString();
-                family[i]["mail"] = data["mail"].toString();
-                family[i]["maritalStatus"] = data["maritalStatus"].toString();
-                family[i]["mobileNumber"] = data["mobileNumber"].toString();
-                family[i]["name"] = data["name"].toString();
-                family[i]["occupation"] = data["occupation"].toString();
-                family[i]["oldPension"] = data["oldPension"].toString();
-                family[i]["photo"] = data["photo"].toString();
-                family[i]["physicallyChallenge"] = data["physicallyChallenge"].toString();
-                family[i]["privateInsurance"] = data["privateInsurance"].toString();
-                family[i]["relationship"] = data["relationship"].toString();
-                family[i]["retirementPension"] = data["retirementPension"].toString();
-                family[i]["smartphone"] = data["smartphone"].toString();
-                family[i]["widowedPension"] = data["widowedPension"].toString();
+               _family.aadharNumber= family[i]["aadharNumber"];
+               _family.age= family[i]["age"];
+               _family.annualIncome= family[i]["annualIncome"];
+               _family.bloodGroup=  family[i]["bloodGroup"];
+               _family.caste= family[i]["caste"];
+               _family.community= family[i]["community"];
+               _family.dob= family[i]["dob"];
+               _family.education= family[i]["education"];
+               _family.gender= family[i]["gender"];
+               _family.govtInsurance= family[i]["govtInsurance"];
+               _family.mail= family[i]["mail"];
+               _family.maritalStatus= family[i]["maritalStatus"];
+               _family.mobileNumber= family[i]["mobileNumber"];
+               _family.name= family[i]["name"];
+               _family.occupation= family[i]["occupation"];
+               _family.oldPension=  family[i]["oldPension"];
+               _family.photo= family[i]["photo"];
+               _family.physicallyChallenge=  family[i]["physicallyChallenge"] ;
+               _family.privateInsurance=  family[i]["privateInsurance"];
+               _family.relationship= family[i]["relationship"];
+               _family.retirementPension= family[i]["retirementPension"];
+               _family.smartphone= family[i]["smartphone"];
+               _family.widowedPension= family[i]["widowedPension"];
+                _familyList.add(_family);
+               demographicData.family=_familyList;
+               debugPrint("demographicData1:${ demographicData.family[i].smartphone}");
+
+               debugPrint("demographicData1:${_family.physicallyChallenge}");
+
               }
 
+              propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
+              propertyList.fourWheeler = element["Property"]["fourWheeler"];
+              propertyList.livestockCount = element["Property"]["livestockCount"];
+              propertyList.livestockType = element["Property"]["livestockType"];
+              propertyList.noOfVehicleOwn = element["Property"]["noOfVehicleOwn"];
+              propertyList.others = element["Property"]["others"];
+              propertyList.ownLand = element["Property"]["ownLand"];
+              propertyList.ownLivestocks = element["Property"]["ownLivestocks"];
+              propertyList.ownVehicle = element["Property"]["ownVehicle"];
+              propertyList.statusofHouse = element["Property"]["statusofHouse"];
+              propertyList.threeWheeler = element["Property"]["threeWheeler"];
+              propertyList.toiletFacility = element["Property"]["toiletFacility"];
+              propertyList.twoWheeler = element["Property"]["twoWheeler"];
+              propertyList.typeofHouse = element["Property"]["typeofHouse"];
+              propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
 
+              habitsList.anyMembersWhoDrink=element['habit']['anyMembersWhoDrink'];
+              habitsList.anyMembersWhoSmoke=element['habit']['anyMembersWhoSmoke'];
+              habitsList.anyMembersWhoUseTobacco=element['habit']['anyMembersWhoUseTobacco'];
+              habitsList.firstDose=element['habit']['firstDose'];
+              habitsList.isVaccinationDone=element['habit']['isVaccinationDone'];
+              habitsList.secondDose=element['habit']['secondDose'];
+              debugPrint("habits:${ habitsList.anyMembersWhoDrink}");
+
+              debugPrint("demographicData2:${propertyList.dryLandInAcres }");
 
                demographicData.location=locationList;
-              // demographicData.family=family;
-              debugPrint("demographicData1:${ demographicData.family}");
+              demographicData.family=_familyList;
+              demographicData.property=propertyList;
+              demographicData.habits=habitsList;
 
               _demographicList.add(demographicData);
 
@@ -669,12 +706,12 @@ class DataTableRow extends DataTableSource {
         )),
       ]);
 
-    debugPrint("FamilyName:${users[index]['name']}");
+    debugPrint("FamilyName:${ demographicList[index].location.formNo}");
     return DataRow.byIndex(
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: users[index]);
+            Get.toNamed('/DetailScreen', arguments: demographicList[index]);
           }
         },
         cells: [
