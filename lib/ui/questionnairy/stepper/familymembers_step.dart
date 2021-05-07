@@ -2338,6 +2338,75 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     oldPension = DemoLocalization.of(context).translate('Not Answer');
     widowedPension = DemoLocalization.of(context).translate('Not Answer');
     retirementPension = DemoLocalization.of(context).translate('Not Answer');
+
+    if (family != null) {
+      if (family.smartphone == 0)
+        smartphone = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.smartphone == 1)
+        smartphone = DemoLocalization.of(context).translate('No');
+      else
+        smartphone = DemoLocalization.of(context).translate('Yes');
+
+      if (family.physicallyChallenge == 0)
+        physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.physicallyChallenge == 1)
+        physicallyChallenge = DemoLocalization.of(context).translate('No');
+      else
+        physicallyChallenge = DemoLocalization.of(context).translate('Yes');
+
+      if (family.govtInsurance == 0)
+        govtInsurance = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.govtInsurance == 1)
+        govtInsurance = DemoLocalization.of(context).translate('No');
+      else
+        govtInsurance = DemoLocalization.of(context).translate('Yes');
+
+      if (family.privateInsurance == 0)
+        privateInsurance = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.privateInsurance == 1)
+        privateInsurance = DemoLocalization.of(context).translate('No');
+      else
+        privateInsurance = DemoLocalization.of(context).translate('Yes');
+
+      if (family.oldPension == 0)
+        oldPension = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.oldPension == 1)
+        oldPension = DemoLocalization.of(context).translate('No');
+      else
+        oldPension = DemoLocalization.of(context).translate('Yes');
+
+      if (family.widowedPension == 0)
+        widowedPension = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.widowedPension == 1)
+        widowedPension = DemoLocalization.of(context).translate('No');
+      else
+        widowedPension = DemoLocalization.of(context).translate('Yes');
+
+      if (family.retirementPension == 0)
+        retirementPension = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.retirementPension == 1)
+        retirementPension = DemoLocalization.of(context).translate('No');
+      else
+        retirementPension = DemoLocalization.of(context).translate('Yes');
+
+      nameController.text = family.name.toString();
+      aadharNumberController.text = family.aadharNumber.toString();
+      relationshipController.text = family.relationship.toString();
+      genderController.text = family.gender.toString();
+      dobController.text = family.dob.toString();
+      ageController.text = family.age.toString();
+      maritalStatusController.text = family.maritalStatus.toString();
+      bloodGroupController.text = family.bloodGroup.toString();
+      educationController.text = family.education.toString();
+      occupationController.text = family.occupation.toString();
+      annualController.text = family.annualIncome.toString();
+      annualIncomeVal = family.annualIncome.toString();
+      mobileNumberController.text = family.mobileNumber.toString();
+      mailController.text = family.mail.toString();
+      communityController.text = family.community.toString();
+      casteController.text = family.caste.toString();
+    }
+
     getGender();
     getRelationShip();
     getEducation();

@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -28,7 +27,8 @@ class FamilyMemberDetails extends StatefulWidget {
 }
 
 class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
-  bool addfamily = true;
+  bool addfamily = false;
+  int familyIndex = -1;
   var height, width;
 
   DemographicFamily demographicFamily;
@@ -67,7 +67,10 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
               children: [
                 InkWell(
                   onTap: () {
-                    addFamilyField();
+                    setState(() {
+                      addfamily = !addfamily;
+                      familyIndex = -1;
+                    });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -120,291 +123,300 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 debugPrint("familyPhoto:${familyList[index].photo}");
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain),
-                        /*SvgPicture.asset(
-                          svgTctLogo,
-                          semanticsLabel: "Logo",
-                          height: height / 10,
-                          width: width / 10,
-                          fit: BoxFit.contain,
-                          allowDrawingOutsideViewBox: true,
-                        ),*/
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].name,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      familyIndex = index;
+                      addfamily = true;
+                    });
+                  },
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          FadeInImage.assetNetwork(placeholder: svgTctLogo, image: familyList[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
+                          // Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain,),
+                          /*SvgPicture.asset(
+                            svgTctLogo,
+                            semanticsLabel: "Logo",
+                            height: height / 10,
+                            width: width / 10,
+                            fit: BoxFit.contain,
+                            allowDrawingOutsideViewBox: true,
+                          ),*/
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].name,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text:
-                                      "${familyList[index].age.toString()},${familyList[index].dob.toString()}",
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:
+                                        "${familyList[index].age.toString()},${familyList[index].dob.toString()}",
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text:
-                                      "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus} ",
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:
+                                        "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus} ",
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].mobileNumber,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].mobileNumber,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].mail,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].mail,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 58,
-                              )
-                            ],
+                                SizedBox(
+                                  height: 58,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: adhaarNumber,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: adhaarNumber,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].aadharNumber,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].aadharNumber,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: occupation,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].occupation,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: community,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                TextWidget(
+                                  text: familyList[index].community,
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: occupation,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: insurance,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].occupation,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getInsurance(familyList[index]),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: community,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
-                                ),
-                              ),
-                              TextWidget(
-                                text: familyList[index].community,
-                                weight: FontWeight.w400,
-                                color: darkColor,
-                                size: 14,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: insurance,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: getInsurance(familyList[index]),
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: educationQualification,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: educationQualification,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].education,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].education,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: annualIncome,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: annualIncome,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text:
-                                      familyList[index].annualIncome.toString(),
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:
+                                        familyList[index].annualIncome.toString(),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: caste,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: caste,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].caste,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].caste,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: pension,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: pension,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: getPension(familyList[index]),
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getPension(familyList[index]),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: smartphone,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: smartphone,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: getSliderValue(familyList[index].smartphone),
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getSliderValue(familyList[index].smartphone),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: physicallyChallenged,
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: physicallyChallenged,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: getSliderValue(familyList[index].physicallyChallenge),
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getSliderValue(familyList[index].physicallyChallenge),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 80,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      height: 1,
-                    ),
-                  ],
+                                SizedBox(
+                                  height: 80,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      Divider(
+                        height: 1,
+                      ),
+                    ],
+                  ),
                 );
               },
             )
@@ -428,43 +440,43 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   }
 
   Family getDefaultFamily() {
-    Family newFamily = new Family();
-    newFamily.name = "";
-    newFamily.aadharNumber = "";
-    newFamily.relationship = "";
-    newFamily.gender = "";
-    newFamily.dob = "";
-    newFamily.age = 0;
-    newFamily.maritalStatus = "";
-    newFamily.bloodGroup = "";
-    newFamily.physicallyChallenge = 0;
-    newFamily.education = "";
-    newFamily.occupation = "";
-    newFamily.annualIncome = "";
-    newFamily.mobileNumber = "";
-    newFamily.mail = "";
-    newFamily.smartphone = 0;
-    newFamily.community = "";
-    newFamily.caste = "";
-    newFamily.photo = "";
-    newFamily.govtInsurance = 0;
-    newFamily.privateInsurance = 0;
-    newFamily.oldPension = 0;
-    newFamily.widowedPension = 0;
-    newFamily.retirementPension = 0;
+    Family newFamily;
+    if(familyIndex == -1) {
+      newFamily = new Family();
+      newFamily.name = "";
+      newFamily.aadharNumber = "";
+      newFamily.relationship = "";
+      newFamily.gender = "";
+      newFamily.dob = "";
+      newFamily.age = 0;
+      newFamily.maritalStatus = "";
+      newFamily.bloodGroup = "";
+      newFamily.physicallyChallenge = 0;
+      newFamily.education = "";
+      newFamily.occupation = "";
+      newFamily.annualIncome = "";
+      newFamily.mobileNumber = "";
+      newFamily.mail = "";
+      newFamily.smartphone = 0;
+      newFamily.community = "";
+      newFamily.caste = "";
+      newFamily.photo = "";
+      newFamily.govtInsurance = 0;
+      newFamily.privateInsurance = 0;
+      newFamily.oldPension = 0;
+      newFamily.widowedPension = 0;
+      newFamily.retirementPension = 0;
+    } else {
+      newFamily = familyList[familyIndex];
+    }
     return newFamily;
   }
 
   void refreshFamilyList(Family family) {
     setState(() {
       familyList.add(family);
-      addFamilyField();
-    });
-  }
-
-  void addFamilyField() {
-    setState(() {
-      addfamily = !addfamily;
+      addfamily = false;
+      familyIndex = -1;
     });
   }
 
