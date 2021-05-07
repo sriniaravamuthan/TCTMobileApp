@@ -47,12 +47,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       doorNoController,
       contactPersonController,
       noOfFamilyPersonController;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   var villageNameController;
   var villageCodeController;
   var panchayatCodeController = TextEditingController();
   var panchayatNoController = TextEditingController();
-
+  String userName = "";
+  String userMail = "";
   List<QueryDocumentSnapshot> snap;
   List villageCodeList,
       villageNameList,
@@ -67,18 +69,12 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   void initState() {
     villageNameList = [];
     villageCodeList = [];
+    if (firebaseAuth.currentUser != null) {
+      userName = firebaseAuth.currentUser.displayName;
+      userMail = firebaseAuth.currentUser.email;
 
-    DocumentReference villageReference =
-        FirebaseFirestore.instance.collection('villageName').doc("12");
-    Map<String, dynamic> data = {
-      'income': villageReference,
-    };
-    FirebaseFirestore.instance
-        .collection('demoRef')
-        .add(data)
-        .then((value) => print("Added Successfully with reference"))
-        .catchError((error) => print("Failed to add data with reference"));
-
+      debugPrint("userEmail:${firebaseAuth.currentUser}");
+    }
     getLanguage();
     // _getVillageCode(villageController.text);
     SystemChrome.setPreferredOrientations([
@@ -195,20 +191,27 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                     child: Row(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            height: 30,
-                            width: 30,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new AssetImage(user)))),
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                            child: firebaseAuth.currentUser.photoURL == null
+                                ? Image.asset(user,fit: BoxFit.fill)
+                                : Image.network(firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          "Senthil Kumar",
-                          style: TextStyle(fontSize: 16, color: darkColor),
+                        userMail != null
+                            ? Text(
+                          userMail,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        )
+                            : Text(
+                          userName,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
                         ),
                       ],
                     )),
@@ -2004,7 +2007,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
     getVillageDetails(language);
-    getDemoRef();
+    // getDemoRef();
   }
 
   void fillVillageData(var village) async {

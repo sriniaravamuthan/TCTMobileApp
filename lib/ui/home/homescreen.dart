@@ -21,6 +21,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
@@ -48,13 +49,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
+  DemographicFamily demographicData=DemographicFamily();
+  Location locationList=Location();
+  List<Family> _familyList=[];
+  List<DemographicFamily> _demographicList=[];
 
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
-      debugPrint("userEmail:$userMail");
+
+      debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
 
     SystemChrome.setPreferredOrientations([
@@ -92,38 +98,22 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset(
-              svgTctLogo,
-              semanticsLabel: "Logo",
-              height: height / 12,
-              width: width / 12,
-              fit: BoxFit.contain,
-              allowDrawingOutsideViewBox: true,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  svgTctLogo,
+                  semanticsLabel: "Logo",
+                  height: height / 12,
+                  width: width / 12,
+                  fit: BoxFit.contain,
+                  allowDrawingOutsideViewBox: true,
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                DropdownButton(
-                  underline: SizedBox(),
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.black87,
-                  ),
-                  items: ['தமிழ்', 'English'].map((val) {
-                    return new DropdownMenuItem<String>(
-                      value: val,
-                      child: new Text(val),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      dropDownLang = val;
-
-                      _changeLanguage();
-                    });
-                    print("Language:$val");
-                  },
-                ),
                 SizedBox(
                   width: 20,
                 ),
@@ -132,28 +122,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            height: 30,
-                            width: 30,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new AssetImage(user)))),
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                            child: firebaseAuth.currentUser.photoURL == null
+                                ? Image.asset(user,fit: BoxFit.fill)
+                                : Image.network(firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
                         userMail != null
                             ? Text(
-                                userMail,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              )
+                          userMail,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        )
                             : Text(
-                                userName,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              ),
+                          userName,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        ),
                       ],
                     )),
                 SizedBox(
@@ -184,10 +174,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           if (snapshot.connectionState == ConnectionState.active)
             family.forEach((element) {
-              final List family = element['familyMembers'];
+              List family = element['familyMembers'];
 
               HashMap data = new HashMap();
               data["name"] = element["Location"]["contactPerson"];
+              data["formNo"] = element["Location"]["formNo"];
+
               data["mobileNumber"] = element["Location"]["contactNumber"];
               // data["villageCode"] = element["Location"]["villagesCode"];
               // data["villageCode"] =
@@ -212,8 +204,61 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               }
               if (data["age"] == null) data["age"] = "";
 
+              locationList.contactPerson = element["Location"]["contactPerson"];
+              locationList.contactNumber = element["Location"]["contactNumber"];
+              locationList.doorNumber =
+                  element["Location"]["doorNumber"].toString();
+              locationList.formNo = element["Location"]["formNo"].toString();
+              locationList.noOfFamilyMembers =
+                  element["Location"]["noOfFamilyMembers"].toString();
+              locationList.panchayatCode =
+                  element["Location"]["panchayatCode"].toString();
+              locationList.panchayatNo =
+                  element["Location"]["panchayatNo"].toString();
+              locationList.projectCode =
+                  element["Location"]["projectCode"].toString();
+              locationList.streetName = element["Location"]["streetName"];
+              locationList.villageName = element["Location"]["villageName"];
+              locationList.villagesCode = element["Location"]["villagesCode"];
+
+              for (int i = 0; i < family.length; i++) {
+                family[i]["aadharNumber"] = data["aadharNumber"];
+                family[i]["age"] = data["age"].toString();
+                family[i]["annualIncome"] = data["annualIncome"];
+                family[i]["bloodGroup"] = data["bloodGroup"];
+                family[i]["caste"] = data["caste"];
+                family[i]["community"] = data["community"];
+                family[i]["dob"] = data["dob"];
+                family[i]["education"] = data["education"];
+                family[i]["gender"] = data["gender"];
+                family[i]["govtInsurance"] = data["govtInsurance"].toString();
+                family[i]["mail"] = data["mail"].toString();
+                family[i]["maritalStatus"] = data["maritalStatus"].toString();
+                family[i]["mobileNumber"] = data["mobileNumber"].toString();
+                family[i]["name"] = data["name"].toString();
+                family[i]["occupation"] = data["occupation"].toString();
+                family[i]["oldPension"] = data["oldPension"].toString();
+                family[i]["photo"] = data["photo"].toString();
+                family[i]["physicallyChallenge"] = data["physicallyChallenge"].toString();
+                family[i]["privateInsurance"] = data["privateInsurance"].toString();
+                family[i]["relationship"] = data["relationship"].toString();
+                family[i]["retirementPension"] = data["retirementPension"].toString();
+                family[i]["smartphone"] = data["smartphone"].toString();
+                family[i]["widowedPension"] = data["widowedPension"].toString();
+              }
+
+
+
+               demographicData.location=locationList;
+              // demographicData.family=family;
+              debugPrint("demographicData1:${ demographicData.family}");
+
+              _demographicList.add(demographicData);
+
+
               if (data != null) {
                 users.add(data);
+
               }
             });
           return Container(
@@ -226,7 +271,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                elevation: 8,
+                elevation: 12,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
@@ -491,149 +536,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 )),
                               ],
                               source:
-                                  DataTableRow(context, height, width, users),
+                                  DataTableRow(context, height, width, users,_demographicList),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
                                 });
                               },
                               rowsPerPage: _rowPerPage,
-                              // rows: users
-                              //     .map((usersItem) => DataRow(
-                              //             onSelectChanged: (bool selected) {
-                              //               if (selected) {
-                              //                 Get.toNamed('/DetailScreen');
-                              //                 debugPrint(
-                              //                     "${usersItem.familyHead}");
-                              //               }
-                              //             },
-                              //             cells: [
-                              //               DataCell(Row(
-                              //                 children: [
-                              //                   // Container(
-                              //                   //     padding: EdgeInsets.only(
-                              //                   //         left: 8.0),
-                              //                   //     height: 30,
-                              //                   //     width: 30,
-                              //                   //     decoration: new BoxDecoration(
-                              //                   //         shape:
-                              //                   //             BoxShape.circle,
-                              //                   //         image: new DecorationImage(
-                              //                   //             fit: BoxFit.fill,
-                              //                   //             image:
-                              //                   //                 new AssetImage(
-                              //                   //                     user)))),
-                              //
-                              //                   SizedBox(
-                              //                       width: 100,
-                              //                       child: TextWidget(
-                              //                         text: name,
-                              //                         color: darkGreyColor,
-                              //                         size: 16,
-                              //                         weight: FontWeight.w600,
-                              //                       ))
-                              //                 ],
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: age.toString(),
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: usersItem.mobile,
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: usersItem.villageCode,
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               // DataCell(SizedBox(
-                              //               //   width: 100,
-                              //               //   child: Center(
-                              //               //     child: TextWidget(
-                              //               //       text: usersItem.zone,
-                              //               //       color: darkGreyColor,
-                              //               //       size: 16,
-                              //               //       weight: FontWeight.w600,
-                              //               //     ),
-                              //               //   ),
-                              //               // )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: SvgPicture.asset(
-                              //                     svgComplete,
-                              //                     semanticsLabel: "Logo",
-                              //                     height: height / 20,
-                              //                     width: width / 20,
-                              //                     fit: BoxFit.contain,
-                              //                     allowDrawingOutsideViewBox:
-                              //                         true,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: Row(
-                              //                     mainAxisAlignment:
-                              //                         MainAxisAlignment
-                              //                             .spaceEvenly,
-                              //                     children: [
-                              //                       InkWell(
-                              //                         onTap: () {
-                              //                           Get.toNamed('/questionnery');
-                              //                           // Navigator.pushReplacementNamed(context, "/questionnery");
-                              //                         },
-                              //                         child: Icon(
-                              //                           Icons.edit,
-                              //                           color: primaryColor,
-                              //                         ),
-                              //                       ),
-                              //                       InkWell(
-                              //                         onTap: () {
-                              //                           setState(() {
-                              //                             showDialog(
-                              //                                 context: context,
-                              //                                 builder:
-                              //                                     (BuildContext
-                              //                                         context) {
-                              //                                   return AlertDialogWidget();
-                              //                                 });
-                              //                             debugPrint("click");
-                              //                           });
-                              //                         },
-                              //                         child: Icon(
-                              //                           Icons.delete,
-                              //                           color: errorColor,
-                              //                         ),
-                              //                       )
-                              //                     ],
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //             ]))
-                              //     .toList(),
                             ),
                           ),
                         ),
@@ -720,8 +629,9 @@ class DataTableRow extends DataTableSource {
   List users;
   BuildContext context;
   var height, width;
+  List<DemographicFamily> demographicList;
 
-  DataTableRow(this.context, this.height, this.width, this.users);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList);
 
   @override
   DataRow getRow(int index) {
@@ -808,7 +718,7 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: TextWidget(
-              text: users[index]['villageCode'].toString(),
+              text: "BMR",
               color: darkGreyColor,
               size: 16,
               weight: FontWeight.w600,
