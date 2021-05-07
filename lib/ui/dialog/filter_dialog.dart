@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 

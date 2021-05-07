@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -28,11 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (user != null) {
       // Navigator.pushReplacementNamed(context, "/homeScreen");
-      Navigator.pushNamedAndRemoveUntil(context, "/homeScreen", (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, "/homeScreen", (route) => false);
       // Get.toNamed('/homeScreen');
     } else {
       // Get.toNamed('/loginScreen');
-      Navigator.pushNamedAndRemoveUntil(context, "/loginScreen", (route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, "/loginScreen", (route) => false);
       Navigator.pushReplacementNamed(context, "/loginScreen");
     }
   }

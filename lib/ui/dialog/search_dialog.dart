@@ -34,7 +34,7 @@ class _SearchDialogState extends State<SearchDialog> {
   var villageCodeController = TextEditingController();
   var villageNameController = TextEditingController();
   var panchayatCodeController = TextEditingController();
-String language;
+  String language;
   @override
   void initState() {
     getLanguage();
@@ -93,7 +93,7 @@ String language;
                                   textInputAction: TextInputAction.next,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
-                                    counterText: "",
+                                      counterText: "",
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide.none,
                                         borderRadius: BorderRadius.all(
@@ -103,31 +103,31 @@ String language;
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
                                   keyboardType: TextInputType.phone,
                                   onSaved: (String val) {
                                     setState(() {
-                                      mobileNoController.text=val;
+                                      mobileNoController.text = val;
                                     });
                                   },
                                 ),
@@ -164,14 +164,18 @@ String language;
                                       clearOnSubmit: false,
                                       itemSubmitted: (item) {
                                         villageCodeController.text = item;
-                                        for(int i = 0; i < villageCodeList.length; i++) {
+                                        for (int i = 0;
+                                            i < villageCodeList.length;
+                                            i++) {
                                           if (item == villageCodeList[i]) {
                                             setState(() {
-                                              villageNameController.text = villageNameList[i];
-                                              panchayatCodeController.text = panchayatCodeList[i];
+                                              villageNameController.text =
+                                                  villageNameList[i];
+                                              panchayatCodeController.text =
+                                                  panchayatCodeList[i];
                                             });
                                             break;
-                                          };
+                                          }
                                         }
                                       },
                                       suggestions: villageCodeList,
@@ -198,7 +202,7 @@ String language;
                                                 color: lightGreyColor),
                                           ),
                                           focusedErrorBorder:
-                                          OutlineInputBorder(
+                                              OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)),
                                             borderSide: BorderSide(
@@ -281,14 +285,18 @@ String language;
                                       },*/
                                       itemSubmitted: (item) {
                                         villageNameController.text = item;
-                                        for(int i = 0; i < villageNameList.length; i++) {
+                                        for (int i = 0;
+                                            i < villageNameList.length;
+                                            i++) {
                                           if (item == villageNameList[i]) {
                                             setState(() {
-                                              villageCodeController.text = villageCodeList[i];
-                                              panchayatCodeController.text = panchayatCodeList[i];
+                                              villageCodeController.text =
+                                                  villageCodeList[i];
+                                              panchayatCodeController.text =
+                                                  panchayatCodeList[i];
                                             });
                                             break;
-                                          };
+                                          }
                                         }
                                       },
                                       suggestions: villageNameList,
@@ -315,7 +323,7 @@ String language;
                                                 color: lightGreyColor),
                                           ),
                                           focusedErrorBorder:
-                                          OutlineInputBorder(
+                                              OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0)),
                                             borderSide: BorderSide(
@@ -374,8 +382,7 @@ String language;
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: AutoCompleteTextField(
-                                    controller:
-                                    panchayatCodeController,
+                                    controller: panchayatCodeController,
                                     clearOnSubmit: false,
                                     /*textChanged: (data) {
                                       panchayatCodeController.text = data;
@@ -388,88 +395,64 @@ String language;
                                         villageCodeList.clear();
                                         villageNameList.clear();
                                         snap.forEach((element) {
-                                          if(element.data()["panchayatCode"].toString() == item) {
-                                            villageCodeList.add(element.data()["villageCode"].toString());
-                                            villageNameList.add(element.data()["villageName"][language].toString());
+                                          if (element
+                                                  .data()["panchayatCode"]
+                                                  .toString() ==
+                                              item) {
+                                            villageCodeList.add(element
+                                                .data()["villageCode"]
+                                                .toString());
+                                            villageNameList.add(element
+                                                .data()["villageName"][language]
+                                                .toString());
                                           }
                                         });
                                       });
                                     },
-                                    suggestions:
-                                    panchayatCodeList,
+                                    suggestions: panchayatCodeList,
                                     style: TextStyle(
                                       color: Color(0xFF222222),
                                       fontSize: 16,
                                     ),
                                     decoration: InputDecoration(
-                                        border:
-                                        OutlineInputBorder(
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide.none,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
                                           borderSide:
-                                          BorderSide.none,
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius
-                                                  .circular(
-                                                  10.0)),
+                                              BorderSide(color: lightGreyColor),
                                         ),
-                                        enabledBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius
-                                                  .circular(
-                                                  10.0)),
-                                          borderSide: BorderSide(
-                                              color:
-                                              lightGreyColor),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
                                         ),
-                                        focusedBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius
-                                                  .circular(
-                                                  10.0)),
-                                          borderSide: BorderSide(
-                                              color:
-                                              lightGreyColor),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
                                         ),
-                                        focusedErrorBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius
-                                                  .circular(
-                                                  10.0)),
-                                          borderSide: BorderSide(
-                                              color:
-                                              lightGreyColor),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
                                         ),
-                                        errorBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.all(
-                                              Radius
-                                                  .circular(
-                                                  10.0)),
-                                          borderSide: BorderSide(
-                                              color:
-                                              lightGreyColor),
-                                        ),
-                                        fillColor:
-                                        lightGreyColor),
-                                    itemBuilder:
-                                        (context, item) {
+                                        fillColor: lightGreyColor),
+                                    itemBuilder: (context, item) {
                                       return new Padding(
-                                          padding:
-                                          EdgeInsets.all(
-                                              8.0),
+                                          padding: EdgeInsets.all(8.0),
                                           child: TextWidget(
                                             text: item,
                                             color: darkColor,
                                             size: 14,
-                                            weight:
-                                            FontWeight.w600,
+                                            weight: FontWeight.w600,
                                           ));
                                     },
                                     itemSorter: (a, b) {
@@ -478,8 +461,7 @@ String language;
                                     itemFilter: (item, query) {
                                       return item
                                           .toLowerCase()
-                                          .startsWith(query
-                                          .toLowerCase());
+                                          .startsWith(query.toLowerCase());
                                     }),
                               ),
                             ),
@@ -593,10 +575,10 @@ String language;
                   child: OutlinedButton(
                     style: ButtonStyle(
                         shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.red)))),
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.red)))),
                     onPressed: () {
                       widget.clearSearch();
                       Navigator.pop(context, false);
@@ -614,17 +596,20 @@ String language;
                   child: OutlinedButton(
                     style: ButtonStyle(
                         foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
+                            MaterialStateProperty.all<Color>(Colors.white),
                         backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+                            MaterialStateProperty.all<Color>(Color(0xff005aa8)),
                         shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.black45)))),
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.black45)))),
                     onPressed: () {
                       widget.search(
-                          mobileNoController.text, villageCodeController.text, villageNameController.text, panchayatCodeController.text);
+                          mobileNoController.text,
+                          villageCodeController.text,
+                          villageNameController.text,
+                          panchayatCodeController.text);
                       Navigator.pop(context, false);
                     },
                     child: Row(
@@ -635,7 +620,7 @@ String language;
                         ),
                         TextWidget(
                           text:
-                          DemoLocalization.of(context).translate('Search'),
+                              DemoLocalization.of(context).translate('Search'),
                           color: lightColor,
                           weight: FontWeight.w400,
                           size: 14,
@@ -651,6 +636,7 @@ String language;
       ],
     );
   }
+
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
@@ -660,15 +646,19 @@ String language;
 
   Future<void> getVillageDetails(String language) async {
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionVillageName).get();
+        await firestoreInstance.collection(collectionVillageName).get();
     setState(() {
       snapShot = querySnapshot.docs;
 
       snap = querySnapshot.docs;
 
-      var villageCodeDoc = querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
-      var villageNameDoc = querySnapshot.docs.map((doc) => doc.data()["villageName"][language]).toList();
-      var panchayatCodeDoc = querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+      var villageCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+      var villageNameDoc = querySnapshot.docs
+          .map((doc) => doc.data()["villageName"][language])
+          .toList();
+      var panchayatCodeDoc =
+          querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
 
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());

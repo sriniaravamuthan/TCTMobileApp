@@ -25,11 +25,11 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   String dropDownLang;
   var height, width;
-  List demographicList;
+  var demographicList;
   @override
   void initState() {
     demographicList = Get.arguments;
-    debugPrint("demographicList:${demographicList.length}");
+    debugPrint("demographicList:${demographicList['formNo']}");
     super.initState();
   }
 
