@@ -38,7 +38,7 @@ class _DetailScreenState extends State<DetailScreen> {
       debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
     demographicList = Get.arguments;
-    // debugPrint("demographicList:${demographicList['formNo']}");
+    debugPrint("demographicList:${demographicList['formNo']}");
     super.initState();
   }
 

@@ -49,7 +49,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
-  DemographicFamily demographicData;
+  DemographicFamily demographicData=DemographicFamily();
+  Location locationList=Location();
+  List<Family> _familyList=[];
   List<DemographicFamily> _demographicList=[];
 
   @override
@@ -172,16 +174,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           if (snapshot.connectionState == ConnectionState.active)
             family.forEach((element) {
+              List family = element['familyMembers'];
 
-              final List family = element['familyMembers'];
-
-              demographicData.location=element['Location'] ;
-              demographicData.family=element['familyMembers'];
-              demographicData.property=element['Property'];
-              demographicData.family=element['habits'];
-              _demographicList.add(demographicData);
               HashMap data = new HashMap();
               data["name"] = element["Location"]["contactPerson"];
+              data["formNo"] = element["Location"]["formNo"];
+
               data["mobileNumber"] = element["Location"]["contactNumber"];
               // data["villageCode"] = element["Location"]["villagesCode"];
               // data["villageCode"] =
@@ -206,8 +204,61 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               }
               if (data["age"] == null) data["age"] = "";
 
+              locationList.contactPerson = element["Location"]["contactPerson"];
+              locationList.contactNumber = element["Location"]["contactNumber"];
+              locationList.doorNumber =
+                  element["Location"]["doorNumber"].toString();
+              locationList.formNo = element["Location"]["formNo"].toString();
+              locationList.noOfFamilyMembers =
+                  element["Location"]["noOfFamilyMembers"].toString();
+              locationList.panchayatCode =
+                  element["Location"]["panchayatCode"].toString();
+              locationList.panchayatNo =
+                  element["Location"]["panchayatNo"].toString();
+              locationList.projectCode =
+                  element["Location"]["projectCode"].toString();
+              locationList.streetName = element["Location"]["streetName"];
+              locationList.villageName = element["Location"]["villageName"];
+              locationList.villagesCode = element["Location"]["villagesCode"];
+
+              for (int i = 0; i < family.length; i++) {
+                family[i]["aadharNumber"] = data["aadharNumber"];
+                family[i]["age"] = data["age"].toString();
+                family[i]["annualIncome"] = data["annualIncome"];
+                family[i]["bloodGroup"] = data["bloodGroup"];
+                family[i]["caste"] = data["caste"];
+                family[i]["community"] = data["community"];
+                family[i]["dob"] = data["dob"];
+                family[i]["education"] = data["education"];
+                family[i]["gender"] = data["gender"];
+                family[i]["govtInsurance"] = data["govtInsurance"].toString();
+                family[i]["mail"] = data["mail"].toString();
+                family[i]["maritalStatus"] = data["maritalStatus"].toString();
+                family[i]["mobileNumber"] = data["mobileNumber"].toString();
+                family[i]["name"] = data["name"].toString();
+                family[i]["occupation"] = data["occupation"].toString();
+                family[i]["oldPension"] = data["oldPension"].toString();
+                family[i]["photo"] = data["photo"].toString();
+                family[i]["physicallyChallenge"] = data["physicallyChallenge"].toString();
+                family[i]["privateInsurance"] = data["privateInsurance"].toString();
+                family[i]["relationship"] = data["relationship"].toString();
+                family[i]["retirementPension"] = data["retirementPension"].toString();
+                family[i]["smartphone"] = data["smartphone"].toString();
+                family[i]["widowedPension"] = data["widowedPension"].toString();
+              }
+
+
+
+               demographicData.location=locationList;
+              // demographicData.family=family;
+              debugPrint("demographicData1:${ demographicData.family}");
+
+              _demographicList.add(demographicData);
+
+
               if (data != null) {
                 users.add(data);
+
               }
             });
           return Container(
@@ -623,7 +674,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: demographicList[index]);
+            Get.toNamed('/DetailScreen', arguments: users[index]);
           }
         },
         cells: [
