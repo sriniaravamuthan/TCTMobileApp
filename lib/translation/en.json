@@ -98,6 +98,8 @@
  "Pension": "Pension",
  "Insurance": "Insurance",
  "Vehicle Details": "Vehicle Details",
- "Save": "Save"
-
+ "Save": "Save",
+"Vaccination Done": "Vaccination Done?",
+ "1st Dose Date": "1st Dose Date",
+ "2nd Dose Date": "2nd Dose Date"
 }

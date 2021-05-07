@@ -23,6 +23,7 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
+import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
@@ -39,7 +40,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   // List<Result> users;
   List users = [];
-  Language language;
+  String language;
   String dropDownLang;
   var height, width;
   String userName = "";
@@ -56,6 +57,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    getLanguage();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
@@ -211,12 +213,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               locationList.doorNumber = element["Location"]["doorNumber"].toString();
               locationList.formNo = element["Location"]["formNo"].toString();
               locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
-              locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
-              locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
+              locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
+              locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
               locationList.projectCode = element["Location"]["projectCode"].toString();
               locationList.streetName = element["Location"]["streetName"];
-              locationList.villageName = element["Location"]["villageName"];
-              locationList.villagesCode = element["Location"]["villagesCode"];
+              locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
+              locationList.villagesCode = villageSnapShot["villageCode"].toString();
 
               for (int i = 0; i < family.length; i++) {
                _family.aadharNumber= family[i]["aadharNumber"];
@@ -581,22 +583,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     );
   }
 
-  void _changeLanguage() async {
-    // Locale _temp = await setLocale(language.languageCode);
-    // SplashScreen.setLocale(context, _temp);
 
-    if (dropDownLang == "தமிழ்") {
-      setState(() {
-        MyApp.setLocale(context, Locale('ta', 'IN'));
-        SharedPref().setStringPref(SharedPref().language, 'ta');
-      });
-    } else {
-      setState(() {
-        MyApp.setLocale(context, Locale('en', 'US'));
-        SharedPref().setStringPref(SharedPref().language, 'en');
-      });
-    }
-  }
 
   void clearSearch() {
     users.clear();
@@ -654,6 +641,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       },
     );
   }
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+  }
+
 }
 
 class DataTableRow extends DataTableSource {
@@ -700,7 +692,6 @@ class DataTableRow extends DataTableSource {
         )),
       ]);
 
-    debugPrint("FamilyName:${ demographicList[index].location.formNo}");
     return DataRow.byIndex(
         index: index,
         onSelectChanged: (bool selected) {
@@ -798,18 +789,18 @@ class DataTableRow extends DataTableSource {
                     ),
                   ),
                   InkWell(
-                    // onTap: () {
-                    //   setState(() {
-                    //     showDialog(
-                    //         context: context,
-                    //         builder:
-                    //             (BuildContext
-                    //         context) {
-                    //           return AlertDialogWidget();
-                    //         });
-                    //     debugPrint("click");
-                    //   });
-                    // },
+                    onTap: () {
+
+                        showDialog(
+                            context: context,
+                            builder:
+                                (BuildContext
+                            context) {
+                              return AlertDialogWidget();
+                            });
+                        debugPrint("click");
+
+                    },
                     child: Icon(
                       Icons.delete,
                       color: errorColor,

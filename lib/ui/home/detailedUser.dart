@@ -26,10 +26,12 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   String dropDownLang;
   var height, width;
-  DemographicFamily demographicList=DemographicFamily();
+  DemographicFamily demographicList;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String userName = "";
   String userMail = "";
+  int familyIndex = -1;
+
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -39,7 +41,7 @@ class _DetailScreenState extends State<DetailScreen> {
       debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
     demographicList = Get.arguments;
-    debugPrint("demographicList:${demographicList.location.formNo}");
+    debugPrint("demographicList:${demographicList.location.contactPerson}");
     super.initState();
   }
 
@@ -180,7 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   width: 10,
                                 ),
                                 TextWidget(
-                                  text: "Senthil Kumar",
+                                  text: demographicList.location.contactPerson,
                                   color: darkColor,
                                   weight: FontWeight.w600,
                                   size: 18,
@@ -255,7 +257,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12345",
+                                                    text: demographicList.location.formNo,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -286,7 +288,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12",
+                                                    text:demographicList.location.doorNumber,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -325,7 +327,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12345",
+                                                    text: demographicList.location.projectCode,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -357,7 +359,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Lalikuppam",
+                                                    text: demographicList.location.streetName,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -396,7 +398,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12345",
+                                                    text: demographicList.location.villagesCode.toString(),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -441,7 +443,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12345",
+                                                    text: demographicList.location.panchayatNo.toString(),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -473,7 +475,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Lalikuppam",
+                                                    text: demographicList.location.villageName.toString(),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -512,7 +514,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "12345",
+                                                    text:demographicList.location.panchayatCode,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -544,7 +546,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Ramasamy",
+                                                    text: demographicList.location.contactPerson,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -614,9 +616,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                            context)
-                                                        .translate('Own Land'),
+                                                    text:demographicList.property.statusofHouse,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -648,7 +648,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Two Wheeler-1",
+                                                    text:getSliderValue(demographicList.property.ownVehicle),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -687,7 +687,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Hut House",
+                                                    text: demographicList.property.typeofHouse,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -732,7 +732,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "Yes",
+                                                    text:getSliderValue( demographicList.property.toiletFacility),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -777,7 +777,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "2",
+                                                    text: demographicList.property.wetLandInAcres,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -806,7 +806,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "COW-2",
+                                                    text:getSliderValue(demographicList.property.ownLivestocks),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -845,7 +845,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text: "1",
+                                                    text: demographicList.property.dryLandInAcres,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -884,112 +884,217 @@ class _DetailScreenState extends State<DetailScreen> {
                                       weight: FontWeight.w800,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 250,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Any Members who Smoke?'),
-                                                  size: 14,
-                                                  weight: FontWeight.w600,
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Any Members who Smoke?'),
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:getSliderValue(demographicList.habits.anyMembersWhoSmoke),
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: "Yes",
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Any Members who Drink?'),
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:getSliderValue(demographicList.habits.anyMembersWhoDrink),
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 250,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Any Members who Drink?'),
-                                                  size: 14,
-                                                  weight: FontWeight.w600,
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              'Any Members who use Tobacco?'),
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: "No",
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 250,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Any Members who use Tobacco?'),
-                                                  size: 14,
-                                                  weight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: "Yes",
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:getSliderValue(demographicList.habits.anyMembersWhoUseTobacco),
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             )
                                           ],
-                                        )
-                                      ],
-                                    ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(context)
+                                                          .translate("Vaccination Done") ,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:getSliderValue(demographicList.habits.isVaccinationDone),
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text:  DemoLocalization.of(context)
+                                                          .translate("1st Dose Date") ,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:demographicList.habits.firstDose,
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 250,
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(context)
+                                                          .translate("2nd Dose Date") ,
+                                                      size: 14,
+                                                      weight: FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                  const EdgeInsets.all(4.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text:demographicList.habits.secondDose,
+                                                      size: 14,
+                                                      color: darkColor,
+                                                      weight: FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -997,7 +1102,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             Divider(
                               thickness: 2,
                             ),
-                            Container(
+                            demographicList.family.length>0?   Container(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1012,319 +1117,302 @@ class _DetailScreenState extends State<DetailScreen> {
                                       weight: FontWeight.w800,
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      // Image.network(familyList[index].photo.toString(), height: height / 10,
-                                      //     width: width / 10,
-                                      //     fit: BoxFit.contain),
-                                      SvgPicture.asset(
-                                        svgTctLogo,
-                                        semanticsLabel: "Logo",
-                                        height: height / 10,
-                                        width: width / 10,
-                                        fit: BoxFit.contain,
-                                        allowDrawingOutsideViewBox: true,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                  ListView.builder(
+                                    itemCount: demographicList.family.length,
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      debugPrint("familyPhoto:${demographicList.family[index].photo}");
+                                      return InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            familyIndex = index;
+                                          });
+                                        },
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "Nishan",
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                FadeInImage.assetNetwork(placeholder: svgTctLogo, image: demographicList.family[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
+                                                // Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain,),
+
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].name,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text:
+                                                          "${demographicList.family[index].age.toString()},${demographicList.family[index].dob.toString()}",
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text:
+                                                          "${demographicList.family[index].gender} ,${demographicList.family[index].bloodGroup},${demographicList.family[index].maritalStatus} ",
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].mobileNumber,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].mail,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 58,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: adhaarNumber,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].aadharNumber,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: occupation,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].occupation,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: community,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      TextWidget(
+                                                        text: demographicList.family[index].community,
+                                                        weight: FontWeight.w400,
+                                                        color: darkColor,
+                                                        size: 14,
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: insurance,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: getInsurance(demographicList.family[index]),
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: educationQualification,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].education,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: annualIncome,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text:
+                                                          demographicList.family[index].annualIncome.toString(),
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: caste,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].caste,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: pension,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: getPension(demographicList.family[index]),
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: smartphone,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: getSliderValue(demographicList.family[index].smartphone),
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: physicallyChallenged,
+                                                          weight: FontWeight.w800,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: TextWidget(
+                                                          text: getSliderValue(demographicList.family[index].physicallyChallenge),
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 80,
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "56",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
+                                            Divider(
+                                              height: 1,
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "o+ ",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "5545454554545",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "ram@gmail.com",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                            )
                                           ],
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: adhaarNumber,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "aadharNumber",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: occupation,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    "Worker",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: community,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            TextWidget(
-                                              text:
-                                                  "Backward",
-                                              weight: FontWeight.w400,
-                                              color: darkColor,
-                                              size: 14,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: insurance,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "gvt,pvt",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: educationQualification,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    "MBA",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: annualIncome,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    "1,00,000",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: caste,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                    "BC",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: pension,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "Old Age,Retirement",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: smartphone,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "yes",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: physicallyChallenged,
-                                                weight: FontWeight.w800,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: "No",
-                                                weight: FontWeight.w400,
-                                                color: darkColor,
-                                                size: 14,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 80,
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                      );
+                                    },
+                                  )
+,
                                   // Row(
                                   //   mainAxisAlignment: MainAxisAlignment.start,
                                   //   children: [
@@ -1884,7 +1972,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   // )
                                 ],
                               ),
-                            )
+                            ):Container(),
                           ],
                         ),
                       ),
@@ -1911,5 +1999,46 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
       ),
     );
+  }
+
+
+
+
+  String getInsurance(Family family) {
+    String insurance = "";
+    if (family.privateInsurance == 2)
+      insurance += DemoLocalization.of(context).translate('Private');
+    if (family.govtInsurance == 2) {
+      if (insurance != "")
+        insurance += ", ";
+      insurance += DemoLocalization.of(context).translate('Government');
+    }
+    return insurance;
+  }
+
+  String getPension(Family family) {
+    String pension = "";
+    if (family.oldPension == 2)
+      pension += DemoLocalization.of(context).translate('Old Age');
+    if (family.retirementPension == 2) {
+      if (pension != "")
+        pension += ", ";
+      pension += DemoLocalization.of(context).translate('Retirement');
+    }
+    if (family.widowedPension == 2) {
+      if (pension != "")
+        pension += ", ";
+      pension += DemoLocalization.of(context).translate('Widowed Pension');
+    }
+    return pension;
+  }
+
+  String getSliderValue(double value) {
+    if (value == 2)
+      return DemoLocalization.of(context).translate('Yes');
+    else if (value == 1)
+      return  DemoLocalization.of(context).translate('No');
+    else
+      return "";
   }
 }
