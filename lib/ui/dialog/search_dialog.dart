@@ -30,7 +30,7 @@ class _SearchDialogState extends State<SearchDialog> {
   List<QueryDocumentSnapshot> snap;
   List villageCodeList = [], villageNameList = [];
   List<String> panchayatCodeList = [];
-  var mobileNoController = TextEditingController();
+  var mobileNoController = TextEditingController(text: "");
   var villageCodeController = TextEditingController();
   var villageNameController = TextEditingController();
   var panchayatCodeController = TextEditingController();

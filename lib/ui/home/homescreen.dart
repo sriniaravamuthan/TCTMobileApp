@@ -35,8 +35,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
-  CollectionReference demographydata =
-      FirebaseFirestore.instance.collection('users');
+  CollectionReference demographydata = FirebaseFirestore.instance.collection('users');
 
   // List<Result> users;
   List users = [];
@@ -49,11 +48,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
-  DemographicFamily demographicData=DemographicFamily();
 
+  List<DemographicFamily> _demographicList = [];
 
-  List<Family> _familyList=[];
-  List<DemographicFamily> _demographicList=[];
+  CollectionReference collectionReference;
+  Query query;
 
   @override
   void initState() {
@@ -68,23 +67,23 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+
+    // collectionReference = firestoreInstance.collection('demographicData');
+    query = firestoreInstance.collection('demographicData');
+
     super.initState();
   }
 
-  Future<String> getVillageCode(DocumentReference village) async {
-    debugPrint("village:${village.path}");
-    return await FirebaseFirestore.instance
-        .doc(village.path)
-        .get()
-        .then((value) {
-      debugPrint("Village Result: ${value['villageCode']}");
-      return value['villageCode'];
-    });
-    // return villageCodeRef;
-    // DocumentSnapshot snapShot = await firestoreInstance.doc(village).get();
-    // String sac = snapShot["villageCode"].toString();
-    // print("GET______________" + sac);
-    // return sac;
+  /*Future<String> getVillageDetail(DocumentReference villageCode) async {
+    DocumentSnapshot snapShot =  await FirebaseFirestore.instance.doc(villageCode.path).get();
+    String sac = snapShot["villageCode"].toString();
+    print("GET______________" + sac);
+    return sac;
+  }*/
+
+  Future<DocumentSnapshot> getVillageDetail(DocumentReference villageCode) async {
+    DocumentSnapshot snapShot =  await FirebaseFirestore.instance.doc(villageCode.path).get();
+    return snapShot;
   }
 
   @override
@@ -165,38 +164,33 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: firestoreInstance.collection('demographicData').snapshots(),
+        // stream: collectionReference.snapshots(),
+        stream: query.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
-          var family = snapshot.data.docs.map((doc) => doc.data()).toList();
-          debugPrint("family : ${family}");
+
+          var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
+          debugPrint("family : ${mainDemograpicData}");
 
           if (snapshot.connectionState == ConnectionState.active)
 
-            family.forEach((element) {
-              List family = element['familyMembers'];
-
+            mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["name"] = element["Location"]["contactPerson"];
               data["formNo"] = element["Location"]["formNo"];
 
               data["mobileNumber"] = element["Location"]["contactNumber"];
-              // data["villageCode"] = element["Location"]["villagesCode"];
-              // data["villageCode"] =
-              //     getVillageCode(element["Location"]["villagesCode"])
-              //         .then((value) => value);
-              DocumentReference reference = element["Location"]["villagesCode"];
-              data["villageCode"] = FirebaseFirestore.instance
-                  .doc(reference.path)
-                  .get()
-                  .then((value) {
-                debugPrint("Village Result: ${value['villageCode']}");
-                return value['villageCode'];
-              });
-              debugPrint("Village : ${data["villageCode"]}");
 
+              DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+
+              print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
+                  "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
+
+              data["villageCode"] = villageSnapShot["villageCode"].toString();
+
+              List family = element['familyMembers'];
               for (int i = 0; i < family.length; i++) {
                 if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                   data["mobileNumber"] = family[i]["mobileNumber"];
@@ -205,24 +199,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 }
               }
               if (data["age"] == null) data["age"] = "";
-              Location locationList=Location();
-              Property propertyList=Property();
-              Habits habitsList=Habits();
-              Family _family=Family();
-              List<Family> _familyList=[];
+
+              DemographicFamily demographicData = DemographicFamily();
+              Location locationList = Location();
+              Property propertyList = Property();
+              Habits habitsList = Habits();
+              Family _family = Family();
+              List<Family> _familyList = [];
               locationList.contactPerson = element["Location"]["contactPerson"];
               locationList.contactNumber = element["Location"]["contactNumber"];
-              locationList.doorNumber =
-                  element["Location"]["doorNumber"].toString();
+              locationList.doorNumber = element["Location"]["doorNumber"].toString();
               locationList.formNo = element["Location"]["formNo"].toString();
-              locationList.noOfFamilyMembers =
-                  element["Location"]["noOfFamilyMembers"].toString();
-              locationList.panchayatCode =
-                  element["Location"]["panchayatCode"].toString();
-              locationList.panchayatNo =
-                  element["Location"]["panchayatNo"].toString();
-              locationList.projectCode =
-                  element["Location"]["projectCode"].toString();
+              locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
+              locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
+              locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
+              locationList.projectCode = element["Location"]["projectCode"].toString();
               locationList.streetName = element["Location"]["streetName"];
               locationList.villageName = element["Location"]["villageName"];
               locationList.villagesCode = element["Location"]["villagesCode"];
@@ -252,12 +243,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.smartphone= family[i]["smartphone"];
                _family.widowedPension= family[i]["widowedPension"];
                 _familyList.add(_family);
-               demographicData.family=_familyList;
-               debugPrint("demographicData1:${ demographicData.family[i].smartphone}");
-
-               debugPrint("demographicData1:${_family.physicallyChallenge}");
-
               }
+              demographicData.family=_familyList;
 
               propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
               propertyList.fourWheeler = element["Property"]["fourWheeler"];
@@ -285,18 +272,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               debugPrint("demographicData2:${propertyList.dryLandInAcres }");
 
-               demographicData.location=locationList;
+              demographicData.location=locationList;
               demographicData.family=_familyList;
               demographicData.property=propertyList;
               demographicData.habits=habitsList;
 
               _demographicList.add(demographicData);
+              users.add(data);
 
-
-              if (data != null) {
-                users.add(data);
-
+              if(_demographicList.length == mainDemograpicData.length) {
+                setState(() {});
               }
+
             });
           return Container(
             decoration: BoxDecoration(
@@ -328,7 +315,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                               child: TextWidget(
                                 text:
                                     "${DemoLocalization.of(context).translate('TotalRecords')}" +
-                                        " " "${(350)}",
+                                        " " "${(_demographicList.length)}",
                                 color: darkColor,
                                 weight: FontWeight.w500,
                                 size: 16,
@@ -345,8 +332,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return SearchDialog(
-                                                search, clearSearch);
+                                            return SearchDialog(search, clearSearch);
                                             // return _navigateAndDisplaySelection(context);
                                           });
                                     },
@@ -614,33 +600,41 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   void clearSearch() {
     users.clear();
+    _demographicList.clear();
+    query = firestoreInstance.collection('demographicData');
     setState(() {});
   }
 
-  void search(String mobileNo, villageCode, villageName, panchayatCode) {
-    print("GET_______" +
-        mobileNo +
-        " " +
-        villageCode +
-        " " +
-        villageName +
-        " " +
-        panchayatCode);
+  Future<void> search(String mobileNo, villageCode, villageName, panchayatCode) async {
+    print("GET_______" + mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
     users.clear();
+    _demographicList.clear();
 
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection("demographicData");
-    if (mobileNo != "") {
-      // collectionReference.where("family.mobileNumber", arrayContains: mobileNo);
-      //  TODO  ::  ::  Need to check this condition
-      // collectionReference.orderBy("family").where("mobileNumber", isEqualTo: mobileNo);
-      collectionReference.where("location.contactNumber", isEqualTo: mobileNo);
+    if (mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
+      query = firestoreInstance.collection('demographicData');
+      setState(() {});
+      return;
+    } else if (mobileNo != "") {
+      query = firestoreInstance.collection('demographicData').where("Location.contactNumber", isEqualTo: mobileNo.trim());
+      setState(() {});
+      return;
     } else if (villageCode != "") {
-      collectionReference.where("location.villagesCode",
-          isEqualTo: int.parse(villageCode));
-    } else if (panchayatCode != null) {
-      collectionReference.where("location.panchayatCode",
-          isEqualTo: int.parse(panchayatCode));
+
+
+      /*DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+      print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
+          "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
+      data["villageCode"] = villageSnapShot["villageCode"].toString();*/
+
+      query = collectionReference.where("location.villagesCode", isEqualTo: int.parse(villageCode));
+    } else if (panchayatCode != "") {
+
+      /*DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+      print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
+          "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
+      data["villageCode"] = villageSnapShot["villageCode"].toString();*/
+
+      query = collectionReference.where("location.panchayatCode", isEqualTo: int.parse(panchayatCode));
     } else {
       return;
     }
@@ -755,7 +749,7 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: TextWidget(
-              text: "BMR",
+              text: users[index]['villageCode'],
               color: darkGreyColor,
               size: 16,
               weight: FontWeight.w600,
