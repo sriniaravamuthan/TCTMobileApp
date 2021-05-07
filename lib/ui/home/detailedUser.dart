@@ -26,10 +26,19 @@ class _DetailScreenState extends State<DetailScreen> {
   String dropDownLang;
   var height, width;
   var demographicList;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String userName = "";
+  String userMail = "";
   @override
   void initState() {
+    if (firebaseAuth.currentUser != null) {
+      userName = firebaseAuth.currentUser.displayName;
+      userMail = firebaseAuth.currentUser.email;
+
+      debugPrint("userEmail:${firebaseAuth.currentUser}");
+    }
     demographicList = Get.arguments;
-    debugPrint("demographicList:${demographicList['formNo']}");
+    // debugPrint("demographicList:${demographicList['formNo']}");
     super.initState();
   }
 
@@ -45,36 +54,51 @@ class _DetailScreenState extends State<DetailScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset(
-              svgTctLogo,
-              semanticsLabel: "Logo",
-              height: height / 12,
-              width: width / 12,
-              fit: BoxFit.contain,
-              allowDrawingOutsideViewBox: true,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  svgTctLogo,
+                  semanticsLabel: "Logo",
+                  height: height / 12,
+                  width: width / 12,
+                  fit: BoxFit.contain,
+                  allowDrawingOutsideViewBox: true,
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                SizedBox(
+                  width: 20,
+                ),
                 InkWell(
                     onTap: () {},
                     child: Row(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            height: 30,
-                            width: 30,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new AssetImage(user)))),
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                            child: firebaseAuth.currentUser.photoURL == null
+                                ? Image.asset(user,fit: BoxFit.fill)
+                                : Image.network(firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          "Senthil Kumar",
-                          style: TextStyle(fontSize: 16, color: darkColor),
+                        userMail != null
+                            ? Text(
+                          userMail,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        )
+                            : Text(
+                          userName,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
                         ),
                       ],
                     )),
@@ -994,14 +1018,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                       // Image.network(familyList[index].photo.toString(), height: height / 10,
                                       //     width: width / 10,
                                       //     fit: BoxFit.contain),
-                                      // SvgPicture.asset(
-                                      //   svgTctLogo,
-                                      //   semanticsLabel: "Logo",
-                                      //   height: height / 10,
-                                      //   width: width / 10,
-                                      //   fit: BoxFit.contain,
-                                      //   allowDrawingOutsideViewBox: true,
-                                      // ),
+                                      SvgPicture.asset(
+                                        svgTctLogo,
+                                        semanticsLabel: "Logo",
+                                        height: height / 10,
+                                        width: width / 10,
+                                        fit: BoxFit.contain,
+                                        allowDrawingOutsideViewBox: true,
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
@@ -1012,7 +1036,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               padding:
                                                   const EdgeInsets.all(2.0),
                                               child: TextWidget(
-                                                text: " familyList[index].name",
+                                                text: "Nishan",
                                                 weight: FontWeight.w800,
                                                 color: darkColor,
                                                 size: 14,
@@ -1104,7 +1128,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   const EdgeInsets.all(2.0),
                                               child: TextWidget(
                                                 text:
-                                                    "familyList[index].occupation",
+                                                    "Worker",
                                                 weight: FontWeight.w400,
                                                 color: darkColor,
                                                 size: 14,
@@ -1122,7 +1146,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                             TextWidget(
                                               text:
-                                                  " familyList[index].community",
+                                                  "Backward",
                                               weight: FontWeight.w400,
                                               color: darkColor,
                                               size: 14,
@@ -1173,7 +1197,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   const EdgeInsets.all(2.0),
                                               child: TextWidget(
                                                 text:
-                                                    " familyList[index].education",
+                                                    "MBA",
                                                 weight: FontWeight.w400,
                                                 color: darkColor,
                                                 size: 14,
@@ -1194,7 +1218,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   const EdgeInsets.all(2.0),
                                               child: TextWidget(
                                                 text:
-                                                    " familyList[index].annualIncome.toString()",
+                                                    "1,00,000",
                                                 weight: FontWeight.w400,
                                                 color: darkColor,
                                                 size: 14,
@@ -1215,7 +1239,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   const EdgeInsets.all(2.0),
                                               child: TextWidget(
                                                 text:
-                                                    " familyList[index].caste",
+                                                    "BC",
                                                 weight: FontWeight.w400,
                                                 color: darkColor,
                                                 size: 14,

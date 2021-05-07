@@ -21,6 +21,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
@@ -48,13 +49,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
+  DemographicFamily demographicData;
+  List<DemographicFamily> _demographicList=[];
 
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
-      debugPrint("userEmail:$userMail");
+
+      debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
 
     SystemChrome.setPreferredOrientations([
@@ -92,38 +96,22 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset(
-              svgTctLogo,
-              semanticsLabel: "Logo",
-              height: height / 12,
-              width: width / 12,
-              fit: BoxFit.contain,
-              allowDrawingOutsideViewBox: true,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  svgTctLogo,
+                  semanticsLabel: "Logo",
+                  height: height / 12,
+                  width: width / 12,
+                  fit: BoxFit.contain,
+                  allowDrawingOutsideViewBox: true,
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                DropdownButton(
-                  underline: SizedBox(),
-                  icon: Icon(
-                    Icons.language,
-                    color: Colors.black87,
-                  ),
-                  items: ['தமிழ்', 'English'].map((val) {
-                    return new DropdownMenuItem<String>(
-                      value: val,
-                      child: new Text(val),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      dropDownLang = val;
-
-                      _changeLanguage();
-                    });
-                    print("Language:$val");
-                  },
-                ),
                 SizedBox(
                   width: 20,
                 ),
@@ -132,28 +120,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left: 8.0),
-                            height: 30,
-                            width: 30,
-                            decoration: new BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: new DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: new AssetImage(user)))),
+                            height: 35,
+                            width: 35,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                            child: firebaseAuth.currentUser.photoURL == null
+                                ? Image.asset(user,fit: BoxFit.fill)
+                                : Image.network(firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
                         userMail != null
                             ? Text(
-                                userMail,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              )
+                          userMail,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        )
                             : Text(
-                                userName,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              ),
+                          userName,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        ),
                       ],
                     )),
                 SizedBox(
@@ -184,8 +172,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           if (snapshot.connectionState == ConnectionState.active)
             family.forEach((element) {
+
               final List family = element['familyMembers'];
 
+              demographicData.location=element['Location'] ;
+              demographicData.family=element['familyMembers'];
+              demographicData.property=element['Property'];
+              demographicData.family=element['habits'];
+              _demographicList.add(demographicData);
               HashMap data = new HashMap();
               data["name"] = element["Location"]["contactPerson"];
               data["mobileNumber"] = element["Location"]["contactNumber"];
@@ -226,7 +220,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                elevation: 8,
+                elevation: 12,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
@@ -491,149 +485,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 )),
                               ],
                               source:
-                                  DataTableRow(context, height, width, users),
+                                  DataTableRow(context, height, width, users,_demographicList),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
                                 });
                               },
                               rowsPerPage: _rowPerPage,
-                              // rows: users
-                              //     .map((usersItem) => DataRow(
-                              //             onSelectChanged: (bool selected) {
-                              //               if (selected) {
-                              //                 Get.toNamed('/DetailScreen');
-                              //                 debugPrint(
-                              //                     "${usersItem.familyHead}");
-                              //               }
-                              //             },
-                              //             cells: [
-                              //               DataCell(Row(
-                              //                 children: [
-                              //                   // Container(
-                              //                   //     padding: EdgeInsets.only(
-                              //                   //         left: 8.0),
-                              //                   //     height: 30,
-                              //                   //     width: 30,
-                              //                   //     decoration: new BoxDecoration(
-                              //                   //         shape:
-                              //                   //             BoxShape.circle,
-                              //                   //         image: new DecorationImage(
-                              //                   //             fit: BoxFit.fill,
-                              //                   //             image:
-                              //                   //                 new AssetImage(
-                              //                   //                     user)))),
-                              //
-                              //                   SizedBox(
-                              //                       width: 100,
-                              //                       child: TextWidget(
-                              //                         text: name,
-                              //                         color: darkGreyColor,
-                              //                         size: 16,
-                              //                         weight: FontWeight.w600,
-                              //                       ))
-                              //                 ],
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: age.toString(),
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: usersItem.mobile,
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: TextWidget(
-                              //                     text: usersItem.villageCode,
-                              //                     color: darkGreyColor,
-                              //                     size: 16,
-                              //                     weight: FontWeight.w600,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               // DataCell(SizedBox(
-                              //               //   width: 100,
-                              //               //   child: Center(
-                              //               //     child: TextWidget(
-                              //               //       text: usersItem.zone,
-                              //               //       color: darkGreyColor,
-                              //               //       size: 16,
-                              //               //       weight: FontWeight.w600,
-                              //               //     ),
-                              //               //   ),
-                              //               // )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: SvgPicture.asset(
-                              //                     svgComplete,
-                              //                     semanticsLabel: "Logo",
-                              //                     height: height / 20,
-                              //                     width: width / 20,
-                              //                     fit: BoxFit.contain,
-                              //                     allowDrawingOutsideViewBox:
-                              //                         true,
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //               DataCell(SizedBox(
-                              //                 width: 100,
-                              //                 child: Center(
-                              //                   child: Row(
-                              //                     mainAxisAlignment:
-                              //                         MainAxisAlignment
-                              //                             .spaceEvenly,
-                              //                     children: [
-                              //                       InkWell(
-                              //                         onTap: () {
-                              //                           Get.toNamed('/questionnery');
-                              //                           // Navigator.pushReplacementNamed(context, "/questionnery");
-                              //                         },
-                              //                         child: Icon(
-                              //                           Icons.edit,
-                              //                           color: primaryColor,
-                              //                         ),
-                              //                       ),
-                              //                       InkWell(
-                              //                         onTap: () {
-                              //                           setState(() {
-                              //                             showDialog(
-                              //                                 context: context,
-                              //                                 builder:
-                              //                                     (BuildContext
-                              //                                         context) {
-                              //                                   return AlertDialogWidget();
-                              //                                 });
-                              //                             debugPrint("click");
-                              //                           });
-                              //                         },
-                              //                         child: Icon(
-                              //                           Icons.delete,
-                              //                           color: errorColor,
-                              //                         ),
-                              //                       )
-                              //                     ],
-                              //                   ),
-                              //                 ),
-                              //               )),
-                              //             ]))
-                              //     .toList(),
                             ),
                           ),
                         ),
@@ -720,8 +578,9 @@ class DataTableRow extends DataTableSource {
   List users;
   BuildContext context;
   var height, width;
+  List<DemographicFamily> demographicList;
 
-  DataTableRow(this.context, this.height, this.width, this.users);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList);
 
   @override
   DataRow getRow(int index) {
@@ -764,7 +623,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: users[index]);
+            Get.toNamed('/DetailScreen', arguments: demographicList[index]);
           }
         },
         cells: [
@@ -808,7 +667,7 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: TextWidget(
-              text: users[index]['villageCode'].toString(),
+              text: "BMR",
               color: darkGreyColor,
               size: 16,
               weight: FontWeight.w600,
