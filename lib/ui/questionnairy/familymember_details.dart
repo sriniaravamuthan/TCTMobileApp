@@ -433,7 +433,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), refreshFamilyList)),
+              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList)),
         ),
       ],
     );
@@ -472,9 +472,12 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
     return newFamily;
   }
 
-  void refreshFamilyList(Family family) {
+  void refreshFamilyList(Family family, int position) {
     setState(() {
-      familyList.add(family);
+      if(position < 0)
+        familyList.add(family);
+      else
+        familyList[position] = family;
       addfamily = false;
       familyIndex = -1;
     });

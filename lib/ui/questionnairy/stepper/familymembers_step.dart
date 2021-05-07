@@ -29,10 +29,11 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 class FamilyMemberStep extends StatefulWidget {
   Function refreshFamilyList;
   Family family;
-  FamilyMemberStep(this.family, this.refreshFamilyList);
+  int familyIndex;
+  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList);
 
   @override
-  _FamilyMemberStepState createState() => _FamilyMemberStepState(family);
+  _FamilyMemberStepState createState() => _FamilyMemberStepState(family, familyIndex);
 }
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
@@ -95,10 +96,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String language;
 
   Family family;
+  int familyIndex;
 
   bool isLoading = false;
 
-  _FamilyMemberStepState(this.family);
+  _FamilyMemberStepState(this.family, this.familyIndex);
 
   @override
   void initState() {
@@ -170,7 +172,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     setState(() {
       this.isLoading = false;
     });
-    widget.refreshFamilyList(family);
+    widget.refreshFamilyList(family, familyIndex);
   }
 
   @override
