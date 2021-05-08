@@ -167,7 +167,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       } else {
         print('Error from image repo ${snapshot.state.toString()}');
       }
-      family.photo = picUrl;
+      if(family.photo!=null){
+        family.photo = picUrl;
+      }else{
+        family.photo = "";
+
+      }
     }
     setState(() {
       this.isLoading = false;

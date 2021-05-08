@@ -276,9 +276,10 @@ class _HabitsStepState extends State<HabitsStep> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(top: 8.0),
                           child: TextWidget(
-                            text: "Vaccination Done?",
+                            text: DemoLocalization.of(context)
+                                .translate("Vaccination Done") ,
                             size: 14,
                             weight: FontWeight.w600,
                           ),
@@ -329,9 +330,10 @@ class _HabitsStepState extends State<HabitsStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
-                            text: "1st Dose Date",
+                            text:  DemoLocalization.of(context)
+                                .translate("1st Dose Date") ,
                             size: 14,
                             weight: FontWeight.w600,
                           ),
@@ -411,9 +413,10 @@ class _HabitsStepState extends State<HabitsStep> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: TextWidget(
-                            text: "2nd Dose Date",
+                            text: DemoLocalization.of(context)
+                                .translate("2nd Dose Date") ,
                             size: 14,
                             weight: FontWeight.w600,
                           ),

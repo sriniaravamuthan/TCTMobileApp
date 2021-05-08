@@ -194,18 +194,18 @@ class _MyAppState extends State<MyApp> {
 //   }
 // }
 
-// class AuthenticationWrapper extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final firebaseUser = context.watch<User>();
-//
-//     if (firebaseUser != null) {
-//       return HomeScreen();
-//     } else {
-//       return LoginScreen();
-//     }
-//   }
-// }
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      return DashboardScreen();
+    } else {
+      return LoginScreen();
+    }
+  }
+}
 
 class NetworkErrorPage extends StatelessWidget {
   var height, width;

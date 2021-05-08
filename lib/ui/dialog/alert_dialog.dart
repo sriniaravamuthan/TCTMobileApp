@@ -6,6 +6,7 @@
  * /
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
@@ -44,7 +45,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
-                onPressed: widget.onPressed,
+                onPressed:() {
+                  // FirebaseFirestore.instance.collection('demographicData').doc(doc.documentID).delete();
+                },
                 child: TextWidget(
                   text: DemoLocalization.of(context).translate('Yes,Delete'),
                   color: darkColor,
