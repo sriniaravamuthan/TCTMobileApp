@@ -53,6 +53,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   CollectionReference collectionReference;
   Query query;
+  List<String> streets = [];
 
   @override
   void initState() {
@@ -171,10 +172,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
 
-          var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
+          var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data())
+              .toList();
           debugPrint("family : ${mainDemograpicData}");
 
-          if (snapshot.connectionState == ConnectionState.active)
+          if (snapshot.connectionState == ConnectionState.active) {
+            streets.clear();
+            _demographicList.clear();
+            users.clear();
 
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
@@ -183,10 +188,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               data["mobileNumber"] = element["Location"]["contactNumber"];
 
-              DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+              DocumentSnapshot villageSnapShot = await getVillageDetail(
+                  element["Location"]["villagesCode"]);
 
-              print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
-                  "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
+              print("GET______________________" +
+                  villageSnapShot["villageCode"].toString() + "__________" +
+                  villageSnapShot["villageName"].toString() +
+                  "________" + villageSnapShot["panchayatNo"].toString() +
+                  "__________" + villageSnapShot["panchayatCode"].toString());
 
               data["villageCode"] = villageSnapShot["villageCode"].toString();
 
@@ -208,83 +217,99 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               List<Family> _familyList = [];
               locationList.contactPerson = element["Location"]["contactPerson"];
               locationList.contactNumber = element["Location"]["contactNumber"];
-              locationList.doorNumber = element["Location"]["doorNumber"].toString();
+              locationList.doorNumber =
+                  element["Location"]["doorNumber"].toString();
               locationList.formNo = element["Location"]["formNo"].toString();
-              locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
-              locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
-              locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
-              locationList.projectCode = element["Location"]["projectCode"].toString();
+              locationList.noOfFamilyMembers =
+                  element["Location"]["noOfFamilyMembers"].toString();
+              locationList.panchayatCode =
+                  element["Location"]["panchayatCode"].toString();
+              locationList.panchayatNo =
+                  element["Location"]["panchayatNo"].toString();
+              locationList.projectCode =
+                  element["Location"]["projectCode"].toString();
               locationList.streetName = element["Location"]["streetName"];
               locationList.villageName = element["Location"]["villageName"];
               locationList.villagesCode = element["Location"]["villagesCode"];
 
               for (int i = 0; i < family.length; i++) {
-               _family.aadharNumber= family[i]["aadharNumber"];
-               _family.age= family[i]["age"];
-               _family.annualIncome= family[i]["annualIncome"];
-               _family.bloodGroup=  family[i]["bloodGroup"];
-               _family.caste= family[i]["caste"];
-               _family.community= family[i]["community"];
-               _family.dob= family[i]["dob"];
-               _family.education= family[i]["education"];
-               _family.gender= family[i]["gender"];
-               _family.govtInsurance= family[i]["govtInsurance"];
-               _family.mail= family[i]["mail"];
-               _family.maritalStatus= family[i]["maritalStatus"];
-               _family.mobileNumber= family[i]["mobileNumber"];
-               _family.name= family[i]["name"];
-               _family.occupation= family[i]["occupation"];
-               _family.oldPension=  family[i]["oldPension"];
-               _family.photo= family[i]["photo"];
-               _family.physicallyChallenge=  family[i]["physicallyChallenge"] ;
-               _family.privateInsurance=  family[i]["privateInsurance"];
-               _family.relationship= family[i]["relationship"];
-               _family.retirementPension= family[i]["retirementPension"];
-               _family.smartphone= family[i]["smartphone"];
-               _family.widowedPension= family[i]["widowedPension"];
+                _family.aadharNumber = family[i]["aadharNumber"];
+                _family.age = family[i]["age"];
+                _family.annualIncome = family[i]["annualIncome"];
+                _family.bloodGroup = family[i]["bloodGroup"];
+                _family.caste = family[i]["caste"];
+                _family.community = family[i]["community"];
+                _family.dob = family[i]["dob"];
+                _family.education = family[i]["education"];
+                _family.gender = family[i]["gender"];
+                _family.govtInsurance = family[i]["govtInsurance"];
+                _family.mail = family[i]["mail"];
+                _family.maritalStatus = family[i]["maritalStatus"];
+                _family.mobileNumber = family[i]["mobileNumber"];
+                _family.name = family[i]["name"];
+                _family.occupation = family[i]["occupation"];
+                _family.oldPension = family[i]["oldPension"];
+                _family.photo = family[i]["photo"];
+                _family.physicallyChallenge = family[i]["physicallyChallenge"];
+                _family.privateInsurance = family[i]["privateInsurance"];
+                _family.relationship = family[i]["relationship"];
+                _family.retirementPension = family[i]["retirementPension"];
+                _family.smartphone = family[i]["smartphone"];
+                _family.widowedPension = family[i]["widowedPension"];
                 _familyList.add(_family);
               }
-              demographicData.family=_familyList;
+              demographicData.family = _familyList;
 
-              propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
+              propertyList.dryLandInAcres =
+              element["Property"]["dryLandInAcres"];
               propertyList.fourWheeler = element["Property"]["fourWheeler"];
-              propertyList.livestockCount = element["Property"]["livestockCount"];
+              propertyList.livestockCount =
+              element["Property"]["livestockCount"];
               propertyList.livestockType = element["Property"]["livestockType"];
-              propertyList.noOfVehicleOwn = element["Property"]["noOfVehicleOwn"];
+              propertyList.noOfVehicleOwn =
+              element["Property"]["noOfVehicleOwn"];
               propertyList.others = element["Property"]["others"];
               propertyList.ownLand = element["Property"]["ownLand"];
               propertyList.ownLivestocks = element["Property"]["ownLivestocks"];
               propertyList.ownVehicle = element["Property"]["ownVehicle"];
               propertyList.statusofHouse = element["Property"]["statusofHouse"];
               propertyList.threeWheeler = element["Property"]["threeWheeler"];
-              propertyList.toiletFacility = element["Property"]["toiletFacility"];
+              propertyList.toiletFacility =
+              element["Property"]["toiletFacility"];
               propertyList.twoWheeler = element["Property"]["twoWheeler"];
               propertyList.typeofHouse = element["Property"]["typeofHouse"];
-              propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
+              propertyList.wetLandInAcres =
+              element["Property"]["wetLandInAcres"];
 
-              habitsList.anyMembersWhoDrink=element['habit']['anyMembersWhoDrink'];
-              habitsList.anyMembersWhoSmoke=element['habit']['anyMembersWhoSmoke'];
-              habitsList.anyMembersWhoUseTobacco=element['habit']['anyMembersWhoUseTobacco'];
-              habitsList.firstDose=element['habit']['firstDose'];
-              habitsList.isVaccinationDone=element['habit']['isVaccinationDone'];
-              habitsList.secondDose=element['habit']['secondDose'];
+              habitsList.anyMembersWhoDrink =
+              element['habit']['anyMembersWhoDrink'];
+              habitsList.anyMembersWhoSmoke =
+              element['habit']['anyMembersWhoSmoke'];
+              habitsList.anyMembersWhoUseTobacco =
+              element['habit']['anyMembersWhoUseTobacco'];
+              habitsList.firstDose = element['habit']['firstDose'];
+              habitsList.isVaccinationDone =
+              element['habit']['isVaccinationDone'];
+              habitsList.secondDose = element['habit']['secondDose'];
               debugPrint("habits:${ habitsList.anyMembersWhoDrink}");
 
               debugPrint("demographicData2:${propertyList.dryLandInAcres }");
 
-              demographicData.location=locationList;
-              demographicData.family=_familyList;
-              demographicData.property=propertyList;
-              demographicData.habits=habitsList;
+              demographicData.location = locationList;
+              demographicData.family = _familyList;
+              demographicData.property = propertyList;
+              demographicData.habits = habitsList;
+
+              streets.add(demographicData.location.streetName);
 
               _demographicList.add(demographicData);
               users.add(data);
 
-              if(_demographicList.length == mainDemograpicData.length) {
+              if (_demographicList.length == mainDemograpicData.length) {
                 setState(() {});
               }
-
             });
+        }
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -558,8 +583,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                 )),
                               ],
-                              source:
-                                  DataTableRow(context, height, width, users,_demographicList),
+                              source: DataTableRow(context, height, width, users,_demographicList, streets),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
@@ -601,6 +625,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   void clearSearch() {
     users.clear();
     _demographicList.clear();
+    streets.clear();
     query = firestoreInstance.collection('demographicData');
     setState(() {});
   }
@@ -609,6 +634,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     print("GET_______" + mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
     users.clear();
     _demographicList.clear();
+    streets.clear();
 
     if (mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
       query = firestoreInstance.collection('demographicData');
@@ -619,40 +645,31 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       setState(() {});
       return;
     } else if (villageCode != "") {
-
-
-      /*DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
-      print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
-          "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
-      data["villageCode"] = villageSnapShot["villageCode"].toString();*/
-
-      query = collectionReference.where("location.villagesCode", isEqualTo: int.parse(villageCode));
+      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("villageCode", isEqualTo: villageCode).get();
+      DocumentReference documentReference;
+      if (querySnapshot.docs.isEmpty) {
+        query = null;
+        setState(() {});
+        return;
+      }
+      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
+      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: documentReference);
+      setState(() {});
+      return;
     } else if (panchayatCode != "") {
-
-      /*DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
-      print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
-          "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
-      data["villageCode"] = villageSnapShot["villageCode"].toString();*/
-
-      query = collectionReference.where("location.panchayatCode", isEqualTo: int.parse(panchayatCode));
-    } else {
+      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("panchayatCode", isEqualTo: int.parse(panchayatCode)).get();
+      DocumentReference documentReference;
+      if (querySnapshot.docs.isEmpty) {
+        query = null;
+        setState(() {});
+        return;
+      }
+      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
+      print("GET_________" + documentReference.path);
+      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: documentReference);
+      setState(() {});
       return;
     }
-
-    FutureBuilder<DocumentSnapshot>(
-      future: collectionReference.doc().get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          data.forEach((key, value) {
-            print("DATAAAAAAAAAA___" + key + " : " + value);
-          });
-          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
-        }
-        return Text("loading");
-      },
-    );
   }
 }
 
@@ -661,8 +678,9 @@ class DataTableRow extends DataTableSource {
   BuildContext context;
   var height, width;
   List<DemographicFamily> demographicList;
+  List<String> streets;
 
-  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets);
 
   @override
   DataRow getRow(int index) {
@@ -705,7 +723,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: demographicList[index]);
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, true]);
           }
         },
         cells: [
@@ -787,9 +805,8 @@ class DataTableRow extends DataTableSource {
                 children: [
                   InkWell(
                     onTap: () {
-                      Get.toNamed(
-                        '/questionnery',
-                      );
+                      // Get.toNamed('/questionnery',);
+                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, true],);
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(
