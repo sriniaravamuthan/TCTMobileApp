@@ -1134,9 +1134,22 @@ class _DetailScreenState extends State<DetailScreen> {
                                             Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                FadeInImage.assetNetwork(placeholder: svgTctLogo, image: demographicList.family[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
-                                                // Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain,),
-
+                                                Container(
+                                                    height: 140,
+                                                    width: 120,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius.all(Radius.circular(50))),
+                                                    child:  demographicList.family[index].photo== ""
+                                                        ? SvgPicture.asset(
+                                                      svgTctLogo,
+                                                      semanticsLabel: "Logo",
+                                                      height: height / 10,
+                                                      width: width / 10,
+                                                      fit: BoxFit.contain,
+                                                      allowDrawingOutsideViewBox: true,
+                                                    )
+                                                        : Image.network(demographicList.family[index].photo,fit: BoxFit.fill)),
                                                 Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Column(

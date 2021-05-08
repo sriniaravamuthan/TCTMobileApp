@@ -198,7 +198,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 BorderRadius.all(Radius.circular(50))),
                             child: firebaseAuth.currentUser.photoURL == null
                                 ? Image.asset(user,fit: BoxFit.fill)
-                                : Image.network(firebaseAuth.currentUser.photoURL)),
+                                : Image.network(firebaseAuth.currentUser.photoURL,fit: BoxFit.fill,height: 100,width: 60,)),
                         SizedBox(
                           width: 10,
                         ),

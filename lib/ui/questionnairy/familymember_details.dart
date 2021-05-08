@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -135,7 +136,23 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          FadeInImage.assetNetwork(placeholder: svgTctLogo, image: familyList[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
+                          Container(
+                              height: 140,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
+                              child:  familyList[index].photo== ""
+                                  ? SvgPicture.asset(
+                                svgTctLogo,
+                                semanticsLabel: "Logo",
+                                height: height / 10,
+                                width: width / 10,
+                                fit: BoxFit.contain,
+                                allowDrawingOutsideViewBox: true,
+                              )
+                                  : Image.network(familyList[index].photo,fit: BoxFit.fill)),
+                          // FadeInImage.assetNetwork(placeholder: svgTctLogo, image: familyList[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
                           // Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain,),
                           /*SvgPicture.asset(
                             svgTctLogo,
