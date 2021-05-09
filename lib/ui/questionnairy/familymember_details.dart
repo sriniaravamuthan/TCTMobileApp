@@ -157,16 +157,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 allowDrawingOutsideViewBox: true,
                               )
                                   : Image.network(familyList[index].photo,fit: BoxFit.fill)),
-                          // FadeInImage.assetNetwork(placeholder: svgTctLogo, image: familyList[index].photo, height: height/10, width: width/10, fit: BoxFit.contain,),
-                          // Image.network(familyList[index].photo.toString(), height: height / 10, width: width / 10, fit: BoxFit.contain,),
-                          /*SvgPicture.asset(
-                            svgTctLogo,
-                            semanticsLabel: "Logo",
-                            height: height / 10,
-                            width: width / 10,
-                            fit: BoxFit.contain,
-                            allowDrawingOutsideViewBox: true,
-                          ),*/
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -233,7 +223,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: adhaarNumber,
+                                    text: DemoLocalization.of(context)
+                                        .translate('Aadhaar No'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -251,7 +242,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: occupation,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Business'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -269,22 +261,27 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: community,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Section'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
                                   ),
                                 ),
-                                TextWidget(
-                                  text: familyList[index].community,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                SizedBox(
+                                  width: 130,
+                                  child: TextWidget(
+                                    text: familyList[index].community,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: insurance,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Insurance'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -311,7 +308,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: educationQualification,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Education Qualification'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -329,7 +327,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: annualIncome,
+                                    text: DemoLocalization.of(context)
+                                        .translate('Annual Income'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -348,7 +347,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: caste,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Caste'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -366,7 +366,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: pension,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Pension'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -393,7 +394,8 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
-                                    text: smartphone,
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Smart phone'),
                                     weight: FontWeight.w800,
                                     color: darkColor,
                                     size: 14,
@@ -410,11 +412,18 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
-                                  child: TextWidget(
-                                    text: physicallyChallenged,
-                                    weight: FontWeight.w800,
-                                    color: darkColor,
-                                    size: 14,
+                                  child: FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: SizedBox(
+                                      width: 150,
+                                      child: TextWidget(
+                                        text:  DemoLocalization.of(context)
+                                            .translate('Physically challenged'),
+                                        weight: FontWeight.w800,
+                                        color: darkColor,
+                                        size: 14,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Padding(

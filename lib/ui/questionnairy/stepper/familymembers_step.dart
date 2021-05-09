@@ -1620,8 +1620,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2.0,
                                   right: 16.0,
-                                  top: 2.0,
-                                  bottom: 2.0),
+                                  ),
                               child: AutoCompleteTextField(
                                   controller: communityController,
                                   clearOnSubmit: false,

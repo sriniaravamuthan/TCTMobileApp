@@ -106,7 +106,7 @@ class _MyAppState extends State<MyApp> {
                         return supportedLocales.first;
                       },
                       theme: ThemeData(),
-                      home: DashboardScreen(),
+                      home: AuthenticationWrapper(),
                       getPages: [
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
                         GetPage(
