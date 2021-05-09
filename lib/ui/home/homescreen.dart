@@ -466,7 +466,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: () {
                                       // Get.toNamed('/questionnery');
-                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, documentId, false],);
+                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false],);
                                       // Navigator.pushReplacementNamed(context, "/questionnery");
                                     },
                                     child: Container(
@@ -898,7 +898,7 @@ class DataTableRow extends DataTableSource {
                   InkWell(
                     onTap: () {
                       // Get.toNamed('/questionnery',);
-                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId, true],);
+                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId[index], true],);
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(

@@ -65,7 +65,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   List<String> panchayatCodeList = [], panchayatNoList = [];
   var height, width;
   List<String> streets = [];
-  List<String> documentId = [];
+  String documentId = "";
   bool isEdit = false;
 
   @override
@@ -2068,9 +2068,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     demographicFamily.location = location;
 
-    FireStoreService fireStoreService = new FireStoreService();
-    fireStoreService.createFamily(demographicFamily).then((value) =>
-        {if (value) debugPrint("addedSuccess") else print("failed to add")});
+    if (!isEdit) {
+      FireStoreService fireStoreService = new FireStoreService();
+      fireStoreService.createFamily(demographicFamily).then((value) =>
+      {if (value) debugPrint("addedSuccess") else
+        print("failed to add")});
+    } else {
+      documentId
+    }
   }
 
   getVillageDetails(String language) async {
