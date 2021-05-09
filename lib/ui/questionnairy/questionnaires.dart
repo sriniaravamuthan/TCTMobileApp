@@ -110,8 +110,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       doorNoController.text = location.doorNumber;
       contactPersonController.text = location.contactPerson;
       noOfFamilyPersonController.text = location.noOfFamilyMembers;
-
-      if (location.villageName.toString().length > 1000) {
+       if(location.villageName ==String)
+      if (location.villageName.toString().length > 6) {
         fillVillageData(location.villageName);
       } else {
         villageNameController.text = location.villageName;
@@ -2047,10 +2047,17 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       }
     }
 
-    location.villagesCode = documentReference;
-    location.panchayatNo = documentReference;
-    location.panchayatCode = documentReference;
-    location.villageName = documentReference;
+    if (documentReference != null) {
+      location.villagesCode = documentReference;
+      location.panchayatNo = documentReference;
+      location.panchayatCode = documentReference;
+      location.villageName = documentReference;
+    } else {
+      location.villagesCode =villageCodeController.text;
+          location.panchayatNo =panchayatNoController.text;
+          location.panchayatCode =panchayatCodeController.text;
+          location.villageName =villageNameController.text;
+    }
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {

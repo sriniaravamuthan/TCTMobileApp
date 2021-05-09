@@ -10,19 +10,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
+import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class AlertDialogWidget extends StatefulWidget {
-  final String text;
-  final Function onPressed;
 
-  const AlertDialogWidget({Key key, this.text, this.onPressed})
-      : super(key: key);
+   Function deleteDoc;
+   int index;
+
+  AlertDialogWidget(this.deleteDoc, this.index);
+
   @override
-  _AlertDialogWidgetState createState() => _AlertDialogWidgetState();
+  _AlertDialogWidgetState createState() => _AlertDialogWidgetState(deleteDoc, index);
 }
 
 class _AlertDialogWidgetState extends State<AlertDialogWidget> {
+  Function deleteDoc;
+  int index;
+
+  _AlertDialogWidgetState(this.deleteDoc, this.index);
+
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
@@ -46,7 +53,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
                 onPressed:() {
-                  // FirebaseFirestore.instance.collection('demographicData').doc(doc.documentID).delete();
+                  widget.deleteDoc(index);
+                  Navigator.pop(context, false);
+
                 },
                 child: TextWidget(
                   text: DemoLocalization.of(context).translate('Yes,Delete'),

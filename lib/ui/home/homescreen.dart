@@ -10,6 +10,7 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -192,12 +193,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               data["mobileNumber"] = element["Location"]["contactNumber"];
 
-              DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
-              data["villageCode"] = villageSnapShot["villageCode"].toString();
-
-              if (data["villageCode"] == "")
-                data["status"] = false;
-
               List family = element['familyMembers'];
               for (int i = 0; i < family.length; i++) {
                 if (family[i]["mobileNumber"] == data["mobileNumber"]) {
@@ -219,12 +214,32 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               locationList.doorNumber = element["Location"]["doorNumber"].toString();
               locationList.formNo = element["Location"]["formNo"].toString();
               locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
-              locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
-              locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
               locationList.projectCode = element["Location"]["projectCode"].toString();
               locationList.streetName = element["Location"]["streetName"];
-              locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
-              locationList.villagesCode = villageSnapShot["villageCode"].toString();
+
+              data["villageCode"] = "";
+              if (element["Location"]["villagesCode"] == "") {
+                locationList.villageName = "";
+                locationList.villagesCode = "";
+              } else {
+                DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+                data["villageCode"] = villageSnapShot["villageCode"].toString();
+                locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
+                locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
+                locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
+                locationList.villagesCode = villageSnapShot["villageCode"].toString();
+              }
+              if (element["Location"]["panchayatCode"] == "") {
+                locationList.panchayatCode = "";
+                locationList.panchayatNo = "";
+              } else {
+                DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["panchayatCode"]);
+                locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
+                locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
+              }
+
+              if (data["villageCode"] == "")
+                data["status"] = false;
 
               if (locationList.streetName == "")
                 data["status"] = false;
@@ -721,6 +736,40 @@ class DataTableRow extends DataTableSource {
 
   @override
   DataRow getRow(int index) {
+    if (users.isEmpty){
+      return DataRow(cells: [
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: index == 0 ?"No data found": "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+        DataCell(TextWidget(
+          text: "",
+          size: 16,
+          weight: FontWeight.w600,
+        )),
+      ]);
+    }
     if (index >= users.length)
       return DataRow(cells: [
         DataCell(TextWidget(
@@ -823,8 +872,15 @@ class DataTableRow extends DataTableSource {
           DataCell(SizedBox(
             width: 100,
             child: Center(
-              child: SvgPicture.asset(
+              child:users [index]["status"]==true?SvgPicture.asset(
                 svgComplete,
+                semanticsLabel: "Logo",
+                height: height / 20,
+                width: width / 20,
+                fit: BoxFit.contain,
+                allowDrawingOutsideViewBox: true,
+              ):SvgPicture.asset(
+                svgInProgress,
                 semanticsLabel: "Logo",
                 height: height / 20,
                 width: width / 20,
@@ -858,7 +914,8 @@ class DataTableRow extends DataTableSource {
                             builder:
                                 (BuildContext
                             context) {
-                              return AlertDialogWidget();
+                              debugPrint("DocumetId:${documentId[index]}");
+                              return AlertDialogWidget(deleteDoc, index);
                             });
                         debugPrint("click");
 
@@ -877,6 +934,13 @@ class DataTableRow extends DataTableSource {
 
   @override
   bool get isRowCountApproximate => true;
+
+  void deleteDoc(int index) {
+    debugPrint("DocumetId:${documentId[index]}");
+    FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
+      return SnackBar(content: Text('Deleted successful'));
+    });
+  }
 
   @override
   int get rowCount => 100;
