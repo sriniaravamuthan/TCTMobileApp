@@ -55,10 +55,6 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                 onPressed:() {
                   widget.deleteDoc(index);
                   Navigator.pop(context, false);
-                  setState(() {
-
-                  });
-
                 },
                 child: TextWidget(
                   text: DemoLocalization.of(context).translate('Yes,Delete'),

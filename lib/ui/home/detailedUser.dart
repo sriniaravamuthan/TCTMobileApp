@@ -654,9 +654,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 padding:
                                                     const EdgeInsets.all(4.0),
                                                 child: SizedBox(
-                                                  width: 120,
+                                                  width: 150,
                                                   child: TextWidget(
-                                                    text:getSliderValue(demographicList.property.ownVehicle),
+                                                    text:getVehicle(demographicList.property),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -814,7 +814,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: TextWidget(
-                                                    text:getSliderValue(demographicList.property.ownLivestocks),
+                                                    text:getLiveStock(demographicList.property),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -1490,17 +1490,21 @@ class _DetailScreenState extends State<DetailScreen> {
     return insurance;
   }
 
-  // String getLiveStock(Property property) {
-  //   String liveStock = "";
-  //   if (property.ownLivestocks == 2)
-  //     liveStock += property.livestockType.toString();
-  //   if (family.govtInsurance == 2) {
-  //     if (insurance != "")
-  //       insurance += ", ";
-  //     insurance += DemoLocalization.of(context).translate('Government');
-  //   }
-  //   return insurance;
-  // }
+  String getLiveStock(Property property) {
+    String liveStock = "";
+    if (property.ownLivestocks == 2)
+      liveStock += property.livestockType.toString() + "-" + property.livestockCount ;
+    return liveStock;
+  }
+
+
+  String getVehicle(Property property) {
+    String vehicles = "";
+    if (property.ownVehicle == 2)
+      vehicles += DemoLocalization.of(context).translate('Two Wheeler')+"-" +property.twoWheeler.toString()+ "," + DemoLocalization.of(context).translate('Three Wheeler')+"""
+-"""+ property.threeWheeler+ "," + DemoLocalization.of(context).translate('Four Wheeler')+"-" +property.fourWheeler.toString();
+    return vehicles;
+  }
 
   String getPension(Family family) {
     String pension = "";

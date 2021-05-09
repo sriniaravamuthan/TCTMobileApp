@@ -2106,7 +2106,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.done),
+                            Icon(Icons.cancel_outlined),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: TextWidget(
