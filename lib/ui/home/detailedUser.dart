@@ -31,6 +31,9 @@ class _DetailScreenState extends State<DetailScreen> {
   String userName = "";
   String userMail = "";
   int familyIndex = -1;
+  List<String> streets = [];
+  List<String> documentId = [];
+  bool isEdit = false;
 
   @override
   void initState() {
@@ -40,7 +43,12 @@ class _DetailScreenState extends State<DetailScreen> {
 
       debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
-    demographicList = Get.arguments;
+    var arguments = Get.arguments;
+    demographicList = arguments[0];
+    streets = arguments[1];
+    documentId = arguments[2];
+    isEdit = arguments[3];
+
     debugPrint("demographicList:${demographicList.location.contactPerson}");
     super.initState();
   }

@@ -55,6 +55,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   CollectionReference collectionReference;
   Query query;
   List<String> streets = [];
+  List<String> documentId = [];
 
   @override
   void initState() {
@@ -179,22 +180,23 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
           if (snapshot.connectionState == ConnectionState.active) {
             streets.clear();
-            _demographicList.clear();
-            users.clear();
-
+            documentId.clear();
+            /*_demographicList.clear();
+            users.clear();*/
+            documentId = snapshot.data.docs.map((e) => e.id).toList();
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
+              data["status"] = true;  //  True -> Complete, false -> InProgress
               data["name"] = element["Location"]["contactPerson"];
               data["formNo"] = element["Location"]["formNo"];
 
               data["mobileNumber"] = element["Location"]["contactNumber"];
 
               DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
-
-              print("GET______________________" + villageSnapShot["villageCode"].toString() + "__________" + villageSnapShot["villageName"].toString() +
-                  "________" + villageSnapShot["panchayatNo"].toString() + "__________" + villageSnapShot["panchayatCode"].toString());
-
               data["villageCode"] = villageSnapShot["villageCode"].toString();
+
+              if (data["villageCode"] == "")
+                data["status"] = false;
 
               List family = element['familyMembers'];
               for (int i = 0; i < family.length; i++) {
@@ -224,14 +226,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
               locationList.villagesCode = villageSnapShot["villageCode"].toString();
 
+              if (locationList.streetName == "")
+                data["status"] = false;
+              if (locationList.doorNumber == "")
+                data["status"] = false;
+              if (locationList.contactPerson == "")
+                data["status"] = false;
+
+              int hasCaste = -1, hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
                _family.aadharNumber= family[i]["aadharNumber"];
                _family.age= family[i]["age"];
                _family.annualIncome= family[i]["annualIncome"];
                _family.bloodGroup=  family[i]["bloodGroup"];
                _family.caste= family[i]["caste"];
+               if (_family.caste != "")
+                 hasCaste += 1;
                _family.community= family[i]["community"];
+               if (_family.community != "")
+                 hasSection += 1;
                _family.dob= family[i]["dob"];
+               if (_family.community != "")
+                 hasDob += 1;
                _family.education= family[i]["education"];
                _family.gender= family[i]["gender"];
                _family.govtInsurance= family[i]["govtInsurance"];
@@ -245,11 +261,26 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.physicallyChallenge=  family[i]["physicallyChallenge"] ;
                _family.privateInsurance=  family[i]["privateInsurance"];
                _family.relationship= family[i]["relationship"];
+               if (_family.relationship != "")
+                 hasRelationShip += 1;
                _family.retirementPension= family[i]["retirementPension"];
                _family.smartphone= family[i]["smartphone"];
                _family.widowedPension= family[i]["widowedPension"];
                 _familyList.add(_family);
               }
+
+              if (hasCaste < 0)
+                data["status"] = false;
+
+              if (hasSection < 0)
+                data["status"] = false;
+
+              if (hasRelationShip < 0)
+                data["status"] = false;
+
+              if (hasDob < 0)
+                data["status"] = false;
+
               demographicData.family = _familyList;
 
               propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
@@ -283,7 +314,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               demographicData.property = propertyList;
               demographicData.habits = habitsList;
 
-              streets.add(demographicData.location.streetName);
+              if (demographicData.location.streetName != "")
+                streets.add(demographicData.location.streetName);
 
               _demographicList.add(demographicData);
               users.add(data);
@@ -418,7 +450,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Get.toNamed('/questionnery');
+                                      // Get.toNamed('/questionnery');
+                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, documentId, false],);
                                       // Navigator.pushReplacementNamed(context, "/questionnery");
                                     },
                                     child: Container(
@@ -566,7 +599,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                 )),
                               ],
-                              source: DataTableRow(context, height, width, users,_demographicList, streets),
+                              source: DataTableRow(context, height, width, users,_demographicList, streets, documentId),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
@@ -682,8 +715,9 @@ class DataTableRow extends DataTableSource {
   var height, width;
   List<DemographicFamily> demographicList;
   List<String> streets;
+  List<String> documentId = [];
 
-  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets, this.documentId);
 
   @override
   DataRow getRow(int index) {
@@ -725,7 +759,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, true]);
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId, true]);
           }
         },
         cells: [
@@ -808,7 +842,7 @@ class DataTableRow extends DataTableSource {
                   InkWell(
                     onTap: () {
                       // Get.toNamed('/questionnery',);
-                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, true],);
+                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId, true],);
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(

@@ -64,6 +64,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       originalVillageNameList = [];
   List<String> panchayatCodeList = [], panchayatNoList = [];
   var height, width;
+  List<String> streets = [];
+  List<String> documentId = [];
+  bool isEdit = false;
 
   @override
   void initState() {
@@ -90,6 +93,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     villageNameController = TextEditingController();
     villageCodeController = TextEditingController();
 
+    var arguments = Get.arguments;
+    demographicFamily = arguments[0];
+    streets = arguments[1];
+    documentId = arguments[2];
+    isEdit = arguments[3];
+
+    print("GET____________________" + streets.toString());
+
     if (demographicFamily.location != null) {
       location = demographicFamily.location;
 
@@ -100,7 +111,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       contactPersonController.text = location.contactPerson;
       noOfFamilyPersonController.text = location.noOfFamilyMembers;
 
-      fillVillageData(location.villageName);
+      if (location.villageName.toString().length > 1000) {
+        fillVillageData(location.villageName);
+      } else {
+        villageNameController.text = location.villageName;
+        villageCodeController.text = location.villagesCode;
+        panchayatCodeController.text = location.panchayatCode;
+        panchayatNoController.text = location.panchayatNo;
+      }
     } else {
       location.formNo = "";
       location.villagesCode = "";
@@ -1437,7 +1455,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 itemSubmitted: (item) {
                                                   streetNameController.text = item;
                                                 },
-                                                // suggestions: relationLangList,
+                                                suggestions: streets,
                                                 style: TextStyle(
                                                   color: Color(0xFF222222),
                                                   fontSize: 16,
