@@ -17,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
+import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
@@ -25,6 +26,7 @@ import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
@@ -98,6 +100,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     streets = arguments[1];
     documentId = arguments[2];
     isEdit = arguments[3];
+    debugPrint("isEdit" + isEdit.toString());
+
 
     print("GET____________________" + streets.toString());
 
@@ -2071,11 +2075,20 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     if (!isEdit) {
       FireStoreService fireStoreService = new FireStoreService();
       fireStoreService.createFamily(demographicFamily).then((value) =>
-      {if (value) debugPrint("addedSuccess") else
-        print("failed to add")});
+      {if (value)  snackBarAlert(success, "Added SuccessFully",
+          successColor)else
+        snackBarAlert(error, "Failed to Add",
+            errorColor)
+        });
     } else {
-      documentId
-    }
+      debugPrint("documentId:$documentId");
+      FireStoreService fireStoreService = new FireStoreService();
+      fireStoreService.updateFamily(demographicFamily,documentId).then((value) =>
+      {if (value)  snackBarAlert(success, "Updated SuccessFully",
+          successColor)  else
+        snackBarAlert(error, "Failed to Update",
+            errorColor)});
+        }
   }
 
   getVillageDetails(String language) async {
