@@ -20,7 +20,9 @@ const String family = "FAMILY MEMBERS";
 const String property = "PROPERTY DETAILS";
 const String habits = "HABITS";
 const String checkInternet = "Check Internet Connection";
-
+const String warning = "Warning";
+const String error = "Error";
+const String success = "Success";
 //location
 const String familyHead = "FAMILY HEAD";
 const String age = "AGE";
