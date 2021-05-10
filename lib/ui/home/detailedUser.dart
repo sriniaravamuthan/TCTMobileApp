@@ -1186,7 +1186,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: TextWidget(
                                                           text:
-                                                          "${demographicList.family[index].gender} ,${demographicList.family[index].bloodGroup},${demographicList.family[index].maritalStatus} ",
+                                                          "${demographicList.family[index].gender} ,${demographicList.family[index].bloodGroup},${demographicList.family[index].maritalStatus != null ? demographicList.family[index].maritalStatus : ""} ",
                                                           weight: FontWeight.w400,
                                                           color: darkColor,
                                                           size: 14,
