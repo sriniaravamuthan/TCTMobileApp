@@ -57,6 +57,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   Query query;
   List<String> streets = [];
   List<String> documentId = [];
+  bool loadData = true;
 
   @override
   void initState() {
@@ -170,7 +171,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         // stream: collectionReference.snapshots(),
-        stream: query.snapshots(),
+        stream: query?.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -179,11 +180,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
           debugPrint("family : ${mainDemograpicData}");
 
-          if (snapshot.connectionState == ConnectionState.active) {
+          if (loadData && snapshot.connectionState == ConnectionState.active) {
             streets.clear();
             documentId.clear();
-            /*_demographicList.clear();
-            users.clear();*/
+            _demographicList.clear();
+            users.clear();
             documentId = snapshot.data.docs.map((e) => e.id).toList();
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
@@ -336,6 +337,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               users.add(data);
 
               if (_demographicList.length == mainDemograpicData.length) {
+                loadData = false;
                 setState(() {});
               }
             });
@@ -654,6 +656,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   void clearSearch() {
+    loadData = true;
     users.clear();
     _demographicList.clear();
     streets.clear();
@@ -663,6 +666,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   Future<void> search(String mobileNo, villageCode, villageName, panchayatCode) async {
     print("GET_______" + mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
+    loadData = true;
     users.clear();
     _demographicList.clear();
     streets.clear();
@@ -677,6 +681,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       return;
     } else if (villageCode != "") {
       QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("villageCode", isEqualTo: villageCode).get();
+      DocumentReference documentReference;
+      if (querySnapshot.docs.isEmpty) {
+        query = null;
+        setState(() {});
+        return;
+      }
+      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
+      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: documentReference);
+      setState(() {});
+      return;
+    }else if (villageName != "") {
+      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("villageName.$language", isEqualTo: villageName).get();
       DocumentReference documentReference;
       if (querySnapshot.docs.isEmpty) {
         query = null;

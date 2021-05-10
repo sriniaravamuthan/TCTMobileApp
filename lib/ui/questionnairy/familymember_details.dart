@@ -126,6 +126,11 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                 debugPrint("familyPhoto:${familyList[index].photo}");
                 return InkWell(
                   onTap: () {
+                    if (familyIndex > 0) {
+                      final snackBar = SnackBar(content: Text('Save or cancel the current member before editing another'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      return;
+                    }
                     setState(() {
                       familyIndex = index;
                       addfamily = true;
@@ -450,7 +455,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList)),
+              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields)),
         ),
       ],
     );
@@ -497,6 +502,12 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
         familyList[position] = family;
       addfamily = false;
       familyIndex = -1;
+    });
+  }
+
+  void cancelFields() {
+    setState(() {
+      addfamily = false;
     });
   }
 

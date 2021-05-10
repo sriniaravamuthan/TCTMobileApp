@@ -13,6 +13,7 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,10 +28,10 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
-  Function refreshFamilyList;
+  Function refreshFamilyList, cancelFields;
   Family family;
   int familyIndex;
-  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList);
+  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList, this.cancelFields);
 
   @override
   _FamilyMemberStepState createState() => _FamilyMemberStepState(family, familyIndex);
@@ -45,7 +46,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var genderController = TextEditingController();
   var dobController = TextEditingController();
   var ageController = TextEditingController();
-  var maritalStatusController = TextEditingController();
+  var maritalStatusController = TextEditingController(text: "");
   var bloodGroupController = TextEditingController();
   String physicallyChallenge = "";
   var educationController = TextEditingController();
@@ -2054,7 +2055,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
             Padding(
               padding: const EdgeInsets.only(top: 24.0, left: 24.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
                     onTap: () {
@@ -2089,8 +2090,41 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       ),
                     ),
                   ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: InkWell(
+                      onTap: () {
+                        widget.cancelFields();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.black45,
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.done),
+                            Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Cancel'),
+                                color: darkColor,
+                                weight: FontWeight.w700,
+                                size: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   isLoading
-                      ? CircularProgressIndicator()
+                      ? Container(margin: EdgeInsets.only(left: 10), child: CircularProgressIndicator())
                       : Visibility(visible: false, child: Text("Saving")),
                   Container()
                 ],
