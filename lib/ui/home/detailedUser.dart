@@ -1252,11 +1252,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
-                                                        child: TextWidget(
-                                                          text: demographicList.family[index].occupation,
-                                                          weight: FontWeight.w400,
-                                                          color: darkColor,
-                                                          size: 14,
+                                                        child: SizedBox(
+                                                          width: 150,
+                                                          child: TextWidget(
+                                                            text: demographicList.family[index].occupation,
+                                                            weight: FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
                                                         ),
                                                       ),
                                                       Padding(
@@ -1269,11 +1272,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           size: 14,
                                                         ),
                                                       ),
-                                                      TextWidget(
-                                                        text: demographicList.family[index].community,
-                                                        weight: FontWeight.w400,
-                                                        color: darkColor,
-                                                        size: 14,
+                                                      SizedBox(
+                                                        width: 150,
+                                                        child: TextWidget(
+                                                          text: demographicList.family[index].community,
+                                                          weight: FontWeight.w400,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                        ),
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
@@ -1373,11 +1379,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
-                                                        child: TextWidget(
-                                                          text: getPension(demographicList.family[index]),
-                                                          weight: FontWeight.w400,
-                                                          color: darkColor,
-                                                          size: 14,
+                                                        child: SizedBox(
+                                                          width: 150,
+                                                          child: TextWidget(
+                                                            text: getPension(demographicList.family[index]),
+                                                            weight: FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -1410,12 +1419,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       ),
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
-                                                        child: TextWidget(
-                                                          text:  DemoLocalization.of(context)
-                                                              .translate('Physically challenged'),
-                                                          weight: FontWeight.w800,
-                                                          color: darkColor,
-                                                          size: 14,
+                                                        child: SizedBox(
+                                                          width: 140,
+                                                          child: TextWidget(
+                                                            text:  DemoLocalization.of(context)
+                                                                .translate('Physically challenged'),
+                                                            weight: FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
                                                         ),
                                                       ),
                                                       Padding(
@@ -1465,9 +1477,9 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
           backgroundColor: primaryColor,
           onPressed: () {
-            setState(() {
+            Get.offAndToNamed('/questionnery', arguments: [demographicList , streets, documentId, true],);
 
-              Get.toNamed('/questionnery', arguments: [demographicList , streets, documentId, true],);
+            setState(() {
             });
           },
         ),

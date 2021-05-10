@@ -795,13 +795,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 58,
+                                      height: 59,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             left: 2.0,
                                             right: 16.0,
-                                            top: 2.0,
-                                            bottom: 2.0),
+                                            top: 0.0,
+                                            bottom: 0.0),
                                         child: AutoCompleteTextField(
                                             controller: maritalStatusController,
                                             clearOnSubmit: false,
@@ -1208,7 +1208,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0, top: 0.0, bottom: 0.0),
                               child: AutoCompleteTextField(
                                   controller: occupationController,
                                   clearOnSubmit: false,

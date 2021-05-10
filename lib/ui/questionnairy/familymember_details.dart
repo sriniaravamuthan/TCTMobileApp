@@ -183,11 +183,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
-                                  child: TextWidget(
-                                    text: "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus != null ? familyList[index].maritalStatus : ""}",
-                                    weight: FontWeight.w400,
-                                    color: darkColor,
-                                    size: 14,
+                                  child: SizedBox(
+                                    width: 100,
+                                    child: TextWidget(
+                                      text: "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus != null ? familyList[index].maritalStatus : ""}",
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -250,11 +253,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
-                                  child: TextWidget(
-                                    text: familyList[index].occupation,
-                                    weight: FontWeight.w400,
-                                    color: darkColor,
-                                    size: 14,
+                                  child: SizedBox(
+                                    width: 130,
+                                    child: TextWidget(
+                                      text: familyList[index].occupation,
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -374,11 +380,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
-                                  child: TextWidget(
-                                    text: getPension(familyList[index]),
-                                    weight: FontWeight.w400,
-                                    color: darkColor,
-                                    size: 14,
+                                  child: SizedBox(
+                                    width: 130,
+                                    child: TextWidget(
+                                      text: getPension(familyList[index]),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
                                   ),
                                 ),
                               ],
