@@ -232,9 +232,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 locationList.panchayatCode = "";
                 locationList.panchayatNo = "";
               } else {
-                DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["panchayatCode"]);
-                locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
-                locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
+                if (element["Location"]["villagesCode"] == "") {
+                  DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["panchayatCode"]);
+                  locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
+                  locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
+                }
               }
 
               if (data["villageCode"] == "")
@@ -466,7 +468,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: () {
                                       // Get.toNamed('/questionnery');
-                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false],);
+                                      loadData = true;
+                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false],).then((value) async => {clearSearch()});
                                       // Navigator.pushReplacementNamed(context, "/questionnery");
                                     },
                                     child: Container(
@@ -614,7 +617,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                 )),
                               ],
-                              source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch),
+                              source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch, makeLoadData),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
@@ -653,6 +656,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     }
   }
 
+  void makeLoadData() {
+    loadData = true;
+  }
+  
   void clearSearch() {
     loadData = true;
     users.clear();
@@ -745,9 +752,9 @@ class DataTableRow extends DataTableSource {
   List<DemographicFamily> demographicList;
   List<String> streets;
   List<String> documentId = [];
-  Function clearSearch;
+  Function clearSearch, makeLoadData;
 
-  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets, this.documentId, this.clearSearch);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets, this.documentId, this.clearSearch, this.makeLoadData);
 
   @override
   DataRow getRow(int index) {
@@ -823,7 +830,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true]);
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true]).then((value) => clearSearch());
           }
         },
         cells: [
@@ -913,7 +920,8 @@ class DataTableRow extends DataTableSource {
                   InkWell(
                     onTap: () {
                       // Get.toNamed('/questionnery',);
-                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId[index], true],);
+                      makeLoadData();
+                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId[index], true],).then((value) => clearSearch());
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(

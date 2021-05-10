@@ -114,15 +114,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       doorNoController.text = location.doorNumber;
       contactPersonController.text = location.contactPerson;
       noOfFamilyPersonController.text = location.noOfFamilyMembers;
-       if(location.villageName ==String)
-      if (location.villageName.toString().length > 6) {
+      /*if (location.villagesCode.toString().length > 6) {
         fillVillageData(location.villageName);
-      } else {
+      } else {*/
         villageNameController.text = location.villageName;
         villageCodeController.text = location.villagesCode;
         panchayatCodeController.text = location.panchayatCode;
         panchayatNoController.text = location.panchayatNo;
-      }
+      // }
     } else {
       location.formNo = "";
       location.villagesCode = "";
