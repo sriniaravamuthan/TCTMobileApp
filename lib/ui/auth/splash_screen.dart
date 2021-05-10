@@ -28,13 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
     if (user != null) {
       // Navigator.pushReplacementNamed(context, "/homeScreen");
       Navigator.pushNamedAndRemoveUntil(
-          context, "/dashBoard", (route) => false);
+          context, "/homeScreen", (route) => false);
       // Get.toNamed('/homeScreen');
     } else {
       // Get.toNamed('/loginScreen');
       Navigator.pushNamedAndRemoveUntil(
           context, "/loginScreen", (route) => false);
-      Navigator.pushReplacementNamed(context, "/loginScreen");
+      // Navigator.pushReplacementNamed(context, "/loginScreen");
     }
   }
 

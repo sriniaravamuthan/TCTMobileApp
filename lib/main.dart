@@ -38,7 +38,7 @@ Future<bool> check() async {
   } else if (connectivityResult == ConnectivityResult.wifi) {
     return true;
   }
-  return false;
+  return true;
 }
 
 class MyApp extends StatefulWidget {
@@ -92,16 +92,14 @@ class _MyAppState extends State<MyApp> {
           initialData: null,
         )
       ],
-      child:
-      // FutureBuilder(
-      //     future: check(),
-      //     builder: (context, projectSnap) {
-      //       if (projectSnap.connectionState == ConnectionState.waiting) {
-      //         return Center(child: CircularProgressIndicator());
-      //       } else if (projectSnap.connectionState == ConnectionState.done) {
-      //         debugPrint("connection : ${projectSnap.connectionState}");
-      //         return projectSnap.data == true
-      //             ?
+      child: FutureBuilder(
+          future: check(),
+          builder: (context, projectSnap) {
+            if (projectSnap.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (projectSnap.connectionState == ConnectionState.done) {
+              debugPrint("connection : ${projectSnap.connectionState}");
+              return projectSnap.data == true ?
               GetMaterialApp(
                       title: appName,
                       debugShowCheckedModeBanner: false,
@@ -134,15 +132,15 @@ class _MyAppState extends State<MyApp> {
                         GetPage(name: '/DetailScreen', page: () => DetailScreen()),
                       ],
                     )
-                  // : MaterialApp(
-                  //     title: appName,
-                  //     debugShowCheckedModeBanner: false,
-                  //     home: NetworkErrorPage(),
-                  //   );
-          //   } else {
-          //     return Text("Error ${projectSnap.error}");
-          //   }
-          // }),
+                  : MaterialApp(
+                      title: appName,
+                      debugShowCheckedModeBanner: false,
+                      home: NetworkErrorPage(),
+                    );
+            } else {
+              return Text("Error ${projectSnap.error}");
+            }
+          }),
     );
   }
 }
