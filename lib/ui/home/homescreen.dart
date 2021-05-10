@@ -206,7 +206,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               Location locationList = Location();
               Property propertyList = Property();
               Habits habitsList = Habits();
-              Family _family = Family();
               List<Family> _familyList = [];
               locationList.contactPerson = element["Location"]["contactPerson"];
               locationList.contactNumber = element["Location"]["contactNumber"];
@@ -251,6 +250,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               int hasCaste = -1, hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
+                Family _family = Family();
                _family.aadharNumber= family[i]["aadharNumber"];
                _family.age= family[i]["age"];
                _family.annualIncome= family[i]["annualIncome"];
@@ -296,8 +296,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               if (hasDob < 0)
                 data["status"] = false;
-
-              demographicData.family = _familyList;
 
               propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
               propertyList.fourWheeler = element["Property"]["fourWheeler"];
