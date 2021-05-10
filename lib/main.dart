@@ -12,6 +12,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/auth/login.dart';
+import 'package:tct_demographics/ui/auth/splash_screen.dart';
 import 'package:tct_demographics/ui/home/dashboardScreen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
@@ -124,8 +125,9 @@ class _MyAppState extends State<MyApp> {
                         return supportedLocales.first;
                       },
                       theme: ThemeData(),
-                      home: AuthenticationWrapper(),
+                      home: SplashScreen(),
                       getPages: [
+                        GetPage(name: '/dashBoard', page: () => DashboardScreen()),
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
                         GetPage(name: '/loginScreen', page: () => LoginScreen()),
                         GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
@@ -208,18 +210,18 @@ class _MyAppState extends State<MyApp> {
 //   }
 // }
 
-class AuthenticationWrapper extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final firebaseUser = context.watch<User>();
-
-    if (firebaseUser != null) {
-      return DashboardScreen();
-    } else {
-      return LoginScreen();
-    }
-  }
-}
+// class AuthenticationWrapper extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final firebaseUser = context.watch<User>();
+//
+//     if (firebaseUser != null) {
+//       return DashboardScreen();
+//     } else {
+//       return LoginScreen();
+//     }
+//   }
+// }
 
 class NetworkErrorPage extends StatelessWidget {
   var height, width;

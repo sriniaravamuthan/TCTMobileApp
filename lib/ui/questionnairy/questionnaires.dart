@@ -1264,8 +1264,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
+                                                    top: 0.0,
+                                                    bottom: 0.0),
                                                 child: AutoCompleteTextField(
                                                     controller:
                                                         villageNameController,
