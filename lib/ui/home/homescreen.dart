@@ -10,7 +10,6 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +18,6 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/data_model.dart';
@@ -616,7 +614,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                 )),
                               ],
-                              source: DataTableRow(context, height, width, users,_demographicList, streets, documentId),
+                              source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch),
                               onRowsPerPageChanged: (r) {
                                 setState(() {
                                   _rowPerPage = r;
@@ -747,8 +745,9 @@ class DataTableRow extends DataTableSource {
   List<DemographicFamily> demographicList;
   List<String> streets;
   List<String> documentId = [];
+  Function clearSearch;
 
-  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets, this.documentId);
+  DataTableRow(this.context, this.height, this.width, this.users, this.demographicList, this.streets, this.documentId, this.clearSearch);
 
   @override
   DataRow getRow(int index) {
@@ -824,7 +823,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
-            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId, true]);
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true]);
           }
         },
         cells: [
@@ -954,6 +953,7 @@ class DataTableRow extends DataTableSource {
   void deleteDoc(int index) {
     debugPrint("DocumetId:${documentId[index]}");
     FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
+      clearSearch();
       return SnackBar(content: Text('Deleted successful'));
     });
   }
