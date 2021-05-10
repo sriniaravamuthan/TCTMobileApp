@@ -72,15 +72,17 @@ class _MyAppState extends State<MyApp> {
           initialData: null,
         )
       ],
-      child: FutureBuilder(
-          future: check(),
-          builder: (context, projectSnap) {
-            if (projectSnap.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (projectSnap.connectionState == ConnectionState.done) {
-              debugPrint("connection : ${projectSnap.connectionState}");
-              return projectSnap.data == true
-                  ? GetMaterialApp(
+      child:
+      // FutureBuilder(
+      //     future: check(),
+      //     builder: (context, projectSnap) {
+      //       if (projectSnap.connectionState == ConnectionState.waiting) {
+      //         return Center(child: CircularProgressIndicator());
+      //       } else if (projectSnap.connectionState == ConnectionState.done) {
+      //         debugPrint("connection : ${projectSnap.connectionState}");
+      //         return projectSnap.data == true
+      //             ?
+              GetMaterialApp(
                       title: appName,
                       debugShowCheckedModeBanner: false,
                       locale: _locale,
@@ -118,15 +120,15 @@ class _MyAppState extends State<MyApp> {
                             name: '/DetailScreen', page: () => DetailScreen()),
                       ],
                     )
-                  : MaterialApp(
-                      title: appName,
-                      debugShowCheckedModeBanner: false,
-                      home: NetworkErrorPage(),
-                    );
-            } else {
-              return Text("Error ${projectSnap.error}");
-            }
-          }),
+                  // : MaterialApp(
+                  //     title: appName,
+                  //     debugShowCheckedModeBanner: false,
+                  //     home: NetworkErrorPage(),
+                  //   );
+          //   } else {
+          //     return Text("Error ${projectSnap.error}");
+          //   }
+          // }),
     );
   }
 }

@@ -405,16 +405,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               onPressed: () {
                                 setState(() {
                                   addData();
-                                  /*if (_formKey != null &&
-                                      _formKey.currentState != null) {
-                                    if (_formKey.currentState.validate()) {
-                                      _formKey.currentState.save();
-                                      addData();
-                                    }
-                                  }*/
-                                  // else {
-                                  //   _showToast(context);
-                                  // }
+
                                 });
                               },
                             ),
@@ -2097,7 +2088,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       FireStoreService fireStoreService = new FireStoreService();
       fireStoreService.createFamily(demographicFamily).then((value) =>
       {if (value) {
-        showAddSuccess()
+          Navigator.pop(context, false),
+      showAddSuccess()
       } else {
         snackBarAlert(error, "Failed to Add", errorColor)
       }});
@@ -2106,7 +2098,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       FireStoreService fireStoreService = new FireStoreService();
       fireStoreService.updateFamily(demographicFamily,documentId).then((value) =>
       {if (value) {
-        showUpdateSuccess()
+          Navigator.pop(context, false),
+
+      showUpdateSuccess()
       }  else {
         snackBarAlert(error, "Failed to Update", errorColor)
       }});
@@ -2115,12 +2109,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
   void showAddSuccess() {
     snackBarAlert(success, "Added SuccessFully", successColor);
-    Navigator.pop(context, false);
   }
 
   void showUpdateSuccess() {
     snackBarAlert(success, "Updated SuccessFully", successColor);
-    Navigator.pop(context, false);
   }
 
   getVillageDetails(String language) async {
@@ -2155,28 +2147,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       });
     });
   }
-
-  void getDemoRef() async {
-    FirebaseFirestore.instance
-        .doc('villageName/12')
-        .get()
-        .then((value) => print("demo:${value['villageName']}"));
-
-    QuerySnapshot querySnapshot =
-        await firestoreInstance.collection('demoRef').get();
-    demoList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    debugPrint("demoList:$demoList");
-
-    demoList.forEach((element) {
-      final demoListData = element['income'];
-      debugPrint("demoListData:$demoListData");
-      if (demoListData != null) {
-        demoLanList.add(demoListData);
-        debugPrint("demoLanList:$demoLanList");
-      }
-    });
-  }
-
   void showToast(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

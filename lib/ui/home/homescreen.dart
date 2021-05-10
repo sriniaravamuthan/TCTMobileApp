@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
+import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/data_model.dart';
@@ -25,6 +26,7 @@ import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
 import 'package:tct_demographics/ui/dialog/search_dialog.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -960,7 +962,7 @@ class DataTableRow extends DataTableSource {
     debugPrint("DocumetId:${documentId[index]}");
     FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
       clearSearch();
-      return SnackBar(content: Text('Deleted successful'));
+      showDeleteSuccess();
     });
   }
 
@@ -969,4 +971,9 @@ class DataTableRow extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+
+  void showDeleteSuccess() {
+    snackBarAlert(success, "Deleted SuccessFully", successColor);
+
+  }
 }
