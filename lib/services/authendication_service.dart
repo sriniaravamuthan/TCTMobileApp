@@ -44,9 +44,10 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(context) async {
     await _firebaseAuth.signOut();
     SharedPref().setStringPref(SharedPref().language, "");
+    Navigator.pop(context, false);
     Get.toNamed('/loginScreen');
   }
 }

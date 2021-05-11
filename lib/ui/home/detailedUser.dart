@@ -118,7 +118,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut();
+                    AuthenticationService(FirebaseAuth.instance).signOut(context);
                   },
                   child: Icon(
                     Icons.power_settings_new_outlined,
