@@ -45,11 +45,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
 
     super.initState();
   }
-
+  @override
+  dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -74,8 +85,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SvgPicture.asset(
                 svgTctLogo,
                 semanticsLabel: "Logo",
-                height: height / 12,
-                width: width / 12,
+                height: 40,
+                width:50,
                 fit: BoxFit.contain,
                 allowDrawingOutsideViewBox: true,
               ),
@@ -155,8 +166,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       body: Center(
         child: SizedBox(
-          width: width / 2,
-          height: height / 4,
+          width: 300,
+          height: 130,
           child: InkWell(
             onTap: () {
               Get.toNamed('/homeScreen');

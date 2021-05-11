@@ -1,5 +1,6 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -29,7 +30,29 @@ class _LoginScreenState extends State<LoginScreen> {
       selectedRadioTile = val;
     });
   }
+  @override
+  void initState() {
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+
+    super.initState();
+  }
+  @override
+  dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -58,8 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: EdgeInsets.only(
                   top: (height) * 0.05,
-                  left: (width) * 0.30,
-                  right: (width) * 0.30,
+                  left: (width) * 0.22,
+                  right: (width) * 0.22,
                   bottom: (height) * 0.05),
               child: Card(
                 elevation: 6.0,

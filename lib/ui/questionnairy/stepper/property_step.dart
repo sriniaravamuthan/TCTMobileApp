@@ -135,7 +135,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         height: 58,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
+                              left: 2.0, right: 16.0),
                           child: AutoCompleteTextField(
                               controller: statusHouseController,
                               clearOnSubmit: false,
@@ -294,7 +294,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 1,
+                  widthFactor: 1.05,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -345,7 +345,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 1,
+                  widthFactor: 1.05,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -980,7 +980,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.75,
+                    widthFactor: 0.85,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1164,9 +1164,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                   ),
                 ),
               ),
-              Container(
-                width: 220,
-              )
+
             ],
           ),
         ],
