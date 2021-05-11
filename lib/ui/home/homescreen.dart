@@ -270,7 +270,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.gender= family[i]["gender"];
                _family.govtInsurance= family[i]["govtInsurance"];
                _family.mail= family[i]["mail"];
-               _family.maritalStatus= family[i]["maritalStatus "];
+               if (family[i]["maritalStatus "] == "null")
+                 _family.maritalStatus= "";
+               else
+                 _family.maritalStatus= family[i]["maritalStatus "];
                _family.mobileNumber= family[i]["mobileNumber"];
                _family.name= family[i]["name"];
                _family.occupation= family[i]["occupation"];
@@ -830,6 +833,7 @@ class DataTableRow extends DataTableSource {
         index: index,
         onSelectChanged: (bool selected) {
           if (selected) {
+            makeLoadData();
             Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true]).then((value) => clearSearch());
           }
         },
