@@ -472,7 +472,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       // Get.toNamed('/questionnery');
                                       loadData = true;
-                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false],).then((value) async => {clearSearch()});
+                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false,makeLoadData],).then((value) async => {clearSearch()});
                                       // Navigator.pushReplacementNamed(context, "/questionnery");
                                     },
                                     child: Container(
@@ -927,7 +927,7 @@ class DataTableRow extends DataTableSource {
                     onTap: () {
                       // Get.toNamed('/questionnery',);
                       makeLoadData();
-                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId[index], true],).then((value) => clearSearch());
+                      Get.toNamed('/questionnery', arguments: [demographicList[index] , streets, documentId[index], true,makeLoadData],).then((value) => clearSearch());
                       // Navigator.pushReplacementNamed(context, "/questionnery");
                     },
                     child: Icon(
