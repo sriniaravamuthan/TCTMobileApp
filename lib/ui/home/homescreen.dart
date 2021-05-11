@@ -270,7 +270,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.gender= family[i]["gender"];
                _family.govtInsurance= family[i]["govtInsurance"];
                _family.mail= family[i]["mail"];
-               _family.maritalStatus= family[i]["maritalStatus"];
+               _family.maritalStatus= family[i]["maritalStatus "];
                _family.mobileNumber= family[i]["mobileNumber"];
                _family.name= family[i]["name"];
                _family.occupation= family[i]["occupation"];
