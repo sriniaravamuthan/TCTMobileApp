@@ -8,6 +8,7 @@
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cupertino_stepper/cupertino_stepper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -344,9 +345,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                   ),
                 ),
                 Expanded(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(height: 50.0),
-                    child: Stepper(
+                  child: SizedBox(
+                    height: 50,
+                    child: CupertinoStepper(
                       type: StepperType.horizontal,
                       physics: ClampingScrollPhysics(),
                       currentStep: this._currentStep,
