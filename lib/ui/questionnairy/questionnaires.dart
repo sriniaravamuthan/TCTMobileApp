@@ -69,6 +69,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   List<String> streets = [];
   String documentId = "";
   bool isEdit = false;
+  Function makeLoadData;
 
   @override
   void initState() {
@@ -100,6 +101,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     streets = arguments[1];
     documentId = arguments[2];
     isEdit = arguments[3];
+    makeLoadData = arguments[4];
     debugPrint("isEdit" + isEdit.toString());
 
 
@@ -2089,6 +2091,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       fireStoreService.createFamily(demographicFamily).then((value) =>
       {if (value) {
           Navigator.pop(context, false),
+        // makeLoadData(),
+        // Get.offAndToNamed('/homeScreen'),
       showAddSuccess()
       } else {
         snackBarAlert(error, "Failed to Add", errorColor)
@@ -2099,7 +2103,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       fireStoreService.updateFamily(demographicFamily,documentId).then((value) =>
       {if (value) {
           Navigator.pop(context, false),
-
+        makeLoadData(),
+        // Get.offAndToNamed('/homeScreen'),
       showUpdateSuccess()
       }  else {
         snackBarAlert(error, "Failed to Update", errorColor)

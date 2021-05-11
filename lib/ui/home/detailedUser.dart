@@ -34,6 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
   List<String> streets = [];
   String documentId ="";
   bool isEdit = false;
+  Function makeLoadData;
 
   @override
   void initState() {
@@ -48,6 +49,7 @@ class _DetailScreenState extends State<DetailScreen> {
     streets = arguments[1];
     documentId = arguments[2];
     isEdit = arguments[3];
+    makeLoadData = arguments[4];
 
     debugPrint("demographicList:${demographicList.location.contactPerson}");
     super.initState();
@@ -1477,7 +1479,7 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
           backgroundColor: primaryColor,
           onPressed: () {
-            Get.offAndToNamed('/questionnery', arguments: [demographicList , streets, documentId, true],);
+            Get.offAndToNamed('/questionnery', arguments: [demographicList , streets, documentId, true, makeLoadData],);
 
             setState(() {
             });

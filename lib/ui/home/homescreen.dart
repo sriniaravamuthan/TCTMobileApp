@@ -660,7 +660,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   void makeLoadData() {
-    loadData = true;
+    setState(() {
+      loadData = true;
+    });
   }
   
   void clearSearch() {
@@ -834,7 +836,7 @@ class DataTableRow extends DataTableSource {
         onSelectChanged: (bool selected) {
           if (selected) {
             makeLoadData();
-            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true]).then((value) => clearSearch());
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true, makeLoadData]).then((value) => clearSearch());
           }
         },
         cells: [
