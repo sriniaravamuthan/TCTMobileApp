@@ -16,6 +16,7 @@ import 'package:tct_demographics/ui/home/dashboardScreen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
 import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 import 'localization/localization.dart';
@@ -59,16 +60,34 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void getLanguage() async {
+    String language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+    if (language == "ta") {
+      _locale = Locale('ta', 'IN');
+    } else {
+      _locale = Locale('en', 'US');
+    }
+  }
+
+  @override
+  void initState() {
+    getLanguage();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // String language = await SharedPref().getStringPref(SharedPref().language);
+    // _locale = "";
+
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
-          create: (context) =>
-              context.read<AuthenticationService>().authStateChanges,
+          create: (context) => context.read<AuthenticationService>().authStateChanges,
           initialData: null,
         )
       ],
@@ -96,10 +115,7 @@ class _MyAppState extends State<MyApp> {
                       ],
                       localeResolutionCallback: (locale, supportedLocales) {
                         for (var supportedLocaleLanguage in supportedLocales) {
-                          if (supportedLocaleLanguage.languageCode ==
-                                  locale.languageCode &&
-                              supportedLocaleLanguage.countryCode ==
-                                  locale.countryCode) {
+                          if (supportedLocaleLanguage.languageCode == locale.languageCode && supportedLocaleLanguage.countryCode == locale.countryCode) {
                             return supportedLocaleLanguage;
                           }
                         }
@@ -109,13 +125,9 @@ class _MyAppState extends State<MyApp> {
                       home: AuthenticationWrapper(),
                       getPages: [
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
-                        GetPage(
-                            name: '/loginScreen', page: () => LoginScreen()),
-                        GetPage(
-                            name: '/questionnery',
-                            page: () => QuestionnairesScreen()),
-                        GetPage(
-                            name: '/DetailScreen', page: () => DetailScreen()),
+                        GetPage(name: '/loginScreen', page: () => LoginScreen()),
+                        GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
+                        GetPage(name: '/DetailScreen', page: () => DetailScreen()),
                       ],
                     )
                   : MaterialApp(
