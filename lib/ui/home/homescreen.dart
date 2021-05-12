@@ -677,6 +677,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     users.clear();
     _demographicList.clear();
     streets.clear();
+    documentId.clear();
     query = firestoreInstance.collection('demographicData');
     setState(() {});
   }
@@ -687,6 +688,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     users.clear();
     _demographicList.clear();
     streets.clear();
+    documentId.clear();
 
     if (mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
       query = firestoreInstance.collection('demographicData');
@@ -843,7 +845,7 @@ class DataTableRow extends DataTableSource {
         onSelectChanged: (bool selected) {
           if (selected) {
             makeLoadData();
-            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true, makeLoadData]).then((value) => clearSearch());
+            Get.toNamed('/DetailScreen', arguments: [demographicList[index] , streets, documentId[index], true, makeLoadData,users [index]["status"]]).then((value) => clearSearch());
           }
         },
         cells: [
@@ -969,10 +971,10 @@ class DataTableRow extends DataTableSource {
   }
 
   @override
-  bool get isRowCountApproximate => true;
+  bool get isRowCountApproximate => false;
 
   void deleteDoc(int index) {
-    debugPrint("DocumetId:${documentId[index]}");
+    debugPrint("delete DocumetId:${documentId[index]}");
     FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
       clearSearch();
       showDeleteSuccess();
@@ -980,7 +982,7 @@ class DataTableRow extends DataTableSource {
   }
 
   @override
-  int get rowCount => 100;
+  int get rowCount => users.length;
 
   @override
   int get selectedRowCount => 0;

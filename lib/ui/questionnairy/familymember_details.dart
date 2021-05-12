@@ -111,14 +111,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
         Visibility(
             visible: familyList.isNotEmpty,
             child:
-                // FutureBuilder(
-                //   future: refreshFamilyList(family),
-                //   builder: (context, projectSnap) {
-                //     if (projectSnap.connectionState == ConnectionState.waiting) {
-                //       return Center(child: CircularProgressIndicator());
-                //     } else if (projectSnap.connectionState == ConnectionState.done) {
-                //
-                //       return
+
                 ListView.builder(
               itemCount: familyList.length,
               physics: BouncingScrollPhysics(),

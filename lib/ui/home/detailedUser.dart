@@ -34,6 +34,8 @@ class _DetailScreenState extends State<DetailScreen> {
   List<String> streets = [];
   String documentId ="";
   bool isEdit = false;
+  bool isStatus = false;
+
   Function makeLoadData;
 
   @override
@@ -50,6 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
     documentId = arguments[2];
     isEdit = arguments[3];
     makeLoadData = arguments[4];
+    isStatus=arguments[5];
 
     debugPrint("demographicList:${demographicList.location.contactPerson}");
     super.initState();
@@ -202,8 +205,15 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 30.0),
-                            child: TextWidget(
-                              text: "*IN PROGRESS",
+                            child: isStatus==true?TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Completed'),
+                              color: successColor,
+                              weight: FontWeight.w600,
+                              size: 18,
+                            ):TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('In Progress'),
                               color: yellowColor,
                               weight: FontWeight.w600,
                               size: 18,
@@ -569,6 +579,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 ],
                                               ),
                                             ),
+                                            Container(width: 130,),
                                           ],
                                         ),
                                       )
@@ -590,8 +601,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             left: 16.0, top: 8.0),
                                         child: TextWidget(
                                           text: DemoLocalization.of(context)
-                                              .translate('Property Details')
-                                              .toUpperCase(),
+                                              .translate('Property Details'),
                                           size: 16,
                                           color: darkColor,
                                           weight: FontWeight.w800,
@@ -874,6 +884,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 ],
                                               ),
                                             ),
+                                            Container(width: 70,),
+
                                           ],
                                         ),
                                       )
@@ -896,8 +908,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             left: 16.0, top: 8.0),
                                         child: TextWidget(
                                           text: DemoLocalization.of(context)
-                                              .translate('Habits')
-                                              .toUpperCase(),
+                                              .translate('Habits'),
                                           size: 16,
                                           color: darkColor,
                                           weight: FontWeight.w800,
@@ -1008,7 +1019,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       ),
                                                     )
                                                   ],
-                                                )
+                                                ),
+                                                Container(width: 70,),
+
                                               ],
                                             ),
                                           ),
@@ -1109,7 +1122,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       ),
                                                     )
                                                   ],
-                                                )
+                                                ),
+                                                Container(width: 70,),
+
                                               ],
                                             ),
                                           ),

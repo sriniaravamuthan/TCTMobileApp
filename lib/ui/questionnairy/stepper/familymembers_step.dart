@@ -617,7 +617,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       height: 58,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16.0, ),
+                                            right: 16.0),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -1441,6 +1441,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
+                                  validator: (value) {
+                                    if (value.isNotEmpty) {
+
+                                        if (value.length != 10)
+                                          return 'Enter a valid mobile!';
+
+                                    }
+                                    return null;
+                                  }
                               ),
                             ),
                           ),
@@ -1509,7 +1518,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.emailAddress,
                                 onSaved: (String val) {
-                                  setState(() {});
+                                  setState(() {
+                                    mailController.text=val;
+                                  });
                                 },
                                 validator: (value) {
                                   if (value.isNotEmpty) {
@@ -2061,7 +2072,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       setState(() {
                         this.isLoading = true;
                       });
-                      uploadFile();
+                      if (_stepTwoKey.currentState.validate()) {
+                        if (_stepTwoKey != null) {
+                          _stepTwoKey.currentState.save();
+                          uploadFile();
+                        }
+                      }
+
                     },
                     child: Container(
                       decoration: BoxDecoration(
