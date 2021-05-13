@@ -525,6 +525,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   void cancelFields() {
     setState(() {
       addfamily = false;
+      familyIndex = -1;
     });
   }
 
