@@ -617,7 +617,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       height: 58,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16.0, top: 2.0, bottom: 2.0),
+                                            right: 16.0, ),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 
@@ -37,11 +38,29 @@ class _SplashScreenState extends State<SplashScreen> {
       // Navigator.pushReplacementNamed(context, "/loginScreen");
     }
   }
-
   @override
   void initState() {
     startTime();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+
     super.initState();
+  }
+  @override
+  dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
   }
 
   @override
@@ -60,8 +79,8 @@ class _SplashScreenState extends State<SplashScreen> {
           child: SvgPicture.asset(
             svgTctLogo,
             semanticsLabel: "Logo",
-            height: height / 3,
-            width: width / 3,
+            height:150,
+            width:150,
             fit: BoxFit.contain,
             allowDrawingOutsideViewBox: true,
           ),

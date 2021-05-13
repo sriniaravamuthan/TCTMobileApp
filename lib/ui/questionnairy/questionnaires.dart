@@ -86,6 +86,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
     fromNoController = TextEditingController();
     projectCodeController = TextEditingController();
@@ -177,6 +179,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     super.initState();
   }
+  @override
+  dispose(){
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -196,8 +208,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                 SvgPicture.asset(
                   svgTctLogo,
                   semanticsLabel: "Logo",
-                  height: height / 12,
-                  width: width / 12,
+                  height: 40,
+                  width:50,
                   fit: BoxFit.contain,
                   allowDrawingOutsideViewBox: true,
                 ),
