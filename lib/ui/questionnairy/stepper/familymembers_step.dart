@@ -598,7 +598,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Align(
                               alignment: Alignment.center,
                               child: FractionallySizedBox(
-                                widthFactor: 1,
+                                widthFactor: 1.05,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -625,9 +625,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                     SizedBox(
                                       height: 58,
+                                      width: 250,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16.0),
+                                            right: 1.0,top:1,bottom: 1),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -698,7 +699,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             child: Align(
                               alignment: Alignment.topRight,
                               child: FractionallySizedBox(
-                                widthFactor: 1,
+                                widthFactor: 0.75,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -725,12 +726,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                     SizedBox(
                                       height: 54,
-                                      width: 120,
+                                      width: 100,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
                                             right: 16.0, top: 2.0, bottom: 2.0),
                                         child: TextFormField(
-                                          maxLength: 2,
+                                          maxLength: 3,
                                           controller: ageController,
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -768,7 +769,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                     color: lightGreyColor),
                                               ),
                                               fillColor: lightGreyColor),
-                                          keyboardType: TextInputType.text,
+                                          keyboardType: TextInputType.number,
                                           onSaved: (String val) {
                                             setState(() {
                                               ageController.text = val;
@@ -2013,6 +2014,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+              ],
+            ),
+            Row(
+              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.topRight,
@@ -2069,11 +2074,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-            Row(
-              children: [
+                ),
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1.05,
@@ -2174,6 +2175,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1.05,
@@ -2277,12 +2285,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
@@ -2366,6 +2368,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+                // Expanded(
+                //   child: SizedBox(
+                //     height: MediaQuery.of(context)
+                //         .viewInsets
+                //         .bottom,
+                //   ),
+                // ),
+                // Expanded(
+                //   child: SizedBox(
+                //     height: MediaQuery.of(context)
+                //         .viewInsets
+                //         .bottom,
+                //   ),
+                // ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
@@ -2385,6 +2406,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                           SizedBox(
                             height: 58,
+                            width: 180,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, top: 2.0, bottom: 2.0),
@@ -2451,71 +2473,23 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: SizedBox(
-                    height: MediaQuery.of(context)
-                        .viewInsets
-                        .bottom,
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    height: MediaQuery.of(context)
-                        .viewInsets
-                        .bottom,
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24.0, left: 24.0),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        this.isLoading = true;
-                      });
-                      if (_stepTwoKey.currentState.validate()) {
-                        if (_stepTwoKey != null) {
-                          _stepTwoKey.currentState.save();
-                          uploadFile();
-                        }
-                      }
 
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.black45,
-                          style: BorderStyle.solid,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.done),
-                          Padding(
-                            padding: const EdgeInsets.all(6.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Save'),
-                              color: darkColor,
-                              weight: FontWeight.w700,
-                              size: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: InkWell(
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+
+                    InkWell(
                       onTap: () {
-                        widget.cancelFields();
+                        setState(() {
+                          this.isLoading = true;
+                        });
+                        if (_stepTwoKey.currentState.validate()) {
+                          if (_stepTwoKey != null) {
+                            _stepTwoKey.currentState.save();
+                            uploadFile();
+                          }
+                        }
+
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -2528,12 +2502,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.cancel_outlined),
+                            Icon(Icons.done),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
-                                    .translate('Cancel'),
+                                    .translate('Save'),
                                 color: darkColor,
                                 weight: FontWeight.w700,
                                 size: 14,
@@ -2543,13 +2517,46 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                       ),
                     ),
-                  ),
-                  isLoading
-                      ? Container(margin: EdgeInsets.only(left: 10), child: CircularProgressIndicator())
-                      : Visibility(visible: false, child: Text("Saving")),
-                  Container()
-                ],
-              ),
+                    Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: InkWell(
+                        onTap: () {
+                          widget.cancelFields();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.black45,
+                              style: BorderStyle.solid,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.cancel_outlined),
+                              Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Cancel'),
+                                  color: darkColor,
+                                  weight: FontWeight.w700,
+                                  size: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    isLoading
+                        ? Container(margin: EdgeInsets.only(left: 10), child: CircularProgressIndicator())
+                        : Visibility(visible: false, child: Text("Saving")),
+                    Container()
+                  ],
+                ),
+              ],
             )
           ],
         ),

@@ -293,10 +293,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                            top: (height) * 0.02,
-                            left: (width) * 0.02,
-                            right: (width) * 0.02,
-                            bottom: (height) * 0.02,
+                            top: (height) * 0.01,
+                            left: (width) * 0.01,
+                            right: (width) * 0.01,
+                            bottom: (height) * 0.01,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -362,6 +362,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               ),
                             ],
                           ),
+                        ),
+                        Padding(
+                          padding:  EdgeInsets.only( bottom: (height) * 0.01),
+                          child: Divider(height: 1,),
                         ),
                         Form(
                           key: _formKey,
@@ -1710,7 +1714,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                     child: Align(
                                       alignment: Alignment.topLeft,
                                       child: FractionallySizedBox(
-                                        widthFactor: 0.25,
+                                        widthFactor: 0.50,
                                         child: Column(
                                           crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -1729,7 +1733,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                             SizedBox(
                                               height: 58,
-                                              width: 120,
+                                              width: 150,
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 2,
@@ -1827,52 +1831,49 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                      alignment: Alignment.topRight,
-                                      child: Container())
+                                  Container(),                        Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: FloatingActionButton(
+                                          // isExtended: true,
+                                          child: Icon(
+                                            Icons.keyboard_arrow_right,
+                                            size: 30,
+                                            color: darkColor,
+                                          ),
+                                          backgroundColor: lightColor,
+                                          onPressed: () {
+                                            continued();
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: FloatingActionButton(
+                                          // isExtended: true,
+                                          child: Icon(
+                                            Icons.done,
+                                            size: 30,
+                                          ),
+                                          backgroundColor: primaryColor,
+                                          onPressed: () {
+                                            setState(() {
+                                              addData();
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
                               )
                             ],
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: FloatingActionButton(
-                                // isExtended: true,
-                                child: Icon(
-                                  Icons.keyboard_arrow_right,
-                                  size: 30,
-                                  color: darkColor,
-                                ),
-                                backgroundColor: lightColor,
-                                onPressed: () {
-                                  continued();
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: FloatingActionButton(
-                                // isExtended: true,
-                                child: Icon(
-                                  Icons.done,
-                                  size: 30,
-                                ),
-                                backgroundColor: primaryColor,
-                                onPressed: () {
-                                  setState(() {
-                                    addData();
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),
@@ -1950,6 +1951,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      Padding(
+                        padding:  EdgeInsets.only( bottom: (height) * 0.01),
+                        child: Divider(height: 1,),
                       ),
                       FamilyMemberDetails(demographicFamily),
                       Row(
@@ -2084,6 +2089,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                             ),
                           ],
                         ),
+                      ),
+                      Padding(
+                        padding:  EdgeInsets.only( bottom: (height) * 0.01),
+                        child: Divider(height: 1,),
                       ),
                       PropertyDetailStep(demographicFamily),
                       Row(
@@ -2305,24 +2314,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     })
         : null;
   }
-
-  /*Future<void> _getVillageCode(String text) async {
-    debugPrint(
-        "VillageCode:${FirebaseFirestore.instance.collection(collectionVillageCode).snapshots()}");
-    QuerySnapshot querySnapshot =
-        await firestoreInstance.collection('demographicData').get();
-    // Get data from docs and convert map to List
-    print("villageCodeList2:$querySnapshot");
-
-    villageCodeList = querySnapshot.docs.map((doc) => doc.data()).toList();
-    print("villageCodeList:$villageCodeList");
-    villageCodeList.forEach((element) {
-      LinkedHashMap<String, dynamic> data = element['location'];
-      values = data.values.toList();
-
-      print("villageCodeList1:${values.last}");
-    });
-  }*/
 
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
