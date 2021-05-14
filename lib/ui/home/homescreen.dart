@@ -437,52 +437,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                                  // SizedBox(
-                                  //   width: 10,
-                                  // ),
-                                  // InkWell(
-                                  //   onTap: () {
-                                  //     showDialog(
-                                  //         context: context,
-                                  //         builder: (BuildContext context) {
-                                  //           return FilterDialog();
-                                  //         });
-                                  //   },
-                                  //   child: Container(
-                                  //     decoration: BoxDecoration(
-                                  //       borderRadius: BorderRadius.circular(50),
-                                  //       border: Border.all(
-                                  //         color: Colors.black45,
-                                  //         style: BorderStyle.solid,
-                                  //         width: 1.0,
-                                  //       ),
-                                  //     ),
-                                  //     child: Padding(
-                                  //       padding: const EdgeInsets.all(6.0),
-                                  //       child: Row(
-                                  //         children: [
-                                  //           Icon(Icons.filter_list_sharp),
-                                  //           SizedBox(
-                                  //             width: 5,
-                                  //           ),
-                                  //           TextWidget(
-                                  //             text: DemoLocalization.of(context)
-                                  //                 .translate('Filter'),
-                                  //             color: darkColor,
-                                  //             weight: FontWeight.w800,
-                                  //             size: 14,
-                                  //           ),
-                                  //         ],
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      // Get.toNamed('/questionnery');
                                       loadData = true;
                                       Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false,makeLoadData],).then((value) async => {clearSearch()});
                                       // Navigator.pushReplacementNamed(context, "/questionnery");
@@ -528,113 +487,116 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                       Expanded(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
-                          child: PaginatedDataTable(
-                            columnSpacing: 20.0,
-                            showCheckboxColumn: false,
-                            columns: [
-                              DataColumn(
-                                  label: SizedBox(
-                                width: 100,
-                                child: Center(
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Family Head'),
-                                    color: darkColor,
-                                    size: 16,
-                                    weight: FontWeight.w700,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                            children: [
+                              PaginatedDataTable(
+                                columnSpacing: 0.05,
+                                showCheckboxColumn: false,
+                                horizontalMargin: 0.0,
+                                columns: [
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 96,
+                                    child: Center(
+                                      child: Padding(
+                                        padding:  EdgeInsets.only(right:1.0),
+                                        child: TextWidget(
+                                          text: DemoLocalization.of(context)
+                                              .translate('Family Head'),
+                                          color: darkColor,
+                                          size: 16,
+                                          weight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 57,
+                                        child: Padding(
+                                          padding:  EdgeInsets.only(right:1.0),
+                                          child: Center(
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Age'),
+                                              color: darkColor,
+                                              size: 16,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                   ),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: SizedBox(
-                                    width: 100,
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 95,
+                                        child: Padding(
+                                          padding:  EdgeInsets.only(left:6.0),
+                                          child: Center(
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Mobile No'),
+                                              color: darkColor,
+                                              size: 16,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                     ),
+                                  DataColumn(
+                                      label: SizedBox(
+                                        width: 96,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Village Code'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                     ),
+
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 66,
                                     child: Center(
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
-                                            .translate('Age'),
+                                            .translate('Status'),
                                         color: darkColor,
                                         size: 16,
                                         weight: FontWeight.w700,
                                       ),
                                     ),
-                                  ),
-                                  numeric: true),
-                              DataColumn(
-                                  label: SizedBox(
-                                    width: 100,
+                                  )),
+                                  DataColumn(
+                                      label: SizedBox(
+                                    width: 70,
                                     child: Center(
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
-                                            .translate('Mobile No'),
+                                            .translate('Action'),
                                         color: darkColor,
                                         size: 16,
                                         weight: FontWeight.w700,
                                       ),
                                     ),
-                                  ),
-                                  numeric: true),
-                              DataColumn(
-                                  label: SizedBox(
-                                    width: 140,
-                                    child: Center(
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Village Code'),
-                                        color: darkColor,
-                                        size: 16,
-                                        weight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  numeric: true),
-                              // DataColumn(
-                              //     label: SizedBox(
-                              //       width: 100,
-                              //       child: Center(
-                              //         child: TextWidget(
-                              //           text: DemoLocalization.of(context)
-                              //               .translate('Zone'),
-                              //           color: darkColor,
-                              //           size: 16,
-                              //           weight: FontWeight.w700,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //     numeric: true),
-                              DataColumn(
-                                  label: SizedBox(
-                                width: 100,
-                                child: Center(
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Status'),
-                                    color: darkColor,
-                                    size: 16,
-                                    weight: FontWeight.w700,
-                                  ),
-                                ),
-                              )),
-                              DataColumn(
-                                  label: SizedBox(
-                                width: 100,
-                                child: Center(
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Action'),
-                                    color: darkColor,
-                                    size: 16,
-                                    weight: FontWeight.w700,
-                                  ),
-                                ),
-                              )),
+                                  )),
+                                ],
+                                source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch, makeLoadData),
+                                onRowsPerPageChanged: (r) {
+                                  setState(() {
+                                    _rowPerPage = r;
+                                  });
+                                },
+                                rowsPerPage: _rowPerPage,
+                              ),
                             ],
-                            source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch, makeLoadData),
-                            onRowsPerPageChanged: (r) {
-                              setState(() {
-                                _rowPerPage = r;
-                              });
-                            },
-                            rowsPerPage: _rowPerPage,
                           ),
                         ),
                       ),
@@ -854,7 +816,7 @@ class DataTableRow extends DataTableSource {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: SizedBox(
-                    width: 100,
+                    width: 96,
                     child: TextWidget(
                       text: users[index]['name'],
                       color: darkGreyColor,
@@ -865,7 +827,7 @@ class DataTableRow extends DataTableSource {
             ],
           )),
           DataCell(SizedBox(
-            width: 100,
+            width: 55,
             child: Center(
               child: TextWidget(
                 text: users[index]['age'].toString(),
@@ -876,7 +838,7 @@ class DataTableRow extends DataTableSource {
             ),
           )),
           DataCell(SizedBox(
-            width: 100,
+            width: 95,
             child: Center(
               child: TextWidget(
                 text: users[index]['mobileNumber'],
@@ -887,12 +849,14 @@ class DataTableRow extends DataTableSource {
             ),
           )),
           DataCell(SizedBox(
-            width: 100,
-            child: TextWidget(
-              text: users[index]['villageCode'],
-              color: darkGreyColor,
-              size: 16,
-              weight: FontWeight.w600,
+            width: 70,
+            child: Center(
+              child: TextWidget(
+                text: users[index]['villageCode'],
+                color: darkGreyColor,
+                size: 16,
+                weight: FontWeight.w600,
+              ),
             ),
           )),
           // DataCell(SizedBox(
@@ -907,7 +871,7 @@ class DataTableRow extends DataTableSource {
           //   ),
           // )),
           DataCell(SizedBox(
-            width: 100,
+            width: 60,
             child: Center(
               child:users [index]["status"]==true?SvgPicture.asset(
                 svgComplete,
@@ -927,7 +891,7 @@ class DataTableRow extends DataTableSource {
             ),
           )),
           DataCell(SizedBox(
-            width: 100,
+            width: 65,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
