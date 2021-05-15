@@ -247,11 +247,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, right: 4),
+                                        padding: const EdgeInsets.only(left: 4, right: 4),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.all(4.0),
@@ -271,6 +269,35 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 width: 120,
                                                 child: TextWidget(
                                                   text: demographicList.location.formNo,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 120,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(context).translate('Panchayat No'),
+                                                  size: 14,
+                                                  color: darkGreyColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 120,
+                                                child: TextWidget(
+                                                  text: demographicList.location.panchayatNo.toString(),
                                                   size: 14,
                                                   color: darkColor,
                                                   weight: FontWeight.w400,
@@ -322,10 +349,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Project Code No'),
+                                                  text: DemoLocalization.of(context).translate('Project Code No'),
                                                   size: 14,
                                                   color: darkGreyColor,
                                                   weight: FontWeight.w700,
@@ -350,14 +374,40 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                             Padding(
                                               padding:
+                                              const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 120,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(context).translate('Panchayat Code'),
+                                                  size: 14,
+                                                  color: darkGreyColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 120,
+                                                child: TextWidget(
+                                                  text:demographicList.location.panchayatCode,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Padding(
+                                              padding:
                                                   const EdgeInsets.all(4.0),
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Street Name'),
+                                                  text: DemoLocalization.of(context).translate('Street Name'),
                                                   size: 14,
                                                   color: darkGreyColor,
                                                   weight: FontWeight.w700,
@@ -393,10 +443,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Village Code'),
+                                                  text: DemoLocalization.of(context).translate('Village Code'),
                                                   size: 14,
                                                   color: darkGreyColor,
                                                   weight: FontWeight.w700,
@@ -419,29 +466,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                             SizedBox(
                                               height: 10,
                                             ),
-                                            Container(
-                                              height: 50,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
+                                              const EdgeInsets.all(4.0),
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Panchayat No'),
+                                                  text: DemoLocalization.of(context).translate('Village Name'),
                                                   size: 14,
                                                   color: darkGreyColor,
                                                   weight: FontWeight.w700,
@@ -450,39 +481,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: demographicList.location.panchayatNo.toString(),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Village Name'),
-                                                  size: 14,
-                                                  color: darkGreyColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
+                                              const EdgeInsets.all(4.0),
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
@@ -493,58 +492,16 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, right: 4, bottom: 4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Panchayat Code'),
-                                                  size: 14,
-                                                  color: darkGreyColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text:demographicList.location.panchayatCode,
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
                                             SizedBox(
                                               height: 10,
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
+                                              const EdgeInsets.all(4.0),
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                          context)
-                                                      .translate(
-                                                          'Contact Person'),
+                                                  text: DemoLocalization.of(context).translate('Contact Person'),
                                                   size: 14,
                                                   color: darkGreyColor,
                                                   weight: FontWeight.w700,
@@ -553,7 +510,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
+                                              const EdgeInsets.all(4.0),
                                               child: SizedBox(
                                                 width: 120,
                                                 child: TextWidget(
@@ -567,7 +524,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                           ],
                                         ),
                                       ),
-                                      // Container(width: 130,),
                                     ],
                                   ),
                                 )
