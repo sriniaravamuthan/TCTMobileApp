@@ -401,6 +401,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                     bottom: 2.0),
                                                 child: TextFormField(
                                                   controller: fromNoController,
+                                                  readOnly: isEdit,
                                                   maxLength: 4,
                                                   textInputAction:
                                                   TextInputAction.next,
@@ -516,6 +517,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 child: TextFormField(
                                                   controller:
                                                   projectCodeController,
+                                                  readOnly: isEdit,
                                                   maxLength: 1,
                                                   textInputAction:
                                                   TextInputAction.next,

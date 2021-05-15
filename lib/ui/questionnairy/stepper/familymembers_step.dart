@@ -1081,9 +1081,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50))),
-                                child: _image == null
-                                    ? Image.asset(imgCamera)
-                                    : Image.file(_image)),
+                                child: family.photo == "" ?
+                                _image == null ? Image.asset(imgCamera) : Image.file(_image)
+                                  : Image.network(family.photo,fit: BoxFit.fill)),
                           ),
                         ),
                       ],
@@ -2451,6 +2451,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       relationshipController.text = family.relationship.toString();
       genderController.text = family.gender.toString();
       dobController.text = family.dob.toString();
+      datePicker.text = family.dob.toString();
       ageController.text = family.age.toString();
       maritalStatusController.text = family.maritalStatus.toString();
       bloodGroupController.text = family.bloodGroup.toString();
