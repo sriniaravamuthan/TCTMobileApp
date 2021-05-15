@@ -1086,7 +1086,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     children: [
                                                       Padding(
                                                         padding: const EdgeInsets.all(8.0),
-                                                        child:                                   Container(
+                                                        child:Container(
                                                             height: 140,
                                                             width: 120,
                                                             decoration: BoxDecoration(
@@ -1097,8 +1097,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 :demographicList.family[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill):demographicList.family[index].gender=="Male" || demographicList.family[index].gender=="ஆண்"?SvgPicture.asset(
                                                               svgMan,
                                                               semanticsLabel: "Logo",
-                                                              height: height / 10,
-                                                              width: width / 10,
+                                                              height: height / 12,
+                                                              width: width / 8,
                                                               fit: BoxFit.contain,
                                                               allowDrawingOutsideViewBox: true,
                                                             ):SvgPicture.asset(
@@ -1111,7 +1111,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             ) ),
                                                       ),
                                                       Padding(
-                                                        padding: const EdgeInsets.all(8.0),
+                                                        padding: const EdgeInsets.all(4.0),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
@@ -1162,17 +1162,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
-                                                            SizedBox(
-                                                              height: 58,
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(8.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
+                                                            SizedBox(height: 10,),
                                                             Padding(
                                                               padding: EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1192,6 +1182,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                            SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1205,7 +1196,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: SizedBox(
-                                                                width: 150,
+                                                                width: 100,
                                                                 child: TextWidget(
                                                                   text: demographicList.family[index].occupation,
                                                                   weight: FontWeight.w400,
@@ -1214,6 +1205,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 ),
                                                               ),
                                                             ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(4.0),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1233,6 +1232,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                            SizedBox(height: 10,),
+
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1252,15 +1253,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(8.0),
-                                                        child: Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
+                                                            SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1280,14 +1273,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                            SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context)
-                                                                    .translate('Annual Income'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 120,
+                                                                child: TextWidget(
+                                                                  text: DemoLocalization.of(context)
+                                                                      .translate('Annual Income'),
+                                                                  weight: FontWeight.w800,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
@@ -1300,6 +1297,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1319,6 +1324,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                            SizedBox(height: 10,),
+
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1341,15 +1348,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 ),
                                                               ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(8.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          children: [
+                                                            SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
@@ -1369,6 +1368,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
+                                                            SizedBox(height: 10,),
+
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: SizedBox(
@@ -1391,12 +1392,19 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 size: 14,
                                                               ),
                                                             ),
-                                                            SizedBox(
-                                                              height: 80,
-                                                            )
                                                           ],
                                                         ),
-                                                      )
+                                                      ),
+                                                      // Padding(
+                                                      //   padding: const EdgeInsets.all(4.0),
+                                                      //   child: Column(
+                                                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //     mainAxisAlignment: MainAxisAlignment.start,
+                                                      //     children: [
+                                                      //       //habit
+                                                      //     ],
+                                                      //   ),
+                                                      // )
                                                     ],
                                                   ),
                                                   Divider(
