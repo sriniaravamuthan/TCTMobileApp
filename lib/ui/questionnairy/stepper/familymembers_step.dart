@@ -66,6 +66,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String widowedPension = "";
   String retirementPension = "";
 
+  String textSmoke = "";
+  String textDrink = "";
+  String textTobacco = "";
+  String textVaccine = "";
+
+  double drinkValue = 0;
+  TextEditingController firstDosePicker = TextEditingController();
+  DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
+  TextEditingController secondDosePicker = TextEditingController();
+
   List<dynamic> values;
   List genderList = [],
       genderListLang = [],
@@ -90,7 +100,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityVal;
   int ageVal;
   TextEditingController datePicker = TextEditingController();
-  DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
+  // DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   String gender = "";
   File _image;
   final picker = ImagePicker();
@@ -2062,6 +2072,401 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 )
               ],
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.05,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Any Members who Smoke?'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.anyMembersWhoSmoke,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: textSmoke,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.05,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Any Members who Drink?'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.anyMembersWhoDrink,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch1(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: textDrink,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.05,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Any Members who use Tobacco?'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape:
+                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.anyMembersWhoUseTobacco,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch2(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: textTobacco,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.05,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate("Vaccination Done") ,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: family.isVaccinationDone,
+                                  min: 0,
+                                  max: 2,
+                                  divisions: 2,
+                                  onChanged: (value) {
+                                    toggleSwitch3(value);
+                                  },
+                                ),
+                              ),
+                              TextWidget(
+                                text: textVaccine,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextWidget(
+                              text:  DemoLocalization.of(context)
+                                  .translate("1st Dose Date") ,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: TextFormField(
+                                textInputAction: TextInputAction.next,
+                                autocorrect: true,
+                                controller: firstDosePicker,
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
+                                keyboardType: TextInputType.text,
+                                onSaved: (String val) {
+                                  setState(() {});
+                                },
+                                onTap: () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+                                  date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2022));
+                                  String dateFormat =
+                                  DateFormat(" d-MMMM-y").format(date);
+                                  family.firstDose = dateFormat;
+                                  firstDosePicker.text = dateFormat;
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate("2nd Dose Date") ,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0, top: 2.0, bottom: 2.0),
+                              child: TextFormField(
+                                textInputAction: TextInputAction.next,
+                                autocorrect: true,
+                                controller: secondDosePicker,
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
+                                keyboardType: TextInputType.text,
+                                onSaved: (String val) {
+                                  setState(() {});
+                                },
+                                onTap: () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+
+                                  date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2022));
+                                  String dateFormat =
+                                  DateFormat(" d-MMMM-y").format(date);
+                                  secondDosePicker.text = dateFormat;
+                                  family.secondDose = dateFormat;
+                                  // "${date.day}/${date.month}/${date.year}";
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context)
+                        .viewInsets
+                        .bottom,
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: MediaQuery.of(context)
+                        .viewInsets
+                        .bottom,
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 24.0, left: 24.0),
               child: Row(
@@ -2233,6 +2638,54 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         retirementPension = DemoLocalization.of(context).translate('No');
       else
         retirementPension = DemoLocalization.of(context).translate('Yes');
+    });
+  }
+
+  void toggleSwitch(double value) {
+    family.anyMembersWhoSmoke = value;
+    setState(() {
+      if (value == 0)
+        textSmoke = DemoLocalization.of(context).translate('Not Answer');
+      else if (value == 1)
+        textSmoke = DemoLocalization.of(context).translate('No');
+      else
+        textSmoke = DemoLocalization.of(context).translate('Yes');
+    });
+  }
+
+  void toggleSwitch1(double value) {
+    family.anyMembersWhoDrink = value;
+    setState(() {
+      if (value == 0)
+        textDrink = DemoLocalization.of(context).translate('Not Answer');
+      else if (value == 1)
+        textDrink = DemoLocalization.of(context).translate('No');
+      else
+        textDrink = DemoLocalization.of(context).translate('Yes');
+    });
+  }
+
+  void toggleSwitch2(double value) {
+    family.anyMembersWhoUseTobacco = value;
+    setState(() {
+      if (value == 0)
+        textTobacco = DemoLocalization.of(context).translate('Not Answer');
+      else if (value == 1)
+        textTobacco = DemoLocalization.of(context).translate('No');
+      else
+        textTobacco = DemoLocalization.of(context).translate('Yes');
+    });
+  }
+
+  void toggleSwitch3(double value) {
+    family.isVaccinationDone = value;
+    setState(() {
+      if (value == 0)
+        textVaccine = DemoLocalization.of(context).translate('Not Answer');
+      else if (value == 1)
+        textVaccine = DemoLocalization.of(context).translate('No');
+      else
+        textVaccine = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -2446,6 +2899,34 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       else
         retirementPension = DemoLocalization.of(context).translate('Yes');
 
+      if (family.anyMembersWhoSmoke == 0)
+        textSmoke = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.anyMembersWhoSmoke == 1)
+        textSmoke = DemoLocalization.of(context).translate('No');
+      else
+        textSmoke = DemoLocalization.of(context).translate('Yes');
+
+      if (family.anyMembersWhoDrink == 0)
+        textDrink = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.anyMembersWhoDrink == 1)
+        textDrink = DemoLocalization.of(context).translate('No');
+      else
+        textDrink = DemoLocalization.of(context).translate('Yes');
+
+      if (family.anyMembersWhoUseTobacco == 0)
+        textTobacco = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.anyMembersWhoUseTobacco == 1)
+        textTobacco = DemoLocalization.of(context).translate('No');
+      else
+        textTobacco = DemoLocalization.of(context).translate('Yes');
+
+      if (family.isVaccinationDone == 0)
+        textVaccine = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.isVaccinationDone == 1)
+        textVaccine = DemoLocalization.of(context).translate('No');
+      else
+        textVaccine = DemoLocalization.of(context).translate('Yes');
+
       nameController.text = family.name.toString();
       aadharNumberController.text = family.aadharNumber.toString();
       relationshipController.text = family.relationship.toString();
@@ -2463,6 +2944,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       mailController.text = family.mail.toString();
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
+
+      firstDosePicker.text = family.firstDose;
+      secondDosePicker.text = family.secondDose;
     }
 
     getGender();

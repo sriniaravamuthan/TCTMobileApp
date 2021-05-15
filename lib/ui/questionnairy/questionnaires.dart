@@ -283,7 +283,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: PageView(
+              child: PageView (
+                physics:new NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 controller: pageController,
                 children: [
@@ -2103,7 +2104,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               },
                             ),
                           ),
-                          SizedBox(
+                          /*SizedBox(
                             height: 10,
                           ),
                           Padding(
@@ -2120,7 +2121,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                 continued();
                               },
                             ),
-                          ),
+                          ),*/
                           SizedBox(
                             height: 10,
                           ),
@@ -2144,7 +2145,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                       ),
                     ],
                   )),
-                  SingleChildScrollView(child: Column(
+                  /*SingleChildScrollView(child: Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
@@ -2262,7 +2263,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                         ],
                       ),
                     ],
-                  )),
+                  )),*/
                 ],
               ),
             ),

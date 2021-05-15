@@ -41,6 +41,13 @@ class FireStoreService {
         "oldPension": element.oldPension,
         "widowedPension": element.widowedPension,
         "retirementPension": element.retirementPension,
+
+        'anyMembersWhoSmoke': element.anyMembersWhoSmoke,
+        'anyMembersWhoDrink': element.anyMembersWhoDrink,
+        'anyMembersWhoUseTobacco': element.anyMembersWhoUseTobacco,
+        'isVaccinationDone': element.isVaccinationDone,
+        'firstDose': element.firstDose,
+        'secondDose': element.secondDose,
       };
       familyList.add(map);
     });
@@ -56,7 +63,7 @@ class FireStoreService {
       "createdDate":getTime(),
       "Location": createLocation(demographicFamily),
       "Property": createProperty(demographicFamily),
-      "habit":createHabit(demographicFamily),
+      // "habit":createHabit(demographicFamily),
       "familyMembers": createFamilyList(demographicFamily)
     };
 
@@ -72,7 +79,7 @@ class FireStoreService {
       "createdDate":getTime(),
       "Location": createLocation(demographicFamily),
       "Property": createProperty(demographicFamily),
-      "habit":createHabit(demographicFamily),
+      // "habit":createHabit(demographicFamily),
       "familyMembers": createFamilyList(demographicFamily)
     };
 

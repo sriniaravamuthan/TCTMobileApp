@@ -245,6 +245,13 @@ class Family {
   double widowedPension = 0;
   double retirementPension = 0;
 
+  double anyMembersWhoSmoke = 0;
+  double anyMembersWhoDrink = 0;
+  double anyMembersWhoUseTobacco = 0;
+  double isVaccinationDone = 0;
+  String firstDose;
+  String secondDose;
+
   Family(
       {this.name,
       this.aadharNumber,
@@ -263,7 +270,14 @@ class Family {
       this.smartphone,
       this.community,
       this.caste,
-      this.photo});
+      this.photo,
+
+      this.anyMembersWhoSmoke,
+      this.anyMembersWhoDrink,
+      this.anyMembersWhoUseTobacco,
+      this.isVaccinationDone,
+      this.firstDose,
+      this.secondDose});
 
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];
@@ -284,6 +298,13 @@ class Family {
     community = json['community '];
     caste = json['caste  '];
     photo = json['photo  '];
+
+    anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
+    anyMembersWhoDrink = json['anyMembersWhoDrink '];
+    anyMembersWhoUseTobacco = json['anyMembersWhoUseTobacco'];
+    isVaccinationDone = json['isVaccinationDone'];
+    firstDose = json['firstDose'];
+    secondDose = json['secondDose'];
   }
 
   Map<String, dynamic> toJson() {
@@ -306,6 +327,13 @@ class Family {
     data['community '] = this.community;
     data['caste  '] = this.caste;
     data['photo  '] = this.photo;
+
+    data['anyMembersWhoSmoke'] = this.anyMembersWhoSmoke;
+    data['anyMembersWhoDrink '] = this.anyMembersWhoDrink;
+    data['anyMembersWhoUseTobacco'] = this.anyMembersWhoUseTobacco;
+    data['isVaccinationDone'] = this.isVaccinationDone;
+    data['firstDose'] = this.firstDose;
+    data['secondDose'] = this.secondDose;
     return data;
   }
 }
