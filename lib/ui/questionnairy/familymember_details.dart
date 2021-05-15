@@ -12,7 +12,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
@@ -181,8 +180,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                         Padding(
                                           padding: const EdgeInsets.all(2.0),
                                           child: TextWidget(
-                                            text:
-                                                "${familyList[index].age.toString()},${familyList[index].dob.toString()}",
+                                            text: "${familyList[index].age == 0 ? "" : familyList[index].age.toString()}${familyList[index].dob.toString().length > 0 ? "," + familyList[index].dob.toString() : ""}",
                                             weight: FontWeight.w400,
                                             color: darkColor,
                                             size: 14,
@@ -193,7 +191,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                           child: SizedBox(
                                             width: 100,
                                             child: TextWidget(
-                                              text: "${familyList[index].gender} ,${familyList[index].bloodGroup},${familyList[index].maritalStatus != null ? familyList[index].maritalStatus : ""}",
+                                              text: getTexts(familyList[index]),
                                               weight: FontWeight.w400,
                                               color: darkColor,
                                               size: 14,
@@ -458,7 +456,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
@@ -481,7 +478,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields)),
+              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields, deleteFields)),
         ),
       ],
     );
@@ -549,6 +546,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
     });
   }
 
+  void deleteFields(Family family) {
+    setState(() {
+      addfamily = false;
+      familyList.remove(family);
+      familyIndex = -1;
+    });
+  }
+
   String getInsurance(Family family) {
     String insurance = "";
     if (family.privateInsurance == 2)
@@ -585,6 +590,19 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       return  DemoLocalization.of(context).translate('No');
     else
       return "";
+  }
+
+  getTexts(Family family) {
+    String toReturn = family.gender;
+    if (toReturn.length > 0 && family.bloodGroup.length > 0) {
+      toReturn += ", ";
+    }
+    toReturn += family.bloodGroup;
+    if (toReturn.length > 0 && family.maritalStatus != null && family.maritalStatus.length > 0) {
+      toReturn += ", ";
+    }
+    toReturn += family.maritalStatus;
+    return toReturn;
   }
 
 }

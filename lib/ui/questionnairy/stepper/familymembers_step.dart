@@ -28,10 +28,10 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
-  Function refreshFamilyList, cancelFields;
+  Function refreshFamilyList, cancelFields, deleteFields;
   Family family;
   int familyIndex;
-  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList, this.cancelFields);
+  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList, this.cancelFields, this.deleteFields);
 
   @override
   _FamilyMemberStepState createState() => _FamilyMemberStepState(family, familyIndex);
@@ -2473,11 +2473,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     InkWell(
                       onTap: () {
                         setState(() {
@@ -2550,6 +2548,39 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                       ),
                     ),
+                    familyIndex >= 0 ? Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: InkWell(
+                        onTap: () {
+                          widget.deleteFields(family);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.black45,
+                              style: BorderStyle.solid,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.delete_forever_outlined),
+                              Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Delete'),
+                                  color: darkColor,
+                                  weight: FontWeight.w700,
+                                  size: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ) : Container(),
                     isLoading
                         ? Container(margin: EdgeInsets.only(left: 10), child: CircularProgressIndicator())
                         : Visibility(visible: false, child: Text("Saving")),
