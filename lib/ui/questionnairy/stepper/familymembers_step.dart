@@ -2500,7 +2500,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.done),
+                            Icon(Icons.done,color: successColor,),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: TextWidget(
@@ -2565,7 +2565,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.delete_forever_outlined),
+                              Icon(Icons.delete_forever_outlined,color: errorColor,),
                               Padding(
                                 padding: const EdgeInsets.all(6.0),
                                 child: TextWidget(
