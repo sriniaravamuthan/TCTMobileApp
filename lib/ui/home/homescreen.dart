@@ -306,6 +306,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.firstDose=family[i]['firstDose'];
                 _family.isVaccinationDone=family[i]['isVaccinationDone'];
                 _family.secondDose=family[i]['secondDose'];
+                _family.isExpanded= 'Show More';
 
                 _familyList.add(_family);
               }

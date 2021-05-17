@@ -252,6 +252,8 @@ class Family {
   String firstDose;
   String secondDose;
 
+  String isExpanded = "Show More";  //  For internal purpose
+
   Family(
       {this.name,
       this.aadharNumber,
