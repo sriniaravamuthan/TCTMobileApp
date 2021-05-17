@@ -19,12 +19,13 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberDetails extends StatefulWidget {
   DemographicFamily demographicFamily;
+  Orientation orientation;
 
-  FamilyMemberDetails(this.demographicFamily);
+  FamilyMemberDetails(this.demographicFamily, this.orientation);
 
   @override
   _FamilyMemberDetailsState createState() =>
-      _FamilyMemberDetailsState(demographicFamily);
+      _FamilyMemberDetailsState(demographicFamily, this.orientation);
 }
 
 class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
@@ -35,8 +36,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   DemographicFamily demographicFamily;
 
   List<Family> familyList = [];
+  Orientation orientation;
 
-  _FamilyMemberDetailsState(this.demographicFamily);
+  _FamilyMemberDetailsState(this.demographicFamily, this.orientation);
 
   @override
   void initState() {
@@ -110,22 +112,9 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
         Divider(
           height: 1,
         ),
-        Visibility(
-            visible: familyList.isNotEmpty,
-            child:  OrientationBuilder(
-    builder: (context, orientation){
-    if(orientation == Orientation.portrait){
-    return _portraitMode();
-    }else{
-    return _landscapeMode();
-    }
-    },
-    ), //     } else {
-            //       return Text("Error ${projectSnap.error}");
-            //     }
-            //   },
-            // ),
-            ),
+        Visibility(visible: familyList.isNotEmpty,
+          child: orientation == Orientation.portrait ?  _portraitMode() : _landscapeMode(),
+          ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Visibility(
@@ -624,7 +613,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
           children: [
             Container(
               child: InkWell(
-                onTap: () {
+                /*onTap: () {
                   if (familyIndex > 0) {
                     final snackBar = SnackBar(content: Text('Save or cancel the current member before editing another'));
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -634,7 +623,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     familyIndex = index;
                     addfamily = true;
                   });
-                },
+                },*/
                 child: Column(
                   children: [
                     Row(
@@ -930,8 +919,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                   child: SizedBox(
                                     width: 150,
                                     child: TextWidget(
-                                      text:  DemoLocalization.of(context)
-                                          .translate('Physically challenged'),
+                                      text:  DemoLocalization.of(context).translate('Physically challenged'),
                                       weight: FontWeight.w800,
                                       color: darkColor,
                                       size: 14,
@@ -1173,6 +1161,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                             familyList[index].isExpanded = "Show Less";
                           else
                             familyList[index].isExpanded = "Show More";
+                          return;
                         });
                       },
                       child: TextWidget(
@@ -1188,6 +1177,17 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     ),
                   ],
                 ),
+                onTap: () {
+                  if (familyIndex > 0) {
+                    final snackBar = SnackBar(content: Text('Save or cancel the current member before editing another'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    return;
+                  }
+                  setState(() {
+                    familyIndex = index;
+                    addfamily = true;
+                  });
+                },
               ),
             ),
             Divider(

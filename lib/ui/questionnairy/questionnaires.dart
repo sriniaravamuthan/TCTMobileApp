@@ -267,36 +267,1626 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
           ],
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imgBG),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            elevation: 8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
+      body: OrientationBuilder(builder: (context, orientation) {
+        return Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(imgBG),
+              fit: BoxFit.cover,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: PageView (
-                physics:new NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                controller: pageController,
-                children: [
-                  SingleChildScrollView(
-                    child: Column(
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PageView (
+                  physics:new NeverScrollableScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  controller: pageController,
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: (height) * 0.01,
+                              left: (width) * 0.01,
+                              right: (width) * 0.01,
+                              bottom: (height) * 0.01,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                      child: Padding(
+                                        padding:
+                                        const EdgeInsets.only(left: 8.0, right: 8),
+                                        child: Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(24),
+                                              border: Border.all(
+                                                color: Colors.black45,
+                                                style: BorderStyle.solid,
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Icon(
+                                              Icons.keyboard_arrow_left,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    ),
+                                    TextWidget(
+                                      text: DemoLocalization.of(context)
+                                          .translate('Location'),
+                                      color: darkColor,
+                                      weight: FontWeight.w600,
+                                      size: 16,
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: RichText(
+                                        text: TextSpan(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Mandatory Fields'),
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 14,
+                                                color: darkColor,
+                                                fontStyle: FontStyle.normal,
+                                                fontWeight: FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                text: ' *',
+                                                style: TextStyle(
+                                                    color: Colors.red, fontSize: 14.0),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.only( bottom: (height) * 0.01),
+                            child: Divider(height: 1,),
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: TextWidget(
+                                                  text:
+                                                  DemoLocalization.of(context)
+                                                      .translate('Form No'),
+                                                  size: 14,
+                                                  weight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 2,
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: TextFormField(
+                                                    controller: fromNoController,
+                                                    readOnly: isEdit,
+                                                    maxLength: 4,
+                                                    textInputAction:
+                                                    TextInputAction.next,
+                                                    enableSuggestions: true,
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderSide:
+                                                          BorderSide.none,
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                        lightGreyColor),
+                                                    keyboardType:
+                                                    TextInputType.number,
+                                                    onSaved: (String val) {
+                                                      setState(() {
+                                                        // demographicFamily.location.formNo = val;
+                                                        location.formNo = val;
+                                                        fromNoController.text =
+                                                            val;
+                                                        // debugPrint("formNo:${demographicFamily.location.formNo}");
+                                                      });
+                                                    },
+                                                    // validator: (value) {
+                                                    //   if (value.isEmpty) {
+                                                    //     debugPrint(
+                                                    //         "empid :yes");
+                                                    //     return 'Employee Id must not be empty';
+                                                    //   }
+                                                    //   return null;
+                                                    // },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: TextWidget(
+                                                  text:
+                                                  DemoLocalization.of(context)
+                                                      .translate(
+                                                      'Project Code No'),
+                                                  size: 14,
+                                                  weight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                    projectCodeController,
+                                                    readOnly: isEdit,
+                                                    maxLength: 1,
+                                                    textInputAction:
+                                                    TextInputAction.next,
+                                                    enableSuggestions: true,
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderSide:
+                                                          BorderSide.none,
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                        lightGreyColor),
+                                                    keyboardType:
+                                                    TextInputType.number,
+                                                    onSaved: (String val) {
+                                                      setState(() {
+                                                        location.projectCode =
+                                                            val;
+                                                        projectCodeController
+                                                            .text = val;
+                                                      });
+                                                    },
+                                                    // validator: (value) {
+                                                    //   if (value.isEmpty) {
+                                                    //     debugPrint(
+                                                    //         "empid :yes");
+                                                    //     return 'Employee Id must not be empty';
+                                                    //   }
+                                                    //   return null;
+                                                    // },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate(
+                                                          'Village Code'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                    padding:
+                                                    const EdgeInsets.only(
+                                                        right: 16.0,
+                                                        top: 2.0,
+                                                        bottom: 2.0),
+                                                    child: AutoCompleteTextField(
+                                                        controller:
+                                                        villageCodeController,
+                                                        clearOnSubmit: false,
+                                                        itemSubmitted: (item) {
+                                                          setState(() {
+                                                            villageCodeController
+                                                                .text = item;
+                                                            for (int i = 0;
+                                                            i <
+                                                                originalVillageCodeList
+                                                                    .length;
+                                                            i++) {
+                                                              if (item ==
+                                                                  originalVillageCodeList[
+                                                                  i]) {
+                                                                panchayatCodeController
+                                                                    .text =
+                                                                panchayatCodeList[
+                                                                i];
+                                                                panchayatNoController
+                                                                    .text =
+                                                                panchayatNoList[
+                                                                i];
+                                                                break;
+                                                              }
+                                                            }
+                                                            for (int i = 0;
+                                                            i <
+                                                                villageCodeList
+                                                                    .length;
+                                                            i++) {
+                                                              if (item ==
+                                                                  villageCodeList[
+                                                                  i]) {
+                                                                villageNameController
+                                                                    .text =
+                                                                villageNameList[
+                                                                i];
+                                                                break;
+                                                              }
+                                                            }
+                                                          });
+                                                        },
+                                                        suggestions:
+                                                        villageCodeList,
+                                                        style: TextStyle(
+                                                          color:
+                                                          Color(0xFF222222),
+                                                          fontSize: 16,
+                                                        ),
+                                                        decoration:
+                                                        InputDecoration(
+                                                            border:
+                                                            OutlineInputBorder(
+                                                              borderSide:
+                                                              BorderSide
+                                                                  .none,
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  10.0)),
+                                                            ),
+                                                            enabledBorder:
+                                                            OutlineInputBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  10.0)),
+                                                              borderSide:
+                                                              BorderSide(
+                                                                  color:
+                                                                  lightGreyColor),
+                                                            ),
+                                                            focusedBorder:
+                                                            OutlineInputBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  10.0)),
+                                                              borderSide:
+                                                              BorderSide(
+                                                                  color:
+                                                                  lightGreyColor),
+                                                            ),
+                                                            focusedErrorBorder:
+                                                            OutlineInputBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  10.0)),
+                                                              borderSide:
+                                                              BorderSide(
+                                                                  color:
+                                                                  lightGreyColor),
+                                                            ),
+                                                            errorBorder:
+                                                            OutlineInputBorder(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                  .circular(
+                                                                  10.0)),
+                                                              borderSide:
+                                                              BorderSide(
+                                                                  color:
+                                                                  lightGreyColor),
+                                                            ),
+                                                            fillColor:
+                                                            lightGreyColor),
+                                                        itemBuilder:
+                                                            (context, item) {
+                                                          return new Padding(
+                                                              padding:
+                                                              EdgeInsets.all(
+                                                                  8.0),
+                                                              child: TextWidget(
+                                                                text: item,
+                                                                color: darkColor,
+                                                                size: 14,
+                                                                weight: FontWeight
+                                                                    .w600,
+                                                              ));
+                                                        },
+                                                        itemSorter: (a, b) {
+                                                          return a.compareTo(b);
+                                                        },
+                                                        itemFilter:
+                                                            (item, query) {
+                                                          return item
+                                                              .toLowerCase()
+                                                              .startsWith(query
+                                                              .toLowerCase());
+                                                        })),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate(
+                                                          'Panchayat No'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 2,
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: AutoCompleteTextField(
+                                                      keyboardType:
+                                                      TextInputType.number,
+                                                      controller:
+                                                      panchayatNoController,
+                                                      clearOnSubmit: false,
+                                                      itemSubmitted: (item) {
+                                                        panchayatNoController
+                                                            .text = item;
+                                                        setState(() {
+                                                          villageNameController
+                                                              .text = "";
+                                                          villageCodeController
+                                                              .text = "";
+                                                          villageCodeList.clear();
+                                                          villageNameList.clear();
+                                                          snap.forEach((element) {
+                                                            if (element
+                                                                .data()[
+                                                            "panchayatNo"]
+                                                                .toString() ==
+                                                                item) {
+                                                              villageCodeList.add(
+                                                                  element
+                                                                      .data()[
+                                                                  "villageCode"]
+                                                                      .toString());
+                                                              villageNameList.add(
+                                                                  element
+                                                                      .data()[
+                                                                  "villageName"]
+                                                                  [
+                                                                  language]
+                                                                      .toString());
+                                                            }
+                                                          });
+                                                          for (int i = 0;
+                                                          i <
+                                                              panchayatNoList
+                                                                  .length;
+                                                          i++) {
+                                                            if (item ==
+                                                                panchayatNoList[
+                                                                i]) {
+                                                              panchayatCodeController
+                                                                  .text =
+                                                              panchayatCodeList[
+                                                              i];
+                                                              break;
+                                                            }
+                                                          }
+                                                        });
+                                                      },
+                                                      suggestions:
+                                                      panchayatNoList,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF222222),
+                                                        fontSize: 16,
+                                                      ),
+                                                      decoration: InputDecoration(
+                                                          border:
+                                                          OutlineInputBorder(
+                                                            borderSide:
+                                                            BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                          ),
+                                                          enabledBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          errorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          fillColor:
+                                                          lightGreyColor),
+                                                      itemBuilder:
+                                                          (context, item) {
+                                                        return new Padding(
+                                                            padding:
+                                                            EdgeInsets.all(
+                                                                8.0),
+                                                            child: TextWidget(
+                                                              text: item,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                              weight:
+                                                              FontWeight.w600,
+                                                            ));
+                                                      },
+                                                      itemSorter: (a, b) {
+                                                        return a.compareTo(b);
+                                                      },
+                                                      itemFilter: (item, query) {
+                                                        return item
+                                                            .toLowerCase()
+                                                            .startsWith(query
+                                                            .toLowerCase());
+                                                      }),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate(
+                                                          'Panchayat Code'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: AutoCompleteTextField(
+                                                      keyboardType:
+                                                      TextInputType.number,
+                                                      controller:
+                                                      panchayatCodeController,
+                                                      clearOnSubmit: false,
+                                                      itemSubmitted: (item) {
+                                                        panchayatCodeController
+                                                            .text = item;
+                                                        setState(() {
+                                                          villageNameController
+                                                              .text = "";
+                                                          villageCodeController
+                                                              .text = "";
+                                                          villageCodeList.clear();
+                                                          villageNameList.clear();
+                                                          snap.forEach((element) {
+                                                            if (element
+                                                                .data()[
+                                                            "panchayatCode"]
+                                                                .toString() ==
+                                                                item) {
+                                                              villageCodeList.add(
+                                                                  element
+                                                                      .data()[
+                                                                  "villageCode"]
+                                                                      .toString());
+                                                              villageNameList.add(
+                                                                  element
+                                                                      .data()[
+                                                                  "villageName"]
+                                                                  [
+                                                                  language]
+                                                                      .toString());
+                                                            }
+                                                          });
+                                                          for (int i = 0;
+                                                          i <
+                                                              panchayatCodeList
+                                                                  .length;
+                                                          i++) {
+                                                            if (item ==
+                                                                panchayatCodeList[
+                                                                i]) {
+                                                              panchayatNoController
+                                                                  .text =
+                                                              panchayatNoList[
+                                                              i];
+                                                              break;
+                                                            }
+                                                          }
+                                                        });
+                                                      },
+                                                      suggestions:
+                                                      panchayatCodeList,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF222222),
+                                                        fontSize: 16,
+                                                      ),
+                                                      decoration: InputDecoration(
+                                                          border:
+                                                          OutlineInputBorder(
+                                                            borderSide:
+                                                            BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                          ),
+                                                          enabledBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          errorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          fillColor:
+                                                          lightGreyColor),
+                                                      itemBuilder:
+                                                          (context, item) {
+                                                        return new Padding(
+                                                            padding:
+                                                            EdgeInsets.all(
+                                                                8.0),
+                                                            child: TextWidget(
+                                                              text: item,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                              weight:
+                                                              FontWeight.w600,
+                                                            ));
+                                                      },
+                                                      itemSorter: (a, b) {
+                                                        return a.compareTo(b);
+                                                      },
+                                                      itemFilter: (item, query) {
+                                                        return item
+                                                            .toLowerCase()
+                                                            .startsWith(query
+                                                            .toLowerCase());
+                                                      }),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate(
+                                                          'Village Name'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 16.0,
+                                                      top: 0.0,
+                                                      bottom: 0.0),
+                                                  child: AutoCompleteTextField(
+                                                      controller:
+                                                      villageNameController,
+                                                      clearOnSubmit: false,
+                                                      itemSubmitted: (item) {
+                                                        villageNameController
+                                                            .text = item;
+                                                        setState(() {
+                                                          for (int i = 0;
+                                                          i <
+                                                              originalVillageNameList
+                                                                  .length;
+                                                          i++) {
+                                                            if (item ==
+                                                                originalVillageNameList[
+                                                                i]) {
+                                                              panchayatCodeController
+                                                                  .text =
+                                                              panchayatCodeList[
+                                                              i];
+                                                              panchayatNoController
+                                                                  .text =
+                                                              panchayatNoList[
+                                                              i];
+                                                              break;
+                                                            }
+                                                          }
+                                                          for (int i = 0;
+                                                          i <
+                                                              villageNameList
+                                                                  .length;
+                                                          i++) {
+                                                            if (item ==
+                                                                villageNameList[
+                                                                i]) {
+                                                              villageCodeController
+                                                                  .text =
+                                                              villageCodeList[
+                                                              i];
+                                                              break;
+                                                            }
+                                                          }
+                                                        });
+                                                      },
+                                                      suggestions:
+                                                      villageNameList,
+                                                      style: TextStyle(
+                                                        color: Color(0xFF222222),
+                                                        fontSize: 16,
+                                                      ),
+                                                      decoration: InputDecoration(
+                                                          border:
+                                                          OutlineInputBorder(
+                                                            borderSide:
+                                                            BorderSide.none,
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                          ),
+                                                          enabledBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          errorBorder:
+                                                          OutlineInputBorder(
+                                                            borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius
+                                                                    .circular(
+                                                                    10.0)),
+                                                            borderSide: BorderSide(
+                                                                color:
+                                                                lightGreyColor),
+                                                          ),
+                                                          fillColor:
+                                                          lightGreyColor),
+                                                      itemBuilder:
+                                                          (context, item) {
+                                                        return new Padding(
+                                                            padding:
+                                                            EdgeInsets.all(
+                                                                8.0),
+                                                            child: TextWidget(
+                                                              text: item,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                              weight:
+                                                              FontWeight.w600,
+                                                            ));
+                                                      },
+                                                      itemSorter: (a, b) {
+                                                        return a.compareTo(b);
+                                                      },
+                                                      itemFilter: (item, query) {
+                                                        debugPrint("item:$item");
+                                                        return item
+                                                            .toLowerCase()
+                                                            .startsWith(query
+                                                            .toLowerCase());
+                                                      }),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: RichText(
+                                              text: TextSpan(
+                                                  text: DemoLocalization.of(
+                                                      context)
+                                                      .translate('Street Name'),
+                                                  style: GoogleFonts.roboto(
+                                                      fontSize: 14,
+                                                      color: darkColor,
+                                                      fontStyle: FontStyle.normal,
+                                                      fontWeight:
+                                                      FontWeight.w600),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: ' *',
+                                                      style: TextStyle(
+                                                          color: Colors.red,
+                                                          fontSize: 14.0),
+                                                    ),
+                                                  ]),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 58,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                              child: AutoCompleteTextField(
+                                                  controller: streetNameController,
+                                                  clearOnSubmit: false,
+                                                  itemSubmitted: (item) {
+                                                    streetNameController.text = item;
+                                                  },
+                                                  suggestions: streets,
+                                                  style: TextStyle(
+                                                    color: Color(0xFF222222),
+                                                    fontSize: 16,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                      border: OutlineInputBorder(
+                                                        borderSide: BorderSide.none,
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                        borderSide:
+                                                        BorderSide(color: lightGreyColor),
+                                                      ),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                        borderSide:
+                                                        BorderSide(color: lightGreyColor),
+                                                      ),
+                                                      focusedErrorBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                        borderSide:
+                                                        BorderSide(color: lightGreyColor),
+                                                      ),
+                                                      errorBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(10.0)),
+                                                        borderSide:
+                                                        BorderSide(color: lightGreyColor),
+                                                      ),
+                                                      fillColor: lightGreyColor),
+                                                  itemBuilder: (context, item) {
+                                                    return new Padding(
+                                                        padding: EdgeInsets.all(8.0),
+                                                        child: TextWidget(
+                                                          text: item,
+                                                          color: darkColor,
+                                                          size: 14,
+                                                          weight: FontWeight.w600,
+                                                        ));
+                                                  },
+                                                  itemSorter: (a, b) {
+                                                    return a.compareTo(b);
+                                                  },
+                                                  itemFilter: (item, query) {
+                                                    return item
+                                                        .toLowerCase()
+                                                        .startsWith(query.toLowerCase());
+                                                  }),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topRight,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate('Door No'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: TextFormField(
+                                                    controller: doorNoController,
+                                                    textInputAction:
+                                                    TextInputAction.next,
+                                                    enableSuggestions: true,
+                                                    decoration: InputDecoration(
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderSide:
+                                                          BorderSide.none,
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                        lightGreyColor),
+                                                    keyboardType:
+                                                    TextInputType.text,
+                                                    onSaved: (String val) {
+                                                      setState(() {
+                                                        location.doorNumber = val;
+                                                        doorNoController.text =
+                                                            val;
+                                                      });
+                                                    },
+                                                    // validator: (value) {
+                                                    //   if (value.isEmpty) {
+                                                    //     debugPrint(
+                                                    //         "empid :yes");
+                                                    //     return 'Employee Id must not be empty';
+                                                    //   }
+                                                    //   return null;
+                                                    // },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 1,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                      text: DemoLocalization.of(
+                                                          context)
+                                                          .translate(
+                                                          'Contact Person'),
+                                                      style: GoogleFonts.roboto(
+                                                          fontSize: 14,
+                                                          color: darkColor,
+                                                          fontStyle:
+                                                          FontStyle.normal,
+                                                          fontWeight:
+                                                          FontWeight.w600),
+                                                      children: [
+                                                        TextSpan(
+                                                          text: ' *',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 14.0),
+                                                        ),
+                                                      ]),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                    contactPersonController,
+                                                    textInputAction:
+                                                    TextInputAction.next,
+                                                    enableSuggestions: true,
+                                                    decoration: InputDecoration(
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderSide:
+                                                          BorderSide.none,
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                        lightGreyColor),
+                                                    keyboardType:
+                                                    TextInputType.text,
+                                                    onSaved: (String val) {
+                                                      setState(() {
+                                                        location.contactPerson =
+                                                            val;
+                                                        contactPersonController
+                                                            .text = val;
+                                                      });
+                                                    },
+                                                    // validator: (value) {
+                                                    //   if (value.isEmpty) {
+                                                    //     debugPrint(
+                                                    //         "empid :yes");
+                                                    //     return 'Employee Id must not be empty';
+                                                    //   }
+                                                    //   return null;
+                                                    // },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: FractionallySizedBox(
+                                          widthFactor: 0.50,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(2.0),
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                      context)
+                                                      .translate(
+                                                      'Number of Family Members'),
+                                                  size: 14,
+                                                  weight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: 150,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 2,
+                                                      right: 16.0,
+                                                      top: 2.0,
+                                                      bottom: 2.0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                    noOfFamilyPersonController,
+                                                    maxLength: 2,
+                                                    textInputAction:
+                                                    TextInputAction.done,
+                                                    enableSuggestions: true,
+                                                    decoration: InputDecoration(
+                                                        counterText: "",
+                                                        border:
+                                                        OutlineInputBorder(
+                                                          borderSide:
+                                                          BorderSide.none,
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                        ),
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        errorBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0)),
+                                                          borderSide: BorderSide(
+                                                              color:
+                                                              lightGreyColor),
+                                                        ),
+                                                        fillColor:
+                                                        lightGreyColor),
+                                                    keyboardType:
+                                                    TextInputType.number,
+                                                    onSaved: (String val) {
+                                                      setState(() {
+                                                        location.noOfFamilyMembers =
+                                                            val;
+                                                        noOfFamilyPersonController
+                                                            .text = val;
+                                                      });
+                                                    },
+                                                    // validator: (value) {
+                                                    //   if (value.isEmpty) {
+                                                    //     debugPrint(
+                                                    //         "empid :yes");
+                                                    //     return 'Employee Id must not be empty';
+                                                    //   }
+                                                    //   return null;
+                                                    // },
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(),                        Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: FloatingActionButton(
+                                            // isExtended: true,
+                                            child: Icon(
+                                              Icons.keyboard_arrow_right,
+                                              size: 30,
+                                              color: darkColor,
+                                            ),
+                                            backgroundColor: lightColor,
+                                            onPressed: () {
+                                              continued();
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: FloatingActionButton(
+                                            // isExtended: true,
+                                            child: Icon(
+                                              Icons.done,
+                                              size: 30,
+                                            ),
+                                            backgroundColor: primaryColor,
+                                            onPressed: () {
+                                              setState(() {
+                                                addData();
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SingleChildScrollView(child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
-                            top: (height) * 0.01,
-                            left: (width) * 0.01,
-                            right: (width) * 0.01,
-                            bottom: (height) * 0.01,
+                            top: (height) * 0.02,
+                            left: (width) * 0.02,
+                            right: (width) * 0.02,
+                            bottom: (height) * 0.02,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -329,7 +1919,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                   ),
                                   TextWidget(
                                     text: DemoLocalization.of(context)
-                                        .translate('Location'),
+                                        .translate('Family Members'),
                                     color: darkColor,
                                     weight: FontWeight.w600,
                                     size: 16,
@@ -367,1753 +1957,164 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           padding:  EdgeInsets.only( bottom: (height) * 0.01),
                           child: Divider(height: 1,),
                         ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                DemoLocalization.of(context)
-                                                    .translate('Form No'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 2,
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: TextFormField(
-                                                  controller: fromNoController,
-                                                  readOnly: isEdit,
-                                                  maxLength: 4,
-                                                  textInputAction:
-                                                  TextInputAction.next,
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                      counterText: "",
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                      lightGreyColor),
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                  onSaved: (String val) {
-                                                    setState(() {
-                                                      // demographicFamily.location.formNo = val;
-                                                      location.formNo = val;
-                                                      fromNoController.text =
-                                                          val;
-                                                      // debugPrint("formNo:${demographicFamily.location.formNo}");
-                                                    });
-                                                  },
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty) {
-                                                  //     debugPrint(
-                                                  //         "empid :yes");
-                                                  //     return 'Employee Id must not be empty';
-                                                  //   }
-                                                  //   return null;
-                                                  // },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text:
-                                                DemoLocalization.of(context)
-                                                    .translate(
-                                                    'Project Code No'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: TextFormField(
-                                                  controller:
-                                                  projectCodeController,
-                                                  readOnly: isEdit,
-                                                  maxLength: 1,
-                                                  textInputAction:
-                                                  TextInputAction.next,
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                      counterText: "",
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                      lightGreyColor),
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                  onSaved: (String val) {
-                                                    setState(() {
-                                                      location.projectCode =
-                                                          val;
-                                                      projectCodeController
-                                                          .text = val;
-                                                    });
-                                                  },
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty) {
-                                                  //     debugPrint(
-                                                  //         "empid :yes");
-                                                  //     return 'Employee Id must not be empty';
-                                                  //   }
-                                                  //   return null;
-                                                  // },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Village Code'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
-                                                  child: AutoCompleteTextField(
-                                                      controller:
-                                                      villageCodeController,
-                                                      clearOnSubmit: false,
-                                                      itemSubmitted: (item) {
-                                                        setState(() {
-                                                          villageCodeController
-                                                              .text = item;
-                                                          for (int i = 0;
-                                                          i <
-                                                              originalVillageCodeList
-                                                                  .length;
-                                                          i++) {
-                                                            if (item ==
-                                                                originalVillageCodeList[
-                                                                i]) {
-                                                              panchayatCodeController
-                                                                  .text =
-                                                              panchayatCodeList[
-                                                              i];
-                                                              panchayatNoController
-                                                                  .text =
-                                                              panchayatNoList[
-                                                              i];
-                                                              break;
-                                                            }
-                                                          }
-                                                          for (int i = 0;
-                                                          i <
-                                                              villageCodeList
-                                                                  .length;
-                                                          i++) {
-                                                            if (item ==
-                                                                villageCodeList[
-                                                                i]) {
-                                                              villageNameController
-                                                                  .text =
-                                                              villageNameList[
-                                                              i];
-                                                              break;
-                                                            }
-                                                          }
-                                                        });
-                                                      },
-                                                      suggestions:
-                                                      villageCodeList,
-                                                      style: TextStyle(
-                                                        color:
-                                                        Color(0xFF222222),
-                                                        fontSize: 16,
-                                                      ),
-                                                      decoration:
-                                                      InputDecoration(
-                                                          border:
-                                                          OutlineInputBorder(
-                                                            borderSide:
-                                                            BorderSide
-                                                                .none,
-                                                            borderRadius: BorderRadius
-                                                                .all(Radius
-                                                                .circular(
-                                                                10.0)),
-                                                          ),
-                                                          enabledBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius: BorderRadius
-                                                                .all(Radius
-                                                                .circular(
-                                                                10.0)),
-                                                            borderSide:
-                                                            BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius: BorderRadius
-                                                                .all(Radius
-                                                                .circular(
-                                                                10.0)),
-                                                            borderSide:
-                                                            BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius: BorderRadius
-                                                                .all(Radius
-                                                                .circular(
-                                                                10.0)),
-                                                            borderSide:
-                                                            BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          errorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius: BorderRadius
-                                                                .all(Radius
-                                                                .circular(
-                                                                10.0)),
-                                                            borderSide:
-                                                            BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          fillColor:
-                                                          lightGreyColor),
-                                                      itemBuilder:
-                                                          (context, item) {
-                                                        return new Padding(
-                                                            padding:
-                                                            EdgeInsets.all(
-                                                                8.0),
-                                                            child: TextWidget(
-                                                              text: item,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                              weight: FontWeight
-                                                                  .w600,
-                                                            ));
-                                                      },
-                                                      itemSorter: (a, b) {
-                                                        return a.compareTo(b);
-                                                      },
-                                                      itemFilter:
-                                                          (item, query) {
-                                                        return item
-                                                            .toLowerCase()
-                                                            .startsWith(query
-                                                            .toLowerCase());
-                                                      })),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
+                        FamilyMemberDetails(demographicFamily, orientation),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.keyboard_arrow_left,
+                                  size: 30,
+                                  color: darkColor,
+                                ),
+                                backgroundColor: lightColor,
+                                onPressed: () {
+                                  cancel();
+                                },
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Panchayat No'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 2,
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: AutoCompleteTextField(
-                                                    keyboardType:
-                                                    TextInputType.number,
-                                                    controller:
-                                                    panchayatNoController,
-                                                    clearOnSubmit: false,
-                                                    itemSubmitted: (item) {
-                                                      panchayatNoController
-                                                          .text = item;
-                                                      setState(() {
-                                                        villageNameController
-                                                            .text = "";
-                                                        villageCodeController
-                                                            .text = "";
-                                                        villageCodeList.clear();
-                                                        villageNameList.clear();
-                                                        snap.forEach((element) {
-                                                          if (element
-                                                              .data()[
-                                                          "panchayatNo"]
-                                                              .toString() ==
-                                                              item) {
-                                                            villageCodeList.add(
-                                                                element
-                                                                    .data()[
-                                                                "villageCode"]
-                                                                    .toString());
-                                                            villageNameList.add(
-                                                                element
-                                                                    .data()[
-                                                                "villageName"]
-                                                                [
-                                                                language]
-                                                                    .toString());
-                                                          }
-                                                        });
-                                                        for (int i = 0;
-                                                        i <
-                                                            panchayatNoList
-                                                                .length;
-                                                        i++) {
-                                                          if (item ==
-                                                              panchayatNoList[
-                                                              i]) {
-                                                            panchayatCodeController
-                                                                .text =
-                                                            panchayatCodeList[
-                                                            i];
-                                                            break;
-                                                          }
-                                                        }
-                                                      });
-                                                    },
-                                                    suggestions:
-                                                    panchayatNoList,
-                                                    style: TextStyle(
-                                                      color: Color(0xFF222222),
-                                                      fontSize: 16,
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                        OutlineInputBorder(
-                                                          borderSide:
-                                                          BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                        lightGreyColor),
-                                                    itemBuilder:
-                                                        (context, item) {
-                                                      return new Padding(
-                                                          padding:
-                                                          EdgeInsets.all(
-                                                              8.0),
-                                                          child: TextWidget(
-                                                            text: item,
-                                                            color: darkColor,
-                                                            size: 14,
-                                                            weight:
-                                                            FontWeight.w600,
-                                                          ));
-                                                    },
-                                                    itemSorter: (a, b) {
-                                                      return a.compareTo(b);
-                                                    },
-                                                    itemFilter: (item, query) {
-                                                      return item
-                                                          .toLowerCase()
-                                                          .startsWith(query
-                                                          .toLowerCase());
-                                                    }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Panchayat Code'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: AutoCompleteTextField(
-                                                    keyboardType:
-                                                    TextInputType.number,
-                                                    controller:
-                                                    panchayatCodeController,
-                                                    clearOnSubmit: false,
-                                                    itemSubmitted: (item) {
-                                                      panchayatCodeController
-                                                          .text = item;
-                                                      setState(() {
-                                                        villageNameController
-                                                            .text = "";
-                                                        villageCodeController
-                                                            .text = "";
-                                                        villageCodeList.clear();
-                                                        villageNameList.clear();
-                                                        snap.forEach((element) {
-                                                          if (element
-                                                              .data()[
-                                                          "panchayatCode"]
-                                                              .toString() ==
-                                                              item) {
-                                                            villageCodeList.add(
-                                                                element
-                                                                    .data()[
-                                                                "villageCode"]
-                                                                    .toString());
-                                                            villageNameList.add(
-                                                                element
-                                                                    .data()[
-                                                                "villageName"]
-                                                                [
-                                                                language]
-                                                                    .toString());
-                                                          }
-                                                        });
-                                                        for (int i = 0;
-                                                        i <
-                                                            panchayatCodeList
-                                                                .length;
-                                                        i++) {
-                                                          if (item ==
-                                                              panchayatCodeList[
-                                                              i]) {
-                                                            panchayatNoController
-                                                                .text =
-                                                            panchayatNoList[
-                                                            i];
-                                                            break;
-                                                          }
-                                                        }
-                                                      });
-                                                    },
-                                                    suggestions:
-                                                    panchayatCodeList,
-                                                    style: TextStyle(
-                                                      color: Color(0xFF222222),
-                                                      fontSize: 16,
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                        OutlineInputBorder(
-                                                          borderSide:
-                                                          BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                        lightGreyColor),
-                                                    itemBuilder:
-                                                        (context, item) {
-                                                      return new Padding(
-                                                          padding:
-                                                          EdgeInsets.all(
-                                                              8.0),
-                                                          child: TextWidget(
-                                                            text: item,
-                                                            color: darkColor,
-                                                            size: 14,
-                                                            weight:
-                                                            FontWeight.w600,
-                                                          ));
-                                                    },
-                                                    itemSorter: (a, b) {
-                                                      return a.compareTo(b);
-                                                    },
-                                                    itemFilter: (item, query) {
-                                                      return item
-                                                          .toLowerCase()
-                                                          .startsWith(query
-                                                          .toLowerCase());
-                                                    }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Village Name'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0,
-                                                    top: 0.0,
-                                                    bottom: 0.0),
-                                                child: AutoCompleteTextField(
-                                                    controller:
-                                                    villageNameController,
-                                                    clearOnSubmit: false,
-                                                    itemSubmitted: (item) {
-                                                      villageNameController
-                                                          .text = item;
-                                                      setState(() {
-                                                        for (int i = 0;
-                                                        i <
-                                                            originalVillageNameList
-                                                                .length;
-                                                        i++) {
-                                                          if (item ==
-                                                              originalVillageNameList[
-                                                              i]) {
-                                                            panchayatCodeController
-                                                                .text =
-                                                            panchayatCodeList[
-                                                            i];
-                                                            panchayatNoController
-                                                                .text =
-                                                            panchayatNoList[
-                                                            i];
-                                                            break;
-                                                          }
-                                                        }
-                                                        for (int i = 0;
-                                                        i <
-                                                            villageNameList
-                                                                .length;
-                                                        i++) {
-                                                          if (item ==
-                                                              villageNameList[
-                                                              i]) {
-                                                            villageCodeController
-                                                                .text =
-                                                            villageCodeList[
-                                                            i];
-                                                            break;
-                                                          }
-                                                        }
-                                                      });
-                                                    },
-                                                    suggestions:
-                                                    villageNameList,
-                                                    style: TextStyle(
-                                                      color: Color(0xFF222222),
-                                                      fontSize: 16,
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                        border:
-                                                        OutlineInputBorder(
-                                                          borderSide:
-                                                          BorderSide.none,
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                        ),
-                                                        enabledBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        errorBorder:
-                                                        OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                          borderSide: BorderSide(
-                                                              color:
-                                                              lightGreyColor),
-                                                        ),
-                                                        fillColor:
-                                                        lightGreyColor),
-                                                    itemBuilder:
-                                                        (context, item) {
-                                                      return new Padding(
-                                                          padding:
-                                                          EdgeInsets.all(
-                                                              8.0),
-                                                          child: TextWidget(
-                                                            text: item,
-                                                            color: darkColor,
-                                                            size: 14,
-                                                            weight:
-                                                            FontWeight.w600,
-                                                          ));
-                                                    },
-                                                    itemSorter: (a, b) {
-                                                      return a.compareTo(b);
-                                                    },
-                                                    itemFilter: (item, query) {
-                                                      debugPrint("item:$item");
-                                                      return item
-                                                          .toLowerCase()
-                                                          .startsWith(query
-                                                          .toLowerCase());
-                                                    }),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  size: 30,
+                                  color: darkColor,
+                                ),
+                                backgroundColor: lightColor,
+                                onPressed: () {
+                                  continued();
+                                },
                               ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.done,
+                                  size: 30,
+                                ),
+                                backgroundColor: primaryColor,
+                                onPressed: () {
+                                  setState(() {
+                                    addData();
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+                    SingleChildScrollView(child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: (height) * 0.02,
+                            left: (width) * 0.02,
+                            right: (width) * 0.02,
+                            bottom: (height) * 0.02,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: RichText(
-                                            text: TextSpan(
-                                                text: DemoLocalization.of(
-                                                    context)
-                                                    .translate('Street Name'),
-                                                style: GoogleFonts.roboto(
-                                                    fontSize: 14,
-                                                    color: darkColor,
-                                                    fontStyle: FontStyle.normal,
-                                                    fontWeight:
-                                                    FontWeight.w600),
-                                                children: [
-                                                  TextSpan(
-                                                    text: ' *',
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontSize: 14.0),
-                                                  ),
-                                                ]),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.only(left: 8.0, right: 8),
+                                      child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(24),
+                                            border: Border.all(
+                                              color: Colors.black45,
+                                              style: BorderStyle.solid,
+                                              width: 1.0,
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 58,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16.0, top: 2.0, bottom: 2.0),
-                                            child: AutoCompleteTextField(
-                                                controller: streetNameController,
-                                                clearOnSubmit: false,
-                                                itemSubmitted: (item) {
-                                                  streetNameController.text = item;
-                                                },
-                                                suggestions: streets,
-                                                style: TextStyle(
-                                                  color: Color(0xFF222222),
-                                                  fontSize: 16,
-                                                ),
-                                                decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                      borderSide: BorderSide.none,
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10.0)),
-                                                    ),
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10.0)),
-                                                      borderSide:
-                                                      BorderSide(color: lightGreyColor),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10.0)),
-                                                      borderSide:
-                                                      BorderSide(color: lightGreyColor),
-                                                    ),
-                                                    focusedErrorBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10.0)),
-                                                      borderSide:
-                                                      BorderSide(color: lightGreyColor),
-                                                    ),
-                                                    errorBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(10.0)),
-                                                      borderSide:
-                                                      BorderSide(color: lightGreyColor),
-                                                    ),
-                                                    fillColor: lightGreyColor),
-                                                itemBuilder: (context, item) {
-                                                  return new Padding(
-                                                      padding: EdgeInsets.all(8.0),
-                                                      child: TextWidget(
-                                                        text: item,
-                                                        color: darkColor,
-                                                        size: 14,
-                                                        weight: FontWeight.w600,
-                                                      ));
-                                                },
-                                                itemSorter: (a, b) {
-                                                  return a.compareTo(b);
-                                                },
-                                                itemFilter: (item, query) {
-                                                  return item
-                                                      .toLowerCase()
-                                                      .startsWith(query.toLowerCase());
-                                                }),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate('Door No'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: TextFormField(
-                                                  controller: doorNoController,
-                                                  textInputAction:
-                                                  TextInputAction.next,
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                      lightGreyColor),
-                                                  keyboardType:
-                                                  TextInputType.text,
-                                                  onSaved: (String val) {
-                                                    setState(() {
-                                                      location.doorNumber = val;
-                                                      doorNoController.text =
-                                                          val;
-                                                    });
-                                                  },
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty) {
-                                                  //     debugPrint(
-                                                  //         "empid :yes");
-                                                  //     return 'Employee Id must not be empty';
-                                                  //   }
-                                                  //   return null;
-                                                  // },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 1,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Contact Person'),
-                                                    style: GoogleFonts.roboto(
-                                                        fontSize: 14,
-                                                        color: darkColor,
-                                                        fontStyle:
-                                                        FontStyle.normal,
-                                                        fontWeight:
-                                                        FontWeight.w600),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(
-                                                            color: Colors.red,
-                                                            fontSize: 14.0),
-                                                      ),
-                                                    ]),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: TextFormField(
-                                                  controller:
-                                                  contactPersonController,
-                                                  textInputAction:
-                                                  TextInputAction.next,
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                      lightGreyColor),
-                                                  keyboardType:
-                                                  TextInputType.text,
-                                                  onSaved: (String val) {
-                                                    setState(() {
-                                                      location.contactPerson =
-                                                          val;
-                                                      contactPersonController
-                                                          .text = val;
-                                                    });
-                                                  },
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty) {
-                                                  //     debugPrint(
-                                                  //         "empid :yes");
-                                                  //     return 'Employee Id must not be empty';
-                                                  //   }
-                                                  //   return null;
-                                                  // },
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.topLeft,
-                                      child: FractionallySizedBox(
-                                        widthFactor: 0.50,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(2.0),
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(
-                                                    context)
-                                                    .translate(
-                                                    'Number of Family Members'),
-                                                size: 14,
-                                                weight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: 150,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 2,
-                                                    right: 16.0,
-                                                    top: 2.0,
-                                                    bottom: 2.0),
-                                                child: TextFormField(
-                                                  controller:
-                                                  noOfFamilyPersonController,
-                                                  maxLength: 2,
-                                                  textInputAction:
-                                                  TextInputAction.done,
-                                                  enableSuggestions: true,
-                                                  decoration: InputDecoration(
-                                                      counterText: "",
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide.none,
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                      ),
-                                                      enabledBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      errorBorder:
-                                                      OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0)),
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                            lightGreyColor),
-                                                      ),
-                                                      fillColor:
-                                                      lightGreyColor),
-                                                  keyboardType:
-                                                  TextInputType.number,
-                                                  onSaved: (String val) {
-                                                    setState(() {
-                                                      location.noOfFamilyMembers =
-                                                          val;
-                                                      noOfFamilyPersonController
-                                                          .text = val;
-                                                    });
-                                                  },
-                                                  // validator: (value) {
-                                                  //   if (value.isEmpty) {
-                                                  //     debugPrint(
-                                                  //         "empid :yes");
-                                                  //     return 'Employee Id must not be empty';
-                                                  //   }
-                                                  //   return null;
-                                                  // },
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                  .viewInsets
-                                                  .bottom,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(),                        Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: FloatingActionButton(
-                                          // isExtended: true,
                                           child: Icon(
-                                            Icons.keyboard_arrow_right,
-                                            size: 30,
-                                            color: darkColor,
-                                          ),
-                                          backgroundColor: lightColor,
-                                          onPressed: () {
-                                            continued();
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: FloatingActionButton(
-                                          // isExtended: true,
-                                          child: Icon(
-                                            Icons.done,
-                                            size: 30,
-                                          ),
-                                          backgroundColor: primaryColor,
-                                          onPressed: () {
-                                            setState(() {
-                                              addData();
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                                            Icons.keyboard_arrow_left,
+                                            size: 20,
+                                          )),
+                                    ),
+                                  ),
+                                  TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate('Property Details'),
+                                    color: darkColor,
+                                    weight: FontWeight.w600,
+                                    size: 16,
                                   )
                                 ],
-                              )
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: DemoLocalization.of(context)
+                                              .translate('Mandatory Fields'),
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 14,
+                                              color: darkColor,
+                                              fontStyle: FontStyle.normal,
+                                              fontWeight: FontWeight.w600),
+                                          children: [
+                                            TextSpan(
+                                              text: ' *',
+                                              style: TextStyle(
+                                                  color: Colors.red, fontSize: 14.0),
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SingleChildScrollView(child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: (height) * 0.02,
-                          left: (width) * 0.02,
-                          right: (width) * 0.02,
-                          bottom: (height) * 0.02,
+                        Padding(
+                          padding:  EdgeInsets.only( bottom: (height) * 0.01),
+                          child: Divider(height: 1,),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        PropertyDetailStep(demographicFamily),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 8.0, right: 8),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(24),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          size: 20,
-                                        )),
-                                  ),
-                                ),
-                                TextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Family Members'),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.keyboard_arrow_left,
+                                  size: 30,
                                   color: darkColor,
-                                  weight: FontWeight.w600,
-                                  size: 16,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Mandatory Fields'),
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14,
-                                            color: darkColor,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w600),
-                                        children: [
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(
-                                                color: Colors.red, fontSize: 14.0),
-                                          ),
-                                        ]),
-                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.only( bottom: (height) * 0.01),
-                        child: Divider(height: 1,),
-                      ),
-                      FamilyMemberDetails(demographicFamily),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_left,
-                                size: 30,
-                                color: darkColor,
+                                backgroundColor: lightColor,
+                                onPressed: () {
+                                  cancel();
+                                },
                               ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                cancel();
-                              },
                             ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                size: 30,
-                                color: darkColor,
-                              ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                continued();
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.done,
-                                size: 30,
-                              ),
-                              backgroundColor: primaryColor,
-                              onPressed: () {
-                                setState(() {
-                                  addData();
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-                  SingleChildScrollView(child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: (height) * 0.02,
-                          left: (width) * 0.02,
-                          right: (width) * 0.02,
-                          bottom: (height) * 0.02,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 8.0, right: 8),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(24),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          size: 20,
-                                        )),
-                                  ),
-                                ),
-                                TextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Property Details'),
-                                  color: darkColor,
-                                  weight: FontWeight.w600,
-                                  size: 16,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Mandatory Fields'),
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14,
-                                            color: darkColor,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w600),
-                                        children: [
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(
-                                                color: Colors.red, fontSize: 14.0),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.only( bottom: (height) * 0.01),
-                        child: Divider(height: 1,),
-                      ),
-                      PropertyDetailStep(demographicFamily),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_left,
-                                size: 30,
-                                color: darkColor,
-                              ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                cancel();
-                              },
-                            ),
-                          ),
-                          /*SizedBox(
+                            /*SizedBox(
                             height: 10,
                           ),
                           Padding(
@@ -2131,154 +2132,36 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                               },
                             ),
                           ),*/
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.done,
-                                size: 30,
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: FloatingActionButton(
+                                // isExtended: true,
+                                child: Icon(
+                                  Icons.done,
+                                  size: 30,
+                                ),
+                                backgroundColor: primaryColor,
+                                onPressed: () {
+                                  setState(() {
+                                    addData();
+                                  });
+                                },
                               ),
-                              backgroundColor: primaryColor,
-                              onPressed: () {
-                                setState(() {
-                                  addData();
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-                  /*SingleChildScrollView(child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: (height) * 0.02,
-                          left: (width) * 0.02,
-                          right: (width) * 0.02,
-                          bottom: (height) * 0.02,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 8.0, right: 8),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(24),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          size: 20,
-                                        )),
-                                  ),
-                                ),
-                                TextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Habits'),
-                                  color: darkColor,
-                                  weight: FontWeight.w600,
-                                  size: 16,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: RichText(
-                                    text: TextSpan(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Mandatory Fields'),
-                                        style: GoogleFonts.roboto(
-                                            fontSize: 14,
-                                            color: darkColor,
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w600),
-                                        children: [
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(
-                                                color: Colors.red, fontSize: 14.0),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                              ],
                             ),
                           ],
                         ),
-                      ),
-                      HabitsStep(demographicFamily),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_left,
-                                size: 30,
-                                color: darkColor,
-                              ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                cancel();
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.done,
-                                size: 30,
-                              ),
-                              backgroundColor: primaryColor,
-                              onPressed: () {
-                                setState(() {
-                                  addData();
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),*/
-                ],
+                      ],
+                    )),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 
