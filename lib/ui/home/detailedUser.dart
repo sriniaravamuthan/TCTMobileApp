@@ -2396,7 +2396,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     ),
                                                   ],
                                                 ),
-
                                                 demographicList.family[index].isExpanded == "Show Less" ? Padding(
                                                   padding: const EdgeInsets.all(4.0),
                                                   child: Row(
@@ -2527,7 +2526,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text:  DemoLocalization.of(context).translate('Insurance'),
+                                                                text:  DemoLocalization.of(context).translate('Physically challenged'),
                                                                 weight: FontWeight.w800,
                                                                 color: darkColor,
                                                                 size: 14,
@@ -2536,7 +2535,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text: getInsurance(demographicList.family[index]),
+                                                                text: getSliderValue(demographicList.family[index].physicallyChallenge),
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,
