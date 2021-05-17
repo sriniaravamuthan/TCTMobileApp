@@ -937,7 +937,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 120,
                                                     child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoSmoke),
+                                                      text:getSliderValue(demographicList.family[index].anyMembersWhoSmoke),
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -969,7 +969,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 120,
                                                     child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoDrink),
+                                                      text:getSliderValue(demographicList.family[index].anyMembersWhoDrink),
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -1001,7 +1001,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 120,
                                                     child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoUseTobacco),
+                                                      text:getSliderValue(demographicList.family[index].anyMembersWhoUseTobacco),
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -1044,7 +1044,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 120,
                                                     child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.isVaccinationDone),
+                                                      text:getSliderValue(demographicList.family[index].isVaccinationDone),
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -1074,7 +1074,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 250,
                                                     child: TextWidget(
-                                                      text:demographicList.habits.firstDose,
+                                                      text:demographicList.family[index].firstDose,
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -1104,7 +1104,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: SizedBox(
                                                     width: 250,
                                                     child: TextWidget(
-                                                      text:demographicList.habits.secondDose,
+                                                      text:demographicList.family[index].secondDose,
                                                       size: 14,
                                                       color: darkColor,
                                                       weight: FontWeight.w400,
@@ -2243,247 +2243,6 @@ class _DetailScreenState extends State<DetailScreen> {
                           Divider(
                             thickness: 2,
                           ),
-                          /*SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 16.0, top: 8.0),
-                                    child: TextWidget(
-                                      text: DemoLocalization.of(context)
-                                          .translate('Habits'),
-                                      size: 16,
-                                      color: darkColor,
-                                      weight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate(
-                                                              'Any Members who Smoke?'),
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoSmoke),
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate(
-                                                              'Any Members who Drink?'),
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoDrink),
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(
-                                                              context)
-                                                          .translate(
-                                                              'Any Members who use Tobacco?'),
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.anyMembersWhoUseTobacco),
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Container(width: 70,),
-
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context)
-                                                          .translate("Vaccination Done") ,
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text:getSliderValue(demographicList.habits.isVaccinationDone),
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text:  DemoLocalization.of(context)
-                                                          .translate("1st Dose Date") ,
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text:demographicList.habits.firstDose,
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context)
-                                                          .translate("2nd Dose Date") ,
-                                                      size: 14,
-                                                      weight: FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(4.0),
-                                                  child: SizedBox(
-                                                    width: 250,
-                                                    child: TextWidget(
-                                                      text:demographicList.habits.secondDose,
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Container(width: 70,),
-
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2,
-                          ),*/
                           demographicList.family.length > 0 ?  Container(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -2791,7 +2550,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text:getSliderValue(demographicList.habits.anyMembersWhoDrink),
+                                                              text:getSliderValue(demographicList.family[index].anyMembersWhoDrink),
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2810,7 +2569,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text:demographicList.habits.secondDose == null ? "" : demographicList.habits.secondDose,
+                                                              text:demographicList.family[index].secondDose == null ? "" : demographicList.family[index].secondDose,
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2851,26 +2610,20 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           SizedBox(height: 10,),
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate('Any Members who use Tobacco?'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
+                                                            child: TextWidget(
+                                                              text: DemoLocalization.of(context).translate('Any Members who use Tobacco?'),
+                                                              weight: FontWeight.w800,
+                                                              color: darkColor,
+                                                              size: 14,
                                                             ),
                                                           ),
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text:getSliderValue(demographicList.habits.anyMembersWhoUseTobacco),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
+                                                            child: TextWidget(
+                                                              text:getSliderValue(demographicList.family[index].anyMembersWhoUseTobacco),
+                                                              weight: FontWeight.w400,
+                                                              color: darkColor,
+                                                              size: 14,
                                                             ),
                                                           ),
                                                         ],
@@ -2912,7 +2665,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text:getSliderValue(demographicList.habits.isVaccinationDone),
+                                                              text:getSliderValue(demographicList.family[index].isVaccinationDone),
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2938,7 +2691,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text:getSliderValue(demographicList.habits.anyMembersWhoSmoke),
+                                                              text:getSliderValue(demographicList.family[index].anyMembersWhoSmoke),
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2957,7 +2710,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text: demographicList.habits.firstDose == null ? "" : demographicList.habits.firstDose,
+                                                              text: demographicList.family[index].firstDose == null ? "" : demographicList.family[index].firstDose,
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
