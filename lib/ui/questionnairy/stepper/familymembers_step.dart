@@ -2368,20 +2368,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                // Expanded(
-                //   child: SizedBox(
-                //     height: MediaQuery.of(context)
-                //         .viewInsets
-                //         .bottom,
-                //   ),
-                // ),
-                // Expanded(
-                //   child: SizedBox(
-                //     height: MediaQuery.of(context)
-                //         .viewInsets
-                //         .bottom,
-                //   ),
-                // ),
+
               ],
             ),
             Row(

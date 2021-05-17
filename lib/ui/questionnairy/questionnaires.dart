@@ -268,6 +268,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         ),
       ),
       body: OrientationBuilder(builder: (context, orientation) {
+        debugPrint("Orientation:$orientation");
         return Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -1390,7 +1391,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             height: 58,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                                  right: 16.0,),
                                               child: AutoCompleteTextField(
                                                   controller: streetNameController,
                                                   clearOnSubmit: false,
@@ -1619,8 +1620,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(
                                                       right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                      ),
                                                   child: TextFormField(
                                                     controller:
                                                     contactPersonController,

@@ -247,48 +247,41 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   }
 
   Widget _portraitMode() {
-    return ListView.builder(
+    ListView.builder(
       itemCount: familyList.length,
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         debugPrint("familyPhoto:${familyList[index].photo}");
         return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
               child: InkWell(
                 onTap: () {
-                  if (familyIndex > 0) {
-                    final snackBar = SnackBar(content: Text('Save or cancel the current member before editing another'));
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    return;
-                  }
                   setState(() {
                     familyIndex = index;
-                    addfamily = true;
                   });
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Container(
-                              height: 160,
-                              width: 140,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child:Container(
+                              height: 140,
+                              width: 120,
                               decoration: BoxDecoration(
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(50))),
                               child:  familyList[index].photo!= ""
                                   ?Image.network(familyList[index].photo,fit: BoxFit.fill)
-                                  :familyList[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill): familyList[index].gender=="Male" || familyList[index].gender=="ஆண்"?SvgPicture.asset(
+                                  :familyList[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill):familyList[index].gender=="Male" || familyList[index].gender=="ஆண்"?SvgPicture.asset(
                                 svgMan,
                                 semanticsLabel: "Logo",
-                                height: height / 10,
-                                width: width / 10,
+                                height: height / 12,
+                                width: width / 8,
                                 fit: BoxFit.contain,
                                 allowDrawingOutsideViewBox: true,
                               ):SvgPicture.asset(
@@ -299,306 +292,452 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 fit: BoxFit.contain,
                                 allowDrawingOutsideViewBox: true,
                               ) ),
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:familyList[index].name,
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: "${familyList[index].age == 0 ? "" : familyList[index].age.toString()}${familyList[index].dob.toString().length > 0 ? "," + familyList[index].dob.toString() : ""}",
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: getTexts(familyList[index]),
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: familyList[index].mobileNumber,
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: familyList[index].mail,
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              Padding(
+                                padding: EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:  DemoLocalization.of(context)
+                                      .translate('Aadhaar No'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: familyList[index].aadharNumber,
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:  DemoLocalization.of(context).translate('Section'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: TextWidget(
+                                  text: familyList[index].community,
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:  DemoLocalization.of(context)
+                                      .translate('Caste'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: TextWidget(
+                                    text: familyList[index].caste,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              SizedBox(height: 10,),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:  DemoLocalization.of(context).translate('Education Qualification'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: TextWidget(
+                                    text: familyList[index].education,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context).translate('Business'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: familyList[index].occupation,
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
+                    familyList[index].isExpanded == "Show Less" ? Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: familyList[index].name,
-                              weight: FontWeight.w800,
-                              color: darkColor,
-                              size: 14,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: SizedBox(
+                                    width: 120,
+                                    child: TextWidget(
+                                      text: DemoLocalization.of(context).translate('Annual Income'),
+                                      weight: FontWeight.w800,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: SizedBox(
+                                    width: 120,
+                                    child: TextWidget(
+                                      text: familyList[index].annualIncome.toString(),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Smart phone'),
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getSliderValue(familyList[index].smartphone),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:  DemoLocalization.of(context)
+                                        .translate('Pension'),
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: SizedBox(
+                                    width: 150,
+                                    child: TextWidget(
+                                      text: getPension(familyList[index]),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:  DemoLocalization.of(context).translate('Insurance'),
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: getInsurance(familyList[index]),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+
+                              ],
                             ),
+                          ),
+
+                          Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Column (
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: SizedBox(
+                                      width: 150,
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context).translate('Any Members who Smoke?'),
+                                        weight: FontWeight.w800,
+                                        color: darkColor,
+                                        size: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: TextWidget(
+                                      text:getSliderValue(familyList[index].anyMembersWhoSmoke),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: TextWidget(
+                                      text: DemoLocalization.of(context).translate('Any Members who Drink?'),
+                                      weight: FontWeight.w800,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: TextWidget(
+                                      text:getSliderValue(familyList[index].anyMembersWhoDrink),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: SizedBox(
+                                      width: 150,
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context).translate('Any Members who use Tobacco?'),
+                                        weight: FontWeight.w800,
+                                        color: darkColor,
+                                        size: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: TextWidget(
+                                      text:getSliderValue(familyList[index].anyMembersWhoUseTobacco),
+                                      weight: FontWeight.w400,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ],
+                              )
                           ),
                           Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: "${familyList[index].age == 0 ? "" : familyList[index].age.toString()}${familyList[index].dob.toString().length > 0 ? "," + familyList[index].dob.toString() : ""}",
-                              weight: FontWeight.w400,
-                              color: darkColor,
-                              size: 14,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context).translate("Vaccination Done") ,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:getSliderValue(familyList[index].isVaccinationDone),
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:  DemoLocalization.of(context).translate("1st Dose Date") ,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: familyList[index].firstDose == null ? "" : familyList[index].firstDose,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context).translate("2nd Dose Date") ,
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:familyList[index].secondDose == null ? "" :familyList[index].secondDose,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: SizedBox(
-                              width: 100,
-                              child: TextWidget(
-                                text: getTexts(familyList[index]),
-                                weight: FontWeight.w400,
-                                color: darkColor,
-                                size: 14,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: familyList[index].mobileNumber,
-                              weight: FontWeight.w400,
-                              color: darkColor,
-                              size: 14,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: familyList[index].mail,
-                              weight: FontWeight.w400,
-                              color: darkColor,
-                              size: 14,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Aadhaar No'),
-                              weight: FontWeight.w800,
-                              color: darkColor,
-                              size: 14,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: familyList[index].aadharNumber,
-                              weight: FontWeight.w400,
-                              color: darkColor,
-                              size: 14,
-                            ),
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(2.0),
-                          //   child: TextWidget(
-                          //     text:  DemoLocalization.of(context)
-                          //         .translate('Business'),
-                          //     weight: FontWeight.w800,
-                          //     color: darkColor,
-                          //     size: 14,
-                          //   ),
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(2.0),
-                          //   child: SizedBox(
-                          //     width: 130,
-                          //     child: TextWidget(
-                          //       text: familyList[index].occupation,
-                          //       weight: FontWeight.w400,
-                          //       color: darkColor,
-                          //       size: 14,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
+                    ) : Container(),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (familyList[index].isExpanded == "Show More")
+                            familyList[index].isExpanded = "Show Less";
+                          else
+                            familyList[index].isExpanded = "Show More";
+                        });
+                      },
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right:16.0,bottom:8),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context).translate(familyList[index].isExpanded),
+                            weight: FontWeight.w600,
+                            color: primaryColor,
+                            size: 14,
+                          ),
+                        ),
+                      ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text:  DemoLocalization.of(context)
-                                .translate('Section'),
-                            weight: FontWeight.w800,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 130,
-                          child: TextWidget(
-                            text: familyList[index].community,
-                            weight: FontWeight.w400,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text:  DemoLocalization.of(context)
-                                .translate('Insurance'),
-                            weight: FontWeight.w800,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: getInsurance(familyList[index]),
-                            weight: FontWeight.w400,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text:  DemoLocalization.of(context)
-                                .translate('Education Qualification'),
-                            weight: FontWeight.w800,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: familyList[index].education,
-                            weight: FontWeight.w400,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        SizedBox(height: 10,),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Annual Income'),
-                            weight: FontWeight.w800,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text:
-                            familyList[index].annualIncome.toString(),
-                            weight: FontWeight.w400,
-                            color: darkColor,
-                            size: 14,
-                          ),
-                        ),
-                      ],
+                    SizedBox(height: 2,),
+                    Divider(
+                      height: 1,
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: Column(
-                    //     mainAxisAlignment: MainAxisAlignment.start,
-                    //     crossAxisAlignment: CrossAxisAlignment.start,
-                    //     children: [
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text:  DemoLocalization.of(context)
-                    //               .translate('Caste'),
-                    //           weight: FontWeight.w800,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text: familyList[index].caste,
-                    //           weight: FontWeight.w400,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //       SizedBox(height: 10,),
-                    //
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text:  DemoLocalization.of(context)
-                    //               .translate('Pension'),
-                    //           weight: FontWeight.w800,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: SizedBox(
-                    //           width: 130,
-                    //           child: TextWidget(
-                    //             text: getPension(familyList[index]),
-                    //             weight: FontWeight.w400,
-                    //             color: darkColor,
-                    //             size: 14,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(height: 10,),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text:  DemoLocalization.of(context)
-                    //               .translate('Smart phone'),
-                    //           weight: FontWeight.w800,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text: getSliderValue(familyList[index].smartphone),
-                    //           weight: FontWeight.w400,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //       SizedBox(height: 10,),
-                    //
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: FittedBox(
-                    //           fit: BoxFit.contain,
-                    //           child: SizedBox(
-                    //             width: 150,
-                    //             child: TextWidget(
-                    //               text:  DemoLocalization.of(context)
-                    //                   .translate('Physically challenged'),
-                    //               weight: FontWeight.w800,
-                    //               color: darkColor,
-                    //               size: 14,
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(2.0),
-                    //         child: TextWidget(
-                    //           text: getSliderValue(familyList[index].physicallyChallenge),
-                    //           weight: FontWeight.w400,
-                    //           color: darkColor,
-                    //           size: 14,
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
             ),
-            Divider(
-              height: 1,
-            ),
+            Divider(height: 1,),
           ],
         );
       },
     );
-
 
   }
 
@@ -771,11 +910,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].education,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                child: SizedBox(
+                                  width: 120,
+                                  child: TextWidget(
+                                    text: familyList[index].education,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
                               ),
                             ],
@@ -798,11 +940,14 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text: familyList[index].caste,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
+                                child: SizedBox(
+                                  width: 120,
+                                  child: TextWidget(
+                                    text: familyList[index].caste,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 10,),
@@ -944,7 +1089,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                     width: 120,
                                     child: TextWidget(
                                       text: familyList[index].annualIncome.toString(),
-                                      weight: FontWeight.w800,
+                                      weight: FontWeight.w400,
                                       color: darkColor,
                                       size: 14,
                                     ),

@@ -1054,11 +1054,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].caste,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text: demographicList.family[index].caste,
+                                                      weight: FontWeight.w400,
+                                                      color: darkColor,
+                                                      size: 14,
+                                                    ),
                                                   ),
                                                 ),
                                                 SizedBox(height: 10,),
@@ -1074,11 +1077,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].education,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text: demographicList.family[index].education,
+                                                      weight: FontWeight.w400,
+                                                      color: darkColor,
+                                                      size: 14,
+                                                    ),
                                                   ),
                                                 ),
                                                 SizedBox(height: 10,),
@@ -1136,7 +1142,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       width: 120,
                                                       child: TextWidget(
                                                         text: demographicList.family[index].annualIncome.toString(),
-                                                        weight: FontWeight.w800,
+                                                        weight: FontWeight.w400,
                                                         color: darkColor,
                                                         size: 14,
                                                       ),
@@ -2314,11 +2320,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           ),
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: demographicList.family[index].education,
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
+                                                            child: SizedBox(
+                                                              width: 120,
+                                                              child: TextWidget(
+                                                                text: demographicList.family[index].education,
+                                                                weight: FontWeight.w400,
+                                                                color: darkColor,
+                                                                size: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -2331,21 +2340,27 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text:  DemoLocalization.of(context)
-                                                                  .translate('Caste'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
+                                                            child: SizedBox(
+                                                              width: 120,
+                                                              child: TextWidget(
+                                                                text:  DemoLocalization.of(context)
+                                                                    .translate('Caste'),
+                                                                weight: FontWeight.w800,
+                                                                color: darkColor,
+                                                                size: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: demographicList.family[index].caste,
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
+                                                            child: SizedBox(
+                                                              width: 120,
+                                                              child: TextWidget(
+                                                                text: demographicList.family[index].caste,
+                                                                weight: FontWeight.w400,
+                                                                color: darkColor,
+                                                                size: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                           SizedBox(height: 10,),
@@ -2487,7 +2502,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 width: 120,
                                                                 child: TextWidget(
                                                                   text: demographicList.family[index].annualIncome.toString(),
-                                                                  weight: FontWeight.w800,
+                                                                  weight: FontWeight.w400,
                                                                   color: darkColor,
                                                                   size: 14,
                                                                 ),
