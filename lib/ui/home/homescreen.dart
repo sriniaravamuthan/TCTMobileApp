@@ -299,6 +299,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.retirementPension= family[i]["retirementPension"];
                _family.smartphone= family[i]["smartphone"];
                _family.widowedPension= family[i]["widowedPension"];
+
+                _family.anyMembersWhoDrink=family[i]['anyMembersWhoDrink'];
+                _family.anyMembersWhoSmoke=family[i]['anyMembersWhoSmoke'];
+                _family.anyMembersWhoUseTobacco=family[i]['anyMembersWhoUseTobacco'];
+                _family.firstDose=family[i]['firstDose'];
+                _family.isVaccinationDone=family[i]['isVaccinationDone'];
+                _family.secondDose=family[i]['secondDose'];
+
                 _familyList.add(_family);
               }
 
@@ -330,15 +338,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               propertyList.typeofHouse = element["Property"]["typeofHouse"];
               propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
 
-              habitsList.anyMembersWhoDrink=element['habit']['anyMembersWhoDrink'];
+              /*habitsList.anyMembersWhoDrink=element['habit']['anyMembersWhoDrink'];
               habitsList.anyMembersWhoSmoke=element['habit']['anyMembersWhoSmoke'];
               habitsList.anyMembersWhoUseTobacco=element['habit']['anyMembersWhoUseTobacco'];
               habitsList.firstDose=element['habit']['firstDose'];
               habitsList.isVaccinationDone=element['habit']['isVaccinationDone'];
-              habitsList.secondDose=element['habit']['secondDose'];
-              debugPrint("habits:${ habitsList.anyMembersWhoDrink}");
-
-              debugPrint("demographicData2:${propertyList.dryLandInAcres }");
+              habitsList.secondDose=element['habit']['secondDose'];*/
 
               demographicData.location = locationList;
               demographicData.family = _familyList;
