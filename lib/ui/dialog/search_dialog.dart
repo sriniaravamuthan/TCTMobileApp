@@ -267,7 +267,7 @@ class _SearchDialogState extends State<SearchDialog> {
                             SizedBox(
                               height: 58,
                               child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding: const EdgeInsets.only(left:2.0,right: 2),
                                   child: AutoCompleteTextField(
                                       controller: villageNameController,
                                       clearOnSubmit: false,

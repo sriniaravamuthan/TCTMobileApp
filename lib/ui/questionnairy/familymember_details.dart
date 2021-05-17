@@ -51,6 +51,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
       });
       demographicFamily.family = familyList;
     }
+    print('GET___________' + familyList.length.toString()+ "_________" + orientation.toString());
     super.initState();
   }
 
@@ -247,7 +248,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   }
 
   Widget _portraitMode() {
-    ListView.builder(
+    return  ListView.builder(
       itemCount: familyList.length,
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
@@ -363,6 +364,28 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                   size: 14,
                                 ),
                               ),
+                              SizedBox(height: 10,),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text:  DemoLocalization.of(context).translate('Education Qualification'),
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: SizedBox(
+                                  width: 120,
+                                  child: TextWidget(
+                                    text: familyList[index].education,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -406,29 +429,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                   width: 120,
                                   child: TextWidget(
                                     text: familyList[index].caste,
-                                    weight: FontWeight.w400,
-                                    color: darkColor,
-                                    size: 14,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10,),
-                              SizedBox(height: 10,),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text:  DemoLocalization.of(context).translate('Education Qualification'),
-                                  weight: FontWeight.w800,
-                                  color: darkColor,
-                                  size: 14,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: SizedBox(
-                                  width: 120,
-                                  child: TextWidget(
-                                    text: familyList[index].education,
                                     weight: FontWeight.w400,
                                     color: darkColor,
                                     size: 14,

@@ -1015,6 +1015,28 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     size: 14,
                                                   ),
                                                 ),
+                                                SizedBox(height: 10,),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: TextWidget(
+                                                    text:  DemoLocalization.of(context).translate('Education Qualification'),
+                                                    weight: FontWeight.w800,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: SizedBox(
+                                                    width: 120,
+                                                    child: TextWidget(
+                                                      text: demographicList.family[index].education,
+                                                      weight: FontWeight.w400,
+                                                      color: darkColor,
+                                                      size: 14,
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -1058,29 +1080,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     width: 120,
                                                     child: TextWidget(
                                                       text: demographicList.family[index].caste,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate('Education Qualification'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text: demographicList.family[index].education,
                                                       weight: FontWeight.w400,
                                                       color: darkColor,
                                                       size: 14,
