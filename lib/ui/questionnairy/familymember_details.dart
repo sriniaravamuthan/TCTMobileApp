@@ -258,11 +258,6 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
           children: [
             Container(
               child: InkWell(
-                onTap: () {
-                  setState(() {
-                    familyIndex = index;
-                  });
-                },
                 child: Column(
                   children: [
                     Row(
@@ -731,6 +726,17 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                     ),
                   ],
                 ),
+                onTap: () {
+                  if (familyIndex > 0) {
+                    final snackBar = SnackBar(content: Text('Save or cancel the current member before editing another'));
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    return;
+                  }
+                  setState(() {
+                    familyIndex = index;
+                    addfamily = true;
+                  });
+                },
               ),
             ),
             Divider(height: 1,),
