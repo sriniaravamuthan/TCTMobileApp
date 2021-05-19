@@ -25,21 +25,31 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberStep extends StatefulWidget {
   Function refreshFamilyList, cancelFields, deleteFields;
   Family family;
   int familyIndex;
-  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList, this.cancelFields, this.deleteFields);
+
+  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList,
+      this.cancelFields, this.deleteFields);
 
   @override
-  _FamilyMemberStepState createState() => _FamilyMemberStepState(family, familyIndex);
+  _FamilyMemberStepState createState() =>
+      _FamilyMemberStepState(family, familyIndex);
 }
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
-  bool relationShip = false,isGender=false,maritalStatus=false,bloodGrp=false,education=false,business=false,section=false;
+  bool isRelationShip = false,
+      isGender = false,
+      isMaritalStatus = false,
+      isBloodGrp = false,
+      isEducation = false,
+      isBusiness = false,
+      isSection = false;
   var nameController = TextEditingController();
   var aadharNumberController = TextEditingController();
   var relationshipController = TextEditingController();
@@ -59,6 +69,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String smartphone = "";
   var communityController = TextEditingController();
   var casteController = TextEditingController();
+
   // var photoController = TextEditingController();
   String govtInsurance = "";
   String privateInsurance = "";
@@ -75,7 +86,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   TextEditingController firstDosePicker = TextEditingController();
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   TextEditingController secondDosePicker = TextEditingController();
-
   List<dynamic> values;
   List genderList = [],
       genderListLang = [],
@@ -100,6 +110,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityVal;
   int ageVal;
   TextEditingController datePicker = TextEditingController();
+
   // DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   String gender = "";
   File _image;
@@ -161,10 +172,31 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.oldPension = getSwitchValues(oldPension);
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
-    if(family.relationship!=""){
-      relationShip=true;
+    if (family.relationship != "") {
+      isRelationShip = true;
     }
 
+    if (family.relationship != "") {
+      isRelationShip = true;
+    }
+    if (family.gender != "") {
+      isGender = true;
+    }
+    if (family.maritalStatus != "") {
+      isMaritalStatus = true;
+    }
+    if (family.bloodGroup != "") {
+      isBloodGrp = true;
+    }
+    if (family.education != "") {
+      isEducation = true;
+    }
+    if (family.occupation != "") {
+      isBusiness = true;
+    }
+    if (family.community != "") {
+      isSection = true;
+    }
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
           .ref()
@@ -181,11 +213,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       } else {
         print('Error from image repo ${snapshot.state.toString()}');
       }
-      if(family.photo!=null){
+      if (family.photo != null) {
         family.photo = picUrl;
-      }else{
+      } else {
         family.photo = "";
-
       }
     }
     setState(() {
@@ -246,7 +277,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 2, right: 16.0, top: 2.0, bottom: 2.0),
+                                  left: 2, right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 controller: nameController,
                                 textInputAction: TextInputAction.next,
@@ -315,7 +346,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           height: 58,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                right: 16.0, top: 2.0, bottom: 2.0),
+                                right: 16.0, top: 1.0, bottom: 1.0),
                             child: TextFormField(
                               controller: aadharNumberController,
                               maxLength: 12,
@@ -396,13 +427,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           height: 58,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                right: 16.0, top: 2.0, bottom: 2.0),
+                                right: 16.0,  top: 1.0, bottom: 1.0),
                             child: AutoCompleteTextField(
                                 controller: relationshipController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   relationshipController.text = item;
-                                  relationShip=true;
+                                  isRelationShip = true;
                                 },
                                 suggestions: relationLangList,
                                 style: TextStyle(
@@ -454,7 +485,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  relationShip=false;
+                                  isRelationShip = false;
+
                                   return item
                                       .toLowerCase()
                                       .startsWith(query.toLowerCase());
@@ -512,13 +544,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           padding: const EdgeInsets.only(
                                               left: 2,
                                               right: 16.0,
-                                              top: 2.0,
-                                              bottom: 2.0),
+                                              top: 1.0, bottom: 1.0),
                                           child: AutoCompleteTextField(
                                               controller: genderController,
                                               clearOnSubmit: false,
                                               itemSubmitted: (item) {
                                                 genderController.text = item;
+                                                isGender=true;
                                                 debugPrint(
                                                     "stringList1:${genderController.text}");
                                               },
@@ -588,6 +620,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               },
                                               itemFilter: (item, query) {
                                                 debugPrint("genderItem:$item");
+                                                isGender=false;
+
                                                 return item
                                                     .toLowerCase()
                                                     .startsWith(
@@ -633,7 +667,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       width: 250,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 1.0,top:1,bottom: 1),
+                                            right: 1.0, top: 1, bottom: 1),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.next,
                                           autocorrect: true,
@@ -734,7 +768,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       width: 100,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16.0, top: 2.0, bottom: 2.0),
+                                            right: 16.0,  top: 1.0, bottom: 1.0),
                                         child: TextFormField(
                                           maxLength: 3,
                                           controller: ageController,
@@ -816,14 +850,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         padding: const EdgeInsets.only(
                                             left: 2.0,
                                             right: 16.0,
-                                            top: 0.0,
-                                            bottom: 0.0),
+                                            top: 1.0, bottom: 1.0),
                                         child: AutoCompleteTextField(
                                             controller: maritalStatusController,
                                             clearOnSubmit: false,
                                             itemSubmitted: (item) {
                                               maritalStatusController.text =
                                                   item;
+                                              isMaritalStatus=true;
                                             },
                                             suggestions: maritalLangList,
                                             style: TextStyle(
@@ -889,6 +923,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             },
                                             itemFilter: (item, query) {
                                               debugPrint("genderItem:$item");
+                                              isMaritalStatus=false;
+
                                               return item
                                                   .toLowerCase()
                                                   .startsWith(
@@ -922,12 +958,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       height: 58,
                                       child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16.0, top: 2.0, bottom: 2.0),
+                                            right: 16.0, top: 1.0, bottom: 1.0),
                                         child: AutoCompleteTextField(
                                             controller: bloodGroupController,
                                             clearOnSubmit: false,
                                             itemSubmitted: (item) {
                                               bloodGroupController.text = item;
+                                              isBloodGrp=true;
                                             },
                                             suggestions: bloodGrpLangList,
                                             style: TextStyle(
@@ -992,6 +1029,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               return a.compareTo(b);
                                             },
                                             itemFilter: (item, query) {
+                                              isBloodGrp=false;
                                               return item
                                                   .toLowerCase()
                                                   .startsWith(
@@ -1097,9 +1135,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(50))),
-                                child: family.photo == "" ?
-                                _image == null ? Image.asset(imgCamera) : Image.file(_image)
-                                  : Image.network(family.photo,fit: BoxFit.fill)),
+                                child: family.photo == ""
+                                    ? _image == null
+                                        ? Image.asset(imgCamera)
+                                        : Image.file(_image)
+                                    : Image.network(family.photo,
+                                        fit: BoxFit.fill)),
                           ),
                         ),
                       ],
@@ -1132,12 +1173,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 2, right: 16.0,),
+                                left: 2,
+                                right: 16.0,
+                                  top: 1.0, bottom: 1.0
+                              ),
                               child: AutoCompleteTextField(
                                   controller: educationController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
                                     educationController.text = item;
+                                    isEducation=true;
                                     debugPrint(
                                         "stringList1:${educationController.text}");
                                   },
@@ -1192,6 +1237,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   },
                                   itemFilter: (item, query) {
                                     debugPrint("genderItem:$item");
+                                    isEducation=false;
+
                                     return item
                                         .toLowerCase()
                                         .startsWith(query.toLowerCase());
@@ -1224,12 +1271,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 0.0, bottom: 0.0),
+                                  right: 16.0,  top: 1.0, bottom: 1.0),
                               child: AutoCompleteTextField(
                                   controller: occupationController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
                                     occupationController.text = item;
+                                    isBusiness=true;
                                   },
                                   suggestions: businessLangList,
                                   style: TextStyle(
@@ -1282,6 +1330,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   },
                                   itemFilter: (item, query) {
                                     debugPrint("genderItem:$item");
+                                    isBusiness=false;
                                     return item
                                         .toLowerCase()
                                         .startsWith(query.toLowerCase());
@@ -1314,7 +1363,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0,  top: 1.0, bottom: 1.0),
                               child: AutoCompleteTextField(
                                   keyboardType: TextInputType.number,
                                   controller: annualController,
@@ -1413,60 +1462,56 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2.0,
                                   right: 16.0,
-                                  top: 2.0,
-                                  bottom: 2.0),
+                                  top: 1.0, bottom: 1.0),
                               child: TextFormField(
-                                controller: mobileNumberController,
-                                textInputAction: TextInputAction.next,
-                                autocorrect: true,
-                                maxLength: 10,
-                                enableSuggestions: true,
-                                decoration: InputDecoration(
-                                    counterText: "",
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                          BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                keyboardType: TextInputType.phone,
-                                onSaved: (String val) {
-                                  setState(() {});
-                                },
+                                  controller: mobileNumberController,
+                                  textInputAction: TextInputAction.next,
+                                  autocorrect: true,
+                                  maxLength: 10,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                      counterText: "",
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
+                                      ),
+                                      fillColor: lightGreyColor),
+                                  keyboardType: TextInputType.phone,
+                                  onSaved: (String val) {
+                                    setState(() {});
+                                  },
                                   validator: (value) {
                                     if (value.isNotEmpty) {
-
-                                        if (value.length != 10)
-                                          return 'Enter a valid mobile!';
-
+                                      if (value.length != 10)
+                                        return 'Enter a valid mobile!';
                                     }
                                     return null;
-                                  }
-                              ),
+                                  }),
                             ),
                           ),
                         ],
@@ -1495,7 +1540,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0,  top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 controller: mailController,
                                 textInputAction: TextInputAction.next,
@@ -1535,7 +1580,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 keyboardType: TextInputType.emailAddress,
                                 onSaved: (String val) {
                                   setState(() {
-                                    mailController.text=val;
+                                    mailController.text = val;
                                   });
                                 },
                                 validator: (value) {
@@ -1645,14 +1690,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 2.0,
-                                  right: 16.0,
-                                  ),
+                                left: 2.0,
+                                right: 16.0,
+                                  top: 1.0, bottom: 1.0
+                              ),
                               child: AutoCompleteTextField(
                                   controller: communityController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
                                     communityController.text = item;
+                                    isSection=true;
                                   },
                                   suggestions: sectionLangList,
                                   style: TextStyle(
@@ -1704,6 +1751,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     return a.compareTo(b);
                                   },
                                   itemFilter: (item, query) {
+                                    isSection=false;
                                     debugPrint("genderItem:$item");
                                     return item
                                         .toLowerCase()
@@ -1725,30 +1773,19 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: RichText(
-                              text: TextSpan(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Caste'),
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 14,
-                                      color: darkColor,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w600),
-                                  children: [
-                                    TextSpan(
-                                      text: ' *',
-                                      style: TextStyle(
-                                          color: Colors.red, fontSize: 14.0),
-                                    ),
-                                  ]),
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context).translate(
+                                  'Caste'),
+                              size: 14,
+                              weight: FontWeight.w600,
                             ),
                           ),
                           SizedBox(
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0,  top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 controller: casteController,
                                 textInputAction: TextInputAction.next,
@@ -2106,8 +2143,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 thumbShape: RoundSliderThumbShape(
                                     enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
                                 value: family.anyMembersWhoSmoke,
@@ -2156,8 +2193,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 thumbShape: RoundSliderThumbShape(
                                     enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
                                 value: family.anyMembersWhoDrink,
@@ -2180,8 +2217,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-
-
               ],
             ),
             Row(
@@ -2213,8 +2248,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 thumbShape: RoundSliderThumbShape(
                                     enabledThumbRadius: 12.0),
                                 overlayColor: Colors.white.withAlpha(32),
-                                overlayShape:
-                                RoundSliderOverlayShape(overlayRadius: 28.0),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
                               ),
                               child: Slider(
                                 value: family.anyMembersWhoUseTobacco,
@@ -2248,7 +2283,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             padding: const EdgeInsets.only(top: 8.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
-                                  .translate("Vaccination Done") ,
+                                  .translate("Vaccination Done"),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -2301,8 +2336,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: TextWidget(
-                              text:  DemoLocalization.of(context)
-                                  .translate("1st Dose Date") ,
+                              text: DemoLocalization.of(context)
+                                  .translate("1st Dose Date"),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -2311,7 +2346,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -2320,32 +2355,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -2361,7 +2396,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                  DateFormat(" d-MMMM-y").format(date);
+                                      DateFormat(" d-MMMM-y").format(date);
                                   family.firstDose = dateFormat;
                                   firstDosePicker.text = dateFormat;
                                 },
@@ -2373,7 +2408,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-
               ],
             ),
             Row(
@@ -2391,7 +2425,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextWidget(
                               text: DemoLocalization.of(context)
-                                  .translate("2nd Dose Date") ,
+                                  .translate("2nd Dose Date"),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -2401,7 +2435,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             width: 180,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,),
+                                right: 16.0,
+                                  top: 1.0, bottom: 1.0
+                              ),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -2410,32 +2446,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -2452,7 +2488,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                  DateFormat(" d-MMMM-y").format(date);
+                                      DateFormat(" d-MMMM-y").format(date);
                                   secondDosePicker.text = dateFormat;
                                   family.secondDose = dateFormat;
                                   // "${date.day}/${date.month}/${date.year}";
@@ -2473,13 +2509,71 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         setState(() {
                           this.isLoading = true;
                         });
-                        if (_stepTwoKey.currentState.validate()) {
-                          if (_stepTwoKey != null) {
-                            _stepTwoKey.currentState.save();
-                            uploadFile();
-                          }
-                        }
 
+                        if (_stepTwoKey.currentState.validate()) {
+                          // if (_stepTwoKey != null) {
+                            _stepTwoKey.currentState.save();
+                            if (relationshipController.text != "" &&
+                                !isRelationShip) {
+                              setState(() {
+                                relationshipController.text = "";
+                                snackBarAlert("Error",
+                                    "RelationShip  must be in List", errorColor);
+                                return;
+                              });
+                            }  else if (genderController.text != "" &&
+                                !isGender) {
+                              setState(() {
+                                genderController.text = "";
+                                snackBarAlert("Error",
+                                    "Gender  must be in List", errorColor);
+                                return;
+                              });
+                            }else if (maritalStatusController.text != "" &&
+                                !isMaritalStatus) {
+                              setState(() {
+                                maritalStatusController.text = "";
+                                snackBarAlert("Error",
+                                    "Marital Status  must be in List", errorColor);
+                                return;
+                              });
+                            }else if (bloodGroupController.text != "" &&
+                                !isBloodGrp) {
+                              setState(() {
+                                bloodGroupController.text = "";
+                                snackBarAlert("Error",
+                                    "Blood Group  must be in List", errorColor);
+                                return;
+                              });
+                            }else if (educationController.text != "" &&
+                                !isEducation) {
+                              setState(() {
+                                educationController.text = "";
+                                snackBarAlert("Error",
+                                    "Education Qualification must be in List", errorColor);
+                                return;
+                              });
+                            }else if (occupationController.text != "" &&
+                                !isBusiness) {
+                              setState(() {
+                                occupationController.text = "";
+                                snackBarAlert("Error",
+                                    "Business must be in List", errorColor);
+                                return;
+                              });
+                            }else if (communityController.text != "" &&
+                                !isSection) {
+                              setState(() {
+                                communityController.text = "";
+                                snackBarAlert("Error",
+                                    "Section must be in List", errorColor);
+                                return;
+                              });
+                            }
+                            else {
+                              uploadFile();
+                            }                          // }
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -2492,7 +2586,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.done,color: successColor,),
+                            Icon(
+                              Icons.done,
+                              color: successColor,
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: TextWidget(
@@ -2540,41 +2637,48 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                       ),
                     ),
-                    familyIndex >= 0 ? Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: InkWell(
-                        onTap: () {
-                          widget.deleteFields(family);
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: Colors.black45,
-                              style: BorderStyle.solid,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(Icons.delete_forever_outlined,color: errorColor,),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: TextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Delete'),
-                                  color: darkColor,
-                                  weight: FontWeight.w700,
-                                  size: 14,
+                    familyIndex >= 0
+                        ? Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: InkWell(
+                              onTap: () {
+                                widget.deleteFields(family);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                    color: Colors.black45,
+                                    style: BorderStyle.solid,
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.delete_forever_outlined,
+                                      color: errorColor,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Delete'),
+                                        color: darkColor,
+                                        weight: FontWeight.w700,
+                                        size: 14,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ) : Container(),
+                            ),
+                          )
+                        : Container(),
                     isLoading
-                        ? Container(margin: EdgeInsets.only(left: 10), child: CircularProgressIndicator())
+                        ? Container(
+                            margin: EdgeInsets.only(left: 10),
+                            child: CircularProgressIndicator())
                         : Visibility(visible: false, child: Text("Saving")),
                     Container()
                   ],
@@ -2591,7 +2695,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.physicallyChallenge = value;
     setState(() {
       if (value == 0)
-        physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
+        physicallyChallenge =
+            DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
         physicallyChallenge = DemoLocalization.of(context).translate('No');
       else
@@ -2663,7 +2768,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.retirementPension = value;
     setState(() {
       if (value == 0)
-        retirementPension = DemoLocalization.of(context).translate('Not Answer');
+        retirementPension =
+            DemoLocalization.of(context).translate('Not Answer');
       else if (value == 1)
         retirementPension = DemoLocalization.of(context).translate('No');
       else
@@ -2888,7 +2994,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         smartphone = DemoLocalization.of(context).translate('Yes');
 
       if (family.physicallyChallenge == 0)
-        physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
+        physicallyChallenge =
+            DemoLocalization.of(context).translate('Not Answer');
       else if (family.physicallyChallenge == 1)
         physicallyChallenge = DemoLocalization.of(context).translate('No');
       else
@@ -2923,7 +3030,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         widowedPension = DemoLocalization.of(context).translate('Yes');
 
       if (family.retirementPension == 0)
-        retirementPension = DemoLocalization.of(context).translate('Not Answer');
+        retirementPension =
+            DemoLocalization.of(context).translate('Not Answer');
       else if (family.retirementPension == 1)
         retirementPension = DemoLocalization.of(context).translate('No');
       else
@@ -2989,5 +3097,4 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getIncome();
     setState(() {});
   }
-
 }

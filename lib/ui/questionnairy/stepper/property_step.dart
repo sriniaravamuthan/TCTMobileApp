@@ -55,7 +55,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   List statusHouseList;
   List statusHouseListLang;
   List typeHouseList;
-  List typeHouseListLang;
+  List<String> typeHouseListLang;
+  List<int> typeHouseListStr;
 
   _PropertyDetailStepState(this.demographicFamily);
 
@@ -224,68 +225,80 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         child: Padding(
                           padding: const EdgeInsets.only(
                               right: 16.0, top: 2.0, bottom: 2.0),
-                          child: AutoCompleteTextField(
-                              controller: typeHouseController,
-                              clearOnSubmit: false,
-                              itemSubmitted: (item) {
-                                typeHouseController.text = item;
-                                property.typeofHouse = item;
-                              },
-                              suggestions: typeHouseListLang,
-                              style: TextStyle(
-                                color: Color(0xFF222222),
-                                fontSize: 16,
-                              ),
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              itemBuilder: (context, item) {
-                                return new Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextWidget(
-                                      text: item,
-                                      color: darkColor,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    ));
-                              },
-                              itemSorter: (a, b) {
-                                return a.compareTo(b);
-                              },
-                              itemFilter: (item, query) {
-                                debugPrint("genderItem:$item");
-                                return item
-                                    .toLowerCase()
-                                    .startsWith(query.toLowerCase());
-                              }),
+                           child :DropdownButton<int>(
+                                items: typeHouseListLang.map((String val) {
+                                  return new DropdownMenuItem<String>(
+                                    value: int.tryParse(typeHouseController.text),
+                                    child: new Text(val),
+                                  );
+                                }).toList(),
+                                hint: Text("select"),
+                                onChanged: (newVal) {
+                                  typeHouseController.text = newVal.toString();
+                                  this.setState(() {});
+                                }),
+                          // child: AutoCompleteTextField(
+                          //     controller: typeHouseController,
+                          //     clearOnSubmit: false,
+                          //     itemSubmitted: (item) {
+                          //       typeHouseController.text = item;
+                          //       property.typeofHouse = item;
+                          //     },
+                          //     suggestions: typeHouseListLang,
+                          //     style: TextStyle(
+                          //       color: Color(0xFF222222),
+                          //       fontSize: 16,
+                          //     ),
+                          //     decoration: InputDecoration(
+                          //         border: OutlineInputBorder(
+                          //           borderSide: BorderSide.none,
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(10.0)),
+                          //         ),
+                          //         enabledBorder: OutlineInputBorder(
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(10.0)),
+                          //           borderSide:
+                          //               BorderSide(color: lightGreyColor),
+                          //         ),
+                          //         focusedBorder: OutlineInputBorder(
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(10.0)),
+                          //           borderSide:
+                          //               BorderSide(color: lightGreyColor),
+                          //         ),
+                          //         focusedErrorBorder: OutlineInputBorder(
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(10.0)),
+                          //           borderSide:
+                          //               BorderSide(color: lightGreyColor),
+                          //         ),
+                          //         errorBorder: OutlineInputBorder(
+                          //           borderRadius:
+                          //               BorderRadius.all(Radius.circular(10.0)),
+                          //           borderSide:
+                          //               BorderSide(color: lightGreyColor),
+                          //         ),
+                          //         fillColor: lightGreyColor),
+                          //     itemBuilder: (context, item) {
+                          //       return new Padding(
+                          //           padding: EdgeInsets.all(8.0),
+                          //           child: TextWidget(
+                          //             text: item,
+                          //             color: darkColor,
+                          //             size: 14,
+                          //             weight: FontWeight.w600,
+                          //           ));
+                          //     },
+                          //     itemSorter: (a, b) {
+                          //       return a.compareTo(b);
+                          //     },
+                          //     itemFilter: (item, query) {
+                          //       debugPrint("genderItem:$item");
+                          //       return item
+                          //           .toLowerCase()
+                          //           .startsWith(query.toLowerCase());
+                          //     }),
                         ),
                       ),
                     ],
@@ -1200,7 +1213,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       if (typeHouseData != null) {
         typeofHouseVal = typeHouseData[language];
         typeHouseListLang.add(typeofHouseVal);
-        debugPrint("stringList:$typeHouseListLang");
+
       }
     });
   }
