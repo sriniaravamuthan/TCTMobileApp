@@ -50,6 +50,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       noOfFamilyPersonController;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
+  bool villageName = false, villageCode = false, panchCode = false, panchNo = false;
   var villageNameController;
   var villageCodeController;
   var panchayatCodeController = TextEditingController();
@@ -657,8 +658,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         clearOnSubmit: false,
                                                         itemSubmitted: (item) {
                                                           setState(() {
-                                                            villageCodeController
-                                                                .text = item;
+                                                            villageCodeController.text = item;
+                                                            villageCode = true;
                                                             for (int i = 0;
                                                             i <
                                                                 originalVillageCodeList
@@ -777,8 +778,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         itemSorter: (a, b) {
                                                           return a.compareTo(b);
                                                         },
-                                                        itemFilter:
-                                                            (item, query) {
+                                                        itemFilter: (item, query) {
+                                                              villageCode = false;
                                                           return item
                                                               .toLowerCase()
                                                               .startsWith(query
@@ -846,6 +847,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       panchayatNoController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
+                                                        panchNo = true;
                                                         panchayatNoController
                                                             .text = item;
                                                         setState(() {
@@ -973,6 +975,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         return a.compareTo(b);
                                                       },
                                                       itemFilter: (item, query) {
+                                                        panchNo = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
@@ -1041,6 +1044,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               .text = "";
                                                           villageCodeController
                                                               .text = "";
+                                                          panchCode = true;
                                                           villageCodeList.clear();
                                                           villageNameList.clear();
                                                           snap.forEach((element) {
@@ -1161,6 +1165,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         return a.compareTo(b);
                                                       },
                                                       itemFilter: (item, query) {
+                                                        panchCode = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
@@ -1216,12 +1221,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       top: 0.0,
                                                       bottom: 0.0),
                                                   child: AutoCompleteTextField(
-                                                      controller:
-                                                      villageNameController,
+                                                      controller: villageNameController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
-                                                        villageNameController
-                                                            .text = item;
+                                                        villageNameController.text = item;
+                                                        villageName = true;
                                                         setState(() {
                                                           for (int i = 0;
                                                           i <
@@ -1341,6 +1345,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       },
                                                       itemFilter: (item, query) {
                                                         debugPrint("item:$item");
+                                                        villageName = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
@@ -1846,6 +1851,27 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                             backgroundColor: lightColor,
                                             onPressed: () {
+                                              if (villageNameController.text != "" && !villageName) {
+                                                setState(() {
+                                                  //  TODO  ::  ::  Add logic here
+                                                  return;
+                                                });
+                                              } else if (villageCodeController.text != "" && !villageCode) {
+                                                setState(() {
+                                                  //  TODO  ::  ::  Add logic here
+                                                  return;
+                                                });
+                                              } else if (panchayatCodeController.text != "" && !panchCode) {
+                                                setState(() {
+                                                  //  TODO  ::  ::  Add logic here
+                                                  return;
+                                                });
+                                              } else if (panchayatNoController.text != "" && !panchNo) {
+                                                setState(() {
+                                                  //  TODO  ::  ::  Add logic here
+                                                  return;
+                                                });
+                                              }
                                               continued();
                                             },
                                           ),
