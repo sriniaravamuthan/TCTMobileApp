@@ -39,7 +39,7 @@ class FamilyMemberStep extends StatefulWidget {
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
-
+  bool relationShip = false,isGender=false,maritalStatus=false,bloodGrp=false,education=false,business=false,section=false;
   var nameController = TextEditingController();
   var aadharNumberController = TextEditingController();
   var relationshipController = TextEditingController();
@@ -161,6 +161,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.oldPension = getSwitchValues(oldPension);
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
+    if(family.relationship!=""){
+      relationShip=true;
+    }
 
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
@@ -399,6 +402,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   relationshipController.text = item;
+                                  relationShip=true;
                                 },
                                 suggestions: relationLangList,
                                 style: TextStyle(
@@ -450,6 +454,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
+                                  relationShip=false;
                                   return item
                                       .toLowerCase()
                                       .startsWith(query.toLowerCase());
@@ -1127,7 +1132,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 2, right: 16.0, top: 2.0, bottom: 2.0),
+                                  left: 2, right: 16.0,),
                               child: AutoCompleteTextField(
                                   controller: educationController,
                                   clearOnSubmit: false,

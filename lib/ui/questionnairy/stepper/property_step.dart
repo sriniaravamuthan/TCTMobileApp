@@ -1047,9 +1047,9 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            right: 16.0, top: 2.0, bottom: 2.0),
+                            right: 16.0),
                         child: SizedBox(
-                          height: 50,
+                          height: 54,
                           width: 250,
                           child: TextFormField(
                             controller: stockTypeController,

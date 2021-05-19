@@ -261,8 +261,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 data["status"] = false;
               if (locationList.contactPerson == "")
                 data["status"] = false;
-
-              int hasCaste = -1, hasSection = -1, hasRelationShip = -1, hasDob = -1;
+              // hasCaste = -1,
+              int  hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
                 Family _family = Family();
                _family.aadharNumber= family[i]["aadharNumber"];
@@ -270,8 +270,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.annualIncome= family[i]["annualIncome"];
                _family.bloodGroup=  family[i]["bloodGroup"];
                _family.caste= family[i]["caste"];
-               if (_family.caste != "")
-                 hasCaste += 1;
+               // if (_family.caste != "")
+               //   hasCaste += 1;
                _family.community= family[i]["community"];
                if (_family.community != "")
                  hasSection += 1;
@@ -311,8 +311,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _familyList.add(_family);
               }
 
-              if (hasCaste < 0)
-                data["status"] = false;
+              // if (hasCaste < 0)
+              //   data["status"] = false;
 
               if (hasSection < 0)
                 data["status"] = false;
@@ -338,14 +338,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               propertyList.twoWheeler = element["Property"]["twoWheeler"];
               propertyList.typeofHouse = element["Property"]["typeofHouse"];
               propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
-
-              /*habitsList.anyMembersWhoDrink=element['habit']['anyMembersWhoDrink'];
-              habitsList.anyMembersWhoSmoke=element['habit']['anyMembersWhoSmoke'];
-              habitsList.anyMembersWhoUseTobacco=element['habit']['anyMembersWhoUseTobacco'];
-              habitsList.firstDose=element['habit']['firstDose'];
-              habitsList.isVaccinationDone=element['habit']['isVaccinationDone'];
-              habitsList.secondDose=element['habit']['secondDose'];*/
-
               demographicData.location = locationList;
               demographicData.family = _familyList;
               demographicData.property = propertyList;
@@ -865,17 +857,6 @@ class DataTableRow extends DataTableSource {
               ),
             ),
           )),
-          // DataCell(SizedBox(
-          //   width: 100,
-          //   child: Center(
-          //     child: TextWidget(
-          //       text: usersItem.zone,
-          //       color: darkGreyColor,
-          //       size: 16,
-          //       weight: FontWeight.w600,
-          //     ),
-          //   ),
-          // )),
           DataCell(SizedBox(
             width: 60,
             child: Center(

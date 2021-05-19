@@ -126,6 +126,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         villageCodeController.text = location.villagesCode;
         panchayatCodeController.text = location.panchayatCode;
         panchayatNoController.text = location.panchayatNo;
+        if(location.villageName!=""){
+          villageName=true;
+        }
+      if(location.villagesCode!=""){
+        villageCode=true;
+      }
+      if(location.panchayatCode!=""){
+        panchCode=true;
+      }
+      if(location.panchayatNo!=""){
+        panchNo=true;
+      }
       // }
     } else {
       location.formNo = "";
@@ -1852,27 +1864,31 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             backgroundColor: lightColor,
                                             onPressed: () {
                                               if (villageNameController.text != "" && !villageName) {
+                                                debugPrint("villageName:$villageName");
                                                 setState(() {
-                                                  //  TODO  ::  ::  Add logic here
+                                                  villageNameController.text="";
+                                                  snackBarAlert("Error", "Village Name must be in List", errorColor);
                                                   return;
                                                 });
                                               } else if (villageCodeController.text != "" && !villageCode) {
                                                 setState(() {
-                                                  //  TODO  ::  ::  Add logic here
+                                                  villageCodeController.text="";
+                                                  snackBarAlert("Error", "Village Code must be in List", errorColor);
                                                   return;
                                                 });
                                               } else if (panchayatCodeController.text != "" && !panchCode) {
                                                 setState(() {
-                                                  //  TODO  ::  ::  Add logic here
-                                                  return;
+                                                  panchayatCodeController.text="";
+                                                  snackBarAlert("Error", "Panchayat Code must be in List", errorColor);                                                  return;
                                                 });
                                               } else if (panchayatNoController.text != "" && !panchNo) {
                                                 setState(() {
-                                                  //  TODO  ::  ::  Add logic here
-                                                  return;
+                                                  panchayatNoController.text="";
+                                                  snackBarAlert("Error", "Panchayat No must be in List", errorColor);                                                          return;
                                                 });
+                                              }else{
+                                                continued();
                                               }
-                                              continued();
                                             },
                                           ),
                                         ),
