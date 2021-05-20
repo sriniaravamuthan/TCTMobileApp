@@ -671,7 +671,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         itemSubmitted: (item) {
                                                           setState(() {
                                                             villageCodeController.text = item;
-                                                            villageCode = true;
+                                                            villageName = true;
+                                                            villageCode=true;
+                                                            panchCode=true;
+                                                            panchNo=true;
                                                             for (int i = 0;
                                                             i <
                                                                 originalVillageCodeList
@@ -859,9 +862,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       panchayatNoController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
-                                                        panchNo = true;
-                                                        panchayatNoController
-                                                            .text = item;
+                                                        panchCode=true;
+                                                        panchNo=true;
+                                                        panchayatNoController.text = item;
                                                         setState(() {
                                                           villageNameController
                                                               .text = "";
@@ -1052,11 +1055,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         panchayatCodeController
                                                             .text = item;
                                                         setState(() {
-                                                          villageNameController
-                                                              .text = "";
-                                                          villageCodeController
-                                                              .text = "";
-                                                          panchCode = true;
+                                                          panchCode=true;
+                                                          panchNo=true;
+                                                          villageNameController.text = "";
+                                                          villageCodeController.text = "";
                                                           villageCodeList.clear();
                                                           villageNameList.clear();
                                                           snap.forEach((element) {
@@ -1238,6 +1240,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                       itemSubmitted: (item) {
                                                         villageNameController.text = item;
                                                         villageName = true;
+                                                        villageCode=true;
+                                                        panchCode=true;
+                                                        panchNo=true;
                                                         setState(() {
                                                           for (int i = 0;
                                                           i <
@@ -1863,32 +1868,32 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                             ),
                                             backgroundColor: lightColor,
                                             onPressed: () {
-                                              // if (villageNameController.text != "" && !villageName) {
-                                              //   debugPrint("villageName:$villageName");
-                                              //   setState(() {
-                                              //     villageNameController.text="";
-                                              //     snackBarAlert("Error", "Village Name must be in List", errorColor);
-                                              //     return;
-                                              //   });
-                                              // } else if (villageCodeController.text != "" && !villageCode) {
-                                              //   setState(() {
-                                              //     villageCodeController.text="";
-                                              //     snackBarAlert("Error", "Village Code must be in List", errorColor);
-                                              //     return;
-                                              //   });
-                                              // } else if (panchayatCodeController.text != "" && !panchCode) {
-                                              //   setState(() {
-                                              //     panchayatCodeController.text="";
-                                              //     snackBarAlert("Error", "Panchayat Code must be in List", errorColor);                                                  return;
-                                              //   });
-                                              // } else if (panchayatNoController.text != "" && !panchNo) {
-                                              //   setState(() {
-                                              //     panchayatNoController.text="";
-                                              //     snackBarAlert("Error", "Panchayat No must be in List", errorColor);                                                          return;
-                                              //   });
-                                              // }else{
+                                              if (villageNameController.text != "" && !villageName) {
+                                                debugPrint("villageName:$villageName");
+                                                setState(() {
+                                                  villageNameController.text="";
+                                                  snackBarAlert("Error", "Village Name must be in List", errorColor);
+                                                  return;
+                                                });
+                                              } else if (villageCodeController.text != "" && !villageCode) {
+                                                setState(() {
+                                                  villageCodeController.text="";
+                                                  snackBarAlert("Error", "Village Code must be in List", errorColor);
+                                                  return;
+                                                });
+                                              } else if (panchayatCodeController.text != "" && !panchCode) {
+                                                setState(() {
+                                                  panchayatCodeController.text="";
+                                                  snackBarAlert("Error", "Panchayat Code must be in List", errorColor);                                                  return;
+                                                });
+                                              } else if (panchayatNoController.text != "" && !panchNo) {
+                                                setState(() {
+                                                  panchayatNoController.text="";
+                                                  snackBarAlert("Error", "Panchayat No must be in List", errorColor);                                                          return;
+                                                });
+                                              }else{
                                                 continued();
-                                              // }
+                                              }
                                             },
                                           ),
                                         ),

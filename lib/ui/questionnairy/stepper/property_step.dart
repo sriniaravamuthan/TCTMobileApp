@@ -8,7 +8,6 @@
 
 import 'dart:collection';
 
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
@@ -37,6 +36,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   String vehicle = "";
   String liveStock = "";
 
+  bool houseStatus = false, houseType = false;
   var statusHouseController = TextEditingController();
   var typeHouseController = TextEditingController();
   var wetLandController = TextEditingController();
@@ -53,7 +53,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
 
   String language;
   List statusHouseList;
-  List statusHouseListLang;
+  List<String> statusHouseListLang;
   List typeHouseList;
   List<String> typeHouseListLang;
   List<int> typeHouseListStr;
@@ -74,6 +74,11 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
 
       statusHouseController.text = property.statusofHouse;
       typeHouseController.text = property.typeofHouse;
+
+      if(property.statusofHouse != "")
+        houseStatus = true;
+      if(property.typeofHouse != "")
+        houseType = true;
 
       wetLandController.text = property.wetLandInAcres.toString();
       dryLandController.text = property.dryLandInAcres.toString();
@@ -135,12 +140,26 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 2.0, right: 16.0),
-                          child: AutoCompleteTextField(
+                          padding: const EdgeInsets.only(left: 2.0, right: 16.0),
+                          child :DropdownButton<String>(
+                              items: statusHouseListLang.map((String val) {
+                                return new DropdownMenuItem<String>(
+                                  value: val,
+                                  child: new Text(val),
+                                );
+                              }).toList(),
+                              isExpanded: true,
+                              hint: statusHouseController.text == "" ? Text("select") : Text(statusHouseController.text),
+                              onChanged: (newVal) {
+                                statusHouseController.text = newVal;
+                                property.statusofHouse = newVal;
+                                this.setState(() {});
+                              }),
+                          /*child: AutoCompleteTextField(
                               controller: statusHouseController,
                               clearOnSubmit: false,
                               itemSubmitted: (item) {
+                                houseStatus = true;
                                 statusHouseController.text = item;
                                 property.statusofHouse = item;
                               },
@@ -195,10 +214,11 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               },
                               itemFilter: (item, query) {
                                 debugPrint("genderItem:$item");
+                                houseStatus = false;
                                 return item
                                     .toLowerCase()
                                     .startsWith(query.toLowerCase());
-                              }),
+                              }),*/
                         ),
                       ),
                     ],
@@ -223,82 +243,86 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0, top: 2.0, bottom: 2.0),
-                           child :DropdownButton<int>(
+                          padding: const EdgeInsets.only(right: 16.0, top: 2.0, bottom: 2.0),
+                           child :DropdownButton<String>(
+                             // value: property.typeofHouse,
                                 items: typeHouseListLang.map((String val) {
                                   return new DropdownMenuItem<String>(
-                                    value: int.tryParse(typeHouseController.text),
+                                    value: val,
                                     child: new Text(val),
                                   );
                                 }).toList(),
-                                hint: Text("select"),
+                               isExpanded: true,
+                               hint: typeHouseController.text == "" ? Text("select") : Text(typeHouseController.text),
                                 onChanged: (newVal) {
                                   typeHouseController.text = newVal.toString();
+                                  property.typeofHouse = newVal;
                                   this.setState(() {});
                                 }),
-                          // child: AutoCompleteTextField(
-                          //     controller: typeHouseController,
-                          //     clearOnSubmit: false,
-                          //     itemSubmitted: (item) {
-                          //       typeHouseController.text = item;
-                          //       property.typeofHouse = item;
-                          //     },
-                          //     suggestions: typeHouseListLang,
-                          //     style: TextStyle(
-                          //       color: Color(0xFF222222),
-                          //       fontSize: 16,
-                          //     ),
-                          //     decoration: InputDecoration(
-                          //         border: OutlineInputBorder(
-                          //           borderSide: BorderSide.none,
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10.0)),
-                          //         ),
-                          //         enabledBorder: OutlineInputBorder(
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10.0)),
-                          //           borderSide:
-                          //               BorderSide(color: lightGreyColor),
-                          //         ),
-                          //         focusedBorder: OutlineInputBorder(
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10.0)),
-                          //           borderSide:
-                          //               BorderSide(color: lightGreyColor),
-                          //         ),
-                          //         focusedErrorBorder: OutlineInputBorder(
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10.0)),
-                          //           borderSide:
-                          //               BorderSide(color: lightGreyColor),
-                          //         ),
-                          //         errorBorder: OutlineInputBorder(
-                          //           borderRadius:
-                          //               BorderRadius.all(Radius.circular(10.0)),
-                          //           borderSide:
-                          //               BorderSide(color: lightGreyColor),
-                          //         ),
-                          //         fillColor: lightGreyColor),
-                          //     itemBuilder: (context, item) {
-                          //       return new Padding(
-                          //           padding: EdgeInsets.all(8.0),
-                          //           child: TextWidget(
-                          //             text: item,
-                          //             color: darkColor,
-                          //             size: 14,
-                          //             weight: FontWeight.w600,
-                          //           ));
-                          //     },
-                          //     itemSorter: (a, b) {
-                          //       return a.compareTo(b);
-                          //     },
-                          //     itemFilter: (item, query) {
-                          //       debugPrint("genderItem:$item");
-                          //       return item
-                          //           .toLowerCase()
-                          //           .startsWith(query.toLowerCase());
-                          //     }),
+                          /*child: AutoCompleteTextField(
+                              controller: typeHouseController,
+                              clearOnSubmit: false,
+                              itemSubmitted: (item) {
+                                houseType = true;
+                                typeHouseController.text = item;
+                                property.typeofHouse = item;
+                              },
+                              suggestions: typeHouseListLang,
+                              style: TextStyle(
+                                color: Color(0xFF222222),
+                                fontSize: 16,
+                              ),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                        BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
+                              itemBuilder: (context, item) {
+                                return new Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TextWidget(
+                                      text: item,
+                                      color: darkColor,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    ));
+                              },
+                              itemSorter: (a, b) {
+                                return a.compareTo(b);
+                              },
+                              itemFilter: (item, query) {
+                                debugPrint("genderItem:$item");
+                                houseType = false;
+                                return item
+                                    .toLowerCase()
+                                    .startsWith(query.toLowerCase());
+                              }),*/
                         ),
                       ),
                     ],
@@ -1206,6 +1230,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
     QuerySnapshot querySnapshot =
         await firestoreInstance.collection(collectionTypeHouse).get();
     typeHouseList = querySnapshot.docs.map((doc) => doc.data()).toList();
+    // typeHouseListLang.add("select");
     typeHouseList.forEach((element) {
       LinkedHashMap<String, dynamic> typeHouseData =
           element[collectionTypeHouse];
@@ -1213,7 +1238,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       if (typeHouseData != null) {
         typeofHouseVal = typeHouseData[language];
         typeHouseListLang.add(typeofHouseVal);
-
       }
     });
   }

@@ -353,6 +353,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               textInputAction: TextInputAction.next,
                               autocorrect: true,
                               enableSuggestions: true,
+                              /*inputFormatters: [
+                                // MaskTextInputFormatter(mask: "********####", filter: {"*": RegExp(r'[0-9]')})
+                                *//*MaskedTextInputFormatterShifter(
+                                    maskONE:"********XXXX",
+                                    maskTWO:"XXX.XXX/XXXX-XX"
+                                ),*//*
+                                ],*/
                               decoration: InputDecoration(
                                   counterText: "",
                                   border: OutlineInputBorder(
