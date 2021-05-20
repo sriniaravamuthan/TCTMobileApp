@@ -35,7 +35,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   String land = "";
   String vehicle = "";
   String liveStock = "";
-
+  bool isAuto=true;
   bool houseStatus = false, houseType = false;
   var statusHouseController = TextEditingController();
   var typeHouseController = TextEditingController();
@@ -145,7 +145,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
                               autofocus: true,
-
                               decoration: InputDecoration(
                                   counterText: "",
                                   border: OutlineInputBorder(
@@ -426,7 +425,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             padding: const EdgeInsets.only(
                                 left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
-                              autofocus:true,
+                              // autofocus:isAuto,
                               controller: wetLandController,
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
@@ -1125,6 +1124,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           child: TextFormField(
                             controller: stockCountController,
                             onChanged: (value) {
+                              isAuto=false;
                               property.livestockCount = value;
                             },
                             textInputAction: TextInputAction.next,
@@ -1159,7 +1159,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.number,
                             onSaved: (String val) {
-                              setState(() {});
+                              setState(() {
+                              });
                             },
                           ),
                         ),
@@ -1186,7 +1187,9 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       debugPrint("statusHouseData:$statusHouseData");
       if (statusHouseData != null) {
         statusOfHouseVal = statusHouseData[language];
-        statusHouseListLang.add(statusOfHouseVal);
+        setState(() {
+          statusHouseListLang.add(statusOfHouseVal);
+        });
         debugPrint("stringList:$statusHouseListLang");
       }
     });
@@ -1204,9 +1207,13 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       debugPrint("typeHouseData:$typeHouseData");
       if (typeHouseData != null) {
         typeofHouseVal = typeHouseData[language];
-        typeHouseListLang.add(typeofHouseVal);
+        setState(() {
+          typeHouseListLang.add(typeofHouseVal);
+
+        });
       }
     });
+
   }
 
   void getLanguage() async {
