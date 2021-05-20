@@ -217,7 +217,10 @@ class _DetailScreenState extends State<DetailScreen> {
     return  SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          decoration: BoxDecoration(
+          width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+
+      decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(imgBG),
               fit: BoxFit.cover,
@@ -1009,7 +1012,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
                                                   child: TextWidget(
-                                                    text: demographicList.family[index].aadharNumber,
+                                                    text: getMaskedNo(demographicList.family[index].aadharNumber),
                                                     weight: FontWeight.w400,
                                                     color: darkColor,
                                                     size: 14,
@@ -2256,7 +2259,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text: demographicList.family[index].aadharNumber,
+                                                              text: getMaskedNo(demographicList.family[index].aadharNumber),
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2665,7 +2668,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ],
                             ),
-                          ):Container(),
+                          ):Container(color: primaryColor,),
                         ],
                       ),
                     ],
@@ -2688,6 +2691,18 @@ class _DetailScreenState extends State<DetailScreen> {
     }
     toReturn += family.maritalStatus;
     return toReturn;
+  }
+
+  getMaskedNo(String aadharNumber) {
+    if(aadharNumber == "")
+      return "";
+    if(aadharNumber==""){
+      return aadharNumber="";
+    }else{
+      aadharNumber = aadharNumber.replaceRange(0, aadharNumber.length - 4, "*");
+      return "*******" +    aadharNumber;
+    }
+
   }
 
 }

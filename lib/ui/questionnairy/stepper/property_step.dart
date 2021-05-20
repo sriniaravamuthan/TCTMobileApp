@@ -145,6 +145,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
                               autofocus: true,
+                               hint: statusHouseController.text == "" ? Text("") : Text(statusHouseController.text),
                               decoration: InputDecoration(
                                   counterText: "",
                                   border: OutlineInputBorder(
@@ -236,6 +237,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
                               autofocus: true,
+                              hint: typeHouseController.text == "" ? Text("") : Text(typeHouseController.text),
+
                               decoration: InputDecoration(
                                   counterText: "",
                                   border: OutlineInputBorder(
