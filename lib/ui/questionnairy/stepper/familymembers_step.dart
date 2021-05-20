@@ -172,31 +172,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.oldPension = getSwitchValues(oldPension);
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
-    if (family.relationship != "") {
-      isRelationShip = true;
-    }
 
-    if (family.relationship != "") {
-      isRelationShip = true;
-    }
-    if (family.gender != "") {
-      isGender = true;
-    }
-    if (family.maritalStatus != "") {
-      isMaritalStatus = true;
-    }
-    if (family.bloodGroup != "") {
-      isBloodGrp = true;
-    }
-    if (family.education != "") {
-      isEducation = true;
-    }
-    if (family.occupation != "") {
-      isBusiness = true;
-    }
-    if (family.community != "") {
-      isSection = true;
-    }
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
           .ref()
@@ -2513,15 +2489,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   children: [
                     InkWell(
                       onTap: () {
-                        setState(() {
-                          this.isLoading = true;
-                        });
-
                         if (_stepTwoKey.currentState.validate()) {
                           // if (_stepTwoKey != null) {
                             _stepTwoKey.currentState.save();
-                            if (relationshipController.text != "" &&
-                                !isRelationShip) {
+                            print("GET_____________________________" + isRelationShip.toString());
+                              if (relationshipController.text != "" && !isRelationShip) {
                               setState(() {
                                 relationshipController.text = "";
                                 snackBarAlert("Error",
@@ -2578,6 +2550,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               });
                             }
                             else {
+                              setState(() {
+                                this.isLoading = true;
+                              });
                               uploadFile();
                             }                          // }
                         }
@@ -3089,6 +3064,28 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       mailController.text = family.mail.toString();
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
+
+      if (family.relationship != "") {
+        isRelationShip = true;
+      }
+      if (family.gender != "") {
+        isGender = true;
+      }
+      if (family.maritalStatus != "") {
+        isMaritalStatus = true;
+      }
+      if (family.bloodGroup != "") {
+        isBloodGrp = true;
+      }
+      if (family.education != "") {
+        isEducation = true;
+      }
+      if (family.occupation != "") {
+        isBusiness = true;
+      }
+      if (family.community != "") {
+        isSection = true;
+      }
 
       firstDosePicker.text = family.firstDose;
       secondDosePicker.text = family.secondDose;
