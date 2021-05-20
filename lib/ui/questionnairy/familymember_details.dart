@@ -410,7 +410,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
                                 ),
                               ),
                               SizedBox(
-                                width: 150,
+                                width: 120,
                                 child: TextWidget(
                                   text: familyList[index].community,
                                   weight: FontWeight.w400,

@@ -140,7 +140,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 2.0, right: 16.0,top:1,bottom: 1),
+                          padding: const EdgeInsets.only(left: 2.0, right: 16.0,),
 
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
@@ -233,7 +233,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                            padding: const EdgeInsets.only(left: 2.0, right: 16.0,top:1,bottom: 1),
+                            padding: const EdgeInsets.only(left: 2.0, right: 16.0,),
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
                               autofocus: true,
@@ -355,13 +355,15 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Own Land'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
+                        padding: const EdgeInsets.only(left:6,top: 4.0,),
+                        child:Center(
+                          child: SizedBox(width: 120,child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Own Land'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),),
+                        )
                       ),
                       Column(
                         children: [
@@ -426,7 +428,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           width: 150,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
+                                left: 2.0, right: 16.0,),
                             child: TextFormField(
                               // autofocus:isAuto,
                               controller: wetLandController,
@@ -509,7 +511,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         height: 50,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              right: 16.0, top: 2.0, bottom: 2.0),
+                              right: 16.0, ),
                           child: TextFormField(
                             controller: dryLandController,
                             onChanged: (value) {
@@ -633,7 +635,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             height: 50,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0, top: 2.0, bottom: 2.0),
+                                  right: 16.0, ),
                               child: TextFormField(
                                 controller: motorVehicleController,
                                 onChanged: (value) {
@@ -711,7 +713,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
+                              left: 2.0, right: 16.0, ),
                           child: SizedBox(
                             width: 150,
                             height: 50,
@@ -785,7 +787,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            right: 16.0, top: 2.0, bottom: 2.0),
+                            right: 16.0,),
                         child: SizedBox(
                           width: 150,
                           height: 50,
@@ -855,7 +857,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            right: 16.0, top: 2.0, bottom: 2.0),
+                            right: 16.0,),
                         child: SizedBox(
                           width: 150,
                           height: 50,
@@ -925,7 +927,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            right: 16.0, top: 2.0, bottom: 2.0),
+                            right: 16.0, ),
                         child: SizedBox(
                           width: 150,
                           height: 50,
@@ -986,7 +988,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.85,
+                    widthFactor: 0.88,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1038,7 +1040,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 0.75,
+                  widthFactor: 0.84,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1105,7 +1107,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 0.75,
+                  widthFactor: 0.80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1120,7 +1122,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            right: 16.0, top: 2.0, bottom: 2.0),
+                            right: 16.0, ),
                         child: SizedBox(
                           width: 250,
                           height: 50,
