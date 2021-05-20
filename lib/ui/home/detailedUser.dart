@@ -217,9 +217,6 @@ class _DetailScreenState extends State<DetailScreen> {
     return  SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
-          width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-
       decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(imgBG),
@@ -889,7 +886,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           Divider(
                             thickness: 2,
                           ),
-                demographicList.family.length > 0 ?  Container(
+                Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1394,7 +1391,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ],
                   ),
-                ):Container(),
+                ),
 
                         ],
                       ),
@@ -2136,7 +2133,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           Divider(
                             thickness: 2,
                           ),
-                          demographicList.family.length > 0 ?  Container(
+                            Container(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -2668,7 +2665,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ],
                             ),
-                          ):Container(color: primaryColor,),
+                          ),
                         ],
                       ),
                     ],
@@ -2694,8 +2691,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   getMaskedNo(String aadharNumber) {
-    if(aadharNumber == "")
-      return "";
+
     if(aadharNumber==""){
       return aadharNumber="";
     }else{

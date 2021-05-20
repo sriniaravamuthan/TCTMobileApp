@@ -1408,8 +1408,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   }
 
   getMaskedNo(String aadharNumber) {
-    if(aadharNumber == "")
-      return "";
+
     if(aadharNumber==""){
      return aadharNumber="";
     }else{
