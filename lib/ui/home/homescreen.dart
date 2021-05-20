@@ -189,7 +189,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
 
-          var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
+          // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
+          var mainDemograpicData = snapshot.data.docs.map((doc) => doc).toList();
           debugPrint("family : ${mainDemograpicData}");
 
           if (loadData && snapshot.connectionState == ConnectionState.active) {
@@ -197,16 +198,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             documentId.clear();
             _demographicList.clear();
             users.clear();
-            documentId = snapshot.data.docs.map((e) => e.id).toList();
+            // documentId = snapshot.data.docs.map((e) => e.id).toList();
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true;  //  True -> Complete, false -> InProgress
-              data["name"] = element["Location"]["contactPerson"];
-              data["formNo"] = element["Location"]["formNo"];
+              data["name"] = element.data()["Location"]["contactPerson"];
+              data["formNo"] = element.data()["Location"]["formNo"];
 
-              data["mobileNumber"] = element["Location"]["contactNumber"];
+              data["mobileNumber"] = element.data()["Location"]["contactNumber"];
 
-              List family = element['familyMembers'];
+              List family = element.data()['familyMembers'];
               for (int i = 0; i < family.length; i++) {
                 if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                   data["mobileNumber"] = family[i]["mobileNumber"];
@@ -221,32 +222,32 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               Property propertyList = Property();
               Habits habitsList = Habits();
               List<Family> _familyList = [];
-              locationList.contactPerson = element["Location"]["contactPerson"];
-              locationList.contactNumber = element["Location"]["contactNumber"];
-              locationList.doorNumber = element["Location"]["doorNumber"].toString();
-              locationList.formNo = element["Location"]["formNo"].toString();
-              locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
-              locationList.projectCode = element["Location"]["projectCode"].toString();
-              locationList.streetName = element["Location"]["streetName"];
+              locationList.contactPerson = element.data()["Location"]["contactPerson"];
+              locationList.contactNumber = element.data()["Location"]["contactNumber"];
+              locationList.doorNumber = element.data()["Location"]["doorNumber"].toString();
+              locationList.formNo = element.data()["Location"]["formNo"].toString();
+              locationList.noOfFamilyMembers = element.data()["Location"]["noOfFamilyMembers"].toString();
+              locationList.projectCode = element.data()["Location"]["projectCode"].toString();
+              locationList.streetName = element.data()["Location"]["streetName"];
 
               data["villageCode"] = "";
-              if (element["Location"]["villagesCode"] == "") {
+              if (element.data()["Location"]["villagesCode"] == "") {
                 locationList.villageName = "";
                 locationList.villagesCode = "";
               } else {
-                DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["villagesCode"]);
+                DocumentSnapshot villageSnapShot = await getVillageDetail(element.data()["Location"]["villagesCode"]);
                 data["villageCode"] = villageSnapShot["villageCode"].toString();
                 locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
                 locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
                 locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
                 locationList.villagesCode = villageSnapShot["villageCode"].toString();
               }
-              if (element["Location"]["panchayatCode"] == "") {
+              if (element.data()["Location"]["panchayatCode"] == "") {
                 locationList.panchayatCode = "";
                 locationList.panchayatNo = "";
               } else {
-                if (element["Location"]["villagesCode"] == "") {
-                  DocumentSnapshot villageSnapShot = await getVillageDetail(element["Location"]["panchayatCode"]);
+                if (element.data()["Location"]["villagesCode"] == "") {
+                  DocumentSnapshot villageSnapShot = await getVillageDetail(element.data()["Location"]["panchayatCode"]);
                   locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
                   locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
                 }
@@ -323,21 +324,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               if (hasDob < 0)
                 data["status"] = false;
 
-              propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
-              propertyList.fourWheeler = element["Property"]["fourWheeler"];
-              propertyList.livestockCount = element["Property"]["livestockCount"];
-              propertyList.livestockType = element["Property"]["livestockType"];
-              propertyList.noOfVehicleOwn = element["Property"]["noOfVehicleOwn"];
-              propertyList.others = element["Property"]["others"];
-              propertyList.ownLand = element["Property"]["ownLand"];
-              propertyList.ownLivestocks = element["Property"]["ownLivestocks"];
-              propertyList.ownVehicle = element["Property"]["ownVehicle"];
-              propertyList.statusofHouse = element["Property"]["statusofHouse"];
-              propertyList.threeWheeler = element["Property"]["threeWheeler"];
-              propertyList.toiletFacility = element["Property"]["toiletFacility"];
-              propertyList.twoWheeler = element["Property"]["twoWheeler"];
-              propertyList.typeofHouse = element["Property"]["typeofHouse"];
-              propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
+              propertyList.dryLandInAcres = element.data()["Property"]["dryLandInAcres"];
+              propertyList.fourWheeler = element.data()["Property"]["fourWheeler"];
+              propertyList.livestockCount = element.data()["Property"]["livestockCount"];
+              propertyList.livestockType = element.data()["Property"]["livestockType"];
+              propertyList.noOfVehicleOwn = element.data()["Property"]["noOfVehicleOwn"];
+              propertyList.others = element.data()["Property"]["others"];
+              propertyList.ownLand = element.data()["Property"]["ownLand"];
+              propertyList.ownLivestocks = element.data()["Property"]["ownLivestocks"];
+              propertyList.ownVehicle = element.data()["Property"]["ownVehicle"];
+              propertyList.statusofHouse = element.data()["Property"]["statusofHouse"];
+              propertyList.threeWheeler = element.data()["Property"]["threeWheeler"];
+              propertyList.toiletFacility = element.data()["Property"]["toiletFacility"];
+              propertyList.twoWheeler = element.data()["Property"]["twoWheeler"];
+              propertyList.typeofHouse = element.data()["Property"]["typeofHouse"];
+              propertyList.wetLandInAcres = element.data()["Property"]["wetLandInAcres"];
               demographicData.location = locationList;
               demographicData.family = _familyList;
               demographicData.property = propertyList;
@@ -346,11 +347,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               if (demographicData.location.streetName != "")
                 streets.add(demographicData.location.streetName);
 
+              demographicData.docId = element.id;
+              documentId.add(element.id);
+
               _demographicList.add(demographicData);
               users.add(data);
 
               if (_demographicList.length == mainDemograpicData.length) {
                 loadData = false;
+                /*print("GET__________" + documentId.toString());
+                print("GET__________" + _demographicList.toString());*/
                 setState(() {});
               }
             });

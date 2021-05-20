@@ -12,6 +12,7 @@ class DemographicFamily {
   Property property = new Property();
   Habits habits = new Habits();
   List<Family> family = [];
+  String docId = "";
 
   DemographicFamily(
       {this.location, this.property, this.habits, this.family, this.uid});
