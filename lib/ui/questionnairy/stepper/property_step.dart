@@ -140,85 +140,75 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 2.0, right: 16.0),
-                          child :DropdownButton<String>(
-                              items: statusHouseListLang.map((String val) {
-                                return new DropdownMenuItem<String>(
-                                  value: val,
-                                  child: new Text(val),
-                                );
-                              }).toList(),
+                          padding: const EdgeInsets.only(left: 2.0, right: 16.0,top:1,bottom: 1),
+
+                            child: DropdownButtonFormField<String>(
                               isExpanded: true,
-                              hint: statusHouseController.text == "" ? Text("select") : Text(statusHouseController.text),
+                              autofocus: true,
+
+                              decoration: InputDecoration(
+                                  counterText: "",
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                    BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                    BorderSide(color: lightGreyColor),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                    BorderSide(color: lightGreyColor),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                                    borderSide:
+                                    BorderSide(color: lightGreyColor),
+                                  ),
+                                  fillColor: lightGreyColor),
                               onChanged: (newVal) {
                                 statusHouseController.text = newVal;
                                 property.statusofHouse = newVal;
                                 this.setState(() {});
-                              }),
-                          /*child: AutoCompleteTextField(
-                              controller: statusHouseController,
-                              clearOnSubmit: false,
-                              itemSubmitted: (item) {
-                                houseStatus = true;
-                                statusHouseController.text = item;
-                                property.statusofHouse = item;
                               },
-                              suggestions: statusHouseListLang,
-                              style: TextStyle(
-                                color: Color(0xFF222222),
-                                fontSize: 16,
-                              ),
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                              items: statusHouseListLang.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide:
-                                        BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              itemBuilder: (context, item) {
-                                return new Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextWidget(
-                                      text: item,
-                                      color: darkColor,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    ));
-                              },
-                              itemSorter: (a, b) {
-                                return a.compareTo(b);
-                              },
-                              itemFilter: (item, query) {
-                                debugPrint("genderItem:$item");
-                                houseStatus = false;
-                                return item
-                                    .toLowerCase()
-                                    .startsWith(query.toLowerCase());
-                              }),*/
+                                );
+                              }).toList(),
+                            ),
+                          // child :DropdownButton<String>(
+                          //     items: statusHouseListLang.map((String val) {
+                          //       return new DropdownMenuItem<String>(
+                          //         value: val,
+                          //         child: new Text(val),
+                          //       );
+                          //     }).toList(),
+                          //     isExpanded: true,
+                          //     hint: statusHouseController.text == "" ? Text("select") : Text(statusHouseController.text),
+                          //     onChanged: (newVal) {
+                          //       statusHouseController.text = newVal;
+                          //       property.statusofHouse = newVal;
+                          //       this.setState(() {});
+                          //     }),
                         ),
                       ),
                     ],
@@ -243,86 +233,62 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                       SizedBox(
                         height: 58,
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0, top: 2.0, bottom: 2.0),
-                           child :DropdownButton<String>(
-                             // value: property.typeofHouse,
-                                items: typeHouseListLang.map((String val) {
-                                  return new DropdownMenuItem<String>(
-                                    value: val,
-                                    child: new Text(val),
-                                  );
-                                }).toList(),
-                               isExpanded: true,
-                               hint: typeHouseController.text == "" ? Text("select") : Text(typeHouseController.text),
-                                onChanged: (newVal) {
-                                  typeHouseController.text = newVal.toString();
-                                  property.typeofHouse = newVal;
-                                  this.setState(() {});
-                                }),
-                          /*child: AutoCompleteTextField(
-                              controller: typeHouseController,
-                              clearOnSubmit: false,
-                              itemSubmitted: (item) {
-                                houseType = true;
-                                typeHouseController.text = item;
-                                property.typeofHouse = item;
-                              },
-                              suggestions: typeHouseListLang,
-                              style: TextStyle(
-                                color: Color(0xFF222222),
-                                fontSize: 16,
-                              ),
+                            padding: const EdgeInsets.only(left: 2.0, right: 16.0,top:1,bottom: 1),
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              autofocus: true,
                               decoration: InputDecoration(
+                                  counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                    BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                    BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                    BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                    BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
-                              itemBuilder: (context, item) {
-                                return new Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextWidget(
-                                      text: item,
-                                      color: darkColor,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    ));
+                              // value: communityVal,
+                              onChanged: (newVal) {
+                                typeHouseController.text = newVal.toString();
+                                property.typeofHouse = newVal;
+                                this.setState(() {});
                               },
-                              itemSorter: (a, b) {
-                                return a.compareTo(b);
-                              },
-                              itemFilter: (item, query) {
-                                debugPrint("genderItem:$item");
-                                houseType = false;
-                                return item
-                                    .toLowerCase()
-                                    .startsWith(query.toLowerCase());
-                              }),*/
+                              items: typeHouseListLang
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: TextWidget(
+                                    text: value,
+                                    color: darkColor,
+                                    weight: FontWeight.w400,
+                                    size: 14,
+                                  ),
+                                );
+                              }).toList(),
+                            )
                         ),
                       ),
                     ],
@@ -460,6 +426,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             padding: const EdgeInsets.only(
                                 left: 2.0, right: 16.0, top: 2.0, bottom: 2.0),
                             child: TextFormField(
+                              autofocus:true,
                               controller: wetLandController,
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
