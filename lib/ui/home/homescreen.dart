@@ -7,6 +7,7 @@
  */
 
 import 'dart:collection';
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -235,21 +236,36 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 locationList.villageName = "";
                 locationList.villagesCode = "";
               } else {
-                DocumentSnapshot villageSnapShot = await getVillageDetail(element.data()["Location"]["villagesCode"]);
-                data["villageCode"] = villageSnapShot["villageCode"].toString();
-                locationList.panchayatCode =villageSnapShot["panchayatCode"].toString();
-                locationList.panchayatNo =villageSnapShot["panchayatNo"].toString() ;
-                locationList.villageName =  villageSnapShot["villageName"][language].toString() ;
-                locationList.villagesCode = villageSnapShot["villageCode"].toString();
+                var docOrString = element.data()["Location"]["villagesCode"];
+                if(docOrString is String) {
+                  data["villageCode"] = element.data()["Location"]["villagesCode"].toString();
+                  locationList.villageName = element.data()["Location"]["villageName"].toString();
+                  locationList.villagesCode = element.data()["Location"]["villagesCode"].toString();
+                  locationList.panchayatCode = element.data()["Location"]["panchayatCode"].toString();
+                  locationList.panchayatNo = element.data()["Location"]["panchayatNo"].toString();
+                } else {
+                  DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
+                  data["villageCode"] = villageSnapShot["villageCode"].toString();
+                  locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
+                  locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
+                  locationList.villageName = villageSnapShot["villageName"][language].toString();
+                  locationList.villagesCode = villageSnapShot["villageCode"].toString();
+                }
               }
               if (element.data()["Location"]["panchayatCode"] == "") {
                 locationList.panchayatCode = "";
                 locationList.panchayatNo = "";
               } else {
                 if (element.data()["Location"]["villagesCode"] == "") {
-                  DocumentSnapshot villageSnapShot = await getVillageDetail(element.data()["Location"]["panchayatCode"]);
-                  locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
-                  locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
+                  var docOrString = element.data()["Location"]["panchayatCode"];
+                  if(docOrString is String) {
+                    locationList.panchayatCode = element.data()["Location"]["panchayatCode"].toString();
+                    locationList.panchayatNo = element.data()["Location"]["panchayatNo"].toString();
+                  } else {
+                    DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
+                    locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
+                    locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
+                  }
                 }
               }
 
@@ -281,7 +297,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                  hasDob += 1;
                _family.education= family[i]["education"];
                _family.gender= family[i]["gender"];
-               _family.govtInsurance= family[i]["govtInsurance"];
+               var isInt = family[i]["govtInsurance"];
+               /*if (isInt is double) {
+                 _family.govtInsurance= isInt;
+               } else {*/
+                 // _family.govtInsurance= isInt.toDouble();
+                 _family.govtInsurance= family[i]["govtInsurance"].toDouble();
+               // }
                _family.mail= family[i]["mail"];
                if (family[i]["maritalStatus "] == "null")
                  _family.maritalStatus= "";
@@ -292,20 +314,20 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.occupation= family[i]["occupation"];
                _family.oldPension=  family[i]["oldPension"];
                _family.photo= family[i]["photo"];
-               _family.physicallyChallenge=  family[i]["physicallyChallenge"] ;
-               _family.privateInsurance=  family[i]["privateInsurance"];
+               _family.physicallyChallenge=  family[i]["physicallyChallenge"].toDouble();
+               _family.privateInsurance=  family[i]["privateInsurance"].toDouble();
                _family.relationship= family[i]["relationship"];
                if (_family.relationship != "")
                  hasRelationShip += 1;
-               _family.retirementPension= family[i]["retirementPension"];
-               _family.smartphone= family[i]["smartphone"];
-               _family.widowedPension= family[i]["widowedPension"];
+               _family.retirementPension= family[i]["retirementPension"].toDouble();
+               _family.smartphone= family[i]["smartphone"].toDouble();
+               _family.widowedPension= family[i]["widowedPension"].toDouble();
 
-                _family.anyMembersWhoDrink=family[i]['anyMembersWhoDrink'];
-                _family.anyMembersWhoSmoke=family[i]['anyMembersWhoSmoke'];
-                _family.anyMembersWhoUseTobacco=family[i]['anyMembersWhoUseTobacco'];
+                _family.anyMembersWhoDrink=family[i]['anyMembersWhoDrink'].toDouble();
+                _family.anyMembersWhoSmoke=family[i]['anyMembersWhoSmoke'].toDouble();
+                _family.anyMembersWhoUseTobacco=family[i]['anyMembersWhoUseTobacco'].toDouble();
                 _family.firstDose=family[i]['firstDose'];
-                _family.isVaccinationDone=family[i]['isVaccinationDone'];
+                _family.isVaccinationDone=family[i]['isVaccinationDone'].toDouble();
                 _family.secondDose=family[i]['secondDose'];
                 _family.isExpanded= 'Show More';
 
