@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 76,
+                                height: 80,
                                 width: width / 2,
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
@@ -134,6 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     textInputAction: TextInputAction.next,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
+                                      counterText: "",
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.all(
@@ -197,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 76,
+                                height: 80,
                                 width: width / 2,
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
@@ -208,6 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     textInputAction: TextInputAction.done,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
+                                      counterText: "",
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.all(

@@ -632,7 +632,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                           padding: const EdgeInsets.all(4.0),
                           child: SizedBox(
                             width: 150,
-                            height: 50,
+                            height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   right: 16.0, ),

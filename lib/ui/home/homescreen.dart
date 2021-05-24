@@ -189,7 +189,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
             return Center(child: CircularProgressIndicator());
-
           // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
           var mainDemograpicData = snapshot.data.docs.map((doc) => doc).toList();
           debugPrint("family : ${mainDemograpicData}");
@@ -199,7 +198,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             documentId.clear();
             _demographicList.clear();
             users.clear();
-            // documentId = snapshot.data.docs.map((e) => e.id).toList();
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true;  //  True -> Complete, false -> InProgress
@@ -305,14 +303,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                  _family.govtInsurance= family[i]["govtInsurance"].toDouble();
                // }
                _family.mail= family[i]["mail"];
-               if (family[i]["maritalStatus "] == "null")
+               if (family[i]["maritalStatus"] == "null")
                  _family.maritalStatus= "";
                else
-                 _family.maritalStatus= family[i]["maritalStatus "];
+                 _family.maritalStatus= family[i]["maritalStatus"];
                _family.mobileNumber= family[i]["mobileNumber"];
                _family.name= family[i]["name"];
                _family.occupation= family[i]["occupation"];
-               _family.oldPension=  family[i]["oldPension"];
+               _family.oldPension=  family[i]["oldPension"].toDouble();
                _family.photo= family[i]["photo"];
                _family.physicallyChallenge=  family[i]["physicallyChallenge"].toDouble();
                _family.privateInsurance=  family[i]["privateInsurance"].toDouble();
@@ -352,12 +350,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               propertyList.livestockType = element.data()["Property"]["livestockType"];
               propertyList.noOfVehicleOwn = element.data()["Property"]["noOfVehicleOwn"];
               propertyList.others = element.data()["Property"]["others"];
-              propertyList.ownLand = element.data()["Property"]["ownLand"];
-              propertyList.ownLivestocks = element.data()["Property"]["ownLivestocks"];
-              propertyList.ownVehicle = element.data()["Property"]["ownVehicle"];
+              propertyList.ownLand = element.data()["Property"]["ownLand"].toDouble();
+              propertyList.ownLivestocks = element.data()["Property"]["ownLivestocks"].toDouble();
+              propertyList.ownVehicle = element.data()["Property"]["ownVehicle"].toDouble();
               propertyList.statusofHouse = element.data()["Property"]["statusofHouse"];
               propertyList.threeWheeler = element.data()["Property"]["threeWheeler"];
-              propertyList.toiletFacility = element.data()["Property"]["toiletFacility"];
+              propertyList.toiletFacility = element.data()["Property"]["toiletFacility"].toDouble();
               propertyList.twoWheeler = element.data()["Property"]["twoWheeler"];
               propertyList.typeofHouse = element.data()["Property"]["typeofHouse"];
               propertyList.wetLandInAcres = element.data()["Property"]["wetLandInAcres"];
@@ -377,8 +375,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               if (_demographicList.length == mainDemograpicData.length) {
                 loadData = false;
-                /*print("GET__________" + documentId.toString());
-                print("GET__________" + _demographicList.toString());*/
                 setState(() {});
               }
             });
