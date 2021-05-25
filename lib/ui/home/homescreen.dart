@@ -184,7 +184,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         // stream: collectionReference.snapshots(),
-        stream: query?.snapshots(),
+        stream: query.limit(25)?.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -201,12 +201,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true;  //  True -> Complete, false -> InProgress
-              data["name"] = element.data()["Location"]["contactPerson"];
-              data["formNo"] = element.data()["Location"]["formNo"];
+              data["name"] = element["Location"]["contactPerson"];
+              data["formNo"] = element["Location"]["formNo"];
 
-              data["mobileNumber"] = element.data()["Location"]["contactNumber"];
+              data["mobileNumber"] = element["Location"]["contactNumber"];
 
-              List family = element.data()['familyMembers'];
+              List family = element['familyMembers'];
               for (int i = 0; i < family.length; i++) {
                 if (family[i]["mobileNumber"] == data["mobileNumber"]) {
                   data["mobileNumber"] = family[i]["mobileNumber"];
@@ -221,26 +221,26 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               Property propertyList = Property();
               Habits habitsList = Habits();
               List<Family> _familyList = [];
-              locationList.contactPerson = element.data()["Location"]["contactPerson"];
-              locationList.contactNumber = element.data()["Location"]["contactNumber"];
-              locationList.doorNumber = element.data()["Location"]["doorNumber"].toString();
-              locationList.formNo = element.data()["Location"]["formNo"].toString();
-              locationList.noOfFamilyMembers = element.data()["Location"]["noOfFamilyMembers"].toString();
-              locationList.projectCode = element.data()["Location"]["projectCode"].toString();
-              locationList.streetName = element.data()["Location"]["streetName"];
+              locationList.contactPerson = element["Location"]["contactPerson"];
+              locationList.contactNumber = element["Location"]["contactNumber"];
+              locationList.doorNumber = element["Location"]["doorNumber"].toString();
+              locationList.formNo = element["Location"]["formNo"].toString();
+              locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
+              locationList.projectCode = element["Location"]["projectCode"].toString();
+              locationList.streetName = element["Location"]["streetName"];
 
               data["villageCode"] = "";
-              if (element.data()["Location"]["villagesCode"] == "") {
+              if (element["Location"]["villagesCode"] == "") {
                 locationList.villageName = "";
                 locationList.villagesCode = "";
               } else {
-                var docOrString = element.data()["Location"]["villagesCode"];
+                var docOrString = element["Location"]["villagesCode"];
                 if(docOrString is String) {
-                  data["villageCode"] = element.data()["Location"]["villagesCode"].toString();
-                  locationList.villageName = element.data()["Location"]["villageName"].toString();
-                  locationList.villagesCode = element.data()["Location"]["villagesCode"].toString();
-                  locationList.panchayatCode = element.data()["Location"]["panchayatCode"].toString();
-                  locationList.panchayatNo = element.data()["Location"]["panchayatNo"].toString();
+                  data["villageCode"] = element["Location"]["villagesCode"].toString();
+                  locationList.villageName = element["Location"]["villageName"].toString();
+                  locationList.villagesCode = element["Location"]["villagesCode"].toString();
+                  locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
+                  locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
                 } else {
                   DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
                   data["villageCode"] = villageSnapShot["villageCode"].toString();
@@ -250,15 +250,15 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   locationList.villagesCode = villageSnapShot["villageCode"].toString();
                 }
               }
-              if (element.data()["Location"]["panchayatCode"] == "") {
+              if (element["Location"]["panchayatCode"] == "") {
                 locationList.panchayatCode = "";
                 locationList.panchayatNo = "";
               } else {
-                if (element.data()["Location"]["villagesCode"] == "") {
-                  var docOrString = element.data()["Location"]["panchayatCode"];
+                if (element["Location"]["villagesCode"] == "") {
+                  var docOrString = element["Location"]["panchayatCode"];
                   if(docOrString is String) {
-                    locationList.panchayatCode = element.data()["Location"]["panchayatCode"].toString();
-                    locationList.panchayatNo = element.data()["Location"]["panchayatNo"].toString();
+                    locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
+                    locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
                   } else {
                     DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
                     locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
@@ -344,21 +344,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               if (hasDob < 0)
                 data["status"] = false;
 
-              propertyList.dryLandInAcres = element.data()["Property"]["dryLandInAcres"];
-              propertyList.fourWheeler = element.data()["Property"]["fourWheeler"];
-              propertyList.livestockCount = element.data()["Property"]["livestockCount"];
-              propertyList.livestockType = element.data()["Property"]["livestockType"];
-              propertyList.noOfVehicleOwn = element.data()["Property"]["noOfVehicleOwn"];
-              propertyList.others = element.data()["Property"]["others"];
-              propertyList.ownLand = element.data()["Property"]["ownLand"].toDouble();
-              propertyList.ownLivestocks = element.data()["Property"]["ownLivestocks"].toDouble();
-              propertyList.ownVehicle = element.data()["Property"]["ownVehicle"].toDouble();
-              propertyList.statusofHouse = element.data()["Property"]["statusofHouse"];
-              propertyList.threeWheeler = element.data()["Property"]["threeWheeler"];
-              propertyList.toiletFacility = element.data()["Property"]["toiletFacility"].toDouble();
-              propertyList.twoWheeler = element.data()["Property"]["twoWheeler"];
-              propertyList.typeofHouse = element.data()["Property"]["typeofHouse"];
-              propertyList.wetLandInAcres = element.data()["Property"]["wetLandInAcres"];
+              propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
+              propertyList.fourWheeler = element["Property"]["fourWheeler"];
+              propertyList.livestockCount = element["Property"]["livestockCount"];
+              propertyList.livestockType = element["Property"]["livestockType"];
+              propertyList.noOfVehicleOwn = element["Property"]["noOfVehicleOwn"];
+              propertyList.others = element["Property"]["others"];
+              propertyList.ownLand = element["Property"]["ownLand"].toDouble();
+              propertyList.ownLivestocks = element["Property"]["ownLivestocks"].toDouble();
+              propertyList.ownVehicle = element["Property"]["ownVehicle"].toDouble();
+              propertyList.statusofHouse = element["Property"]["statusofHouse"];
+              propertyList.threeWheeler = element["Property"]["threeWheeler"];
+              propertyList.toiletFacility = element["Property"]["toiletFacility"].toDouble();
+              propertyList.twoWheeler = element["Property"]["twoWheeler"];
+              propertyList.typeofHouse = element["Property"]["typeofHouse"];
+              propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
               demographicData.location = locationList;
               demographicData.family = _familyList;
               demographicData.property = propertyList;

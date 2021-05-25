@@ -874,18 +874,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                           villageNameList.clear();
                                                           snap.forEach((element) {
                                                             if (element
-                                                                .data()[
+                                                                [
                                                             "panchayatNo"]
                                                                 .toString() ==
                                                                 item) {
                                                               villageCodeList.add(
                                                                   element
-                                                                      .data()[
+                                                                      [
                                                                   "villageCode"]
                                                                       .toString());
                                                               villageNameList.add(
                                                                   element
-                                                                      .data()[
+                                                                      [
                                                                   "villageName"]
                                                                   [
                                                                   language]
@@ -1063,18 +1063,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                           villageNameList.clear();
                                                           snap.forEach((element) {
                                                             if (element
-                                                                .data()[
+                                                                [
                                                             "panchayatCode"]
                                                                 .toString() ==
                                                                 item) {
                                                               villageCodeList.add(
                                                                   element
-                                                                      .data()[
+                                                                      [
                                                                   "villageCode"]
                                                                       .toString());
                                                               villageNameList.add(
                                                                   element
-                                                                      .data()[
+                                                                      [
                                                                   "villageName"]
                                                                   [
                                                                   language]
@@ -2271,7 +2271,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     if (villageCodeController.text != "") {
       DocumentReference documentReference;
       for (int i = 0; i < snap.length; i++) {
-        if (snap[i].data()["villageCode"].toString() ==
+        if (snap[i]["villageCode"].toString() ==
             villageCodeController.text) {
           documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
           break;
@@ -2291,7 +2291,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     } else if (panchayatNoController.text != "") {
       DocumentReference documentReference;
       for (int i = 0; i < snap.length; i++) {
-        if (snap[i].data()["panchayatNo"].toString() == panchayatNoController.text) {
+        if (snap[i]["panchayatNo"].toString() == panchayatNoController.text) {
           documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
           break;
         }
@@ -2364,14 +2364,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       snap = querySnapshot.docs;
 
       var villageCodeDoc =
-          querySnapshot.docs.map((doc) => doc.data()["villageCode"]).toList();
+          querySnapshot.docs.map((doc) => doc["villageCode"]).toList();
       var villageNameDoc = querySnapshot.docs
-          .map((doc) => doc.data()["villageName"][language])
+          .map((doc) => doc["villageName"][language])
           .toList();
       var panchayatCodeDoc =
-          querySnapshot.docs.map((doc) => doc.data()["panchayatCode"]).toList();
+          querySnapshot.docs.map((doc) => doc["panchayatCode"]).toList();
       var panchayatNoDoc =
-          querySnapshot.docs.map((doc) => doc.data()["panchayatNo"]).toList();
+          querySnapshot.docs.map((doc) => doc["panchayatNo"]).toList();
 
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());
