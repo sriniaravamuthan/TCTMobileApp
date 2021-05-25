@@ -208,9 +208,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               List family = element['familyMembers'];
               for (int i = 0; i < family.length; i++) {
-                if (family[i]["mobileNumber"] == data["mobileNumber"]) {
+                if (family[i]["name"] == data["name"]) {
                   data["mobileNumber"] = family[i]["mobileNumber"];
-                  data["age"] = family[i]["age"];
+                  data["age"] = family[i]["age"].toString();
                   break;
                 }
               }
@@ -310,7 +310,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                _family.mobileNumber= family[i]["mobileNumber"];
                _family.name= family[i]["name"];
                _family.occupation= family[i]["occupation"];
-               _family.oldPension=  family[i]["oldPension"].toDouble();
+               _family.oldPension=  family[i]["oldPension"] == null ? 0: family[i]["oldPension"].toDouble();
                _family.photo= family[i]["photo"];
                _family.physicallyChallenge=  family[i]["physicallyChallenge"].toDouble();
                _family.privateInsurance=  family[i]["privateInsurance"].toDouble();
@@ -513,7 +513,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
 
                             children: [
-                              PaginatedDataTable(
+                              DataTable(
                                 columnSpacing: 0.05,
                                 showCheckboxColumn: false,
                                 horizontalMargin: 0.0,
@@ -610,13 +610,131 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     ),
                                   )),
                                 ],
-                                source: DataTableRow(context, height, width, users,_demographicList, streets, documentId, clearSearch, makeLoadData),
-                                onRowsPerPageChanged: (r) {
+                                rows: users
+                                    .map((usersItem) => DataRow(
+                                    onSelectChanged: (bool selected) {
+                                      if (selected) {
+                                        int index = 0;
+                                        for(int i = 0; i<users.length; i++) {
+                                          if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
+                                              && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
+                                            index = i;
+                                            break;
+                                          }
+                                        }
+                                        Get.toNamed('/DetailScreen', arguments: [_demographicList[index] , streets, documentId[index], true, makeLoadData,users [index]["status"]]).then((value) => clearSearch());
+                                      }
+                                    },
+                                    cells: [
+                                      DataCell(Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 100,
+                                              child: TextWidget(
+                                                text: usersItem['name'],
+                                                color: darkGreyColor,
+                                                size: 16,
+                                                weight: FontWeight.w600,
+                                              ))
+                                        ],
+                                      )),
+                                      DataCell(SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text:usersItem['age'].toString(),
+                                            color: darkGreyColor,
+                                            size: 16,
+                                            weight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      )),
+                                      DataCell(SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: usersItem['mobileNumber'],
+                                            color: darkGreyColor,
+                                            size: 16,
+                                            weight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      )),
+                                      DataCell(SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: usersItem['villageCode'],
+                                            color: darkGreyColor,
+                                            size: 16,
+                                            weight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      )),
+                                      DataCell(SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: SvgPicture.asset(
+                                            svgComplete,
+                                            semanticsLabel: "Logo",
+                                            height: height / 20,
+                                            width: width / 20,
+                                            fit: BoxFit.contain,
+                                            allowDrawingOutsideViewBox:
+                                            true,
+                                          ),
+                                        ),
+                                      )),
+                                      DataCell(SizedBox(
+                                        width: 100,
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment
+                                                .spaceEvenly,
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.toNamed('/questionnery');
+                                                  // Navigator.pushReplacementNamed(context, "/questionnery");
+                                                },
+                                                child: Icon(
+                                                  Icons.edit,
+                                                  color: primaryColor,
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder:
+                                                            (BuildContext
+                                                        context) {
+/*
+                                                          return AlertDialogWidget();
+*/
+                                                        });
+                                                    debugPrint("click");
+                                                  });
+                                                },
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  color: errorColor,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )),
+                                    ]))
+                                    .toList(),
+                               /* onRowsPerPageChanged: (r) {
                                   setState(() {
                                     _rowPerPage = r;
                                   });
                                 },
-                                rowsPerPage: _rowPerPage,
+                                rowsPerPage: _rowPerPage,*/
                               ),
                             ],
                           ),
