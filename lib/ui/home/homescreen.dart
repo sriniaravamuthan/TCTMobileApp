@@ -51,6 +51,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String villageRef = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
+  bool loadMore = false;
 
   List<DemographicFamily> _demographicList = [];
 
@@ -59,6 +60,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   List<String> streets = [];
   List<String> documentId = [];
   bool loadData = true;
+
+  DocumentSnapshot documentSnapshot;
 
   @override
   void initState() {
@@ -184,7 +187,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         // stream: collectionReference.snapshots(),
-        stream: query.limit(25)?.snapshots(),
+        stream: query.limit(10)?.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -194,10 +197,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           debugPrint("family : ${mainDemograpicData}");
 
           if (loadData && snapshot.connectionState == ConnectionState.active) {
-            streets.clear();
-            documentId.clear();
-            _demographicList.clear();
-            users.clear();
+
+            if(!loadMore) {
+              streets.clear();
+              documentId.clear();
+              _demographicList.clear();
+              users.clear();
+            }
+
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true;  //  True -> Complete, false -> InProgress
@@ -374,6 +381,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               users.add(data);
 
               if (_demographicList.length == mainDemograpicData.length) {
+                documentSnapshot = snapshot.data.docs[snapshot.data.docs.length - 1];
+                print("GET_________" + documentSnapshot.toString());
                 loadData = false;
                 setState(() {});
               }
@@ -421,6 +430,45 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
+                                  InkWell(
+                                    onTap: () {
+                                      loadMore = true;
+                                      loadData = true;
+                                      query.startAfterDocument(documentSnapshot);
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: Colors.black45,
+                                          style: BorderStyle.solid,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.search),
+                                            SizedBox(
+                                              width: 5,
+                                            ),
+                                            TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Load more'),
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                              size: 14,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   InkWell(
                                     onTap: () {
                                       showDialog(
