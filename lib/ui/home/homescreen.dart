@@ -81,7 +81,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     ]);
 
     // collectionReference = firestoreInstance.collection('demographicData');
-    query = firestoreInstance.collection('demographicData');
+    query = firestoreInstance.collection('demographicData').limit(10);
 
     super.initState();
   }
@@ -180,7 +180,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         // stream: collectionReference.snapshots(),
-        stream: query.limit(10)?.snapshots(),
+        stream: query.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting)
@@ -374,7 +374,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               users.add(data);
 
               if (_demographicList.length == mainDemograpicData.length) {
-                documentSnapshot = snapshot.data.docs[snapshot.data.docs.length - 1];
+                // documentSnapshot = snapshot.data.docs[snapshot.data.docs.length - 1];
                 print("GET_________" + documentSnapshot.toString());
                 loadData = false;
                 setState(() {});
@@ -427,7 +427,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     onTap: () {
                                       loadMore = true;
                                       loadData = true;
-                                      query.startAfterDocument(documentSnapshot);
+                                       query =  firestoreInstance.collection('demographicData').startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(10);
+                                     debugPrint("LoadMore:${snapshot.data.docs.length}");
+                                      // query.startAfterDocument(documentSnapshot);
                                       setState(() {});
                                     },
                                     child: Container(
@@ -443,7 +445,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         padding: const EdgeInsets.all(6.0),
                                         child: Row(
                                           children: [
-                                            Icon(Icons.search),
+                                            Icon(Icons.more_horiz),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -669,21 +671,24 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     cells: [
                                       DataCell(Row(
                                         children: [
-                                          SizedBox(
-                                              width: 100,
-                                              child: TextWidget(
-                                                text: usersItem['name'],
-                                                color: darkGreyColor,
-                                                size: 16,
-                                                weight: FontWeight.w600,
-                                              ))
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8.0),
+                                            child: SizedBox(
+                                                width: 99,
+                                                child: TextWidget(
+                                                  text: usersItem['name'],
+                                                  color: darkGreyColor,
+                                                  size: 16,
+                                                  weight: FontWeight.w600,
+                                                )),
+                                          )
                                         ],
                                       )),
                                       DataCell(SizedBox(
-                                        width: 100,
+                                        width: 55,
                                         child: Center(
                                           child: TextWidget(
-                                            text:usersItem['age'].toString(),
+                                            text: usersItem['age'].toString(),
                                             color: darkGreyColor,
                                             size: 16,
                                             weight: FontWeight.w600,
@@ -691,7 +696,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         ),
                                       )),
                                       DataCell(SizedBox(
-                                        width: 100,
+                                        width: 95,
                                         child: Center(
                                           child: TextWidget(
                                             text: usersItem['mobileNumber'],
@@ -702,7 +707,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         ),
                                       )),
                                       DataCell(SizedBox(
-                                        width: 100,
+                                        width: 70,
                                         child: Center(
                                           child: TextWidget(
                                             text: usersItem['villageCode'],
@@ -713,30 +718,44 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         ),
                                       )),
                                       DataCell(SizedBox(
-                                        width: 100,
+                                        width: 60,
                                         child: Center(
-                                          child: SvgPicture.asset(
+                                          child:usersItem["status"]==true?SvgPicture.asset(
                                             svgComplete,
                                             semanticsLabel: "Logo",
-                                            height: height / 20,
-                                            width: width / 20,
+                                            height: 27,
+                                            width: 27,
                                             fit: BoxFit.contain,
-                                            allowDrawingOutsideViewBox:
-                                            true,
+                                            allowDrawingOutsideViewBox: true,
+                                          ):SvgPicture.asset(
+                                            svgInProgress,
+                                            semanticsLabel: "Logo",
+                                            height: 28,
+                                            width: 28,
+                                            fit: BoxFit.contain,
+                                            allowDrawingOutsideViewBox: true,
                                           ),
                                         ),
                                       )),
                                       DataCell(SizedBox(
-                                        width: 100,
+                                        width: 65,
                                         child: Center(
                                           child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceEvenly,
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  Get.toNamed('/questionnery');
+                                                  int index = 0;
+                                                  for(int i = 0; i<users.length; i++) {
+                                                    if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
+                                                        && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
+                                                      index = i;
+                                                      break;
+                                                    }
+                                                  }
+                                                  // Get.toNamed('/questionnery',);
+                                                  makeLoadData();
+                                                  Get.toNamed('/questionnery', arguments: [_demographicList[index] , streets, documentId[index], true,makeLoadData],).then((value) => clearSearch());
                                                   // Navigator.pushReplacementNamed(context, "/questionnery");
                                                 },
                                                 child: Icon(
@@ -746,18 +765,25 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                               ),
                                               InkWell(
                                                 onTap: () {
-                                                  setState(() {
-                                                    showDialog(
-                                                        context: context,
-                                                        builder:
-                                                            (BuildContext
-                                                        context) {
-/*
-                                                          return AlertDialogWidget();
-*/
-                                                        });
-                                                    debugPrint("click");
-                                                  });
+                                                  int index = 0;
+                                                  for(int i = 0; i<users.length; i++) {
+                                                    if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
+                                                        && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
+                                                      index = i;
+                                                      break;
+                                                    }
+                                                  }
+                                                  showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (BuildContext
+                                                      context) {
+
+                                                        debugPrint("DocumetId:${documentId[index]}");
+                                                        return AlertDialogWidget(deleteDoc, index);
+                                                      });
+                                                  debugPrint("click");
+
                                                 },
                                                 child: Icon(
                                                   Icons.delete,
@@ -821,7 +847,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     _demographicList.clear();
     streets.clear();
     documentId.clear();
-    query = firestoreInstance.collection('demographicData');
+    query = firestoreInstance.collection('demographicData').limit(10);
     setState(() {});
   }
 
@@ -899,6 +925,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
   }
+  void deleteDoc(int index) {
+    debugPrint("delete DocumetId:${documentId[index]}");
+    FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
+      clearSearch();
+      showDeleteSuccess();
+    });
+  }
+  void showDeleteSuccess() {
+    snackBarAlert(success, "Deleted SuccessFully", successColor);
+
+  }
+
 
 }
 
