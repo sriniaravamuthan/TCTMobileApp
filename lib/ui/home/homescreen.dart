@@ -96,13 +96,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  /*Future<String> getVillageDetail(DocumentReference villageCode) async {
-    DocumentSnapshot snapShot =  await FirebaseFirestore.instance.doc(villageCode.path).get();
-    String sac = snapShot["villageCode"].toString();
-    print("GET______________" + sac);
-    return sac;
-  }*/
-
   Future<DocumentSnapshot> getVillageDetail(DocumentReference villageCode) async {
     DocumentSnapshot snapShot =  await FirebaseFirestore.instance.doc(villageCode.path).get();
     return snapShot;
