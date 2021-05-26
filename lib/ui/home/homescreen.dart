@@ -52,6 +52,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   String mobileNo;
   bool loadMore = false;
+  bool isLoading = false;
 
   List<DemographicFamily> _demographicList = [];
 
@@ -180,15 +181,15 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         // stream: collectionReference.snapshots(),
         stream: query.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) return Text('Something went wrong');
-          if (snapshot.connectionState == ConnectionState.waiting)
+          if (snapshot.hasError && !loadMore) return Text('Something went wrong');
+          if (snapshot.connectionState == ConnectionState.waiting && !loadMore)
             return Center(child: CircularProgressIndicator());
           // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
           var mainDemograpicData = snapshot.data.docs.map((doc) => doc).toList();
           debugPrint("family : ${mainDemograpicData}");
 
           if (loadData && snapshot.connectionState == ConnectionState.active) {
-
+            isLoading=false;
             if(!loadMore) {
               streets.clear();
               documentId.clear();
@@ -799,6 +800,61 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 },
                                 rowsPerPage: _rowPerPage,*/
                               ),
+                              InkWell(
+                                onTap: () {
+                                  loadMore = true;
+                                  loadData = true;
+                                  if(snapshot.data.docs.length > 0) {
+                                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(10);
+                                    setState(() {
+                                      isLoading=true;
+                                    });
+                                  }
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(),
+                                    isLoading
+                                        ? Container(
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: Center(child: CircularProgressIndicator()))
+                                        : Container(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top:8.0,right: 24,bottom: 8),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          border: Border.all(
+                                            color: Colors.black45,
+                                            style: BorderStyle.solid,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Row(
+                                            children: [
+                                              Icon(Icons.more_horiz),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              TextWidget(
+                                                text: DemoLocalization.of(context)
+                                                    .translate('Load more'),
+                                                color: darkColor,
+                                                weight: FontWeight.w700,
+                                                size: 14,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+
+                                ),
+                              )
                             ],
                           ),
                         ),
