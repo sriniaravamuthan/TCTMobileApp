@@ -248,7 +248,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Get.toNamed('/homeScreen');
+                                    Get.back();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -1439,7 +1439,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Get.toNamed('/homeScreen');
+                                    Get.back();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(

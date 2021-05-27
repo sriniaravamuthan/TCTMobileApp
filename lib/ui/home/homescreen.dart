@@ -420,7 +420,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  InkWell(
+                                  /*InkWell(
                                     onTap: () {
                                       loadMore = true;
                                       loadData = true;
@@ -460,7 +460,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                   SizedBox(
                                     width: 10,
-                                  ),
+                                  ),*/
                                   InkWell(
                                     onTap: () {
                                       showDialog(
@@ -504,9 +504,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      loadData = true;
-                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily() , streets, "", false,makeLoadData],).then((value) async => {clearSearch()});
-                                      // Navigator.pushReplacementNamed(context, "/questionnery");
+                                      // loadData = true;
+                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily(), streets, "", false, makeLoadData],)/*.then((value) async => {clearSearch()})*/;
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -662,7 +661,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                             break;
                                           }
                                         }
-                                        Get.toNamed('/DetailScreen', arguments: [_demographicList[index] , streets, documentId[index], true, makeLoadData,users [index]["status"]]).then((value) => clearSearch());
+                                        Get.toNamed('/DetailScreen', arguments: [_demographicList[index] , streets, documentId[index], true, makeLoadData,users [index]["status"]])/*.then((value) => clearSearch())*/;
                                       }
                                     },
                                     cells: [
@@ -750,10 +749,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                       break;
                                                     }
                                                   }
-                                                  // Get.toNamed('/questionnery',);
-                                                  makeLoadData();
-                                                  Get.toNamed('/questionnery', arguments: [_demographicList[index] , streets, documentId[index], true,makeLoadData],).then((value) => clearSearch());
-                                                  // Navigator.pushReplacementNamed(context, "/questionnery");
+                                                  // makeLoadData();
+                                                  Get.toNamed('/questionnery', arguments: [_demographicList[index] , streets, documentId[index], true,makeLoadData],)/*.then((value) => clearSearch())*/;
                                                 },
                                                 child: Icon(
                                                   Icons.edit,
@@ -952,10 +949,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       setState(() {});
     }
   }
+
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
   }
+
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
     FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
@@ -963,15 +962,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       showDeleteSuccess();
     });
   }
+
   void showDeleteSuccess() {
     snackBarAlert(success, "Deleted SuccessFully", successColor);
-
   }
-
 
 }
 
-class DataTableRow extends DataTableSource {
+/*class DataTableRow extends DataTableSource {
   List users;
   BuildContext context;
   var height, width;
@@ -1194,4 +1192,4 @@ class DataTableRow extends DataTableSource {
     snackBarAlert(success, "Deleted SuccessFully", successColor);
 
   }
-}
+}*/
