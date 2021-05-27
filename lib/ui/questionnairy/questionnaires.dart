@@ -22,12 +22,14 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/services/firestore_service.dart';
-import 'package:tct_demographics/ui/questionnairy/familymember_details.dart';
+import 'package:tct_demographics/ui/questionnairy/familymember_details_portrait.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
+
+import 'familymember_details_landscape.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
   @override
@@ -2004,7 +2006,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           padding:  EdgeInsets.only( bottom: (height) * 0.01),
                           child: Divider(height: 1,),
                         ),
-                        FamilyMemberDetails(demographicFamily, orientation),
+                        // FamilyMemberDetailsPortrait(demographicFamily, orientation),
+                        orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsPortrait(demographicFamily, orientation),
+                        // orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsLandscape(demographicFamily, orientation),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -2287,7 +2291,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       fireStoreService.createFamily(demographicFamily).then((value) => {
         if (value) {
           Navigator.pop(context, false),
-        // makeLoadData(),
+        makeLoadData(),
         // Get.offAndToNamed('/homeScreen'),
       showAddSuccess()
       } else {

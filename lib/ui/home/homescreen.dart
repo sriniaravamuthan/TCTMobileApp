@@ -505,7 +505,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      // loadData = true;
+                                      loadData = true;
                                       Get.toNamed('/questionnery', arguments: [new DemographicFamily(), streets, "", false, makeLoadData],)/*.then((value) async => {clearSearch()})*/;
                                     },
                                     child: Container(
@@ -934,7 +934,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
-    FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
+    FirebaseFirestore.instance.collection('testCollection').doc(documentId[index]).delete().then((value) {
       clearSearch();
       showDeleteSuccess();
     });

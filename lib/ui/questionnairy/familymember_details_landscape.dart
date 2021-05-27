@@ -17,18 +17,18 @@ import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
-class FamilyMemberDetails extends StatefulWidget {
+class FamilyMemberDetailsLandscape extends StatefulWidget {
   DemographicFamily demographicFamily;
   Orientation orientation;
 
-  FamilyMemberDetails(this.demographicFamily, this.orientation);
+  FamilyMemberDetailsLandscape(this.demographicFamily, this.orientation);
 
   @override
-  _FamilyMemberDetailsState createState() =>
-      _FamilyMemberDetailsState(demographicFamily, this.orientation);
+  _FamilyMemberDetailsLandscapeState createState() =>
+      _FamilyMemberDetailsLandscapeState(demographicFamily, this.orientation);
 }
 
-class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
+class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandscape> {
   bool addfamily = false;
   int familyIndex = -1;
   var height, width;
@@ -38,7 +38,7 @@ class _FamilyMemberDetailsState extends State<FamilyMemberDetails> {
   List<Family> familyList = [];
   Orientation orientation;
 
-  _FamilyMemberDetailsState(this.demographicFamily, this.orientation);
+  _FamilyMemberDetailsLandscapeState(this.demographicFamily, this.orientation);
 
   @override
   void initState() {
