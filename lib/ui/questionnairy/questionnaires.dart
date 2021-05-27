@@ -2268,51 +2268,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.contactPerson = contactPersonController.text;
     location.noOfFamilyMembers = noOfFamilyPersonController.text;
 
-    if (villageCodeController.text != "") {
-      DocumentReference documentReference;
-      for (int i = 0; i < snap.length; i++) {
-        if (snap[i]["villageCode"].toString() ==
-            villageCodeController.text) {
-          documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
-          break;
-        }
-      }
-      if (documentReference != null) {
-        location.villagesCode = documentReference;
-        location.panchayatNo = documentReference;
-        location.panchayatCode = documentReference;
-        location.villageName = documentReference;
-      } else {
-        location.villagesCode = villageCodeController.text;
-        location.panchayatNo = panchayatNoController.text;
-        location.panchayatCode = panchayatCodeController.text;
-        location.villageName = villageNameController.text;
-      }
-    } else if (panchayatNoController.text != "") {
-      DocumentReference documentReference;
-      for (int i = 0; i < snap.length; i++) {
-        if (snap[i]["panchayatNo"].toString() == panchayatNoController.text) {
-          documentReference = firestoreInstance.collection(collectionVillageName).doc(snap[i].id);
-          break;
-        }
-      }
-      if (documentReference != null) {
-        location.villagesCode = "";
-        location.panchayatNo = documentReference;
-        location.panchayatCode = documentReference;
-        location.villageName = "";
-      } else {
-        location.villagesCode = villageCodeController.text;
-        location.panchayatNo = panchayatNoController.text;
-        location.panchayatCode = panchayatCodeController.text;
-        location.villageName = villageNameController.text;
-      }
-    } else {
-      location.villagesCode = villageCodeController.text;
-      location.panchayatNo = panchayatNoController.text;
-      location.panchayatCode = panchayatCodeController.text;
-      location.villageName = villageNameController.text;
-    }
+    location.villagesCode = villageCodeController.text;
+    location.panchayatNo = panchayatNoController.text;
+    location.panchayatCode = panchayatCodeController.text;
+    location.villageName = villageNameController.text;
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
@@ -2325,8 +2284,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     if (!isEdit) {
       FireStoreService fireStoreService = new FireStoreService();
-      fireStoreService.createFamily(demographicFamily).then((value) =>
-      {if (value) {
+      fireStoreService.createFamily(demographicFamily).then((value) => {
+        if (value) {
           Navigator.pop(context, false),
         // makeLoadData(),
         // Get.offAndToNamed('/homeScreen'),

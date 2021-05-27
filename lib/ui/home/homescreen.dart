@@ -213,7 +213,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   break;
                 }
               }
-              if (data["age"] == null) data["age"] = "";
+              if (data["age"] == null) data["age"] = "-";
+              if (data["mobileNumber"] == "") data["mobileNumber"] = "-";
 
               DemographicFamily demographicData = DemographicFamily();
               Location locationList = Location();
@@ -912,40 +913,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       query = firestoreInstance.collection('demographicData').limit(10);
       setState(() {});
     } else if (mobileNo != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.contactNumber", isEqualTo: mobileNo.trim()).limit(10);
+      query = firestoreInstance.collection('demographicData').where("Location.contactNumber", isEqualTo: mobileNo.trim());
       setState(() {});
     } else if (villageCode != "") {
-      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("villageCode", isEqualTo: villageCode).get();
-      DocumentReference documentReference;
-      if (querySnapshot.docs.isEmpty) {
-        query = null;
-        setState(() {});
-        return;
-      }
-      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
-      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: documentReference).limit(10);
+      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: villageCode).limit(10);
       setState(() {});
     }else if (villageName != "") {
-      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("villageName.$language", isEqualTo: villageName).get();
-      DocumentReference documentReference;
-      if (querySnapshot.docs.isEmpty) {
-        query = null;
-        setState(() {});
-        return;
-      }
-      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
-      query = firestoreInstance.collection('demographicData').where("Location.villageName", isEqualTo: documentReference).limit(10);
+      query = firestoreInstance.collection('demographicData').where("Location.villageName", isEqualTo: villageName).limit(10);
       setState(() {});
     } else if (panchayatCode != "") {
-      QuerySnapshot querySnapshot = await firestoreInstance.collection(collectionVillageName).where("panchayatCode", isEqualTo: int.parse(panchayatCode)).get();
-      DocumentReference documentReference;
-      if (querySnapshot.docs.isEmpty) {
-        query = null;
-        setState(() {});
-        return;
-      }
-      documentReference = firestoreInstance.collection(collectionVillageName).doc(querySnapshot.docs[0].id);
-      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: documentReference).limit(10);
+      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: panchayatCode).limit(10);
       setState(() {});
     }
   }
