@@ -16,3 +16,5 @@ const svgComplete = "assets/svg/complete.svg";
 const svgInProgress = "assets/svg/inprogress.svg";
 const svgMan = "assets/svg/man.svg";
 const svgWoman = "assets/svg/woman.svg";
+const svgGender = "assets/svg/gender.svg";
+

@@ -283,7 +283,14 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                               fit: BoxFit.contain,
                                               allowDrawingOutsideViewBox: true,
                                             )
-                                          : SvgPicture.asset(
+                                          :familyList[index].gender=="Transgender" ||familyList[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                svgGender,
+                                semanticsLabel: "Logo",
+                                height: height / 12,
+                                width: width / 8,
+                                fit: BoxFit.contain,
+                                allowDrawingOutsideViewBox: true,
+                              ):SvgPicture.asset(
                                               svgWoman,
                                               semanticsLabel: "Logo",
                                               height: height / 10,
@@ -848,7 +855,14 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                               width: width / 8,
                                               fit: BoxFit.contain,
                                               allowDrawingOutsideViewBox: true,
-                                            )
+                                            ):familyList[index].gender=="Transgender" ||familyList[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                svgGender,
+                                semanticsLabel: "Logo",
+                                height: height / 12,
+                                width: width / 8,
+                                fit: BoxFit.contain,
+                                allowDrawingOutsideViewBox: true,
+                              )
                                           : SvgPicture.asset(
                                               svgWoman,
                                               semanticsLabel: "Logo",

@@ -936,6 +936,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   width: width / 8,
                                                   fit: BoxFit.contain,
                                                   allowDrawingOutsideViewBox: true,
+                                                ):demographicList.family[index].gender=="Transgender" || demographicList.family[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                                  svgGender,
+                                                  semanticsLabel: "Logo",
+                                                  height: height / 12,
+                                                  width: width / 8,
+                                                  fit: BoxFit.contain,
+                                                  allowDrawingOutsideViewBox: true,
                                                 ):SvgPicture.asset(
                                                   svgWoman,
                                                   semanticsLabel: "Logo",
@@ -962,7 +969,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
                                                   child: TextWidget(
-                                                    text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString()}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
+                                                    text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString()  + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
                                                     weight: FontWeight.w400,
                                                     color: darkColor,
                                                     size: 14,
@@ -2183,6 +2190,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             width: width / 8,
                                                             fit: BoxFit.contain,
                                                             allowDrawingOutsideViewBox: true,
+                                                          ):demographicList.family[index].gender=="Transgender" || demographicList.family[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                                            svgGender,
+                                                            semanticsLabel: "Logo",
+                                                            height: height / 12,
+                                                            width: width / 8,
+                                                            fit: BoxFit.contain,
+                                                            allowDrawingOutsideViewBox: true,
                                                           ):SvgPicture.asset(
                                                             svgWoman,
                                                             semanticsLabel: "Logo",
@@ -2209,7 +2223,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString()}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
+                                                              text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,

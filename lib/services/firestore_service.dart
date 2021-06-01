@@ -11,7 +11,7 @@ import 'package:tct_demographics/models/data_model.dart';
 
 class FireStoreService {
   CollectionReference demographicData =
-      FirebaseFirestore.instance.collection('testCollection');
+      FirebaseFirestore.instance.collection('demographicData');
 
   List<Map<String, dynamic>> createFamilyList(
       DemographicFamily demographicFamily) {

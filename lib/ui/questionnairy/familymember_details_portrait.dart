@@ -283,7 +283,14 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
                                               fit: BoxFit.contain,
                                               allowDrawingOutsideViewBox: true,
                                             )
-                                          : SvgPicture.asset(
+                                          :familyList[index].gender=="Transgender" || familyList[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                svgGender,
+                                semanticsLabel: "Logo",
+                                height: height / 12,
+                                width: width / 8,
+                                fit: BoxFit.contain,
+                                allowDrawingOutsideViewBox: true,
+                              ): SvgPicture.asset(
                                               svgWoman,
                                               semanticsLabel: "Logo",
                                               height: height / 10,
@@ -849,7 +856,14 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
                                               fit: BoxFit.contain,
                                               allowDrawingOutsideViewBox: true,
                                             )
-                                          : SvgPicture.asset(
+                                          : familyList[index].gender=="Transgender" || familyList[index].gender=="திருநங்கை"?SvgPicture.asset(
+                                svgGender,
+                                semanticsLabel: "Logo",
+                                height: height / 12,
+                                width: width / 8,
+                                fit: BoxFit.contain,
+                                allowDrawingOutsideViewBox: true,
+                              ): SvgPicture.asset(
                                               svgWoman,
                                               semanticsLabel: "Logo",
                                               height: height / 10,
