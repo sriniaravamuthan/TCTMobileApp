@@ -80,10 +80,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     ]);
 
     // collectionReference = firestoreInstance.collection('demographicData');
-    query = firestoreInstance.collection('demographicData').limit(10);
-
+    query = firestoreInstance.collection('demographicData').limit(30);
     super.initState();
   }
+
   @override
   dispose(){
     SystemChrome.setPreferredOrientations([
@@ -375,6 +375,17 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               if (_demographicList.length == mainDemograpicData.length) {
                 loadData = false;
+                if(isSearch) {
+                  isSearch = false;
+                  loadMore = true;
+                  loadData = true;
+                  if(snapshot.data.docs.length > 0) {
+                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
+                    setState(() {
+                      isLoading=true;
+                    });
+                  }
+                }
                 // setState(() {});
               }
             });
@@ -426,7 +437,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       loadMore = true;
                                       loadData = true;
                                      if(snapshot.data.docs.length > 0) {
-                                       query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(10);
+                                       query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
                                        setState(() {});
                                      }
                                     },
@@ -803,7 +814,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   loadMore = true;
                                   loadData = true;
                                   if(snapshot.data.docs.length > 0) {
-                                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(10);
+                                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
                                     setState(() {
                                       isLoading=true;
                                     });
@@ -897,10 +908,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     _demographicList.clear();
     streets.clear();
     documentId.clear();
-    query = firestoreInstance.collection('demographicData').limit(10);
+    query = firestoreInstance.collection('demographicData').limit(30);
     setState(() {});
   }
 
+  bool isSearch = false;
   Future<void> search(String mobileNo, villageCode, villageName, panchayatCode) async {
     print("GET_______" + mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
     loadData = true;
@@ -910,19 +922,22 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     documentId.clear();
 
     if (mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
-      query = firestoreInstance.collection('demographicData').limit(10);
+      query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
     } else if (mobileNo != "") {
       query = firestoreInstance.collection('demographicData').where("Location.contactNumber", isEqualTo: mobileNo.trim());
       setState(() {});
     } else if (villageCode != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: villageCode).limit(10);
+      isSearch = true;
+      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: villageCode).limit(30);
       setState(() {});
     }else if (villageName != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.villageName", isEqualTo: villageName).limit(10);
+      isSearch = true;
+      query = firestoreInstance.collection('demographicData').where("Location.villageName", isEqualTo: villageName).limit(30);
       setState(() {});
     } else if (panchayatCode != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: panchayatCode).limit(10);
+      isSearch = true;
+      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: panchayatCode).limit(30);
       setState(() {});
     }
   }
