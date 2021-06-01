@@ -382,7 +382,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   if(snapshot.data.docs.length > 0) {
                     query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
                     setState(() {
-                      isLoading=true;
+                      isLoading=false;
                     });
                   }
                 }

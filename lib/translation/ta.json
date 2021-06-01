@@ -8,7 +8,7 @@
   "Street Name":"தெருவின் பெயர்",
   "Door No": "கதவு எண்",
   "Answering Person Name": "பதிலளிக்கும் நபரின் பெயர்",
-  "Caste":" சாதி",
+  "Caste":"சாதி",
   "Name": "பெயர்",
   "Section": "பிரிவு",
   "Gender": "பாலினம்",
@@ -48,7 +48,7 @@
   "Retirement Pension?": "பிற உதவித் தொகையைப் பெறுகிறீர்களா?",
   "Any Members who Smoke?": "புகைபிடிக்கும் பழக்கம்?",
   "Any Members who Drink?":"குடிப்பழக்கம்?",
-  "Any Members who use Tobacco?":"புகையிலை பழக்கத்தைப் பயன்படுத்துதல்?",
+  "Any Members who use Tobacco?":"புகையிலை பழக்கம்?",
 
   "Private": "தனியார்",
   "Government": "அரசு",

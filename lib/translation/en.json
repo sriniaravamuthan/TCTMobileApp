@@ -8,7 +8,7 @@
  "Street Name":"Street Name",
   "Door No": "Door No",
  "Answering Person Name": "Answering Person Name",
- "Caste":" Caste",
+ "Caste":"Caste",
   "Name": "Name",
   "Section": "Section",
   "Gender": "Gender",
@@ -48,7 +48,7 @@
  "Retirement Pension?": "Retirement Pension?",
   "Any Members who Smoke?": "Smoking Habit?",
  "Any Members who Drink?":"Drinking Habit?",
-  "Any Members who use Tobacco?":"Using Tobacco Habit?",
+  "Any Members who use Tobacco?":"Tobacco Habit?",
 
  "Private": "Private",
  "Government": "Government",
