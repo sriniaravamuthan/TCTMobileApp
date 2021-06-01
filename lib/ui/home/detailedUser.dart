@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
@@ -974,7 +975,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
                                                   child: TextWidget(
-                                                    text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString()  + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
+                                                    text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", "+ getDOB(demographicList.family[index].dob.toString()) : ""}",
                                                     weight: FontWeight.w400,
                                                     color: darkColor,
                                                     size: 14,
@@ -1223,6 +1224,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
+                                                    SizedBox(height: 20,),
                                                     Padding(
                                                       padding: const EdgeInsets.all(2.0),
                                                       child: TextWidget(
@@ -1323,8 +1325,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       size: 14,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 10,),
-
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
@@ -1354,7 +1354,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       size: 14,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 10,),
+                                                  SizedBox(height: 20,),
 
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
@@ -2249,7 +2249,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? "," + demographicList.family[index].dob.toString() : ""}",
+                                                              text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
                                                               size: 14,
@@ -2760,6 +2760,20 @@ class _DetailScreenState extends State<DetailScreen> {
     }else{
       aadharNumber = aadharNumber.replaceRange(0, aadharNumber.length - 4, "*");
       return "*******" +    aadharNumber;
+    }
+
+  }
+
+   getDOB(String dob) {
+    if(dob==""){
+      return dob="";
+    }else{
+      var inputFormat = DateFormat('dd-MM-yyyy');
+      var inputDate = inputFormat.parse(dob);
+
+      var outputFormat = DateFormat('d-MMMM-y');
+      var outputDate = outputFormat.format(inputDate);
+      return outputDate;
     }
 
   }

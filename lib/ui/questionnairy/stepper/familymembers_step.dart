@@ -702,7 +702,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2022));
                                             String dateFormat =
-                                                DateFormat(" d-MMMM-y")
+                                                DateFormat("d-MMMM-y")
                                                     .format(date);
                                             datePicker.text = dateFormat;
                                             dobController.text =
