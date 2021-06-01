@@ -677,21 +677,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       }
                                     },
                                     cells: [
-                                      DataCell(Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 8.0),
-                                            child: SizedBox(
-                                                width: 99,
-                                                child: TextWidget(
-                                                  text: usersItem['name'],
-                                                  color: darkGreyColor,
-                                                  size: 16,
-                                                  weight: FontWeight.w600,
-                                                )),
-                                          )
-                                        ],
-                                      )),
+                                     users.length>0? DataCell(Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: SizedBox(
+                                            width: 99,
+                                            child: TextWidget(
+                                              text: usersItem['name'],
+                                              color: darkGreyColor,
+                                              size: 16,
+                                              weight: FontWeight.w600,
+                                            )),
+                                      )): DataCell(TextWidget(
+                        text: "No data found",
+                          size: 16,
+                          weight: FontWeight.w600,
+                        )),
                                       DataCell(SizedBox(
                                         width: 55,
                                         child: Center(

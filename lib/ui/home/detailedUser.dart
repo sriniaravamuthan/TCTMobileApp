@@ -210,7 +210,7 @@ class _DetailScreenState extends State<DetailScreen> {
     else if (value == 1)
       return  DemoLocalization.of(context).translate('No');
     else
-      return "";
+      return DemoLocalization.of(context).translate('Not Answer');
   }
 
   Widget _portraitMode() {
@@ -1104,9 +1104,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ],
                                             ),
                                           ),
+
                                         ],
                                       ),
-
                                       demographicList.family[index].isExpanded == "Show Less" ? Padding(
                                         padding: const EdgeInsets.all(4.0),
                                         child: Row(
@@ -1223,7 +1223,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    SizedBox(height: 16,),
                                                     Padding(
                                                       padding: const EdgeInsets.all(2.0),
                                                       child: TextWidget(
@@ -1233,7 +1232,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         size: 14,
                                                       ),
                                                     ),
-
                                                     Padding(
                                                       padding: const EdgeInsets.all(2.0),
                                                       child: TextWidget(
@@ -1325,6 +1323,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       size: 14,
                                                     ),
                                                   ),
+                                                  SizedBox(height: 10,),
+
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
@@ -1334,7 +1334,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       size: 14,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 16,),
+                                                  SizedBox(height: 10,),
 
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
@@ -1348,13 +1348,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
-                                                      text: demographicList.family[index].firstDose == null ? "" : demographicList.family[index].firstDose,
+                                                      text: demographicList.family[index].firstDose == ""? DemoLocalization.of(context).translate('Not Answer'): demographicList.family[index].firstDose,
                                                       weight: FontWeight.w400,
                                                       color: darkColor,
                                                       size: 14,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 16,),
+                                                  SizedBox(height: 10,),
 
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
@@ -1368,13 +1368,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
-                                                      text:demographicList.family[index].secondDose == null ? "" : demographicList.family[index].secondDose,
+                                                      text:demographicList.family[index].secondDose == "" ? DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].secondDose,
                                                       weight: FontWeight.w400,
                                                       color: darkColor,
                                                       size: 14,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 10,),
                                                   Container(height: 50,)
 
                                                 ],
@@ -2193,12 +2192,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                               });
                                             },
                                             child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding: const EdgeInsets.all(8.0),
+                                                      padding: const EdgeInsets.all(4.0),
                                                       child:Container(
                                                           height: 140,
                                                           width: 120,
@@ -2446,6 +2448,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         ],
                                                       ),
                                                     ),
+                                                    Container(height: 50,width: 20,)
+
                                                   ],
                                                 ),
                                                 demographicList.family[index].isExpanded == "Show Less" ? Padding(
@@ -2454,6 +2458,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
+                                                      Container(height: 50,width: 20,),
+
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column (
@@ -2481,11 +2487,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate('Any Members who Drink?'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 150,
+                                                                child: TextWidget(
+                                                                  text: DemoLocalization.of(context).translate('Any Members who Drink?'),
+                                                                  weight: FontWeight.w800,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
@@ -2500,17 +2509,20 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             SizedBox(height: 10,),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate("2nd Dose Date") ,
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 120,
+                                                                child: TextWidget(
+                                                                  text: DemoLocalization.of(context).translate("2nd Dose Date") ,
+                                                                  weight: FontWeight.w800,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text:demographicList.family[index].secondDose == null ? "" : demographicList.family[index].secondDose,
+                                                                text:demographicList.family[index].secondDose == "" ?  DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].secondDose,
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,
@@ -2523,14 +2535,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment: MainAxisAlignment.start,
                                                           children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate('Annual Income'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 120,
+                                                                child: TextWidget(
+                                                                  text: DemoLocalization.of(context).translate('Annual Income'),
+                                                                  weight: FontWeight.w800,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
@@ -2574,14 +2590,19 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+
                                                           children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context).translate('Physically challenged'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 150,
+                                                                child: TextWidget(
+                                                                  text:  DemoLocalization.of(context).translate('Physically challenged'),
+                                                                  weight: FontWeight.w800,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             Padding(
@@ -2615,21 +2636,22 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           ],
                                                         ),
                                                       ),
+                                                      Container(height: 50,width: 10,),
+
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+
                                                           children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Any Members who Smoke?'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
+                                                              child: TextWidget(
+                                                                text: DemoLocalization.of(context).translate('Any Members who Smoke?'),
+                                                                weight: FontWeight.w800,
+                                                                color: darkColor,
+                                                                size: 14,
                                                               ),
                                                             ),
                                                             Padding(
@@ -2654,15 +2676,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text: demographicList.family[index].firstDose == null ? "" : demographicList.family[index].firstDose,
+                                                                text: demographicList.family[index].firstDose == "" ?  DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].firstDose,
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,
                                                               ),
                                                             ),
+
                                                           ],
                                                         ),
                                                       ),
+                                                      Container(height: 50,width: 50,)
+
                                                     ],
                                                   ),
                                                 ) : Container(),
