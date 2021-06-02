@@ -41,8 +41,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   DemographicFamily demographicFamily = new DemographicFamily();
   String language;
-
   Location location = new Location();
+  var addLength;
 
   var fromNoController,
       projectCodeController,
@@ -2288,12 +2288,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
     if (!isEdit) {
       FireStoreService fireStoreService = new FireStoreService();
+
       fireStoreService.createFamily(demographicFamily).then((value) => {
         if (value) {
-          Navigator.pop(context, false),
-        makeLoadData(),
-        // Get.offAndToNamed('/homeScreen'),
-      showAddSuccess()
+          setCount()
+
       } else {
         snackBarAlert(error, "Failed to Add", errorColor)
       }});
@@ -2359,6 +2358,30 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         content: Text('All fields are required'),
       ),
     );
+  }
+
+  setCount() async {
+    var data = await FirebaseFirestore.instance.collection(collectionCount)
+        .get();
+    for (int i = 0; i < data.docs.length; i++) {
+      var totalLength = data.docs[i].data()['length'];
+      debugPrint("totalLength$totalLength");
+      addLength = totalLength + 1;
+    }
+    FirebaseFirestore.instance.collection(collectionCount).doc(
+        'ZDuG7E8KkwuadT4WxGGb')
+        .update({
+      "length": addLength,
+    })
+        .then((value) { Navigator.pop(context, false);
+    makeLoadData();
+    // Get.offAndToNamed('/homeScreen'),
+
+    showAddSuccess();})
+        .catchError((error) => false);
+
+    debugPrint("addLength$addLength");
+
   }
 
 }

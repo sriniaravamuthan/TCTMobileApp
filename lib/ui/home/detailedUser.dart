@@ -174,14 +174,14 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   String getLiveStock(Property property) {
-    String liveStock = "";
+    String liveStock = DemoLocalization.of(context).translate('Not Answer');
     if (property.ownLivestocks == 2)
       liveStock += property.livestockType.toString() + "-" + property.livestockCount ;
     return liveStock;
   }
 
   String getVehicle(Property property) {
-    String vehicles = "";
+    String vehicles = DemoLocalization.of(context).translate('Not Answer');
     if (property.ownVehicle == 2)
       vehicles += DemoLocalization.of(context).translate('Two Wheeler')+ "-" + property.twoWheeler.toString()+ "," + "\n${DemoLocalization.of(context).translate('Three Wheeler')}"+"""
 -"""+ property.threeWheeler+ "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}"+"-" +property.fourWheeler.toString();
@@ -338,7 +338,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Form No'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -348,7 +348,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.formNo,
+                                                text: demographicList.location.formNo==""?" -": demographicList.location.formNo,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -366,7 +366,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Panchayat No'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -377,7 +377,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.panchayatNo.toString(),
+                                                text: demographicList.location.panchayatNo==""?" -":demographicList.location.panchayatNo.toString(),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -395,7 +395,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Door No'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -406,7 +406,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text:demographicList.location.doorNumber,
+                                                text:demographicList.location.doorNumber==""?" -":demographicList.location.doorNumber,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -431,7 +431,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Project Code No'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -442,7 +442,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.projectCode,
+                                                text: demographicList.location.projectCode==""?" -":demographicList.location.projectCode,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -460,7 +460,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Panchayat Code'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -489,7 +489,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Street Name'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -525,7 +525,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Village Code'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -554,7 +554,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Village Name'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -583,7 +583,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               child: TextWidget(
                                                 text: DemoLocalization.of(context).translate('Contact Person'),
                                                 size: 14,
-                                                color: darkGreyColor,
+                                                color: darkColor,
                                                 weight: FontWeight.w700,
                                               ),
                                             ),
@@ -652,7 +652,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Status of House'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -684,7 +684,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Vehicle Details'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -716,7 +716,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Type of House'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -755,7 +755,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Toilet Facility at Home'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -787,7 +787,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Wet Land Holding(In Acres)'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -819,7 +819,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Livestock Details'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -859,7 +859,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       .translate(
                                                       'Dry Land Holding(In Acres)'),
                                                   size: 14,
-                                                  color: darkGreyColor,
+                                                  color: darkColor,
                                                   weight: FontWeight.w700,
                                                 ),
                                               ),
@@ -1113,6 +1113,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
+                                            Container(height: 50,
+                                              width: 20,),
                                             Padding(
                                               padding: const EdgeInsets.all(2.0),
                                               child: Column(
@@ -1318,11 +1320,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 children: [
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate("Vaccination Done") ,
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
+                                                    child: SizedBox(
+                                                      width: 100,
+                                                      child: TextWidget(
+                                                        text: DemoLocalization.of(context).translate("Vaccination Done") ,
+                                                        weight: FontWeight.w800,
+                                                        color: darkColor,
+                                                        size: 14,
+                                                      ),
                                                     ),
                                                   ),
                                                   Padding(
@@ -1561,7 +1566,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Form No'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1571,7 +1576,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 150,
                                                   child: TextWidget(
-                                                    text: demographicList.location.formNo,
+                                                    text: demographicList.location.formNo==""?" -": demographicList.location.formNo,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -1593,7 +1598,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Panchayat No'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1604,7 +1609,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 150,
                                                   child: TextWidget(
-                                                    text: demographicList.location.panchayatNo.toString(),
+                                                    text: demographicList.location.panchayatNo==""?" -":demographicList.location.panchayatNo.toString(),
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -1626,7 +1631,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Door No'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1637,7 +1642,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 150,
                                                   child: TextWidget(
-                                                    text:demographicList.location.doorNumber,
+                                                    text:demographicList.location.doorNumber==""?" -":demographicList.location.doorNumber,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -1659,7 +1664,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Project Code No'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1670,7 +1675,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 150,
                                                   child: TextWidget(
-                                                    text: demographicList.location.projectCode,
+                                                    text: demographicList.location.projectCode==""?" -":demographicList.location.projectCode,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
@@ -1698,7 +1703,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Panchayat Code'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1731,7 +1736,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Street Name'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1764,7 +1769,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Village Code'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1797,7 +1802,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Village Name'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1840,7 +1845,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Contact Person'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1906,7 +1911,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   child: TextWidget(
                                                     text: DemoLocalization.of(context).translate('Status of House'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1942,7 +1947,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Vehicle Details'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -1977,7 +1982,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Type of House'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -2016,7 +2021,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Toilet Facility at Home'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -2059,7 +2064,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Wet Land Holding(In Acres)'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -2095,7 +2100,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Livestock Details'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -2131,7 +2136,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         .translate(
                                                         'Dry Land Holding(In Acres)'),
                                                     size: 14,
-                                                    color: darkGreyColor,
+                                                    color: darkColor,
                                                     weight: FontWeight.w700,
                                                   ),
                                                 ),
@@ -2458,7 +2463,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Container(height: 50,width: 20,),
+                                                      Container(height: 50,width: 5,),
 
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
@@ -2535,18 +2540,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column(
                                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                                          mainAxisAlignment: MainAxisAlignment.start,
                                                           children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 120,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Annual Income'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
+                                                              child: TextWidget(
+                                                                text: DemoLocalization.of(context).translate('Annual Income'),
+                                                                weight: FontWeight.w800,
+                                                                color: darkColor,
+                                                                size: 14,
                                                               ),
                                                             ),
                                                             Padding(
@@ -2595,14 +2596,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           children: [
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text:  DemoLocalization.of(context).translate('Physically challenged'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
+                                                              child: TextWidget(
+                                                                text:  DemoLocalization.of(context).translate('Physically challenged'),
+                                                                weight: FontWeight.w800,
+                                                                color: darkColor,
+                                                                size: 14,
                                                               ),
                                                             ),
                                                             Padding(
@@ -2686,7 +2684,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Container(height: 50,width: 50,)
+                                                      Container(height: 50,width: 30,)
 
                                                     ],
                                                   ),
@@ -2756,7 +2754,7 @@ class _DetailScreenState extends State<DetailScreen> {
   getMaskedNo(String aadharNumber) {
 
     if(aadharNumber==""){
-      return aadharNumber="";
+      return aadharNumber= " -";
     }else{
       aadharNumber = aadharNumber.replaceRange(0, aadharNumber.length - 4, "*");
       return "*******" +    aadharNumber;
@@ -2765,15 +2763,21 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
    getDOB(String dob) {
+
     if(dob==""){
       return dob="";
     }else{
-      var inputFormat = DateFormat('dd-MM-yyyy');
-      var inputDate = inputFormat.parse(dob);
+      try {
+        var inputFormat = DateFormat('dd-MM-yyyy');
+        var inputDate = inputFormat.parse(dob);
+        var outputFormat = DateFormat('d-MMMM-y');
+        var outputDate = outputFormat.format(inputDate);
+        return outputDate;
 
-      var outputFormat = DateFormat('d-MMMM-y');
-      var outputDate = outputFormat.format(inputDate);
-      return outputDate;
+      } on Exception catch (_) {
+       return dob;
+      }
+
     }
 
   }

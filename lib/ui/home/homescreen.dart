@@ -39,7 +39,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
   CollectionReference demographydata = FirebaseFirestore.instance.collection('users');
-
+  var deleteLength;
+  var demoLength=0;
   // List<Result> users;
   List users = [];
   String language;
@@ -53,7 +54,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   String mobileNo;
   bool loadMore = false;
   bool isLoading = false;
-
   List<DemographicFamily> _demographicList = [];
 
   CollectionReference collectionReference;
@@ -64,6 +64,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+
     getLanguage();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -267,6 +268,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 }
               }
 
+              // demoLength = await totalLength();
+              debugPrint("demoLength$demoLength");
+
               if (data["villageCode"] == "")
                 data["status"] = false;
 
@@ -420,7 +424,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                               child: TextWidget(
                                 text:
                                     "${DemoLocalization.of(context).translate('TotalRecords')}" +
-                                        " " "${(_demographicList.length)}",
+                                        " " "${(_demographicList.length)}" +" / ${demoLength}",
                                 color: darkColor,
                                 weight: FontWeight.w500,
                                 size: 16,
@@ -900,6 +904,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     setState(() {
       loadData = true;
     });
+    totalLength();
   }
   
   void clearSearch() {
@@ -945,19 +950,59 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
+    // demoLength = await totalLength();
+   totalLength();
+
   }
 
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
     FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
       clearSearch();
-      showDeleteSuccess();
+      deleteCount();
+
     });
   }
 
   void showDeleteSuccess() {
     snackBarAlert(success, "Deleted SuccessFully", successColor);
   }
+
+   deleteCount() async{
+
+     var data = await FirebaseFirestore.instance.collection(collectionCount)
+         .get();
+     for (int i = 0; i < data.docs.length; i++) {
+       var totalLength = data.docs[i].data()['length'];
+       debugPrint("totalLength$totalLength");
+       deleteLength = totalLength - 1;
+     }
+     FirebaseFirestore.instance.collection(collectionCount).doc(
+         'ZDuG7E8KkwuadT4WxGGb')
+         .update({
+       "length": deleteLength,
+     })
+         .then((value) {
+     makeLoadData();
+     showDeleteSuccess();
+    }).catchError((error) => false);
+
+     debugPrint("deleteLength$deleteLength");
+  }
+
+  /*Future<int> totalLength() async{
+    var data=await FirebaseFirestore.instance.collection(collectionCount).get();
+    return data.docs[0].data()["length"];
+  }*/
+
+  totalLength() async{
+    var data=await FirebaseFirestore.instance.collection(collectionCount).get();
+    demoLength= data.docs[0].data()["length"];
+    setState(() {
+
+    });
+  }
+
 
 }
 
