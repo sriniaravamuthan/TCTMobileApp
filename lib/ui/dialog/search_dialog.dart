@@ -34,6 +34,7 @@ class _SearchDialogState extends State<SearchDialog> {
   var villageCodeController = TextEditingController();
   var villageNameController = TextEditingController();
   var panchayatCodeController = TextEditingController();
+  var contactPersonController = TextEditingController();
   String language;
   @override
   void initState() {
@@ -58,6 +59,229 @@ class _SearchDialogState extends State<SearchDialog> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 4.0, right: 4, top: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: FractionallySizedBox(
+                        widthFactor: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TextWidget(
+                                text:DemoLocalization.of(
+                                    context)
+                                    .translate(
+                                    'Contact Person'),
+                                size: 14,
+                                weight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 58,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 16.0,
+                                ),
+                                child: TextFormField(
+                                  controller:
+                                  contactPersonController,
+                                  textInputAction:
+                                  TextInputAction.next,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                      border:
+                                      OutlineInputBorder(
+                                        borderSide:
+                                        BorderSide.none,
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                      ),
+                                      enabledBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      focusedBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      focusedErrorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      errorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      fillColor:
+                                      lightGreyColor),
+
+                                  keyboardType:
+                                  TextInputType.text,
+                                  onSaved: (String val) {
+                                    setState(() {
+                                      contactPersonController
+                                          .text = val;
+                                    });
+                                  },
+                                  // validator: (value) {
+                                  //   if (value.isEmpty) {
+                                  //     debugPrint(
+                                  //         "empid :yes");
+                                  //     return 'Employee Id must not be empty';
+                                  //   }
+                                  //   return null;
+                                  // },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: FractionallySizedBox(
+                        widthFactor: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TextWidget(
+                                text:DemoLocalization.of(
+                                    context)
+                                    .translate(
+                                    'Contact Person'),
+                                size: 14,
+                                weight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 58,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 16.0,
+                                ),
+                                child: TextFormField(
+                                  controller:
+                                  contactPersonController,
+                                  textInputAction:
+                                  TextInputAction.next,
+                                  enableSuggestions: true,
+                                  decoration: InputDecoration(
+                                      border:
+                                      OutlineInputBorder(
+                                        borderSide:
+                                        BorderSide.none,
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                      ),
+                                      enabledBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      focusedBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      focusedErrorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      errorBorder:
+                                      OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(
+                                            Radius.circular(
+                                                10.0)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            lightGreyColor),
+                                      ),
+                                      fillColor:
+                                      lightGreyColor),
+                                  keyboardType:
+                                  TextInputType.text,
+                                  onSaved: (String val) {
+                                    setState(() {
+                                      contactPersonController
+                                          .text = val;
+                                    });
+                                  },
+                                  // validator: (value) {
+                                  //   if (value.isEmpty) {
+                                  //     debugPrint(
+                                  //         "empid :yes");
+                                  //     return 'Employee Id must not be empty';
+                                  //   }
+                                  //   return null;
+                                  // },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 4.0, right: 4, top: 4),
               child: Row(
@@ -606,6 +830,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                     side: BorderSide(color: Colors.black45)))),
                     onPressed: () {
                       widget.search(
+                        contactPersonController.text,
                           mobileNoController.text,
                           villageCodeController.text,
                           villageNameController.text,
