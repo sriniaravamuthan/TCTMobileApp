@@ -174,17 +174,18 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   String getLiveStock(Property property) {
-    String liveStock = DemoLocalization.of(context).translate('Not Answer');
+    String liveStock = "";
     if (property.ownLivestocks == 2)
       liveStock += property.livestockType.toString() + "-" + property.livestockCount ;
     return liveStock;
   }
 
   String getVehicle(Property property) {
-    String vehicles = DemoLocalization.of(context).translate('Not Answer');
+    String vehicles = "";
     if (property.ownVehicle == 2)
       vehicles += DemoLocalization.of(context).translate('Two Wheeler')+ "-" + property.twoWheeler.toString()+ "," + "\n${DemoLocalization.of(context).translate('Three Wheeler')}"+"""
 -"""+ property.threeWheeler+ "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}"+"-" +property.fourWheeler.toString();
+    debugPrint("vehicles:$vehicles");
     return vehicles;
   }
 
@@ -2186,7 +2187,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
-                                    debugPrint("familyPhoto:${demographicList.family[index].photo}");
+                                    debugPrint("familyPhoto:${demographicList.family[index].education}");
+
                                     return Column(
                                       children: [
                                         Container(

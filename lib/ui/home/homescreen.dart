@@ -334,6 +334,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.isExpanded= 'Show More';
 
                 _familyList.add(_family);
+                debugPrint("GETFamily______"+_family.education);
               }
 
               // if (hasCaste < 0)
@@ -672,7 +673,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                         int index = 0;
                                         for(int i = 0; i<users.length; i++) {
                                           if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
-                                              && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
+                                              && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode']  ) {
                                             index = i;
                                             break;
                                           }

@@ -1735,7 +1735,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   },
                                   itemFilter: (item, query) {
                                     isSection=false;
-                                    debugPrint("genderItem:$item");
                                     return item
                                         .toLowerCase()
                                         .startsWith(query.toLowerCase());
@@ -1817,6 +1816,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+                Container(
+                  width: 160,
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1,
@@ -1867,12 +1874,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
+                ),
                 Expanded(
                   child: Align(
                     alignment: Alignment.topRight,
@@ -1985,6 +1987,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.topRight,
@@ -2004,27 +2011,30 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                           Column(
                             children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape: RoundSliderThumbShape(
-                                      enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape: RoundSliderOverlayShape(
-                                      overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: family.widowedPension,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleWidowedPension(value);
-                                  },
+                              SizedBox(
+                                width: 250,
+                                child: SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    activeTrackColor: primaryColor,
+                                    inactiveTrackColor: Colors.lightBlueAccent,
+                                    trackShape: RectangularSliderTrackShape(),
+                                    trackHeight: 4.0,
+                                    thumbColor: primaryColor,
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: 12.0),
+                                    overlayColor: Colors.white.withAlpha(32),
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: 28.0),
+                                  ),
+                                  child: Slider(
+                                    value: family.widowedPension,
+                                    min: 0,
+                                    max: 2,
+                                    divisions: 2,
+                                    onChanged: (value) {
+                                      toggleWidowedPension(value);
+                                    },
+                                  ),
                                 ),
                               ),
                               TextWidget(
@@ -2039,10 +2049,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.topRight,
@@ -2064,27 +2070,31 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             ),
                             Column(
                               children: [
-                                SliderTheme(
-                                  data: SliderTheme.of(context).copyWith(
-                                    activeTrackColor: primaryColor,
-                                    inactiveTrackColor: Colors.lightBlueAccent,
-                                    trackShape: RectangularSliderTrackShape(),
-                                    trackHeight: 4.0,
-                                    thumbColor: primaryColor,
-                                    thumbShape: RoundSliderThumbShape(
-                                        enabledThumbRadius: 12.0),
-                                    overlayColor: Colors.white.withAlpha(32),
-                                    overlayShape: RoundSliderOverlayShape(
-                                        overlayRadius: 28.0),
-                                  ),
-                                  child: Slider(
-                                    value: family.retirementPension,
-                                    min: 0,
-                                    max: 2,
-                                    divisions: 2,
-                                    onChanged: (value) {
-                                      toggleRetirementPension(value);
-                                    },
+                                SizedBox(
+                                  width: 250,
+
+                                  child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      activeTrackColor: primaryColor,
+                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      trackShape: RectangularSliderTrackShape(),
+                                      trackHeight: 4.0,
+                                      thumbColor: primaryColor,
+                                      thumbShape: RoundSliderThumbShape(
+                                          enabledThumbRadius: 12.0),
+                                      overlayColor: Colors.white.withAlpha(32),
+                                      overlayShape: RoundSliderOverlayShape(
+                                          overlayRadius: 28.0),
+                                    ),
+                                    child: Slider(
+                                      value: family.retirementPension,
+                                      min: 0,
+                                      max: 2,
+                                      divisions: 2,
+                                      onChanged: (value) {
+                                        toggleRetirementPension(value);
+                                      },
+                                    ),
                                   ),
                                 ),
                                 TextWidget(
@@ -2100,6 +2110,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+                Container(
+                  width: 180,
+                )
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1.05,
@@ -2200,11 +2219,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1.05,
@@ -2255,6 +2269,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Expanded(
                   child: FractionallySizedBox(
                     widthFactor: 1.05,
@@ -2345,25 +2364,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                          BorderSide(color: lightGreyColor),
+                                      BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -2379,7 +2398,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                      DateFormat(" d-MMMM-y").format(date);
+                                  DateFormat(" d-MMMM-y").format(date);
                                   family.firstDose = dateFormat;
                                   firstDosePicker.text = dateFormat;
                                 },
@@ -2391,11 +2410,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
                 Expanded(
                   child: Align(
                     alignment: Alignment.center,
@@ -2415,7 +2429,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                           SizedBox(
                             height: 58,
-                            width: 180,
                             child: Padding(
                               padding: const EdgeInsets.only(
                                 right: 16.0,
@@ -2484,78 +2497,151 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        if (_stepTwoKey.currentState.validate()) {
-                          // if (_stepTwoKey != null) {
-                            _stepTwoKey.currentState.save();
-                            print("GET_____________________________" + isRelationShip.toString());
-                              if (relationshipController.text != "" && !isRelationShip) {
-                              setState(() {
-                                relationshipController.text = "";
-                                snackBarAlert("Error",
-                                    "RelationShip  must be in List", errorColor);
-                                return;
-                              });
-                            }  else if (genderController.text != "" &&
-                                !isGender) {
-                              setState(() {
-                                genderController.text = "";
-                                snackBarAlert("Error",
-                                    "Gender  must be in List", errorColor);
-                                return;
-                              });
-                            }else if (maritalStatusController.text != "" &&
-                                !isMaritalStatus) {
-                              setState(() {
-                                maritalStatusController.text = "";
-                                snackBarAlert("Error",
-                                    "Marital Status  must be in List", errorColor);
-                                return;
-                              });
-                            }else if (bloodGroupController.text != "" &&
-                                !isBloodGrp) {
-                              setState(() {
-                                bloodGroupController.text = "";
-                                snackBarAlert("Error",
-                                    "Blood Group  must be in List", errorColor);
-                                return;
-                              });
-                            }else if (educationController.text != "" &&
-                                !isEducation) {
-                              setState(() {
-                                educationController.text = "";
-                                snackBarAlert("Error",
-                                    "Education Qualification must be in List", errorColor);
-                                return;
-                              });
-                            }else if (occupationController.text != "" &&
-                                !isBusiness) {
-                              setState(() {
-                                occupationController.text = "";
-                                snackBarAlert("Error",
-                                    "Business must be in List", errorColor);
-                                return;
-                              });
-                            }else if (communityController.text != "" &&
-                                !isSection) {
-                              setState(() {
-                                communityController.text = "";
-                                snackBarAlert("Error",
-                                    "Section must be in List", errorColor);
-                                return;
-                              });
-                            }
-                            else {
-                              setState(() {
-                                this.isLoading = true;
-                              });
-                              uploadFile();
-                            }                          // }
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      if (_stepTwoKey.currentState.validate()) {
+                        // if (_stepTwoKey != null) {
+                        _stepTwoKey.currentState.save();
+                        print("GET_____________________________" + isRelationShip.toString());
+                        if (relationshipController.text != "" && !isRelationShip) {
+                          setState(() {
+                            relationshipController.text = "";
+                            snackBarAlert("Error",
+                                "RelationShip  must be in List", errorColor);
+                            return;
+                          });
+                        }  else if (genderController.text != "" &&
+                            !isGender) {
+                          setState(() {
+                            genderController.text = "";
+                            snackBarAlert("Error",
+                                "Gender  must be in List", errorColor);
+                            return;
+                          });
+                        }else if (maritalStatusController.text != "" &&
+                            !isMaritalStatus) {
+                          setState(() {
+                            maritalStatusController.text = "";
+                            snackBarAlert("Error",
+                                "Marital Status  must be in List", errorColor);
+                            return;
+                          });
+                        }else if (bloodGroupController.text != "" &&
+                            !isBloodGrp) {
+                          setState(() {
+                            bloodGroupController.text = "";
+                            snackBarAlert("Error",
+                                "Blood Group  must be in List", errorColor);
+                            return;
+                          });
+                        }else if (educationController.text != "" &&
+                            !isEducation) {
+                          setState(() {
+                            educationController.text = "";
+                            snackBarAlert("Error",
+                                "Education Qualification must be in List", errorColor);
+                            return;
+                          });
+                        }else if (occupationController.text != "" &&
+                            !isBusiness) {
+                          setState(() {
+                            occupationController.text = "";
+                            snackBarAlert("Error",
+                                "Business must be in List", errorColor);
+                            return;
+                          });
+                        }else if (communityController.text != "" &&
+                            !isSection) {
+                          setState(() {
+                            communityController.text = "";
+                            snackBarAlert("Error",
+                                "Section must be in List", errorColor);
+                            return;
+                          });
                         }
+                        else {
+                          setState(() {
+                            this.isLoading = true;
+                          });
+                          uploadFile();
+                        }                          // }
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.black45,
+                          style: BorderStyle.solid,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.done,
+                            color: successColor,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Save'),
+                              color: darkColor,
+                              weight: FontWeight.w700,
+                              size: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: InkWell(
+                      onTap: () {
+                        widget.cancelFields();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: Colors.black45,
+                            style: BorderStyle.solid,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.cancel_outlined),
+                            Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Cancel'),
+                                color: darkColor,
+                                weight: FontWeight.w700,
+                                size: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  familyIndex >= 0
+                      ? Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: InkWell(
+                      onTap: () {
+                        widget.deleteFields(family);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -2569,14 +2655,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         child: Row(
                           children: [
                             Icon(
-                              Icons.done,
-                              color: successColor,
+                              Icons.delete_forever_outlined,
+                              color: errorColor,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
-                                    .translate('Save'),
+                                    .translate('Delete'),
                                 color: darkColor,
                                 weight: FontWeight.w700,
                                 size: 14,
@@ -2586,86 +2672,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                         ),
                       ),
                     ),
-                    Container(
+                  )
+                      : Container(),
+                  isLoading
+                      ? Container(
                       margin: EdgeInsets.only(left: 10),
-                      child: InkWell(
-                        onTap: () {
-                          widget.cancelFields();
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: Colors.black45,
-                              style: BorderStyle.solid,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(Icons.cancel_outlined),
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: TextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Cancel'),
-                                  color: darkColor,
-                                  weight: FontWeight.w700,
-                                  size: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    familyIndex >= 0
-                        ? Container(
-                            margin: EdgeInsets.only(left: 10),
-                            child: InkWell(
-                              onTap: () {
-                                widget.deleteFields(family);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color: Colors.black45,
-                                    style: BorderStyle.solid,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delete_forever_outlined,
-                                      color: errorColor,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: TextWidget(
-                                        text: DemoLocalization.of(context)
-                                            .translate('Delete'),
-                                        color: darkColor,
-                                        weight: FontWeight.w700,
-                                        size: 14,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(),
-                    isLoading
-                        ? Container(
-                            margin: EdgeInsets.only(left: 10),
-                            child: CircularProgressIndicator())
-                        : Visibility(visible: false, child: Text("Saving")),
-                    Container()
-                  ],
-                ),
-              ],
+                      child: CircularProgressIndicator())
+                      : Visibility(visible: false, child: Text("Saving")),
+                  Container()
+                ],
+              ),
             )
           ],
         ),
