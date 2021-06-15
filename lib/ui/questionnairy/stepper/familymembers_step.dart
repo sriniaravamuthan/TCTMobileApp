@@ -49,7 +49,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       isBloodGrp = false,
       isEducation = false,
       isBusiness = false,
-      isSection = false;
+      isSection = false,
+  isPhysical=false;
   var nameController = TextEditingController();
   var aadharNumberController = TextEditingController();
   var relationshipController = TextEditingController();
@@ -69,6 +70,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String smartphone = "";
   var communityController = TextEditingController();
   var casteController = TextEditingController();
+  var physicalController = TextEditingController();
 
   // var photoController = TextEditingController();
   String govtInsurance = "";
@@ -167,6 +169,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.smartphone = getSwitchValues(smartphone);
     family.community = communityController.text;
     family.caste = casteController.text;
+    family.physical = physicalController.text;
     family.govtInsurance = getSwitchValues(govtInsurance);
     family.privateInsurance = getSwitchValues(privateInsurance);
     family.oldPension = getSwitchValues(oldPension);
@@ -210,6 +213,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   @override
   Widget build(BuildContext context) {
     debugPrint("stringList1$genderListLang");
+    debugPrint("isPhysical$isPhysical");
+
     return Form(
       key: _stepTwoKey,
       child: Padding(
@@ -1135,6 +1140,76 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                physicallyChallenge=="Yes" ||  physicallyChallenge=="ஆம்"? Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Physically challenged'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                              child: TextFormField(
+                                controller: physicalController,
+                                textInputAction: TextInputAction.next,
+                                autocorrect: true,
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
+                                keyboardType: TextInputType.text,
+                                onSaved: (String val) {
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ):Container(),
                 Expanded(
                   child: Align(
                     alignment: Alignment.topLeft,
@@ -1404,7 +1479,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     return a.compareTo(b);
                                   },
                                   itemFilter: (item, query) {
-                                    debugPrint("genderItem:$item");
                                     return item
                                         .toLowerCase()
                                         .startsWith(query.toLowerCase());
@@ -1876,81 +1950,24 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context).translate(
-                                  'Private Insurance/Health Insurance?'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context).translate(
+                                'Private Insurance/Health Insurance?'),
+                            size: 14,
+                            weight: FontWeight.w600,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 16.0, top: 2.0, bottom: 2.0),
-                            child: Column(
-                              children: [
-                                SliderTheme(
-                                  data: SliderTheme.of(context).copyWith(
-                                    activeTrackColor: primaryColor,
-                                    inactiveTrackColor: Colors.lightBlueAccent,
-                                    trackShape: RectangularSliderTrackShape(),
-                                    trackHeight: 4.0,
-                                    thumbColor: primaryColor,
-                                    thumbShape: RoundSliderThumbShape(
-                                        enabledThumbRadius: 12.0),
-                                    overlayColor: Colors.white.withAlpha(32),
-                                    overlayShape: RoundSliderOverlayShape(
-                                        overlayRadius: 28.0),
-                                  ),
-                                  child: Slider(
-                                    value: family.privateInsurance,
-                                    min: 0,
-                                    max: 2,
-                                    divisions: 2,
-                                    onChanged: (value) {
-                                      togglePrivateInsurance(value);
-                                    },
-                                  ),
-                                ),
-                                TextWidget(
-                                  text: privateInsurance,
-                                  size: 14,
-                                  weight: FontWeight.w600,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Old age Pension?'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          Column(
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: 16.0, top: 2.0, bottom: 2.0),
+                          child: Column(
                             children: [
                               SliderTheme(
                                 data: SliderTheme.of(context).copyWith(
@@ -1966,24 +1983,75 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       overlayRadius: 28.0),
                                 ),
                                 child: Slider(
-                                  value: family.oldPension,
+                                  value: family.privateInsurance,
                                   min: 0,
                                   max: 2,
                                   divisions: 2,
                                   onChanged: (value) {
-                                    toggleOldPension(value);
+                                    togglePrivateInsurance(value);
                                   },
                                 ),
                               ),
                               TextWidget(
-                                text: oldPension,
+                                text: privateInsurance,
                                 size: 14,
                                 weight: FontWeight.w600,
                               )
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Old age Pension?'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.oldPension,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleOldPension(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: oldPension,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -2695,10 +2763,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       if (value == 0)
         physicallyChallenge =
             DemoLocalization.of(context).translate('Not Answer');
-      else if (value == 1)
+      else if (value == 1) {
         physicallyChallenge = DemoLocalization.of(context).translate('No');
-      else
+        debugPrint("isPhysical2$isPhysical");
+
+      } else {
         physicallyChallenge = DemoLocalization.of(context).translate('Yes');
+        isPhysical=true;
+        debugPrint("isPhysical1$isPhysical");
+
+      }
     });
   }
 
@@ -3080,7 +3154,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       mailController.text = family.mail.toString();
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
-
+      physicalController.text = family.physical.toString();
+debugPrint("physically:${family.physical.toString()}");
       if (family.relationship != "") {
         isRelationShip = true;
       }

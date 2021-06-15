@@ -27,6 +27,7 @@ class FireStoreService {
         "maritalStatus": element.maritalStatus,
         "bloodGroup": element.bloodGroup,
         "physicallyChallenge": element.physicallyChallenge,
+        "physicallyChallenged": element.physical,
         "education": element.education,
         "occupation": element.occupation,
         "annualIncome": element.annualIncome,

@@ -239,6 +239,7 @@ class Family {
   double smartphone = 0;
   String community = "";
   String caste = "";
+  String physical = "";
   String photo = "";
   double govtInsurance = 0;
   double privateInsurance = 0;
@@ -273,6 +274,7 @@ class Family {
       this.smartphone,
       this.community,
       this.caste,
+      this.physical,
       this.photo,
 
       this.anyMembersWhoSmoke,
@@ -300,6 +302,7 @@ class Family {
     smartphone = json['smartphone'];
     community = json['community '];
     caste = json['caste  '];
+    physical = json['physical  '];
     photo = json['photo  '];
 
     anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
@@ -329,6 +332,7 @@ class Family {
     data['smartphone'] = this.smartphone;
     data['community '] = this.community;
     data['caste  '] = this.caste;
+    data['physical  '] = this.physical;
     data['photo  '] = this.photo;
 
     data['anyMembersWhoSmoke'] = this.anyMembersWhoSmoke;

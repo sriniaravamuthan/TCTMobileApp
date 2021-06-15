@@ -431,6 +431,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 left: 2.0, right: 16.0,),
                             child: TextFormField(
                               // autofocus:isAuto,
+                              readOnly: land=="Yes" ||  land=="ஆம்"?false:true,
                               controller: wetLandController,
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
@@ -514,6 +515,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               right: 16.0, ),
                           child: TextFormField(
                             controller: dryLandController,
+                            readOnly: land=="Yes" ||  land=="ஆம்"?false:true,
                             onChanged: (value) {
                               property.dryLandInAcres = value;
                             },
@@ -638,6 +640,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                   right: 16.0, ),
                               child: TextFormField(
                                 controller: motorVehicleController,
+                                readOnly: vehicle=="Yes" ||  vehicle=="ஆம்"?false:true,
                                 onChanged: (value) {
                                   property.noOfVehicleOwn = value;
                                 },
@@ -722,6 +725,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               onChanged: (value) {
                                 property.twoWheeler = value;
                               },
+                              readOnly: vehicle=="Yes" ||  vehicle=="ஆம்"?false:true,
                               maxLength: 2,
                               textInputAction: TextInputAction.next,
                               enableSuggestions: true,
@@ -796,6 +800,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onChanged: (value) {
                               property.threeWheeler = value;
                             },
+                            readOnly: vehicle=="Yes" ||  vehicle=="ஆம்"?false:true,
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -866,6 +871,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onChanged: (value) {
                               property.fourWheeler = value;
                             },
+                            readOnly: vehicle=="Yes" ||  vehicle=="ஆம்"?false:true,
                             maxLength: 2,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
@@ -1064,6 +1070,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onChanged: (value) {
                               property.livestockType = value;
                             },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
@@ -1132,6 +1139,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               isAuto=false;
                               property.livestockCount = value;
                             },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
