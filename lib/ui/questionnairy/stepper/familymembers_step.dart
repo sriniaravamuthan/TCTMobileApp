@@ -477,8 +477,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
                                   return item
                                       .toLowerCase()
-                                      .startsWith(query.toLowerCase());
-                                }),
+                                      .startsWith(query.toLowerCase())|| item == "";
+                                },minLength: 0,),
                           ),
                         ),
                       ],
@@ -607,14 +607,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                                 return a.compareTo(b);
                                               },
                                               itemFilter: (item, query) {
-                                                debugPrint("genderItem:$item");
                                                 isGender=false;
 
                                                 return item
                                                     .toLowerCase()
                                                     .startsWith(
-                                                        query.toLowerCase());
-                                              })),
+                                                        query.toLowerCase()) || item == "";
+                                              },minLength: 0,)),
                                     ),
                                   ],
                                 ),
@@ -910,14 +909,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               return a.compareTo(b);
                                             },
                                             itemFilter: (item, query) {
-                                              debugPrint("genderItem:$item");
                                               isMaritalStatus=false;
 
                                               return item
                                                   .toLowerCase()
                                                   .startsWith(
-                                                      query.toLowerCase());
-                                            }),
+                                                      query.toLowerCase())|| item == "";
+                                            },minLength: 0,),
                                       ),
                                     ),
                                   ],
@@ -1021,8 +1019,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                               return item
                                                   .toLowerCase()
                                                   .startsWith(
-                                                      query.toLowerCase());
-                                            }),
+                                                      query.toLowerCase())|| item == "";
+                                            },minLength: 0,),
                                       ),
                                     ),
                                   ],
@@ -1294,7 +1292,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     return a.compareTo(b);
                                   },
                                   itemFilter: (item, query) {
-                                    debugPrint("genderItem:$item");
                                     isEducation=false;
 
                                     return item
@@ -1387,7 +1384,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     return a.compareTo(b);
                                   },
                                   itemFilter: (item, query) {
-                                    debugPrint("genderItem:$item");
                                     isBusiness=false;
                                     return item
                                         .toLowerCase()

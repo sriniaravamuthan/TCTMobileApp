@@ -2277,6 +2277,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.panchayatCode = panchayatCodeController.text;
     location.villageName = villageNameController.text;
 
+/*
+    for (int i = 0; i < demographicFamily.family.length; i++) {
+      if (demographicFamily.family[0].name.isNotEmpty) {
+        location.contactPerson = demographicFamily.family[0].name;
+        debugPrint("location.contactPerson:${location.contactPerson}");
+        break;
+      }
+    }
+*/
+
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
         location.contactNumber = demographicFamily.family[i].mobileNumber;
