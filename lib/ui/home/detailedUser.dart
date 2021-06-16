@@ -182,11 +182,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
   String getVehicle(Property property) {
     String vehicles = "";
-    if (property.ownVehicle == 2)
-      vehicles += DemoLocalization.of(context).translate('Two Wheeler')+ "-" + property.twoWheeler.toString()+ "," + "\n${DemoLocalization.of(context).translate('Three Wheeler')}"+"""
--"""+ property.threeWheeler+ "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}"+"-" +property.fourWheeler.toString();
-    debugPrint("vehicles:$vehicles");
-    return vehicles;
+    if (property.ownVehicle == 2) {
+      vehicles += DemoLocalization.of(context).translate('Two Wheeler') + "-" + property.twoWheeler.toString() + "," + "\n${DemoLocalization.of(context).translate('Three Wheeler')}" + """-""" +
+          property.threeWheeler + "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}" + "-" + property.fourWheeler.toString();
+      debugPrint("vehicles:$vehicles");
+      return vehicles;
+    }else if(property.ownVehicle == 0){
+      return DemoLocalization.of(context).translate('Not Answered');
+    }
   }
 
   String getPension(Family family) {
@@ -212,7 +215,7 @@ class _DetailScreenState extends State<DetailScreen> {
     else if (value == 1)
       return  DemoLocalization.of(context).translate('No');
     else
-      return DemoLocalization.of(context).translate('Not Answer');
+      return DemoLocalization.of(context).translate('Not Answered');
   }
 
   Widget _portraitMode() {
@@ -1354,7 +1357,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
-                                                      text: demographicList.family[index].firstDose == ""? DemoLocalization.of(context).translate('Not Answer'): demographicList.family[index].firstDose,
+                                                      text: demographicList.family[index].firstDose == ""? DemoLocalization.of(context).translate('Not Answered'): demographicList.family[index].firstDose,
                                                       weight: FontWeight.w400,
                                                       color: darkColor,
                                                       size: 14,
@@ -1374,7 +1377,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   Padding(
                                                     padding: const EdgeInsets.all(2.0),
                                                     child: TextWidget(
-                                                      text:demographicList.family[index].secondDose == "" ? DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].secondDose,
+                                                      text:demographicList.family[index].secondDose == "" ? DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].secondDose,
                                                       weight: FontWeight.w400,
                                                       color: darkColor,
                                                       size: 14,
@@ -2529,7 +2532,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text:demographicList.family[index].secondDose == "" ?  DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].secondDose,
+                                                                text:demographicList.family[index].secondDose == "" ?  DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].secondDose,
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,
@@ -2676,7 +2679,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text: demographicList.family[index].firstDose == "" ?  DemoLocalization.of(context).translate('Not Answer') : demographicList.family[index].firstDose,
+                                                                text: demographicList.family[index].firstDose == "" ?  DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].firstDose,
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,

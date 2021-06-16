@@ -223,6 +223,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               Habits habitsList = Habits();
               List<Family> _familyList = [];
               locationList.contactPerson = element["Location"]["contactPerson"];
+              locationList.name = element["Location"]["name"];
               debugPrint("contactPerson:${locationList.contactPerson}");
               locationList.contactNumber = element["Location"]["contactNumber"];
               locationList.doorNumber = element["Location"]["doorNumber"].toString();
@@ -920,18 +921,21 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   bool isSearch = false;
-  Future<void> search(String contactPerson,mobileNo, villageCode, villageName, panchayatCode) async {
-    print("GET_______" + contactPerson.trim() + " " + mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
+  Future<void> search(String contactPerson,familyHead,mobileNo, villageCode, villageName, panchayatCode) async {
+    print("GET_______" + contactPerson.trim() + " " +  familyHead.trim() + " " +mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
     loadData = true;
     users.clear();
     _demographicList.clear();
     streets.clear();
     documentId.clear();
 
-    if (contactPerson == ""&& mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
+    if (contactPerson == ""&& familyHead=="" && mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
-    }  else if (contactPerson != "") {
+    } else if (familyHead != "") {
+      query = firestoreInstance.collection('demographicData').where("Location.name", isEqualTo: familyHead).limit(30);
+      setState(() {});
+    } else if (contactPerson != "") {
       query = firestoreInstance.collection('demographicData').where("Location.contactPerson", isEqualTo: contactPerson.capitalize).limit(30);
       setState(() {});
     }else if (mobileNo != "") {

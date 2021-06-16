@@ -35,6 +35,7 @@ class _SearchDialogState extends State<SearchDialog> {
   var villageNameController = TextEditingController();
   var panchayatCodeController = TextEditingController();
   var contactPersonController = TextEditingController();
+  var familyHeadController = TextEditingController();
   String language;
   @override
   void initState() {
@@ -84,11 +85,9 @@ class _SearchDialogState extends State<SearchDialog> {
                               ),
                             ),
                             SizedBox(
-                              height: 58,
+                              height: 54,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 16.0,
-                                ),
+                                padding: const EdgeInsets.all(4.0),
                                 child: TextFormField(
                                   controller:
                                   contactPersonController,
@@ -186,20 +185,19 @@ class _SearchDialogState extends State<SearchDialog> {
                                 text:DemoLocalization.of(
                                     context)
                                     .translate(
-                                    'Contact Person'),
+                                    'Family Head Name'),
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
                             ),
                             SizedBox(
-                              height: 58,
+                              height: 54,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 16.0,
-                                ),
+                                padding: const EdgeInsets.all(4.0),
+
                                 child: TextFormField(
                                   controller:
-                                  contactPersonController,
+                                  familyHeadController,
                                   textInputAction:
                                   TextInputAction.next,
                                   enableSuggestions: true,
@@ -259,7 +257,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                   TextInputType.text,
                                   onSaved: (String val) {
                                     setState(() {
-                                      contactPersonController
+                                      familyHeadController
                                           .text = val;
                                     });
                                   },
@@ -831,6 +829,7 @@ class _SearchDialogState extends State<SearchDialog> {
                     onPressed: () {
                       widget.search(
                         contactPersonController.text,
+                          familyHeadController.text,
                           mobileNoController.text,
                           villageCodeController.text,
                           villageNameController.text,

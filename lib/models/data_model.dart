@@ -66,6 +66,7 @@ class Location {
   String contactPerson = "";
   String noOfFamilyMembers = "";
   String contactNumber = "";
+  String name = "";
 
   Location(
       {this.formNo,

@@ -104,6 +104,7 @@ class FireStoreService {
     'doorNumber': demographicFamily.location.doorNumber,
     'contactPerson': demographicFamily.location.contactPerson,
     'contactNumber': demographicFamily.location.contactNumber,
+     "name":demographicFamily.location.name,
     'noOfFamilyMembers': demographicFamily.location.noOfFamilyMembers
   };
   return map;
