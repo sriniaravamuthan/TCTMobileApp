@@ -1856,7 +1856,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                         ),
                                       ),
                                     ),
-                                    Container(),                        Row(
+                                    Container(),
+                                    Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Padding(
@@ -2006,9 +2007,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                           padding:  EdgeInsets.only( bottom: (height) * 0.01),
                           child: Divider(height: 1,),
                         ),
-                        // FamilyMemberDetailsPortrait(demographicFamily, orientation),
-                        orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsPortrait(demographicFamily, orientation),
-                        // orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsLandscape(demographicFamily, orientation),
+                        orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsLandscape(demographicFamily, orientation),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
