@@ -139,6 +139,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       newFamily.maritalStatus = "";
       newFamily.bloodGroup = "";
       newFamily.physicallyChallenge = 0;
+      newFamily.physical="";
       newFamily.education = "";
       newFamily.occupation = "";
       newFamily.annualIncome = "";
@@ -192,6 +193,17 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       familyList.remove(family);
       familyIndex = -1;
     });
+  }
+  String getPhysical(Family family) {
+    String physical = "";
+    if (family.physicallyChallenge == 2 && family.physical!="") {
+      physical += DemoLocalization.of(context).translate('Yes') + "-" + family.physical.toString();
+      return physical;
+    } else if (family.physicallyChallenge == 1)
+      return DemoLocalization.of(context).translate('No');
+    else if(family.physicallyChallenge == 0){
+      return DemoLocalization.of(context).translate('Not Answered');
+    }
   }
 
   String getInsurance(Family family) {
@@ -1270,8 +1282,8 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: getSliderValue(familyList[index]
-                                              .physicallyChallenge),
+                                          text: getPhysical(familyList[index]
+                                              ),
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,

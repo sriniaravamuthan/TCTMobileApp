@@ -2578,7 +2578,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           setState(() {
                             relationshipController.text = "";
                             snackBarAlert("Error",
-                                "RelationShip  must be in List", errorColor);
+                                "RelatiionShip  must be in List", errorColor);
                             return;
                           });
                         }  else if (genderController.text != "" &&

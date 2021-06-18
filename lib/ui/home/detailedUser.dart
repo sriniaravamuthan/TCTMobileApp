@@ -212,6 +212,17 @@ class _DetailScreenState extends State<DetailScreen> {
     }
     return pension;
   }
+  String getPhysical(Family family) {
+    String physical = "";
+    if (family.physicallyChallenge == 2 && family.physical!="") {
+      physical += DemoLocalization.of(context).translate('Yes') + "-" + family.physical.toString();
+      return physical;
+    } else if (family.physicallyChallenge == 1)
+      return DemoLocalization.of(context).translate('No');
+    else if(family.physicallyChallenge == 0){
+      return DemoLocalization.of(context).translate('Not Answered');
+    }
+  }
 
   String getSliderValue(double value) {
     if (value == 2)
@@ -2621,7 +2632,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
                                                               child: TextWidget(
-                                                                text: getSliderValue(demographicList.family[index].physicallyChallenge),
+                                                                text: getPhysical(demographicList.family[index]),
                                                                 weight: FontWeight.w400,
                                                                 color: darkColor,
                                                                 size: 14,

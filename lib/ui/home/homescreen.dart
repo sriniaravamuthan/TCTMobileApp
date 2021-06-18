@@ -343,6 +343,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.photo = family[i]["photo"];
                 _family.physicallyChallenge =
                     family[i]["physicallyChallenge"].toDouble();
+                _family.physical =
+                    family[i]["physicallyChallenged"];
                 _family.privateInsurance =
                     family[i]["privateInsurance"].toDouble();
                 _family.relationship = family[i]["relationship"];
