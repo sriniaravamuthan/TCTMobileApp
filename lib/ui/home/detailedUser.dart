@@ -175,9 +175,9 @@ class _DetailScreenState extends State<DetailScreen> {
 
   String getLiveStock(Property property) {
     String liveStock = "";
-    if (property.ownLivestocks == 2) {
+    if (property.ownLivestocks == 2 && property.livestockCount!="") {
       liveStock +=
-          property.livestockType.toString() + "-" + property.livestockCount;
+          property.livestockType.toString() + "," + property.livestockCount;
       return liveStock;
     }else if(property.ownLivestocks == 0){
       return DemoLocalization.of(context).translate('Not Answered');
