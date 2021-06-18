@@ -7,7 +7,6 @@
  */
 
 import 'dart:collection';
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,9 +37,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
   int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
-  CollectionReference demographydata = FirebaseFirestore.instance.collection('users');
+  CollectionReference demographydata =
+      FirebaseFirestore.instance.collection('users');
   var deleteLength;
-  var demoLength=0;
+  var demoLength = 0;
+
   // List<Result> users;
   List users = [];
   String language;
@@ -64,7 +65,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-
     getLanguage();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -86,7 +86,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   @override
-  dispose(){
+  dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -96,8 +96,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  Future<DocumentSnapshot> getVillageDetail(DocumentReference villageCode) async {
-    DocumentSnapshot snapShot =  await FirebaseFirestore.instance.doc(villageCode.path).get();
+  Future<DocumentSnapshot> getVillageDetail(
+      DocumentReference villageCode) async {
+    DocumentSnapshot snapShot =
+        await FirebaseFirestore.instance.doc(villageCode.path).get();
     return snapShot;
   }
 
@@ -120,7 +122,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   svgTctLogo,
                   semanticsLabel: "Logo",
                   height: 40,
-                  width:50,
+                  width: 50,
                   fit: BoxFit.contain,
                   allowDrawingOutsideViewBox: true,
                 ),
@@ -141,24 +143,25 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                             width: 35,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
+                                    BorderRadius.all(Radius.circular(50))),
                             child: firebaseAuth.currentUser.photoURL == null
-                                ? Image.asset(user,fit: BoxFit.fill)
-                                : Image.network(firebaseAuth.currentUser.photoURL)),
+                                ? Image.asset(user, fit: BoxFit.fill)
+                                : Image.network(
+                                    firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
                         userMail != null
                             ? Text(
-                          userMail,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        )
+                                userMail,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              )
                             : Text(
-                          userName,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        ),
+                                userName,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              ),
                       ],
                     )),
                 SizedBox(
@@ -166,7 +169,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut(context);
+                    AuthenticationService(FirebaseAuth.instance)
+                        .signOut(context);
                   },
                   child: Icon(
                     Icons.power_settings_new_outlined,
@@ -182,16 +186,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         // stream: collectionReference.snapshots(),
         stream: query.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError && !loadMore) return Text('Something went wrong');
+          if (snapshot.hasError && !loadMore)
+            return Text('Something went wrong');
           if (snapshot.connectionState == ConnectionState.waiting && !loadMore)
             return Center(child: CircularProgressIndicator());
           // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
-          var mainDemograpicData = snapshot.data.docs.map((doc) => doc).toList();
+          var mainDemograpicData =
+              snapshot.data.docs.map((doc) => doc).toList();
           debugPrint("family : ${mainDemograpicData}");
 
           if (loadData && snapshot.connectionState == ConnectionState.active) {
-            isLoading=false;
-            if(!loadMore) {
+            isLoading = false;
+            if (!loadMore) {
               streets.clear();
               documentId.clear();
               _demographicList.clear();
@@ -200,7 +206,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
-              data["status"] = true;  //  True -> Complete, false -> InProgress
+              data["status"] = true; //  True -> Complete, false -> InProgress
               data["name"] = element["Location"]["contactPerson"];
               data["formNo"] = element["Location"]["formNo"];
 
@@ -210,10 +216,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               for (int i = 0; i < family.length; i++) {
                 if (family[i]["name"] == data["name"]) {
                   data["mobileNumber"] = family[i]["mobileNumber"];
-                  data["age"] = family[i]["age"].toString();
                   break;
                 }
               }
+              data["age"] = family.length.toString();
+              debugPrint("familylist length:${family.length}");
+
               if (data["age"] == null) data["age"] = "-";
               if (data["mobileNumber"] == "") data["mobileNumber"] = "-";
 
@@ -226,10 +234,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               locationList.name = element["Location"]["name"];
               debugPrint("contactPerson:${locationList.contactPerson}");
               locationList.contactNumber = element["Location"]["contactNumber"];
-              locationList.doorNumber = element["Location"]["doorNumber"].toString();
+              locationList.doorNumber =
+                  element["Location"]["doorNumber"].toString();
               locationList.formNo = element["Location"]["formNo"].toString();
-              locationList.noOfFamilyMembers = element["Location"]["noOfFamilyMembers"].toString();
-              locationList.projectCode = element["Location"]["projectCode"].toString();
+              locationList.noOfFamilyMembers =
+                  element["Location"]["noOfFamilyMembers"].toString();
+              locationList.projectCode =
+                  element["Location"]["projectCode"].toString();
               locationList.streetName = element["Location"]["streetName"];
 
               data["villageCode"] = "";
@@ -238,19 +249,30 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 locationList.villagesCode = "";
               } else {
                 var docOrString = element["Location"]["villagesCode"];
-                if(docOrString is String) {
-                  data["villageCode"] = element["Location"]["villagesCode"].toString();
-                  locationList.villageName = element["Location"]["villageName"].toString();
-                  locationList.villagesCode = element["Location"]["villagesCode"].toString();
-                  locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
-                  locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
+                if (docOrString is String) {
+                  data["villageCode"] =
+                      element["Location"]["villagesCode"].toString();
+                  locationList.villageName =
+                      element["Location"]["villageName"].toString();
+                  locationList.villagesCode =
+                      element["Location"]["villagesCode"].toString();
+                  locationList.panchayatCode =
+                      element["Location"]["panchayatCode"].toString();
+                  locationList.panchayatNo =
+                      element["Location"]["panchayatNo"].toString();
                 } else {
-                  DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
-                  data["villageCode"] = villageSnapShot["villageCode"].toString();
-                  locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
-                  locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
-                  locationList.villageName = villageSnapShot["villageName"][language].toString();
-                  locationList.villagesCode = villageSnapShot["villageCode"].toString();
+                  DocumentSnapshot villageSnapShot =
+                      await getVillageDetail(docOrString);
+                  data["villageCode"] =
+                      villageSnapShot["villageCode"].toString();
+                  locationList.panchayatCode =
+                      villageSnapShot["panchayatCode"].toString();
+                  locationList.panchayatNo =
+                      villageSnapShot["panchayatNo"].toString();
+                  locationList.villageName =
+                      villageSnapShot["villageName"][language].toString();
+                  locationList.villagesCode =
+                      villageSnapShot["villageCode"].toString();
                 }
               }
               if (element["Location"]["panchayatCode"] == "") {
@@ -259,13 +281,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               } else {
                 if (element["Location"]["villagesCode"] == "") {
                   var docOrString = element["Location"]["panchayatCode"];
-                  if(docOrString is String) {
-                    locationList.panchayatCode = element["Location"]["panchayatCode"].toString();
-                    locationList.panchayatNo = element["Location"]["panchayatNo"].toString();
+                  if (docOrString is String) {
+                    locationList.panchayatCode =
+                        element["Location"]["panchayatCode"].toString();
+                    locationList.panchayatNo =
+                        element["Location"]["panchayatNo"].toString();
                   } else {
-                    DocumentSnapshot villageSnapShot = await getVillageDetail(docOrString);
-                    locationList.panchayatCode = villageSnapShot["panchayatCode"].toString();
-                    locationList.panchayatNo = villageSnapShot["panchayatNo"].toString();
+                    DocumentSnapshot villageSnapShot =
+                        await getVillageDetail(docOrString);
+                    locationList.panchayatCode =
+                        villageSnapShot["panchayatCode"].toString();
+                    locationList.panchayatNo =
+                        villageSnapShot["panchayatNo"].toString();
                   }
                 }
               }
@@ -273,99 +300,105 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               // demoLength = await totalLength();
               debugPrint("demoLength$demoLength");
 
-              if (data["villageCode"] == "")
-                data["status"] = false;
+              if (data["villageCode"] == "") data["status"] = false;
 
-              if (locationList.streetName == "")
-                data["status"] = false;
-              if (locationList.doorNumber == "")
-                data["status"] = false;
-              if (locationList.contactPerson == "")
-                data["status"] = false;
+              if (locationList.streetName == "") data["status"] = false;
+              if (locationList.doorNumber == "") data["status"] = false;
+              if (locationList.contactPerson == "") data["status"] = false;
               // hasCaste = -1,
-              int  hasSection = -1, hasRelationShip = -1, hasDob = -1;
+              int hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
                 Family _family = Family();
-               _family.aadharNumber= family[i]["aadharNumber"];
-               _family.age= family[i]["age"];
-               _family.annualIncome= family[i]["annualIncome"];
-               _family.bloodGroup=  family[i]["bloodGroup"];
-               _family.caste= family[i]["caste"];
-               // if (_family.caste != "")
-               //   hasCaste += 1;
-               _family.community= family[i]["community"];
-               if (_family.community != "")
-                 hasSection += 1;
-               _family.dob= family[i]["dob"];
-               if (_family.community != "")
-                 hasDob += 1;
-               _family.education= family[i]["education"];
-               _family.gender= family[i]["gender"];
-               var isInt = family[i]["govtInsurance"];
-               /*if (isInt is double) {
+                _family.aadharNumber = family[i]["aadharNumber"];
+                _family.age = family[i]["age"];
+                _family.annualIncome = family[i]["annualIncome"];
+                _family.bloodGroup = family[i]["bloodGroup"];
+                _family.caste = family[i]["caste"];
+                // if (_family.caste != "")
+                //   hasCaste += 1;
+                _family.community = family[i]["community"];
+                if (_family.community != "") hasSection += 1;
+                _family.dob = family[i]["dob"];
+                if (_family.community != "") hasDob += 1;
+                _family.education = family[i]["education"];
+                _family.gender = family[i]["gender"];
+                var isInt = family[i]["govtInsurance"];
+                /*if (isInt is double) {
                  _family.govtInsurance= isInt;
                } else {*/
-                 // _family.govtInsurance= isInt.toDouble();
-                 _family.govtInsurance= family[i]["govtInsurance"].toDouble();
-               // }
-               _family.mail= family[i]["mail"];
-               if (family[i]["maritalStatus"] == "null")
-                 _family.maritalStatus= "";
-               else
-                 _family.maritalStatus= family[i]["maritalStatus"];
-               _family.mobileNumber= family[i]["mobileNumber"];
-               _family.name= family[i]["name"];
-               _family.occupation= family[i]["occupation"];
-               _family.oldPension=  family[i]["oldPension"] == null ? 0: family[i]["oldPension"].toDouble();
-               _family.photo= family[i]["photo"];
-               _family.physicallyChallenge=  family[i]["physicallyChallenge"].toDouble();
-               _family.privateInsurance=  family[i]["privateInsurance"].toDouble();
-               _family.relationship= family[i]["relationship"];
-               if (_family.relationship != "")
-                 hasRelationShip += 1;
-               _family.retirementPension= family[i]["retirementPension"].toDouble();
-               _family.smartphone= family[i]["smartphone"].toDouble();
-               _family.widowedPension= family[i]["widowedPension"].toDouble();
+                // _family.govtInsurance= isInt.toDouble();
+                _family.govtInsurance = family[i]["govtInsurance"].toDouble();
+                // }
+                _family.mail = family[i]["mail"];
+                if (family[i]["maritalStatus"] == "null")
+                  _family.maritalStatus = "";
+                else
+                  _family.maritalStatus = family[i]["maritalStatus"];
+                _family.mobileNumber = family[i]["mobileNumber"];
+                _family.name = family[i]["name"];
+                _family.occupation = family[i]["occupation"];
+                _family.oldPension = family[i]["oldPension"] == null
+                    ? 0
+                    : family[i]["oldPension"].toDouble();
+                _family.photo = family[i]["photo"];
+                _family.physicallyChallenge =
+                    family[i]["physicallyChallenge"].toDouble();
+                _family.privateInsurance =
+                    family[i]["privateInsurance"].toDouble();
+                _family.relationship = family[i]["relationship"];
+                if (_family.relationship != "") hasRelationShip += 1;
+                _family.retirementPension =
+                    family[i]["retirementPension"].toDouble();
+                _family.smartphone = family[i]["smartphone"].toDouble();
+                _family.widowedPension = family[i]["widowedPension"].toDouble();
 
-                _family.anyMembersWhoDrink=family[i]['anyMembersWhoDrink'].toDouble();
-                _family.anyMembersWhoSmoke=family[i]['anyMembersWhoSmoke'].toDouble();
-                _family.anyMembersWhoUseTobacco=family[i]['anyMembersWhoUseTobacco'].toDouble();
-                _family.firstDose=family[i]['firstDose'];
-                _family.isVaccinationDone=family[i]['isVaccinationDone'].toDouble();
-                _family.secondDose=family[i]['secondDose'];
-                _family.isExpanded= 'Show More';
+                _family.anyMembersWhoDrink =
+                    family[i]['anyMembersWhoDrink'].toDouble();
+                _family.anyMembersWhoSmoke =
+                    family[i]['anyMembersWhoSmoke'].toDouble();
+                _family.anyMembersWhoUseTobacco =
+                    family[i]['anyMembersWhoUseTobacco'].toDouble();
+                _family.firstDose = family[i]['firstDose'];
+                _family.isVaccinationDone =
+                    family[i]['isVaccinationDone'].toDouble();
+                _family.secondDose = family[i]['secondDose'];
+                _family.isExpanded = 'Show More';
 
                 _familyList.add(_family);
-                debugPrint("GETFamily______"+_family.education);
+                debugPrint("GETFamily______" + _family.education);
               }
 
               // if (hasCaste < 0)
               //   data["status"] = false;
 
-              if (hasSection < 0)
-                data["status"] = false;
+              if (hasSection < 0) data["status"] = false;
 
-              if (hasRelationShip < 0)
-                data["status"] = false;
+              if (hasRelationShip < 0) data["status"] = false;
 
-              if (hasDob < 0)
-                data["status"] = false;
+              if (hasDob < 0) data["status"] = false;
 
-              propertyList.dryLandInAcres = element["Property"]["dryLandInAcres"];
+              propertyList.dryLandInAcres =
+                  element["Property"]["dryLandInAcres"];
               propertyList.fourWheeler = element["Property"]["fourWheeler"];
-              propertyList.livestockCount = element["Property"]["livestockCount"];
+              propertyList.livestockCount =
+                  element["Property"]["livestockCount"];
               propertyList.livestockType = element["Property"]["livestockType"];
-              propertyList.noOfVehicleOwn = element["Property"]["noOfVehicleOwn"];
+              propertyList.noOfVehicleOwn =
+                  element["Property"]["noOfVehicleOwn"];
               propertyList.others = element["Property"]["others"];
               propertyList.ownLand = element["Property"]["ownLand"].toDouble();
-              propertyList.ownLivestocks = element["Property"]["ownLivestocks"].toDouble();
-              propertyList.ownVehicle = element["Property"]["ownVehicle"].toDouble();
+              propertyList.ownLivestocks =
+                  element["Property"]["ownLivestocks"].toDouble();
+              propertyList.ownVehicle =
+                  element["Property"]["ownVehicle"].toDouble();
               propertyList.statusofHouse = element["Property"]["statusofHouse"];
               propertyList.threeWheeler = element["Property"]["threeWheeler"];
-              propertyList.toiletFacility = element["Property"]["toiletFacility"].toDouble();
+              propertyList.toiletFacility =
+                  element["Property"]["toiletFacility"].toDouble();
               propertyList.twoWheeler = element["Property"]["twoWheeler"];
               propertyList.typeofHouse = element["Property"]["typeofHouse"];
-              propertyList.wetLandInAcres = element["Property"]["wetLandInAcres"];
+              propertyList.wetLandInAcres =
+                  element["Property"]["wetLandInAcres"];
               demographicData.location = locationList;
               demographicData.family = _familyList;
               demographicData.property = propertyList;
@@ -382,21 +415,24 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               if (_demographicList.length == mainDemograpicData.length) {
                 loadData = false;
-                if(isSearch) {
+                if (isSearch) {
                   isSearch = false;
                   loadMore = true;
                   loadData = true;
-                  if(snapshot.data.docs.length > 0) {
-                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
+                  if (snapshot.data.docs.length > 0) {
+                    query = query
+                        .startAfterDocument(
+                            snapshot.data.docs[snapshot.data.docs.length - 1])
+                        .limit(30);
                     setState(() {
-                      isLoading=false;
+                      isLoading = false;
                     });
                   }
                 }
                 // setState(() {});
               }
             });
-        }
+          }
           return Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -427,7 +463,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                               child: TextWidget(
                                 text:
                                     "${DemoLocalization.of(context).translate('TotalRecords')}" +
-                                        " " "${(_demographicList.length)}" +" / ${demoLength}",
+                                        " " "${(_demographicList.length)}" +
+                                        " / ${demoLength}",
                                 color: darkColor,
                                 weight: FontWeight.w500,
                                 size: 16,
@@ -485,7 +522,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
-                                            return SearchDialog(search, clearSearch);
+                                            return SearchDialog(
+                                                search, clearSearch);
                                             // return _navigateAndDisplaySelection(context);
                                           });
                                     },
@@ -524,7 +562,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   InkWell(
                                     onTap: () {
                                       loadData = true;
-                                      Get.toNamed('/questionnery', arguments: [new DemographicFamily(), streets, "", false, makeLoadData],)/*.then((value) async => {clearSearch()})*/;
+                                      Get.toNamed(
+                                        '/questionnery',
+                                        arguments: [
+                                          new DemographicFamily(),
+                                          streets,
+                                          "",
+                                          false,
+                                          makeLoadData
+                                        ],
+                                      ) /*.then((value) async => {clearSearch()})*/;
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -569,19 +616,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.vertical,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
-
                             children: [
                               DataTable(
-                                columnSpacing: 0.05,
+                                columnSpacing: 0.06,
                                 showCheckboxColumn: false,
-                                horizontalMargin: 0.0,
+                                horizontalMargin: 0.10,
                                 columns: [
                                   DataColumn(
                                       label: SizedBox(
                                     width: 96,
                                     child: Center(
                                       child: Padding(
-                                        padding:  EdgeInsets.only(right:1.0),
+                                        padding: EdgeInsets.only(right: 1.0),
                                         child: TextWidget(
                                           text: DemoLocalization.of(context)
                                               .translate('Family Head'),
@@ -593,54 +639,53 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                     ),
                                   )),
                                   DataColumn(
-                                      label: SizedBox(
-                                        width: 57,
-                                        child: Padding(
-                                          padding:  EdgeInsets.only(right:1.0),
-                                          child: Center(
-                                            child: TextWidget(
-                                              text: DemoLocalization.of(context)
-                                                  .translate('Age'),
-                                              color: darkColor,
-                                              size: 16,
-                                              weight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                  ),
-                                  DataColumn(
-                                      label: SizedBox(
-                                        width: 95,
-                                        child: Padding(
-                                          padding:  EdgeInsets.only(left:6.0),
-                                          child: Center(
-                                            child: TextWidget(
-                                              text: DemoLocalization.of(context)
-                                                  .translate('Mobile No'),
-                                              color: darkColor,
-                                              size: 16,
-                                              weight: FontWeight.w700,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                     ),
-                                  DataColumn(
-                                      label: SizedBox(
-                                        width: 96,
+                                    label: SizedBox(
+                                      width: 72,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(right: 1.0),
                                         child: Center(
                                           child: TextWidget(
                                             text: DemoLocalization.of(context)
-                                                .translate('Village Code'),
+                                                .translate('Total Members'),
                                             color: darkColor,
                                             size: 16,
                                             weight: FontWeight.w700,
                                           ),
                                         ),
                                       ),
-                                     ),
-
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 95,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 6.0),
+                                        child: Center(
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate('Mobile No'),
+                                            color: darkColor,
+                                            size: 16,
+                                            weight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 96,
+                                      child: Center(
+                                        child: TextWidget(
+                                          text: DemoLocalization.of(context)
+                                              .translate('Village Code'),
+                                          color: darkColor,
+                                          size: 16,
+                                          weight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   DataColumn(
                                       label: SizedBox(
                                     width: 66,
@@ -670,146 +715,216 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 ],
                                 rows: users
                                     .map((usersItem) => DataRow(
-                                    onSelectChanged: (bool selected) {
-                                      if (selected) {
-                                        int index = 0;
-                                        for(int i = 0; i<users.length; i++) {
-                                          if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
-                                              && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode']  ) {
-                                            index = i;
-                                            break;
-                                          }
-                                        }
-                                        Get.toNamed('/DetailScreen', arguments: [_demographicList[index] , streets, documentId[index], true, makeLoadData,users [index]["status"]])/*.then((value) => clearSearch())*/;
-                                      }
-                                    },
-                                    cells: [
-                                     users.length>0? DataCell(Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: SizedBox(
-                                            width: 99,
-                                            child: TextWidget(
-                                              text: usersItem['name'],
-                                              color: darkGreyColor,
-                                              size: 16,
-                                              weight: FontWeight.w600,
-                                            )),
-                                      )): DataCell(TextWidget(
-                        text: "No data found",
-                          size: 16,
-                          weight: FontWeight.w600,
-                        )),
-                                      DataCell(SizedBox(
-                                        width: 55,
-                                        child: Center(
-                                          child: TextWidget(
-                                            text: usersItem['age'].toString(),
-                                            color: darkGreyColor,
-                                            size: 16,
-                                            weight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      )),
-                                      DataCell(SizedBox(
-                                        width: 95,
-                                        child: Center(
-                                          child: TextWidget(
-                                            text: usersItem['mobileNumber'],
-                                            color: darkGreyColor,
-                                            size: 16,
-                                            weight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      )),
-                                      DataCell(SizedBox(
-                                        width: 70,
-                                        child: Center(
-                                          child: TextWidget(
-                                            text: usersItem['villageCode'],
-                                            color: darkGreyColor,
-                                            size: 16,
-                                            weight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      )),
-                                      DataCell(SizedBox(
-                                        width: 60,
-                                        child: Center(
-                                          child:usersItem["status"]==true?SvgPicture.asset(
-                                            svgComplete,
-                                            semanticsLabel: "Logo",
-                                            height: 27,
-                                            width: 27,
-                                            fit: BoxFit.contain,
-                                            allowDrawingOutsideViewBox: true,
-                                          ):SvgPicture.asset(
-                                            svgInProgress,
-                                            semanticsLabel: "Logo",
-                                            height: 28,
-                                            width: 28,
-                                            fit: BoxFit.contain,
-                                            allowDrawingOutsideViewBox: true,
-                                          ),
-                                        ),
-                                      )),
-                                      DataCell(SizedBox(
-                                        width: 65,
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  int index = 0;
-                                                  for(int i = 0; i<users.length; i++) {
-                                                    if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
-                                                        && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
-                                                      index = i;
-                                                      break;
-                                                    }
+                                            onSelectChanged: (bool selected) {
+                                              if (selected) {
+                                                int index = 0;
+                                                for (int i = 0;
+                                                    i < users.length;
+                                                    i++) {
+                                                  if (usersItem['name'] ==
+                                                          users[i]['name'] &&
+                                                      usersItem[
+                                                              "mobileNumber"] ==
+                                                          users[i][
+                                                              "mobileNumber"] &&
+                                                      usersItem[
+                                                              'villageCode'] ==
+                                                          users[i]
+                                                              ['villageCode']) {
+                                                    index = i;
+                                                    break;
                                                   }
-                                                  // makeLoadData();
-                                                  Get.toNamed('/questionnery', arguments: [_demographicList[index] , streets, documentId[index], true,makeLoadData],)/*.then((value) => clearSearch())*/;
-                                                },
-                                                child: Icon(
-                                                  Icons.edit,
-                                                  color: primaryColor,
+                                                }
+                                                Get.toNamed('/DetailScreen',
+                                                    arguments: [
+                                                      _demographicList[index],
+                                                      streets,
+                                                      documentId[index],
+                                                      true,
+                                                      makeLoadData,
+                                                      users[index]["status"]
+                                                    ]) /*.then((value) => clearSearch())*/;
+                                              }
+                                            },
+                                            cells: [
+                                              users.length > 0
+                                                  ? DataCell(Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: SizedBox(
+                                                          width: 99,
+                                                          child: TextWidget(
+                                                            text: usersItem[
+                                                                'name'],
+                                                            color:
+                                                                darkGreyColor,
+                                                            size: 16,
+                                                            weight:
+                                                                FontWeight.w600,
+                                                          )),
+                                                    ))
+                                                  : DataCell(TextWidget(
+                                                      text: "No data found",
+                                                      size: 16,
+                                                      weight: FontWeight.w600,
+                                                    )),
+                                              DataCell(SizedBox(
+                                                width: 55,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem['age']
+                                                        .toString(),
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
                                                 ),
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  int index = 0;
-                                                  for(int i = 0; i<users.length; i++) {
-                                                    if(usersItem["age"] == users[i]["age"] && usersItem['name'] == users[i]['name']
-                                                        && usersItem["mobileNumber"] == users[i]["mobileNumber"] && usersItem['villageCode'] == users[i]['villageCode'] ) {
-                                                      index = i;
-                                                      break;
-                                                    }
-                                                  }
-                                                  showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (BuildContext
-                                                      context) {
-
-                                                        debugPrint("DocumetId:${documentId[index]}");
-                                                        return AlertDialogWidget(deleteDoc, index);
-                                                      });
-                                                  debugPrint("click");
-
-                                                },
-                                                child: Icon(
-                                                  Icons.delete,
-                                                  color: errorColor,
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 95,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem[
+                                                        'mobileNumber'],
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                    ]))
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 70,
+                                                child: Center(
+                                                  child: TextWidget(
+                                                    text: usersItem[
+                                                        'villageCode'],
+                                                    color: darkGreyColor,
+                                                    size: 16,
+                                                    weight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 60,
+                                                child: Center(
+                                                  child: usersItem["status"] ==
+                                                          true
+                                                      ? SvgPicture.asset(
+                                                          svgComplete,
+                                                          semanticsLabel:
+                                                              "Logo",
+                                                          height: 27,
+                                                          width: 27,
+                                                          fit: BoxFit.contain,
+                                                          allowDrawingOutsideViewBox:
+                                                              true,
+                                                        )
+                                                      : SvgPicture.asset(
+                                                          svgInProgress,
+                                                          semanticsLabel:
+                                                              "Logo",
+                                                          height: 28,
+                                                          width: 28,
+                                                          fit: BoxFit.contain,
+                                                          allowDrawingOutsideViewBox:
+                                                              true,
+                                                        ),
+                                                ),
+                                              )),
+                                              DataCell(SizedBox(
+                                                width: 65,
+                                                child: Center(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          int index = 0;
+                                                          for (int i = 0;
+                                                              i < users.length;
+                                                              i++) {
+                                                            if (usersItem['name'] == users[i]['name'] &&
+                                                                usersItem[
+                                                                        "mobileNumber"] ==
+                                                                    users[i][
+                                                                        "mobileNumber"] &&
+                                                                usersItem[
+                                                                        'villageCode'] ==
+                                                                    users[i][
+                                                                        'villageCode']) {
+                                                              index = i;
+                                                              break;
+                                                            }
+                                                          }
+                                                          // makeLoadData();
+                                                          Get.toNamed(
+                                                            '/questionnery',
+                                                            arguments: [
+                                                              _demographicList[
+                                                                  index],
+                                                              streets,
+                                                              documentId[index],
+                                                              true,
+                                                              makeLoadData
+                                                            ],
+                                                          ) /*.then((value) => clearSearch())*/;
+                                                        },
+                                                        child: Icon(
+                                                          Icons.edit,
+                                                          color: primaryColor,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          int index = 0;
+                                                          for (int i = 0;
+                                                              i < users.length;
+                                                              i++) {
+                                                            if (usersItem["age"] == users[i]["age"] &&
+                                                                usersItem[
+                                                                        'name'] ==
+                                                                    users[i][
+                                                                        'name'] &&
+                                                                usersItem[
+                                                                        "mobileNumber"] ==
+                                                                    users[i][
+                                                                        "mobileNumber"] &&
+                                                                usersItem[
+                                                                        'villageCode'] ==
+                                                                    users[i][
+                                                                        'villageCode']) {
+                                                              index = i;
+                                                              break;
+                                                            }
+                                                          }
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
+                                                                debugPrint(
+                                                                    "DocumetId:${documentId[index]}");
+                                                                return AlertDialogWidget(
+                                                                    deleteDoc,
+                                                                    index);
+                                                              });
+                                                          debugPrint("click");
+                                                        },
+                                                        child: Icon(
+                                                          Icons.delete,
+                                                          color: errorColor,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              )),
+                                            ]))
                                     .toList(),
-                               /* onRowsPerPageChanged: (r) {
+                                /* onRowsPerPageChanged: (r) {
                                   setState(() {
                                     _rowPerPage = r;
                                   });
@@ -820,27 +935,35 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 onTap: () {
                                   loadMore = true;
                                   loadData = true;
-                                  if(snapshot.data.docs.length > 0) {
-                                    query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
+                                  if (snapshot.data.docs.length > 0) {
+                                    query = query
+                                        .startAfterDocument(snapshot.data.docs[
+                                            snapshot.data.docs.length - 1])
+                                        .limit(30);
                                     setState(() {
-                                      isLoading=true;
+                                      isLoading = true;
                                     });
                                   }
                                 },
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(),
                                     isLoading
                                         ? Container(
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: Center(child: CircularProgressIndicator()))
+                                            margin: EdgeInsets.only(left: 10),
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator()))
                                         : Container(),
                                     Padding(
-                                      padding: const EdgeInsets.only(top:8.0,right: 24,bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          top: 8.0, right: 24, bottom: 8),
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(5),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
                                           border: Border.all(
                                             color: Colors.black45,
                                             style: BorderStyle.solid,
@@ -856,8 +979,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                 width: 5,
                                               ),
                                               TextWidget(
-                                                text: DemoLocalization.of(context)
-                                                    .translate('Show More'),
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate('Show More'),
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
                                                 size: 14,
@@ -868,7 +992,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                       ),
                                     )
                                   ],
-
                                 ),
                               )
                             ],
@@ -909,7 +1032,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     });
     totalLength();
   }
-  
+
   void clearSearch() {
     loadData = true;
     users.clear();
@@ -921,37 +1044,72 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   }
 
   bool isSearch = false;
-  Future<void> search(String contactPerson,familyHead,mobileNo, villageCode, villageName, panchayatCode) async {
-    print("GET_______" + contactPerson.trim() + " " +  familyHead.trim() + " " +mobileNo.trim() + " " + villageCode + " " + villageName + " " + panchayatCode);
+
+  Future<void> search(String contactPerson, familyHead, mobileNo, villageCode,
+      villageName, panchayatCode) async {
+    print("GET_______" +
+        contactPerson.trim() +
+        " " +
+        familyHead.trim() +
+        " " +
+        mobileNo.trim() +
+        " " +
+        villageCode +
+        " " +
+        villageName +
+        " " +
+        panchayatCode);
     loadData = true;
     users.clear();
     _demographicList.clear();
     streets.clear();
     documentId.clear();
 
-    if (contactPerson == ""&& familyHead=="" && mobileNo == "" && villageCode == "" && villageName == "" && panchayatCode == "") {
+    if (contactPerson == "" &&
+        familyHead == "" &&
+        mobileNo == "" &&
+        villageCode == "" &&
+        villageName == "" &&
+        panchayatCode == "") {
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
     } else if (familyHead != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.name", isEqualTo: familyHead).limit(30);
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.name", isEqualTo: familyHead)
+          .limit(30);
       setState(() {});
     } else if (contactPerson != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.contactPerson", isEqualTo: contactPerson.capitalize).limit(30);
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
+          .limit(30);
       setState(() {});
-    }else if (mobileNo != "") {
-      query = firestoreInstance.collection('demographicData').where("Location.contactNumber", isEqualTo: mobileNo.trim());
+    } else if (mobileNo != "") {
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.contactNumber", isEqualTo: mobileNo.trim());
       setState(() {});
     } else if (villageCode != "") {
       isSearch = true;
-      query = firestoreInstance.collection('demographicData').where("Location.villagesCode", isEqualTo: villageCode).limit(30);
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.villagesCode", isEqualTo: villageCode)
+          .limit(30);
       setState(() {});
-    }else if (villageName != "") {
+    } else if (villageName != "") {
       isSearch = true;
-      query = firestoreInstance.collection('demographicData').where("Location.villageName", isEqualTo: villageName).limit(30);
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.villageName", isEqualTo: villageName)
+          .limit(30);
       setState(() {});
     } else if (panchayatCode != "") {
       isSearch = true;
-      query = firestoreInstance.collection('demographicData').where("Location.panchayatCode", isEqualTo: panchayatCode).limit(30);
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.panchayatCode", isEqualTo: panchayatCode)
+          .limit(30);
       setState(() {});
     }
   }
@@ -960,16 +1118,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
     // demoLength = await totalLength();
-   totalLength();
-
+    totalLength();
   }
 
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
-    FirebaseFirestore.instance.collection('demographicData').doc(documentId[index]).delete().then((value) {
+    FirebaseFirestore.instance
+        .collection('demographicData')
+        .doc(documentId[index])
+        .delete()
+        .then((value) {
       clearSearch();
       deleteCount();
-
     });
   }
 
@@ -977,26 +1137,25 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     snackBarAlert(success, "Deleted SuccessFully", successColor);
   }
 
-   deleteCount() async{
-
-     var data = await FirebaseFirestore.instance.collection(collectionCount)
-         .get();
-     for (int i = 0; i < data.docs.length; i++) {
-       var totalLength = data.docs[i].data()['length'];
-       debugPrint("totalLength$totalLength");
-       deleteLength = totalLength - 1;
-     }
-     FirebaseFirestore.instance.collection(collectionCount).doc(
-         'ZDuG7E8KkwuadT4WxGGb')
-         .update({
-       "length": deleteLength,
-     })
-         .then((value) {
-     makeLoadData();
-     showDeleteSuccess();
+  deleteCount() async {
+    var data =
+        await FirebaseFirestore.instance.collection(collectionCount).get();
+    for (int i = 0; i < data.docs.length; i++) {
+      var totalLength = data.docs[i].data()['length'];
+      debugPrint("totalLength$totalLength");
+      deleteLength = totalLength - 1;
+    }
+    FirebaseFirestore.instance
+        .collection(collectionCount)
+        .doc('ZDuG7E8KkwuadT4WxGGb')
+        .update({
+      "length": deleteLength,
+    }).then((value) {
+      makeLoadData();
+      showDeleteSuccess();
     }).catchError((error) => false);
 
-     debugPrint("deleteLength$deleteLength");
+    debugPrint("deleteLength$deleteLength");
   }
 
   /*Future<int> totalLength() async{
@@ -1004,15 +1163,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     return data.docs[0].data()["length"];
   }*/
 
-  totalLength() async{
-    var data=await FirebaseFirestore.instance.collection(collectionCount).get();
-    demoLength= data.docs[0].data()["length"];
-    setState(() {
-
-    });
+  totalLength() async {
+    var data =
+        await FirebaseFirestore.instance.collection(collectionCount).get();
+    demoLength = data.docs[0].data()["length"];
+    setState(() {});
   }
-
-
 }
 
 /*class DataTableRow extends DataTableSource {

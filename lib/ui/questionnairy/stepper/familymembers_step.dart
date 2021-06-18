@@ -1296,8 +1296,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
                                     return item
                                         .toLowerCase()
-                                        .startsWith(query.toLowerCase());
-                                  }),
+                                        .startsWith(query.toLowerCase())|| item == "";
+                                  },minLength: 0,),
                             ),
                           ),
                         ],
@@ -1387,8 +1387,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     isBusiness=false;
                                     return item
                                         .toLowerCase()
-                                        .startsWith(query.toLowerCase());
-                                  }),
+                                        .startsWith(query.toLowerCase())|| item == "";
+                                  },minLength: 0,),
                             ),
                           ),
                         ],
@@ -1807,8 +1807,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     isSection=false;
                                     return item
                                         .toLowerCase()
-                                        .startsWith(query.toLowerCase());
-                                  }),
+                                        .startsWith(query.toLowerCase())|| item == "";
+                                  },minLength: 0,),
                             ),
                           ),
                         ],

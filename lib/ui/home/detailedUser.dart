@@ -175,9 +175,13 @@ class _DetailScreenState extends State<DetailScreen> {
 
   String getLiveStock(Property property) {
     String liveStock = "";
-    if (property.ownLivestocks == 2)
-      liveStock += property.livestockType.toString() + "-" + property.livestockCount ;
-    return liveStock;
+    if (property.ownLivestocks == 2) {
+      liveStock +=
+          property.livestockType.toString() + "-" + property.livestockCount;
+      return liveStock;
+    }else if(property.ownLivestocks == 0){
+      return DemoLocalization.of(context).translate('Not Answered');
+    }
   }
 
   String getVehicle(Property property) {
@@ -903,7 +907,10 @@ class _DetailScreenState extends State<DetailScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0, top: 8.0),
                         child: TextWidget(
-                          text: DemoLocalization.of(context).translate('Family Members'),
+                          text: "${
+                                    DemoLocalization.of(context)
+                                        .translate('Family Members')
+                                  }" + " ""(${demographicList.family.length})",
                           size: 16,
                           color: darkColor,
                           weight: FontWeight.w800,
@@ -2179,7 +2186,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 16.0, top: 8.0),
                                   child: TextWidget(
-                                    text: DemoLocalization.of(context).translate('Family Members'),
+                                    text: "${
+                                        DemoLocalization.of(context)
+                                            .translate('Family Members')
+                                    }" + " ""(${demographicList.family.length})",
                                     size: 16,
                                     color: darkColor,
                                     weight: FontWeight.w800,
