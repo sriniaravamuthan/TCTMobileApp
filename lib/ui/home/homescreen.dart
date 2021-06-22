@@ -1075,6 +1075,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         panchayatCode == "") {
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
+    }else if (contactPerson != "" && villageName != "") {
+      isSearch = true;
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
+          .where("Location.villageName", isEqualTo: villageName)
+          .limit(30);
+      setState(() {});
     } else if (familyHead != "") {
       query = firestoreInstance
           .collection('demographicData')

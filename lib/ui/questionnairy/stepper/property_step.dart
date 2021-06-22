@@ -433,7 +433,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                               // autofocus:isAuto,
                               readOnly: land=="Yes" ||  land=="ஆம்"?false:true,
                               controller: wetLandController,
-                              maxLength: 2,
+                              maxLength: 4,
                               textInputAction: TextInputAction.next,
                               onChanged: (value) {
                                 property.wetLandInAcres = value;
@@ -519,7 +519,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                             onChanged: (value) {
                               property.dryLandInAcres = value;
                             },
-                            maxLength: 2,
+                            maxLength: 4,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
                             enableSuggestions: true,
