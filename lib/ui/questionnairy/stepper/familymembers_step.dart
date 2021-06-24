@@ -3151,7 +3151,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
       physicalController.text = family.physical.toString();
-debugPrint("physically:${family.physical.toString()}");
+      debugPrint("physically:${family.physical.toString()}");
       if (family.relationship != "") {
         isRelationShip = true;
       }

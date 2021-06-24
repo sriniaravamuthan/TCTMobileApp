@@ -47,6 +47,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
   var fourWheelerController = TextEditingController();
   var othersController = TextEditingController();
   var stockTypeController = TextEditingController();
+  var cowController = TextEditingController();
+  var buffaloController = TextEditingController();
+  var bullController = TextEditingController();
+  var henController = TextEditingController();
+  var pigController = TextEditingController();
+  var goatController = TextEditingController();
+  var sheepController = TextEditingController();
+  var othersLiveController = TextEditingController();
   var stockCountController = TextEditingController();
 
   String statusOfHouseVal, typeofHouseVal, livestockTypeVal;
@@ -87,7 +95,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       threeWheelerController.text = property.threeWheeler.toString();
       fourWheelerController.text = property.fourWheeler.toString();
       othersController.text = property.others.toString();
-      stockTypeController.text = property.livestockType.toString();
+      cowController.text = property.cow.toString();
+      buffaloController.text = property.buffalo.toString();
+      bullController.text = property.bull.toString();
+      henController.text = property.hen.toString();
+      goatController.text = property.goat.toString();
+      sheepController.text = property.sheep.toString();
+      pigController.text = property.pig.toString();
+      othersLiveController.text = property.othersLive.toString();
       stockCountController.text = property.livestockCount.toString();
     } else {
       property.wetLandInAcres = "";
@@ -103,7 +118,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       property.statusofHouse = "";
       property.typeofHouse = "";
       property.others = "";
-      property.livestockType = "";
+      property.cow= "";
+      property.buffalo="";
+      property.bull = "";
+      property.hen = "";
+      property.goat = "";
+      property.sheep = "";
+      property.pig = "";
+      property.othersLive = "";
       property.livestockCount = "";
       demographicFamily.property = property;
     }
@@ -994,12 +1016,12 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: FractionallySizedBox(
-                    widthFactor: 0.88,
+                    widthFactor: 1.1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
+                          padding: const EdgeInsets.only(left:8,top: 4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Livestock Details'),
@@ -1046,7 +1068,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
               ),
               Expanded(
                 child: FractionallySizedBox(
-                  widthFactor: 0.84,
+                  widthFactor: 0.75,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1054,7 +1076,7 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.all(2.0),
                         child: TextWidget(
                           text: DemoLocalization.of(context)
-                              .translate('Livestock Type'),
+                              .translate('Cow'),
                           size: 14,
                           weight: FontWeight.w600,
                         ),
@@ -1063,87 +1085,19 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         padding: const EdgeInsets.only(
                             right: 16.0),
                         child: SizedBox(
-                          height: 54,
-                          width: 250,
-                          child: TextFormField(
-                            controller: stockTypeController,
-                            onChanged: (value) {
-                              property.livestockType = value;
-                            },
-                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: FractionallySizedBox(
-                  widthFactor: 0.80,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Livestock Count'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0, ),
-                        child: SizedBox(
-                          width: 250,
                           height: 50,
                           child: TextFormField(
-                            controller: stockCountController,
+                            controller: cowController,
                             onChanged: (value) {
-                              isAuto=false;
-                              property.livestockCount = value;
+                              property.cow = value;
                             },
                             readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
                             textInputAction: TextInputAction.next,
                             autocorrect: true,
+                            maxLength: 2,
                             enableSuggestions: true,
                             decoration: InputDecoration(
+                              counterText: "",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
                                   borderRadius:
@@ -1172,6 +1126,563 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                                 fillColor: lightGreyColor),
                             keyboardType: TextInputType.number,
                             onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Buffalo'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: buffaloController,
+                            onChanged: (value) {
+                              property.buffalo = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Bull'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: bullController,
+                            onChanged: (value) {
+                              property.bull = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Hen'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: henController,
+                            onChanged: (value) {
+                              property.hen = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Goat'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: goatController,
+                            onChanged: (value) {
+                              property.goat = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Sheep'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: sheepController,
+                            onChanged: (value) {
+                              property.sheep = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Pig'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: pigController,
+                            onChanged: (value) {
+                              property.pig = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 0.75,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Others'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextFormField(
+                            controller: othersLiveController,
+                            onChanged: (value) {
+                              property.othersLive = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            maxLength: 2,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Livestock Count'),
+                          size: 14,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 16.0, ),
+                        child: SizedBox(
+                          width: 250,
+                          height: 50,
+                          child: TextFormField(
+                            controller: stockCountController,
+                            onChanged: (value) {
+                              isAuto=false;
+                              property.livestockCount = value;
+                            },
+                            readOnly: liveStock=="Yes" ||  liveStock=="ஆம்"?false:true,
+                            textInputAction: TextInputAction.next,
+                            autocorrect: true,
+                            enableSuggestions: true,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                                  borderSide: BorderSide(color: lightGreyColor),
+                                ),
+                                fillColor: lightGreyColor),
+                            keyboardType: TextInputType.number,
+                            onSaved: (String val) {
                               setState(() {
                               });
                             },
@@ -1182,9 +1693,8 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                   ),
                 ),
               ),
-
             ],
-          ),
+          )
         ],
       ),
     );
@@ -1279,7 +1789,14 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
       threeWheelerController.text = property.threeWheeler.toString();
       fourWheelerController.text = property.fourWheeler.toString();
       othersController.text = property.others.toString();
-      stockTypeController.text = property.livestockType.toString();
+      cowController.text = property.cow.toString();
+      buffaloController.text = property.buffalo.toString();
+      bullController.text = property.bull.toString();
+      henController.text = property.hen.toString();
+      goatController.text = property.goat.toString();
+      sheepController.text = property.sheep.toString();
+      pigController.text = property.pig.toString();
+      othersLiveController.text = property.othersLive.toString();
       stockCountController.text = property.livestockCount.toString();
     }
 

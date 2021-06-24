@@ -125,7 +125,14 @@ class FireStoreService {
     'fourWheeler': demographicFamily.property.fourWheeler,
     'others': demographicFamily.property.others,
     'ownLivestocks': demographicFamily.property.ownLivestocks,
-    'livestockType': demographicFamily.property.livestockType,
+    'cow': demographicFamily.property.cow,
+    'buffalo': demographicFamily.property.buffalo,
+    'bull': demographicFamily.property.bull,
+    'hen': demographicFamily.property.hen,
+    'goat': demographicFamily.property.goat,
+    'sheep': demographicFamily.property.sheep,
+    'pig': demographicFamily.property.pig,
+    'othersLive': demographicFamily.property.othersLive,
     'livestockCount': demographicFamily.property.livestockCount
   };
    return map;

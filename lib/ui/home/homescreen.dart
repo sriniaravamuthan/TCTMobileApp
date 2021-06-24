@@ -384,7 +384,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               propertyList.fourWheeler = element["Property"]["fourWheeler"];
               propertyList.livestockCount =
                   element["Property"]["livestockCount"];
-              propertyList.livestockType = element["Property"]["livestockType"];
+              propertyList.cow = element["Property"]["cow"];
+              propertyList.buffalo = element["Property"]["buffalo"];
+              propertyList.bull = element["Property"]["bull"];
+              propertyList.hen = element["Property"]["hen"];
+              propertyList.sheep = element["Property"]["sheep"];
+              propertyList.goat = element["Property"]["goat"];
+              propertyList.pig = element["Property"]["pig"];
+              propertyList.othersLive = element["Property"]["othersLive"];
               propertyList.noOfVehicleOwn =
                   element["Property"]["noOfVehicleOwn"];
               propertyList.others = element["Property"]["others"];
@@ -1084,11 +1091,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .limit(30);
       setState(() {});
     } else if (familyHead != "") {
+      isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
           .where("Location.name", isEqualTo: familyHead)
           .limit(30);
       setState(() {});
+debugPrint("familyHead:${query}");
     } else if (contactPerson != "") {
       query = firestoreInstance
           .collection('demographicData')

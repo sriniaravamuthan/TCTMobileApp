@@ -169,7 +169,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       property.statusofHouse = "";
       property.typeofHouse = "";
       property.others = "";
-      property.livestockType = "";
+      property.cow= "";
+      property.buffalo="";
+      property.bull = "";
+      property.hen = "";
+      property.goat = "";
+      property.sheep = "";
+      property.pig = "";
+      property.othersLive = "";
       property.livestockCount = "";
       demographicFamily.property = property;
     }
@@ -2277,11 +2284,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.villageName = villageNameController.text;
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
-      if (demographicFamily.family[0].name.isNotEmpty) {
-        location.name = demographicFamily.family[0].name;
-        debugPrint("location.contactPerson:${location.name}");
+      if(demographicFamily.family[i].relationship=="Head"){
+        location.name = demographicFamily.family[i].name;
+        debugPrint("location.name:${location.name}");
+
+      }
+/*
+      if (demographicFamily.family[i].name.isNotEmpty) {
+        location.name = demographicFamily.family[i].name;
+        debugPrint("location.name:${location.name}");
         break;
       }
+*/
     }
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
@@ -2320,7 +2334,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   void showAddSuccess() {
     snackBarAlert(success, "Added SuccessFully", successColor);
   }
-
   void showUpdateSuccess() {
     snackBarAlert(success, "Updated SuccessFully", successColor);
   }

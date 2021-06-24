@@ -175,10 +175,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
   String getLiveStock(Property property) {
     String liveStock = "";
-    if (property.ownLivestocks == 2 && property.livestockCount!="") {
-      liveStock +=
-          property.livestockType.toString() + "," + property.livestockCount;
+    if (property.ownLivestocks == 2) {
+      liveStock +=DemoLocalization.of(context).translate('Cow') + "-" + property.cow.toString() + "," "" + "${DemoLocalization.of(context).translate('Buffalo')}" + """-""" +
+          property.buffalo + "," ""+ "${DemoLocalization.of(context).translate('Bull')}" + "-" + property.bull.toString() + "," "" "\n${DemoLocalization.of(context).translate('Hen')}" + "-" + property.hen.toString()
+          + "," ""+ "${DemoLocalization.of(context).translate('Goat')}" + "-" + property.goat.toString() + "," ""+  "${DemoLocalization.of(context).translate('Sheep')}" + "-" + property.sheep.toString()
+          + "," ""+  "\n${DemoLocalization.of(context).translate('Pig')}" + "-" + property.pig.toString() + "," ""+  "${DemoLocalization.of(context).translate('Others')}" + "-" + property.othersLive.toString();
       return liveStock;
+    } else if (property.ownLivestocks == 1) {
+      return DemoLocalization.of(context).translate('No');
     }else if(property.ownLivestocks == 0){
       return DemoLocalization.of(context).translate('Not Answered');
     }
@@ -191,7 +195,9 @@ class _DetailScreenState extends State<DetailScreen> {
           property.threeWheeler + "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}" + "-" + property.fourWheeler.toString();
       debugPrint("vehicles:$vehicles");
       return vehicles;
-    }else if(property.ownVehicle == 0){
+    } else if (property.ownVehicle == 1) {
+      return DemoLocalization.of(context).translate('No');
+    } else if(property.ownVehicle == 0){
       return DemoLocalization.of(context).translate('Not Answered');
     }
   }
@@ -847,7 +853,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               padding:
                                               const EdgeInsets.all(4.0),
                                               child: SizedBox(
-                                                width: 120,
+                                                width: 150,
                                                 child: TextWidget(
                                                   text:getLiveStock(demographicList.property),
                                                   size: 14,

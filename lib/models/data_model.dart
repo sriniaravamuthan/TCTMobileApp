@@ -126,7 +126,14 @@ class Property {
   String fourWheeler = "";
   String others = "";
   double ownLivestocks = 0;
-  String livestockType = "";
+  String cow = "";
+  String buffalo = "";
+  String bull = "";
+  String hen = "";
+  String pig = "";
+  String goat = "";
+  String sheep = "";
+  String othersLive = "";
   String livestockCount = "";
 
   Property(
@@ -143,8 +150,11 @@ class Property {
       this.fourWheeler,
       this.others,
       this.ownLivestocks,
-      this.livestockType,
+        this.cow,
+        this.buffalo, this.bull, this.hen, this.pig, this.goat,
+        this.sheep, this.othersLive,
       this.livestockCount});
+
 
   Property.fromJson(Map<String, dynamic> json) {
     statusofHouse = json['statusofHouse '];
@@ -160,7 +170,14 @@ class Property {
     fourWheeler = json['fourWheeler '];
     others = json['others  '];
     ownLivestocks = json['ownLivestocks '];
-    livestockType = json['livestockType   '];
+    cow = json['cow   '];
+    buffalo = json['buffalo   '];
+    bull = json['bull   '];
+    hen = json['hen   '];
+    goat = json['goat   '];
+    sheep = json['sheep   '];
+    pig = json['pig   '];
+    othersLive = json['othersLive   '];
     livestockCount = json['livestockCount   '];
   }
 
@@ -179,7 +196,14 @@ class Property {
     data['fourWheeler '] = this.fourWheeler;
     data['others  '] = this.others;
     data['ownLivestocks '] = this.ownLivestocks;
-    data['livestockType   '] = this.livestockType;
+    data['livestockType   '] = this.cow;
+    data['livestockType   '] = this.bull;
+    data['livestockType   '] = this.buffalo;
+    data['livestockType   '] = this.hen;
+    data['livestockType   '] = this.goat;
+    data['livestockType   '] = this.sheep;
+    data['livestockType   '] = this.pig;
+    data['livestockType   '] = this.othersLive;
     data['livestockCount   '] = this.livestockCount;
     return data;
   }
