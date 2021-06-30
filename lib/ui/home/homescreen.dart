@@ -207,7 +207,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true; //  True -> Complete, false -> InProgress
-              data["name"] = element["Location"]["contactPerson"];
+              if(element["Location"]["name"]!=null){
+                data["name"] = element["Location"]["name"];
+              }else{
+                data["name"]="";
+              }
               data["formNo"] = element["Location"]["formNo"];
 
               data["mobileNumber"] = element["Location"]["contactNumber"];
@@ -221,8 +225,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               }
               data["age"] = family.length.toString();
               debugPrint("familylist length:${family.length}");
-
-              if (data["age"] == null) data["age"] = "-";
+              if (data["name"] == "")  data["name"] = " ";
               if (data["mobileNumber"] == "") data["mobileNumber"] = "-";
 
               DemographicFamily demographicData = DemographicFamily();
@@ -309,11 +312,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               int hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
                 Family _family = Family();
+                _family.position=family[i]["positon"];
+                debugPrint("Position:${_family.position}");
                 _family.aadharNumber = family[i]["aadharNumber"];
                 _family.age = family[i]["age"];
                 _family.annualIncome = family[i]["annualIncome"];
                 _family.bloodGroup = family[i]["bloodGroup"];
                 _family.caste = family[i]["caste"];
+
                 // if (_family.caste != "")
                 //   hasCaste += 1;
                 _family.community = family[i]["community"];

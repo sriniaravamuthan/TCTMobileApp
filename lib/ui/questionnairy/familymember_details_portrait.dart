@@ -227,7 +227,7 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
     else if (value == 1)
       return DemoLocalization.of(context).translate('No');
     else
-      return "";
+      return DemoLocalization.of(context).translate('Not Answered');
   }
   String getPhysical(Family family) {
     String physical = "";

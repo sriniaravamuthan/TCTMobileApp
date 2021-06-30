@@ -238,7 +238,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
     else if (value == 1)
       return DemoLocalization.of(context).translate('No');
     else
-      return "";
+      return DemoLocalization.of(context).translate('Not Answered');
   }
 
   getTexts(Family family) {

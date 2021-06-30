@@ -176,10 +176,10 @@ class _DetailScreenState extends State<DetailScreen> {
   String getLiveStock(Property property) {
     String liveStock = "";
     if (property.ownLivestocks == 2) {
-      liveStock +=DemoLocalization.of(context).translate('Cow') + "-" + property.cow.toString() + "," "" + "${DemoLocalization.of(context).translate('Buffalo')}" + """-""" +
-          property.buffalo + "," ""+ "${DemoLocalization.of(context).translate('Bull')}" + "-" + property.bull.toString() + "," "" "\n${DemoLocalization.of(context).translate('Hen')}" + "-" + property.hen.toString()
-          + "," ""+ "${DemoLocalization.of(context).translate('Goat')}" + "-" + property.goat.toString() + "," ""+  "${DemoLocalization.of(context).translate('Sheep')}" + "-" + property.sheep.toString()
-          + "," ""+  "\n${DemoLocalization.of(context).translate('Pig')}" + "-" + property.pig.toString() + "," ""+  "${DemoLocalization.of(context).translate('Others')}" + "-" + property.othersLive.toString();
+      liveStock +=DemoLocalization.of(context).translate('Cow') + "-" + property.cow.toString() + "," " " + "${DemoLocalization.of(context).translate('Buffalo')}" + """-""" +
+          property.buffalo + "," " "+ "${DemoLocalization.of(context).translate('Bull')}" + "-" + property.bull.toString() + "," " " "\n${DemoLocalization.of(context).translate('Hen')}" + "-" + property.hen.toString()
+          + "," " "+ "${DemoLocalization.of(context).translate('Goat')}" + "-" + property.goat.toString() + "," " "+  "${DemoLocalization.of(context).translate('Sheep')}" + "-" + property.sheep.toString()
+          + "," " "+  "\n${DemoLocalization.of(context).translate('Pig')}" + "-" + property.pig.toString() + "," " "+  "${DemoLocalization.of(context).translate('Others')}" + "-" + property.othersLive.toString();
       return liveStock;
     } else if (property.ownLivestocks == 1) {
       return DemoLocalization.of(context).translate('No');
@@ -191,8 +191,8 @@ class _DetailScreenState extends State<DetailScreen> {
   String getVehicle(Property property) {
     String vehicles = "";
     if (property.ownVehicle == 2) {
-      vehicles += DemoLocalization.of(context).translate('Two Wheeler') + "-" + property.twoWheeler.toString() + "," + "\n${DemoLocalization.of(context).translate('Three Wheeler')}" + """-""" +
-          property.threeWheeler + "," + "\n${DemoLocalization.of(context).translate('Four Wheeler')}" + "-" + property.fourWheeler.toString();
+      vehicles += DemoLocalization.of(context).translate('Two Wheeler') + "-" + property.twoWheeler.toString() + "," " "+ "\n${DemoLocalization.of(context).translate('Three Wheeler')}" + """-""" +
+          property.threeWheeler + "," " "+ "\n${DemoLocalization.of(context).translate('Four Wheeler')}" + "-" + property.fourWheeler.toString();
       debugPrint("vehicles:$vehicles");
       return vehicles;
     } else if (property.ownVehicle == 1) {
@@ -994,7 +994,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
                                                   child: TextWidget(
-                                                    text: demographicList.family[index].name,
+                                                    text:demographicList.family[index].position + ")" + " " + demographicList.family[index].name,
                                                     weight: FontWeight.w800,
                                                     color: darkColor,
                                                     size: 14,
@@ -2277,7 +2277,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
-                                                              text: demographicList.family[index].name,
+                                                              text:demographicList.family[index].position + ")" + " " + demographicList.family[index].name,
                                                               weight: FontWeight.w800,
                                                               color: darkColor,
                                                               size: 14,
