@@ -319,7 +319,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].name,
+                                  text: getName(familyList[index],familyList),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -892,7 +892,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].name,
+                                  text:  getName(familyList[index],familyList),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -1431,6 +1431,13 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
         );
       },
     );
+  }
+  getName(Family family, List<Family> familyList) {
+    String name = "";
+    if (family.name!="" && family.position!="") {
+      name +=  family.position + ")" + " " + family.name;
+      return name;
+    }
   }
 
   getMaskedNo(String aadharNumber) {

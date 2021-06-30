@@ -319,7 +319,7 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].name,
+                                  text:getName(familyList[index]),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -892,7 +892,7 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: familyList[index].name,
+                                  text: getName(familyList[index]),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -1441,5 +1441,13 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
       return "*******" +    aadharNumber;
     }
 
+  }
+
+  getName(Family family) {
+    String name = "";
+    if (family.name!="" && family.position!="") {
+      name +=  family.position + ")" + " " + family.name;
+      return name;
+    }
   }
 }
