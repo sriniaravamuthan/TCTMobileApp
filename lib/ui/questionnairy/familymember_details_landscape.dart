@@ -120,7 +120,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields, deleteFields)),
+              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields, deleteFields,familyList)),
         ),
       ],
     );
@@ -131,6 +131,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
     if (familyIndex == -1) {
       newFamily = new Family();
       newFamily.name = "";
+      newFamily.position="";
       newFamily.aadharNumber = "";
       newFamily.relationship = "";
       newFamily.gender = "";
@@ -319,7 +320,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text: getName(familyList[index],familyList),
+                                  text: getName(familyList[index]),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -892,7 +893,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
-                                  text:  getName(familyList[index],familyList),
+                                  text:  getName(familyList[index]),
                                   weight: FontWeight.w800,
                                   color: darkColor,
                                   size: 14,
@@ -1432,12 +1433,19 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       },
     );
   }
-  getName(Family family, List<Family> familyList) {
+  getName(Family family) {
     String name = "";
-    if (family.name!="" && family.position!="") {
-      name +=  family.position + ")" + " " + family.name;
-      return name;
+    if (family.position!=null) {
+      name +=  family.position + ")" + " " ;
+    }else{
+      return "";
     }
+      if(family.name!=null ){
+        name+=family.name;
+      return name;
+    }else{
+        return "";
+      }
   }
 
   getMaskedNo(String aadharNumber) {

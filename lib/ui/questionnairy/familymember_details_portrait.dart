@@ -72,6 +72,7 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
                 InkWell(
                   onTap: () {
                     setState(() {
+                      debugPrint("LengthOfFamily:${familyList.length}");
                       addfamily = !addfamily;
                       familyIndex = -1;
                     });
@@ -120,7 +121,7 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields, deleteFields)),
+              child: FamilyMemberStep(getDefaultFamily(), familyIndex, refreshFamilyList, cancelFields, deleteFields,familyList)),
         ),
       ],
     );
@@ -1445,9 +1446,10 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
 
   getName(Family family) {
     String name = "";
-    if (family.name!="" && family.position!="") {
-      name +=  family.position + ")" + " " + family.name;
-      return name;
-    }
+    if (family.position!=null) {
+      name +=  family.position + ")" + " " ;
+    }if(family.name!=null )
+      name+=family.name;
+    return name;
   }
 }
