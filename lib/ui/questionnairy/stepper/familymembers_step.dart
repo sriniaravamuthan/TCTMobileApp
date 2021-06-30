@@ -32,13 +32,13 @@ class FamilyMemberStep extends StatefulWidget {
   Function refreshFamilyList, cancelFields, deleteFields;
   Family family;
   int familyIndex;
-
+  List<Family> familyList;
   FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList,
-      this.cancelFields, this.deleteFields);
+      this.cancelFields, this.deleteFields,this.familyList);
 
   @override
   _FamilyMemberStepState createState() =>
-      _FamilyMemberStepState(family, familyIndex);
+      _FamilyMemberStepState(family, familyIndex,familyList);
 }
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
@@ -89,6 +89,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   TextEditingController secondDosePicker = TextEditingController();
   List<dynamic> values;
+  int position;
   List genderList = [],
       genderListLang = [],
       relationList = [],
@@ -105,7 +106,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       bloodGrpLangList = [],
       sectionList = [],
       sectionLangList = [];
-  String relationshipVal,
+     String relationshipVal,
       maritalStatusVal,
       qualificationVal,
       occupationVal,
@@ -118,13 +119,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   File _image;
   final picker = ImagePicker();
   String language;
-
   Family family;
   int familyIndex;
 
   bool isLoading = false;
-
-  _FamilyMemberStepState(this.family, this.familyIndex);
+  List<Family> familyList;
+  _FamilyMemberStepState(this.family, this.familyIndex, this.familyList);
 
   @override
   void initState() {
@@ -152,6 +152,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   }
 
   Future uploadFile() async {
+    if(family.position==null || family.position=="" ) {
+      position = familyList.length + 1;
+      family.position = position.toString();
+    }
     family.name = nameController.text;
     family.aadharNumber = aadharNumberController.text;
     family.relationship = relationshipController.text;
