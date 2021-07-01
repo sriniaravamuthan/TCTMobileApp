@@ -249,6 +249,7 @@ class Habits {
 class Family {
   String name = "";
   String position="";
+  String familyId="";
   String aadharNumber = "";
   String relationship = "";
   String gender = "";
@@ -285,6 +286,7 @@ class Family {
   Family(
       {this.name,
         this.position,
+        this.familyId,
       this.aadharNumber,
       this.relationship,
       this.gender,
@@ -314,6 +316,7 @@ class Family {
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];
     position = json['position '];
+    familyId=json['familyId '];
     aadharNumber = json['aadharNumber '];
     relationship = json['relationship '];
     gender = json['gender '];
@@ -345,6 +348,8 @@ class Family {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['Name '] = this.name;
     data['position '] = this.position;
+    data['familyId '] = this.familyId;
+
     data['aadharNumber '] = this.aadharNumber;
     data['relationship '] = this.relationship;
     data['gender '] = this.gender;

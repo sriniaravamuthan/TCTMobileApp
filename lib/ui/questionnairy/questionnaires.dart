@@ -115,7 +115,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     if (demographicFamily.location != null) {
       location = demographicFamily.location;
 
+/*
       fromNoController.text = location.formNo;
+*/
       projectCodeController.text = location.projectCode;
       streetNameController.text = location.streetName;
       doorNoController.text = location.doorNumber;
@@ -128,6 +130,14 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         villageCodeController.text = location.villagesCode;
         panchayatCodeController.text = location.panchayatCode;
         panchayatNoController.text = location.panchayatNo;
+
+      for (int i = 0; i < demographicFamily.family.length; i++) {
+        fromNoController.text = demographicFamily.family[i].familyId;
+          debugPrint("location.formNo:${location.formNo}");
+      }
+
+
+
         if(location.villageName!=""){
           villageName=true;
         }

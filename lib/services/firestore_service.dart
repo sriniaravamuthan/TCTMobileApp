@@ -38,6 +38,7 @@ class FireStoreService {
         "caste": element.caste,
         "photo": element.photo,
         "positon":element.position,
+        "familyId":element.familyId,
         "govtInsurance": element.govtInsurance,
         "privateInsurance": element.privateInsurance,
         "oldPension": element.oldPension,

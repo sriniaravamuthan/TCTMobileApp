@@ -2419,7 +2419,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
-                                readOnly: textVaccine=="Yes" ||  textVaccine=="ஆம்"?false:true,
                                 autocorrect: true,
                                 controller: firstDosePicker,
                                 enableSuggestions: true,
@@ -2505,7 +2504,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               ),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
-                                readOnly: textVaccine=="Yes" ||  textVaccine=="ஆம்"?false:true,
                                 autocorrect: true,
                                 controller: secondDosePicker,
                                 enableSuggestions: true,

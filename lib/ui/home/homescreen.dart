@@ -313,6 +313,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               for (int i = 0; i < family.length; i++) {
                 Family _family = Family();
                 _family.position=family[i]["positon"];
+                locationList.formNo=family[i]["familyId"];
+                _family.familyId=family[i]["familyId"];
                 debugPrint("Position:${_family.position}");
                 _family.aadharNumber = family[i]["aadharNumber"];
                 _family.age = family[i]["age"];
