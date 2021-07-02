@@ -2309,6 +2309,7 @@ String formNoMax="";
     location.panchayatNo = panchayatNoController.text;
     location.panchayatCode = panchayatCodeController.text;
     location.villageName = villageNameController.text;
+    setMaxCount(maxCounts, location.villagesCode);
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
       demographicFamily.family[i].familyId= fromNoController.text;
@@ -2437,6 +2438,26 @@ String formNoMax="";
 
     debugPrint("addLength$addLength");
 
+  }
+
+   setMaxCount(int maxCounts, villagesCode) async{
+     String villageDocumentId = "";
+     var data = await firestoreInstance.collection(collectionVillageName)
+         .where('villageCode', isEqualTo: villagesCode)
+         .get();
+     setState(() {
+       villageDocumentId = data.docs[0].id;
+     });
+     debugPrint("villageDocumentId:$villageDocumentId");
+
+
+     firestoreInstance
+         .collection(collectionVillageName).doc(villageDocumentId)
+         .update({
+       "maxCount":maxCounts,
+     })
+         .then((value) => debugPrint("Village Details Added Successfully"))
+         .catchError((error) => debugPrint("Village Details Failed to add"));
   }
 
 }
