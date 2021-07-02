@@ -66,14 +66,15 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       demoLanList = [],
       originalVillageCodeList = [],
       originalVillageNameList = [];
-  List<String> panchayatCodeList = [], panchayatNoList = [];
+  List<String> panchayatCodeList = [], panchayatNoList = [],maxCountList=[];
   var height, width;
   List<String> streets = [];
   String documentId = "";
   bool isEdit = false;
   Function makeLoadData;
   final pageController = PageController(initialPage: 0);
-
+int maxCounts=0;
+String formNoMax="";
   @override
   void initState() {
     villageNameList = [];
@@ -506,7 +507,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         location.formNo = val;
                                                         fromNoController.text =
                                                             val;
-                                                        // debugPrint("formNo:${demographicFamily.location.formNo}");
+                                                        debugPrint("formNo:${fromNoController.text}");
                                                       });
                                                     },
                                                     // validator: (value) {
@@ -702,6 +703,16 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                               if (item ==
                                                                   originalVillageCodeList[
                                                                   i]) {
+                                                                maxCounts=int.tryParse(maxCountList[i]);
+                                                                if(maxCounts>0){
+                                                                  maxCounts=maxCounts+1;
+                                                                }
+
+                                                                formNoMax=item + maxCounts.toString();
+                                                                fromNoController.text=formNoMax;
+                                                                debugPrint("formNoMax:$formNoMax");
+
+                                                                debugPrint("MaximumCount:$maxCounts");
                                                                 panchayatCodeController
                                                                     .text =
                                                                 panchayatCodeList[
@@ -2276,12 +2287,18 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     DocumentSnapshot snapShot = await firestoreInstance.doc(village.path).get();
     villageNameController.text = snapShot["villageName"][language].toString();
     villageCodeController.text = snapShot["villageCode"].toString();
+
     panchayatCodeController.text = snapShot["panchayatCode"].toString();
     panchayatNoController.text = snapShot["panchayatNo"].toString();
   }
 
-  void addData() {
-    location.formNo = fromNoController.text;
+  void addData() async{
+    if(formNoMax!=null || formNoMax!=""){
+      location.formNo = fromNoController.text;
+    }else{
+      location.formNo = "";
+    }
+
     location.projectCode = projectCodeController.text;
     location.streetName = streetNameController.text;
     location.doorNumber = doorNoController.text;
@@ -2294,6 +2311,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.villageName = villageNameController.text;
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
+      demographicFamily.family[i].familyId= fromNoController.text;
       if(demographicFamily.family[i].relationship=="Head"){
         location.name = demographicFamily.family[i].name;
         debugPrint("location.name:${location.name}");
@@ -2356,6 +2374,11 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
 
       var villageCodeDoc =
           querySnapshot.docs.map((doc) => doc["villageCode"]).toList();
+
+      var maxCountDoc =
+      querySnapshot.docs.map((doc) => doc["maxCount"]).toList();
+      debugPrint("MaxCount:$maxCountDoc");
+
       var villageNameDoc = querySnapshot.docs
           .map((doc) => doc["villageName"][language])
           .toList();
@@ -2367,6 +2390,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       villageCodeDoc.forEach((element) {
         villageCodeList.add(element.toString());
         originalVillageCodeList.add(element.toString());
+      });
+      maxCountDoc.forEach((element) {
+        maxCountList.add(element.toString());
       });
       villageNameDoc.forEach((element) {
         villageNameList.add(element.toString());

@@ -61,6 +61,7 @@ class Location {
   var panchayatNo;
   var panchayatCode;
   var villageName;
+  var maxCount;
   String streetName = "";
   String doorNumber = "";
   String contactPerson = "";
@@ -74,6 +75,7 @@ class Location {
       this.villagesCode,
       this.panchayatNo,
       this.panchayatCode,
+      this.maxCount,
       this.villageName,
       this.streetName,
       this.doorNumber,
@@ -85,6 +87,7 @@ class Location {
     formNo = json['formNo'];
     projectCode = json['projectCode'];
     villagesCode = json['villagesCode'];
+    maxCount = json['maxCount'];
     panchayatNo = json['panchayatNo'];
     panchayatCode = json['panchayatCode'];
     villageName = json['villageName '];
@@ -100,6 +103,7 @@ class Location {
     data['formNo'] = this.formNo;
     data['projectCode'] = this.projectCode;
     data['villagesCode'] = this.villagesCode;
+    data['maxCount'] = this.maxCount;
     data['panchayatNo'] = this.panchayatNo;
     data['panchayatCode'] = this.panchayatCode;
     data['villageName '] = this.villageName;

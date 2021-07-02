@@ -1604,7 +1604,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 child: SizedBox(
                                                   width: 150,
                                                   child: TextWidget(
-                                                    text: demographicList.location.formNo==""?" -": demographicList.location.formNo,
+                                                    text: demographicList.location.formNo==null||demographicList.location.formNo==""?" -": demographicList.location.formNo,
                                                     size: 14,
                                                     color: darkColor,
                                                     weight: FontWeight.w400,
