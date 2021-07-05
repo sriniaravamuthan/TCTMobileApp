@@ -306,7 +306,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   width: 10,
                                 ),
                                 TextWidget(
-                                  text: demographicList.location.contactPerson,
+                                  text: demographicList.location.name,
                                   color: darkColor,
                                   weight: FontWeight.w600,
                                   size: 18,
@@ -956,13 +956,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                   child: Column(
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
                                             child:Container(
                                                 height: 140,
-                                                width: 120,
+                                                width: 140,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                     BorderRadius.all(Radius.circular(50))),
@@ -1134,7 +1133,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   ),
                                                 ),
                                                 SizedBox(height: 10,),
-
                                               ],
                                             ),
                                           ),
@@ -2223,7 +2221,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     debugPrint("familyPhoto:${demographicList.family[index].education}");
-
+                                    demographicList.family.sort((a, b) => a.position.compareTo(b.position));
+                                    debugPrint("demographicList:${demographicList.family[index].position}");
                                     return Column(
                                       children: [
                                         Container(
@@ -2238,8 +2237,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
                                                       padding: const EdgeInsets.all(4.0),
