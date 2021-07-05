@@ -118,13 +118,18 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  svgTctLogo,
-                  semanticsLabel: "Logo",
-                  height: 40,
-                  width: 50,
-                  fit: BoxFit.contain,
-                  allowDrawingOutsideViewBox: true,
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context, false);
+                  },
+                  child: SvgPicture.asset(
+                    svgTctLogo,
+                    semanticsLabel: "Logo",
+                    height: 40,
+                    width: 50,
+                    fit: BoxFit.contain,
+                    allowDrawingOutsideViewBox: true,
+                  ),
                 ),
               ],
             ),
