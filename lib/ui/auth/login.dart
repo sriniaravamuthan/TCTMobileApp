@@ -263,6 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
+/*
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -338,6 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ],
                               ),
+*/
                               Align(
                                 alignment: Alignment.center,
                                 child: Material(
@@ -390,16 +392,16 @@ class _LoginScreenState extends State<LoginScreen> {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);
 
-    if (selectedRadioTile == "தமிழ்") {
-      setState(() {
-        MyApp.setLocale(context, Locale('ta', 'IN'));
-        SharedPref().setStringPref(SharedPref().language, 'ta');
-      });
-    } else {
+    // if (selectedRadioTile == "தமிழ்") {
+    //   setState(() {
+    //     MyApp.setLocale(context, Locale('ta', 'IN'));
+    //     SharedPref().setStringPref(SharedPref().language, 'ta');
+    //   });
+    // } else {
       setState(() {
         MyApp.setLocale(context, Locale('en', 'US'));
         SharedPref().setStringPref(SharedPref().language, 'en');
       });
-    }
+    // }
   }
 }
