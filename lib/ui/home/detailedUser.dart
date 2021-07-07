@@ -994,6 +994,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                             padding: const EdgeInsets.all(4.0),
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
@@ -1062,6 +1063,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ],
                                             ),
                                           ),
+                                          Spacer(),
                                           Padding(
                                             padding: const EdgeInsets.all(4.0),
                                             child: Column(
@@ -1136,6 +1138,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                               ],
                                             ),
                                           ),
+                                          Spacer(),
 
                                         ],
                                       ),
@@ -2237,6 +2240,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
                                                 Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Padding(
                                                       padding: const EdgeInsets.all(4.0),
@@ -2247,7 +2252,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                                               borderRadius:
                                                               BorderRadius.all(Radius.circular(50))),
                                                           child:  demographicList.family[index].photo!= ""
-                                                              ?Image.network( demographicList.family[index].photo,fit: BoxFit.fill)
+                                                              ?Padding(
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Image.network( demographicList.family[index].photo,fit: BoxFit.fill),
+                                                              )
                                                               :demographicList.family[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill):demographicList.family[index].gender=="Male" || demographicList.family[index].gender=="ஆண்"?SvgPicture.asset(
                                                             svgMan,
                                                             semanticsLabel: "Logo",
@@ -2275,6 +2283,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                       padding: const EdgeInsets.all(4.0),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
@@ -2287,11 +2296,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           ),
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
+                                                            child: SizedBox(
+                                                              width: 120,
+                                                              child: TextWidget(
+                                                                text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
+                                                                weight: FontWeight.w400,
+                                                                color: darkColor,
+                                                                size: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                           Padding(
@@ -2321,7 +2333,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                                               size: 14,
                                                             ),
                                                           ),
-                                                          SizedBox(height: 10,),
                                                           Padding(
                                                             padding: EdgeInsets.all(2.0),
                                                             child: TextWidget(
@@ -2344,10 +2355,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         ],
                                                       ),
                                                     ),
+                                                    Spacer(),
                                                     Padding(
                                                       padding: const EdgeInsets.all(4.0),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
@@ -2387,6 +2401,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             ),
                                                           ),
                                                           SizedBox(height: 10,),
+
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
@@ -2411,10 +2426,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         ],
                                                       ),
                                                     ),
+                                                    Spacer(),
                                                     Padding(
                                                       padding: const EdgeInsets.all(2.0),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+
                                                         children: [
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
@@ -2442,6 +2460,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             ),
                                                           ),
                                                           SizedBox(height: 10,),
+
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
@@ -2487,18 +2506,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                                         ],
                                                       ),
                                                     ),
-                                                    Container(height: 50,width: 20,)
+                                                    Spacer(),
+
+                                                    Container(height: 50,width: 20,),
+                                                    Spacer(),
 
                                                   ],
                                                 ),
                                                 demographicList.family[index].isExpanded == "Show Less" ? Padding(
                                                   padding: const EdgeInsets.all(4.0),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Container(height: 50,width: 5,),
-
                                                       Padding(
                                                         padding: const EdgeInsets.all(2.0),
                                                         child: Column (
@@ -2516,11 +2535,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                                             ),
                                                             Padding(
                                                               padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].occupation,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
+                                                              child: SizedBox(
+                                                                width: 150,
+
+                                                                child: TextWidget(
+                                                                  text: demographicList.family[index].occupation,
+                                                                  weight: FontWeight.w400,
+                                                                  color: darkColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                             SizedBox(height: 10,),

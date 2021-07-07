@@ -830,11 +830,10 @@ String formNoMax="";
                                                         },
                                                         itemFilter: (item, query) {
                                                               villageCode = false;
-                                                          return item
-                                                              .toLowerCase()
-                                                              .startsWith(query
-                                                              .toLowerCase());
-                                                        })),
+                                                              return item
+                                                                  .toLowerCase()
+                                                                  .startsWith(query.toLowerCase())|| item == "";
+                                                        },minLength: 0,)),
                                               ),
                                             ],
                                           ),
