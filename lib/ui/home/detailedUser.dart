@@ -944,6 +944,8 @@ class _DetailScreenState extends State<DetailScreen> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           debugPrint("familyPhoto:${demographicList.family[index].photo}");
+                          demographicList.family.sort((a, b) => a.position.compareTo(b.position));
+                          debugPrint("demographicList:${demographicList.family[index].position}");
                           return Column(
                             children: [
                               Container(

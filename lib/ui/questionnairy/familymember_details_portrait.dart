@@ -264,6 +264,8 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
       shrinkWrap: true,
       itemBuilder: (context, index) {
         debugPrint("familyPhoto:${familyList[index].photo}");
+        familyList.sort((a, b) => a.position.compareTo(b.position));
+        debugPrint("demographicList:${familyList[index].position}");
         return Column(
           children: [
             Container(
@@ -837,6 +839,8 @@ class _FamilyMemberDetailsPortraitState extends State<FamilyMemberDetailsPortrai
       shrinkWrap: true,
       itemBuilder: (context, index) {
         debugPrint("familyPhoto:${familyList[index].photo}");
+        familyList.sort((a, b) => a.position.compareTo(b.position));
+        debugPrint("demographicList:${familyList[index].position}");
         return Column(
           children: [
             Container(

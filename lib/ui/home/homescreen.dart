@@ -378,6 +378,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                     family[i]['isVaccinationDone'].toDouble();
                 _family.secondDose = family[i]['secondDose'];
                 _family.isExpanded = 'Show More';
+                _familyList.sort((a, b) => a.position.compareTo(b.position));
 
                 _familyList.add(_family);
                 debugPrint("GETFamily______" + _family.education);
