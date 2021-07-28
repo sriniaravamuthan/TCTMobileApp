@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -168,31 +166,62 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       body: Center(
-        child: SizedBox(
-          width: 300,
-          height: 130,
-          child: InkWell(
-            onTap: () {
-              Get.toNamed('/homeScreen');
-            },
-            child: Card(
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Center(
-                child: TextWidget(
-                  text: 'Demographics Data',
-                  color: primaryColor,
-                  weight: FontWeight.w600,
-                  size: 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 300,
+              height: 130,
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed('/homeScreen');
+                },
+                child: Card(
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Center(
+                    child: TextWidget(
+                      text: 'Demographics App'.toUpperCase(),
+                      color: primaryColor,
+                      weight: FontWeight.w600,
+                      size: 20,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  elevation: 5,
+                  margin: EdgeInsets.all(10),
                 ),
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              elevation: 5,
-              margin: EdgeInsets.all(10),
             ),
-          ),
+            SizedBox(
+              width: 300,
+              height: 130,
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed('/homeScreen');
+                },
+                child: Card(
+                  semanticContainer: true,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Center(
+                    child: TextWidget(
+                      text: 'Survey App'.toUpperCase(),
+                      color: primaryColor,
+                      weight: FontWeight.w600,
+                      size: 20,
+                    ),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  elevation: 5,
+                  margin: EdgeInsets.all(10),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
