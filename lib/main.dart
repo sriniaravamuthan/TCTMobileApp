@@ -18,6 +18,7 @@ import 'package:tct_demographics/ui/home/dashboardScreen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
 import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
+import 'package:tct_demographics/ui/survey/search_campaign_screen.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -127,11 +128,19 @@ class _MyAppState extends State<MyApp> {
                       theme: ThemeData(),
                       home: SplashScreen(),
                       getPages: [
-                        GetPage(name: '/dashBoard', page: () => DashboardScreen()),
+                        GetPage(
+                            name: '/dashBoard', page: () => DashboardScreen()),
                         GetPage(name: '/homeScreen', page: () => HomeScreen()),
-                        GetPage(name: '/loginScreen', page: () => LoginScreen()),
-                        GetPage(name: '/questionnery', page: () => QuestionnairesScreen()),
-                        GetPage(name: '/DetailScreen', page: () => DetailScreen()),
+                        GetPage(
+                            name: '/loginScreen', page: () => LoginScreen()),
+                        GetPage(
+                            name: '/questionnery',
+                            page: () => QuestionnairesScreen()),
+                        GetPage(
+                            name: '/DetailScreen', page: () => DetailScreen()),
+                        GetPage(
+                            name: '/SearchCampaignScreen',
+                            page: () => SearchCampaignScreen()),
                       ],
                     )
                   : MaterialApp(

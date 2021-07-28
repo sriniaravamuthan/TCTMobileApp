@@ -200,7 +200,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 130,
               child: InkWell(
                 onTap: () {
-                  Get.toNamed('/homeScreen');
+                  Get.toNamed('/SearchCampaignScreen');
                 },
                 child: Card(
                   semanticContainer: true,
