@@ -1096,6 +1096,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         panchayatCode == "") {
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
+    }else if (familyHead != "" && villageName != "") {
+      isSearch = true;
+      query = firestoreInstance
+          .collection('demographicData')
+          .where("Location.name", isEqualTo: familyHead.toString().capitalize)
+          .where("Location.villageName", isEqualTo: villageName)
+          .limit(30);
+      setState(() {});
     }else if (contactPerson != "" && villageName != "") {
       isSearch = true;
       query = firestoreInstance
@@ -1104,14 +1112,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
       setState(() {});
-    } else if (familyHead != "") {
+    }  else if (familyHead != "") {
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
           .where("Location.name", isEqualTo: familyHead.toString().capitalize)
           .limit(30);
       setState(() {});
-debugPrint("familyHead:${query}");
+      debugPrint("familyHead:${query}");
     } else if (contactPerson != "") {
       query = firestoreInstance
           .collection('demographicData')

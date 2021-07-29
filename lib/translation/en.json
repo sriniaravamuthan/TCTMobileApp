@@ -114,5 +114,20 @@
  "Pig":"Pig",
  "Goat":"Goat",
  "Hen":"Hen",
- "Sheep":"Sheep"
+ "Sheep":"Sheep",
+ "Search Campaign":"Search Campaign",
+ "Campaign ID":"Campaign ID:",
+ "Campaign Name**":"Campaign Name**:",
+ "Village Codes":"Village Code:",
+ "Or":"(Or)",
+ "Campaign Name":"Campaign Name:",
+ "Campaign Description":"Campaign Description:",
+ "Objective Name":"Objective Name:",
+ "Campaign Population":"Campaign Population:",
+ "Completed:":"Completed:",
+ "Pending:":"Pending:",
+ "Respondent Name":"Respondent Name ",
+ "Section Name":"Section Name:",
+ "Question":"Question:",
+ "Submit":"Submit"
 }

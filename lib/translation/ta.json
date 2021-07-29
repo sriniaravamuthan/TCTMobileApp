@@ -114,6 +114,21 @@
   "Pig":"பன்றி",
   "Goat":"வெள்ளாடு",
   "Hen":"கோழி",
-  "Sheep":"செம்மறி ஆடு"
+  "Sheep":"செம்மறி ஆடு",
+  "Search Campaign":"பிரச்சாரத்தைத் தேடுங்கள்",
+  "Campaign ID":"பிரச்சார ஐடி:",
+  "Campaign Name**":"பிரச்சாரத்தின் பெயர்**:",
+  "Village Codes":"கிராம குறியீடு எண்:",
+  "Or":"(அல்லது)",
+  "Campaign Name":"பிரச்சாரத்தின் பெயர்:",
+  "Campaign Description":"பிரச்சார விளக்கம்:",
+  "Objective Name":"குறிக்கோள் பெயர்:",
+  "Campaign Population":"பிரச்சார மக்கள் தொகை:",
+  "Completed:":"நிறைவு",
+  "Pending:":"நிலுவையில் உள்ளது:",
+  "Respondent Name":"பதிலளித்தவரின் பெயர்",
+  "Section Name":"பிரிவு பெயர்:",
+  "Question":"கேள்வி:",
+  "Submit":"சமர்ப்பிக்கவும்"
 
 }

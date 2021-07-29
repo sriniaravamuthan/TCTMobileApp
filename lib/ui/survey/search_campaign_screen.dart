@@ -189,284 +189,300 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
   }
 
   Widget _portraitMode() {
-    return Container(
-      color: Theme.of(context).accentColor,
-      margin: EdgeInsets.all(80),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: TextWidget(
-                text: "Search Campaign",
-                color: Colors.white,
-                size: 26,
-                weight: FontWeight.w700,
+    return Center(
+      child: Container(
+        height: MediaQuery.of(context).size.width / 1.3,
+        color: Theme.of(context).accentColor,
+        margin: EdgeInsets.all(65),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: TextWidget(
+                  text:DemoLocalization.of(context)
+                      .translate('Search Campaign'),
+                  color: Colors.white,
+                  size: 18,
+                  weight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      TextWidget(
-                        text: "Campaign ID **:",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
-                      ),
-                      Spacer(flex: 1),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: campaignIDController,
-                            textInputAction: TextInputAction.next,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                suffixIcon: Icon(Icons.search),
-                                fillColor: Colors.white),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Campaign ID'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
+                        Spacer(flex: 1),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3.5,
+                          height: MediaQuery.of(context).size.width / 10,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: campaignIDController,
+                              textInputAction: TextInputAction.next,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  suffixIcon: Icon(Icons.search),
+                                  fillColor: Colors.white),
 
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {
-                                campaignIDController.text = val;
-                              });
-                            },
-                            // validator: (value) {
-                            //   if (value.isEmpty) {
-                            //     debugPrint(
-                            //         "empid :yes");
-                            //     return 'Employee Id must not be empty';
-                            //   }
-                            //   return null;
-                            // },
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {
+                                  campaignIDController.text = val;
+                                });
+                              },
+                              // validator: (value) {
+                              //   if (value.isEmpty) {
+                              //     debugPrint(
+                              //         "empid :yes");
+                              //     return 'Employee Id must not be empty';
+                              //   }
+                              //   return null;
+                              // },
+                            ),
                           ),
                         ),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Spacer(),
-                      TextWidget(
-                        text: "(or)",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      TextWidget(
-                        text: "Campaign Name **:",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
-                      ),
-                      Spacer(flex: 1),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: campaignNameController,
-                            textInputAction: TextInputAction.next,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                suffixIcon: Icon(Icons.search),
-                                fillColor: Colors.white),
+                        Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Spacer(),
+                        TextWidget(
+                          text:  DemoLocalization.of(context)
+                              .translate('Or'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextWidget(
+                          text:DemoLocalization.of(context)
+                              .translate('Campaign Name**'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
+                        Spacer(flex: 1),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3.5,
+                          height: MediaQuery.of(context).size.width / 10,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: campaignNameController,
+                              textInputAction: TextInputAction.next,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  suffixIcon: Icon(Icons.search),
+                                  fillColor: Colors.white),
 
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {
-                                campaignNameController.text = val;
-                              });
-                            },
-                            // validator: (value) {
-                            //   if (value.isEmpty) {
-                            //     debugPrint(
-                            //         "empid :yes");
-                            //     return 'Employee Id must not be empty';
-                            //   }
-                            //   return null;
-                            // },
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {
+                                  campaignNameController.text = val;
+                                });
+                              },
+                              // validator: (value) {
+                              //   if (value.isEmpty) {
+                              //     debugPrint(
+                              //         "empid :yes");
+                              //     return 'Employee Id must not be empty';
+                              //   }
+                              //   return null;
+                              // },
+                            ),
                           ),
                         ),
-                      ),
-                      Spacer(
-                        flex: 2,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      TextWidget(
-                        text: "Village Code:",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
-                      ),
-                      Spacer(flex: 1),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
-                            controller: villageCodeController,
-                            textInputAction: TextInputAction.next,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
-                                ),
-                                suffixIcon: Icon(Icons.search),
-                                fillColor: Colors.white),
+                        Spacer(
+                          flex: 2,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Village Codes'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
+                        Spacer(flex: 1),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 3.5,
+                          height: MediaQuery.of(context).size.width / 10,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: villageCodeController,
+                              textInputAction: TextInputAction.next,
+                              enableSuggestions: true,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                  suffixIcon: Icon(Icons.search),
+                                  fillColor: Colors.white),
 
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {
-                                villageCodeController.text = val;
-                              });
+                              keyboardType: TextInputType.text,
+                              onSaved: (String val) {
+                                setState(() {
+                                  villageCodeController.text = val;
+                                });
+                              },
+                              // validator: (value) {
+                              //   if (value.isEmpty) {
+                              //     debugPrint(
+                              //         "empid :yes");
+                              //     return 'Employee Id must not be empty';
+                              //   }
+                              //   return null;
+                              // },
+                            ),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: OutlinedButton(
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Color(0xff005aa8)),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        side:
+                                            BorderSide(color: Colors.black45)))),
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Icon(Icons.search),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Search'),
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                  size: 14,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: OutlinedButton(
+                            style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white),
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Color(0xff005aa8)),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        side: BorderSide(color: Colors.red)))),
+                            onPressed: () {
+                              Navigator.pop(context, false);
                             },
-                            // validator: (value) {
-                            //   if (value.isEmpty) {
-                            //     debugPrint(
-                            //         "empid :yes");
-                            //     return 'Employee Id must not be empty';
-                            //   }
-                            //   return null;
-                            // },
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('cancel'),
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                              size: 14,
+                            ),
                           ),
                         ),
-                      ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xff005aa8)),
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      side:
-                                          BorderSide(color: Colors.black45)))),
-                          onPressed: () {},
-                          child: Row(
-                            children: [
-                              Icon(Icons.search),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              TextWidget(
-                                text: DemoLocalization.of(context)
-                                    .translate('Search'),
-                                color: lightColor,
-                                weight: FontWeight.w400,
-                                size: 14,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      side: BorderSide(color: Colors.red)))),
-                          onPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('cancel'),
-                            color: darkColor,
-                            weight: FontWeight.w400,
-                            size: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -474,18 +490,22 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
   Widget _landscapeMode() {
     return Container(
       color: Theme.of(context).accentColor,
-      margin: EdgeInsets.all(80),
+      margin: EdgeInsets.all(75),
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: TextWidget(
-                text: "Search Campaign",
-                color: Colors.white,
-                size: 26,
-                weight: FontWeight.w700,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextWidget(
+                  text:DemoLocalization.of(context)
+                      .translate('Search Campaign'),
+                  color: Colors.white,
+                  size: 18,
+                  weight: FontWeight.w700,
+                ),
               ),
             ),
           ),
@@ -500,14 +520,17 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                   Row(
                     children: [
                       TextWidget(
-                        text: "Campaign ID **:",
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign ID'),
                         color: Colors.white,
-                        size: 22,
+                        size: 16,
                         weight: FontWeight.w400,
                       ),
                       Spacer(),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height / 10,
+
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -552,22 +575,31 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         ),
                       ),
                       Spacer(),
-                      TextWidget(
-                        text: "(or)",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
-                      ),
-                      Spacer(),
-                      TextWidget(
-                        text: "Campaign Name **:",
-                        color: Colors.white,
-                        size: 22,
-                        weight: FontWeight.w400,
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text:  DemoLocalization.of(context)
+                              .translate('Or'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
                       ),
                       Spacer(),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: 120,
+                        child: TextWidget(
+                          text:DemoLocalization.of(context)
+                              .translate('Campaign Name**'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                      Spacer(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height / 10,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -616,14 +648,16 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                   Row(
                     children: [
                       TextWidget(
-                        text: "Village Code:",
+                        text: DemoLocalization.of(context)
+                            .translate('Village Codes'),
                         color: Colors.white,
-                        size: 22,
+                        size: 16,
                         weight: FontWeight.w400,
                       ),
                       Spacer(),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 4,
+                        height: MediaQuery.of(context).size.height / 10,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -712,8 +746,12 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         padding: const EdgeInsets.all(16.0),
                         child: OutlinedButton(
                           style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff005aa8)),
                               shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
@@ -723,7 +761,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('cancel'),
-                            color: darkColor,
+                            color: lightColor,
                             weight: FontWeight.w400,
                             size: 14,
                           ),
