@@ -18,6 +18,7 @@ import 'package:tct_demographics/ui/home/dashboardScreen.dart';
 import 'package:tct_demographics/ui/home/detailedUser.dart';
 import 'package:tct_demographics/ui/home/homescreen.dart';
 import 'package:tct_demographics/ui/questionnairy/questionnaires.dart';
+import 'package:tct_demographics/ui/survey/campaign_list_screen.dart';
 import 'package:tct_demographics/ui/survey/search_campaign_screen.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
@@ -141,6 +142,9 @@ class _MyAppState extends State<MyApp> {
                         GetPage(
                             name: '/SearchCampaignScreen',
                             page: () => SearchCampaignScreen()),
+                        GetPage(
+                            name: '/CampaignListScreen',
+                            page: () => CampaignListScreen()),
                       ],
                     )
                   : MaterialApp(

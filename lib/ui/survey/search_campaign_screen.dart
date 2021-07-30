@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -432,7 +433,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                         borderRadius: BorderRadius.circular(5.0),
                                         side:
                                             BorderSide(color: Colors.black45)))),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed('/CampaignListScreen');
+                            },
                             child: Row(
                               children: [
                                 Icon(Icons.search),
@@ -656,7 +659,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       ),
                       Spacer(),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 4,
+                        width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height / 10,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -724,7 +727,10 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       borderRadius: BorderRadius.circular(5.0),
                                       side:
                                           BorderSide(color: Colors.black45)))),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed('/CampaignListScreen');
+
+                          },
                           child: Row(
                             children: [
                               Icon(Icons.search),
