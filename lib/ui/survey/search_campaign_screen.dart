@@ -71,110 +71,99 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       appBar: AppBar(
         backgroundColor: lightColor,
         automaticallyImplyLeading: false,
-        title: DoubleBackToCloseApp(
-          snackBar: SnackBar(
-              backgroundColor: errorColor,
-              elevation: 6,
-              content: TextWidget(
-                text: 'Tap back again to Exit',
-                color: lightColor,
-                weight: FontWeight.w600,
-                size: 16,
-              )),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context, false);
-                    },
-                    child: SvgPicture.asset(
-                      svgTctLogo,
-                      semanticsLabel: "Logo",
-                      height: 40,
-                      width: 50,
-                      fit: BoxFit.contain,
-                      allowDrawingOutsideViewBox: true,
-                    ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SvgPicture.asset(
+                    svgTctLogo,
+                    semanticsLabel: "Logo",
+                    height: 40,
+                    width: 50,
+                    fit: BoxFit.contain,
+                    allowDrawingOutsideViewBox: true,
                   ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  DropdownButton(
-                    underline: SizedBox(),
-                    icon: Icon(
-                      Icons.language,
-                      color: Colors.black87,
-                    ),
-                    items: ['தமிழ்', 'English'].map((val) {
-                      return new DropdownMenuItem<String>(
-                        value: val,
-                        child: new Text(val),
-                      );
-                    }).toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        dropDownLang = val;
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                DropdownButton(
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.language,
+                    color: Colors.black87,
+                  ),
+                  items: ['தமிழ்', 'English'].map((val) {
+                    return new DropdownMenuItem<String>(
+                      value: val,
+                      child: new Text(val),
+                    );
+                  }).toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      dropDownLang = val;
 
-                        _changeLanguage();
-                      });
-                      print("Language:$val");
-                    },
+                      _changeLanguage();
+                    });
+                    print("Language:$val");
+                  },
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Container(
+                            padding: EdgeInsets.only(left: 8.0),
+                            height: 30,
+                            width: 30,
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: new AssetImage(user)))),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        userMail != null
+                            ? Text(
+                                userMail,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              )
+                            : Text(
+                                userName,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              ),
+                      ],
+                    )),
+                SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    AuthenticationService(FirebaseAuth.instance)
+                        .signOut(context);
+                  },
+                  child: Icon(
+                    Icons.power_settings_new_outlined,
+                    color: darkColor,
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(left: 8.0),
-                              height: 30,
-                              width: 30,
-                              decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: new AssetImage(user)))),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          userMail != null
-                              ? Text(
-                                  userMail,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                )
-                              : Text(
-                                  userName,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                ),
-                        ],
-                      )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      AuthenticationService(FirebaseAuth.instance)
-                          .signOut(context);
-                    },
-                    child: Icon(
-                      Icons.power_settings_new_outlined,
-                      color: darkColor,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
       body: OrientationBuilder(
