@@ -9,6 +9,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
+import 'package:tct_demographics/models/campaign_list.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
@@ -28,6 +29,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignNameController = TextEditingController();
+  bool isLoading = false;
+  List<CampaignList> _campaignList = [];
+
 
   @override
   void initState() {
@@ -222,7 +226,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               text: DemoLocalization.of(context)
                                   .translate('Campaign Name'),
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w700,
                             ),
                           ),
@@ -232,7 +236,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "Campaign for Diabetes",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
@@ -244,7 +248,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Campaign Description'),
                             size: 14,
-                            color: darkColor,
+                            color: lightColor,
                             weight: FontWeight.w700,
                           ),
                           Padding(
@@ -253,7 +257,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "Diabetes for Women of age > 60",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
@@ -265,7 +269,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Objective Name'),
                             size: 14,
-                            color: darkColor,
+                            color: lightColor,
                             weight: FontWeight.w700,
                           ),
                           Padding(
@@ -273,7 +277,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "Diabetes",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
@@ -293,7 +297,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               text: DemoLocalization.of(context)
                                   .translate('Campaign Population'),
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w700,
                             ),
                           ),
@@ -303,7 +307,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "370",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
@@ -315,7 +319,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Completed'),
                             size: 14,
-                            color: darkColor,
+                            color: lightColor,
                             weight: FontWeight.w700,
                           ),
                           Padding(
@@ -324,7 +328,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "60",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
@@ -336,7 +340,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Pending:'),
                             size: 14,
-                            color: darkColor,
+                            color: lightColor,
                             weight: FontWeight.w700,
                           ),
                           Padding(
@@ -345,12 +349,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             child: TextWidget(
                               text: "60",
                               size: 14,
-                              color: darkColor,
+                              color: lightColor,
                               weight: FontWeight.w400,
                             ),
                           ),
                         ],
                       ),
+                      Container(width: 300,)
+
                     ],
                   ),
                 ],
@@ -361,7 +367,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: 60,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+            padding: const EdgeInsets.only(left: 8.0,right: 8,top:2),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
@@ -372,7 +378,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: TextWidget(
                       text: 'Showing 30 of 210 records',
                       size: 14,
-                      color: darkColor,
+                      color: lightColor,
                       weight: FontWeight.w400,
                     ),
                   ),
@@ -437,47 +443,41 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   DataTable(
-                    columnSpacing: 0.06,
+                    columnSpacing: 0.04,
                     showCheckboxColumn: false,
-                    horizontalMargin: 0.10,
-
+                    showBottomBorder: true,
+                    // horizontalMargin: 0.10,
                     headingRowColor: MaterialStateColor
                         .resolveWith(
                             (states) => Color(0xff005aa8)),
                     columns:  <DataColumn>[
                       DataColumn(
-                          label: Padding(
-                            padding: EdgeInsets.only(right: 1.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Head'),
-                              color: lightColor,
-                              size: 16,
-                              weight: FontWeight.w700,
-                            ),
-                          )),
-                      DataColumn(
-                        label: Padding(
-                          padding: EdgeInsets.only(left: 6.0),
-                          child: TextWidget(
+                          label: TextWidget(
                             text: DemoLocalization.of(context)
-                                .translate('Respondent Name'),
+                                .translate('Family Head'),
                             color: lightColor,
                             size: 16,
                             weight: FontWeight.w700,
-                          ),
+                          )),
+                      DataColumn(
+                       label: VerticalDivider(thickness: 2,),
+                      ),
+                      DataColumn(
+                        label: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Respondent Name'),
+                          color: lightColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       DataColumn(
-                        label: Padding(
-                          padding: EdgeInsets.only(left: 6.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Mobile No'),
-                            color: lightColor,
-                            size: 16,
-                            weight: FontWeight.w700,
-                          ),
+                        label: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Mobile No'),
+                          color: lightColor,
+                          size: 16,
+                          weight: FontWeight.w700,
                         ),
                       ),
                       DataColumn(
@@ -498,11 +498,24 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w700,
                           ))
                     ],
-                    rows:  <DataRow>[
+                    rows: <DataRow>[
                       DataRow(
                         cells: <DataCell>[
-                          DataCell(Text('Mohit')),
-                          DataCell(Text('Mohit')),
+                          DataCell(TextWidget(
+                            text: "Mohit"
+                                .toString(),
+                            color: darkGreyColor,
+                            size: 16,
+                            weight: FontWeight.w400,
+                          ),),
+                          DataCell(VerticalDivider()),
+                          DataCell(TextWidget(
+                            text: "Mohit"
+                                .toString(),
+                            color: darkGreyColor,
+                            size: 16,
+                            weight: FontWeight.w400,
+                          )),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('')),
@@ -511,6 +524,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Akshay')),
+                          DataCell(VerticalDivider()),
+
                           DataCell(Text('Akshay')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -520,7 +535,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(Text('29')),
+                          DataCell(VerticalDivider()),
+
+                          DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('')),
@@ -529,7 +546,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(Text('29')),
+                          DataCell(VerticalDivider()),
+
+                          DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('')),
@@ -538,7 +557,31 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(Text('29')),
+                          DataCell(VerticalDivider()),
+
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(VerticalDivider()),
+
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(VerticalDivider()),
+
+                          DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('')),
@@ -551,11 +594,557 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ),
           ),
         ),
+        InkWell(
+          onTap: () {
+/*
+            loadMore = true;
+            loadData = true;
+            if (snapshot.data.docs.length > 0) {
+              query = query
+                  .startAfterDocument(snapshot.data.docs[
+              snapshot.data.docs.length - 1])
+                  .limit(30);
+              setState(() {
+                isLoading = true;
+              });
+            }
+*/
+          },
+          child: Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: [
+              Container(),
+              isLoading
+                  ? Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Center(
+                      child:
+                      CircularProgressIndicator()))
+                  : Container(),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, right: 24, bottom: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Colors.black45,
+                      style: BorderStyle.solid,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.more_horiz),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        TextWidget(
+                          text:
+                          DemoLocalization.of(context)
+                              .translate('Show More'),
+                          color: darkColor,
+                          weight: FontWeight.w700,
+                          size: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+
       ],
     );
   }
 
   Widget _portraitMode() {
-    return Container();
+    return Column(
+      children: [
+        Container(
+          height: 120,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+            child: Card(
+              color: Theme.of(context).accentColor,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Campaign Name'),
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w700,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4, left: 2),
+                              child: SizedBox(
+                                width: 100,
+                                child: TextWidget(
+                                  text: "Campaign for Diabetes",
+                                  size: 14,
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4, left: 2),
+                              child: SizedBox(
+                                width: 120,
+                                child: TextWidget(
+                                  text: "Diabetes for Women of age > 60",
+                                  size: 14,
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Objective Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextWidget(
+                                text: "Diabetes",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SizedBox(
+                              width: 80,
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Campaign Population'),
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 4.0, bottom: 4, left: 2),
+                            child: TextWidget(
+                              text: "370",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Completed'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4, left: 2),
+                              child: TextWidget(
+                                text: "60",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Row(
+                          children: [
+                            TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Pending:'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 4.0, bottom: 4, left: 2),
+                              child: TextWidget(
+                                text: "60",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: 60,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0,right: 8,top:2),
+            child: Card(
+              color: Theme.of(context).accentColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: TextWidget(
+                      text: 'Showing 30 of 210 records',
+                      size: 14,
+                      color: lightColor,
+                      weight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 3,
+                    height: MediaQuery.of(context).size.height / 8,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: campaignNameController,
+                        textInputAction: TextInputAction.next,
+                        enableSuggestions: true,
+                        decoration: InputDecoration(
+                            labelText: "Search",
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black54),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                            suffixIcon: Icon(Icons.search),
+                            fillColor: Colors.white),
+
+                        keyboardType: TextInputType.text,
+                        onSaved: (String val) {
+                          setState(() {
+                            campaignNameController.text = val;
+                          });
+                        },
+                        // validator: (value) {
+                        //   if (value.isEmpty) {
+                        //     debugPrint(
+                        //         "empid :yes");
+                        //     return 'Employee Id must not be empty';
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  DataTable(
+                    columnSpacing: 0.04,
+                    showCheckboxColumn: false,
+                    // horizontalMargin: 0.10,
+                    showBottomBorder: true,
+                    headingRowColor: MaterialStateColor
+                        .resolveWith(
+                            (states) => Color(0xff005aa8)),
+                    columns:  <DataColumn>[
+                      DataColumn(
+                          label: SizedBox(
+                            width: 80,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Family Head'),
+                              color: lightColor,
+                              size: 16,
+                              weight: FontWeight.w700,
+                            ),
+                          )),
+                      DataColumn(
+                        label: SizedBox(
+                          width: 100,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Respondent Name'),
+                            color: lightColor,
+                            size: 16,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: SizedBox(
+                          width: 120,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Mobile No'),
+                            color: lightColor,
+                            size: 16,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: SizedBox(
+                          width: 100,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Village Code'),
+                            color: lightColor,
+                            size: 16,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                          label: SizedBox(
+                            width: 80,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Status'),
+                              color: lightColor,
+                              size: 16,
+                              weight: FontWeight.w700,
+                            ),
+                          ))
+                    ],
+                    rows: <DataRow>[
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(TextWidget(
+                            text: "Mohit"
+                                .toString(),
+                            color: darkGreyColor,
+                            size: 16,
+                            weight: FontWeight.w400,
+                          ),),
+                          DataCell(TextWidget(
+                            text: "Mohit"
+                                .toString(),
+                            color: darkGreyColor,
+                            size: 16,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Completed')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Akshay')),
+                          DataCell(Text('Akshay')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Pending')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Pending')),
+                        ],
+                      )  ,
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Completed')),
+                        ],
+                      ) ,
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Completed')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Pending')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('Completed')),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+/*
+            loadMore = true;
+            loadData = true;
+            if (snapshot.data.docs.length > 0) {
+              query = query
+                  .startAfterDocument(snapshot.data.docs[
+              snapshot.data.docs.length - 1])
+                  .limit(30);
+              setState(() {
+                isLoading = true;
+              });
+            }
+*/
+          },
+          child: Row(
+            mainAxisAlignment:
+            MainAxisAlignment.spaceBetween,
+            children: [
+              Container(),
+              isLoading
+                  ? Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Center(
+                      child:
+                      CircularProgressIndicator()))
+                  : Container(),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 8.0, right: 24, bottom: 8),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius.circular(5),
+                    border: Border.all(
+                      color: Colors.black45,
+                      style: BorderStyle.solid,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.more_horiz),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        TextWidget(
+                          text:
+                          DemoLocalization.of(context)
+                              .translate('Show More'),
+                          color: darkColor,
+                          weight: FontWeight.w700,
+                          size: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        )
+
+      ],
+    );
+
   }
 }
+
