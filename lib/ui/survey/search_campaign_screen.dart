@@ -229,10 +229,10 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         ),
                         Spacer(flex: 1),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 3.5,
+                          width: MediaQuery.of(context).size.width / 3.6,
                           height: MediaQuery.of(context).size.width / 10,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top:8.0,left: 10,bottom: 8),
                             child: TextFormField(
                               controller: campaignIDController,
                               textInputAction: TextInputAction.next,
@@ -363,12 +363,12 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           size: 16,
                           weight: FontWeight.w400,
                         ),
-                        Spacer(flex: 1),
+                        Spacer(),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 3.5,
+                          width: MediaQuery.of(context).size.width / 3.4,
                           height: MediaQuery.of(context).size.width / 10,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(top:8.0,left: 20,bottom: 8),
                             child: TextFormField(
                               controller: villageCodeController,
                               textInputAction: TextInputAction.next,
@@ -399,20 +399,10 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                   villageCodeController.text = val;
                                 });
                               },
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     debugPrint(
-                              //         "empid :yes");
-                              //     return 'Employee Id must not be empty';
-                              //   }
-                              //   return null;
-                              // },
                             ),
                           ),
                         ),
-                        Spacer(
-                          flex: 1,
-                        ),
+                        Spacer(),
                       ],
                     ),
                     Row(
@@ -589,15 +579,12 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         ),
                       ),
                       Spacer(),
-                      SizedBox(
-                        width: 120,
-                        child: TextWidget(
-                          text:DemoLocalization.of(context)
-                              .translate('Campaign Name**'),
-                          color: Colors.white,
-                          size: 16,
-                          weight: FontWeight.w400,
-                        ),
+                      TextWidget(
+                        text:DemoLocalization.of(context)
+                            .translate('Campaign Name**'),
+                        color: Colors.white,
+                        size: 16,
+                        weight: FontWeight.w400,
                       ),
                       Spacer(),
                       SizedBox(
@@ -705,7 +692,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         ),
                       ),
                       Spacer(
-                        flex: 15,
+                        flex: 14,
                       ),
                     ],
                   ),
