@@ -490,6 +490,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ],
                     rows: <DataRow>[
                       DataRow(
+                        onSelectChanged: (bool selected) {
+                            Get.toNamed('/SurveyQuestionnaire',);
+                        },
                         cells: <DataCell>[
                           DataCell(TextWidget(
                             text: "Mohit"
@@ -986,6 +989,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ],
                     rows: <DataRow>[
                       DataRow(
+                        onSelectChanged: (bool selected) {
+                          Get.toNamed('/SurveyQuestionnaire',);
+                        },
                         cells: <DataCell>[
                           DataCell(TextWidget(
                             text: "Mohit"

@@ -24,6 +24,7 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 import 'localization/localization.dart';
+import 'ui/survey/survey_questionnaire_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -145,6 +146,9 @@ class _MyAppState extends State<MyApp> {
                         GetPage(
                             name: '/CampaignListScreen',
                             page: () => CampaignListScreen()),
+                        GetPage(
+                            name: '/SurveyQuestionnaire',
+                            page: () => SurveyQuestionnaireScreen()),
                       ],
                     )
                   : MaterialApp(
