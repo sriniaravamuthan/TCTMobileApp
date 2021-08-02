@@ -197,154 +197,154 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         Container(
-          height: 90,
+          height: 100,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Name'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 4.0, bottom: 4, left: 2),
-                            child: TextWidget(
-                              text: "Campaign for Diabetes",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 4.0, bottom: 4, left: 2),
-                            child: TextWidget(
-                              text: "Diabetes for Women of age > 60",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextWidget(
-                              text: "Diabetes",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: TextWidget(
+                      text: DemoLocalization.of(context)
+                          .translate('Campaign Name'),
+                      size: 14,
+                      color: lightColor,
+                      weight: FontWeight.w700,
+                    ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0, bottom: 4,),
+                    child: SizedBox(
+                      width: 100,
+                      child: TextWidget(
+                        text: "Campaign for Diabetes",
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: TextWidget(
+                      text: DemoLocalization.of(context)
+                          .translate('Campaign Description'),
+                      size: 14,
+                      color: lightColor,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0, bottom: 4,),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: SizedBox(
+                        width: 100,
+                        child: TextWidget(
+                          text: "Diabetes for Women of age > 60",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: TextWidget(
+                      text: DemoLocalization.of(context)
+                          .translate('Objective Name'),
+                      size: 14,
+                      color: lightColor,
+                      weight: FontWeight.w700,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 4.0, bottom: 4,),
+                    child: TextWidget(
+                      text: "Diabetes",
+                      size: 14,
+                      color: lightColor,
+                      weight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Population'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 4.0, bottom: 4, left: 2),
-                            child: TextWidget(
-                              text: "370",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Campaign Population'),
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w700,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Completed'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 4.0, bottom: 4, left: 2),
-                            child: TextWidget(
-                              text: "60",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 4.0, bottom: 4, left: 2),
+                        child: TextWidget(
+                          text: "370",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Pending:'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 4.0, bottom: 4, left: 2),
-                            child: TextWidget(
-                              text: "60",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Completed'),
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w700,
+                        ),
                       ),
-                      Container(width: 300,)
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 4.0, bottom: 4, left: 2),
+                        child: TextWidget(
+                          text: "60",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Pending:'),
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 4.0, bottom: 4, left: 2),
+                        child: TextWidget(
+                          text: "60",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                      Container(width: 250,)
 
                     ],
                   ),
@@ -450,15 +450,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w700,
                           )),
                       DataColumn(
-                       label: VerticalDivider(thickness: 2,),
-                      ),
-                      DataColumn(
-                        label: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Respondent Name'),
-                          color: lightColor,
-                          size: 16,
-                          weight: FontWeight.w700,
+                        label: SizedBox(
+                          width: 160,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Respondent Name'),
+                            color: lightColor,
+                            size: 16,
+                            weight: FontWeight.w700,
+                          ),
                         ),
                       ),
                       DataColumn(
@@ -501,7 +501,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             size: 16,
                             weight: FontWeight.w400,
                           ),),
-                          DataCell(VerticalDivider()),
                           DataCell(TextWidget(
                             text: "Mohit"
                                 .toString(),
@@ -517,8 +516,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Akshay')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Akshay')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -528,8 +525,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -539,8 +534,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -550,8 +543,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -561,8 +552,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -572,8 +561,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -941,7 +928,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           )),
                       DataColumn(
                         label: SizedBox(
-                          width: 100,
+                          width: 120,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Respondent Name'),

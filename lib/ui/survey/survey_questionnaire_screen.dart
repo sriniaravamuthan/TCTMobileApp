@@ -1,5 +1,6 @@
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -176,11 +177,265 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget _portraitMode() {
-    return Container();
+    return Column(
+      children: [
+        Container(
+          height: 100,
+          child: Card(
+            color: Theme.of(context).accentColor,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 4.0, bottom: 4,),
+                            child: SizedBox(
+                              width: 100,
+                              child: TextWidget(
+                                text: "Campaign for Diabetes",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SizedBox(
+                              width: 100,
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Campaign Description'),
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 4.0, bottom: 4,),
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: SizedBox(
+                                width: 120,
+                                child: TextWidget(
+                                  text: "Diabetes for Women of age > 60",
+                                  size: 14,
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                  ],
+                ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0,bottom: 4),
+                      child: Row(
+                        children: [
+                          TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Objective Name'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextWidget(
+                              text: "Diabetes",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0,left: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: TextWidget(
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
+                  size: 14,
+                  color: darkColor,
+                  weight: FontWeight.w700,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 4.0, bottom: 4,),
+                child: SizedBox(
+                  width: 100,
+                  child: TextWidget(
+                    text: "Mohit",
+                    size: 14,
+                    color: darkColor,
+                    weight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        questionnaireList(),
+
+      ],
+    );
+
   }
 
   Widget _landscapeMode() {
-    return Container();
+    return Column(
+      children: [
+        Container(
+          height: 70,
+          child: Card(
+            color: Theme.of(context).accentColor,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: SizedBox(
+                        width: 100,
+                        child: TextWidget(
+                          text: "Campaign for Diabetes",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Description'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: SizedBox(
+                          width: 100,
+                          child: TextWidget(
+                            text: "Diabetes for Women of age > 60",
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Objective Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: TextWidget(
+                        text: "Diabetes",
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0,left: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: TextWidget(
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
+                  size: 14,
+                  color: darkColor,
+                  weight: FontWeight.w700,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 4.0, bottom: 4,),
+                child: SizedBox(
+                  width: 100,
+                  child: TextWidget(
+                    text: "Mohit",
+                    size: 14,
+                    color: darkColor,
+                    weight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        questionnaireList(),
+
+      ],
+    );
+
   }
 
   void _changeLanguage() async {
@@ -198,5 +453,77 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         SharedPref().setStringPref(SharedPref().language, 'en');
       });
     }
+  }
+
+  questionnaireList() {
+    return Expanded(
+        child: ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 2,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  elevation: 5,
+                  child: Container(
+                    margin: EdgeInsets.only(right: 6),
+                    decoration: BoxDecoration(
+                        color: lightColor,
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(10))),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: "Section Name",
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 16,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text:"Question: Gender?"
+                                  .toString(),
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 14,
+                            ),
+                          )    ,
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text:"Option"
+                                  .toString(),
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 14,
+                            ),
+                          ) ,
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text:"productPrice"
+                                  .toString(),
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 14,
+                            ),
+                          ),
+                        ]
+
+                    ),
+                  ),
+                ),
+              ); //   key: UniqueKey(),
+              //   direction: DismissDirection.endToStart,
+              // );
+            })        );
+
   }
 }
