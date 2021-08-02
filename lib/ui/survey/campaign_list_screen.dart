@@ -31,7 +31,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   var campaignNameController = TextEditingController();
   bool isLoading = false;
   List<CampaignList> _campaignList = [];
-
+  var arguments;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+    arguments = Get.arguments;
     super.initState();
   }
 
@@ -199,7 +199,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: 90,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Column(
@@ -344,8 +344,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         ],
                       ),
-                      Container(width: 300,)
-
+                      Container(
+                        width: 300,
+                      )
                     ],
                   ),
                 ],
@@ -356,7 +357,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: 60,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8,top:2),
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 2),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
@@ -428,7 +429,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -437,20 +438,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     showCheckboxColumn: false,
                     showBottomBorder: true,
                     // horizontalMargin: 0.10,
-                    headingRowColor: MaterialStateColor
-                        .resolveWith(
-                            (states) => Color(0xff005aa8)),
-                    columns:  <DataColumn>[
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xff005aa8)),
+                    columns: <DataColumn>[
                       DataColumn(
                           label: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Family Head'),
-                            color: lightColor,
-                            size: 16,
-                            weight: FontWeight.w700,
-                          )),
+                        text: DemoLocalization.of(context)
+                            .translate('Family Head'),
+                        color: lightColor,
+                        size: 16,
+                        weight: FontWeight.w700,
+                      )),
                       DataColumn(
-                       label: VerticalDivider(thickness: 2,),
+                        label: VerticalDivider(
+                          thickness: 2,
+                        ),
                       ),
                       DataColumn(
                         label: TextWidget(
@@ -481,30 +483,31 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                       DataColumn(
                           label: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Status'),
-                            color: lightColor,
-                            size: 16,
-                            weight: FontWeight.w700,
-                          ))
+                        text: DemoLocalization.of(context).translate('Status'),
+                        color: lightColor,
+                        size: 16,
+                        weight: FontWeight.w700,
+                      ))
                     ],
                     rows: <DataRow>[
                       DataRow(
                         onSelectChanged: (bool selected) {
-                            Get.toNamed('/SurveyQuestionnaire',);
+                          Get.toNamed(
+                            '/SurveyQuestionnaire',
+                          );
                         },
                         cells: <DataCell>[
-                          DataCell(TextWidget(
-                            text: "Mohit"
-                                .toString(),
-                            color: darkGreyColor,
-                            size: 16,
-                            weight: FontWeight.w400,
-                          ),),
+                          DataCell(
+                            TextWidget(
+                              text: "Mohit".toString(),
+                              color: darkGreyColor,
+                              size: 16,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                           DataCell(VerticalDivider()),
                           DataCell(TextWidget(
-                            text: "Mohit"
-                                .toString(),
+                            text: "Mohit".toString(),
                             color: darkGreyColor,
                             size: 16,
                             weight: FontWeight.w400,
@@ -518,7 +521,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         cells: <DataCell>[
                           DataCell(Text('Akshay')),
                           DataCell(VerticalDivider()),
-
                           DataCell(Text('Akshay')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -529,29 +531,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
                           DataCell(VerticalDivider()),
-
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      )  ,
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ) ,
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -562,7 +541,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
                           DataCell(VerticalDivider()),
-
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -573,7 +551,26 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
                           DataCell(VerticalDivider()),
-
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(VerticalDivider()),
+                          DataCell(Text('Deepak')),
+                          DataCell(Text('7856589655')),
+                          DataCell(Text('CTL')),
+                          DataCell(Text('')),
+                        ],
+                      ),
+                      DataRow(
+                        cells: <DataCell>[
+                          DataCell(Text('Deepak')),
+                          DataCell(VerticalDivider()),
                           DataCell(Text('Deepak')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
@@ -604,24 +601,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 */
           },
           child: Row(
-            mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(),
               isLoading
                   ? Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Center(
-                      child:
-                      CircularProgressIndicator()))
+                      margin: EdgeInsets.only(left: 10),
+                      child: Center(child: CircularProgressIndicator()))
                   : Container(),
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0, right: 24, bottom: 8),
+                padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                    BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(5),
                     border: Border.all(
                       color: Colors.black45,
                       style: BorderStyle.solid,
@@ -637,8 +629,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           width: 5,
                         ),
                         TextWidget(
-                          text:
-                          DemoLocalization.of(context)
+                          text: DemoLocalization.of(context)
                               .translate('Show More'),
                           color: darkColor,
                           weight: FontWeight.w700,
@@ -652,7 +643,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ],
           ),
         )
-
       ],
     );
   }
@@ -663,7 +653,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: 120,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Column(
@@ -756,7 +746,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ],
                         ),
                       ),
-
                       Row(
                         children: [
                           Padding(
@@ -832,7 +821,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ],
                         ),
                       ),
-
                     ],
                   ),
                 ],
@@ -843,7 +831,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: 60,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0,right: 8,top:2),
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 2),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
@@ -915,7 +903,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
+              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -924,21 +912,20 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     showCheckboxColumn: false,
                     // horizontalMargin: 0.10,
                     showBottomBorder: true,
-                    headingRowColor: MaterialStateColor
-                        .resolveWith(
-                            (states) => Color(0xff005aa8)),
-                    columns:  <DataColumn>[
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xff005aa8)),
+                    columns: <DataColumn>[
                       DataColumn(
                           label: SizedBox(
-                            width: 80,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Head'),
-                              color: lightColor,
-                              size: 16,
-                              weight: FontWeight.w700,
-                            ),
-                          )),
+                        width: 80,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Family Head'),
+                          color: lightColor,
+                          size: 16,
+                          weight: FontWeight.w700,
+                        ),
+                      )),
                       DataColumn(
                         label: SizedBox(
                           width: 100,
@@ -977,32 +964,34 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                       DataColumn(
                           label: SizedBox(
-                            width: 80,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Status'),
-                              color: lightColor,
-                              size: 16,
-                              weight: FontWeight.w700,
-                            ),
-                          ))
+                        width: 80,
+                        child: TextWidget(
+                          text:
+                              DemoLocalization.of(context).translate('Status'),
+                          color: lightColor,
+                          size: 16,
+                          weight: FontWeight.w700,
+                        ),
+                      ))
                     ],
                     rows: <DataRow>[
                       DataRow(
                         onSelectChanged: (bool selected) {
-                          Get.toNamed('/SurveyQuestionnaire',);
+                          Get.toNamed(
+                            '/SurveyQuestionnaire',
+                          );
                         },
                         cells: <DataCell>[
+                          DataCell(
+                            TextWidget(
+                              text: "Mohit".toString(),
+                              color: darkGreyColor,
+                              size: 16,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                           DataCell(TextWidget(
-                            text: "Mohit"
-                                .toString(),
-                            color: darkGreyColor,
-                            size: 16,
-                            weight: FontWeight.w400,
-                          ),),
-                          DataCell(TextWidget(
-                            text: "Mohit"
-                                .toString(),
+                            text: "Mohit".toString(),
                             color: darkGreyColor,
                             size: 16,
                             weight: FontWeight.w400,
@@ -1029,7 +1018,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           DataCell(Text('CTL')),
                           DataCell(Text('Pending')),
                         ],
-                      )  ,
+                      ),
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
@@ -1038,7 +1027,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           DataCell(Text('CTL')),
                           DataCell(Text('Completed')),
                         ],
-                      ) ,
+                      ),
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
@@ -1090,24 +1079,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 */
           },
           child: Row(
-            mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(),
               isLoading
                   ? Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Center(
-                      child:
-                      CircularProgressIndicator()))
+                      margin: EdgeInsets.only(left: 10),
+                      child: Center(child: CircularProgressIndicator()))
                   : Container(),
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0, right: 24, bottom: 8),
+                padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                    BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(5),
                     border: Border.all(
                       color: Colors.black45,
                       style: BorderStyle.solid,
@@ -1123,8 +1107,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           width: 5,
                         ),
                         TextWidget(
-                          text:
-                          DemoLocalization.of(context)
+                          text: DemoLocalization.of(context)
                               .translate('Show More'),
                           color: darkColor,
                           weight: FontWeight.w700,
@@ -1138,10 +1121,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ],
           ),
         )
-
       ],
     );
-
   }
 }
-

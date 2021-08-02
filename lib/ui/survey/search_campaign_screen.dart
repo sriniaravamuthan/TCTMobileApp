@@ -191,8 +191,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: TextWidget(
-                  text:DemoLocalization.of(context)
-                      .translate('Search Campaign'),
+                  text:
+                      DemoLocalization.of(context).translate('Search Campaign'),
                   color: Colors.white,
                   size: 18,
                   weight: FontWeight.w700,
@@ -221,7 +221,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           width: MediaQuery.of(context).size.width / 3.6,
                           height: MediaQuery.of(context).size.width / 10,
                           child: Padding(
-                            padding: const EdgeInsets.only(top:8.0,left: 10,bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8.0, left: 10, bottom: 8),
                             child: TextFormField(
                               controller: campaignIDController,
                               textInputAction: TextInputAction.next,
@@ -273,8 +274,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       children: [
                         Spacer(),
                         TextWidget(
-                          text:  DemoLocalization.of(context)
-                              .translate('Or'),
+                          text: DemoLocalization.of(context).translate('Or'),
                           color: Colors.white,
                           size: 16,
                           weight: FontWeight.w400,
@@ -285,7 +285,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                     Row(
                       children: [
                         TextWidget(
-                          text:DemoLocalization.of(context)
+                          text: DemoLocalization.of(context)
                               .translate('Campaign Name**'),
                           color: Colors.white,
                           size: 16,
@@ -357,7 +357,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           width: MediaQuery.of(context).size.width / 3.4,
                           height: MediaQuery.of(context).size.width / 10,
                           child: Padding(
-                            padding: const EdgeInsets.only(top:8.0,left: 20,bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8.0, left: 20, bottom: 8),
                             child: TextFormField(
                               controller: villageCodeController,
                               textInputAction: TextInputAction.next,
@@ -381,7 +382,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                   ),
                                   suffixIcon: Icon(Icons.search),
                                   fillColor: Colors.white),
-
                               keyboardType: TextInputType.text,
                               onSaved: (String val) {
                                 setState(() {
@@ -402,18 +402,25 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           padding: const EdgeInsets.all(16.0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all<Color>(
-                                    Colors.white),
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    Color(0xff005aa8)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xff005aa8)),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        side:
-                                            BorderSide(color: Colors.black45)))),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        side: BorderSide(
+                                            color: Colors.black45)))),
                             onPressed: () {
-                              Get.toNamed('/CampaignListScreen');
+                              Get.toNamed('/CampaignListScreen', arguments: [
+                                campaignIDController.text.toString(),
+                                campaignNameController.text.toString(),
+                                villageCodeController.text.toString()
+                              ]);
                             },
                             child: Row(
                               children: [
@@ -436,14 +443,17 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           padding: const EdgeInsets.all(16.0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all<Color>(
-                                    Colors.white),
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    Color(0xff005aa8)),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xff005aa8)),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5.0),
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
                                         side: BorderSide(color: Colors.red)))),
                             onPressed: () {
                               Navigator.pop(context, false);
@@ -482,8 +492,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextWidget(
-                  text:DemoLocalization.of(context)
-                      .translate('Search Campaign'),
+                  text:
+                      DemoLocalization.of(context).translate('Search Campaign'),
                   color: Colors.white,
                   size: 18,
                   weight: FontWeight.w700,
@@ -512,7 +522,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height / 10,
-
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
@@ -560,8 +569,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: TextWidget(
-                          text:  DemoLocalization.of(context)
-                              .translate('Or'),
+                          text: DemoLocalization.of(context).translate('Or'),
                           color: Colors.white,
                           size: 16,
                           weight: FontWeight.w400,
@@ -569,7 +577,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       ),
                       Spacer(),
                       TextWidget(
-                        text:DemoLocalization.of(context)
+                        text: DemoLocalization.of(context)
                             .translate('Campaign Name**'),
                         color: Colors.white,
                         size: 16,
@@ -705,7 +713,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           BorderSide(color: Colors.black45)))),
                           onPressed: () {
                             Get.toNamed('/CampaignListScreen');
-
                           },
                           child: Row(
                             children: [
@@ -733,7 +740,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color(0xff005aa8)),
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
