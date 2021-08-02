@@ -1,4 +1,3 @@
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +7,9 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
-import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
-import 'package:tct_demographics/widgets/text_widget.dart';
 
 class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
@@ -77,7 +74,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Get.toNamed('/homeScreen');
                   },
                   child: SvgPicture.asset(
                     svgTctLogo,
