@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
+import 'package:tct_demographics/constants/app_colors.dart';
+import 'package:tct_demographics/constants/app_strings.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 
-void setSearchCampaignAPI(SearchCampaignRequest searchCampaignRequest) async {
+Future<SearchCampaignResponse> setSearchCampaignAPI(
+    SearchCampaignRequest searchCampaignRequest) async {
+  debugPrint(
+      "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
   String url;
   url = "https://run.mocky.io/v3/0d027d73-6a5f-4338-ba8d-c01d1798518b";
 
@@ -28,14 +34,13 @@ void setSearchCampaignAPI(SearchCampaignRequest searchCampaignRequest) async {
   if (response.statusCode == 200) {
     debugPrint("Response ${data.data}");
     if (!data.isError) {
-      // snackBarAlert(
-      //     success, data.message.toString(), Icon(Icons.done), chartColor10);
+      return data;
     } else {
-      // snackBarAlert(warning, data.message.toString(),
-      //     Icon(Icons.warning_amber_outlined), warningColor);
+      snackBarAlert(warning, "API Error", errorColor);
+      return null;
     }
   } else {
-    // snackBarAlert(
-    //     error, data.message.toString(), Icon(Icons.error_outline), errorColor);
+    snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
+    return null;
   }
 }
