@@ -213,7 +213,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           text: DemoLocalization.of(context)
                               .translate('Campaign ID'),
                           color: Colors.white,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w400,
                         ),
                         Spacer(flex: 1),
@@ -276,7 +276,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         TextWidget(
                           text: DemoLocalization.of(context).translate('Or'),
                           color: Colors.white,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w400,
                         ),
                         Spacer(),
@@ -349,7 +349,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           text: DemoLocalization.of(context)
                               .translate('Village Codes'),
                           color: Colors.white,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w400,
                         ),
                         Spacer(),
@@ -484,7 +484,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       physics: BouncingScrollPhysics(),
       child: Container(
         color: Theme.of(context).accentColor,
-        margin: EdgeInsets.all(75),
+        margin: EdgeInsets.all(65),
         child: Stack(
           children: [
             Padding(
@@ -507,7 +507,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 24.0, right: 24, top: 40.0, bottom: 24),
+                    left: 24.0, right: 24, top: 60.0, bottom: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -518,7 +518,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           text: DemoLocalization.of(context)
                               .translate('Campaign ID'),
                           color: Colors.white,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w400,
                         ),
                         SizedBox(
@@ -572,7 +572,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           child: TextWidget(
                             text: DemoLocalization.of(context).translate('Or'),
                             color: Colors.white,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w400,
                           ),
                         ),
@@ -642,7 +642,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Village Codes'),
                             color: Colors.white,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w400,
                           ),
                         ),

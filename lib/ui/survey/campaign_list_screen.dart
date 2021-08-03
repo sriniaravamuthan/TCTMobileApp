@@ -250,6 +250,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   }
 
   Widget _landscapeMode() {
+    debugPrint("CampaignList:${dataCampaign?.campaignName}");
+
     return Column(
       children: [
         Container(
@@ -280,7 +282,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         child: SizedBox(
                           width: 100,
                           child: TextWidget(
-                            text: dataCampaign?.campaignName,
+                            // text: dataCampaign?.campaignName,
+                            text: "Campaign for Diabetes",
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
