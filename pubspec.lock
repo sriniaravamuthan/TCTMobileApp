@@ -378,6 +378,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  json_to_form:
+    dependency: "direct main"
+    description:
+      name: json_to_form
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   matcher:
     dependency: transitive
     description:

@@ -1,14 +1,20 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:json_to_form/json_schema.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
+import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/widgets/text_widget.dart';
 
 class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
@@ -45,7 +51,96 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
     super.initState();
   }
+  String form = json.encode({
+    'title': 'Section Name:',
+    'fields': [
+      {
+        'key': 'inputKey',
+        'type': 'Input',
+        'label': 'How old are you?',
+        'value': '',
+        'required': true
+      },
+      {
+        'key': 'tareatext1',
+        'type': 'TareaText',
+        'label': 'TareaText test',
+        'placeholder': "hola a todos"
+      },
+      {
+        'key': 'radiobutton1',
+        'type': 'RadioButton',
+        'label': 'What is your Gender?',
+        'value': 2,
+        'items': [
+          {
+            'label': "Male",
+            'value': 1,
+          },
+          {
+            'label': "Female",
+            'value': 2,
+          },
+        ]
+      },
+      {
+        'key': 'checkbox1',
+        'type': 'Checkbox',
+        'label': 'Habits',
+        'items': [
+          {
+            'label': "Smoking Habit",
+            'value': true,
+          },
+          {
+            'label': "Drinking Habit",
+            'value': false,
+          },
+          {
+            'label': "Tobacco Habit",
+            'value': false,
+          }
+        ]
+      },
+      {
+        'key': 'select1',
+        'type': 'Select',
+        'label': 'Which of your relatives has diabetes?',
+        'value': 'Father',
+        'items': [
+          {
+            'label': "Father",
+            'value': "Father",
+          },
+          {
+            'label': "Mother",
+            'value': "Mother",
+          },
+          {
+            'label': "Grand Father",
+            'value': "Grand Father",
+          }
+        ]
+      },
+      {
+        'key':'date',
+        'type':'Date',
+        'label': 'Select test'
+      }
+    ]
+  });
 
+  Map decorations = {
+    'inputKey': InputDecoration(
+      labelText: "Enter your age",
+      labelStyle:TextStyle(fontSize:14, ),
+      border: OutlineInputBorder(
+          borderSide: BorderSide()
+
+      ),
+    ),
+  };
+  dynamic response;
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([
@@ -173,11 +268,294 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget _portraitMode() {
-    return Container();
+    return Column(
+      children: [
+        Container(
+          height: 100,
+          child: Card(
+            color: Theme.of(context).accentColor,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 4.0, bottom: 4,),
+                            child: SizedBox(
+                              width: 100,
+                              child: TextWidget(
+                                text: "Campaign for Diabetes",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: SizedBox(
+                              width: 100,
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Campaign Description'),
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 4.0, bottom: 4,),
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: SizedBox(
+                                width: 120,
+                                child: TextWidget(
+                                  text: "Diabetes for Women of age > 60",
+                                  size: 14,
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                  ],
+                ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0,bottom: 4),
+                      child: Row(
+                        children: [
+                          TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Objective Name'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextWidget(
+                              text: "Diabetes",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0,left: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: TextWidget(
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
+                  size: 14,
+                  color: darkColor,
+                  weight: FontWeight.w700,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 4.0, bottom: 4,),
+                child: SizedBox(
+                  width: 100,
+                  child: TextWidget(
+                    text: "Mohit",
+                    size: 14,
+                    color: darkColor,
+                    weight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        questionnaireList(),
+
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: OutlinedButton(
+              style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color(0xff005aa8)),
+                  shape: MaterialStateProperty.all<
+                      RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.red)))),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: TextWidget(
+                text: DemoLocalization.of(context)
+                    .translate('Submit'),
+                color: lightColor,
+                weight: FontWeight.w400,
+                size: 14,
+              ),
+            ),
+          ),
+        )
+
+      ],
+    );
+
   }
 
   Widget _landscapeMode() {
-    return Container();
+    return Column(
+      children: [
+        Container(
+          height: 70,
+          child: Card(
+            color: Theme.of(context).accentColor,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: SizedBox(
+                        width: 100,
+                        child: TextWidget(
+                          text: "Campaign for Diabetes",
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Description'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: SizedBox(
+                          width: 100,
+                          child: TextWidget(
+                            text: "Diabetes for Women of age > 60",
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Objective Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 4.0, bottom: 4,),
+                      child: TextWidget(
+                        text: "Diabetes",
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0,left: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: TextWidget(
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
+                  size: 14,
+                  color: darkColor,
+                  weight: FontWeight.w700,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 4.0, bottom: 4,),
+                child: SizedBox(
+                  width: 100,
+                  child: TextWidget(
+                    text: "Mohit",
+                    size: 14,
+                    color: darkColor,
+                    weight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        questionnaireList(),
+
+      ],
+    );
+
   }
 
   void _changeLanguage() async {
@@ -195,5 +573,107 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         SharedPref().setStringPref(SharedPref().language, 'en');
       });
     }
+  }
+
+  questionnaireList() {
+    return Expanded(
+        child: SingleChildScrollView(
+
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 2,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: EdgeInsets.only(right: 6),
+                      decoration: BoxDecoration(
+                          color: lightColor,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(10))),
+                     child: new Container(
+                        // Center is a layout widget. It takes a single child and positions it
+                        // in the middle of the parent.
+                        child: new Column(children: <Widget>[
+                          new JsonSchema(
+                            decorations: decorations,
+                            form: form,
+                            onChanged: (dynamic response) {
+                              this.response = response;
+                              print(jsonEncode(response));
+                            },
+                            actionSave: (data) {
+                              print(jsonEncode(data));
+                            },
+                            // autovalidateMode: AutovalidateMode.always,
+                            // buttonSave: new Container(
+                            //   height: 40.0,
+                            //   color: Colors.blueAccent,
+                            //   child: Center(
+                            //     child: Text("Send",
+                            //         style: TextStyle(
+                            //             color: Colors.white, fontWeight: FontWeight.bold)),
+                            //   ),
+                            // ),
+                          ),
+                        ]),
+                      ),
+                      // child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Padding(
+                      //         padding:
+                      //         const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text: "Section Name",
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 16,
+                      //         ),
+                      //       ),
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Question: Gender?"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       )    ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Option"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ) ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"productPrice"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ),
+                      //     ]
+                      //
+                      // ),
+                    ),
+                  ),
+                ); //   key: UniqueKey(),
+                //   direction: DismissDirection.endToStart,
+                // );
+              }),
+        )        );
+
   }
 }

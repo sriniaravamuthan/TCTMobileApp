@@ -45,6 +45,8 @@ dependencies:
   flutter_svg: ^0.22.0
   intl: ^0.17.0
   http: ^0.13.3
+  json_to_form:
+
   flutter_localizations:
     sdk: flutter
 
