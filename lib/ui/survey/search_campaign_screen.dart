@@ -504,7 +504,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -518,7 +518,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                         size: 16,
                         weight: FontWeight.w400,
                       ),
-                      Spacer(),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height / 10,
@@ -565,7 +564,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           ),
                         ),
                       ),
-                      Spacer(),
+
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: TextWidget(
@@ -575,15 +574,16 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           weight: FontWeight.w400,
                         ),
                       ),
-                      Spacer(),
-                      TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Name**'),
-                        color: Colors.white,
-                        size: 16,
-                        weight: FontWeight.w400,
+                      SizedBox(
+                        width: 120,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Campaign Name**'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
                       ),
-                      Spacer(),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height / 10,
@@ -634,14 +634,16 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                   ),
                   Row(
                     children: [
-                      TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Village Codes'),
-                        color: Colors.white,
-                        size: 16,
-                        weight: FontWeight.w400,
+                      SizedBox(
+                        width: 120,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Village Codes'),
+                          color: Colors.white,
+                          size: 16,
+                          weight: FontWeight.w400,
+                        ),
                       ),
-                      Spacer(),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 5,
                         height: MediaQuery.of(context).size.height / 10,

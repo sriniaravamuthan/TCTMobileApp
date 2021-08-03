@@ -438,7 +438,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Family Head'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           )),
                       DataColumn(
@@ -448,7 +448,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Respondent Name'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           ),
                         ),
@@ -458,7 +458,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           text: DemoLocalization.of(context)
                               .translate('Mobile No'),
                           color: lightColor,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w700,
                         ),
                       ),
@@ -467,7 +467,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           text: DemoLocalization.of(context)
                               .translate('Village Code'),
                           color: lightColor,
-                          size: 16,
+                          size: 15,
                           weight: FontWeight.w700,
                         ),
                       ),
@@ -476,7 +476,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Status'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           ))
                     ],
