@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:json_to_form/json_schema.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -48,7 +51,96 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
     super.initState();
   }
+  String form = json.encode({
+    'title': 'Section Name:',
+    'fields': [
+      {
+        'key': 'inputKey',
+        'type': 'Input',
+        'label': 'How old are you?',
+        'value': '',
+        'required': true
+      },
+      {
+        'key': 'tareatext1',
+        'type': 'TareaText',
+        'label': 'TareaText test',
+        'placeholder': "hola a todos"
+      },
+      {
+        'key': 'radiobutton1',
+        'type': 'RadioButton',
+        'label': 'What is your Gender?',
+        'value': 2,
+        'items': [
+          {
+            'label': "Male",
+            'value': 1,
+          },
+          {
+            'label': "Female",
+            'value': 2,
+          },
+        ]
+      },
+      {
+        'key': 'checkbox1',
+        'type': 'Checkbox',
+        'label': 'Habits',
+        'items': [
+          {
+            'label': "Smoking Habit",
+            'value': true,
+          },
+          {
+            'label': "Drinking Habit",
+            'value': false,
+          },
+          {
+            'label': "Tobacco Habit",
+            'value': false,
+          }
+        ]
+      },
+      {
+        'key': 'select1',
+        'type': 'Select',
+        'label': 'Which of your relatives has diabetes?',
+        'value': 'Father',
+        'items': [
+          {
+            'label': "Father",
+            'value': "Father",
+          },
+          {
+            'label': "Mother",
+            'value': "Mother",
+          },
+          {
+            'label': "Grand Father",
+            'value': "Grand Father",
+          }
+        ]
+      },
+      {
+        'key':'date',
+        'type':'Date',
+        'label': 'Select test'
+      }
+    ]
+  });
 
+  Map decorations = {
+    'inputKey': InputDecoration(
+      labelText: "Enter your age",
+      labelStyle:TextStyle(fontSize:14, ),
+      border: OutlineInputBorder(
+          borderSide: BorderSide()
+
+      ),
+    ),
+  };
+  dynamic response;
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([
@@ -304,6 +396,35 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         ),
         questionnaireList(),
 
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: OutlinedButton(
+              style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color(0xff005aa8)),
+                  shape: MaterialStateProperty.all<
+                      RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.red)))),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: TextWidget(
+                text: DemoLocalization.of(context)
+                    .translate('Submit'),
+                color: lightColor,
+                weight: FontWeight.w400,
+                size: 14,
+              ),
+            ),
+          ),
+        )
+
       ],
     );
 
@@ -456,73 +577,103 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   questionnaireList() {
     return Expanded(
-        child: ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 2,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 5,
-                  child: Container(
-                    margin: EdgeInsets.only(right: 6),
-                    decoration: BoxDecoration(
-                        color: lightColor,
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10))),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: "Section Name",
-                              color: darkColor,
-                              weight: FontWeight.w600,
-                              size: 16,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text:"Question: Gender?"
-                                  .toString(),
-                              color: darkColor,
-                              weight: FontWeight.w600,
-                              size: 14,
-                            ),
-                          )    ,
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text:"Option"
-                                  .toString(),
-                              color: darkColor,
-                              weight: FontWeight.w600,
-                              size: 14,
-                            ),
-                          ) ,
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text:"productPrice"
-                                  .toString(),
-                              color: darkColor,
-                              weight: FontWeight.w600,
-                              size: 14,
-                            ),
-                          ),
-                        ]
+        child: SingleChildScrollView(
 
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 2,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: EdgeInsets.only(right: 6),
+                      decoration: BoxDecoration(
+                          color: lightColor,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(10))),
+                     child: new Container(
+                        // Center is a layout widget. It takes a single child and positions it
+                        // in the middle of the parent.
+                        child: new Column(children: <Widget>[
+                          new JsonSchema(
+                            decorations: decorations,
+                            form: form,
+                            onChanged: (dynamic response) {
+                              this.response = response;
+                              print(jsonEncode(response));
+                            },
+                            actionSave: (data) {
+                              print(jsonEncode(data));
+                            },
+                            // autovalidateMode: AutovalidateMode.always,
+                            // buttonSave: new Container(
+                            //   height: 40.0,
+                            //   color: Colors.blueAccent,
+                            //   child: Center(
+                            //     child: Text("Send",
+                            //         style: TextStyle(
+                            //             color: Colors.white, fontWeight: FontWeight.bold)),
+                            //   ),
+                            // ),
+                          ),
+                        ]),
+                      ),
+                      // child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Padding(
+                      //         padding:
+                      //         const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text: "Section Name",
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 16,
+                      //         ),
+                      //       ),
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Question: Gender?"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       )    ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Option"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ) ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"productPrice"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ),
+                      //     ]
+                      //
+                      // ),
                     ),
                   ),
-                ),
-              ); //   key: UniqueKey(),
-              //   direction: DismissDirection.endToStart,
-              // );
-            })        );
+                ); //   key: UniqueKey(),
+                //   direction: DismissDirection.endToStart,
+                // );
+              }),
+        )        );
 
   }
 }
