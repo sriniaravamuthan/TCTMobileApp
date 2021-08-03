@@ -46,7 +46,7 @@ dependencies:
   intl: ^0.17.0
   http: ^0.13.3
   json_to_form:
-
+  localstore: ^1.2.0
   flutter_localizations:
     sdk: flutter
 

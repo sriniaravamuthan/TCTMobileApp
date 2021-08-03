@@ -15,7 +15,6 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
-import 'package:tct_demographics/models/campaign_list.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
@@ -56,26 +55,26 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    // setState(() {
     arguments = Get.arguments;
+    // });
     debugPrint("Arguments $arguments");
     super.initState();
-    listenNetwork = Connectivity()
+    /* listenNetwork = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
-      setState(() {
+      // setState(() {
         result == ConnectivityResult.none
             ? isInternet = false
             : isInternet = true;
-      });
+      // });
       debugPrint("ConnectivityResult $result");
-    });
+    });*/
     apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
         campaignId: arguments[0],
         campaignName: arguments[1],
         villageCode: arguments[2],
-        languageCode:
-        SharedPref().getStringPref(SharedPref().language).toString()));
-
+        languageCode: "ta"));
   }
 
   @override
@@ -87,6 +86,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       DeviceOrientation.portraitDown,
     ]);
     super.dispose();
+    // listenNetwork.cancel();
   }
 
   @override
@@ -182,18 +182,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     AuthenticationService(FirebaseAuth.instance)
                         .signOut(context);
                   },
-                  child: Icon(
-                    Icons.power_settings_new_outlined,
-                    color: darkColor,
-                  ),
-                )
-              ],
-            ),
-          ],
+                    child: Icon(
+                      Icons.power_settings_new_outlined,
+                      color: darkColor,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      body:isInternet ? checkOrientation() : checkOrientation());
-
+        body: checkOrientation());
   }
   Widget checkOrientation() {
     return OrientationBuilder(
@@ -206,9 +205,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                setState(() {
                   dataCampaign = projectSnap.data?.data;
-                });
                 return _portraitMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -223,9 +220,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                setState(() {
                   dataCampaign = projectSnap.data?.data;
-                });
                 return _landscapeMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -285,7 +280,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         child: SizedBox(
                           width: 100,
                           child: TextWidget(
-                            text: "Campaign for Diabetes",
+                            text: dataCampaign?.campaignName,
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
