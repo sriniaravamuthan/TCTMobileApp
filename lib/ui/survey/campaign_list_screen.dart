@@ -1,9 +1,15 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/api/campaign_list_api.dart';
+import 'package:tct_demographics/api/request/search_campaign_request.dart';
+import 'package:tct_demographics/api/response/search_campaign_response.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -30,8 +36,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignNameController = TextEditingController();
   bool isLoading = false;
-  List<CampaignList> _campaignList = [];
-
+  var _campaignList = [];
+  var arguments;
+  StreamSubscription<ConnectivityResult> listenNetwork;
+  bool isInternet = false;
+  Future apiCampaignList;
+  Data dataCampaign;
 
   @override
   void initState() {
@@ -46,8 +56,26 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+    arguments = Get.arguments;
+    debugPrint("Arguments $arguments");
     super.initState();
+    listenNetwork = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      setState(() {
+        result == ConnectivityResult.none
+            ? isInternet = false
+            : isInternet = true;
+      });
+      debugPrint("ConnectivityResult $result");
+    });
+    apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+        campaignId: arguments[0],
+        campaignName: arguments[1],
+        villageCode: arguments[2],
+        languageCode:
+        SharedPref().getStringPref(SharedPref().language).toString()));
+
   }
 
   @override
@@ -164,15 +192,48 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ],
         ),
       ),
-      body: OrientationBuilder(
-        builder: (context, orientation) {
-          if (orientation == Orientation.portrait) {
-            return _portraitMode();
-          } else {
-            return _landscapeMode();
-          }
-        },
-      ),
+      body:isInternet ? checkOrientation() : checkOrientation());
+
+  }
+  Widget checkOrientation() {
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          return FutureBuilder<SearchCampaignResponse>(
+            future: apiCampaignList,
+            builder: (context, projectSnap) {
+              if (projectSnap.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (projectSnap.connectionState == ConnectionState.done) {
+                debugPrint("SearchCampaign Response : ${projectSnap.data}");
+                setState(() {
+                  dataCampaign = projectSnap.data?.data;
+                });
+                return _portraitMode();
+              } else {
+                return Text("Error ${projectSnap.error}");
+              }
+            },
+          );
+        } else {
+          return FutureBuilder<SearchCampaignResponse>(
+            future: apiCampaignList,
+            builder: (context, projectSnap) {
+              if (projectSnap.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (projectSnap.connectionState == ConnectionState.done) {
+                debugPrint("SearchCampaign Response : ${projectSnap.data}");
+                setState(() {
+                  dataCampaign = projectSnap.data?.data;
+                });
+                return _landscapeMode();
+              } else {
+                return Text("Error ${projectSnap.error}");
+              }
+            },
+          );
+        }
+      },
     );
   }
 
