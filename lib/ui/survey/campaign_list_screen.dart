@@ -860,14 +860,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             campaignNameController.text = val;
                           });
                         },
-                        // validator: (value) {
-                        //   if (value.isEmpty) {
-                        //     debugPrint(
-                        //         "empid :yes");
-                        //     return 'Employee Id must not be empty';
-                        //   }
-                        //   return null;
-                        // },
                       ),
                     ),
                   )
@@ -882,48 +874,52 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 2.0,right: 8,top:4),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DataTable(
-                    columnSpacing: 0.04,
+                    columnSpacing: 0.4,
                     showCheckboxColumn: false,
-                    // horizontalMargin: 0.10,
+                    horizontalMargin: 0.10,
                     showBottomBorder: true,
                     headingRowColor: MaterialStateColor
                         .resolveWith(
                             (states) => Color(0xff005aa8)),
                     columns:  <DataColumn>[
                       DataColumn(
-                          label: SizedBox(
-                            width: 90,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Head'),
-                              color: lightColor,
-                              size: 16,
-                              weight: FontWeight.w700,
+                          label: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: SizedBox(
+                              width: 85,
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Family Head'),
+                                color: lightColor,
+                                size: 15,
+                                weight: FontWeight.w700,
+                              ),
                             ),
                           )),
                       DataColumn(
                         label: SizedBox(
-                          width: 150,
+                          width: 160,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Respondent Name'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           ),
                         ),
                       ),
                       DataColumn(
                         label: SizedBox(
-                          width: 120,
+                          width: 100,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Mobile No'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           ),
                         ),
@@ -935,7 +931,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: DemoLocalization.of(context)
                                 .translate('Village Code'),
                             color: lightColor,
-                            size: 16,
+                            size: 15,
                             weight: FontWeight.w700,
                           ),
                         ),
@@ -947,7 +943,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               text: DemoLocalization.of(context)
                                   .translate('Status'),
                               color: lightColor,
-                              size: 16,
+                              size: 15,
                               weight: FontWeight.w700,
                             ),
                           ))
@@ -966,7 +962,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w400,
                           ),),
                           DataCell(TextWidget(
-                            text: "Mohit"
+                            text: "Mohit Kumar"
                                 .toString(),
                             color: darkGreyColor,
                             size: 16,
@@ -989,7 +985,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
+                          DataCell(Text('Rajesh')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('Pending')),
@@ -1016,7 +1012,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       DataRow(
                         cells: <DataCell>[
                           DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
+                          DataCell(Text('Deepak Kumar')),
                           DataCell(Text('7856589655')),
                           DataCell(Text('CTL')),
                           DataCell(Text('Pending')),
