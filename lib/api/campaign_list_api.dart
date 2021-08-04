@@ -46,14 +46,14 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     var data = SearchCampaignResponse.fromJson(json.decode(response.body));
 
     if (response.statusCode == 200) {
-      debugPrint("Response ${data.data.toJson()}");
+      debugPrint("Response ${data.toJson()}");
       if (!data.isError) {
         try {
           db.collection('campaign_list').doc("list").delete();
         } catch (error) {
           debugPrint("Error $error");
         } finally {
-          db.collection('campaign_list').doc("list").set(data.data.toJson());
+          db.collection('campaign_list').doc("list").set(data.toJson());
         }
         return data;
       } else {

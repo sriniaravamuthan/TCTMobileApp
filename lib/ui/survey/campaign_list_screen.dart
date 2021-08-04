@@ -219,8 +219,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                  dataCampaign = projectSnap.data?.data;
+                debugPrint(
+                    "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
+                dataCampaign = projectSnap.data?.data;
                 return _landscapeMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -251,7 +252,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   Widget _landscapeMode() {
     debugPrint("CampaignList:${dataCampaign?.campaignName}");
-
     return Column(
       children: [
         Container(
