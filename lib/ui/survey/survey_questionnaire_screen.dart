@@ -20,8 +20,7 @@ class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
 
   @override
-  _SurveyQuestionnaireScreenState createState() =>
-      _SurveyQuestionnaireScreenState();
+  _SurveyQuestionnaireScreenState createState() => _SurveyQuestionnaireScreenState();
 }
 
 class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
@@ -32,7 +31,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
-
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -53,7 +51,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
     super.initState();
   }
-
   String form = json.encode({
     'title': 'Section Name:',
     'fields': [
@@ -125,21 +122,25 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           }
         ]
       },
-      {'key': 'date', 'type': 'Date', 'label': 'Select test'}
+      {
+        'key':'date',
+        'type':'Date',
+        'label': 'Select test'
+      }
     ]
   });
 
   Map decorations = {
     'inputKey': InputDecoration(
       labelText: "Enter your age",
-      labelStyle: TextStyle(
-        fontSize: 14,
+      labelStyle:TextStyle(fontSize:14, ),
+      border: OutlineInputBorder(
+          borderSide: BorderSide()
+
       ),
-      border: OutlineInputBorder(borderSide: BorderSide()),
     ),
   };
   dynamic response;
-
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([
@@ -225,15 +226,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         ),
                         userMail != null
                             ? Text(
-                                userMail,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              )
+                          userMail,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        )
                             : Text(
-                                userName,
-                                style:
-                                    TextStyle(fontSize: 16, color: darkColor),
-                              ),
+                          userName,
+                          style:
+                          TextStyle(fontSize: 16, color: darkColor),
+                        ),
                       ],
                     )),
                 SizedBox(
@@ -254,168 +255,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 100,
-            child: Card(
-              color: Theme.of(context).accentColor,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Name'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 4.0,
-                          bottom: 4,
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          child: TextWidget(
-                            text: "Campaign for Diabetes",
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: SizedBox(
-                          width: 100,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 4.0,
-                          bottom: 4,
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: SizedBox(
-                            width: 120,
-                            child: TextWidget(
-                              text: "Diabetes for Women of age > 60",
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0, bottom: 4),
-                    child: Row(
-                      children: [
-                        TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Objective Name'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextWidget(
-                            text: "Diabetes",
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: TextWidget(
-                    text: DemoLocalization.of(context)
-                        .translate('Respondent Name'),
-                    size: 14,
-                    color: darkColor,
-                    weight: FontWeight.w700,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 4.0,
-                    bottom: 4,
-                  ),
-                  child: SizedBox(
-                    width: 100,
-                    child: TextWidget(
-                      text: "Mohit",
-                      size: 14,
-                      color: darkColor,
-                      weight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          questionnaireList(),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: OutlinedButton(
-                style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            side: BorderSide(color: Colors.red)))),
-                onPressed: () {
-                  Navigator.pop(context, false);
-                },
-                child: TextWidget(
-                  text: DemoLocalization.of(context).translate('Submit'),
-                  color: lightColor,
-                  weight: FontWeight.w400,
-                  size: 14,
-                ),
-              ),
-            ),
-          )
-        ],
-      )
-
-/*      OrientationBuilder(
+      body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
             return _portraitMode();
@@ -423,8 +263,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             return _landscapeMode();
           }
         },
-      )*/
-      ,
+      ),
     );
   }
 
@@ -432,7 +271,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     return Column(
       children: [
         Container(
-          height: 100,
+          height: MediaQuery.of(context).size.height/8,
           child: Card(
             color: Theme.of(context).accentColor,
             child: Column(
@@ -441,93 +280,81 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
+                          Expanded(
+                            flex:1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: 100,
+                              child: TextWidget(
+                                text: "Campaign for Diabetes",
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                    Expanded(
+                      flex: 2,
                       child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Name'),
+                        text: "Diabetes for Women of age > 60",
                         size: 14,
                         color: lightColor,
-                        weight: FontWeight.w700,
+                        weight: FontWeight.w400,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        child: TextWidget(
-                          text: "Campaign for Diabetes",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: SizedBox(
-                        width: 100,
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Description'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                          width: 120,
+                  ],
+                ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex:1,
                           child: TextWidget(
-                            text: "Diabetes for Women of age > 60",
+                            text: DemoLocalization.of(context)
+                                .translate('Objective Name'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: "Diabetes",
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
                           ),
                         ),
-                      ),
+                        Spacer(flex: 2,)
+                      ],
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 18.0, bottom: 4),
-                  child: Row(
-                    children: [
-                      TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Objective Name'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextWidget(
-                          text: "Diabetes",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
+
               ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 16),
+          padding: const EdgeInsets.only(top:8.0,left: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -535,8 +362,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextWidget(
-                  text:
-                      DemoLocalization.of(context).translate('Respondent Name'),
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
                   size: 14,
                   color: darkColor,
                   weight: FontWeight.w700,
@@ -544,9 +371,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 4.0,
-                  bottom: 4,
-                ),
+                  top: 4.0, bottom: 4,),
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
@@ -561,17 +386,19 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
+
         Align(
           alignment: Alignment.bottomRight,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: OutlinedButton(
               style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      Color(0xff005aa8)),
+                  shape: MaterialStateProperty.all<
+                      RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.red)))),
@@ -579,7 +406,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 Navigator.pop(context, false);
               },
               child: TextWidget(
-                text: DemoLocalization.of(context).translate('Submit'),
+                text: DemoLocalization.of(context)
+                    .translate('Submit'),
                 color: lightColor,
                 weight: FontWeight.w400,
                 size: 14,
@@ -587,8 +415,10 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             ),
           ),
         )
+
       ],
     );
+
   }
 
   Widget _landscapeMode() {
@@ -616,9 +446,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
+                        top: 4.0, bottom: 4,),
                       child: SizedBox(
                         width: 100,
                         child: TextWidget(
@@ -641,9 +469,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
+                        top: 4.0, bottom: 4,),
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
                         child: SizedBox(
@@ -669,9 +495,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
+                        top: 4.0, bottom: 4,),
                       child: TextWidget(
                         text: "Diabetes",
                         size: 14,
@@ -681,12 +505,13 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                   ],
                 ),
+
               ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 16),
+          padding: const EdgeInsets.only(top:8.0,left: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -694,8 +519,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextWidget(
-                  text:
-                      DemoLocalization.of(context).translate('Respondent Name'),
+                  text: DemoLocalization.of(context)
+                      .translate('Respondent Name'),
                   size: 14,
                   color: darkColor,
                   weight: FontWeight.w700,
@@ -703,9 +528,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 4.0,
-                  bottom: 4,
-                ),
+                  top: 4.0, bottom: 4,),
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
@@ -720,8 +543,10 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
+
       ],
     );
+
   }
 
   void _changeLanguage() async {
@@ -744,99 +569,102 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   questionnaireList() {
     return Expanded(
         child: SingleChildScrollView(
-      child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 2,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 5,
-                child: Container(
-                  margin: EdgeInsets.only(right: 6),
-                  decoration: BoxDecoration(
-                      color: lightColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: new Container(
-                    // Center is a layout widget. It takes a single child and positions it
-                    // in the middle of the parent.
-                    child: new Column(children: <Widget>[
-                      new JsonSchema(
-                        decorations: decorations,
-                        form: form,
-                        onChanged: (dynamic response) {
-                          this.response = response;
-                          print(jsonEncode(response));
-                        },
-                        actionSave: (data) {
-                          print(jsonEncode(data));
-                        },
-                        // autovalidateMode: AutovalidateMode.always,
-                        // buttonSave: new Container(
-                        //   height: 40.0,
-                        //   color: Colors.blueAccent,
-                        //   child: Center(
-                        //     child: Text("Send",
-                        //         style: TextStyle(
-                        //             color: Colors.white, fontWeight: FontWeight.bold)),
-                        //   ),
-                        // ),
+
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: 2,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: EdgeInsets.only(right: 6),
+                      decoration: BoxDecoration(
+                          color: lightColor,
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(10))),
+                     child: new Container(
+                        // Center is a layout widget. It takes a single child and positions it
+                        // in the middle of the parent.
+                        child: new Column(children: <Widget>[
+                          new JsonSchema(
+                            decorations: decorations,
+                            form: form,
+                            onChanged: (dynamic response) {
+                              this.response = response;
+                              print(jsonEncode(response));
+                            },
+                            actionSave: (data) {
+                              print(jsonEncode(data));
+                            },
+                            // autovalidateMode: AutovalidateMode.always,
+                            // buttonSave: new Container(
+                            //   height: 40.0,
+                            //   color: Colors.blueAccent,
+                            //   child: Center(
+                            //     child: Text("Send",
+                            //         style: TextStyle(
+                            //             color: Colors.white, fontWeight: FontWeight.bold)),
+                            //   ),
+                            // ),
+                          ),
+                        ]),
                       ),
-                    ]),
+                      // child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Padding(
+                      //         padding:
+                      //         const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text: "Section Name",
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 16,
+                      //         ),
+                      //       ),
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Question: Gender?"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       )    ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"Option"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ) ,
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: TextWidget(
+                      //           text:"productPrice"
+                      //               .toString(),
+                      //           color: darkColor,
+                      //           weight: FontWeight.w600,
+                      //           size: 14,
+                      //         ),
+                      //       ),
+                      //     ]
+                      //
+                      // ),
+                    ),
                   ),
-                  // child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Padding(
-                  //         padding:
-                  //         const EdgeInsets.all(2.0),
-                  //         child: TextWidget(
-                  //           text: "Section Name",
-                  //           color: darkColor,
-                  //           weight: FontWeight.w600,
-                  //           size: 16,
-                  //         ),
-                  //       ),
-                  //       Padding(
-                  //         padding: const EdgeInsets.all(2.0),
-                  //         child: TextWidget(
-                  //           text:"Question: Gender?"
-                  //               .toString(),
-                  //           color: darkColor,
-                  //           weight: FontWeight.w600,
-                  //           size: 14,
-                  //         ),
-                  //       )    ,
-                  //       Padding(
-                  //         padding: const EdgeInsets.all(2.0),
-                  //         child: TextWidget(
-                  //           text:"Option"
-                  //               .toString(),
-                  //           color: darkColor,
-                  //           weight: FontWeight.w600,
-                  //           size: 14,
-                  //         ),
-                  //       ) ,
-                  //       Padding(
-                  //         padding: const EdgeInsets.all(2.0),
-                  //         child: TextWidget(
-                  //           text:"productPrice"
-                  //               .toString(),
-                  //           color: darkColor,
-                  //           weight: FontWeight.w600,
-                  //           size: 14,
-                  //         ),
-                  //       ),
-                  //     ]
-                  //
-                  // ),
-                ),
-              ),
-            ); //   key: UniqueKey(),
-            //   direction: DismissDirection.endToStart,
-            // );
-          }),
-    ));
+                ); //   key: UniqueKey(),
+                //   direction: DismissDirection.endToStart,
+                // );
+              }),
+        )        );
+
   }
 }
