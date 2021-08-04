@@ -936,9 +936,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DataTable(
-                    columnSpacing: 0.4,
+                    columnSpacing: MediaQuery.of(context).size.width/40,
                     showCheckboxColumn: false,
-                    // horizontalMargin: 0.8,
+                    horizontalMargin: 0.8,
                     showBottomBorder: true,
                     headingRowColor: MaterialStateColor
                         .resolveWith(
@@ -946,9 +946,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     columns:  <DataColumn>[
                       DataColumn(
                           label: Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: SizedBox(
-                              width: 85,
+                            padding: const EdgeInsets.only(top:2.0,bottom: 2.0,left: 4,),
+                            child: Expanded(
+                             flex: 1,
                               child: TextWidget(
                                 text: DemoLocalization.of(context)
                                     .translate('Family Head'),
@@ -959,8 +959,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                           )),
                       DataColumn(
-                        label: SizedBox(
-                          width: 160,
+                        label: Expanded(
+                          flex: 1,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Respondent Name'),
@@ -971,8 +971,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                       ),
                       DataColumn(
-                        label: SizedBox(
-                          width: 100,
+                        label: Expanded(
+                          flex: 1,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Mobile No'),
@@ -983,8 +983,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                       ),
                       DataColumn(
-                        label: SizedBox(
-                          width: 100,
+                        label: Expanded(
+                          flex: 1,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Village Code'),
@@ -995,8 +995,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                       ),
                       DataColumn(
-                          label: SizedBox(
-                            width: 80,
+                          label: Expanded(
+                            flex: 1,
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Status'),
