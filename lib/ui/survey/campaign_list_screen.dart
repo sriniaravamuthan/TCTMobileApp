@@ -441,7 +441,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         textInputAction: TextInputAction.next,
                         enableSuggestions: true,
                         decoration: InputDecoration(
-                            labelText: "Search",
+                            // labelText: "Search",
                             filled: true,
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
@@ -707,7 +707,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -931,7 +930,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
-              padding: const EdgeInsets.only(left: 2.0,right: 8,top:4),
+              padding: const EdgeInsets.only(left: 8.0,right: 8,top:4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -939,7 +938,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   DataTable(
                     columnSpacing: 0.4,
                     showCheckboxColumn: false,
-                    horizontalMargin: 0.10,
+                    // horizontalMargin: 0.8,
                     showBottomBorder: true,
                     headingRowColor: MaterialStateColor
                         .resolveWith(
