@@ -163,7 +163,6 @@ class _PropertyDetailStepState extends State<PropertyDetailStep> {
                         height: 58,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 2.0, right: 16.0,),
-
                             child: DropdownButtonFormField<String>(
                               isExpanded: true,
                               autofocus: true,

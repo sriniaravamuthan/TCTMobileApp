@@ -14,7 +14,10 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/widgets/dropdown_widget.dart';
+import 'package:tct_demographics/widgets/radio_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
+import 'package:tct_demographics/widgets/textfield_widget.dart';
 
 class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
@@ -31,6 +34,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
+  var _controller=TextEditingController();
+  List<String> listItem;
+
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -48,7 +54,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+    listItem=[];
     super.initState();
   }
   String form = json.encode({
@@ -103,7 +109,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         ]
       },
       {
-        'key': 'select1',
+        'key': 'selectKey',
         'type': 'Select',
         'label': 'Which of your relatives has diabetes?',
         'value': 'Father',
@@ -122,23 +128,31 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           }
         ]
       },
+/*
       {
         'key':'date',
         'type':'Date',
         'label': 'Select test'
       }
+*/
     ]
   });
 
   Map decorations = {
     'inputKey': InputDecoration(
-      labelText: "Enter your age",
+      // labelText: "Enter your age",
       labelStyle:TextStyle(fontSize:14, ),
       border: OutlineInputBorder(
           borderSide: BorderSide()
 
       ),
     ),
+    'selectKey': InputDecoration(
+  border: OutlineInputBorder(
+  borderRadius: const BorderRadius.all(
+  const Radius.circular(30.0),
+  ),
+  ),),
   };
   dynamic response;
   @override
@@ -588,8 +602,44 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                      child: new Container(
                         // Center is a layout widget. It takes a single child and positions it
                         // in the middle of the parent.
-                        child: new Column(children: <Widget>[
-                          new JsonSchema(
+                        child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.all(4.0),
+                                  child: TextWidget(
+                                    text: "Section Name",
+                                    color: darkColor,
+                                    weight: FontWeight.w600,
+                                    size: 16,
+                                  ),
+                                ),
+                              Padding(
+                                padding:
+                                const EdgeInsets.all(4.0),
+                                child: TextWidget(
+                                  text: "Question1",
+                                  color: darkColor,
+                                  weight: FontWeight.w600,
+                                  size: 14,
+                                ),
+                              ),
+                             TextFieldWidget(),
+                              Padding(
+                                padding:
+                                const EdgeInsets.all(4.0),
+                                child: TextWidget(
+                                  text: "Question2",
+                                  color: darkColor,
+                                  weight: FontWeight.w600,
+                                  size: 14,
+                                ),
+                              ),
+                           RadioButtonWidget(fList: [RadioList(name: "Male",index: 1),RadioList(name: "Female",index: 2)],
+                           ),
+                         DropDownWidget(listItem: ["Father","Mother"],),
+/*                          new JsonSchema(
                             decorations: decorations,
                             form: form,
                             onChanged: (dynamic response) {
@@ -609,7 +659,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                             //             color: Colors.white, fontWeight: FontWeight.bold)),
                             //   ),
                             // ),
-                          ),
+                          )*/
                         ]),
                       ),
                       // child: Column(
