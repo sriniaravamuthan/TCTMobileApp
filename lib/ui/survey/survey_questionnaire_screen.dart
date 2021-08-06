@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:json_to_form/json_schema.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart';
+import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -36,6 +38,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   var campaignIDController = TextEditingController();
   var _controller=TextEditingController();
   List<String> listItem;
+  Future apiSurveyQuestion;
+  Data dataSurveyQues;
+
 
   @override
   void initState() {
@@ -44,6 +49,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
+    apiSurveyQuestion = getSurveyQuestionAPI();
+
 /*     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getJson();
     });*/
@@ -272,9 +279,36 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
-            return _portraitMode();
+            return FutureBuilder<SurveyQuestionnaireResponse>(
+              future: apiSurveyQuestion,
+              builder: (context, projectSnap) {
+                if (projectSnap.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (projectSnap.connectionState == ConnectionState.done) {
+                  debugPrint("SearchCampaign Response : ${projectSnap.data}");
+                  dataSurveyQues = projectSnap.data?.data;
+                  return _portraitMode();
+                } else {
+                  return Text("Error ${projectSnap.error}");
+                }
+              },
+            );
           } else {
-            return _landscapeMode();
+            return FutureBuilder<SurveyQuestionnaireResponse>(
+              future: apiSurveyQuestion,
+              builder: (context, projectSnap) {
+                if (projectSnap.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (projectSnap.connectionState == ConnectionState.done) {
+                  debugPrint(
+                      "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
+                  dataSurveyQues = projectSnap.data?.data;
+                  return _landscapeMode();
+                } else {
+                  return Text("Error ${projectSnap.error}");
+                }
+              },
+            );
           }
         },
       ),
@@ -309,7 +343,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                             child: SizedBox(
                               width: 100,
                               child: TextWidget(
-                                text: "Campaign for Diabetes",
+                                text: dataSurveyQues.campaignName,
                                 size: 14,
                                 color: lightColor,
                                 weight: FontWeight.w400,
@@ -329,7 +363,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     Expanded(
                       flex: 2,
                       child: TextWidget(
-                        text: "Diabetes for Women of age > 60",
+                        text: dataSurveyQues.campaignDescription,
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -352,7 +386,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         Expanded(
                           flex: 1,
                           child: TextWidget(
-                            text: "Diabetes",
+                            text: dataSurveyQues.objectiveName,
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
@@ -389,7 +423,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
-                    text: "Mohit",
+                    text: dataSurveyQues.respondentName,
                     size: 14,
                     color: darkColor,
                     weight: FontWeight.w400,
@@ -464,7 +498,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                       child: SizedBox(
                         width: 100,
                         child: TextWidget(
-                          text: "Campaign for Diabetes",
+                          text:  dataSurveyQues.campaignName,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
@@ -489,7 +523,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         child: SizedBox(
                           width: 100,
                           child: TextWidget(
-                            text: "Diabetes for Women of age > 60",
+                            text: dataSurveyQues.campaignDescription,
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
@@ -511,7 +545,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                       padding: const EdgeInsets.only(
                         top: 4.0, bottom: 4,),
                       child: TextWidget(
-                        text: "Diabetes",
+                        text: dataSurveyQues.objectiveName,
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -546,7 +580,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
-                    text: "Mohit",
+                    text: dataSurveyQues.respondentName,
                     size: 14,
                     color: darkColor,
                     weight: FontWeight.w400,
@@ -583,11 +617,10 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   questionnaireList() {
     return Expanded(
         child: SingleChildScrollView(
-
           child: ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 2,
+              itemCount: dataSurveyQues.sections.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -609,7 +642,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                                   padding:
                                   const EdgeInsets.all(4.0),
                                   child: TextWidget(
-                                    text: "Section Name",
+                                    text: dataSurveyQues.sections[index].sectionName,
                                     color: darkColor,
                                     weight: FontWeight.w600,
                                     size: 16,
@@ -619,13 +652,13 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                                 padding:
                                 const EdgeInsets.all(4.0),
                                 child: TextWidget(
-                                  text: "Question1",
+                                  text: dataSurveyQues.sections[index].questions[0].questionName,
                                   color: darkColor,
                                   weight: FontWeight.w600,
                                   size: 14,
                                 ),
                               ),
-                             TextFieldWidget(),
+                              dataSurveyQues.sections[index].questions[0].optionType=="Text"?TextFieldWidget():dataSurveyQues.sections[index].questions[0].optionType=="Radio"?RadioButtonWidget():Container(),
                               Padding(
                                 padding:
                                 const EdgeInsets.all(4.0),
@@ -636,8 +669,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                                   size: 14,
                                 ),
                               ),
-                           RadioButtonWidget(fList: [RadioList(name: "Male",index: 1),RadioList(name: "Female",index: 2)],
-                           ),
+                      RadioButtonWidget(radioQuestion: "Gender",fList: [RadioList(name: "Male",index: 1),RadioList(name: "Female",index: 2)]),
                          DropDownWidget(listItem: ["Father","Mother"],),
 /*                          new JsonSchema(
                             decorations: decorations,
@@ -662,57 +694,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           )*/
                         ]),
                       ),
-                      // child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     children: [
-                      //       Padding(
-                      //         padding:
-                      //         const EdgeInsets.all(2.0),
-                      //         child: TextWidget(
-                      //           text: "Section Name",
-                      //           color: darkColor,
-                      //           weight: FontWeight.w600,
-                      //           size: 16,
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(2.0),
-                      //         child: TextWidget(
-                      //           text:"Question: Gender?"
-                      //               .toString(),
-                      //           color: darkColor,
-                      //           weight: FontWeight.w600,
-                      //           size: 14,
-                      //         ),
-                      //       )    ,
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(2.0),
-                      //         child: TextWidget(
-                      //           text:"Option"
-                      //               .toString(),
-                      //           color: darkColor,
-                      //           weight: FontWeight.w600,
-                      //           size: 14,
-                      //         ),
-                      //       ) ,
-                      //       Padding(
-                      //         padding: const EdgeInsets.all(2.0),
-                      //         child: TextWidget(
-                      //           text:"productPrice"
-                      //               .toString(),
-                      //           color: darkColor,
-                      //           weight: FontWeight.w600,
-                      //           size: 14,
-                      //         ),
-                      //       ),
-                      //     ]
-                      //
-                      // ),
                     ),
                   ),
                 ); //   key: UniqueKey(),
-                //   direction: DismissDirection.endToStart,
-                // );
               }),
         )        );
 
