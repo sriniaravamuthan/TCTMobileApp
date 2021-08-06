@@ -14,8 +14,8 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 class RadioButtonWidget extends StatefulWidget {
   // final String radioQuestion,item1Value,item2Value,itemText1,itemText2;
   final List<RadioList> fList;
-  final String radioQuestion;
-  const RadioButtonWidget({Key key, this.fList, this.radioQuestion,})
+  // final String radioQuestion;
+  const RadioButtonWidget({Key key, this.fList})
       : super(key: key);
 
   @override
@@ -28,25 +28,20 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
   @override
   Widget build(BuildContext context) {
    return Column(
-     children: [
-       TextWidget(text: widget.radioQuestion,size: 14,weight: FontWeight.w400,color: darkColor,),
-       Column(
-          children:
-          widget.fList.map((data) => RadioListTile(
-            title: Text("${data.name}"),
-            groupValue: id,
-            value: data.index,
-            onChanged: (val) {
-              setState(() {
-                radioItem = data.name ;
-                debugPrint("Radio:$radioItem");
-                id = data.index;
-              });
-            },
-          )).toList(),
-        ),
-     ],
-   );
+      children:
+      widget.fList.map((data) => RadioListTile(
+        title: Text("${data.name}"),
+        groupValue: id,
+        value: data.index,
+        onChanged: (val) {
+          setState(() {
+            radioItem = data.name ;
+            debugPrint("Radio:$radioItem");
+            id = data.index;
+          });
+        },
+      )).toList(),
+    );
     // return Padding(
     //     padding: EdgeInsets.all(4),
     //     child: Column(

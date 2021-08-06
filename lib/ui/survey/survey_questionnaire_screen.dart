@@ -15,7 +15,9 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/widgets/radio_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
+import 'package:tct_demographics/widgets/textfield_widget.dart';
 
 class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
@@ -319,7 +321,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 12,
+          height: MediaQuery.of(context).size.height / 8,
           child: Card(
             color: Theme.of(context).accentColor,
             child: Column(
@@ -700,13 +702,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
       );
-      // list.add(
-      //   dataSurveyQues.sections[index].questions[i].optionType == "Text"
-      //       ? TextFieldWidget()
-      //       : dataSurveyQues.sections[index].questions[i].optionType == "Radio"
-      //           ? RadioButtonWidget()
-      //           : Container(),
-      // );
+      optionWidget(dataSurveyQues.sections[index].questions[i],list);
+
     }
     return Column(children: list);
 
@@ -747,5 +744,20 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                             //   ),
                             // ),
                           )*/
+  }
+
+  void optionWidget(Questions question, List<Widget> list) {
+
+    list.add(
+      question.optionType == "Text"
+          ? TextFieldWidget()
+          : question.optionType == "Radio"
+          ? RadioButtonWidget( fList: [
+        RadioList(name: question.options[0].optionName, index: 1),
+        RadioList(name: question.options[1].optionName, index: 2)
+      ])
+          : Container(),
+    );
+
   }
 }
