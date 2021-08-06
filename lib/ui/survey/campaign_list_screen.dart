@@ -95,6 +95,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset:false,
         appBar: AppBar(
           backgroundColor: lightColor,
           automaticallyImplyLeading: false,
@@ -486,48 +487,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child:  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        textAlign: TextAlign.justify,
-                        controller: campaignNameController,
-                        textInputAction: TextInputAction.next,
-                        enableSuggestions: true,
-                        decoration: InputDecoration(
-                            filled: true,
-                            hintText: "Search",
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.white),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.red),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.red),
-                            ),
-                            suffixIcon: Icon(Icons.search),
-                            fillColor: Colors.white),
-
-                        keyboardType: TextInputType.text,
-                        onSaved: (String val) {
-                          setState(() {
-                            campaignNameController.text = val;
-                          });
-                        },
-                      ),
-                    ),),
+                  _searchList(),
 
                 ],
               ),
@@ -968,51 +928,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child:  Container(
-                      height: MediaQuery.of(context).size.height/18,
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextFormField(
-                          textAlign: TextAlign.justify,
-                          controller: searchController,
-                          textInputAction: TextInputAction.next,
-                          enableSuggestions: true,
-                          decoration: InputDecoration(
-                              filled: true,
-                              hintText: "Search",
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.white),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.red),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide:
-                                BorderSide(color: Colors.red),
-                              ),
-                              suffixIcon: Icon(Icons.search),
-                              fillColor: Colors.white),
-
-                          keyboardType: TextInputType.text,
-                          onSaved: (String val) {
-                            setState(() {
-                              searchController.text = val;
-                            });
-                          },
-                        ),
-                      ),
-                    ),),
+                  _searchList()
 
                 ],
               ),
@@ -1244,5 +1160,55 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         )
       ],
     );
+  }
+
+  Widget _searchList(){
+    return Expanded(
+      flex: 1,
+      child:  Container(
+        height: 55,
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: TextFormField(
+            maxLines: 1,
+            textAlign: TextAlign.start,
+            controller: searchController,
+            textInputAction: TextInputAction.next,
+            enableSuggestions: true,
+            decoration: InputDecoration(
+                filled: true,
+                hintText: "Search",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.white),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.red),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide:
+                  BorderSide(color: Colors.red),
+                ),
+                suffixIcon: Icon(Icons.search),
+                fillColor: Colors.white),
+
+            keyboardType: TextInputType.text,
+            onSaved: (String val) {
+              setState(() {
+                searchController.text = val;
+              });
+            },
+          ),
+        ),
+      ),);
+
   }
 }
