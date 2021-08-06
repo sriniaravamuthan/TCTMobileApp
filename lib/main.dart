@@ -121,14 +121,17 @@ class _MyAppState extends State<MyApp> {
                       ],
                       localeResolutionCallback: (locale, supportedLocales) {
                         for (var supportedLocaleLanguage in supportedLocales) {
-                          if (supportedLocaleLanguage.languageCode == locale.languageCode && supportedLocaleLanguage.countryCode == locale.countryCode) {
+                          if (supportedLocaleLanguage.languageCode ==
+                                  locale.languageCode &&
+                              supportedLocaleLanguage.countryCode ==
+                                  locale.countryCode) {
                             return supportedLocaleLanguage;
                           }
                         }
                         return supportedLocales.first;
                       },
                       theme: ThemeData(),
-                      home: SearchCampaignScreen(),
+                      home: SplashScreen(),
                       getPages: [
                         GetPage(
                             name: '/dashBoard', page: () => DashboardScreen()),

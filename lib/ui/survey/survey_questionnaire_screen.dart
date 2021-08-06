@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:json_to_form/json_schema.dart';
 import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -16,16 +15,14 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
-import 'package:tct_demographics/widgets/dropdown_widget.dart';
-import 'package:tct_demographics/widgets/radio_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
-import 'package:tct_demographics/widgets/textfield_widget.dart';
 
 class SurveyQuestionnaireScreen extends StatefulWidget {
   SurveyQuestionnaireScreen({Key key}) : super(key: key);
 
   @override
-  _SurveyQuestionnaireScreenState createState() => _SurveyQuestionnaireScreenState();
+  _SurveyQuestionnaireScreenState createState() =>
+      _SurveyQuestionnaireScreenState();
 }
 
 class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
@@ -36,11 +33,10 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
-  var _controller=TextEditingController();
+  var _controller = TextEditingController();
   List<String> listItem;
   Future apiSurveyQuestion;
   Data dataSurveyQues;
-
 
   @override
   void initState() {
@@ -61,9 +57,10 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    listItem=[];
+    listItem = [];
     super.initState();
   }
+
   String form = json.encode({
     'title': 'Section Name:',
     'fields': [
@@ -148,20 +145,21 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Map decorations = {
     'inputKey': InputDecoration(
       // labelText: "Enter your age",
-      labelStyle:TextStyle(fontSize:14, ),
-      border: OutlineInputBorder(
-          borderSide: BorderSide()
-
+      labelStyle: TextStyle(
+        fontSize: 14,
       ),
+      border: OutlineInputBorder(borderSide: BorderSide()),
     ),
     'selectKey': InputDecoration(
-  border: OutlineInputBorder(
-  borderRadius: const BorderRadius.all(
-  const Radius.circular(30.0),
-  ),
-  ),),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(30.0),
+        ),
+      ),
+    ),
   };
   dynamic response;
+
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([
@@ -247,15 +245,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         ),
                         userMail != null
                             ? Text(
-                          userMail,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        )
+                                userMail,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              )
                             : Text(
-                          userName,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        ),
+                                userName,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              ),
                       ],
                     )),
                 SizedBox(
@@ -284,7 +282,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
-                } else if (projectSnap.connectionState == ConnectionState.done) {
+                } else if (projectSnap.connectionState ==
+                    ConnectionState.done) {
                   debugPrint("SearchCampaign Response : ${projectSnap.data}");
                   dataSurveyQues = projectSnap.data?.data;
                   return _portraitMode();
@@ -299,7 +298,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
-                } else if (projectSnap.connectionState == ConnectionState.done) {
+                } else if (projectSnap.connectionState ==
+                    ConnectionState.done) {
                   debugPrint(
                       "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
                   dataSurveyQues = projectSnap.data?.data;
@@ -319,7 +319,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height/8,
+          height: MediaQuery.of(context).size.height / 12,
           child: Card(
             color: Theme.of(context).accentColor,
             child: Column(
@@ -328,38 +328,38 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                          Expanded(
-                            flex:2,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Name'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: SizedBox(
-                              width: 100,
-                              child: TextWidget(
-                                text: dataSurveyQues.campaignName,
-                                size: 14,
-                                color: lightColor,
-                                weight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Description'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
+                    Expanded(
+                      flex: 1,
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        width: 100,
+                        child: TextWidget(
+                          text: dataSurveyQues.campaignName,
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Description'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
                     Expanded(
                       flex: 2,
                       child: TextWidget(
@@ -371,38 +371,38 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                   ],
                 ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex:1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: dataSurveyQues.objectiveName,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Spacer(flex: 2,)
-                      ],
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Objective Name'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
                     ),
-
-
+                    Expanded(
+                      flex: 1,
+                      child: TextWidget(
+                        text: dataSurveyQues.objectiveName,
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                    Spacer(
+                      flex: 2,
+                    )
+                  ],
+                ),
               ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:8.0,left: 16),
+          padding: const EdgeInsets.only(top: 8.0, left: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -410,8 +410,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextWidget(
-                  text: DemoLocalization.of(context)
-                      .translate('Respondent Name'),
+                  text:
+                      DemoLocalization.of(context).translate('Respondent Name'),
                   size: 14,
                   color: darkColor,
                   weight: FontWeight.w700,
@@ -419,7 +419,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 4.0, bottom: 4,),
+                  top: 4.0,
+                  bottom: 4,
+                ),
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
@@ -434,19 +436,17 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
-
         Align(
           alignment: Alignment.bottomRight,
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: OutlinedButton(
               style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xff005aa8)),
-                  shape: MaterialStateProperty.all<
-                      RoundedRectangleBorder>(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.red)))),
@@ -454,8 +454,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 Navigator.pop(context, false);
               },
               child: TextWidget(
-                text: DemoLocalization.of(context)
-                    .translate('Submit'),
+                text: DemoLocalization.of(context).translate('Submit'),
                 color: lightColor,
                 weight: FontWeight.w400,
                 size: 14,
@@ -463,17 +462,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             ),
           ),
         )
-
       ],
     );
-
   }
 
   Widget _landscapeMode() {
     return Column(
       children: [
         Container(
-          height: 70,
+          height: MediaQuery.of(context).size.height / 8,
           child: Card(
             color: Theme.of(context).accentColor,
             child: Column(
@@ -494,11 +491,13 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0, bottom: 4,),
+                        top: 4.0,
+                        bottom: 4,
+                      ),
                       child: SizedBox(
                         width: 100,
                         child: TextWidget(
-                          text:  dataSurveyQues.campaignName,
+                          text: dataSurveyQues.campaignName,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
@@ -517,7 +516,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0, bottom: 4,),
+                        top: 4.0,
+                        bottom: 4,
+                      ),
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
                         child: SizedBox(
@@ -543,7 +544,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 4.0, bottom: 4,),
+                        top: 4.0,
+                        bottom: 4,
+                      ),
                       child: TextWidget(
                         text: dataSurveyQues.objectiveName,
                         size: 14,
@@ -553,13 +556,12 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top:8.0,left: 16),
+          padding: const EdgeInsets.only(top: 8.0, left: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -567,8 +569,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: TextWidget(
-                  text: DemoLocalization.of(context)
-                      .translate('Respondent Name'),
+                  text:
+                      DemoLocalization.of(context).translate('Respondent Name'),
                   size: 14,
                   color: darkColor,
                   weight: FontWeight.w700,
@@ -576,7 +578,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 4.0, bottom: 4,),
+                  top: 4.0,
+                  bottom: 4,
+                ),
                 child: SizedBox(
                   width: 100,
                   child: TextWidget(
@@ -591,10 +595,34 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
-
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: OutlinedButton(
+              style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          side: BorderSide(color: Colors.red)))),
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: TextWidget(
+                text: DemoLocalization.of(context).translate('Submit'),
+                color: lightColor,
+                weight: FontWeight.w400,
+                size: 14,
+              ),
+            ),
+          ),
+        )
       ],
     );
-
   }
 
   void _changeLanguage() async {
@@ -617,61 +645,88 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   questionnaireList() {
     return Expanded(
         child: SingleChildScrollView(
-          child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: dataSurveyQues.sections.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 5,
-                    child: Container(
-                      margin: EdgeInsets.only(right: 6),
-                      decoration: BoxDecoration(
-                          color: lightColor,
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10))),
-                     child: new Container(
-                        // Center is a layout widget. It takes a single child and positions it
-                        // in the middle of the parent.
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.all(4.0),
-                                  child: TextWidget(
-                                    text: dataSurveyQues.sections[index].sectionName,
-                                    color: darkColor,
-                                    weight: FontWeight.w600,
-                                    size: 16,
-                                  ),
-                                ),
-                              Padding(
-                                padding:
-                                const EdgeInsets.all(4.0),
-                                child: TextWidget(
-                                  text: dataSurveyQues.sections[index].questions[0].questionName,
-                                  color: darkColor,
-                                  weight: FontWeight.w600,
-                                  size: 14,
-                                ),
-                              ),
-                              dataSurveyQues.sections[index].questions[0].optionType=="Text"?TextFieldWidget():dataSurveyQues.sections[index].questions[0].optionType=="Radio"?RadioButtonWidget():Container(),
-                              Padding(
-                                padding:
-                                const EdgeInsets.all(4.0),
-                                child: TextWidget(
-                                  text: "Question2",
-                                  color: darkColor,
-                                  weight: FontWeight.w600,
-                                  size: 14,
-                                ),
-                              ),
-                      RadioButtonWidget(radioQuestion: "Gender",fList: [RadioList(name: "Male",index: 1),RadioList(name: "Female",index: 2)]),
-                         DropDownWidget(listItem: ["Father","Mother"],),
-/*                          new JsonSchema(
+      child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          addAutomaticKeepAlives: false,
+          itemCount: dataSurveyQues.sections.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 5,
+                child: Container(
+                  margin: EdgeInsets.only(right: 6, left: 6),
+                  decoration: BoxDecoration(
+                      color: lightColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: new Container(
+                    // Center is a layout widget. It takes a single child and positions it
+                    // in the middle of the parent.
+                    child: new Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 8, right: 8, top: 8),
+                            child: TextWidget(
+                              text: dataSurveyQues.sections[index].sectionName,
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 16,
+                            ),
+                          ),
+                          itemWidget(index),
+                        ]),
+                  ),
+                ),
+              ),
+            ); //   key: UniqueKey(),
+          }),
+    ));
+  }
+
+  Widget itemWidget(int index) {
+    List<Widget> list = [];
+    for (var i = 0; i < dataSurveyQues.sections[index].questions.length; i++) {
+      list.add(
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
+          child: TextWidget(
+            text: dataSurveyQues.sections[index].questions[i].questionName,
+            color: darkColor,
+            weight: FontWeight.w600,
+            size: 14,
+          ),
+        ),
+      );
+      // list.add(
+      //   dataSurveyQues.sections[index].questions[i].optionType == "Text"
+      //       ? TextFieldWidget()
+      //       : dataSurveyQues.sections[index].questions[i].optionType == "Radio"
+      //           ? RadioButtonWidget()
+      //           : Container(),
+      // );
+    }
+    return Column(children: list);
+
+    /*    Padding(
+    padding: const EdgeInsets.all(4.0),
+    child: TextWidget(
+    text: "Question2",
+    color: darkColor,
+    weight: FontWeight.w600,
+    size: 14,
+    ),
+    ),
+    RadioButtonWidget(radioQuestion: "Gender", fList: [
+    RadioList(name: "Male", index: 1),
+    RadioList(name: "Female", index: 2)
+    ]),
+    DropDownWidget(
+    listItem: ["Father", "Mother"],
+    ),
+                         new JsonSchema(
                             decorations: decorations,
                             form: form,
                             onChanged: (dynamic response) {
@@ -692,13 +747,5 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                             //   ),
                             // ),
                           )*/
-                        ]),
-                      ),
-                    ),
-                  ),
-                ); //   key: UniqueKey(),
-              }),
-        )        );
-
   }
 }
