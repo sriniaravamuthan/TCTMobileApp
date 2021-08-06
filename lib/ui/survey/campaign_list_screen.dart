@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
+import 'package:tct_demographics/util/check_internet.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -36,12 +36,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   var campaignNameController = TextEditingController();
   var searchController = TextEditingController();
   bool isLoading = false;
-  var _campaignList = [];
   var arguments;
-  StreamSubscription<ConnectivityResult> listenNetwork;
-  bool isInternet = false;
-  Future apiCampaignList;
+
+  // StreamSubscription<ConnectivityResult> listenNetwork;
+  bool isInternet;
+  Future apiCampaignList, apiSync;
   Data dataCampaign;
+  Future<bool> internetConnection;
 
   @override
   void initState() {
@@ -56,9 +57,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    // setState(() {
     arguments = Get.arguments;
-    // });
     debugPrint("Arguments $arguments");
     super.initState();
     /* listenNetwork = Connectivity()
@@ -71,7 +70,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       // });
       debugPrint("ConnectivityResult $result");
     });*/
+    internetConnection = checkInternetConnection();
+    internetConnection.then((value) => isInternet = value);
+    debugPrint("isInternet: $isInternet");
     apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+        campaignId: arguments[0],
+        campaignName: arguments[1],
+        villageCode: arguments[2],
+        languageCode: "ta"));
+    apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
         campaignId: arguments[0],
         campaignName: arguments[1],
         villageCode: arguments[2],
@@ -95,7 +102,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
-      resizeToAvoidBottomInset:false,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: lightColor,
           automaticallyImplyLeading: false,
@@ -202,7 +209,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return FutureBuilder<SearchCampaignResponse>(
-            future: apiCampaignList,
+            future: isInternet ? apiCampaignList : apiSync,
             builder: (context, projectSnap) {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -217,7 +224,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           );
         } else {
           return FutureBuilder<SearchCampaignResponse>(
-            future: apiCampaignList,
+            future: isInternet ? apiCampaignList : apiSync,
             builder: (context, projectSnap) {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -334,7 +341,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         ),
                         Expanded(
-                        flex: 1,
+                          flex: 1,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: TextWidget(
@@ -366,8 +373,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(4.0),
                           child: Expanded(
                             flex: 1,
                             child: TextWidget(
@@ -417,8 +423,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           child: Expanded(
                             flex: 1,
                             child: TextWidget(
@@ -429,7 +434,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -441,7 +445,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: MediaQuery.of(context).size.height / 7,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8,),
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8,
+            ),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
@@ -459,36 +466,36 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xff005aa8)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    side: BorderSide(color: Colors.red)))),
-                        onPressed: () {
-                          Navigator.pop(context, false);
-                        },
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Start sync'),
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                          size: 14,
+                  Visibility(
+                    visible: isInternet,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff005aa8)),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      side: BorderSide(color: Colors.red)))),
+                          onPressed: () {},
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Start sync'),
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                            size: 14,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   _searchList(),
-
                 ],
               ),
             ),
@@ -879,7 +886,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         Container(
           height: MediaQuery.of(context).size.height / 12,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8,),
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8,
+            ),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
@@ -899,37 +909,40 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: OutlinedButton(
-                          style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.white),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xff005aa8)),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      side: BorderSide(color: Colors.red)))),
-                          onPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Start sync'),
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                            size: 14,
+                    child: Visibility(
+                      visible: isInternet,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: OutlinedButton(
+                            style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xff005aa8)),
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        side: BorderSide(color: Colors.red)))),
+                            onPressed: () {},
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Start sync'),
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                              size: 14,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                   _searchList()
-
                 ],
               ),
             ),
@@ -954,15 +967,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     columns: <DataColumn>[
                       DataColumn(
                           label: Expanded(
-                            flex: 1,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Head'),
-                              color: lightColor,
-                              size: 15,
-                              weight: FontWeight.w700,
-                            ),
-                          )),
+                        flex: 1,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Family Head'),
+                          color: lightColor,
+                          size: 15,
+                          weight: FontWeight.w700,
+                        ),
+                      )),
                       DataColumn(
                         label: Expanded(
                           flex: 1,
@@ -1162,10 +1175,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     );
   }
 
-  Widget _searchList(){
+  Widget _searchList() {
     return Expanded(
       flex: 1,
-      child:  Container(
+      child: Container(
         height: 55,
         child: Padding(
           padding: const EdgeInsets.all(2.0),
@@ -1182,24 +1195,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   borderSide: BorderSide.none,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide:
-                  BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.white),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                  BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.white),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderSide:
-                  BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.red),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderSide:
-                  BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.red),
                 ),
                 suffixIcon: Icon(Icons.search),
                 fillColor: Colors.white),
-
             keyboardType: TextInputType.text,
             onSaved: (String val) {
               setState(() {
@@ -1208,7 +1216,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             },
           ),
         ),
-      ),);
-
+      ),
+    );
   }
 }
