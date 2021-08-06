@@ -329,7 +329,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                           Expanded(
-                            flex:1,
+                            flex:2,
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Campaign Name'),

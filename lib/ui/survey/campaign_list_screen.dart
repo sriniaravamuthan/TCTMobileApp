@@ -34,6 +34,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignNameController = TextEditingController();
+  var searchController = TextEditingController();
   bool isLoading = false;
   var _campaignList = [];
   var arguments;
@@ -256,62 +257,60 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 5,
+          height: MediaQuery.of(context).size.height / 6,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Name'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 4.0,
-                          bottom: 4,
-                        ),
-                        child: SizedBox(
-                          width: 100,
-                          child: TextWidget(
-                            // text: dataCampaign?.campaignName,
-                            text: "Campaign for Diabetes",
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Description'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: dataCampaign?.campaignName,
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 4.0,
-                          bottom: 4,
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                        child: FittedBox(
-                          fit: BoxFit.fitWidth,
-                          child: SizedBox(
-                            width: 100,
+                        Expanded(
+                          flex: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
                             child: TextWidget(
                               text: "Diabetes for Women of age > 60",
                               size: 14,
@@ -320,99 +319,118 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Objective Name'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Objective Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 4.0,
-                          bottom: 4,
+                        Expanded(
+                        flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: "Diabetes",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                        child: TextWidget(
-                          text: "Diabetes",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Population'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(4),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Population'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 4.0, bottom: 4, left: 2),
-                        child: TextWidget(
-                          text: "370",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
+                        Padding(
+                          padding:
+                              const EdgeInsets.all(4.0),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: "370",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Completed:'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Completed:'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 4.0, bottom: 4, left: 2),
-                        child: TextWidget(
-                          text: "60",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: "60",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Pending:'),
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w700,
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Pending:'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 4.0, bottom: 4, left: 2),
-                        child: TextWidget(
-                          text: "60",
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
+                        Padding(
+                          padding:
+                              const EdgeInsets.all(4),
+                          child: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: "60",
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: 250,
-                      )
-                    ],
+
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -420,53 +438,88 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height / 8,
+          height: MediaQuery.of(context).size.height / 7,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 2),
+            padding: const EdgeInsets.only(left: 8.0, right: 8,),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 4.0, bottom: 4.0, left: 16.0, right: 8.0),
-                    child: TextWidget(
-                      text: 'Showing 30 of 210 records',
-                      size: 14,
-                      color: lightColor,
-                      weight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 3.7,
-                    height: MediaQuery.of(context).size.height / 8,
+                  Expanded(
+                    flex: 2,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: TextWidget(
+                        text: 'Showing 30 of 210 records',
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: OutlinedButton(
+                        style: ButtonStyle(
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color(0xff005aa8)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    side: BorderSide(color: Colors.red)))),
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Start sync'),
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                          size: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child:  Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        textAlign: TextAlign.justify,
                         controller: campaignNameController,
                         textInputAction: TextInputAction.next,
                         enableSuggestions: true,
                         decoration: InputDecoration(
-                            hintText: "Search",
                             filled: true,
+                            hintText: "Search",
                             border: OutlineInputBorder(
                               borderSide: BorderSide.none,
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black54),
+                              borderSide:
+                              BorderSide(color: Colors.white),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide:
+                              BorderSide(color: Colors.white),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
+                              borderSide:
+                              BorderSide(color: Colors.red),
                             ),
                             errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
+                              borderSide:
+                              BorderSide(color: Colors.red),
                             ),
                             suffixIcon: Icon(Icons.search),
                             fillColor: Colors.white),
+
                         keyboardType: TextInputType.text,
                         onSaved: (String val) {
                           setState(() {
@@ -474,8 +527,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           });
                         },
                       ),
-                    ),
-                  )
+                    ),),
+
                 ],
               ),
             ),
@@ -698,7 +751,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 8,
+          height: MediaQuery.of(context).size.height / 7,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
@@ -864,62 +917,103 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height / 15,
+          height: MediaQuery.of(context).size.height / 12,
           child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 2),
+            padding: const EdgeInsets.only(left: 8.0, right: 8,),
             child: Card(
               color: Theme.of(context).accentColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 4.0, bottom: 4.0, left: 16.0, right: 8.0),
-                    child: TextWidget(
-                      text: 'Showing 30 of 210 records',
-                      size: 14,
-                      color: lightColor,
-                      weight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.7,
-                    height: MediaQuery.of(context).size.height / 10,
+                  Expanded(
+                    flex: 1,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: campaignNameController,
-                        textInputAction: TextInputAction.next,
-                        enableSuggestions: true,
-                        decoration: InputDecoration(
-                            hintText: "Search",
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black54),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                            ),
-                            suffixIcon: Icon(Icons.search),
-                            fillColor: Colors.white),
-                        keyboardType: TextInputType.text,
-                        onSaved: (String val) {
-                          setState(() {
-                            campaignNameController.text = val;
-                          });
-                        },
+                      child: TextWidget(
+                        text: 'Showing 30 of 210 records',
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w400,
                       ),
                     ),
-                  )
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: OutlinedButton(
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff005aa8)),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      side: BorderSide(color: Colors.red)))),
+                          onPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Start sync'),
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                            size: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child:  Container(
+                      height: MediaQuery.of(context).size.height/18,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextFormField(
+                          textAlign: TextAlign.justify,
+                          controller: searchController,
+                          textInputAction: TextInputAction.next,
+                          enableSuggestions: true,
+                          decoration: InputDecoration(
+                              filled: true,
+                              hintText: "Search",
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.white),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.red),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Colors.red),
+                              ),
+                              suffixIcon: Icon(Icons.search),
+                              fillColor: Colors.white),
+
+                          keyboardType: TextInputType.text,
+                          onSaved: (String val) {
+                            setState(() {
+                              searchController.text = val;
+                            });
+                          },
+                        ),
+                      ),
+                    ),),
+
                 ],
               ),
             ),
@@ -943,23 +1037,16 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         (states) => Color(0xff005aa8)),
                     columns: <DataColumn>[
                       DataColumn(
-                          label: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 2.0,
-                          bottom: 2.0,
-                          left: 4,
-                        ),
-                        child: Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Family Head'),
-                            color: lightColor,
-                            size: 15,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      )),
+                          label: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Family Head'),
+                              color: lightColor,
+                              size: 15,
+                              weight: FontWeight.w700,
+                            ),
+                          )),
                       DataColumn(
                         label: Expanded(
                           flex: 1,
