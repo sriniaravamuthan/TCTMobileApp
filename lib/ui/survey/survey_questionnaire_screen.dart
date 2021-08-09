@@ -703,19 +703,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
 
-    /*    Padding(
-    padding: const EdgeInsets.all(4.0),
-    child: TextWidget(
-    text: "Question2",
-    color: darkColor,
-    weight: FontWeight.w600,
-    size: 14,
-    ),
-    ),
-    RadioButtonWidget(radioQuestion: "Gender", fList: [
-    RadioList(name: "Male", index: 1),
-    RadioList(name: "Female", index: 2)
-    ]),
+    /*
     DropDownWidget(
     listItem: ["Father", "Mother"],
     ),
@@ -729,16 +717,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                             actionSave: (data) {
                               print(jsonEncode(data));
                             },
-                            // autovalidateMode: AutovalidateMode.always,
-                            // buttonSave: new Container(
-                            //   height: 40.0,
-                            //   color: Colors.blueAccent,
-                            //   child: Center(
-                            //     child: Text("Send",
-                            //         style: TextStyle(
-                            //             color: Colors.white, fontWeight: FontWeight.bold)),
-                            //   ),
-                            // ),
+
                           )*/
   }
 

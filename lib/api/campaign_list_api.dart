@@ -26,7 +26,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
-  debugPrint("URl $url");
+  debugPrint("URl122 $url");
   // var body = json.encode(searchCampaignRequest);
   // debugPrint("product_body: $body");
   // final db = Localstore.instance;
@@ -90,7 +90,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     var data = SearchCampaignResponse.fromJson(json.decode(response.body));
 
     if (response.statusCode == 200) {
-      debugPrint("Response ${data.toJson()}");
+      debugPrint("Response12 ${data.toJson()}");
       if (!data.isError) {
         try {
           db.collection('campaign_list').doc("list").delete();

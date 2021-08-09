@@ -45,40 +45,6 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
         )).toList(),
       ),
    );
-    // return Padding(
-    //     padding: EdgeInsets.all(4),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         TextWidget(text: widget.radioQuestion,size: 14,weight: FontWeight.w400,color: darkColor,),
-    //         ListTile(
-    //           leading: Radio(
-    //             value: widget.item1Value,
-    //             groupValue: radioItem,
-    //             onChanged: (value) {
-    //               setState(() {
-    //                radioItem = value;
-    //               });
-    //             },
-    //           ),
-    //           title:TextWidget(text: widget.item1Value,size: 14,weight: FontWeight.w400,color: darkColor,),
-    //         ),
-    //         ListTile(
-    //           leading: Radio(
-    //             value: widget.item2Value,
-    //             groupValue: radioItem,
-    //             onChanged: (value) {
-    //               setState(() {
-    //                 radioItem = value;
-    //               });
-    //             },
-    //           ),
-    //           title:TextWidget(text: widget.itemText2,size: 14,weight: FontWeight.w400,color: darkColor,),
-    //         ),
-    //         SizedBox(height: 25),
-    //       ],
-    //     )
-    // );
   }
 }
 

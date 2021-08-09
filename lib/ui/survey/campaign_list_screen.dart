@@ -71,16 +71,20 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       debugPrint("ConnectivityResult $result");
     });*/
     isInternet = arguments[3];
-    apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
-        campaignId: arguments[0],
-        campaignName: arguments[1],
-        villageCode: arguments[2],
-        languageCode: "ta"));
-    apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
-        campaignId: arguments[0],
-        campaignName: arguments[1],
-        villageCode: arguments[2],
-        languageCode: "ta"));
+    if(isInternet){
+      apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+          campaignId: arguments[0],
+          campaignName: arguments[1],
+          villageCode: arguments[2],
+          languageCode: "ta"));
+      debugPrint("apiCampaignList$apiCampaignList");
+    }else{
+      apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
+          campaignId: arguments[0],
+          campaignName: arguments[1],
+          villageCode: arguments[2],
+          languageCode: "ta"));
+    }
   }
 
   @override
