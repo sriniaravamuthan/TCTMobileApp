@@ -7,7 +7,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TextFieldWidget extends StatefulWidget {
 final String valueText;
@@ -32,9 +31,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         child: TextField(
           controller: controller,
           keyboardType: TextInputType.text,
+          enableSuggestions: true,
           onChanged: (value) {
             setState(() {
-              controller.text=value;
+              controller.text = value;
             });
           },
           decoration: InputDecoration(
