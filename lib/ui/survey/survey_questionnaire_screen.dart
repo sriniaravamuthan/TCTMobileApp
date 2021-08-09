@@ -662,25 +662,22 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   decoration: BoxDecoration(
                       color: lightColor,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: new Container(
-                    // Center is a layout widget. It takes a single child and positions it
-                    // in the middle of the parent.
-                    child: new Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 8, right: 8, top: 8),
-                            child: TextWidget(
-                              text: dataSurveyQues.sections[index].sectionName,
-                              color: darkColor,
-                              weight: FontWeight.w600,
-                              size: 16,
-                            ),
+                  child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8, right: 8, top: 8),
+                          child: TextWidget(
+                            text: dataSurveyQues.sections[index].sectionName,
+                            color: darkColor,
+                            weight: FontWeight.w600,
+                            size: 16,
                           ),
-                          itemWidget(index),
-                        ]),
-                  ),
+                        ),
+                        itemWidget(index),
+                      ]),
                 ),
               ),
             ); //   key: UniqueKey(),
@@ -705,7 +702,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       optionWidget(dataSurveyQues.sections[index].questions[i],list);
 
     }
-    return Column(children: list);
+    return Column(crossAxisAlignment:CrossAxisAlignment.start,children: list);
 
     /*    Padding(
     padding: const EdgeInsets.all(4.0),
@@ -752,12 +749,20 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       question.optionType == "Text"
           ? TextFieldWidget()
           : question.optionType == "Radio"
-          ? RadioButtonWidget( fList: [
-        RadioList(name: question.options[0].optionName, index: 1),
-        RadioList(name: question.options[1].optionName, index: 2)
-      ])
+          ?radioList(question,list)
           : Container(),
     );
+
+  }
+
+  Widget radioList(Questions question, List<Widget> list) {
+    for (var i = 0; i < question.options.length; i++) {
+      debugPrint("RadioList:${question.options[i].optionName}");
+       RadioButtonWidget( fList: [
+        RadioList(name: question.options[i].optionName, index: i),
+      ]);
+    }
+
 
   }
 }

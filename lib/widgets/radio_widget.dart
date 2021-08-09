@@ -24,24 +24,27 @@ class RadioButtonWidget extends StatefulWidget {
 
 class _RadioButtonWidgetState extends State<RadioButtonWidget> {
   String radioItem;
-  int id = 1;
+  int id = -1;
   @override
   Widget build(BuildContext context) {
-   return Column(
-      children:
-      widget.fList.map((data) => RadioListTile(
-        title: Text("${data.name}"),
-        groupValue: id,
-        value: data.index,
-        onChanged: (val) {
-          setState(() {
-            radioItem = data.name ;
-            debugPrint("Radio:$radioItem");
-            id = data.index;
-          });
-        },
-      )).toList(),
-    );
+   return Container(
+     width: MediaQuery.of(context).size.width/2,
+     child: Column(
+        children:
+        widget.fList.map((data) => RadioListTile(
+          title: Text("${data.name}"),
+          groupValue: id,
+          value: data.index,
+          onChanged: (val) {
+            setState(() {
+              radioItem = data.name ;
+              debugPrint("Radio:$radioItem");
+              id = data.index;
+            });
+          },
+        )).toList(),
+      ),
+   );
     // return Padding(
     //     padding: EdgeInsets.all(4),
     //     child: Column(

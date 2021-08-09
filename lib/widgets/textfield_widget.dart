@@ -24,25 +24,24 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   Widget build(BuildContext context) {
     TextEditingController controller=TextEditingController();
 
-    return Container(
-      width: MediaQuery.of(context).size.width/2.5,
-      height: MediaQuery.of(context).size.height/7.5,
-      child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: TextField(
-            controller: controller,
-            maxLines: 2,
-            keyboardType: TextInputType.text,
-            onChanged: (value) {
-              setState(() {
-                controller.text=value;
-              });
-            },
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        height: 48,
+        width: MediaQuery.of(context).size.width/2,
+        child: TextField(
+          controller: controller,
+          keyboardType: TextInputType.text,
+          onChanged: (value) {
+            setState(() {
+              controller.text=value;
+            });
+          },
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
           ),
         ),
+      ),
     );
   }
 }
