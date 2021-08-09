@@ -9,6 +9,7 @@ import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
+import 'package:tct_demographics/util/check_internet.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
@@ -29,6 +30,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
   var campaignIDController = TextEditingController();
   var villageCodeController = TextEditingController();
   var campaignNameController = TextEditingController();
+  Future<bool> internetConnection;
+  bool isInternet;
 
   @override
   void initState() {
@@ -47,7 +50,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
+    internetConnection = checkInternetConnection();
+    internetConnection.then(
+        (value) => {isInternet = value, debugPrint("isInternet: $value")});
     super.initState();
   }
 
@@ -173,14 +178,17 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Card(
-                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width/12,right: MediaQuery.of(context).size.width/12,top:MediaQuery.of(context).size.height/10 ),
+                  margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 12,
+                      right: MediaQuery.of(context).size.width / 12,
+                      top: MediaQuery.of(context).size.height / 10),
                   color: Theme.of(context).accentColor,
                   child: Column(
                     children: [
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0,top:8),
+                          padding: const EdgeInsets.only(left: 8.0, top: 8),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Search Campaign'),
@@ -199,9 +207,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                             Row(
                               children: [
                                 Expanded(
-                                  flex:3,
+                                  flex: 3,
                                   child: Container(
-                                    child:  TextWidget(
+                                    child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Campaign ID'),
                                       color: Colors.white,
@@ -210,59 +218,63 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     ),
                                   ),
                                 ),
-                               Expanded(
-                                 flex: 3,
-                                 child:  Container(
-                                 height: 50,
-                                 child: Padding(
-                                   padding: const EdgeInsets.only(
-                                       top: 8.0, left: 10, bottom: 8),
-                                   child: TextFormField(
-                                     controller: campaignIDController,
-                                     textInputAction: TextInputAction.next,
-                                     enableSuggestions: true,
-                                     decoration: InputDecoration(
-                                         filled: true,
-                                         border: OutlineInputBorder(
-                                           borderSide: BorderSide.none,
-                                         ),
-                                         enabledBorder: OutlineInputBorder(
-                                           borderSide:
-                                           BorderSide(color: Colors.white),
-                                         ),
-                                         focusedBorder: OutlineInputBorder(
-                                           borderSide:
-                                           BorderSide(color: Colors.white),
-                                         ),
-                                         focusedErrorBorder: OutlineInputBorder(
-                                           borderSide:
-                                           BorderSide(color: Colors.red),
-                                         ),
-                                         errorBorder: OutlineInputBorder(
-                                           borderSide:
-                                           BorderSide(color: Colors.red),
-                                         ),
-                                         suffixIcon: Icon(Icons.search),
-                                         fillColor: Colors.white),
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    height: 50,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 8.0, left: 10, bottom: 8),
+                                      child: TextFormField(
+                                        controller: campaignIDController,
+                                        textInputAction: TextInputAction.next,
+                                        enableSuggestions: true,
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.red),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.red),
+                                            ),
+                                            suffixIcon: Icon(Icons.search),
+                                            fillColor: Colors.white),
 
-                                     keyboardType: TextInputType.text,
-                                     onSaved: (String val) {
-                                       setState(() {
-                                         campaignIDController.text = val;
-                                       });
-                                     },
-                                     // validator: (value) {
-                                     //   if (value.isEmpty) {
-                                     //     debugPrint(
-                                     //         "empid :yes");
-                                     //     return 'Employee Id must not be empty';
-                                     //   }
-                                     //   return null;
-                                     // },
-                                   ),
-                                 ),
-                               ),),
-                                Spacer(flex: 2,)
+                                        keyboardType: TextInputType.text,
+                                        onSaved: (String val) {
+                                          setState(() {
+                                            campaignIDController.text = val;
+                                          });
+                                        },
+                                        // validator: (value) {
+                                        //   if (value.isEmpty) {
+                                        //     debugPrint(
+                                        //         "empid :yes");
+                                        //     return 'Employee Id must not be empty';
+                                        //   }
+                                        //   return null;
+                                        // },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Spacer(
+                                  flex: 2,
+                                )
                               ],
                             ),
                             Row(
@@ -270,8 +282,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                               children: [
                                 Spacer(),
                                 TextWidget(
-                                  text:
-                                      DemoLocalization.of(context).translate('Or'),
+                                  text: DemoLocalization.of(context)
+                                      .translate('Or'),
                                   color: Colors.white,
                                   size: 15,
                                   weight: FontWeight.w400,
@@ -282,7 +294,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                             Row(
                               children: [
                                 Expanded(
-                                  flex:3,
+                                  flex: 3,
                                   child: TextWidget(
                                     text: DemoLocalization.of(context)
                                         .translate('Campaign Name**'),
@@ -308,14 +320,15 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                               borderSide: BorderSide.none,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
-                                            focusedErrorBorder: OutlineInputBorder(
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
                                               borderSide:
                                                   BorderSide(color: Colors.red),
                                             ),
@@ -344,8 +357,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     ),
                                   ),
                                 ),
-                                Spacer(flex: 2,)
-
+                                Spacer(
+                                  flex: 2,
+                                )
                               ],
                             ),
                             Row(
@@ -363,7 +377,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                 Expanded(
                                   flex: 3,
                                   child: Container(
-                                    height:50,
+                                    height: 50,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                           top: 8.0, left: 10, bottom: 8),
@@ -377,14 +391,15 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                               borderSide: BorderSide.none,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: Colors.white),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
                                             ),
-                                            focusedErrorBorder: OutlineInputBorder(
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
                                               borderSide:
                                                   BorderSide(color: Colors.red),
                                             ),
@@ -404,8 +419,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     ),
                                   ),
                                 ),
-                                Spacer(flex: 2,)
-
+                                Spacer(
+                                  flex: 2,
+                                )
                               ],
                             ),
                             Row(
@@ -432,9 +448,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     onPressed: () {
                                       Get.toNamed('/CampaignListScreen',
                                           arguments: [
-                                            campaignIDController.text.toString(),
-                                            campaignNameController.text.toString(),
-                                            villageCodeController.text.toString()
+                                            campaignIDController.text
+                                                .toString(),
+                                            campaignNameController.text
+                                                .toString(),
+                                            villageCodeController.text
+                                                .toString(),
+                                            isInternet
                                           ]);
                                     },
                                     child: Row(

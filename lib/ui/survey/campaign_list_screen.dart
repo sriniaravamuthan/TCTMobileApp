@@ -11,12 +11,13 @@ import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
+import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
-import 'package:tct_demographics/util/check_internet.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class CampaignListScreen extends StatefulWidget {
@@ -42,7 +43,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   bool isInternet;
   Future apiCampaignList, apiSync;
   Data dataCampaign;
-  Future<bool> internetConnection;
 
   @override
   void initState() {
@@ -70,9 +70,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       // });
       debugPrint("ConnectivityResult $result");
     });*/
-    internetConnection = checkInternetConnection();
-    internetConnection.then((value) => isInternet = value);
-    debugPrint("isInternet: $isInternet");
+    isInternet = arguments[3];
     apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
         campaignId: arguments[0],
         campaignName: arguments[1],
@@ -471,7 +469,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Align(
                       alignment: Alignment.center,
                       child: Padding(
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: OutlinedButton(
                           style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(
@@ -483,7 +481,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
-                          onPressed: () {},
+                          onPressed: () {
+                            syncSearchCampaignAPI(SearchCampaignRequest(
+                                    campaignId: arguments[0],
+                                    campaignName: arguments[1],
+                                    villageCode: arguments[2],
+                                    languageCode: "ta"))
+                                .then((value) => {
+                                      snackBarAlert(
+                                          success,
+                                          "Campaign List is ready for Offline",
+                                          successColor)
+                                    });
+                          },
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Start sync'),
@@ -914,7 +924,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       child: Align(
                         alignment: Alignment.center,
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: OutlinedButton(
                             style: ButtonStyle(
                                 foregroundColor:
@@ -929,7 +939,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                         borderRadius:
                                             BorderRadius.circular(5.0),
                                         side: BorderSide(color: Colors.red)))),
-                            onPressed: () {},
+                            onPressed: () {
+                              syncSearchCampaignAPI(SearchCampaignRequest(
+                                      campaignId: arguments[0],
+                                      campaignName: arguments[1],
+                                      villageCode: arguments[2],
+                                      languageCode: "ta"))
+                                  .then((value) => {
+                                        snackBarAlert(
+                                            success,
+                                            "Campaign List is ready for Offline",
+                                            successColor)
+                                      });
+                            },
                             child: TextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Start sync'),

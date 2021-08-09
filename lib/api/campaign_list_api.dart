@@ -98,8 +98,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
           debugPrint("Error $error");
         } finally {
           db.collection('campaign_list').doc("list").set(data.toJson());
-          snackBarAlert(
-              success, "Campaign List is ready for Offline", successColor);
         }
         return data;
       } else {
