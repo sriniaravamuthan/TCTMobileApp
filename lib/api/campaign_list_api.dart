@@ -27,16 +27,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     // 'Access-token': '$token'
   };
   debugPrint("URl122 $url");
-  // var body = json.encode(searchCampaignRequest);
-  // debugPrint("product_body: $body");
-  // final db = Localstore.instance;
-  // var connectionResult = await (Connectivity().checkConnectivity());
-  // if (connectionResult == ConnectivityResult.none) {
-  //   Map<String, dynamic> map =
-  //   await db.collection('campaign_list').doc("list").get();
-  //   debugPrint("Offline List $map");
-  //   return SearchCampaignResponse.fromJson(map);
-  // } else {
+
   final response =
       // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
       await http.get(Uri.parse(url), headers: requestHeaders);
@@ -45,13 +36,6 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
   if (response.statusCode == 200) {
     debugPrint("Response ${data.toJson()}");
     if (!data.isError) {
-      // try {
-      //   db.collection('campaign_list').doc("list").delete();
-      // } catch (error) {
-      //   debugPrint("Error $error");
-      // } finally {
-      //   db.collection('campaign_list').doc("list").set(data.toJson());
-      // }
       return data;
     } else {
       debugPrint("Response2 ${data.data}");
@@ -75,12 +59,14 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
-  debugPrint("URl $url");
+  debugPrint("URl sync: $url");
   final db = Localstore.instance;
   var connectionResult = await (Connectivity().checkConnectivity());
   if (connectionResult == ConnectivityResult.none) {
-    Map<String, dynamic> map =
-        await db.collection('campaign_list').doc("list").get();
+    Map<String, dynamic> map = await db
+        .collection('campaign_list')
+        .doc(searchCampaignRequest.campaignId)
+        .get();
     debugPrint("Offline List $map");
     return SearchCampaignResponse.fromJson(map);
   } else {
@@ -93,11 +79,17 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
       debugPrint("Response12 ${data.toJson()}");
       if (!data.isError) {
         try {
-          db.collection('campaign_list').doc("list").delete();
+          db
+              .collection('campaign_list')
+              .doc(searchCampaignRequest.campaignId)
+              .delete();
         } catch (error) {
           debugPrint("Error $error");
         } finally {
-          db.collection('campaign_list').doc("list").set(data.toJson());
+          db
+              .collection('campaign_list')
+              .doc(searchCampaignRequest.campaignId)
+              .set(data.toJson());
         }
         return data;
       } else {

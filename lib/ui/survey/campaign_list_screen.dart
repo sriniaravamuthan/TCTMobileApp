@@ -1212,7 +1212,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             maxLines: 1,
             textAlign: TextAlign.start,
             controller: searchController,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
             enableSuggestions: true,
             decoration: InputDecoration(
                 filled: true,

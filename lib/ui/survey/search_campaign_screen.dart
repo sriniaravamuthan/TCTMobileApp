@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -228,19 +229,19 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       textInputAction: TextInputAction.next,
                                       enableSuggestions: true,
                                       decoration: InputDecoration(
-                                          contentPadding:
-                                          EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 2.0, horizontal: 2.0),
                                           filled: true,
                                           border: OutlineInputBorder(
                                             borderSide: BorderSide.none,
                                           ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -253,7 +254,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           ),
                                           suffixIcon: Icon(Icons.search),
                                           fillColor: Colors.white),
-
                                       keyboardType: TextInputType.text,
                                       onSaved: (String val) {
                                         setState(() {
@@ -262,8 +262,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       },
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          debugPrint(
-                                              "empid :yes");
+                                          debugPrint("empid :yes");
                                           return 'Campaign ID must not be empty';
                                         }
                                         return null;
@@ -310,20 +309,20 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       controller: campaignNameController,
                                       textInputAction: TextInputAction.next,
                                       enableSuggestions: true,
-                                      decoration: InputDecoration(  contentPadding:
-                                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
-
+                                      decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 2.0, horizontal: 2.0),
                                           filled: true,
                                           border: OutlineInputBorder(
                                             borderSide: BorderSide.none,
                                           ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white),
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -358,9 +357,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                   )
                                 ],
                               ),
-
                               Padding(
-                                padding: const EdgeInsets.only(top:12.0),
+                                padding: const EdgeInsets.only(top: 12.0),
                                 child: Row(
                                   children: [
                                     Expanded(
@@ -377,11 +375,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       flex: 6,
                                       child: TextFormField(
                                         controller: villageCodeController,
-                                        textInputAction: TextInputAction.next,
+                                        textInputAction: TextInputAction.done,
                                         enableSuggestions: true,
                                         decoration: InputDecoration(
                                             contentPadding:
-                                            EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+                                                EdgeInsets.symmetric(
+                                                    vertical: 2.0,
+                                                    horizontal: 2.0),
                                             filled: true,
                                             border: OutlineInputBorder(
                                               borderSide: BorderSide.none,
@@ -437,12 +437,14 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                   RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(5.0),
-                                                  side: BorderSide(
-                                                      color: Colors.black45)))),
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  side:
+                                                      BorderSide(color: Colors.black45)))),
                                       onPressed: () {
                                         setState(() {
-                                          if (_formKey.currentState.validate()) {
+                                          if (_formKey.currentState
+                                              .validate()) {
                                             if (_formKey != null) {
                                               _formKey.currentState.save();
                                               Get.toNamed('/CampaignListScreen',
@@ -489,8 +491,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5.0),
+                                                  borderRadius: BorderRadius.circular(
+                                                      5.0),
                                                   side: BorderSide(
                                                       color: Colors.red)))),
                                       onPressed: () {
@@ -517,8 +519,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
               ],
             ),
           ),
-        )
-        );
+        ));
   }
 
   void _changeLanguage() async {
