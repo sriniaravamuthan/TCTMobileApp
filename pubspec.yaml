@@ -47,6 +47,7 @@ dependencies:
   http: ^0.13.3
   json_to_form:
   localstore: ^1.2.0
+  grouped_buttons: ^1.0.4
   flutter_localizations:
     sdk: flutter
 

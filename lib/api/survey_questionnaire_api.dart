@@ -8,7 +8,7 @@ import 'package:tct_demographics/api/response/survey_question_response.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI() async {
   String url;
-    url = "https://run.mocky.io/v3/4058182d-33f9-46ca-a7c1-e798e4ab530b";
+    url = "https://run.mocky.io/v3/1b7c2aeb-b877-45d9-9f6c-020e93a11102";
   // String token = await SharedPref().getStringPref(SharedPref().token);
   // debugPrint("Token:$token");
   Map<String, String> requestHeaders = {

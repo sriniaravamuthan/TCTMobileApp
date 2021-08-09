@@ -15,6 +15,8 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/widgets/checkbox_Widget.dart';
+import 'package:tct_demographics/widgets/dropdown_widget.dart';
 import 'package:tct_demographics/widgets/radio_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 import 'package:tct_demographics/widgets/textfield_widget.dart';
@@ -677,6 +679,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           ),
                         ),
                         itemWidget(index),
+
                       ]),
                 ),
               ),
@@ -731,6 +734,12 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       case "Radio":
         list.add(radioList(question));
         break;
+      case "Check-box":
+        list.add(checkBoxList(question));
+        break;
+      case "Drop-Down":
+        list.add(dropDownList(question));
+        break;
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
@@ -746,5 +755,29 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
+  }
+
+  Widget checkBoxList(question) {
+    List<Widget> list = [];
+    for (var i = 0; i < question.options.length; i++) {
+      debugPrint("checkbox:${question.options[i].optionName}");
+      list.add(CheckboxWidget(checkList: [
+        CheckboxList(name: question.options[i].optionName, index: i,isChecked: false),
+      ]));
+    }
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
+
+  }
+
+  Widget dropDownList(question) {
+    List<Widget> list = [];
+    for (var i = 0; i < question.options.length; i++) {
+      debugPrint("dropDownList:${question.options[i].optionName}");
+      list.add(DropDownWidget(listItem: [
+        DropDownList(name:question.options[i].optionName)]
+      ));
+    }
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
+
   }
 }

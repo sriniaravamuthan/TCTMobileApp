@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> {
                         return supportedLocales.first;
                       },
                       theme: ThemeData(),
-                      home: SplashScreen(),
+                      home: SurveyQuestionnaireScreen(),
                       getPages: [
                         GetPage(
                             name: '/dashBoard', page: () => DashboardScreen()),
