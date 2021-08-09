@@ -667,8 +667,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8, right: 8, top: 8),
+                          padding:
+                              const EdgeInsets.only(left: 8, right: 8, top: 8),
                           child: TextWidget(
                             text: dataSurveyQues.sections[index].sectionName,
                             color: darkColor,
@@ -699,10 +699,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
       );
-      optionWidget(dataSurveyQues.sections[index].questions[i],list);
-
+      list.add(optionWidget(dataSurveyQues.sections[index].questions[i]));
     }
-    return Column(crossAxisAlignment:CrossAxisAlignment.start,children: list);
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
 
     /*    Padding(
     padding: const EdgeInsets.all(4.0),
@@ -743,26 +742,30 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           )*/
   }
 
-  void optionWidget(Questions question, List<Widget> list) {
-
-    list.add(
-      question.optionType == "Text"
-          ? TextFieldWidget()
-          : question.optionType == "Radio"
-          ?radioList(question,list)
-          : Container(),
-    );
-
-  }
-
-  Widget radioList(Questions question, List<Widget> list) {
-    for (var i = 0; i < question.options.length; i++) {
-      debugPrint("RadioList:${question.options[i].optionName}");
-       RadioButtonWidget( fList: [
-        RadioList(name: question.options[i].optionName, index: i),
-      ]);
+  Widget optionWidget(question) {
+    List<Widget> list = [];
+    debugPrint("OptionType: ${question.optionType}");
+    switch (question.optionType) {
+      case "Text":
+        list.add(TextFieldWidget());
+        break;
+      case "Radio":
+        list.add(radioList(question));
+        break;
     }
 
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
+  }
 
+  Widget radioList(question) {
+    List<Widget> list = [];
+    for (var i = 0; i < question.options.length; i++) {
+      debugPrint("RadioList:${question.options[i].optionName}");
+      list.add(RadioButtonWidget(fList: [
+        RadioList(name: question.options[i].optionName, index: i),
+      ]));
+    }
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 }
