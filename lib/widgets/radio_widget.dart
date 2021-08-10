@@ -8,12 +8,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class RadioButtonWidget extends StatefulWidget {
-  // final String radioQuestion,item1Value,item2Value,itemText1,itemText2;
-  final List<RadioList> fList;
+  final List<Options> fList;
   // final String radioQuestion;
   const RadioButtonWidget({Key key, this.fList})
       : super(key: key);
@@ -24,22 +24,23 @@ class RadioButtonWidget extends StatefulWidget {
 
 class _RadioButtonWidgetState extends State<RadioButtonWidget> {
   String radioItem;
-  int id = -1;
+  String _selectedRadioIndex;
+
   @override
   Widget build(BuildContext context) {
    return Container(
      width: MediaQuery.of(context).size.width/2,
      child: Column(
         children:
-        widget.fList.map((data) => RadioListTile(
-          title: Text("${data.name}"),
-          groupValue: id,
-          value: data.index,
+        widget.fList.map((Options data) => RadioListTile(
+          title: Text("${data.optionName}"),
+          groupValue: _selectedRadioIndex,
+          value:data.optionId,
           onChanged: (val) {
             setState(() {
-              radioItem = data.name ;
+              radioItem = data.optionName ;
               debugPrint("Radio:$radioItem");
-              id = data.index;
+              _selectedRadioIndex = val;
             });
           },
         )).toList(),

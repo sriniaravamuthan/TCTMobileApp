@@ -84,9 +84,3 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     );
   }
 }
-
-class DropDownList {
-  String name;
-
-  DropDownList({this.name});
-}

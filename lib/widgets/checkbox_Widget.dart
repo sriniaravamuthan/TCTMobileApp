@@ -8,9 +8,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart';
 
 class CheckboxWidget extends StatefulWidget {
-  final List<CheckboxList> checkList;
+  final List<Options> checkList;
 
   const CheckboxWidget({Key key, this.checkList})
       : super(key: key);
@@ -20,18 +21,20 @@ class CheckboxWidget extends StatefulWidget {
 }
 
 class _CheckboxWidgetState extends State<CheckboxWidget> {
+  bool isChecked=false;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController controller=TextEditingController();
 
     return Column(
-        children: widget.checkList.map((hobby) {
+        children: widget.checkList.map((Options options) {
           return CheckboxListTile(
-              value: hobby.isChecked,
-              title: Text(hobby.name),
+              value: isChecked,
+              title: Text(options.optionName),
               onChanged: (newValue) {
                 setState(() {
-                  hobby.isChecked= newValue;
+                  isChecked= newValue;
                 });
               });
         }).toList());

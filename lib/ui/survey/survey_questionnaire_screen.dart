@@ -746,25 +746,22 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget radioList(question) {
     List<Widget> list = [];
-    for (var i = 0; i < question.options.length; i++) {
-      debugPrint("RadioList:${question.options[i].optionName}");
-      list.add(RadioButtonWidget(fList: [
-        RadioList(name: question.options[i].optionName, index: i),
-      ]));
-    }
+    // for (var i = 0; i < question.options.length; i++) {
+      debugPrint("RadioList:${question.options}");
+      list.add(RadioButtonWidget(fList:
+       question.options
+      ));
+    // }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
   Widget checkBoxList(question) {
     List<Widget> list = [];
-    for (var i = 0; i < question.options.length; i++) {
-      debugPrint("checkbox:${question.options[i].optionName}");
-      list.add(CheckboxWidget(checkList: [
-        CheckboxList(
-            name: question.options[i].optionName, index: i, isChecked: false),
-      ]));
-    }
+      list.add(CheckboxWidget(checkList:
+        question.options
+      ));
+
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
