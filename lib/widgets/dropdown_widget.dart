@@ -7,10 +7,11 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 
 class DropDownWidget extends StatefulWidget {
-  final List<DropDownList> listItem;
+  final List<Options> listItem;
 
   const DropDownWidget({Key key, this.listItem}) : super(key: key);
 
@@ -22,13 +23,14 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
-
+    String selectedValue;
     return Container(
       padding: const EdgeInsets.all(8.0),
       width: MediaQuery.of(context).size.width / 2,
       child: DropdownButtonFormField<String>(
         isExpanded: true,
         autofocus: true,
+        value: selectedValue,
         decoration: InputDecoration(
             counterText: "",
             border: OutlineInputBorder(),
@@ -55,14 +57,16 @@ class _DropDownWidgetState extends State<DropDownWidget> {
             // ),
             fillColor: lightGreyColor),
         onChanged: (newVal) {
-          controller.text = newVal;
-          this.setState(() {});
+          // controller.text = newVal;
+          this.setState(() {
+            selectedValue = newVal;
+          });
         },
-        items: widget.listItem.map((DropDownList map) {
-          return new DropdownMenuItem<String>(
-            value: map.name,
-            child:
-                new Text(map.name, style: new TextStyle(color: Colors.black)),
+        items: widget.listItem.map((Options maps) {
+          return new DropdownMenuItem(
+            value: maps.optionName,
+            child: new Text(maps.optionName,
+                style: new TextStyle(color: Colors.black)),
           );
         }).toList(),
         // widget.listItem.map<DropdownMenuItem<String>>((String value) {

@@ -679,7 +679,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           ),
                         ),
                         itemWidget(index),
-
                       ]),
                 ),
               ),
@@ -762,22 +761,19 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     for (var i = 0; i < question.options.length; i++) {
       debugPrint("checkbox:${question.options[i].optionName}");
       list.add(CheckboxWidget(checkList: [
-        CheckboxList(name: question.options[i].optionName, index: i,isChecked: false),
+        CheckboxList(
+            name: question.options[i].optionName, index: i, isChecked: false),
       ]));
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
-
   }
 
   Widget dropDownList(question) {
     List<Widget> list = [];
-    for (var i = 0; i < question.options.length; i++) {
-      debugPrint("dropDownList:${question.options[i].optionName}");
-      list.add(DropDownWidget(listItem: [
-        DropDownList(name:question.options[i].optionName)]
-      ));
-    }
+    // for (var i = 0; i < question.options.length; i++) {
+    debugPrint("dropDownList:${question.options}");
+    list.add(DropDownWidget(listItem: question.options));
+    // }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
-
   }
 }
