@@ -140,7 +140,7 @@ class Options {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<dynamic, dynamic> data = new Map<String, dynamic>();
     data['optionId'] = this.optionId;
     data['optionName'] = this.optionName;
     return data;
