@@ -119,7 +119,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context, false);
                   },
                   child: SvgPicture.asset(
@@ -212,10 +212,10 @@ class _HomeScreenScreenState extends State<HomeScreen> {
             mainDemograpicData.forEach((element) async {
               HashMap data = new HashMap();
               data["status"] = true; //  True -> Complete, false -> InProgress
-              if(element["Location"]["name"]!=null){
+              if (element["Location"]["name"] != null) {
                 data["name"] = element["Location"]["name"];
-              }else{
-                data["name"]="";
+              } else {
+                data["name"] = "";
               }
               data["formNo"] = element["Location"]["formNo"];
 
@@ -230,7 +230,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               }
               data["age"] = family.length.toString();
               debugPrint("familylist length:${family.length}");
-              if (data["name"] == "")  data["name"] = " ";
+              if (data["name"] == "") data["name"] = " ";
               if (data["mobileNumber"] == "") data["mobileNumber"] = "-";
 
               DemographicFamily demographicData = DemographicFamily();
@@ -317,9 +317,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
               int hasSection = -1, hasRelationShip = -1, hasDob = -1;
               for (int i = 0; i < family.length; i++) {
                 Family _family = Family();
-                _family.position=family[i]["positon"];
-                locationList.formNo=family[i]["familyId"];
-                _family.familyId=family[i]["familyId"];
+                _family.position = family[i]["positon"];
+                locationList.formNo = family[i]["familyId"];
+                _family.familyId = family[i]["familyId"];
                 debugPrint("Position:${_family.position}");
                 _family.aadharNumber = family[i]["aadharNumber"];
                 _family.age = family[i]["age"];
@@ -356,8 +356,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.photo = family[i]["photo"];
                 _family.physicallyChallenge =
                     family[i]["physicallyChallenge"].toDouble();
-                _family.physical =
-                    family[i]["physicallyChallenged"];
+                _family.physical = family[i]["physicallyChallenged"];
                 _family.privateInsurance =
                     family[i]["privateInsurance"].toDouble();
                 _family.relationship = family[i]["relationship"];
@@ -1096,7 +1095,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         panchayatCode == "") {
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
-    }else if (familyHead != "" && villageName != "") {
+    } else if (familyHead != "" && villageName != "") {
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
@@ -1104,7 +1103,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
       setState(() {});
-    }else if (contactPerson != "" && villageName != "") {
+    } else if (contactPerson != "" && villageName != "") {
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
@@ -1112,7 +1111,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
       setState(() {});
-    }  else if (familyHead != "") {
+    } else if (familyHead != "") {
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
@@ -1212,4 +1211,3 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     setState(() {});
   }
 }
-

@@ -43,9 +43,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   bool isInternet;
   Future apiCampaignList, apiSync;
   Data dataCampaign;
+  int _currentSortColumn = 0;
+  bool _isAscending = true;
+  List<CampaignList> campaignList;
 
   @override
   void initState() {
+    campaignList = [];
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
@@ -71,14 +75,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       debugPrint("ConnectivityResult $result");
     });*/
     isInternet = arguments[3];
-    if(isInternet){
+    if (isInternet) {
       apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
           campaignId: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
           languageCode: "ta"));
       debugPrint("apiCampaignList$apiCampaignList");
-    }else{
+    } else {
       apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
           campaignId: arguments[0],
           campaignName: arguments[1],
@@ -101,6 +105,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int _currentSortColumn = 0;
+    bool _isAscending = true;
+
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -218,6 +225,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
                 dataCampaign = projectSnap.data?.data;
+                campaignList = dataCampaign.campaignList;
                 return _portraitMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -234,6 +242,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 debugPrint(
                     "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
                 dataCampaign = projectSnap.data?.data;
+                campaignList = dataCampaign.campaignList;
                 return _landscapeMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -429,7 +438,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           child: Expanded(
                             flex: 1,
                             child: TextWidget(
-                              text:  dataCampaign?.pending,
+                              text: dataCampaign?.pending,
                               size: 14,
                               color: lightColor,
                               weight: FontWeight.w400,
@@ -515,8 +524,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ),
           ),
         ),
-        campaignTableList(),
-/*
         Expanded(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -527,6 +534,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 children: [
                   DataTable(
                     columnSpacing: 0.04,
+                    sortColumnIndex: _currentSortColumn,
+                    sortAscending: _isAscending,
                     showCheckboxColumn: false,
                     showBottomBorder: true,
                     // horizontalMargin: 0.10,
@@ -540,7 +549,22 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         color: lightColor,
                         size: 15,
                         weight: FontWeight.w700,
-                      )),
+                      ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.familyHeadName.compareTo(b.familyHeadName));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.familyHeadName.compareTo(a.familyHeadName));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      ),
                       DataColumn(
                         label: SizedBox(
                           width: 160,
@@ -552,6 +576,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w700,
                           ),
                         ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.respondentName.compareTo(b.respondentName));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.respondentName.compareTo(a.respondentName));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+
                       ),
                       DataColumn(
                         label: TextWidget(
@@ -560,8 +599,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           color: lightColor,
                           size: 15,
                           weight: FontWeight.w700,
-                        ),
-                      ),
+                        ),),
                       DataColumn(
                         label: TextWidget(
                           text: DemoLocalization.of(context)
@@ -570,6 +608,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           size: 15,
                           weight: FontWeight.w700,
                         ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.villageCode.compareTo(b.villageCode));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.villageCode.compareTo(a.villageCode));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+
                       ),
                       DataColumn(
                           label: TextWidget(
@@ -577,10 +630,25 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         color: lightColor,
                         size: 15,
                         weight: FontWeight.w700,
-                      ))
+                      ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.status.compareTo(b.status));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.status.compareTo(a.status));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      )
                     ],
-                    rows: <DataRow>[
-                      DataRow(
+                    rows: dataCampaign.campaignList.map(
+                          (CampaignList campaignList) => DataRow(
                         onSelectChanged: (bool selected) {
                           Get.toNamed(
                             '/SurveyQuestionnaire',
@@ -589,91 +657,48 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         cells: <DataCell>[
                           DataCell(
                             TextWidget(
-                              text: dataCampaign?.campaignList[0].familyHeadName,
+                              text: campaignList.familyHeadName,
                               color: darkColor,
                               size: 14,
                               weight: FontWeight.w400,
                             ),
                           ),
                           DataCell(TextWidget(
-                            text: dataCampaign?.campaignList[0].respondentName,
+                            text: campaignList.respondentName,
                             color: darkColor,
                             size: 14,
                             weight: FontWeight.w400,
                           )),
-                          DataCell(TextWidget(text:dataCampaign?.campaignList[0].mobileNumber, color: darkColor,
+                          DataCell(TextWidget(
+                            text: campaignList.mobileNumber,
+                            color: darkColor,
                             size: 14,
-                            weight: FontWeight.w400,)),
-                          DataCell(TextWidget(text:dataCampaign?.campaignList[0].villageCode, color: darkColor,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: campaignList.villageCode,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                          DataCell(TextWidget(
+                            text: campaignList.status,
+                            color: darkColor,
                             size: 14,
-                            weight: FontWeight.w400,)),
-                          DataCell(TextWidget(text:dataCampaign?.campaignList[0].status, color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,)),
+                            weight: FontWeight.w400,
+                          )),
                         ],
                       ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Akshay')),
-                          DataCell(Text('Akshay')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('Deepak')),
-                          DataCell(Text('7856589655')),
-                          DataCell(Text('CTL')),
-                          DataCell(Text('')),
-                        ],
-                      ),
-                    ],
+                    ).toList(),
                   )
                 ],
               ),
             ),
           ),
         ),
-*/
         InkWell(
           onTap: () {
 /*
@@ -749,11 +774,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 2.0,right: 2),
+                    padding: const EdgeInsets.only(left: 4.0, right: 2),
                     child: Row(
                       children: [
                         Expanded(
-                          flex:1,
+                          flex: 1,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Campaign Name'),
@@ -784,7 +809,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         Expanded(
                           flex: 1,
                           child: TextWidget(
-                            text:dataCampaign?.campaignDescription,
+                            text: dataCampaign?.campaignDescription,
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
@@ -796,16 +821,18 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Row(
-
                       children: [
                         Expanded(
                           flex: 2,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Objective Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
                           ),
                         ),
                         Expanded(
@@ -830,7 +857,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         Expanded(
                           flex: 1,
                           child: TextWidget(
-                            text:dataCampaign?.campaignPopulation,
+                            text: dataCampaign?.campaignPopulation,
                             size: 14,
                             color: lightColor,
                             weight: FontWeight.w400,
@@ -962,177 +989,204 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ),
           ),
         ),
-        campaignTableList(),
-        // Expanded(
-        //   child: SingleChildScrollView(
-        //     scrollDirection: Axis.vertical,
-        //     child: Padding(
-        //       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         mainAxisAlignment: MainAxisAlignment.start,
-        //         children: [
-        //           DataTable(
-        //             columnSpacing: MediaQuery.of(context).size.width / 40,
-        //             showCheckboxColumn: false,
-        //             horizontalMargin: 0.8,
-        //             showBottomBorder: true,
-        //             headingRowColor: MaterialStateColor.resolveWith(
-        //                 (states) => Color(0xff005aa8)),
-        //             columns: <DataColumn>[
-        //               DataColumn(
-        //                   label: Expanded(
-        //                 flex: 1,
-        //                 child: TextWidget(
-        //                   text: DemoLocalization.of(context)
-        //                       .translate('Family Head'),
-        //                   color: lightColor,
-        //                   size: 15,
-        //                   weight: FontWeight.w700,
-        //                 ),
-        //               )),
-        //               DataColumn(
-        //                 label: Expanded(
-        //                   flex: 1,
-        //                   child: TextWidget(
-        //                     text: DemoLocalization.of(context)
-        //                         .translate('Respondent Name'),
-        //                     color: lightColor,
-        //                     size: 15,
-        //                     weight: FontWeight.w700,
-        //                   ),
-        //                 ),
-        //               ),
-        //               DataColumn(
-        //                 label: Expanded(
-        //                   flex: 1,
-        //                   child: TextWidget(
-        //                     text: DemoLocalization.of(context)
-        //                         .translate('Mobile No'),
-        //                     color: lightColor,
-        //                     size: 15,
-        //                     weight: FontWeight.w700,
-        //                   ),
-        //                 ),
-        //               ),
-        //               DataColumn(
-        //                 label: Expanded(
-        //                   flex: 1,
-        //                   child: TextWidget(
-        //                     text: DemoLocalization.of(context)
-        //                         .translate('Village Code'),
-        //                     color: lightColor,
-        //                     size: 15,
-        //                     weight: FontWeight.w700,
-        //                   ),
-        //                 ),
-        //               ),
-        //               DataColumn(
-        //                   label: Expanded(
-        //                 flex: 1,
-        //                 child: TextWidget(
-        //                   text:
-        //                       DemoLocalization.of(context).translate('Status'),
-        //                   color: lightColor,
-        //                   size: 15,
-        //                   weight: FontWeight.w700,
-        //                 ),
-        //               ))
-        //             ],
-        //             rows: <DataRow>[
-        //               DataRow(
-        //                 onSelectChanged: (bool selected) {
-        //                   Get.toNamed(
-        //                     '/SurveyQuestionnaire',
-        //                   );
-        //                 },
-        //                 cells: <DataCell>[
-        //                   DataCell(
-        //                     TextWidget(
-        //                       text: dataCampaign?.campaignList[0].familyHeadName,
-        //                       color: darkColor,
-        //                       size: 16,
-        //                       weight: FontWeight.w400,
-        //                     ),
-        //                   ),
-        //                   DataCell(TextWidget(
-        //                     text: dataCampaign?.campaignList[0].respondentName,
-        //                     color: darkColor,
-        //                     size: 14,
-        //                     weight: FontWeight.w400,
-        //                   )),
-        //                   DataCell(TextWidget(text:dataCampaign?.campaignList[0].mobileNumber, color: darkColor,
-        //                     size: 14,
-        //                     weight: FontWeight.w400,)),
-        //                   DataCell(TextWidget(text:dataCampaign?.campaignList[0].villageCode, color: darkColor,
-        //                     size: 14,
-        //                     weight: FontWeight.w400,)),
-        //                   DataCell(TextWidget(text:dataCampaign?.campaignList[0].status, color: darkColor,
-        //                     size: 14,
-        //                     weight: FontWeight.w400,)),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Akshay')),
-        //                   DataCell(Text('Akshay')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Pending')),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('Rajesh')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Pending')),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Completed')),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Completed')),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('Deepak Kumar')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Pending')),
-        //                 ],
-        //               ),
-        //               DataRow(
-        //                 cells: <DataCell>[
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('Deepak')),
-        //                   DataCell(Text('7856589655')),
-        //                   DataCell(Text('CTL')),
-        //                   DataCell(Text('Completed')),
-        //                 ],
-        //               ),
-        //             ],
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 6.0, right: 6, top: 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  DataTable(
+                    columnSpacing: MediaQuery.of(context).size.width / 72,
+                    sortColumnIndex: _currentSortColumn,
+                    sortAscending: _isAscending,
+                    showCheckboxColumn: false,
+                    horizontalMargin: 0.20,
+                    showBottomBorder: true,
+                    headingRowColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xff005aa8)),
+                    columns: <DataColumn>[
+                      DataColumn(
+                          label: Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Family Head'),
+                            color: lightColor,
+                            size: 14,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.familyHeadName.compareTo(b.familyHeadName));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.familyHeadName.compareTo(a.familyHeadName));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Respondent Name'),
+                            color: lightColor,
+                            size: 14,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.respondentName.compareTo(b.respondentName));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.respondentName.compareTo(a.respondentName));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Mobile No'),
+                            color: lightColor,
+                            size: 14,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Village Code'),
+                            color: lightColor,
+                            size: 14,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                          onSort: (columnIndex, _) {
+                          setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.villageCode.compareTo(b.villageCode));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.villageCode.compareTo(a.villageCode));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      ),
+                      DataColumn(
+                          label: Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text:
+                              DemoLocalization.of(context).translate('Status'),
+                          color: lightColor,
+                          size: 14,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.status.compareTo(b.status));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.status.compareTo(a.status));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }
+                      )
+                    ],
+                    rows: dataCampaign.campaignList.map(
+                          (CampaignList campaignList) => DataRow(
+                        onSelectChanged: (bool selected) {
+                          Get.toNamed(
+                            '/SurveyQuestionnaire',
+                          );
+                        },
+                        cells: <DataCell>[
+                          DataCell(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: TextWidget(
+                                text: campaignList.familyHeadName,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          DataCell(TextWidget(
+                            text: campaignList.respondentName,
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(TextWidget(
+                            text: campaignList.mobileNumber,
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: campaignList.villageCode,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+
+                            child: TextWidget(
+                              text: campaignList.status,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                        ],
+                      ),
+                    ).toList(),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
         InkWell(
           onTap: () {
 /*
@@ -1239,214 +1293,5 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         ),
       ),
     );
-  }
-
- Widget campaignTableList(){
-   return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              DataTable(
-                columnSpacing: 0.06,
-                showCheckboxColumn: false,
-                showBottomBorder: true,
-                // horizontalMargin: 0.10,
-                headingRowColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xff005aa8)),
-                columns: <DataColumn>[
-                  DataColumn(
-                      label: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                          width: 105,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Family Head'),
-                            color: lightColor,
-                            size: 15,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      )),
-                  DataColumn(
-                    label: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: SizedBox(
-                        width: 155,
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Respondent Name'),
-                          color: lightColor,
-                          size: 15,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                    label: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: SizedBox(
-                        width: 80,
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Mobile No'),
-                          color: lightColor,
-                          size: 15,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                    label: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: SizedBox(
-                        width: 80,
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Village Code'),
-                          color: lightColor,
-                          size: 15,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  DataColumn(
-                      label: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                          width: 100,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context).translate('Status'),
-                            color: lightColor,
-                            size: 15,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                      ))
-                ],
-                rows: <DataRow>[
-                  DataRow(
-                    onSelectChanged: (bool selected) {
-                      Get.toNamed(
-                        '/SurveyQuestionnaire',
-                      );
-                    },
-                    cells: <DataCell>[
-                      DataCell(
-                        TextWidget(
-                          text: dataCampaign?.campaignList[0].familyHeadName,
-                          color: darkColor,
-                          size: 14,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                      DataCell(TextWidget(
-                        text: dataCampaign?.campaignList[0].respondentName,
-                        color: darkColor,
-                        size: 14,
-                        weight: FontWeight.w400,
-                      )),
-                      DataCell(TextWidget(text:dataCampaign?.campaignList[0].mobileNumber, color: darkColor,
-                        size: 14,
-                        weight: FontWeight.w400,)),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: TextWidget(text:dataCampaign?.campaignList[0].villageCode, color: darkColor,
-                          size: 14,
-                          weight: FontWeight.w400,),
-                      )),
-                      DataCell(TextWidget(text:dataCampaign?.campaignList[0].status, color: darkColor,
-                        size: 14,
-                        weight: FontWeight.w400,)),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Akshay')),
-                      DataCell(Text('Akshay')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('Deepak')),
-                      DataCell(Text('7856589655')),
-                      DataCell(Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Text('CTL'),
-                      )),
-                      DataCell(Text('')),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-
-
   }
 }

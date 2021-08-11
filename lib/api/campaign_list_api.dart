@@ -16,7 +16,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
-  String url = "https://run.mocky.io/v3/0d027d73-6a5f-4338-ba8d-c01d1798518b";
+  String url = "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   // String token = await SharedPref().getStringPref(SharedPref().token);
@@ -52,7 +52,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
-  String url = "https://run.mocky.io/v3/0d027d73-6a5f-4338-ba8d-c01d1798518b";
+  String url = "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   Map<String, String> requestHeaders = {

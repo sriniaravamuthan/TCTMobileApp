@@ -213,7 +213,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 3,
+                                    flex: 4,
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Campaign ID'),
@@ -294,7 +294,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 3,
+                                    flex: 4,
                                     child: TextWidget(
                                       text: DemoLocalization.of(context)
                                           .translate('Campaign Name**'),
@@ -362,7 +362,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      flex: 3,
+                                      flex: 4,
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
                                             .translate('Village Codes'),
