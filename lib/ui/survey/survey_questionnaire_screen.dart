@@ -758,10 +758,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget checkBoxList(question) {
     List<Widget> list = [];
+      // debugPrint("checkbox:${question.options[i].optionName}");
       list.add(CheckboxWidget(checkList:
-        question.options
-      ));
-
+           question.options));
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 

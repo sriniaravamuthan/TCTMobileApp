@@ -33,7 +33,12 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
      child: Column(
         children:
         widget.fList.map((Options data) => RadioListTile(
-          title: Text("${data.optionName}"),
+          title: TextWidget(
+            text: data.optionName,
+            color: darkColor,
+            size: 14,
+            weight: FontWeight.w400,
+          ),
           groupValue: _selectedRadioIndex,
           value:data.optionId,
           onChanged: (val) {
@@ -49,8 +54,3 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
   }
 }
 
-class RadioList {
-  String name;
-  int index;
-  RadioList({this.name, this.index});
-}
