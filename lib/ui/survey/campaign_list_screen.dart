@@ -110,107 +110,111 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: lightColor,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.toNamed('/dashBoard');
-                    },
-                    child: SvgPicture.asset(
-                      svgTctLogo,
-                      semanticsLabel: "Logo",
-                      height: 40,
-                      width: 50,
-                      fit: BoxFit.contain,
-                      allowDrawingOutsideViewBox: true,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+  theme: _buildShrineTheme(),
+      home: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            backgroundColor: lightColor,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/dashBoard');
+                      },
+                      child: SvgPicture.asset(
+                        svgTctLogo,
+                        semanticsLabel: "Logo",
+                        height: 40,
+                        width: 50,
+                        fit: BoxFit.contain,
+                        allowDrawingOutsideViewBox: true,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  DropdownButton(
-                    underline: SizedBox(),
-                    icon: Icon(
-                      Icons.language,
-                      color: Colors.black87,
-                    ),
-                    items: ['தமிழ்', 'English'].map((val) {
-                      return new DropdownMenuItem<String>(
-                        value: val,
-                        child: new Text(val),
-                      );
-                    }).toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        dropDownLang = val;
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    DropdownButton(
+                      underline: SizedBox(),
+                      icon: Icon(
+                        Icons.language,
+                        color: Colors.black87,
+                      ),
+                      items: ['தமிழ்', 'English'].map((val) {
+                        return new DropdownMenuItem<String>(
+                          value: val,
+                          child: new Text(val),
+                        );
+                      }).toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          dropDownLang = val;
 
-                        _changeLanguage();
-                      });
-                      print("Language:$val");
-                    },
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(left: 8.0),
-                              height: 30,
-                              width: 30,
-                              decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: new AssetImage(user)))),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          userMail != null
-                              ? Text(
-                                  userMail,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                )
-                              : Text(
-                                  userName,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                ),
-                        ],
-                      )),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      AuthenticationService(FirebaseAuth.instance)
-                          .signOut(context);
-                    },
-                    child: Icon(
-                      Icons.power_settings_new_outlined,
-                      color: darkColor,
+                          _changeLanguage();
+                        });
+                        print("Language:$val");
+                      },
                     ),
-                  )
-                ],
-              ),
-            ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    InkWell(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(left: 8.0),
+                                height: 30,
+                                width: 30,
+                                decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: new AssetImage(user)))),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            userMail != null
+                                ? Text(
+                                    userMail,
+                                    style:
+                                        TextStyle(fontSize: 16, color: darkColor),
+                                  )
+                                : Text(
+                                    userName,
+                                    style:
+                                        TextStyle(fontSize: 16, color: darkColor),
+                                  ),
+                          ],
+                        )),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        AuthenticationService(FirebaseAuth.instance)
+                            .signOut(context);
+                      },
+                      child: Icon(
+                        Icons.power_settings_new_outlined,
+                        color: darkColor,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        body: checkOrientation());
+          body: checkOrientation()),
+    );
   }
 
   Widget checkOrientation() {
@@ -276,7 +280,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 6,
+          width: MediaQuery.of(context).size.width,
+
+          // height: MediaQuery.of(context).size.height / 6,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
@@ -454,7 +460,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height / 7,
+          width: MediaQuery.of(context).size.width,
+          // height: MediaQuery.of(context).size.height / 7,
           child: Padding(
             padding: const EdgeInsets.only(
               left: 8.0,
@@ -519,12 +526,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ),
                   ),
                   _searchList(),
+                  SizedBox(width: 4,)
                 ],
               ),
             ),
           ),
         ),
         Expanded(
+          flex: 8,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
@@ -739,7 +748,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Icon(Icons.more_horiz),
+                        Icon(Icons.more_horiz,color: Colors.black,),
                         SizedBox(
                           width: 5,
                         ),
@@ -766,7 +775,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height / 7,
+          width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
             child: Card(
@@ -798,12 +807,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                         Expanded(
                           flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
                           ),
                         ),
                         Expanded(
@@ -865,15 +877,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                         Expanded(
                           flex: 2,
-                          child: FittedBox(
-                            fit: BoxFit.fitWidth,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Completed:'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Completed:'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
                           ),
                         ),
                         Expanded(
@@ -913,7 +922,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height / 12,
+          width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.only(
               left: 8.0,
@@ -983,19 +992,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       ),
                     ),
                   ),
-                  _searchList()
+                  _searchList(),
+                  SizedBox(width: 4,)
                 ],
               ),
             ),
           ),
         ),
         Expanded(
+          flex: 8,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Padding(
               padding: const EdgeInsets.only(left: 6.0, right: 6, top: 4),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DataTable(
@@ -1005,6 +1016,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     showCheckboxColumn: false,
                     horizontalMargin: 0.20,
                     showBottomBorder: true,
+                    dataRowColor:  MaterialStateColor.resolveWith(
+                            (states) => Color(0xFFffffff)),
                     headingRowColor: MaterialStateColor.resolveWith(
                         (states) => Color(0xff005aa8)),
                     columns: <DataColumn>[
@@ -1227,7 +1240,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Icon(Icons.more_horiz),
+                        Icon(Icons.more_horiz,color: Colors.black,),
                         SizedBox(
                           width: 5,
                         ),
@@ -1249,49 +1262,55 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ],
     );
   }
-
+  ThemeData _buildShrineTheme() {
+    final ThemeData base = ThemeData.light();
+    return base.copyWith(
+      iconTheme: _customIconTheme(base.iconTheme),
+    );
+  }
   Widget _searchList() {
     return Expanded(
       flex: 1,
-      child: Container(
-        height: 55,
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: TextFormField(
-            maxLines: 1,
-            textAlign: TextAlign.start,
-            controller: searchController,
-            textInputAction: TextInputAction.done,
-            enableSuggestions: true,
-            decoration: InputDecoration(
-                filled: true,
-                hintText: "Search",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
-                ),
-                suffixIcon: Icon(Icons.search),
-                fillColor: Colors.white),
-            keyboardType: TextInputType.text,
-            onSaved: (String val) {
-              setState(() {
-                searchController.text = val;
-              });
-            },
-          ),
-        ),
+      child: TextFormField(
+        maxLines: 1,
+        textAlign: TextAlign.start,
+        controller: searchController,
+        textInputAction: TextInputAction.done,
+        enableSuggestions: true,
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+                vertical: 2.0, horizontal: 2.0),
+            filled: true,
+            hintText: "Search",
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+            ),
+            suffixIcon: Icon(Icons.search),
+            fillColor: Colors.white),
+        keyboardType: TextInputType.text,
+        onSaved: (String val) {
+          setState(() {
+            searchController.text = val;
+          });
+        },
       ),
     );
+  }
+
+  _customIconTheme(IconThemeData iconTheme) {
+    return iconTheme.copyWith(color: lightColor);
+
   }
 }
