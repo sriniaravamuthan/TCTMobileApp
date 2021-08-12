@@ -64,7 +64,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
-    /* listenNetwork = Connectivity()
+    /*listenNetwork = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
       // setState(() {
@@ -553,54 +553,55 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     columns: <DataColumn>[
                       DataColumn(
                           label: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Family Head'),
-                        color: lightColor,
-                        size: 15,
-                        weight: FontWeight.w700,
-                      ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) => a.familyHeadName.compareTo(b.familyHeadName));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) => b.familyHeadName.compareTo(a.familyHeadName));
-
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }
-                      ),
-                      DataColumn(
-                        label: SizedBox(
-                          width: 160,
-                          child: TextWidget(
                             text: DemoLocalization.of(context)
-                                .translate('Respondent Name'),
+                                .translate('Family Head'),
                             color: lightColor,
                             size: 15,
                             weight: FontWeight.w700,
                           ),
-                        ),
                           onSort: (columnIndex, _) {
                             setState(() {
                               _currentSortColumn = columnIndex;
                               if (_isAscending == true) {
                                 _isAscending = false;
-                                campaignList.sort((a, b) => a.respondentName.compareTo(b.respondentName));
+                                campaignList.sort((a, b) => a.familyHeadName
+                                    .compareTo(b.familyHeadName));
                               } else {
                                 _isAscending = true;
-                                campaignList.sort((a, b) => b.respondentName.compareTo(a.respondentName));
+                                campaignList.sort((a, b) => b.familyHeadName
+                                    .compareTo(a.familyHeadName));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
-                          }
+                          }),
+                      DataColumn(
+                          label: SizedBox(
+                            width: 160,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Respondent Name'),
+                              color: lightColor,
+                              size: 15,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort((a, b) => a.respondentName
+                                    .compareTo(b.respondentName));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort((a, b) => b.respondentName
+                                    .compareTo(a.respondentName));
 
-                      ),
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          }),
                       DataColumn(
                         label: TextWidget(
                           text: DemoLocalization.of(context)
@@ -608,100 +609,107 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           color: lightColor,
                           size: 15,
                           weight: FontWeight.w700,
-                        ),),
-                      DataColumn(
-                        label: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Village Code'),
-                          color: lightColor,
-                          size: 15,
-                          weight: FontWeight.w700,
                         ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) => a.villageCode.compareTo(b.villageCode));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) => b.villageCode.compareTo(a.villageCode));
-
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }
-
                       ),
                       DataColumn(
                           label: TextWidget(
-                        text: DemoLocalization.of(context).translate('Status'),
-                        color: lightColor,
-                        size: 15,
-                        weight: FontWeight.w700,
-                      ),
+                            text: DemoLocalization.of(context)
+                                .translate('Village Code'),
+                            color: lightColor,
+                            size: 15,
+                            weight: FontWeight.w700,
+                          ),
                           onSort: (columnIndex, _) {
                             setState(() {
                               _currentSortColumn = columnIndex;
                               if (_isAscending == true) {
                                 _isAscending = false;
-                                campaignList.sort((a, b) => a.status.compareTo(b.status));
+                                campaignList.sort((a, b) =>
+                                    a.villageCode.compareTo(b.villageCode));
                               } else {
                                 _isAscending = true;
-                                campaignList.sort((a, b) => b.status.compareTo(a.status));
+                                campaignList.sort((a, b) =>
+                                    b.villageCode.compareTo(a.villageCode));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
-                          }
-                      )
-                    ],
-                    rows: dataCampaign.campaignList.map(
-                          (CampaignList campaignList) => DataRow(
-                        onSelectChanged: (bool selected) {
-                          Get.toNamed(
-                            '/SurveyQuestionnaire',
-                          );
-                        },
-                        cells: <DataCell>[
-                          DataCell(
-                            TextWidget(
-                              text: campaignList.familyHeadName,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
+                          }),
+                      DataColumn(
+                          label: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Status'),
+                            color: lightColor,
+                            size: 15,
+                            weight: FontWeight.w700,
                           ),
-                          DataCell(TextWidget(
-                            text: campaignList.respondentName,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(TextWidget(
-                            text: campaignList.mobileNumber,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: TextWidget(
-                              text: campaignList.villageCode,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
-                          )),
-                          DataCell(TextWidget(
-                            text: campaignList.status,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                        ],
-                      ),
-                    ).toList(),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort(
+                                    (a, b) => a.status.compareTo(b.status));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort(
+                                    (a, b) => b.status.compareTo(a.status));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          })
+                    ],
+                    rows: dataCampaign.campaignList
+                        .map(
+                          (CampaignList campaignList) => DataRow(
+                            onSelectChanged: (bool selected) {
+                              Get.toNamed('/SurveyQuestionnaire', arguments: [
+                                campaignList.familyId,
+                                dataCampaign.campaignId,
+                                isInternet
+                              ]);
+                            },
+                            cells: <DataCell>[
+                              DataCell(
+                                TextWidget(
+                                  text: campaignList.familyHeadName,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                              DataCell(TextWidget(
+                                text: campaignList.respondentName,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              )),
+                              DataCell(TextWidget(
+                                text: campaignList.mobileNumber,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              )),
+                              DataCell(Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: TextWidget(
+                                  text: campaignList.villageCode,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              )),
+                              DataCell(TextWidget(
+                                text: campaignList.status,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              )),
+                            ],
+                          ),
+                        )
+                        .toList(),
                   )
                 ],
               ),
@@ -1023,59 +1031,61 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     columns: <DataColumn>[
                       DataColumn(
                           label: Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 4.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Family Head'),
-                            color: lightColor,
-                            size: 14,
-                            weight: FontWeight.w700,
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Family Head'),
+                                color: lightColor,
+                                size: 14,
+                                weight: FontWeight.w700,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
                           onSort: (columnIndex, _) {
                             setState(() {
                               _currentSortColumn = columnIndex;
                               if (_isAscending == true) {
                                 _isAscending = false;
-                                campaignList.sort((a, b) => a.familyHeadName.compareTo(b.familyHeadName));
+                                campaignList.sort((a, b) => a.familyHeadName
+                                    .compareTo(b.familyHeadName));
                               } else {
                                 _isAscending = true;
-                                campaignList.sort((a, b) => b.familyHeadName.compareTo(a.familyHeadName));
+                                campaignList.sort((a, b) => b.familyHeadName
+                                    .compareTo(a.familyHeadName));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
-                          }
-                      ),
+                          }),
                       DataColumn(
-                        label: Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Respondent Name'),
-                            color: lightColor,
-                            size: 14,
-                            weight: FontWeight.w700,
+                          label: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Respondent Name'),
+                              color: lightColor,
+                              size: 14,
+                              weight: FontWeight.w700,
+                            ),
                           ),
-                        ),
                           onSort: (columnIndex, _) {
                             setState(() {
                               _currentSortColumn = columnIndex;
                               if (_isAscending == true) {
                                 _isAscending = false;
-                                campaignList.sort((a, b) => a.respondentName.compareTo(b.respondentName));
+                                campaignList.sort((a, b) => a.respondentName
+                                    .compareTo(b.respondentName));
                               } else {
                                 _isAscending = true;
-                                campaignList.sort((a, b) => b.respondentName.compareTo(a.respondentName));
+                                campaignList.sort((a, b) => b.respondentName
+                                    .compareTo(a.respondentName));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
-                          }
-                      ),
+                          }),
                       DataColumn(
                         label: Expanded(
                           flex: 1,
@@ -1089,111 +1099,116 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         ),
                       ),
                       DataColumn(
-                        label: Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Village Code'),
-                            color: lightColor,
-                            size: 14,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                          onSort: (columnIndex, _) {
-                          setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) => a.villageCode.compareTo(b.villageCode));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) => b.villageCode.compareTo(a.villageCode));
-
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }
-                      ),
-                      DataColumn(
                           label: Expanded(
-                        flex: 1,
-                        child: TextWidget(
-                          text:
-                              DemoLocalization.of(context).translate('Status'),
-                          color: lightColor,
-                          size: 14,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Village Code'),
+                              color: lightColor,
+                              size: 14,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
                           onSort: (columnIndex, _) {
                             setState(() {
                               _currentSortColumn = columnIndex;
                               if (_isAscending == true) {
                                 _isAscending = false;
-                                campaignList.sort((a, b) => a.status.compareTo(b.status));
+                                campaignList.sort((a, b) =>
+                                    a.villageCode.compareTo(b.villageCode));
                               } else {
                                 _isAscending = true;
-                                campaignList.sort((a, b) => b.status.compareTo(a.status));
+                                campaignList.sort((a, b) =>
+                                    b.villageCode.compareTo(a.villageCode));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
-                          }
-                      )
+                          }),
+                      DataColumn(
+                          label: Expanded(
+                            flex: 1,
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Status'),
+                              color: lightColor,
+                              size: 14,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                          onSort: (columnIndex, _) {
+                            setState(() {
+                              _currentSortColumn = columnIndex;
+                              if (_isAscending == true) {
+                                _isAscending = false;
+                                campaignList.sort(
+                                    (a, b) => a.status.compareTo(b.status));
+                              } else {
+                                _isAscending = true;
+                                campaignList.sort(
+                                    (a, b) => b.status.compareTo(a.status));
+
+                                // sort the product list in Descending, order by Price
+                              }
+                            });
+                          })
                     ],
-                    rows: dataCampaign.campaignList.map(
+                    rows: dataCampaign.campaignList
+                        .map(
                           (CampaignList campaignList) => DataRow(
-                        onSelectChanged: (bool selected) {
-                          Get.toNamed(
-                            '/SurveyQuestionnaire',
-                          );
-                        },
-                        cells: <DataCell>[
-                          DataCell(
-                            Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
-                              child: TextWidget(
-                                text: campaignList.familyHeadName,
+                            onSelectChanged: (bool selected) {
+                              Get.toNamed('/SurveyQuestionnaire', arguments: [
+                                campaignList.familyId,
+                                dataCampaign.campaignId,
+                                isInternet
+                              ]);
+                            },
+                            cells: <DataCell>[
+                              DataCell(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 4.0),
+                                  child: TextWidget(
+                                    text: campaignList.familyHeadName,
+                                    color: darkColor,
+                                    size: 14,
+                                    weight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              DataCell(TextWidget(
+                                text: campaignList.respondentName,
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w400,
-                              ),
-                            ),
+                              )),
+                              DataCell(TextWidget(
+                                text: campaignList.mobileNumber,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              )),
+                              DataCell(Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: TextWidget(
+                                  text: campaignList.villageCode,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              )),
+                              DataCell(Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: TextWidget(
+                                  text: campaignList.status,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              )),
+                            ],
                           ),
-                          DataCell(TextWidget(
-                            text: campaignList.respondentName,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(TextWidget(
-                            text: campaignList.mobileNumber,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: TextWidget(
-                              text: campaignList.villageCode,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
-                          )),
-                          DataCell(Padding(
-                            padding: const EdgeInsets.only(right: 4.0),
-
-                            child: TextWidget(
-                              text: campaignList.status,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
-                          )),
-                        ],
-                      ),
-                    ).toList(),
+                        )
+                        .toList(),
                   )
                 ],
               ),

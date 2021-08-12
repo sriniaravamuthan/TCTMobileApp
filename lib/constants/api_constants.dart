@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:localstore/localstore.dart';
 
 final firestoreInstance = FirebaseFirestore.instance;
 const String collectionVillageCode = "villageCode";
@@ -18,3 +19,5 @@ const String mapFamilyMembers = "familyMembers";
 const String collectionAnnualIncome = "annualIncome";
 const String mapAnnualIncome = "income";
 const String collectionCount = "DemographicCount";
+
+final db = Localstore.instance;

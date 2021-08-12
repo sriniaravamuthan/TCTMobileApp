@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
 import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
@@ -37,10 +38,11 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
-  var _controller = TextEditingController();
+  var arguments;
   List<String> listItem;
-  Future apiSurveyQuestion;
+  Future apiSurveyQuestion, apiSync;
   Data dataSurveyQues;
+  bool isInternet;
 
   @override
   void initState() {
@@ -49,7 +51,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-    apiSurveyQuestion = getSurveyQuestionAPI();
 
 /*     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getJson();
@@ -62,7 +63,22 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitDown,
     ]);
     listItem = [];
+    arguments = Get.arguments;
+    debugPrint("Arguments $arguments");
     super.initState();
+    debugPrint("isInternet: ${arguments[2]}");
+    isInternet = arguments[2];
+    if (isInternet) {
+      apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
+          familyId: arguments[0],
+          campaignId: arguments[1],
+          languageCode: "ta"));
+    } else {
+      apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
+          familyId: arguments[0],
+          campaignId: arguments[1],
+          languageCode: "ta"));
+    }
   }
 
   String form = json.encode({
@@ -282,7 +298,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
             return FutureBuilder<SurveyQuestionnaireResponse>(
-              future: apiSurveyQuestion,
+              future: isInternet ? apiSurveyQuestion : apiSync,
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -298,7 +314,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             );
           } else {
             return FutureBuilder<SurveyQuestionnaireResponse>(
-              future: apiSurveyQuestion,
+              future: isInternet ? apiSurveyQuestion : apiSync,
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());

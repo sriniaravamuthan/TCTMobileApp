@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:localstore/localstore.dart';
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
@@ -52,15 +53,17 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
-  String url = "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
+  String searchCampaignURL =
+      "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
+  String surveyCampaignURL =
+      "https://run.mocky.io/v3/1b7c2aeb-b877-45d9-9f6c-020e93a11102";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
-  debugPrint("URl sync: $url");
-  final db = Localstore.instance;
+  debugPrint("URl sync: $searchCampaignURL");
   var connectionResult = await (Connectivity().checkConnectivity());
   if (connectionResult == ConnectivityResult.none) {
     Map<String, dynamic> map = await db
@@ -70,12 +73,18 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     debugPrint("Offline List $map");
     return SearchCampaignResponse.fromJson(map);
   } else {
-    final response =
+    final responseSearchCampaign =
         // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-        await http.get(Uri.parse(url), headers: requestHeaders);
-    var data = SearchCampaignResponse.fromJson(json.decode(response.body));
+        await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
+    var data = SearchCampaignResponse.fromJson(
+        json.decode(responseSearchCampaign.body));
+    final responseSurvey =
+        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+        await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
+    var dataSurvey =
+        SurveyQuestionnaireResponse.fromJson(json.decode(responseSurvey.body));
 
-    if (response.statusCode == 200) {
+    if (responseSearchCampaign.statusCode == 200) {
       debugPrint("Response12 ${data.toJson()}");
       if (!data.isError) {
         try {
@@ -89,7 +98,28 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignId)
-              .set(data.toJson());
+              .set(data.toJson())
+              .then((value) => {debugPrint("DB Added List: $value")});
+
+          if (responseSurvey.statusCode == 200) {
+            debugPrint("Response1 ${dataSurvey.toJson()}");
+            if (!dataSurvey.isError) {
+              try {
+                db
+                    .collection('campaign_list')
+                    .doc(searchCampaignRequest.campaignId)
+                    .collection('survey')
+                    .doc(searchCampaignRequest.campaignId)
+                    .set(dataSurvey.toJson())
+                    .then((value) => {debugPrint("DB Added Survey: $value")});
+              } catch (error) {
+                debugPrint("Error $error");
+              }
+            }
+          } else {
+            debugPrint("Response ${dataSurvey.data}");
+            snackBarAlert(warning, "API Error", errorColor);
+          }
         }
         return data;
       } else {
@@ -99,7 +129,8 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
       }
     } else {
       debugPrint("Response3 ${data.data}");
-      snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
+      snackBarAlert(error,
+          "Server Error - ${responseSearchCampaign.statusCode}", errorColor);
       return null;
     }
   }
