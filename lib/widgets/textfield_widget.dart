@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
 final String valueText;
+final TextEditingController controller;
 
-  const TextFieldWidget({Key key, this.valueText})
+  const TextFieldWidget({Key key, this.valueText, this.controller})
       : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ final String valueText;
 class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller=TextEditingController();
+    // TextEditingController controller=TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
@@ -29,12 +30,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         height: 48,
         width: MediaQuery.of(context).size.width/2,
         child: TextField(
-          controller: controller,
+          controller: widget.controller,
           keyboardType: TextInputType.text,
           enableSuggestions: true,
           onChanged: (value) {
             setState(() {
-              controller.text = value;
+              widget.controller.text = value;
             });
           },
           decoration: InputDecoration(
