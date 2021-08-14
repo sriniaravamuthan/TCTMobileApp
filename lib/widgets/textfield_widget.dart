@@ -29,11 +29,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       child: Container(
         height: 48,
         width: MediaQuery.of(context).size.width/2,
-        child: TextField(
+        child: TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.text,
           enableSuggestions: true,
-          onChanged: (value) {
+          onSaved: (value) {
             setState(() {
               widget.controller.text = value;
             });

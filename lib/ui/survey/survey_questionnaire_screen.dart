@@ -44,7 +44,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Future apiSurveyQuestion, apiSync;
   Data dataSurveyQues;
   bool isInternet;
-
+  List<Widget> _children = [];
+  List<TextEditingController> controllers = [];
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -189,6 +190,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    controllers.clear();
+
     super.dispose();
   }
 
@@ -339,86 +342,93 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Widget _portraitMode() {
     return Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Card(
-            color: Theme.of(context).accentColor,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Name'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: SizedBox(
-                        width: 100,
-                        child: TextWidget(
-                          text: dataSurveyQues.campaignName,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Theme.of(context).accentColor,
+              child: Column(
+                children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Campaign Name'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
                         ),
-                      ),
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: dataSurveyQues?.campaignName,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: dataSurveyQues?.campaignDescription,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Description'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
+              ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Objective Name'),
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: TextWidget(
+                            text: dataSurveyQues.objectiveName,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                        Spacer(
+                          flex: 2,
+                        )
+                      ],
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: TextWidget(
-                        text: dataSurveyQues.campaignDescription,
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Objective Name'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: TextWidget(
-                        text: dataSurveyQues.objectiveName,
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w400,
-                      ),
-                    ),
-                    Spacer(
-                      flex: 2,
-                    )
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -493,94 +503,99 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Widget _landscapeMode() {
     return Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Card(
-            color: Theme.of(context).accentColor,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Name'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        child: TextWidget(
-                          text: dataSurveyQues.campaignName,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Description'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                          width: 100,
-                          child: TextWidget(
-                            text: dataSurveyQues.campaignDescription,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              color: Theme.of(context).accentColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                      ),
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: dataSurveyQues?.campaignName,
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: dataSurveyQues?.campaignDescription,
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Objective Name'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: TextWidget(
+                              text: dataSurveyQues?.objectiveName,
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Objective Name'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4.0,
-                        bottom: 4,
-                      ),
-                      child: TextWidget(
-                        text: dataSurveyQues.objectiveName,
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -748,11 +763,22 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget optionWidget(question) {
+    TextEditingController controller = TextEditingController();
+    controllers.add(controller);      //adding the current controller to the list
+
+    for(int i = 0; i < controllers.length; i++){
+      print(controllers[i].text);     //printing the values to show that it's working
+    }
+
     List<Widget> list = [];
     debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {
       case "Text":
-        list.add(TextFieldWidget(controller: _controller,));
+        list = List.from(list)
+          ..add(TextFieldWidget(
+            controller: controller,
+          ));
+        // list.add(TextFieldWidget(controller: _controller,));
         break;
       case "Radio":
         list.add(radioList(question));
