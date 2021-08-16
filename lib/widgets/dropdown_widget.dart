@@ -26,9 +26,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     TextEditingController controller = TextEditingController();
     String selectedValue;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8.0,right: 8,top: 8),
       child: Container(
-        width: MediaQuery.of(context).size.width / 2.5,
+        height: MediaQuery.of(context).size.height / 14,
+        width: MediaQuery.of(context).size.width / 2,
         child: DropdownButtonFormField<String>(
           isExpanded: true,
           autofocus: false,
