@@ -884,7 +884,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         ),
                         Expanded(
-                          flex: 2,
+                          flex: 3,
                           child: TextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Completed:'),

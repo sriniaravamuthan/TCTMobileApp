@@ -28,7 +28,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       padding: const EdgeInsets.all(4.0),
       child: Container(
         height: 48,
-        width: MediaQuery.of(context).size.width/2,
+        width: MediaQuery.of(context).size.width/2.5,
         child: TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.text,

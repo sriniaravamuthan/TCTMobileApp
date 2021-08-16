@@ -28,7 +28,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: MediaQuery.of(context).size.width / 2,
+        width: MediaQuery.of(context).size.width / 2.5,
         child: DropdownButtonFormField<String>(
           isExpanded: true,
           autofocus: false,
