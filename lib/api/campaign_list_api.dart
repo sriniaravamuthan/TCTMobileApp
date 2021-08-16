@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
 import 'package:tct_demographics/api/response/survey_question_response.dart';
+import 'package:tct_demographics/api/sqflite/database_client.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -98,6 +99,9 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
         } catch (error) {
           debugPrint("Error $error");
         } finally {
+          DatabaseHelper databaseHelper;
+         var result= await databaseHelper.insert(data.toJson());
+          debugPrint("DB Added SqfLite: $result");
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignId)
@@ -108,6 +112,9 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
             debugPrint("Response1 ${dataSurvey.toJson()}");
             if (!dataSurvey.isError) {
               try {
+                var dbHelper;
+                var result= await dbHelper.insert(dataSurvey.toJson());
+                debugPrint("DB Added SqfLite: $result");
                 db
                     .collection('campaign_list')
                     .doc(searchCampaignRequest.campaignId)

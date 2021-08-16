@@ -48,7 +48,10 @@ dependencies:
   json_to_form:
   localstore: ^1.2.0
   grouped_buttons: ^1.0.4
-  auto_size_text: ^2.1.0
+  sqflite: ^2.0.0+3
+  path_provider: ^2.0.2
+  path: ^1.8.0
+
   flutter_localizations:
     sdk: flutter
 
