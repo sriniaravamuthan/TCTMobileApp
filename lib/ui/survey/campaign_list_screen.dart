@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/api/campaign_list_api.dart';
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -41,7 +42,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   // StreamSubscription<ConnectivityResult> listenNetwork;
   bool isInternet;
-  Future apiCampaignList, apiSync;
+  SearchCampaignRequest _searchCampaignListRequest;
+  Future apiCampaignList, apiSync,apiSearchList;
   Data dataCampaign;
   int _currentSortColumn = 0;
   bool _isAscending = true;
@@ -50,6 +52,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   @override
   void initState() {
     campaignList = [];
+    _searchCampaignListRequest=SearchCampaignRequest();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
@@ -1315,9 +1318,20 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             suffixIcon: Icon(Icons.search),
             fillColor: Colors.white),
         keyboardType: TextInputType.text,
-        onSaved: (String val) {
+        onChanged: (String val) {
           setState(() {
-            searchController.text = val;
+            _searchCampaignListRequest.searchKey=val;
+            debugPrint("SearchCampaignList23: $val");
+            db
+                .collection('campaign_list')
+                .where("campaignList.familyHeadName",isEqualTo: val).get().then((value) => {debugPrint("SearchCampaignList22: $value")});;
+            // apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
+            //     campaignId: arguments[0],
+            //     campaignName: arguments[1],
+            //     villageCode: arguments[2],
+            //     languageCode: "ta",searchKey: val));
+
+            // searchController.text = val;
           });
         },
       ),

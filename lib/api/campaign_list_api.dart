@@ -15,6 +15,8 @@ import 'package:tct_demographics/util/snack_bar.dart';
 
 Future<SearchCampaignResponse> setSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
+  debugPrint("syncSearchCampaignAPI");
+
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
   String url = "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
@@ -53,6 +55,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
+  debugPrint("syncSearchCampaignAPI");
   String searchCampaignURL =
       "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
   String surveyCampaignURL =
