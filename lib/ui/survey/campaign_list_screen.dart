@@ -47,10 +47,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int _currentSortColumn = 0;
   bool _isAscending = true;
   List<CampaignList> campaignList;
+  List<CampaignList> searchList;
+  String searchString = "";
 
   @override
   void initState() {
     campaignList = [];
+    searchList = [];
     _searchCampaignListRequest = SearchCampaignRequest();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -232,6 +235,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
                 dataCampaign = projectSnap.data?.data;
                 campaignList = dataCampaign.campaignList;
+                searchList = dataCampaign.campaignList;
+                debugPrint(
+                    "SearchCampaign List : $searchList");
                 return _portraitMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -249,6 +255,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
                 dataCampaign = projectSnap.data?.data;
                 campaignList = dataCampaign.campaignList;
+                searchList = dataCampaign.campaignList;
+
                 return _landscapeMode();
               } else {
                 return Text("Error ${projectSnap.error}");
@@ -1334,11 +1342,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             _searchCampaignListRequest.searchKey = val;
             debugPrint("SearchCampaignList23: $val");
             debugPrint("SearchCampaignList: $campaignList");
-            List<CampaignList> where = campaignList.where((element) {
-              debugPrint("Search ${element.familyHeadName.contains(val)}");
-              return element.familyHeadName.contains(val) ? element : [];
-            }).toList();
-            debugPrint("SearchCampaignListAfter: ${where.first}");
+            if(val!=""){
+              dataCampaign.campaignList = campaignList.where((campaignList) => campaignList.familyHeadName.contains(val.capitalize)||campaignList.respondentName.contains(val.capitalize)).toList();
+            }else{
+              dataCampaign.campaignList.clear();
+              dataCampaign.campaignList=searchList;
+              debugPrint("Search___:$searchList");
+            }
+
+            // dataCampaign.campaignList = campaignList.where((element) {
+            //   debugPrint("Search ${element.familyHeadName.contains(val)}");
+            //   return element.familyHeadName.contains(val) ? element : [];
+            // }).toList();
+            debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
 
             // db
             //     .collection('campaign_list')
