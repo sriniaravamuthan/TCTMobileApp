@@ -38,13 +38,11 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   String userMail = "";
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
-  var _controller = TextEditingController();
   var arguments;
   List<String> listItem;
   Future apiSurveyQuestion, apiSync;
   Data dataSurveyQues;
   bool isInternet;
-  List<Widget> _children = [];
   List<TextEditingController> controllers = [];
   @override
   void initState() {
@@ -53,10 +51,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-
-/*     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getJson();
-    });*/
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -82,105 +76,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           languageCode: "ta"));
     }
   }
-
-  String form = json.encode({
-    'title': 'Section Name:',
-    'fields': [
-      {
-        'key': 'inputKey',
-        'type': 'Input',
-        'label': 'How old are you?',
-        'value': '',
-        'required': true
-      },
-      {
-        'key': 'tareatext1',
-        'type': 'TareaText',
-        'label': 'TareaText test',
-        'placeholder': "hola a todos"
-      },
-      {
-        'key': 'radiobutton1',
-        'type': 'RadioButton',
-        'label': 'What is your Gender?',
-        'value': 2,
-        'items': [
-          {
-            'label': "Male",
-            'value': 1,
-          },
-          {
-            'label': "Female",
-            'value': 2,
-          },
-        ]
-      },
-      {
-        'key': 'checkbox1',
-        'type': 'Checkbox',
-        'label': 'Habits',
-        'items': [
-          {
-            'label': "Smoking Habit",
-            'value': true,
-          },
-          {
-            'label': "Drinking Habit",
-            'value': false,
-          },
-          {
-            'label': "Tobacco Habit",
-            'value': false,
-          }
-        ]
-      },
-      {
-        'key': 'selectKey',
-        'type': 'Select',
-        'label': 'Which of your relatives has diabetes?',
-        'value': 'Father',
-        'items': [
-          {
-            'label': "Father",
-            'value': "Father",
-          },
-          {
-            'label': "Mother",
-            'value': "Mother",
-          },
-          {
-            'label': "Grand Father",
-            'value': "Grand Father",
-          }
-        ]
-      },
-/*
-      {
-        'key':'date',
-        'type':'Date',
-        'label': 'Select test'
-      }
-*/
-    ]
-  });
-
-  Map decorations = {
-    'inputKey': InputDecoration(
-      // labelText: "Enter your age",
-      labelStyle: TextStyle(
-        fontSize: 14,
-      ),
-      border: OutlineInputBorder(borderSide: BorderSide()),
-    ),
-    'selectKey': InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(30.0),
-        ),
-      ),
-    ),
-  };
-  dynamic response;
 
   @override
   dispose() {
@@ -340,6 +235,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget _portraitMode() {
+    debugPrint("dataSurveyQues campaignName:${dataSurveyQues?.campaignName}");
     return Column(
       children: [
         Padding(
@@ -743,23 +639,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       list.add(optionWidget(dataSurveyQues.sections[index].questions[i]));
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
-
-    /*
-    DropDownWidget(
-    listItem: ["Father", "Mother"],
-    ),
-                         new JsonSchema(
-                            decorations: decorations,
-                            form: form,
-                            onChanged: (dynamic response) {
-                              this.response = response;
-                              print(jsonEncode(response));
-                            },
-                            actionSave: (data) {
-                              print(jsonEncode(data));
-                            },
-
-                          )*/
   }
 
   Widget optionWidget(question) {
@@ -769,7 +648,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     for(int i = 0; i < controllers.length; i++){
       print(controllers[i].text);     //printing the values to show that it's working
     }
-
     List<Widget> list = [];
     debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {

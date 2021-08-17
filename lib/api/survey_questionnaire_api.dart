@@ -9,6 +9,7 @@ import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
 
 import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
@@ -43,18 +44,14 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
 
 Future<SurveyQuestionnaireResponse> getOfflineSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
-  // var connectionResult = await (Connectivity().checkConnectivity());
-  // if (connectionResult == ConnectivityResult.none) {
-  Map<String, dynamic> map = await db
-      .collection('campaign_list')
-      .doc(surveyQuestionnaireRequest.campaignId)
-      .collection('survey')
-      .doc(surveyQuestionnaireRequest.campaignId)
-      .get();
-  debugPrint("Offline List $map");
+ debugPrint("campaignId__:${surveyQuestionnaireRequest.campaignId}");
+
+ Map<String, dynamic> map = await db
+     .collection('campaign_list')
+     .doc(surveyQuestionnaireRequest.campaignId)
+     .collection('survey')
+     .doc(surveyQuestionnaireRequest.campaignId)
+     .get();
+ debugPrint("Offline List $map");
   return SurveyQuestionnaireResponse.fromJson(map);
-  // } else {
-  //   return getSurveyQuestionAPI(surveyQuestionnaireRequest)
-  //       .then((value) => value);
-  // }
 }

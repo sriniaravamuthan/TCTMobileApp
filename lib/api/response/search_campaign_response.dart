@@ -38,17 +38,17 @@ class Data {
 
   Data(
       {this.campaignList,
-      this.campaignId,
-      this.campaignName,
-      this.campaignDescription,
-      this.objectiveName,
-      this.campaignPopulation,
-      this.complete,
-      this.pending,
-      this.totalRecords,
-      this.limit,
-      this.page,
-      this.pages});
+        this.campaignId,
+        this.campaignName,
+        this.campaignDescription,
+        this.objectiveName,
+        this.campaignPopulation,
+        this.complete,
+        this.pending,
+        this.totalRecords,
+        this.limit,
+        this.page,
+        this.pages});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['campaignList'] != null) {
@@ -59,9 +59,9 @@ class Data {
     }
     campaignId = json['campaignId'];
     campaignName = json['campaignName'];
-    campaignDescription = json['campaignDescription:'];
+    campaignDescription = json['campaignDescription'];
     objectiveName = json['objectiveName'];
-    campaignPopulation = json['campaignPopulation:'];
+    campaignPopulation = json['campaignPopulation'];
     complete = json['Complete'];
     pending = json['Pending'];
     totalRecords = json['total Records'];
@@ -77,9 +77,9 @@ class Data {
     }
     data['campaignId'] = this.campaignId;
     data['campaignName'] = this.campaignName;
-    data['campaignDescription:'] = this.campaignDescription;
+    data['campaignDescription'] = this.campaignDescription;
     data['objectiveName'] = this.objectiveName;
-    data['campaignPopulation:'] = this.campaignPopulation;
+    data['campaignPopulation'] = this.campaignPopulation;
     data['Complete'] = this.complete;
     data['Pending'] = this.pending;
     data['total Records'] = this.totalRecords;
@@ -100,17 +100,17 @@ class CampaignList {
 
   CampaignList(
       {this.familyId,
-      this.familyHeadName,
-      this.respondentName,
-      this.mobileNumber,
-      this.villageCode,
-      this.status});
+        this.familyHeadName,
+        this.respondentName,
+        this.mobileNumber,
+        this.villageCode,
+        this.status});
 
   CampaignList.fromJson(Map<String, dynamic> json) {
     familyId = json['familyId'];
     familyHeadName = json['familyHeadName'];
     respondentName = json['respondentName'];
-    mobileNumber = json['mobileNumber:'];
+    mobileNumber = json['mobileNumber'];
     villageCode = json['villageCode'];
     status = json['Status'];
   }
@@ -120,7 +120,7 @@ class CampaignList {
     data['familyId'] = this.familyId;
     data['familyHeadName'] = this.familyHeadName;
     data['respondentName'] = this.respondentName;
-    data['mobileNumber:'] = this.mobileNumber;
+    data['mobileNumber'] = this.mobileNumber;
     data['villageCode'] = this.villageCode;
     data['Status'] = this.status;
     return data;

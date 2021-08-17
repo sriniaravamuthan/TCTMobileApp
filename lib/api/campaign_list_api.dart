@@ -20,7 +20,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
-  String url = "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
+  String url = "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   // String token = await SharedPref().getStringPref(SharedPref().token);
@@ -58,7 +58,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("syncSearchCampaignAPI");
   String searchCampaignURL =
-      "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
+      "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
   String surveyCampaignURL =
       "https://run.mocky.io/v3/1b7c2aeb-b877-45d9-9f6c-020e93a11102";
   searchCampaignRequest.languageCode =
@@ -99,29 +99,34 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
         } catch (error) {
           debugPrint("Error $error");
         } finally {
-          DatabaseHelper databaseHelper;
-         var result= await databaseHelper.insert(data.toJson());
-          debugPrint("DB Added SqfLite: $result");
+         //  DatabaseHelper databaseHelper;
+         // var result= await databaseHelper.insert(data.toJson());
+         //  debugPrint("DB Added SqfLite: $result");
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignId)
-              .set(data.toJson())
-              .then((value) => {debugPrint("DB Added List: $value")});
+              .set(data.toJson());
 
           if (responseSurvey.statusCode == 200) {
             debugPrint("Response1 ${dataSurvey.toJson()}");
             if (!dataSurvey.isError) {
               try {
-                var dbHelper;
-                var result= await dbHelper.insert(dataSurvey.toJson());
-                debugPrint("DB Added SqfLite: $result");
+
                 db
                     .collection('campaign_list')
                     .doc(searchCampaignRequest.campaignId)
                     .collection('survey')
                     .doc(searchCampaignRequest.campaignId)
-                    .set(dataSurvey.toJson())
-                    .then((value) => {debugPrint("DB Added Survey: $value")});
+                    .set(dataSurvey.toJson());
+                debugPrint("campaignId__:${searchCampaignRequest.campaignId}");
+
+                db.collection('campaign_list')
+                    .doc(searchCampaignRequest.campaignId)
+                    .collection('survey')
+                    .doc(searchCampaignRequest.campaignId)
+                    .get().then((value) {
+                  debugPrint("offline survey:$value");
+                });
               } catch (error) {
                 debugPrint("Error $error");
               }
