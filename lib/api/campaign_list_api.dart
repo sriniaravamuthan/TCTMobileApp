@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
 import 'package:tct_demographics/api/response/survey_question_response.dart';
-import 'package:tct_demographics/api/sqflite/database_client.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -58,7 +57,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("syncSearchCampaignAPI");
   String searchCampaignURL =
-      "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
+      "https://run.mocky.io/v3/941a1c5b-df97-40c6-8090-770313f0e521";
   String surveyCampaignURL =
       "https://run.mocky.io/v3/1b7c2aeb-b877-45d9-9f6c-020e93a11102";
   searchCampaignRequest.languageCode =
@@ -105,28 +104,23 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignId)
-              .set(data.toJson());
+              .set(data.toJson())
+              .then((value) => {debugPrint("DB Added List: $value")});
 
           if (responseSurvey.statusCode == 200) {
             debugPrint("Response1 ${dataSurvey.toJson()}");
             if (!dataSurvey.isError) {
               try {
-
+                // var dbHelper;
+                // var result= await dbHelper.insert(dataSurvey.toJson());
+                // debugPrint("DB Added SqfLite: $result");
                 db
                     .collection('campaign_list')
                     .doc(searchCampaignRequest.campaignId)
                     .collection('survey')
                     .doc(searchCampaignRequest.campaignId)
-                    .set(dataSurvey.toJson());
-                debugPrint("campaignId__:${searchCampaignRequest.campaignId}");
-
-                db.collection('campaign_list')
-                    .doc(searchCampaignRequest.campaignId)
-                    .collection('survey')
-                    .doc(searchCampaignRequest.campaignId)
-                    .get().then((value) {
-                  debugPrint("offline survey:$value");
-                });
+                    .set(dataSurvey.toJson())
+                    .then((value) => {debugPrint("DB Added Survey: $value")});
               } catch (error) {
                 debugPrint("Error $error");
               }

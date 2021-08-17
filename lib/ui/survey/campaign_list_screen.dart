@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:tct_demographics/api/campaign_list_api.dart';
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/api/response/search_campaign_response.dart';
-import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
@@ -43,7 +42,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   // StreamSubscription<ConnectivityResult> listenNetwork;
   bool isInternet;
   SearchCampaignRequest _searchCampaignListRequest;
-  Future apiCampaignList, apiSync,apiSearchList;
+  Future apiCampaignList, apiSync, apiSearchList;
   Data dataCampaign;
   int _currentSortColumn = 0;
   bool _isAscending = true;
@@ -52,7 +51,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   @override
   void initState() {
     campaignList = [];
-    _searchCampaignListRequest=SearchCampaignRequest();
+    _searchCampaignListRequest = SearchCampaignRequest();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
@@ -115,7 +114,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-  theme: _buildShrineTheme(),
+      theme: _buildShrineTheme(),
       home: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -187,14 +186,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                             userMail != null
                                 ? Text(
-                                    userMail,
-                                    style:
-                                        TextStyle(fontSize: 16, color: darkColor),
+                              userMail,
+                                    style: TextStyle(
+                                        fontSize: 16, color: darkColor),
                                   )
                                 : Text(
-                                    userName,
-                                    style:
-                                        TextStyle(fontSize: 16, color: darkColor),
+                              userName,
+                                    style: TextStyle(
+                                        fontSize: 16, color: darkColor),
                                   ),
                           ],
                         )),
@@ -529,7 +528,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ),
                   ),
                   _searchList(),
-                  SizedBox(width: 4,)
+                  SizedBox(
+                    width: 4,
+                  )
                 ],
               ),
             ),
@@ -759,7 +760,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Icon(Icons.more_horiz,color: Colors.black,),
+                        Icon(
+                          Icons.more_horiz,
+                          color: Colors.black,
+                        ),
                         SizedBox(
                           width: 5,
                         ),
@@ -1004,7 +1008,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ),
                   ),
                   _searchList(),
-                  SizedBox(width: 4,)
+                  SizedBox(
+                    width: 4,
+                  )
                 ],
               ),
             ),
@@ -1027,8 +1033,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     showCheckboxColumn: false,
                     horizontalMargin: 0.20,
                     showBottomBorder: true,
-                    dataRowColor:  MaterialStateColor.resolveWith(
-                            (states) => Color(0xFFffffff)),
+                    dataRowColor: MaterialStateColor.resolveWith(
+                        (states) => Color(0xFFffffff)),
                     headingRowColor: MaterialStateColor.resolveWith(
                         (states) => Color(0xff005aa8)),
                     columns: <DataColumn>[
@@ -1258,7 +1264,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     padding: const EdgeInsets.all(6.0),
                     child: Row(
                       children: [
-                        Icon(Icons.more_horiz,color: Colors.black,),
+                        Icon(
+                          Icons.more_horiz,
+                          color: Colors.black,
+                        ),
                         SizedBox(
                           width: 5,
                         ),
@@ -1280,12 +1289,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ],
     );
   }
+
   ThemeData _buildShrineTheme() {
     final ThemeData base = ThemeData.light();
     return base.copyWith(
       iconTheme: _customIconTheme(base.iconTheme),
     );
   }
+
   Widget _searchList() {
     return Expanded(
       flex: 1,
@@ -1296,8 +1307,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         textInputAction: TextInputAction.done,
         enableSuggestions: true,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 2.0, horizontal: 2.0),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
             filled: true,
             hintText: "Search",
             border: OutlineInputBorder(
@@ -1320,11 +1331,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         keyboardType: TextInputType.text,
         onChanged: (String val) {
           setState(() {
-            _searchCampaignListRequest.searchKey=val;
+            _searchCampaignListRequest.searchKey = val;
             debugPrint("SearchCampaignList23: $val");
-            db
-                .collection('campaign_list')
-                .where("campaignList.familyHeadName",isEqualTo: val).get().then((value) => {debugPrint("SearchCampaignList22: $value")});;
+            debugPrint("SearchCampaignList: $campaignList");
+            List<CampaignList> where = campaignList.where((element) {
+              debugPrint("Search ${element.familyHeadName.contains(val)}");
+              return element.familyHeadName.contains(val) ? element : [];
+            }).toList();
+            debugPrint("SearchCampaignListAfter: ${where.first}");
+
+            // db
+            //     .collection('campaign_list')
+            //
+            //     .where("familyHeadName", isEqualTo: val)
+            //     .get()
+            //     .then((value) => {debugPrint("SearchCampaignList22: $value")});
             // apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
             //     campaignId: arguments[0],
             //     campaignName: arguments[1],
@@ -1340,6 +1361,5 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   _customIconTheme(IconThemeData iconTheme) {
     return iconTheme.copyWith(color: lightColor);
-
   }
 }
