@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,6 +43,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Data dataSurveyQues;
   bool isInternet;
   List<TextEditingController> controllers = [];
+
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -246,9 +246,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               color: Theme.of(context).accentColor,
               child: Column(
                 children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       children: [
                         Expanded(
                           flex: 1,
@@ -293,7 +293,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         ),
                       ],
                     ),
-              ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -339,8 +339,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: TextWidget(
-                    text:
-                        DemoLocalization.of(context).translate('Respondent Name'),
+                    text: DemoLocalization.of(context)
+                        .translate('Respondent Name'),
                     size: 14,
                     color: darkColor,
                     weight: FontWeight.w700,
@@ -506,8 +506,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: TextWidget(
-                    text:
-                        DemoLocalization.of(context).translate('Respondent Name'),
+                    text: DemoLocalization.of(context)
+                        .translate('Respondent Name'),
                     size: 14,
                     color: darkColor,
                     weight: FontWeight.w700,
@@ -548,7 +548,40 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.red)))),
               onPressed: () {
-                Navigator.pop(context, false);
+                debugPrint("ON Pressed");
+                setState(() {
+                  List<Map<String, dynamic>> sectionItems = [];
+                  dataSurveyQues.sections.forEach((section) {
+                    Map<String, dynamic> sections = Map();
+                    sections['sectionId'] = section.sectionId;
+                    List<Map<String, dynamic>> questionItems = [];
+                    section.questions.forEach((question) {
+                      Map<String, dynamic> questions = Map();
+                      questions['questionId'] = question.questionId;
+                      questions['answerName'] = "AnswerName";
+                      List<Map<String, dynamic>> optionItems = [];
+                      question.options.forEach((option) {
+                        Map<String, dynamic> options = Map();
+                        options['optionId'] = "OptionID";
+                        optionItems.add(options);
+                      });
+                      questions['options'] = optionItems;
+                      questionItems.add(questions);
+                    });
+                    sections['questions'] = questionItems;
+                    sectionItems.add(sections);
+                  });
+                  debugPrint(
+                      "Survey Result ${sectionItems.asMap().toString()}");
+
+                  // survey.addIf(condition, key, value);
+                  /* setSaveSurveyAPI(
+                      SaveSurveyRequest(
+                          campaignId: arguments[1],
+                          familyId: arguments[0],
+                          languageCode: "ta"),
+                      context);*/
+                });
               },
               child: TextWidget(
                 text: DemoLocalization.of(context).translate('Submit'),
@@ -582,44 +615,45 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   questionnaireList() {
     return Expanded(
-      flex: 8,
+        flex: 8,
         child: SingleChildScrollView(
-      child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          addAutomaticKeepAlives: false,
-          itemCount: dataSurveyQues.sections.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 5,
-                child: Container(
-                  margin: EdgeInsets.only(right: 6, left: 6),
-                  decoration: BoxDecoration(
-                      color: lightColor,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: TextWidget(
-                            text: dataSurveyQues.sections[index].sectionName,
-                            color: darkColor,
-                            weight: FontWeight.w600,
-                            size: 16,
-                          ),
-                        ),
-                        itemWidget(index),
-                      ]),
-                ),
-              ),
-            ); //   key: UniqueKey(),
-          }),
-    ));
+          child: ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              addAutomaticKeepAlives: false,
+              itemCount: dataSurveyQues.sections.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Container(
+                      margin: EdgeInsets.only(right: 6, left: 6),
+                      decoration: BoxDecoration(
+                          color: lightColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: new Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 8, right: 8, top: 8),
+                              child: TextWidget(
+                                text:
+                                    dataSurveyQues.sections[index].sectionName,
+                                color: darkColor,
+                                weight: FontWeight.w600,
+                                size: 16,
+                              ),
+                            ),
+                            itemWidget(index),
+                          ]),
+                    ),
+                  ),
+                ); //   key: UniqueKey(),
+              }),
+        ));
   }
 
   Widget itemWidget(int index) {
@@ -643,10 +677,11 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget optionWidget(question) {
     TextEditingController controller = TextEditingController();
-    controllers.add(controller);      //adding the current controller to the list
+    controllers.add(controller); //adding the current controller to the list
 
-    for(int i = 0; i < controllers.length; i++){
-      print(controllers[i].text);     //printing the values to show that it's working
+    for (int i = 0; i < controllers.length; i++) {
+      print(
+          controllers[i].text); //printing the values to show that it's working
     }
     List<Widget> list = [];
     debugPrint("OptionType: ${question.optionType}");
