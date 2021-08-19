@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -381,7 +380,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.red)))),
               onPressed: () {
-                Navigator.pop(context, false);
+                mapData();
               },
               child: TextWidget(
                 text: DemoLocalization.of(context).translate('Submit'),
@@ -548,32 +547,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           borderRadius: BorderRadius.circular(5.0),
                           side: BorderSide(color: Colors.red)))),
               onPressed: () {
-                debugPrint("ON Pressed");
                 setState(() {
-                  List<Map<String, dynamic>> sectionItems = [];
-                  dataSurveyQues.sections.forEach((section) {
-                    Map<String, dynamic> sections = Map();
-                    sections['sectionId'] = section.sectionId;
-                    List<Map<String, dynamic>> questionItems = [];
-                    section.questions.forEach((question) {
-                      Map<String, dynamic> questions = Map();
-                      questions['questionId'] = question.questionId;
-                      questions['answerName'] = "AnswerName";
-                      List<Map<String, dynamic>> optionItems = [];
-                      question.options.forEach((option) {
-                        Map<String, dynamic> options = Map();
-                        options['optionId'] = "OptionID";
-                        optionItems.add(options);
-                      });
-                      questions['options'] = optionItems;
-                      questionItems.add(questions);
-                    });
-                    sections['questions'] = questionItems;
-                    sectionItems.add(sections);
-                  });
-                  debugPrint(
-                      "Survey Result ${sectionItems.asMap().toString()}");
-
+                  mapData();
                   // survey.addIf(condition, key, value);
                   /* setSaveSurveyAPI(
                       SaveSurveyRequest(
@@ -594,6 +569,31 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         )
       ],
     );
+  }
+
+  void mapData() {
+    List<Map<String, dynamic>> sectionItems = [];
+    dataSurveyQues.sections.forEach((section) {
+      Map<String, dynamic> sections = Map();
+      sections['sectionId'] = section.sectionId;
+      List<Map<String, dynamic>> questionItems = [];
+      section.questions.forEach((question) {
+        Map<String, dynamic> questions = Map();
+        questions['questionId'] = question.questionId;
+        questions['answerName'] = "AnswerName";
+        List<Map<String, dynamic>> optionItems = [];
+        question.options.forEach((option) {
+          Map<String, dynamic> options = Map();
+          options['optionId'] = "OptionID";
+          optionItems.add(options);
+        });
+        questions['options'] = optionItems;
+        questionItems.add(questions);
+      });
+      sections['questions'] = questionItems;
+      sectionItems.add(sections);
+    });
+    debugPrint("Survey Result ${sectionItems.asMap().toString()}");
   }
 
   void _changeLanguage() async {
