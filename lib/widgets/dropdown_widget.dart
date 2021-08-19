@@ -28,7 +28,6 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
-        height: MediaQuery.of(context).size.height / 14,
         width: MediaQuery.of(context).size.width / 2,
         child: DropdownButtonFormField<String>(
           isExpanded: true,
@@ -55,17 +54,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               ),
             );
           }).toList(),
-          // widget.listItem.map<DropdownMenuItem<String>>((String value) {
-          //   return DropdownMenuItem<String>(
-          //     value: value,
-          //     child: TextWidget(
-          //       text: value,
-          //       color: darkColor,
-          //       weight: FontWeight.w400,
-          //       size: 14,
-          //     ),
-          //   );
-          // }).toList(),
+
         ),
       ),
     );

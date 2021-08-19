@@ -25,22 +25,29 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
         children: widget.checkList.map((options) {
       debugPrint("Options: $options");
       var item = options;
-      return CheckboxListTile(
-          value: item['optionCheck'],
-          title: TextWidget(
-            text: options['optionName'],
-            color: darkColor,
-            size: 14,
-            weight: FontWeight.w400,
-          ),
-          onChanged: (newValue) {
-            setState(() {
-              item['optionCheck'] = newValue;
-            });
-          });
+      return Align(
+        alignment: Alignment(0,-5),
+        child: CheckboxListTile(
+            dense: true,
+            contentPadding: EdgeInsets.zero,
+            controlAffinity: ListTileControlAffinity.leading,
+            value: item['optionCheck'],
+            title: TextWidget(
+              text: options['optionName'],
+              color: darkColor,
+              size: 14,
+              weight: FontWeight.w400,
+            ),
+            onChanged: (newValue) {
+              setState(() {
+                item['optionCheck'] = newValue;
+              });
+            }),
+      );
         }).toList());
   }
 }

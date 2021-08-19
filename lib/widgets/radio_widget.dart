@@ -33,6 +33,8 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
      child: Column(
         children:
         widget.fList.map((Options data) => RadioListTile(
+          dense: true,
+          contentPadding: EdgeInsets.zero,
           title: TextWidget(
             text: data.optionName,
             color: darkColor,

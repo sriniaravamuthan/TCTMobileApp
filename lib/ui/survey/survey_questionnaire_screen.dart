@@ -365,32 +365,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: OutlinedButton(
-              style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          side: BorderSide(color: Colors.red)))),
-              onPressed: () {
-                mapData();
-              },
-              child: TextWidget(
-                text: DemoLocalization.of(context).translate('Submit'),
-                color: lightColor,
-                weight: FontWeight.w400,
-                size: 14,
-              ),
-            ),
-          ),
-        )
+        submitButton(),
       ],
     );
   }
@@ -532,41 +507,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
         questionnaireList(),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: OutlinedButton(
-              style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          side: BorderSide(color: Colors.red)))),
-              onPressed: () {
-                setState(() {
-                  mapData();
-                  // survey.addIf(condition, key, value);
-                  /* setSaveSurveyAPI(
-                      SaveSurveyRequest(
-                          campaignId: arguments[1],
-                          familyId: arguments[0],
-                          languageCode: "ta"),
-                      context);*/
-                });
-              },
-              child: TextWidget(
-                text: DemoLocalization.of(context).translate('Submit'),
-                color: lightColor,
-                weight: FontWeight.w400,
-                size: 14,
-              ),
-            ),
-          ),
-        )
+        submitButton(),
       ],
     );
   }
@@ -618,13 +559,14 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         flex: 8,
         child: SingleChildScrollView(
           child: ListView.builder(
+              padding: EdgeInsets.all(0.0),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               addAutomaticKeepAlives: false,
               itemCount: dataSurveyQues.sections.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   child: Card(
                     elevation: 5,
                     child: Container(
@@ -636,16 +578,12 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, top: 8),
-                              child: TextWidget(
-                                text:
-                                    dataSurveyQues.sections[index].sectionName,
-                                color: darkColor,
-                                weight: FontWeight.w600,
-                                size: 16,
-                              ),
+                            TextWidget(
+                              text:
+                                  dataSurveyQues.sections[index].sectionName,
+                              color: darkColor,
+                              weight: FontWeight.w600,
+                              size: 16,
                             ),
                             itemWidget(index),
                           ]),
@@ -746,4 +684,33 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     // }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
+
+ Widget submitButton() {
+  return Align(
+     alignment: Alignment.bottomRight,
+     child: Padding(
+       padding: const EdgeInsets.all(4.0),
+       child: OutlinedButton(
+         style: ButtonStyle(
+             foregroundColor:
+             MaterialStateProperty.all<Color>(Colors.white),
+             backgroundColor:
+             MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                 RoundedRectangleBorder(
+                     borderRadius: BorderRadius.circular(5.0),
+                     side: BorderSide(color: Colors.red)))),
+         onPressed: () {
+           mapData();
+         },
+         child: TextWidget(
+           text: DemoLocalization.of(context).translate('Submit'),
+           color: lightColor,
+           weight: FontWeight.w400,
+           size: 14,
+         ),
+       ),
+     ),
+   );
+ }
 }
