@@ -190,7 +190,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                             userMail != null
                                 ? Text(
-                              userMail,
+                                    userMail,
                                     style: TextStyle(
                                         fontSize: 16, color: darkColor),
                                   )
@@ -234,12 +234,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
+
                 dataCampaign = projectSnap.data?.data;
-                campaignList = dataCampaign.campaignList;
-                searchList = dataCampaign.campaignList;
-                debugPrint(
-                    "SearchCampaign List : $searchList");
-                return _portraitMode();
+                if (dataCampaign != null) {
+                  campaignList = dataCampaign.campaignList;
+                  searchList = dataCampaign.campaignList;
+                  return _portraitMode();
+                } else {
+                  campaignList = [];
+                  searchList = [];
+                  return _noData();
+                }
               } else {
                 return Text("Error ${projectSnap.error}");
               }
@@ -255,10 +260,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 debugPrint(
                     "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
                 dataCampaign = projectSnap.data?.data;
-                campaignList = dataCampaign.campaignList;
-                searchList = dataCampaign.campaignList;
-
-                return _landscapeMode();
+                if (dataCampaign != null) {
+                  campaignList = dataCampaign.campaignList;
+                  searchList = dataCampaign.campaignList;
+                  return _landscapeMode();
+                } else {
+                  campaignList = [];
+                  searchList = [];
+                  return _noData();
+                }
               } else {
                 return Text("Error ${projectSnap.error}");
               }
@@ -266,6 +276,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           );
         }
       },
+    );
+  }
+
+  Widget _noData() {
+    return Center(
+      child: TextWidget(
+        text: 'No Data',
+        weight: FontWeight.w400,
+        size: 18,
+        color: Colors.black87,
+      ),
     );
   }
 
@@ -978,6 +999,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     flex: 1,
                     child: Visibility(
                       visible: isInternet,
+                      maintainSize: true,
+                      maintainAnimation: true,
+                      maintainInteractivity: true,
+                      maintainState: true,
+                      maintainSemantics: true,
                       child: Align(
                         alignment: Alignment.center,
                         child: Padding(
@@ -1176,13 +1202,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             });
                           })
                     ],
-                    rows: dataCampaign.campaignList
-                        .map(
+                    rows: dataCampaign?.campaignList
+                        ?.map(
                           (CampaignList campaignList) => DataRow(
                             onSelectChanged: (bool selected) {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
-                                campaignList.familyId,
-                                dataCampaign.campaignId,
+                                campaignList?.familyId,
+                                dataCampaign?.campaignId,
                                 isInternet
                               ]);
                             },
@@ -1231,7 +1257,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ],
                           ),
                         )
-                        .toList(),
+                        ?.toList(),
                   )
                 ],
               ),
@@ -1348,11 +1374,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             _searchCampaignListRequest.searchKey = val;
             debugPrint("SearchCampaignList23: $val");
             debugPrint("SearchCampaignList: $campaignList");
-            if(val!=""){
-              dataCampaign.campaignList = campaignList.where((campaignList) => campaignList.familyHeadName.contains(val.capitalize)||campaignList.respondentName.contains(val.capitalize)).toList();
-            }else{
+            if (val != "") {
+              dataCampaign.campaignList = campaignList
+                  .where((campaignList) =>
+                      campaignList.familyHeadName.contains(val.capitalize) ||
+                      campaignList.respondentName.contains(val.capitalize))
+                  .toList();
+            } else {
               dataCampaign.campaignList.clear();
-              dataCampaign.campaignList=searchList;
+              dataCampaign.campaignList = searchList;
               debugPrint("Search___:$searchList");
             }
 
