@@ -17,6 +17,7 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/checkbox_Widget.dart';
 import 'package:tct_demographics/widgets/dropdown_widget.dart';
 import 'package:tct_demographics/widgets/radio_widget.dart';
+import 'package:tct_demographics/widgets/survey_text_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 import 'package:tct_demographics/widgets/textfield_widget.dart';
 
@@ -239,91 +240,90 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              color: Theme.of(context).accentColor,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+          child: Card(
+            color: Theme.of(context).accentColor,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Name'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
+                      Flexible(
+                        flex: 3,
+                        child: SurveyTextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Campaign Name'),
+                          size: 14,
+                          maxLines: 1,
+                          color: lightColor,
+                          weight: FontWeight.w700,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: dataSurveyQues?.campaignName,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: SurveyTextWidget(
+                          text: dataSurveyQues?.campaignName,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 2,
+                          weight: FontWeight.w400,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Description'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
+                      ),
+                      Flexible(
+                        flex: 3,
+                        child: SurveyTextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Campaign Description'),
+                          size: 14,
+                          maxLines: 1,
+                          color: lightColor,
+                          weight: FontWeight.w700,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: dataSurveyQues?.campaignDescription,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: SurveyTextWidget(
+                          text: dataSurveyQues?.campaignDescription,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 3,
+                          weight: FontWeight.w400,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Objective Name'),
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w700,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: TextWidget(
-                            text: dataSurveyQues.objectiveName,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text: dataSurveyQues.objectiveName,
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
                         ),
-                        Spacer(
-                          flex: 2,
-                        )
-                      ],
-                    ),
+                      ),
+                      Spacer(
+                        flex: 2,
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
