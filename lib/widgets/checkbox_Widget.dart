@@ -12,8 +12,9 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 
 class CheckboxWidget extends StatefulWidget {
   final List<dynamic> checkList;
+   bool selectedValue=false;
 
-  const CheckboxWidget({Key key, this.checkList}) : super(key: key);
+   CheckboxWidget({Key key, this.checkList, this.selectedValue=false}) : super(key: key);
 
   @override
   _CheckboxWidgetState createState() => _CheckboxWidgetState();
@@ -45,6 +46,8 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
             onChanged: (newValue) {
               setState(() {
                 item['optionCheck'] = newValue;
+                widget.selectedValue=newValue;
+                debugPrint("checkBox1:${widget.selectedValue}");
               });
             }),
       );

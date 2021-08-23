@@ -35,6 +35,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   var height, width;
   String userName = "";
   String userMail = "";
+  bool checkSelect=false;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var arguments;
@@ -247,7 +248,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                       Flexible(
                         flex: 3,
@@ -298,6 +300,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8,top:4),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
                         flex: 3,
@@ -383,81 +386,70 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Name'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: dataSurveyQues?.campaignName,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Description'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        Expanded(
+                        Flexible(
                           flex: 3,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: dataSurveyQues?.campaignDescription,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
+                          child: SurveyTextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Campaign Name'),
+                            size: 14,
+                            maxLines: 1,
+                            color: lightColor,
+                            weight: FontWeight.w700,
                           ),
                         ),
-                        Expanded(
+                        Flexible(
                           flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Objective Name'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
+                          child: SurveyTextWidget(
+                            text: dataSurveyQues?.campaignName,
+                            size: 14,
+                            color: lightColor,
+                            maxLines: 2,
+                            weight: FontWeight.w400,
                           ),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: dataSurveyQues?.objectiveName,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
+                        Flexible(
+                          flex: 3,
+                          child: SurveyTextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Campaign Description'),
+                            size: 14,
+                            maxLines: 1,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: SurveyTextWidget(
+                            text: dataSurveyQues?.campaignDescription,
+                            size: 14,
+                            color: lightColor,
+                            maxLines: 3,
+                            weight: FontWeight.w400,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 3,
+                          child: SurveyTextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Objective Name'),
+                            size: 14,
+                            maxLines: 1,
+                            color: lightColor,
+                            weight: FontWeight.w700,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 2,
+                          child: SurveyTextWidget(
+                            text: dataSurveyQues.objectiveName,
+                            size: 14,
+                            maxLines: 2,
+                            color: lightColor,
+                            weight: FontWeight.w400,
                           ),
                         ),
                       ],
@@ -680,7 +672,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       debugPrint("New Options ${options[i]}");
     }
 
-    list.add(CheckboxWidget(checkList: options));
+    list.add(CheckboxWidget(checkList: options,selectedValue: checkSelect,));
+    debugPrint("CheckBox:$checkSelect");
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
