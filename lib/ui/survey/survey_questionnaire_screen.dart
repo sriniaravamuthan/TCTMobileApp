@@ -245,9 +245,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                       Flexible(
                         flex: 3,
@@ -295,31 +295,30 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8,top:4),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: TextWidget(
+                      Flexible(
+                        flex: 3,
+                        child: SurveyTextWidget(
                           text: DemoLocalization.of(context)
                               .translate('Objective Name'),
                           size: 14,
+                          maxLines: 1,
                           color: lightColor,
                           weight: FontWeight.w700,
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: TextWidget(
+                      Flexible(
+                        flex: 2,
+                        child: SurveyTextWidget(
                           text: dataSurveyQues.objectiveName,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
                         ),
                       ),
-                      Spacer(
-                        flex: 2,
-                      )
                     ],
                   ),
                 ),
