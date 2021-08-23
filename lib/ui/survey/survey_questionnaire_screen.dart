@@ -518,19 +518,26 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       Map<String, dynamic> sections = Map();
       sections['sectionId'] = section.sectionId;
       List<Map<String, dynamic>> questionItems = [];
-      section.questions.forEach((question) {
+      for (int i = 0; i < section.questions.length; i++) {
         Map<String, dynamic> questions = Map();
-        questions['questionId'] = question.questionId;
-        questions['answerName'] = "AnswerName";
+        questions['questionId'] = section.questions[i].questionId;
+        switch (section.questions[i].optionType) {
+          case 'Text':
+            questions['answerName'] = controllers[i].text.toString();
+            break;
+          default:
+            questions['answerName'] = "";
+            break;
+        }
         List<Map<String, dynamic>> optionItems = [];
-        question.options.forEach((option) {
+        section.questions[i].options.forEach((option) {
           Map<String, dynamic> options = Map();
           options['optionId'] = "OptionID";
           optionItems.add(options);
         });
         questions['options'] = optionItems;
         questionItems.add(questions);
-      });
+      }
       sections['questions'] = questionItems;
       sectionItems.add(sections);
     });
@@ -633,12 +640,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         break;
       case "Radio":
         list.add(radioList(question));
+        controllers.add(TextEditingController(text: ""));
         break;
       case "Check-box":
         list.add(checkBoxList(question));
+        controllers.add(TextEditingController(text: ""));
         break;
       case "Drop-Down":
         list.add(dropDownList(question));
+        controllers.add(TextEditingController(text: ""));
         break;
     }
 
