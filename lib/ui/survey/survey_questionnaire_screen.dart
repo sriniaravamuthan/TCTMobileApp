@@ -35,15 +35,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   var height, width;
   String userName = "";
   String userMail = "";
-  bool checkSelect=false;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var arguments;
   List<String> listItem;
   Future apiSurveyQuestion, apiSync;
   Data dataSurveyQues;
-  bool isInternet;
+  bool isInternet,checkedValue=false;
   List<TextEditingController> controllers = [];
+  String dropDown = "";
 
   @override
   void initState() {
@@ -516,6 +516,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           case 'Text':
             questions['answerName'] = controllers[i].text.toString();
             break;
+          case 'Drop-Down':
+            questions['answerName'] = dropDown;
+            break;
           default:
             questions['answerName'] = "";
             break;
@@ -669,20 +672,23 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         'optionCheck': false,
       };
       options.add(option);
-      debugPrint("New Options ${options[i]}");
     }
 
-    list.add(CheckboxWidget(checkList: options,selectedValue: checkSelect,));
-    debugPrint("CheckBox:$checkSelect");
+    list.add(CheckboxWidget(checkList: options));
+    debugPrint("checked:$checkedValue");
+
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
+
+
 
   Widget dropDownList(question) {
     List<Widget> list = [];
     // for (var i = 0; i < question.options.length; i++) {
     debugPrint("dropDownList:${question.options}");
-    list.add(DropDownWidget(listItem: question.options));
+    list.add(DropDownWidget(listItem: question.options,callback: (val) => setState(() => dropDown = val)));
+    debugPrint("DropDown:$dropDown");
     // }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
