@@ -257,8 +257,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint(
-                    "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
+                debugPrint("SearchCampaign Response : ${projectSnap.data}");
                 dataCampaign = projectSnap.data?.data;
                 if (dataCampaign != null) {
                   campaignList = dataCampaign.campaignList;
@@ -518,6 +517,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   ),
                   Visibility(
                     visible: isInternet,
+                    maintainSize: true,
+                    maintainAnimation: true,
+                    maintainInteractivity: true,
+                    maintainState: true,
+                    maintainSemantics: true,
                     child: Align(
                       alignment: Alignment.center,
                       child: Padding(
@@ -694,13 +698,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             });
                           })
                     ],
-                    rows: dataCampaign.campaignList
-                        .map(
+                    rows: dataCampaign?.campaignList
+                        ?.map(
                           (CampaignList campaignList) => DataRow(
                             onSelectChanged: (bool selected) {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
-                                campaignList.familyId,
-                                dataCampaign.campaignId,
+                                campaignList?.familyId,
+                                dataCampaign?.campaignId,
                                 isInternet
                               ]);
                             },
@@ -743,7 +747,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ],
                           ),
                         )
-                        .toList(),
+                        ?.toList(),
                   )
                 ],
               ),
