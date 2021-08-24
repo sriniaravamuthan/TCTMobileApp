@@ -1,20 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:localstore/localstore.dart';
 import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
 
 import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
-import 'package:tct_demographics/util/shared_preference.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
   String url;
-  url = "https://run.mocky.io/v3/1b7c2aeb-b877-45d9-9f6c-020e93a11102";
+  url = "https://run.mocky.io/v3/c03db0df-b613-460d-a23a-b12483eb66a4";
   // String token = await SharedPref().getStringPref(SharedPref().token);
   // debugPrint("Token:$token");
   Map<String, String> requestHeaders = {

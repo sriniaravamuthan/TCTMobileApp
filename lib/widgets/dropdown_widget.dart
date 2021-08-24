@@ -25,8 +25,7 @@ class DropDownWidget extends StatefulWidget {
 class _DropDownWidgetState extends State<DropDownWidget> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    String selectedValue;
+    String selectedValue,dropDownValue;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
@@ -43,12 +42,16 @@ class _DropDownWidgetState extends State<DropDownWidget> {
             // controller.text = newVal;
             this.setState(() {
               selectedValue = newVal;
-              widget.callback(newVal);
+              widget.callback(dropDownValue);
+              debugPrint("Drop Get____:$dropDownValue");
 
             });
           },
           items: widget.listItem.map((Options maps) {
             return new DropdownMenuItem(
+              onTap: (){
+                dropDownValue=maps.optionId;
+              },
               value: maps.optionName,
               child: TextWidget(
                 text: maps.optionName,

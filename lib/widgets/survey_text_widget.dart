@@ -29,6 +29,7 @@ class _SurveyTextWidgetState extends State<SurveyTextWidget> {
   Widget build(BuildContext context) {
     return AutoSizeText(
       widget.text,
+      minFontSize: 12,
       maxLines: widget.maxLines,
       textAlign: TextAlign.start,
       style: GoogleFonts.roboto(

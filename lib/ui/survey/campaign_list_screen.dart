@@ -337,36 +337,34 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w700,
                           ),
                         ),
-                        Expanded(
+                        Flexible(
                           flex: 2,
                           child: SurveyTextWidget(
                             text: dataCampaign?.campaignName,
                             size: 14,
                             color: lightColor,
-                            maxLines: 2,
+                            maxLines: 3,
                             weight: FontWeight.w400,
                           ),
                         ),
                         Flexible(
-                          flex: 2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Campaign Description'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
+                          flex: 4,
+                          child: SurveyTextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Campaign Description'),
+                            size: 14,
+                            maxLines: 3,
+                            color: lightColor,
+                            weight: FontWeight.w700,
                           ),
                         ),
                         Flexible(
-                          flex: 3,
+                          flex: 2,
                           child: SurveyTextWidget(
                             text: dataCampaign?.campaignDescription,
                             size: 14,
                             color: lightColor,
-                            maxLines: 3,
+                            maxLines: 2,
                             weight: FontWeight.w400,
                           ),
                         ),
@@ -401,7 +399,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
-                          flex: 1,
+                          flex: 3,
                           child: SurveyTextWidget(
                             text: DemoLocalization.of(context)
                                 .translate('Campaign Population'),
@@ -410,20 +408,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             weight: FontWeight.w700,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Flexible(
-                            flex: 1,
-                            child: SurveyTextWidget(
-                              text: dataCampaign?.campaignPopulation,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
+                        Flexible(
+                          flex: 1,
+                          child: SurveyTextWidget(
+                            text: dataCampaign?.campaignPopulation,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(left: 6.0),
                           child: Flexible(
                             flex: 1,
                             child: SurveyTextWidget(
@@ -435,22 +430,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Flexible(
-                            flex: 1,
-                            child: TextWidget(
-                              text: dataCampaign?.complete,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
+                        Flexible(
+                          flex: 1,
+                          child: TextWidget(
+                            text: dataCampaign?.complete,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.only(left: 6.0),
                           child: Flexible(
-                            flex: 1,
+                            flex: 3,
                             child: SurveyTextWidget(
                               text: DemoLocalization.of(context)
                                   .translate('Pending:'),
@@ -460,16 +452,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: Flexible(
-                            flex: 1,
-                            child: SurveyTextWidget(
-                              text: dataCampaign?.pending,
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w400,
-                            ),
+                        Flexible(
+                          flex: 1,
+                          child: SurveyTextWidget(
+                            text: dataCampaign?.pending,
+                            size: 14,
+                            color: lightColor,
+                            weight: FontWeight.w400,
                           ),
                         ),
                       ],
@@ -826,7 +815,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
                         Flexible(
                           flex: 3,
@@ -845,7 +833,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             text: dataCampaign?.campaignName,
                             size: 14,
                             color: lightColor,
-                            maxLines: 2,
+                            maxLines: 3,
                             weight: FontWeight.w400,
                           ),
                         ),
@@ -877,7 +865,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8,top:4),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Flexible(
                           flex: 3,
