@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 class TextFieldWidget extends StatefulWidget {
 final String valueText;
 final TextEditingController controller;
+final List<TextFieldList> textList;
 
-  const TextFieldWidget({Key key, this.valueText, this.controller})
+
+  const TextFieldWidget({Key key, this.valueText, this.controller, this.textList})
       : super(key: key);
 
   @override
@@ -45,4 +47,9 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       ),
     );
   }
+}
+class TextFieldList {
+  String name;
+  int index;
+  TextFieldList({this.name, this.index});
 }

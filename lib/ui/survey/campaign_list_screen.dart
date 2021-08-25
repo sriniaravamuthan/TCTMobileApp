@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -322,74 +323,93 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Name'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        alignment: WrapAlignment.spaceEvenly,
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: [
+                              Flexible(
+                                flex: 3,
+                                child: SurveyTextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Campaign Name'),
+                                  size: 14,
+                                  maxLines: 1,
+                                  color: lightColor,
+                                  weight: FontWeight.w700,
+                                ),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: SurveyTextWidget(
+                                  text: dataCampaign?.campaignName,
+                                  size: 14,
+                                  color: lightColor,
+                                  maxLines: 3,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignName,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 3,
-                            weight: FontWeight.w400,
+                          Wrap(
+                            direction: Axis.horizontal,
+                            children: [
+                              Flexible(
+                                flex: 4,
+                                child: SurveyTextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Campaign Description'),
+                                  size: 14,
+                                  maxLines: 3,
+                                  color: lightColor,
+                                  weight: FontWeight.w700,
+                                ),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: SurveyTextWidget(
+                                  text: dataCampaign?.campaignDescription,
+                                  size: 14,
+                                  color: lightColor,
+                                  maxLines: 2,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Flexible(
-                          flex: 4,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            maxLines: 3,
-                            color: lightColor,
-                            weight: FontWeight.w700,
+                          Wrap(
+                            children: [
+                              Flexible(
+                                flex: 3,
+                                child: SurveyTextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Objective Name'),
+                                  size: 14,
+                                  maxLines: 1,
+                                  color: lightColor,
+                                  weight: FontWeight.w700,
+                                ),
+                              ),
+                              Flexible(
+                                flex: 2,
+                                child: SurveyTextWidget(
+                                  text: dataCampaign.objectiveName,
+                                  size: 14,
+                                  maxLines: 2,
+                                  color: lightColor,
+                                  weight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignDescription,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 2,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign.objectiveName,
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
