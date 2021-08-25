@@ -7,14 +7,15 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:tct_demographics/models/widget_models/textfield_list.dart';
 
 class TextFieldWidget extends StatefulWidget {
 final String valueText;
 final TextEditingController controller;
-final List<TextFieldList> textList;
+final List<TextFieldModel> textList;
+final TextFieldModel object;
 
-
-  const TextFieldWidget({Key key, this.valueText, this.controller, this.textList})
+  const TextFieldWidget({Key key, this.valueText, this.controller, this.textList, this.object})
       : super(key: key);
 
   @override
@@ -39,6 +40,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             setState(() {
               debugPrint("Text: $value");
               widget.controller.text.toString();
+              widget.textList.add(TextFieldModel(name:widget.controller.text.toString()));
             });
           },
           // onSaved: (value) {
@@ -54,9 +56,4 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       ),
     );
   }
-}
-class TextFieldList {
-  String name;
-  int index;
-  TextFieldList({this.name, this.index});
 }

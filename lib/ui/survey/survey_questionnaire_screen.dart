@@ -12,6 +12,7 @@ import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
+import 'package:tct_demographics/models/widget_models/textfield_list.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/widgets/checkbox_Widget.dart';
@@ -44,7 +45,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   bool isInternet,checkedValue=false;
   List<TextEditingController> controllers = [];
   String dropDown = "";
-
+  TextFieldModel textFieldModel=TextFieldModel();
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -634,13 +635,14 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         //   ));
         list.add(TextFieldWidget(
           controller: TextEditingController(text: ""),
-        ));
+           object: textFieldModel));
         controllers.add(controller); //adding the current controller to the list
 
         break;
       case "Radio":
         list.add(radioList(question));
         controllers.add(TextEditingController(text: ""));
+
         break;
       case "Check-box":
         list.add(checkBoxList(question));
