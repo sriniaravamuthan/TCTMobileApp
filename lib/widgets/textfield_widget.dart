@@ -35,11 +35,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           controller: widget.controller,
           keyboardType: TextInputType.text,
           enableSuggestions: true,
-          onSaved: (value) {
+          onChanged: (value) {
             setState(() {
-              widget.controller.text = value;
+              debugPrint("Text: $value");
+              widget.controller.text.toString();
             });
           },
+          // onSaved: (value) {
+          //   setState(() {
+          //     debugPrint("Text: $value");
+          //     widget.controller.text = value;
+          //   });
+          // },
           decoration: InputDecoration(
             border: OutlineInputBorder(),
           ),

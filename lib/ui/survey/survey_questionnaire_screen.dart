@@ -513,6 +513,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       for (int i = 0; i < section.questions.length; i++) {
         Map<String, dynamic> questions = Map();
         questions['questionId'] = section.questions[i].questionId;
+        debugPrint("Controllers ${controllers[i].text.toString()}");
         switch (section.questions[i].optionType) {
           case 'Text':
             questions['answerName'] = controllers[i].text.toString();
@@ -616,8 +617,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget optionWidget(question) {
-    TextEditingController controller = TextEditingController();
-    controllers.add(controller); //adding the current controller to the list
 
     for (int i = 0; i < controllers.length; i++) {
       print(
@@ -627,11 +626,17 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {
       case "Text":
-        list = List.from(list)
-          ..add(TextFieldWidget(
-            controller: controller,
-          ));
-        // list.add(TextFieldWidget(controller: _controller,));
+        TextEditingController controller = TextEditingController();
+
+        // list = List.from(list)
+        //   ..add(TextFieldWidget(
+        //     controller: controller,
+        //   ));
+        list.add(TextFieldWidget(
+          controller: TextEditingController(text: ""),
+        ));
+        controllers.add(controller); //adding the current controller to the list
+
         break;
       case "Radio":
         list.add(radioList(question));
