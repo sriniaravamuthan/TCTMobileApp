@@ -1051,7 +1051,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  DataTable(
+                  dataCampaign.campaignList.length>0? DataTable(
                     columnSpacing: MediaQuery.of(context).size.width / 72,
                     sortColumnIndex: _currentSortColumn,
                     sortAscending: _isAscending,
@@ -1243,7 +1243,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           ),
                         )
                         ?.toList(),
-                  )
+                  ):_noData()
                 ],
               ),
             ),

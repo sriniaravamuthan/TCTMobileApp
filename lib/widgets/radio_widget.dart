@@ -14,8 +14,9 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 
 class RadioButtonWidget extends StatefulWidget {
   final List<Options> fList;
+  final List<String> optionId;
   // final String radioQuestion;
-  const RadioButtonWidget({Key key, this.fList})
+  const RadioButtonWidget({Key key, this.fList, this.optionId})
       : super(key: key);
 
   @override
@@ -48,6 +49,8 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
               radioItem = data.optionName ;
               debugPrint("Radio:$radioItem");
               _selectedRadioIndex = val;
+              widget.optionId.add(data.optionId);
+              debugPrint("Option Id:${ widget.optionId}");
             });
           },
         )).toList(),

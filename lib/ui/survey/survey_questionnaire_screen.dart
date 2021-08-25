@@ -38,7 +38,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var arguments;
-  List<String> listItem;
+  List<String> listItem,optionId;
   Future apiSurveyQuestion, apiSync;
   Data dataSurveyQues;
   bool isInternet,checkedValue=false;
@@ -60,6 +60,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitDown,
     ]);
     listItem = [];
+    optionId=[];
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
@@ -517,7 +518,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             questions['answerName'] = controllers[i].text.toString();
             break;
           case 'Drop-Down':
-            questions['answerName'] = dropDown;
+            questions['optionId'] = dropDown;
             break;
           default:
             questions['answerName'] = "";
@@ -653,7 +654,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     List<Widget> list = [];
     // for (var i = 0; i < question.options.length; i++) {
     debugPrint("RadioList:${question.options}");
-    list.add(RadioButtonWidget(fList: question.options));
+    list.add(RadioButtonWidget(fList: question.options,optionId:optionId,));
+    debugPrint("Radio Option:${optionId}");
     // }
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);

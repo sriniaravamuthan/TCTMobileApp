@@ -59,7 +59,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
   String searchCampaignURL =
       "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
   String surveyCampaignURL =
-      "https://run.mocky.io/v3/c03db0df-b613-460d-a23a-b12483eb66a4";
+      "https://run.mocky.io/v3/28e4af66-ec82-4a14-b54a-2e364b2b05c9";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   Map<String, String> requestHeaders = {
