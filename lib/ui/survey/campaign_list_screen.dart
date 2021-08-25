@@ -289,7 +289,174 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ),
     );
   }
-
+  Widget header(){
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+      child: Card(
+        color: Theme.of(context).accentColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              direction: Axis.horizontal,
+              alignment: WrapAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Name'),
+                        size: 14,
+                        maxLines: 1,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataCampaign?.campaignName,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 3,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Description'),
+                        size: 14,
+                        maxLines: 3,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataCampaign?.campaignDescription,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 2,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Objective Name'),
+                        size: 14,
+                        maxLines: 1,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataCampaign.objectiveName,
+                          size: 14,
+                          maxLines: 2,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Population'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataCampaign?.campaignPopulation,
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Completed:'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: TextWidget(
+                          text: dataCampaign?.complete,
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Pending:'),
+                        size: 14,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataCampaign?.pending,
+                          size: 14,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
   void _changeLanguage() async {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);
@@ -311,184 +478,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     debugPrint("CampaignList:${dataCampaign?.campaignName}");
     return Column(
       children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-
-          // height: MediaQuery.of(context).size.height / 6,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-            child: Card(
-              color: Theme.of(context).accentColor,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Wrap(
-                        direction: Axis.horizontal,
-                        alignment: WrapAlignment.spaceEvenly,
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Wrap(
-                            direction: Axis.horizontal,
-                            children: [
-                              Flexible(
-                                flex: 3,
-                                child: SurveyTextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Campaign Name'),
-                                  size: 14,
-                                  maxLines: 1,
-                                  color: lightColor,
-                                  weight: FontWeight.w700,
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: SurveyTextWidget(
-                                  text: dataCampaign?.campaignName,
-                                  size: 14,
-                                  color: lightColor,
-                                  maxLines: 3,
-                                  weight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Wrap(
-                            direction: Axis.horizontal,
-                            children: [
-                              Flexible(
-                                flex: 4,
-                                child: SurveyTextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Campaign Description'),
-                                  size: 14,
-                                  maxLines: 3,
-                                  color: lightColor,
-                                  weight: FontWeight.w700,
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: SurveyTextWidget(
-                                  text: dataCampaign?.campaignDescription,
-                                  size: 14,
-                                  color: lightColor,
-                                  maxLines: 2,
-                                  weight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Wrap(
-                            children: [
-                              Flexible(
-                                flex: 3,
-                                child: SurveyTextWidget(
-                                  text: DemoLocalization.of(context)
-                                      .translate('Objective Name'),
-                                  size: 14,
-                                  maxLines: 1,
-                                  color: lightColor,
-                                  weight: FontWeight.w700,
-                                ),
-                              ),
-                              Flexible(
-                                flex: 2,
-                                child: SurveyTextWidget(
-                                  text: dataCampaign.objectiveName,
-                                  size: 14,
-                                  maxLines: 2,
-                                  color: lightColor,
-                                  weight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Population'),
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignPopulation,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 6.0),
-                          child: Flexible(
-                            flex: 1,
-                            child: SurveyTextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Completed:'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: TextWidget(
-                            text: dataCampaign?.complete,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 6.0),
-                          child: Flexible(
-                            flex: 3,
-                            child: SurveyTextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Pending:'),
-                              size: 14,
-                              color: lightColor,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.pending,
-                            size: 14,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        header(),
         Container(
           width: MediaQuery.of(context).size.width,
           // height: MediaQuery.of(context).size.height / 7,
@@ -822,6 +812,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   Widget _portraitMode() {
     return Column(
       children: [
+        header(),
+/*
         Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
@@ -976,6 +968,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ),
           ),
         ),
+*/
         Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(

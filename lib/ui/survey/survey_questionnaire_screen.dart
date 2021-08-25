@@ -241,96 +241,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     debugPrint("dataSurveyQues campaignName:${dataSurveyQues?.campaignName}");
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-            color: Theme.of(context).accentColor,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                      Flexible(
-                        flex: 3,
-                        child: SurveyTextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Name'),
-                          size: 14,
-                          maxLines: 1,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: SurveyTextWidget(
-                          text: dataSurveyQues?.campaignName,
-                          size: 14,
-                          color: lightColor,
-                          maxLines: 2,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 3,
-                        child: SurveyTextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Campaign Description'),
-                          size: 14,
-                          maxLines: 1,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: SurveyTextWidget(
-                          text: dataSurveyQues?.campaignDescription,
-                          size: 14,
-                          color: lightColor,
-                          maxLines: 3,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8,top:4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        flex: 3,
-                        child: SurveyTextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Objective Name'),
-                          size: 14,
-                          maxLines: 1,
-                          color: lightColor,
-                          weight: FontWeight.w700,
-                        ),
-                      ),
-                      Flexible(
-                        flex: 2,
-                        child: SurveyTextWidget(
-                          text: dataSurveyQues.objectiveName,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        header(),
         Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
@@ -377,91 +288,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Widget _landscapeMode() {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              color: Theme.of(context).accentColor,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Name'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataSurveyQues?.campaignName,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 2,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: dataSurveyQues?.campaignDescription,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 3,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataSurveyQues.objectiveName,
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        header(),
         Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
@@ -502,6 +329,106 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         questionnaireList(),
         submitButton(),
       ],
+    );
+  }
+
+  Widget header(){
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+      child: Card(
+        color: Theme.of(context).accentColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: Wrap(
+              direction: Axis.horizontal,
+              alignment: WrapAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Name'),
+                        size: 14,
+                        maxLines: 1,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataSurveyQues?.campaignName,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 3,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Campaign Description'),
+                        size: 14,
+                        maxLines: 3,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataSurveyQues?.campaignDescription,
+                          size: 14,
+                          color: lightColor,
+                          maxLines: 2,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    children: [
+                      SurveyTextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Objective Name'),
+                        size: 14,
+                        maxLines: 1,
+                        color: lightColor,
+                        weight: FontWeight.w700,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: SurveyTextWidget(
+                          text: dataSurveyQues.objectiveName,
+                          size: 14,
+                          maxLines: 2,
+                          color: lightColor,
+                          weight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
