@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/api/request/save_survey_request.dart'
+    as SurveyRequest;
 import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
-import 'package:tct_demographics/api/response/survey_question_response.dart';
+import 'package:tct_demographics/api/response/survey_question_response.dart'
+    as SurveyResponse;
 import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -39,13 +42,20 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var arguments;
-  List<String> listItem,optionId;
+  List<String> listItem, optionId;
   Future apiSurveyQuestion, apiSync;
-  Data dataSurveyQues;
-  bool isInternet,checkedValue=false;
+  SurveyResponse.Data dataSurveyQues;
+  bool isInternet, checkedValue = false;
   List<TextEditingController> controllers = [];
   String dropDown = "";
-  TextFieldModel textFieldModel=TextFieldModel();
+  TextFieldModel textFieldModel = TextFieldModel();
+  List<SurveyRequest.Questions> saveQuestion = [];
+  List<SurveyRequest.Options> saveOption = [];
+
+  List<Map<String, dynamic>> sectionItems = [];
+  SurveyRequest.SaveSurveyRequest saveSurveyRequest =
+      SurveyRequest.SaveSurveyRequest();
+
   @override
   void initState() {
     if (firebaseAuth.currentUser != null) {
@@ -61,7 +71,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitDown,
     ]);
     listItem = [];
-    optionId=[];
+    optionId = [];
+    saveSurveyRequest.sections = [];
+
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
@@ -199,7 +211,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
-            return FutureBuilder<SurveyQuestionnaireResponse>(
+            return FutureBuilder<SurveyResponse.SurveyQuestionnaireResponse>(
               future: isInternet ? apiSurveyQuestion : apiSync,
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
@@ -215,7 +227,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               },
             );
           } else {
-            return FutureBuilder<SurveyQuestionnaireResponse>(
+            return FutureBuilder<SurveyResponse.SurveyQuestionnaireResponse>(
               future: isInternet ? apiSurveyQuestion : apiSync,
               builder: (context, projectSnap) {
                 if (projectSnap.connectionState == ConnectionState.waiting) {
@@ -332,7 +344,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     );
   }
 
-  Widget header(){
+  Widget header() {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
       child: Card(
@@ -361,7 +373,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
                           text: dataSurveyQues?.campaignName,
                           size: 14,
@@ -387,7 +399,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
                           text: dataSurveyQues?.campaignDescription,
                           size: 14,
@@ -412,7 +424,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
                           text: dataSurveyQues.objectiveName,
                           size: 14,
@@ -433,16 +445,16 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   void mapData() {
-    List<Map<String, dynamic>> sectionItems = [];
-    dataSurveyQues.sections.forEach((section) {
+    debugPrint("Size ${saveSurveyRequest.toJson()}");
+    /* saveSurveyRequest.sections.forEach((section) {
       Map<String, dynamic> sections = Map();
       sections['sectionId'] = section.sectionId;
       List<Map<String, dynamic>> questionItems = [];
       for (int i = 0; i < section.questions.length; i++) {
         Map<String, dynamic> questions = Map();
         questions['questionId'] = section.questions[i].questionId;
-        debugPrint("Controllers ${controllers[i].text.toString()}");
-        switch (section.questions[i].optionType) {
+        debugPrint("Controllers ${saveQuestion[i].answerName}");
+        switch (section.questions[i].options[i].optionId) {
           case 'Text':
             questions['answerName'] = controllers[i].text.toString();
             break;
@@ -465,7 +477,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       sections['questions'] = questionItems;
       sectionItems.add(sections);
     });
-    debugPrint("Survey Result ${sectionItems.asMap().toString()}");
+    debugPrint("Survey Result ${sectionItems.asMap().toString()}");*/
   }
 
   void _changeLanguage() async {
@@ -510,8 +522,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             TextWidget(
-                              text:
-                                  dataSurveyQues.sections[index].sectionName,
+                              text: dataSurveyQues.sections[index].sectionName,
                               color: darkColor,
                               weight: FontWeight.w600,
                               size: 16,
@@ -526,7 +537,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget itemWidget(int index) {
+    debugPrint("Index: $index");
+    saveSurveyRequest.sections.insert(
+        index,
+        SurveyRequest.Sections(
+          sectionId: dataSurveyQues.sections[index].sectionId,
+        ));
     List<Widget> list = [];
+    saveSurveyRequest.sections[index].questions = [];
+
     for (var i = 0; i < dataSurveyQues.sections[index].questions.length; i++) {
       list.add(
         Padding(
@@ -539,18 +558,22 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
       );
-      list.add(optionWidget(dataSurveyQues.sections[index].questions[i]));
+      saveSurveyRequest.sections[index].questions.insert(
+          i,
+          SurveyRequest.Questions(
+            questionId: dataSurveyQues.sections[index].questions[i].questionId,
+          ));
+      list.add(
+          optionWidget(dataSurveyQues.sections[index].questions[i], index, i));
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-  Widget optionWidget(question) {
-
-    for (int i = 0; i < controllers.length; i++) {
-      print(
-          controllers[i].text); //printing the values to show that it's working
-    }
+  Widget optionWidget(question, index, i) {
     List<Widget> list = [];
+    saveSurveyRequest.sections[index].questions[i].options = [
+      SurveyRequest.Options(optionId: "")
+    ];
     debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {
       case "Text":
@@ -561,22 +584,29 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         //     controller: controller,
         //   ));
         list.add(TextFieldWidget(
-          controller: TextEditingController(text: ""),
-           object: textFieldModel));
+            controller: TextEditingController(text: ""),
+            save: saveQuestion,
+            object: textFieldModel,
+            answer: saveSurveyRequest.sections[index].questions[i]));
         controllers.add(controller); //adding the current controller to the list
 
         break;
       case "Radio":
-        list.add(radioList(question));
+        list.add(radioList(question,
+            saveSurveyRequest.sections[index].questions[i].options[0]));
+        saveSurveyRequest.sections[index].questions[i].answerName = "";
         controllers.add(TextEditingController(text: ""));
 
         break;
       case "Check-box":
         list.add(checkBoxList(question));
+        saveSurveyRequest.sections[index].questions[i].answerName = "";
         controllers.add(TextEditingController(text: ""));
         break;
       case "Drop-Down":
-        list.add(dropDownList(question));
+        list.add(dropDownList(question,
+            saveSurveyRequest.sections[index].questions[i].options[0]));
+        saveSurveyRequest.sections[index].questions[i].answerName = "";
         controllers.add(TextEditingController(text: ""));
         break;
     }
@@ -584,18 +614,14 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-  Widget radioList(question) {
+  Widget radioList(question, SurveyRequest.Options option) {
     List<Widget> list = [];
-    // for (var i = 0; i < question.options.length; i++) {
     debugPrint("RadioList:${question.options}");
-    list.add(RadioButtonWidget(fList: question.options,optionId:optionId,));
-    debugPrint("Radio Option:${optionId}");
-    // }
-
+    list.add(RadioButtonWidget(fList: question.options, option: option));
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-  Widget checkBoxList(Questions question) {
+  Widget checkBoxList(SurveyResponse.Questions question) {
     List<Widget> list = [];
     // debugPrint("checkbox:${question.options[i].optionName}");
     List<dynamic> options = [];
@@ -613,48 +639,42 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     list.add(CheckboxWidget(checkList: options));
     debugPrint("checked:$checkedValue");
 
-
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-
-
-  Widget dropDownList(question) {
+  Widget dropDownList(question, SurveyRequest.Options option) {
     List<Widget> list = [];
-    // for (var i = 0; i < question.options.length; i++) {
     debugPrint("dropDownList:${question.options}");
-    list.add(DropDownWidget(listItem: question.options,callback: (val) => setState(() => dropDown = val)));
+    list.add(DropDownWidget(listItem: question.options, option: option));
     debugPrint("DropDown:$dropDown");
-    // }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
- Widget submitButton() {
-  return Align(
-     alignment: Alignment.bottomRight,
-     child: Padding(
-       padding: const EdgeInsets.all(4.0),
-       child: OutlinedButton(
-         style: ButtonStyle(
-             foregroundColor:
-             MaterialStateProperty.all<Color>(Colors.white),
-             backgroundColor:
-             MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                 RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(5.0),
-                     side: BorderSide(color: Colors.red)))),
-         onPressed: () {
-           mapData();
-         },
-         child: TextWidget(
-           text: DemoLocalization.of(context).translate('Submit'),
-           color: lightColor,
-           weight: FontWeight.w400,
-           size: 14,
-         ),
-       ),
-     ),
-   );
- }
+  Widget submitButton() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: OutlinedButton(
+          style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      side: BorderSide(color: Colors.red)))),
+          onPressed: () {
+            mapData();
+          },
+          child: TextWidget(
+            text: DemoLocalization.of(context).translate('Submit'),
+            color: lightColor,
+            weight: FontWeight.w400,
+            size: 14,
+          ),
+        ),
+      ),
+    );
+  }
 }

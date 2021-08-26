@@ -6,17 +6,19 @@
  * /
  */
 
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:tct_demographics/api/response/survey_question_response.dart';
+import 'package:tct_demographics/api/request/save_survey_request.dart'
+    as SaveRequest;
+import 'package:tct_demographics/api/response/survey_question_response.dart'
+    as SurveyResponse;
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class DropDownWidget extends StatefulWidget {
-  final List<Options> listItem;
-  final StringCallback callback;
+  final List<SurveyResponse.Options> listItem;
+  SaveRequest.Options option;
 
-  const DropDownWidget({Key key, this.listItem, this.callback}) : super(key: key);
+  DropDownWidget({Key key, this.listItem, this.option}) : super(key: key);
 
   @override
   _DropDownWidgetState createState() => _DropDownWidgetState();
@@ -40,17 +42,18 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               fillColor: lightGreyColor),
           onChanged: (newVal) {
             // controller.text = newVal;
+
             this.setState(() {
               selectedValue = newVal;
-              widget.callback(dropDownValue);
-              debugPrint("Drop Get____:$dropDownValue");
+              widget.option.optionId = dropDownValue;
 
+              debugPrint("Drop Get____:$dropDownValue");
             });
           },
-          items: widget.listItem.map((Options maps) {
+          items: widget.listItem.map((SurveyResponse.Options maps) {
             return new DropdownMenuItem(
-              onTap: (){
-                dropDownValue=maps.optionId;
+              onTap: () {
+                dropDownValue = maps.optionId;
               },
               value: maps.optionName,
               child: TextWidget(
