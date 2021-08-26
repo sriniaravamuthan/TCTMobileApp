@@ -55,7 +55,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               widget.object.name = value;
               widget.save.map((save) => save.answerName = value).toList();
 
-              widget.answer.answerName = value;
+              widget.answer.answerName = value.toString();
 
               Get.put(widget.object, tag: "textObject");
             });

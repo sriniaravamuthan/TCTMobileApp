@@ -10,7 +10,7 @@ class SaveSurveyRequest {
   SaveSurveyRequest.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
     familyId = json['familyId'];
-    languageCode = json['languageCode:'];
+    languageCode = json['languageCode'];
     if (json['sections'] != null) {
       sections = new List<Sections>();
       json['sections'].forEach((v) {
@@ -23,7 +23,7 @@ class SaveSurveyRequest {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['campaignId'] = this.campaignId;
     data['familyId'] = this.familyId;
-    data['languageCode:'] = this.languageCode;
+    data['languageCode'] = this.languageCode;
     if (this.sections != null) {
       data['sections'] = this.sections.map((v) => v.toJson()).toList();
     }

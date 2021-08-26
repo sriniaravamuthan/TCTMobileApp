@@ -72,13 +72,17 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     ]);
     listItem = [];
     optionId = [];
-    saveSurveyRequest.sections = [];
 
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
     debugPrint("isInternet: ${arguments[2]}");
     isInternet = arguments[2];
+    saveSurveyRequest.campaignId = arguments[1].toString();
+    saveSurveyRequest.familyId = arguments[0].toString();
+    saveSurveyRequest.languageCode = "ta".toString();
+    saveSurveyRequest.sections = [];
+
     if (isInternet) {
       apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
           familyId: arguments[0],
@@ -541,7 +545,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     saveSurveyRequest.sections.insert(
         index,
         SurveyRequest.Sections(
-          sectionId: dataSurveyQues.sections[index].sectionId,
+          sectionId: dataSurveyQues.sections[index].sectionId.toString(),
         ));
     List<Widget> list = [];
     saveSurveyRequest.sections[index].questions = [];
@@ -561,7 +565,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       saveSurveyRequest.sections[index].questions.insert(
           i,
           SurveyRequest.Questions(
-            questionId: dataSurveyQues.sections[index].questions[i].questionId,
+            questionId: dataSurveyQues.sections[index].questions[i].questionId
+                .toString(),
           ));
       list.add(
           optionWidget(dataSurveyQues.sections[index].questions[i], index, i));
@@ -571,9 +576,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget optionWidget(question, index, i) {
     List<Widget> list = [];
-    saveSurveyRequest.sections[index].questions[i].options = [
-      SurveyRequest.Options(optionId: "")
-    ];
+    saveSurveyRequest.sections[index].questions[i].options = [];
     debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {
       case "Text":
@@ -592,21 +595,32 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
         break;
       case "Radio":
+        saveSurveyRequest.sections[index].questions[i].options = [
+          SurveyRequest.Options()
+        ];
         list.add(radioList(question,
             saveSurveyRequest.sections[index].questions[i].options[0]));
-        saveSurveyRequest.sections[index].questions[i].answerName = "";
+        saveSurveyRequest.sections[index].questions[i].answerName =
+            "".toString();
         controllers.add(TextEditingController(text: ""));
 
         break;
       case "Check-box":
-        list.add(checkBoxList(question));
-        saveSurveyRequest.sections[index].questions[i].answerName = "";
+        list.add(checkBoxList(
+            question, saveSurveyRequest.sections[index].questions[i].options));
+
+        saveSurveyRequest.sections[index].questions[i].answerName =
+            "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
       case "Drop-Down":
+        saveSurveyRequest.sections[index].questions[i].options = [
+          SurveyRequest.Options()
+        ];
         list.add(dropDownList(question,
             saveSurveyRequest.sections[index].questions[i].options[0]));
-        saveSurveyRequest.sections[index].questions[i].answerName = "";
+        saveSurveyRequest.sections[index].questions[i].answerName =
+            "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
     }
@@ -621,7 +635,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-  Widget checkBoxList(SurveyResponse.Questions question) {
+  Widget checkBoxList(
+      SurveyResponse.Questions question, List<SurveyRequest.Options> option) {
     List<Widget> list = [];
     // debugPrint("checkbox:${question.options[i].optionName}");
     List<dynamic> options = [];
@@ -636,7 +651,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       options.add(option);
     }
 
-    list.add(CheckboxWidget(checkList: options));
+    list.add(CheckboxWidget(checkList: options, option: option));
     debugPrint("checked:$checkedValue");
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);

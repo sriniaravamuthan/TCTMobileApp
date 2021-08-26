@@ -45,7 +45,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
 
             this.setState(() {
               selectedValue = newVal;
-              widget.option.optionId = dropDownValue;
+              widget.option.optionId = dropDownValue.toString();
 
               debugPrint("Drop Get____:$dropDownValue");
             });

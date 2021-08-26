@@ -51,7 +51,7 @@ class _RadioButtonWidgetState extends State<RadioButtonWidget> {
               radioItem = data.optionName;
                       debugPrint("Radio:$radioItem");
                       _selectedRadioIndex = val;
-                      widget.option.optionId = data.optionId;
+                      widget.option.optionId = data.optionId.toString();
                     });
           },
         )).toList(),

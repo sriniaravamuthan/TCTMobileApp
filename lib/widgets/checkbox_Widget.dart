@@ -7,13 +7,15 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:tct_demographics/api/request/save_survey_request.dart'
+    as SaveRequest;
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
-
 class CheckboxWidget extends StatefulWidget {
   final List<dynamic> checkList;
+  List<SaveRequest.Options> option;
 
-  const CheckboxWidget({Key key, this.checkList}) : super(key: key);
+  CheckboxWidget({Key key, this.checkList, this.option}) : super(key: key);
 
   @override
   _CheckboxWidgetState createState() => _CheckboxWidgetState();
@@ -44,7 +46,9 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
             onChanged: (newValue) {
               setState(() {
                 item['optionCheck'] = newValue;
-              });
+                    widget.option.add(SaveRequest.Options(
+                        optionId: options['optionId'].toString()));
+                  });
             }),
       );
         }).toList());
