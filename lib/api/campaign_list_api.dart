@@ -60,6 +60,8 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
       "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
   String surveyCampaignURL =
       "https://run.mocky.io/v3/28e4af66-ec82-4a14-b54a-2e364b2b05c9";
+  String surveySaveCampaignURL =
+      "https://run.mocky.io/v3/417138ce-10e3-47fc-b2a0-eeaa441c9242";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   Map<String, String> requestHeaders = {
@@ -120,6 +122,35 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                     .then((value) => {debugPrint("DB Added Survey: $value")});
               } catch (error) {
                 debugPrint("Error $error");
+              } finally {
+                try {
+                  db
+                      .collection('survey_list')
+                      .doc(searchCampaignRequest.campaignId)
+                      .collection('familyId')
+                      .get();
+                  final responseSurveySave =
+                      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+                      await http.get(Uri.parse(surveySaveCampaignURL),
+                          headers: requestHeaders);
+                  var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
+                      json.decode(responseSurveySave.body));
+                  if (responseSurveySave.statusCode == 200) {
+                    debugPrint("Response12 ${data.toJson()}");
+                    if (!dataSaveSurvey.isError) {
+                    } else {
+                      debugPrint("Response ${dataSurvey.data}");
+                      snackBarAlert(warning, "API Error", errorColor);
+                    }
+                  } else {
+                    snackBarAlert(
+                        error,
+                        "Server Error - ${responseSearchCampaign.statusCode}",
+                        errorColor);
+                  }
+                } catch (error) {
+                  debugPrint("Error $error");
+                } finally {}
               }
             }
           } else {

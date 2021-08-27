@@ -9,6 +9,7 @@ import 'package:tct_demographics/api/request/save_survey_request.dart'
 import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
 import 'package:tct_demographics/api/response/survey_question_response.dart'
     as SurveyResponse;
+import 'package:tct_demographics/api/save_survey_api.dart';
 import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
@@ -450,6 +451,12 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   void mapData() {
     debugPrint("Size ${saveSurveyRequest.toJson()}");
+    if (isInternet) {
+      setSaveSurveyAPI(saveSurveyRequest, context);
+    } else {
+      setSaveOfflineSurveyAPI(saveSurveyRequest, context);
+    }
+
     /* saveSurveyRequest.sections.forEach((section) {
       Map<String, dynamic> sections = Map();
       sections['sectionId'] = section.sectionId;

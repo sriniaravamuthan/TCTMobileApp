@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tct_demographics/api/request/save_survey_request.dart';
 import 'package:tct_demographics/api/response/save_survey_response.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
@@ -35,4 +36,15 @@ void setSaveSurveyAPI(
   } else {
     snackBarAlert(error, data.data.toString(), errorColor);
   }
+}
+
+void setSaveOfflineSurveyAPI(
+    SaveSurveyRequest surveyQuestionnaireRequest, BuildContext context) async {
+  db
+      .collection('survey_list')
+      .doc(surveyQuestionnaireRequest.campaignId)
+      .collection('familyId')
+      .doc(surveyQuestionnaireRequest.familyId)
+      .set(surveyQuestionnaireRequest.toJson())
+      .then((value) => {debugPrint("DB Added Survey: $value")});
 }
