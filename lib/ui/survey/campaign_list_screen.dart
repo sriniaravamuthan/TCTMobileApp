@@ -71,16 +71,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
-    /*listenNetwork = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      // setState(() {
-        result == ConnectivityResult.none
-            ? isInternet = false
-            : isInternet = true;
-      // });
-      debugPrint("ConnectivityResult $result");
-    });*/
     isInternet = arguments[3];
     if (isInternet) {
       apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
@@ -112,9 +102,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int _currentSortColumn = 0;
-    bool _isAscending = true;
-
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return MaterialApp(
@@ -1370,7 +1357,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         onChanged: (String val) {
           setState(() {
             _searchCampaignListRequest.searchKey = val;
-            debugPrint("SearchCampaignList23: $val");
             debugPrint("SearchCampaignList: $campaignList");
             if (val != "") {
               dataCampaign.campaignList = campaignList
@@ -1383,26 +1369,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               dataCampaign.campaignList = searchList;
               debugPrint("Search___:$searchList");
             }
-
-            // dataCampaign.campaignList = campaignList.where((element) {
-            //   debugPrint("Search ${element.familyHeadName.contains(val)}");
-            //   return element.familyHeadName.contains(val) ? element : [];
-            // }).toList();
             debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
-
-            // db
-            //     .collection('campaign_list')
-            //
-            //     .where("familyHeadName", isEqualTo: val)
-            //     .get()
-            //     .then((value) => {debugPrint("SearchCampaignList22: $value")});
-            // apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
-            //     campaignId: arguments[0],
-            //     campaignName: arguments[1],
-            //     villageCode: arguments[2],
-            //     languageCode: "ta",searchKey: val));
-
-            // searchController.text = val;
           });
         },
       ),

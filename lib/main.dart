@@ -84,9 +84,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // String language = await SharedPref().getStringPref(SharedPref().language);
-    // _locale = "";
-
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(

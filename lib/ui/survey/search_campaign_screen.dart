@@ -42,10 +42,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-/*     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getJson();
-    });*/
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -342,14 +338,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           campaignNameController.text = val;
                                         });
                                       },
-                                      // validator: (value) {
-                                      //   if (value.isEmpty) {
-                                      //     debugPrint(
-                                      //         "empid :yes");
-                                      //     return 'Employee Id must not be empty';
-                                      //   }
-                                      //   return null;
-                                      // },
                                     ),
                                   ),
                                   Spacer(

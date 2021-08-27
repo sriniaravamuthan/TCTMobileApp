@@ -581,11 +581,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     switch (question.optionType) {
       case "Text":
         TextEditingController controller = TextEditingController();
-
-        // list = List.from(list)
-        //   ..add(TextFieldWidget(
-        //     controller: controller,
-        //   ));
         list.add(TextFieldWidget(
             controller: TextEditingController(text: ""),
             save: saveQuestion,

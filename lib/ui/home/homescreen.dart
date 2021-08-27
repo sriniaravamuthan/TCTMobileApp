@@ -41,8 +41,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       FirebaseFirestore.instance.collection('users');
   var deleteLength;
   var demoLength = 0;
-
-  // List<Result> users;
   List users = [];
   String language;
   String dropDownLang;
@@ -56,7 +54,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   bool loadMore = false;
   bool isLoading = false;
   List<DemographicFamily> _demographicList = [];
-
   CollectionReference collectionReference;
   Query query;
   List<String> streets = [];
@@ -72,15 +69,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
       debugPrint("userEmail:${firebaseAuth.currentUser}");
     }
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
-    // collectionReference = firestoreInstance.collection('demographicData');
     query = firestoreInstance.collection('demographicData').limit(30);
     super.initState();
   }
@@ -188,7 +182,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        // stream: collectionReference.snapshots(),
         stream: query.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError && !loadMore)
@@ -498,47 +491,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  /*InkWell(
-                                    onTap: () {
-                                      loadMore = true;
-                                      loadData = true;
-                                     if(snapshot.data.docs.length > 0) {
-                                       query = query.startAfterDocument(snapshot.data.docs[snapshot.data.docs.length - 1]).limit(30);
-                                       setState(() {});
-                                     }
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        border: Border.all(
-                                          color: Colors.black45,
-                                          style: BorderStyle.solid,
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6.0),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.more_horiz),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            TextWidget(
-                                              text: DemoLocalization.of(context)
-                                                  .translate('Load more'),
-                                              color: darkColor,
-                                              weight: FontWeight.w700,
-                                              size: 14,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),*/
                                   InkWell(
                                     onTap: () {
                                       showDialog(
@@ -1031,23 +983,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     );
   }
 
-  void _changeLanguage() async {
-    // Locale _temp = await setLocale(language.languageCode);
-    // SplashScreen.setLocale(context, _temp);
-
-    if (dropDownLang == "தமிழ்") {
-      setState(() {
-        MyApp.setLocale(context, Locale('ta', 'IN'));
-        SharedPref().setStringPref(SharedPref().language, 'ta');
-      });
-    } else {
-      setState(() {
-        MyApp.setLocale(context, Locale('en', 'US'));
-        SharedPref().setStringPref(SharedPref().language, 'en');
-      });
-    }
-  }
-
   void makeLoadData() {
     setState(() {
       loadData = true;
@@ -1197,12 +1132,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
     debugPrint("deleteLength$deleteLength");
   }
-
-  /*Future<int> totalLength() async{
-    var data=await FirebaseFirestore.instance.collection(collectionCount).get();
-    return data.docs[0].data()["length"];
-  }*/
-
   totalLength() async {
     var data =
         await FirebaseFirestore.instance.collection(collectionCount).get();

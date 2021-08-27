@@ -14,7 +14,6 @@ import 'package:tct_demographics/models/widget_models/textfield_list.dart';
 class TextFieldWidget extends StatefulWidget {
   final String valueText;
   final TextEditingController controller;
-  final List<TextFieldModel> textList;
   final TextFieldModel object;
   Questions answer;
   List<Questions> save;
@@ -23,7 +22,6 @@ class TextFieldWidget extends StatefulWidget {
       {Key key,
       this.valueText,
       this.controller,
-      this.textList,
       this.object,
       this.save,
       this.answer})
@@ -50,22 +48,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           onChanged: (value) {
             setState(() {
               debugPrint("Text: $value");
-              // widget.controller.text.toString();
-              // widget.textList.add(TextFieldModel(name:widget.controller.text.toString()));
               widget.object.name = value;
               widget.save.map((save) => save.answerName = value).toList();
-
               widget.answer.answerName = value.toString();
-
-              Get.put(widget.object, tag: "textObject");
             });
           },
-          // onSaved: (value) {
-          //   setState(() {
-          //     debugPrint("Text: $value");
-          //     widget.controller.text = value;
-          //   });
-          // },
           decoration: InputDecoration(
             border: OutlineInputBorder(),
           ),

@@ -115,10 +115,6 @@ String formNoMax="";
 
     if (demographicFamily.location != null) {
       location = demographicFamily.location;
-
-/*
-      fromNoController.text = location.formNo;
-*/
       projectCodeController.text = location.projectCode;
       streetNameController.text = location.streetName;
       doorNoController.text = location.doorNumber;
@@ -136,10 +132,7 @@ String formNoMax="";
         fromNoController.text = demographicFamily.family[i].familyId;
           debugPrint("location.formNo:${location.formNo}");
       }
-
-
-
-        if(location.villageName!=""){
+      if(location.villageName!=""){
           villageName=true;
         }
       if(location.villagesCode!=""){
@@ -515,14 +508,6 @@ String formNoMax="";
                                                         debugPrint("formNo:${fromNoController.text}");
                                                       });
                                                     },
-                                                    // validator: (value) {
-                                                    //   if (value.isEmpty) {
-                                                    //     debugPrint(
-                                                    //         "empid :yes");
-                                                    //     return 'Employee Id must not be empty';
-                                                    //   }
-                                                    //   return null;
-                                                    // },
                                                   ),
                                                 ),
                                               ),
@@ -630,14 +615,6 @@ String formNoMax="";
                                                             .text = val;
                                                       });
                                                     },
-                                                    // validator: (value) {
-                                                    //   if (value.isEmpty) {
-                                                    //     debugPrint(
-                                                    //         "empid :yes");
-                                                    //     return 'Employee Id must not be empty';
-                                                    //   }
-                                                    //   return null;
-                                                    // },
                                                   ),
                                                 ),
                                               ),
@@ -1620,14 +1597,6 @@ String formNoMax="";
                                                             val;
                                                       });
                                                     },
-                                                    // validator: (value) {
-                                                    //   if (value.isEmpty) {
-                                                    //     debugPrint(
-                                                    //         "empid :yes");
-                                                    //     return 'Employee Id must not be empty';
-                                                    //   }
-                                                    //   return null;
-                                                    // },
                                                   ),
                                                 ),
                                               ),
@@ -1745,14 +1714,6 @@ String formNoMax="";
                                                             .text = val;
                                                       });
                                                     },
-                                                    // validator: (value) {
-                                                    //   if (value.isEmpty) {
-                                                    //     debugPrint(
-                                                    //         "empid :yes");
-                                                    //     return 'Employee Id must not be empty';
-                                                    //   }
-                                                    //   return null;
-                                                    // },
                                                   ),
                                                 ),
                                               ),
@@ -1867,14 +1828,6 @@ String formNoMax="";
                                                             .text = val;
                                                       });
                                                     },
-                                                    // validator: (value) {
-                                                    //   if (value.isEmpty) {
-                                                    //     debugPrint(
-                                                    //         "empid :yes");
-                                                    //     return 'Employee Id must not be empty';
-                                                    //   }
-                                                    //   return null;
-                                                    // },
                                                   ),
                                                 ),
                                               ),
@@ -2196,24 +2149,6 @@ String formNoMax="";
                                 },
                               ),
                             ),
-                            /*SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: FloatingActionButton(
-                              // isExtended: true,
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                size: 30,
-                                color: darkColor,
-                              ),
-                              backgroundColor: lightColor,
-                              onPressed: () {
-                                continued();
-                              },
-                            ),
-                          ),*/
                             SizedBox(
                               height: 10,
                             ),
@@ -2322,13 +2257,6 @@ String formNoMax="";
         debugPrint("location.name:${location.name}");
 
       }
-/*
-      if (demographicFamily.family[i].name.isNotEmpty) {
-        location.name = demographicFamily.family[i].name;
-        debugPrint("location.name:${location.name}");
-        break;
-      }
-*/
     }
     for (int i = 0; i < demographicFamily.family.length; i++) {
       if (demographicFamily.family[i].mobileNumber.isNotEmpty) {
@@ -2435,8 +2363,6 @@ String formNoMax="";
     })
         .then((value) { Navigator.pop(context, false);
     makeLoadData();
-    // Get.offAndToNamed('/homeScreen'),
-
     showAddSuccess();})
         .catchError((error) => false);
 

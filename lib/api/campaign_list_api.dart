@@ -98,9 +98,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
         } catch (error) {
           debugPrint("Error $error");
         } finally {
-         //  DatabaseHelper databaseHelper;
-         // var result= await databaseHelper.insert(data.toJson());
-         //  debugPrint("DB Added SqfLite: $result");
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignId)

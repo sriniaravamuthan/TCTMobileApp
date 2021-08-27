@@ -175,14 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (value.isEmpty) {
                                         return 'Enter a Email!';
                                       }
-                                      // else if(value.isNotEmpty){
-                                      //     Pattern pattern =
-                                      //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      //     RegExp regex = new RegExp(pattern);
-                                      //     if(!regex.hasMatch(value)){
-                                      //       return 'Enter a valid mail!';
-                                      //     }
-                                      // }
                                       return null;
                                     },
                                   ),
@@ -250,96 +242,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (value.isEmpty) {
                                         return 'Enter a  Password!';
                                       }
-                                      // else if(value.isNotEmpty){
-                                      //     Pattern pattern =
-                                      //         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                                      //     RegExp regex = new RegExp(pattern);
-                                      //     if(!regex.hasMatch(value)){
-                                      //       return 'Enter a valid mail!';
-                                      //     }
-                                      // }
                                       return null;
                                     },
                                   ),
                                 ),
                               ),
-/*
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextWidget(
-                                      text: "Select Your Language",
-                                      color: darkGreyColor,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Flexible(
-                                        fit: FlexFit.loose,
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                            unselectedWidgetColor:
-                                                Color(0xff005aa8),
-                                          ),
-                                          child: RadioListTile(
-                                            value: "தமிழ்",
-                                            groupValue: selectedRadioTile,
-                                            title: Text(
-                                              "தமிழ்",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: primaryColor),
-                                            ),
-                                            onChanged: (val) {
-                                              print("Radio Tile pressed $val");
-                                              setSelectedRadioTile(val);
-                                              print(
-                                                  "radio value: $selectedRadioTile");
-                                            },
-                                            activeColor: Color(0xff005aa8),
-                                            selected: true,
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        fit: FlexFit.loose,
-                                        child: Theme(
-                                          data: Theme.of(context).copyWith(
-                                            unselectedWidgetColor:
-                                                Color(0xff005aa8),
-                                          ),
-                                          child: RadioListTile(
-                                            value: "English",
-                                            groupValue: selectedRadioTile,
-                                            title: Text(
-                                              "English",
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: primaryColor),
-                                            ),
-                                            onChanged: (val) {
-                                              print("Radio Tile pressed $val");
-                                              setSelectedRadioTile(val);
-                                              print(
-                                                  "radio value: $selectedRadioTile");
-                                            },
-                                            activeColor: Color(0xff005aa8),
-                                            selected: false,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-*/
                               Align(
                                 alignment: Alignment.center,
                                 child: Material(
@@ -389,15 +296,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _changeLanguage(String selectedRadioTile) async {
-    // Locale _temp = await setLocale(language.languageCode);
-    // SplashScreen.setLocale(context, _temp);
-
-    // if (selectedRadioTile == "தமிழ்") {
-    //   setState(() {
-    //     MyApp.setLocale(context, Locale('ta', 'IN'));
-    //     SharedPref().setStringPref(SharedPref().language, 'ta');
-    //   });
-    // } else {
       setState(() {
         MyApp.setLocale(context, Locale('en', 'US'));
         SharedPref().setStringPref(SharedPref().language, 'en');

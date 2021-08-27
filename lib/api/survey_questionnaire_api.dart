@@ -21,7 +21,7 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
   final response = await http.get(Uri.parse(url), headers: requestHeaders);
   var data = SurveyQuestionnaireResponse.fromJson(json.decode(response.body));
 
-  debugPrint("product: ${data.data.campaignName}");
+  debugPrint("campaignName: ${data.data.campaignName}");
 
   if (response.statusCode == 200) {
     if (!data.isError) {
@@ -30,8 +30,6 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
       // snackBarAlert(warning, data.isError.toString());
       return null;
     }
-
-    debugPrint("product: ${response.body}");
   } else {
     // snackBarAlert(
     //     error, data.message.toString(), Icon(Icons.error_outline), errorColor);
