@@ -124,30 +124,42 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                 debugPrint("Error $error");
               } finally {
                 try {
-                  db
+                  Map<String, dynamic> future = await db
                       .collection('survey_list')
                       .doc(searchCampaignRequest.campaignId)
                       .collection('familyId')
                       .get();
-                  final responseSurveySave =
-                      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-                      await http.get(Uri.parse(surveySaveCampaignURL),
-                          headers: requestHeaders);
-                  var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
-                      json.decode(responseSurveySave.body));
-                  if (responseSurveySave.statusCode == 200) {
-                    debugPrint("Response12 ${data.toJson()}");
-                    if (!dataSaveSurvey.isError) {
+                  future.forEach((key, value) async {
+                    final responseSurveySave =
+                        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+                        await http.get(Uri.parse(surveySaveCampaignURL),
+                            headers: requestHeaders);
+                    var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
+                        json.decode(responseSurveySave.body));
+                    if (responseSurveySave.statusCode == 200) {
+                      debugPrint("Response12 ${data.toJson()}");
+                      if (!dataSaveSurvey.isError) {
+                        try {
+                          // db
+                          //     .collection('survey_list')
+                          //     .doc(searchCampaignRequest.campaignId)
+                          //     .collection('familyId')
+                          //     .doc(key)
+                          //     .delete();
+                        } catch (err) {
+                          debugPrint("Error $err");
+                        }
+                      } else {
+                        debugPrint("Response ${dataSurvey.data}");
+                        snackBarAlert(warning, "API Error", errorColor);
+                      }
                     } else {
-                      debugPrint("Response ${dataSurvey.data}");
-                      snackBarAlert(warning, "API Error", errorColor);
+                      snackBarAlert(
+                          error,
+                          "Server Error - ${responseSearchCampaign.statusCode}",
+                          errorColor);
                     }
-                  } else {
-                    snackBarAlert(
-                        error,
-                        "Server Error - ${responseSearchCampaign.statusCode}",
-                        errorColor);
-                  }
+                  });
                 } catch (error) {
                   debugPrint("Error $error");
                 } finally {}
