@@ -30,7 +30,7 @@ class CampaignListScreen extends StatefulWidget {
 }
 
 class _CampaignListScreenState extends State<CampaignListScreen> {
-  Language language;
+  String language;
   String dropDownLang;
   var height, width;
   String userName = "";
@@ -40,8 +40,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   var searchController = TextEditingController();
   bool isLoading = false;
   var arguments;
-
-  // StreamSubscription<ConnectivityResult> listenNetwork;
   bool isInternet;
   SearchCampaignRequest _searchCampaignListRequest;
   Future apiCampaignList, apiSync, apiSearchList;
@@ -62,6 +60,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
+    getLanguage();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -77,15 +76,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           campaignId: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: "ta"));
+          languageCode: language));
       debugPrint("apiCampaignList$apiCampaignList");
     } else {
       apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
           campaignId: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: "ta"));
+          languageCode: language));
     }
+  }
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
   }
 
   @override
@@ -518,13 +521,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                     campaignId: arguments[0],
                                     campaignName: arguments[1],
                                     villageCode: arguments[2],
-                                    languageCode: "ta"))
+                                    languageCode: language))
                                 .then((value) => {
-                                      snackBarAlert(
-                                          success,
-                                          "Campaign List is ready for Offline",
-                                          successColor)
-                                    });
+                                      snackBarAlert(success, "Campaign List is ready for Offline", successColor)});
                           },
                           child: TextWidget(
                             text: DemoLocalization.of(context)
@@ -1012,7 +1011,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                       campaignId: arguments[0],
                                       campaignName: arguments[1],
                                       villageCode: arguments[2],
-                                      languageCode: "ta"))
+                                      languageCode: language))
                                   .then((value) => {
                                         snackBarAlert(
                                             success,

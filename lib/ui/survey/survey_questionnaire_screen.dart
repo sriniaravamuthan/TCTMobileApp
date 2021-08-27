@@ -35,7 +35,7 @@ class SurveyQuestionnaireScreen extends StatefulWidget {
 }
 
 class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
-  Language language;
+  String language;
   String dropDownLang;
   var height, width;
   String userName = "";
@@ -81,22 +81,25 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     isInternet = arguments[2];
     saveSurveyRequest.campaignId = arguments[1].toString();
     saveSurveyRequest.familyId = arguments[0].toString();
-    saveSurveyRequest.languageCode = "ta".toString();
+    saveSurveyRequest.languageCode = language;
     saveSurveyRequest.sections = [];
 
     if (isInternet) {
       apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
           familyId: arguments[0],
           campaignId: arguments[1],
-          languageCode: "ta"));
+          languageCode:language));
     } else {
       apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
           familyId: arguments[0],
           campaignId: arguments[1],
-          languageCode: "ta"));
+          languageCode:language));
     }
   }
-
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+  }
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([

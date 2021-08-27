@@ -129,23 +129,29 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                       .doc(searchCampaignRequest.campaignId)
                       .collection('familyId')
                       .get();
+                  debugPrint("Offline_Survey:${future.values}");
+
                   future.forEach((key, value) async {
+                    debugPrint("Offline_Survey_Key:${key.split("/").last}");
+                    debugPrint("Offline_Survey_Key:${key}");
+
+                    var surveyFamilyId=key.split("/").last;
                     final responseSurveySave =
                         // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
                         await http.get(Uri.parse(surveySaveCampaignURL),
                             headers: requestHeaders);
                     var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
-                        json.decode(responseSurveySave.body));
+                        json.decode(responseSurveySave.body.toString()));
                     if (responseSurveySave.statusCode == 200) {
                       debugPrint("Response12 ${data.toJson()}");
                       if (!dataSaveSurvey.isError) {
                         try {
-                          // db
-                          //     .collection('survey_list')
-                          //     .doc(searchCampaignRequest.campaignId)
-                          //     .collection('familyId')
-                          //     .doc(key)
-                          //     .delete();
+                          db
+                              .collection('survey_list')
+                              .doc(searchCampaignRequest.campaignId)
+                              .collection('familyId')
+                              .doc(surveyFamilyId)
+                              .delete();
                         } catch (err) {
                           debugPrint("Error $err");
                         }
