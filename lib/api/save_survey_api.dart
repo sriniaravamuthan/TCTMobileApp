@@ -12,7 +12,7 @@ import 'package:tct_demographics/util/snack_bar.dart';
 void setSaveSurveyAPI(
     SaveSurveyRequest surveyQuestionnaireRequest, BuildContext context) async {
   String url;
-  url = "https://run.mocky.io/v3/4f214514-abb7-4895-95a7-434e85877df6";
+  url = "https://run.mocky.io/v3/417138ce-10e3-47fc-b2a0-eeaa441c9242";
   // String token = await SharedPref().getStringPref(SharedPref().token);
   // debugPrint("Token:$token");
   Map<String, String> requestHeaders = {
