@@ -59,11 +59,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   @override
   void initState() {
+    listItem = [];
+    optionId = [];
+    saveSurveyRequest.sections = [];
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
+    getLanguage();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -71,34 +75,35 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    listItem = [];
-    optionId = [];
+
 
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
     super.initState();
+
     debugPrint("isInternet: ${arguments[2]}");
     isInternet = arguments[2];
-    saveSurveyRequest.campaignId = arguments[1].toString();
-    saveSurveyRequest.familyId = arguments[0].toString();
-    saveSurveyRequest.languageCode = language;
-    saveSurveyRequest.sections = [];
 
     if (isInternet) {
       apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
           familyId: arguments[0],
           campaignId: arguments[1],
           languageCode:language));
+
     } else {
       apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
           familyId: arguments[0],
           campaignId: arguments[1],
           languageCode:language));
     }
+    saveSurveyRequest.campaignId = arguments[1].toString();
+    saveSurveyRequest.familyId = arguments[0].toString();
+    saveSurveyRequest.languageCode = language.toString();
+    debugPrint("language:$language");
+
   }
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
-    debugPrint("language:$language");
   }
   @override
   dispose() {
@@ -454,12 +459,14 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   void mapData() {
     debugPrint("Size ${saveSurveyRequest.toJson()}");
+    debugPrint("SaveLanguage:${saveSurveyRequest.languageCode}");
+
     if (isInternet) {
       setSaveSurveyAPI(saveSurveyRequest, context);
     } else {
       setSaveOfflineSurveyAPI(saveSurveyRequest, context);
     }
-
+    Get.back();
     /* saveSurveyRequest.sections.forEach((section) {
       Map<String, dynamic> sections = Map();
       sections['sectionId'] = section.sectionId;

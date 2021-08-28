@@ -522,8 +522,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                     campaignName: arguments[1],
                                     villageCode: arguments[2],
                                     languageCode: language))
-                                .then((value) => {
-                                      snackBarAlert(success, "Campaign List is ready for Offline", successColor)});
+                                .then((value)  {
+                                  debugPrint("SearchCampaignRequest:${value.data}");
+                                      snackBarAlert(success, "Campaign List is ready for Offline", successColor);});
                           },
                           child: TextWidget(
                             text: DemoLocalization.of(context)

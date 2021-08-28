@@ -7,6 +7,7 @@ import 'package:tct_demographics/api/request/survey_questionnaire_request.dart';
 
 import 'package:tct_demographics/api/response/survey_question_response.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
+import 'package:tct_demographics/util/shared_preference.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
@@ -40,6 +41,10 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
 Future<SurveyQuestionnaireResponse> getOfflineSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
  debugPrint("campaignId__:${surveyQuestionnaireRequest.campaignId}");
+
+ surveyQuestionnaireRequest.languageCode =
+ await SharedPref().getStringPref(SharedPref().language);
+ debugPrint("surveyQuestionnaireRequest.languageCode:${surveyQuestionnaireRequest.languageCode}");
 
  Map<String, dynamic> map = await db
      .collection('campaign_list')
