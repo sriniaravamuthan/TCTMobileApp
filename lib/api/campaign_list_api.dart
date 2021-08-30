@@ -20,7 +20,6 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
-  String url = "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
@@ -32,11 +31,11 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
-  debugPrint("URl122 $url");
+  debugPrint("URl122 $searchCampaignURL");
 
   final response =
       // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-      await http.get(Uri.parse(url), headers: requestHeaders);
+      await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
   var data = SearchCampaignResponse.fromJson(json.decode(response.body));
 
   if (response.statusCode == 200) {
@@ -59,12 +58,6 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("syncSearchCampaignAPI");
-  String searchCampaignURL =
-      "https://run.mocky.io/v3/a0e2689d-e0a3-4609-8973-5b00222609e8";
-  String surveyCampaignURL =
-      "https://run.mocky.io/v3/28e4af66-ec82-4a14-b54a-2e364b2b05c9";
-  String surveySaveCampaignURL =
-      "https://run.mocky.io/v3/417138ce-10e3-47fc-b2a0-eeaa441c9242";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   debugPrint("searchCampaignRequest.languageCode1:${searchCampaignRequest.languageCode}");

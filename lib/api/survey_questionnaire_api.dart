@@ -11,15 +11,13 @@ import 'package:tct_demographics/util/shared_preference.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
-  String url;
-  url = "https://run.mocky.io/v3/28e4af66-ec82-4a14-b54a-2e364b2b05c9";
   // String token = await SharedPref().getStringPref(SharedPref().token);
   // debugPrint("Token:$token");
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
-  debugPrint("URl $url");
-  final response = await http.get(Uri.parse(url), headers: requestHeaders);
+  debugPrint("URl $surveyCampaignURL");
+  final response = await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
   var data = SurveyQuestionnaireResponse.fromJson(json.decode(response.body));
 
   debugPrint("campaignName: ${data.data.campaignName}");

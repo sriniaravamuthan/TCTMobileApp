@@ -12,15 +12,13 @@ import 'package:tct_demographics/util/snack_bar.dart';
 
 void setSaveSurveyAPI(
     SaveSurveyRequest surveyQuestionnaireRequest, BuildContext context) async {
-  String url;
-  url = "https://run.mocky.io/v3/417138ce-10e3-47fc-b2a0-eeaa441c9242";
   // String token = await SharedPref().getStringPref(SharedPref().token);
   // debugPrint("Token:$token");
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
-  debugPrint("URl $url");
-  final response = await http.get(Uri.parse(url), headers: requestHeaders);
+  debugPrint("URl $surveySaveCampaignURL");
+  final response = await http.get(Uri.parse(surveySaveCampaignURL), headers: requestHeaders);
   var data = SaveSurveyResponse.fromJson(json.decode(response.body));
 
   debugPrint("product: ${data.data}");
