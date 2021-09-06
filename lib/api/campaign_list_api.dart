@@ -16,31 +16,50 @@ import 'package:tct_demographics/util/snack_bar.dart';
 
 Future<SearchCampaignResponse> setSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
-  debugPrint("syncSearchCampaignAPI");
-
-  debugPrint(
-      "SearchCampaign Request : ${searchCampaignRequest.campaignId} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
-  searchCampaignRequest.languageCode =
+  debugPrint("setSearchCampaignAPI");
+  searchCampaignRequest.campaignID ="1"; searchCampaignRequest.campaignName ="1";
+  searchCampaignRequest.villageCode="1";
+  searchCampaignRequest.searchKey ="";
+  searchCampaignRequest.languageCode ="ta";
+/*
       await SharedPref().getStringPref(SharedPref().language);
+*/
+  debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
+
   debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
+  debugPrint("URl122 $searchCampaignURL");
+
 
   // String token = await SharedPref().getStringPref(SharedPref().token);
-  // debugPrint("user:$token");
+
 
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
-  debugPrint("URl122 $searchCampaignURL");
+  debugPrint("requestHeaders:$requestHeaders");
 
+
+  Map map ={
+    "campaignID": null,
+    "campaignName": null,
+    "villageCode": null,
+    "languageCode": null,
+    "searchKey": null
+  };
+  String body = json.encode(map);
+  debugPrint("Search:$body");
   final response =
       // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-      await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
+      await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
+  debugPrint("Search_Datas ${response.body}");
+
   var data = SearchCampaignResponse.fromJson(json.decode(response.body));
+  debugPrint("Search_Data $data");
 
   if (response.statusCode == 200) {
     debugPrint("Response ${data.toJson()}");
-    if (!data.isError) {
+    if (!data.error) {
       return data;
     } else {
       debugPrint("Response2 ${data.data}");
@@ -60,8 +79,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
   debugPrint("syncSearchCampaignAPI");
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
-  debugPrint("searchCampaignRequest.languageCode1:${searchCampaignRequest.languageCode}");
-
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
@@ -71,7 +88,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
   if (connectionResult == ConnectivityResult.none) {
     Map<String, dynamic> map = await db
         .collection('campaign_list')
-        .doc(searchCampaignRequest.campaignId)
+        .doc(searchCampaignRequest.campaignID)
         .get();
     debugPrint("Offline List $map");
     return SearchCampaignResponse.fromJson(map);
@@ -89,18 +106,18 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
 
     if (responseSearchCampaign.statusCode == 200) {
       debugPrint("Response12 ${data.toJson()}");
-      if (!data.isError) {
+      if (!data.error) {
         try {
           db
               .collection('campaign_list')
-              .doc(searchCampaignRequest.campaignId)
+              .doc(searchCampaignRequest.campaignID)
               .delete();
         } catch (error) {
           debugPrint("Error $error");
         } finally {
           db
               .collection('campaign_list')
-              .doc(searchCampaignRequest.campaignId)
+              .doc(searchCampaignRequest.campaignID)
               .set(data.toJson())
               .then((value) => {debugPrint("DB Added List: $value")});
 
@@ -110,9 +127,9 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
               try {
                 db
                     .collection('campaign_list')
-                    .doc(searchCampaignRequest.campaignId)
+                    .doc(searchCampaignRequest.campaignID)
                     .collection('survey')
-                    .doc(searchCampaignRequest.campaignId)
+                    .doc(searchCampaignRequest.campaignID)
                     .set(dataSurvey.toJson())
                     .then((value) => {debugPrint("DB Added Survey: $value")});
               } catch (error) {
@@ -121,7 +138,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                 try {
                   Map<String, dynamic> future = await db
                       .collection('survey_list')
-                      .doc(searchCampaignRequest.campaignId)
+                      .doc(searchCampaignRequest.campaignID)
                       .collection('familyId')
                       .get();
                   debugPrint("Offline_Survey:${future.length}");
@@ -149,7 +166,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                         try {
                           db
                               .collection('survey_list')
-                              .doc(searchCampaignRequest.campaignId)
+                              .doc(searchCampaignRequest.campaignID)
                               .collection('familyId')
                               .doc(surveyFamilyId)
                               .delete();

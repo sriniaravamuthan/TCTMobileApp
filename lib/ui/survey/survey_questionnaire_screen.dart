@@ -460,13 +460,13 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   void mapData() {
     debugPrint("Size ${saveSurveyRequest.toJson()}");
     debugPrint("SaveLanguage:${saveSurveyRequest.languageCode}");
+    debugPrint("Length ${saveSurveyRequest.toJson().length}");
 
     if (isInternet) {
       setSaveSurveyAPI(saveSurveyRequest, context);
     } else {
       setSaveOfflineSurveyAPI(saveSurveyRequest, context);
     }
-    Get.back();
     /* saveSurveyRequest.sections.forEach((section) {
       Map<String, dynamic> sections = Map();
       sections['sectionId'] = section.sectionId;

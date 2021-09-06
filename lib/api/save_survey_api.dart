@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:tct_demographics/api/request/save_survey_request.dart';
 import 'package:tct_demographics/api/response/save_survey_response.dart';
@@ -25,7 +26,7 @@ void setSaveSurveyAPI(
 
   if (response.statusCode == 200) {
     if (!data.isError) {
-      Navigator.pop(context, false);
+      Get.back();
     } else {
       snackBarAlert(warning, data.data.toString(), yellowColor);
     }
@@ -44,5 +45,9 @@ void setSaveOfflineSurveyAPI(
       .collection('familyId')
       .doc(surveyQuestionnaireRequest.familyId)
       .set(surveyQuestionnaireRequest.toJson())
-      .then((value) => {debugPrint("DB Added Survey: $value")});
+      .then((value) {
+    debugPrint("DB Added Survey: $value");
+    Get.back();
+
+  } );
 }

@@ -73,14 +73,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     isInternet = arguments[3];
     if (isInternet) {
       apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
-          campaignId: arguments[0],
+          campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
           languageCode: language));
       debugPrint("apiCampaignList$apiCampaignList");
     } else {
       apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
-          campaignId: arguments[0],
+          campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
           languageCode: language));
@@ -517,8 +517,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
                           onPressed: () {
+
                             syncSearchCampaignAPI(SearchCampaignRequest(
-                                    campaignId: arguments[0],
+                                campaignID: arguments[0],
                                     campaignName: arguments[1],
                                     villageCode: arguments[2],
                                     languageCode: language))
@@ -1009,7 +1010,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                         side: BorderSide(color: Colors.red)))),
                             onPressed: () {
                               syncSearchCampaignAPI(SearchCampaignRequest(
-                                      campaignId: arguments[0],
+                                  campaignID: arguments[0],
                                       campaignName: arguments[1],
                                       villageCode: arguments[2],
                                       languageCode: language))

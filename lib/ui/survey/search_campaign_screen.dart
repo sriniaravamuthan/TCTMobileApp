@@ -256,13 +256,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           campaignIDController.text = val;
                                         });
                                       },
-                                      validator: (value) {
+/*                                      validator: (value) {
                                         if (value.isEmpty) {
                                           debugPrint("empid :yes");
                                           return 'Campaign ID must not be empty';
                                         }
                                         return null;
-                                      },
+                                      }*/
                                     ),
                                   ),
                                   Spacer(

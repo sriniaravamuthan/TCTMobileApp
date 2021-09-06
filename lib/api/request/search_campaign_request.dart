@@ -1,5 +1,5 @@
 class SearchCampaignRequest {
-  String campaignId;
+  String campaignID;
   String campaignName;
   String villageCode;
   String languageCode;
@@ -7,13 +7,13 @@ class SearchCampaignRequest {
 
 
   SearchCampaignRequest(
-      {this.campaignId,
+      {this.campaignID,
       this.campaignName,
       this.villageCode,
       this.languageCode,this.searchKey});
 
   SearchCampaignRequest.fromJson(Map<String, dynamic> json) {
-    campaignId = json['campaignId'];
+    campaignID = json['campaignID'];
     campaignName = json['campaignName'];
     villageCode = json['villageCode'];
     languageCode = json['languageCode'];

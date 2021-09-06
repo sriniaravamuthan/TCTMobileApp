@@ -1,29 +1,36 @@
 class SearchCampaignResponse {
-  String aPIName;
-  bool isError;
-  Data data;
+  List<Data> data;
+  String message;
+  bool error;
+  String apiname;
 
-  SearchCampaignResponse({this.aPIName, this.isError, this.data});
+  SearchCampaignResponse({this.data, this.message, this.error, this.apiname});
 
   SearchCampaignResponse.fromJson(Map<String, dynamic> json) {
-    aPIName = json['APIName'];
-    isError = json['isError'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = new List<Data>();
+      json['data'].forEach((v) {
+        data.add(new Data.fromJson(v));
+      });
+    }
+    message = json['message'];
+    error = json['error'];
+    apiname = json['apiname'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['APIName'] = this.aPIName;
-    data['isError'] = this.isError;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data.map((v) => v.toJson()).toList();
     }
+    data['message'] = this.message;
+    data['error'] = this.error;
+    data['apiname'] = this.apiname;
     return data;
   }
 }
 
 class Data {
-  List<CampaignList> campaignList;
   String campaignId;
   String campaignName;
   String campaignDescription;
@@ -31,14 +38,14 @@ class Data {
   String campaignPopulation;
   String complete;
   String pending;
-  int totalRecords;
+  String totalRecords;
   int limit;
-  String page;
+  int page;
   int pages;
+  List<CampaignList> campaignList;
 
   Data(
-      {this.campaignList,
-        this.campaignId,
+      {this.campaignId,
         this.campaignName,
         this.campaignDescription,
         this.objectiveName,
@@ -48,44 +55,45 @@ class Data {
         this.totalRecords,
         this.limit,
         this.page,
-        this.pages});
+        this.pages,
+        this.campaignList});
 
   Data.fromJson(Map<String, dynamic> json) {
+    campaignId = json['campaignId'];
+    campaignName = json['campaignName'];
+    campaignDescription = json['campaignDescription'];
+    objectiveName = json['objectiveName'];
+    campaignPopulation = json['campaignPopulation'];
+    complete = json['complete'];
+    pending = json['pending'];
+    totalRecords = json['totalRecords'];
+    limit = json['limit'];
+    page = json['page'];
+    pages = json['pages'];
     if (json['campaignList'] != null) {
       campaignList = new List<CampaignList>();
       json['campaignList'].forEach((v) {
         campaignList.add(new CampaignList.fromJson(v));
       });
     }
-    campaignId = json['campaignId'];
-    campaignName = json['campaignName'];
-    campaignDescription = json['campaignDescription'];
-    objectiveName = json['objectiveName'];
-    campaignPopulation = json['campaignPopulation'];
-    complete = json['Complete'];
-    pending = json['Pending'];
-    totalRecords = json['total Records'];
-    limit = json['limit'];
-    page = json['page'];
-    pages = json['pages'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.campaignList != null) {
-      data['campaignList'] = this.campaignList.map((v) => v.toJson()).toList();
-    }
     data['campaignId'] = this.campaignId;
     data['campaignName'] = this.campaignName;
     data['campaignDescription'] = this.campaignDescription;
     data['objectiveName'] = this.objectiveName;
     data['campaignPopulation'] = this.campaignPopulation;
-    data['Complete'] = this.complete;
-    data['Pending'] = this.pending;
-    data['total Records'] = this.totalRecords;
+    data['complete'] = this.complete;
+    data['pending'] = this.pending;
+    data['totalRecords'] = this.totalRecords;
     data['limit'] = this.limit;
     data['page'] = this.page;
     data['pages'] = this.pages;
+    if (this.campaignList != null) {
+      data['campaignList'] = this.campaignList.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -112,7 +120,7 @@ class CampaignList {
     respondentName = json['respondentName'];
     mobileNumber = json['mobileNumber'];
     villageCode = json['villageCode'];
-    status = json['Status'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -122,7 +130,7 @@ class CampaignList {
     data['respondentName'] = this.respondentName;
     data['mobileNumber'] = this.mobileNumber;
     data['villageCode'] = this.villageCode;
-    data['Status'] = this.status;
+    data['status'] = this.status;
     return data;
   }
 }
