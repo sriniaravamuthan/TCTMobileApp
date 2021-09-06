@@ -226,7 +226,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
 
-                dataCampaign = projectSnap.data?.data;
+                dataCampaign = projectSnap.data.data.first;
                 if (dataCampaign != null) {
                   campaignList = dataCampaign.campaignList;
                   searchList = dataCampaign.campaignList;
@@ -249,7 +249,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
                 debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                dataCampaign = projectSnap.data?.data;
+                dataCampaign = projectSnap.data?.data?.first;
                 if (dataCampaign != null) {
                   campaignList = dataCampaign.campaignList;
                   searchList = dataCampaign.campaignList;
@@ -1203,21 +1203,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 4.0),
                                   child: TextWidget(
-                                    text: campaignList.familyHeadName,
-                                    color: darkColor,
-                                    size: 14,
-                                    weight: FontWeight.w400,
-                                  ),
+                                    text: campaignList?.familyHeadName,
+                                          color: darkColor,
+                                          size: 14,
+                                          weight: FontWeight.w400,
+                                        ),
                                 ),
                               ),
                               DataCell(TextWidget(
-                                text: campaignList.respondentName,
-                                color: darkColor,
-                                size: 14,
-                                weight: FontWeight.w400,
-                              )),
+                                text: campaignList?.respondentName,
+                                      color: darkColor,
+                                      size: 14,
+                                      weight: FontWeight.w400,
+                                    )),
                               DataCell(TextWidget(
-                                text: campaignList.mobileNumber,
+                                text: campaignList.mobileNumber ?? "-",
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w400,
@@ -1234,11 +1234,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               DataCell(Padding(
                                 padding: const EdgeInsets.only(right: 4.0),
                                 child: TextWidget(
-                                  text: campaignList.status,
-                                  color: darkColor,
-                                  size: 14,
-                                  weight: FontWeight.w400,
-                                ),
+                                  text: campaignList?.status,
+                                        color: darkColor,
+                                        size: 14,
+                                        weight: FontWeight.w400,
+                                      ),
                               )),
                             ],
                           ),
