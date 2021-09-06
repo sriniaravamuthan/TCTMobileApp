@@ -1,67 +1,80 @@
 class SurveyQuestionnaireResponse {
-  String aPIName;
-  bool isError;
-  Data data;
+  List<Data> data;
+  Null message;
+  bool error;
+  String apiname;
 
-  SurveyQuestionnaireResponse({this.aPIName, this.isError, this.data});
+  SurveyQuestionnaireResponse(
+      {this.data, this.message, this.error, this.apiname});
 
   SurveyQuestionnaireResponse.fromJson(Map<String, dynamic> json) {
-    aPIName = json['APIName'];
-    isError = json['isError'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    if (json['data'] != null) {
+      data = new List<Data>();
+      json['data'].forEach((v) {
+        data.add(new Data.fromJson(v));
+      });
+    }
+    message = json['message'];
+    error = json['error'];
+    apiname = json['apiname'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['APIName'] = this.aPIName;
-    data['isError'] = this.isError;
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data.map((v) => v.toJson()).toList();
     }
+    data['message'] = this.message;
+    data['error'] = this.error;
+    data['apiname'] = this.apiname;
     return data;
   }
 }
 
 class Data {
-  List<Sections> sections;
   String campaignId;
   String campaignName;
   String campaignDescription;
   String objectiveName;
   String respondentName;
+  String respondentId;
+  List<Sections> sections;
 
   Data(
-      {this.sections,
-        this.campaignId,
+      {this.campaignId,
         this.campaignName,
         this.campaignDescription,
         this.objectiveName,
-        this.respondentName});
+        this.respondentName,
+        this.respondentId,
+        this.sections});
 
   Data.fromJson(Map<String, dynamic> json) {
+    campaignId = json['campaignId'];
+    campaignName = json['campaignName'];
+    campaignDescription = json['campaignDescription'];
+    objectiveName = json['objectiveName'];
+    respondentName = json['respondentName'];
+    respondentId = json['respondentId'];
     if (json['sections'] != null) {
       sections = new List<Sections>();
       json['sections'].forEach((v) {
         sections.add(new Sections.fromJson(v));
       });
     }
-    campaignId = json['campaignId'];
-    campaignName = json['campaignName'];
-    campaignDescription = json['campaignDescription:'];
-    objectiveName = json['objectiveName'];
-    respondentName = json['respondentName:'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['campaignId'] = this.campaignId;
+    data['campaignName'] = this.campaignName;
+    data['campaignDescription'] = this.campaignDescription;
+    data['objectiveName'] = this.objectiveName;
+    data['respondentName'] = this.respondentName;
+    data['respondentId'] = this.respondentId;
     if (this.sections != null) {
       data['sections'] = this.sections.map((v) => v.toJson()).toList();
     }
-    data['campaignId'] = this.campaignId;
-    data['campaignName'] = this.campaignName;
-    data['campaignDescription:'] = this.campaignDescription;
-    data['objectiveName'] = this.objectiveName;
-    data['respondentName:'] = this.respondentName;
     return data;
   }
 }
@@ -96,34 +109,34 @@ class Sections {
 }
 
 class Questions {
-  String questionName;
-  String optionType;
-  List<Options> options;
   String questionId;
+  String questionName;
+  String responseType;
+  List<Options> options;
 
   Questions(
-      {this.questionName, this.optionType, this.options, this.questionId});
+      {this.questionId, this.questionName, this.responseType, this.options});
 
   Questions.fromJson(Map<String, dynamic> json) {
+    questionId = json['questionId'];
     questionName = json['questionName'];
-    optionType = json['optionType'];
+    responseType = json['responseType'];
     if (json['options'] != null) {
       options = new List<Options>();
       json['options'].forEach((v) {
         options.add(new Options.fromJson(v));
       });
     }
-    questionId = json['questionId'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['questionId'] = this.questionId;
     data['questionName'] = this.questionName;
-    data['optionType'] = this.optionType;
+    data['responseType'] = this.responseType;
     if (this.options != null) {
       data['options'] = this.options.map((v) => v.toJson()).toList();
     }
-    data['questionId'] = this.questionId;
     return data;
   }
 }
@@ -140,7 +153,7 @@ class Options {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<dynamic, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['optionId'] = this.optionId;
     data['optionName'] = this.optionName;
     return data;

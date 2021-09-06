@@ -231,8 +231,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   return Center(child: CircularProgressIndicator());
                 } else if (projectSnap.connectionState ==
                     ConnectionState.done) {
-                  debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                  dataSurveyQues = projectSnap.data?.data;
+                  debugPrint("Survey Response : ${projectSnap.data}");
+                  dataSurveyQues = projectSnap.data?.data?.first;
                   return _portraitMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -248,8 +248,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 } else if (projectSnap.connectionState ==
                     ConnectionState.done) {
                   debugPrint(
-                      "SearchCampaign Response : ${projectSnap.data.data.campaignName}");
-                  dataSurveyQues = projectSnap.data?.data;
+                      "Survey Response : ${projectSnap.data.data[0].campaignName}");
+                  dataSurveyQues = projectSnap.data?.data?.first;
                   return _landscapeMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -594,9 +594,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Widget optionWidget(question, index, i) {
     List<Widget> list = [];
     saveSurveyRequest.sections[index].questions[i].options = [];
-    debugPrint("OptionType: ${question.optionType}");
+    // debugPrint("OptionType: ${question.optionType}");
     switch (question.optionType) {
-      case "Text":
+      case "TEXTBOX":
         TextEditingController controller = TextEditingController();
         list.add(TextFieldWidget(
             controller: TextEditingController(text: ""),
@@ -606,7 +606,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         controllers.add(controller); //adding the current controller to the list
 
         break;
-      case "Radio":
+      case "RADIO BUTTON":
         saveSurveyRequest.sections[index].questions[i].options = [
           SurveyRequest.Options()
         ];
@@ -617,7 +617,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         controllers.add(TextEditingController(text: ""));
 
         break;
-      case "Check-box":
+      case "CHECKBOX":
         list.add(checkBoxList(
             question, saveSurveyRequest.sections[index].questions[i].options));
 
@@ -625,7 +625,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
-      case "Drop-Down":
+      case "DROPDOWN":
         saveSurveyRequest.sections[index].questions[i].options = [
           SurveyRequest.Options()
         ];

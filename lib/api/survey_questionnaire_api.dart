@@ -16,14 +16,22 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
+  Map map ={
+    "campaignId": surveyQuestionnaireRequest.campaignId,
+    "familyId": surveyQuestionnaireRequest.familyId,
+    "languageCode": surveyQuestionnaireRequest.languageCode
+  };
+  String body = json.encode(map);
+  debugPrint("SurveyQuestion:$body");
   debugPrint("URl $surveyCampaignURL");
-  final response = await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
+  final response = await http.post(Uri.parse(surveyCampaignURL), headers: requestHeaders,body:body);
+  debugPrint("Survey_Response ${response.body}");
+
   var data = SurveyQuestionnaireResponse.fromJson(json.decode(response.body));
 
-  debugPrint("campaignName: ${data.data.campaignName}");
-
+  debugPrint("campaignName: ${data.data[0].campaignName}");
   if (response.statusCode == 200) {
-    if (!data.isError) {
+    if (!data.error) {
       return data;
     } else {
       // snackBarAlert(warning, data.isError.toString());

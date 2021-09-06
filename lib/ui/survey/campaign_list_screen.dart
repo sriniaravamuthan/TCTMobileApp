@@ -701,7 +701,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                 weight: FontWeight.w400,
                               )),
                               DataCell(TextWidget(
-                                text: campaignList.mobileNumber,
+                                text: campaignList.mobileNumber ?? "-",
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w400,

@@ -20,31 +20,23 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
   searchCampaignRequest.campaignID ="1"; searchCampaignRequest.campaignName ="1";
   searchCampaignRequest.villageCode="1";
   searchCampaignRequest.searchKey ="";
-  searchCampaignRequest.languageCode ="ta";
-/*
+  searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
-*/
   debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
 
   debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
   debugPrint("URl122 $searchCampaignURL");
-
-
   // String token = await SharedPref().getStringPref(SharedPref().token);
-
-
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
   };
   debugPrint("requestHeaders:$requestHeaders");
-
-
   Map map ={
-    "campaignID": null,
-    "campaignName": null,
-    "villageCode": null,
-    "languageCode": null,
+    "campaignID": searchCampaignRequest.campaignID,
+    "campaignName": searchCampaignRequest.campaignName,
+    "villageCode": searchCampaignRequest.villageCode,
+    "languageCode": searchCampaignRequest.languageCode,
     "searchKey": null
   };
   String body = json.encode(map);
@@ -123,7 +115,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
 
           if (responseSurvey.statusCode == 200) {
               debugPrint("Response1 ${dataSurvey.toJson()}");
-            if (!dataSurvey.isError) {
+            if (!dataSurvey.error) {
               try {
                 db
                     .collection('campaign_list')
@@ -142,7 +134,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                       .collection('familyId')
                       .get();
                   debugPrint("Offline_Survey:${future.length}");
-
                   future.forEach((key, value) async {
                     debugPrint("Offline_Survey_Key:${key.split("/").last}");
                     debugPrint("Offline_Survey_Key:${key}");
