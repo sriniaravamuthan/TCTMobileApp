@@ -2,19 +2,21 @@ class SaveSurveyRequest {
   String campaignId;
   String familyId;
   String languageCode;
-  List<Sections> sections;
+  List<Questions> questions;
+
+  // List<Sections> sections;
 
   SaveSurveyRequest(
-      {this.campaignId, this.familyId, this.languageCode, this.sections});
+      {this.campaignId, this.familyId, this.languageCode, this.questions});
 
   SaveSurveyRequest.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
     familyId = json['familyId'];
     languageCode = json['languageCode'];
-    if (json['sections'] != null) {
-      sections = new List<Sections>();
-      json['sections'].forEach((v) {
-        sections.add(new Sections.fromJson(v));
+    if (json['questions'] != null) {
+      questions = new List<Questions>();
+      json['questions'].forEach((v) {
+        questions.add(new Questions.fromJson(v));
       });
     }
   }
@@ -24,16 +26,15 @@ class SaveSurveyRequest {
     data['campaignId'] = this.campaignId;
     data['familyId'] = this.familyId;
     data['languageCode'] = this.languageCode;
-    if (this.sections != null) {
-      data['sections'] = this.sections.map((v) => v.toJson()).toList();
+    if (this.questions != null) {
+      data['questions'] = this.questions.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Sections {
+/*class Sections {
   String sectionId;
-  List<Questions> questions;
 
   Sections({this.sectionId, this.questions});
 
@@ -55,7 +56,7 @@ class Sections {
     }
     return data;
   }
-}
+}*/
 
 class Questions {
   String questionId;

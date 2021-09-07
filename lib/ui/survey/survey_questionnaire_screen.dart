@@ -60,7 +60,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   void initState() {
     listItem = [];
     optionId = [];
-    saveSurveyRequest.sections = [];
+    saveSurveyRequest.questions = [];
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
       userMail = firebaseAuth.currentUser.email;
@@ -559,13 +559,14 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget itemWidget(int index) {
     debugPrint("Index: $index");
-    saveSurveyRequest?.sections?.insert(
-        index,
-        SurveyRequest.Sections(
-          sectionId: dataSurveyQues?.sections[index]?.sectionId.toString(),
-        ));
+    // saveSurveyRequest?.sections?.insert(
+    //     index,
+    //     SurveyRequest.Sections(
+    //       sectionId: dataSurveyQues?.sections[index]?.sectionId.toString(),
+    //     )
+    // );
     List<Widget> list = [];
-    saveSurveyRequest?.sections[index]?.questions = [];
+    // saveSurveyRequest?.questions = [];
 
     for (var i = 0;
         i < dataSurveyQues?.sections[index]?.questions?.length;
@@ -581,13 +582,16 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           ),
         ),
       );
-      saveSurveyRequest?.sections[index]?.questions?.insert(
+      saveSurveyRequest?.questions?.insert(
           i,
           SurveyRequest.Questions(
             questionId: dataSurveyQues
                 ?.sections[index]?.questions[i]?.questionId
                 .toString(),
           ));
+      for(var j=0;j<saveSurveyRequest?.questions?.length;j++){
+        debugPrint("saveSurveyRequest${saveSurveyRequest.questions[j].toJson()}");
+      }
       list.add(optionWidget(
           dataSurveyQues?.sections[index]?.questions[i], index, i));
     }
@@ -596,7 +600,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget optionWidget(question, index, i) {
     List<Widget> list = [];
-    saveSurveyRequest.sections[index].questions[i].options = [];
+    saveSurveyRequest.questions[i].options = [];
     debugPrint("OptionType: ${question.responseType}");
     switch (question.responseType) {
       case "TEXTBOX":
@@ -605,36 +609,36 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             controller: TextEditingController(text: ""),
             save: saveQuestion,
             object: textFieldModel,
-            answer: saveSurveyRequest.sections[index].questions[i]));
+            answer: saveSurveyRequest.questions[i]));
         controllers.add(controller); //adding the current controller to the list
 
         break;
       case "RADIO BUTTON":
-        saveSurveyRequest.sections[index].questions[i].options = [
+        saveSurveyRequest.questions[i].options = [
           SurveyRequest.Options()
         ];
         list.add(radioList(question,
-            saveSurveyRequest.sections[index].questions[i].options[0]));
-        saveSurveyRequest.sections[index].questions[i].answerName =
+            saveSurveyRequest.questions[i].options[0]));
+        saveSurveyRequest.questions[i].answerName =
             "".toString();
         controllers.add(TextEditingController(text: ""));
 
         break;
       case "CHECKBOX":
         list.add(checkBoxList(
-            question, saveSurveyRequest.sections[index].questions[i].options));
+            question, saveSurveyRequest.questions[i].options));
 
-        saveSurveyRequest.sections[index].questions[i].answerName =
+        saveSurveyRequest.questions[i].answerName =
             "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
       case "DROPDOWN":
-        saveSurveyRequest.sections[index].questions[i].options = [
+        saveSurveyRequest.questions[i].options = [
           SurveyRequest.Options()
         ];
         list.add(dropDownList(question,
-            saveSurveyRequest.sections[index].questions[i].options[0]));
-        saveSurveyRequest.sections[index].questions[i].answerName =
+            saveSurveyRequest.questions[i].options[0]));
+        saveSurveyRequest.questions[i].answerName =
             "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
