@@ -594,8 +594,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   Widget optionWidget(question, index, i) {
     List<Widget> list = [];
     saveSurveyRequest.sections[index].questions[i].options = [];
-    // debugPrint("OptionType: ${question.optionType}");
-    switch (question.optionType) {
+    debugPrint("OptionType: ${question.responseType}");
+    switch (question.responseType) {
       case "TEXTBOX":
         TextEditingController controller = TextEditingController();
         list.add(TextFieldWidget(

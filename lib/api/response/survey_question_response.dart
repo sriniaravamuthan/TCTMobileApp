@@ -1,6 +1,6 @@
 class SurveyQuestionnaireResponse {
   List<Data> data;
-  Null message;
+  String message;
   bool error;
   String apiname;
 
