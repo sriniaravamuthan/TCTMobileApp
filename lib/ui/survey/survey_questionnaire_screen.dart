@@ -13,7 +13,6 @@ import 'package:tct_demographics/api/save_survey_api.dart';
 import 'package:tct_demographics/api/survey_questionnaire_api.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/widget_models/textfield_list.dart';
@@ -293,7 +292,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   child: SizedBox(
                     width: 100,
                     child: TextWidget(
-                      text: dataSurveyQues.respondentName,
+                      text: dataSurveyQues?.respondentName,
                       size: 14,
                       color: darkColor,
                       weight: FontWeight.w400,
@@ -439,7 +438,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                       Padding(
                         padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataSurveyQues.objectiveName,
+                          text: dataSurveyQues?.objectiveName,
                           size: 14,
                           maxLines: 2,
                           color: lightColor,
@@ -527,7 +526,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               addAutomaticKeepAlives: false,
-              itemCount: dataSurveyQues.sections.length,
+              itemCount: dataSurveyQues?.sections?.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(4.0),
@@ -543,7 +542,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             TextWidget(
-                              text: dataSurveyQues.sections[index].sectionName,
+                              text:
+                                  dataSurveyQues?.sections[index]?.sectionName,
                               color: darkColor,
                               weight: FontWeight.w600,
                               size: 16,
@@ -559,34 +559,37 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
   Widget itemWidget(int index) {
     debugPrint("Index: $index");
-    saveSurveyRequest.sections.insert(
+    saveSurveyRequest?.sections?.insert(
         index,
         SurveyRequest.Sections(
-          sectionId: dataSurveyQues.sections[index].sectionId.toString(),
+          sectionId: dataSurveyQues?.sections[index]?.sectionId.toString(),
         ));
     List<Widget> list = [];
-    saveSurveyRequest.sections[index].questions = [];
+    saveSurveyRequest?.sections[index]?.questions = [];
 
-    for (var i = 0; i < dataSurveyQues.sections[index].questions.length; i++) {
+    for (var i = 0;
+        i < dataSurveyQues?.sections[index]?.questions?.length;
+        i++) {
       list.add(
         Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
           child: TextWidget(
-            text: dataSurveyQues.sections[index].questions[i].questionName,
+            text: dataSurveyQues?.sections[index]?.questions[i]?.questionName,
             color: darkColor,
             weight: FontWeight.w600,
             size: 14,
           ),
         ),
       );
-      saveSurveyRequest.sections[index].questions.insert(
+      saveSurveyRequest?.sections[index]?.questions?.insert(
           i,
           SurveyRequest.Questions(
-            questionId: dataSurveyQues.sections[index].questions[i].questionId
+            questionId: dataSurveyQues
+                ?.sections[index]?.questions[i]?.questionId
                 .toString(),
           ));
-      list.add(
-          optionWidget(dataSurveyQues.sections[index].questions[i], index, i));
+      list.add(optionWidget(
+          dataSurveyQues?.sections[index]?.questions[i], index, i));
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
