@@ -85,14 +85,30 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     debugPrint("Offline List $map");
     return SearchCampaignResponse.fromJson(map);
   } else {
+    Map map ={
+        "campaignID": searchCampaignRequest.campaignID,
+      "campaignName": searchCampaignRequest.campaignName,
+      "villageCode": searchCampaignRequest.villageCode,
+      "languageCode": searchCampaignRequest.languageCode,
+      "searchKey": null
+    };
+    String body = json.encode(map);
     final responseSearchCampaign =
-        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-        await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
+        await http.post(Uri.parse(searchCampaignURL), body: body, headers: requestHeaders);
+        // await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
     var data = SearchCampaignResponse.fromJson(
         json.decode(responseSearchCampaign.body));
+    Map questionMap ={
+      "campaignID": searchCampaignRequest.campaignID,
+      "familyId":data?.data?.first?.campaignList?.first?.familyId,
+      "languageCode": searchCampaignRequest.languageCode,
+    };
+    String questionBody = json.encode(questionMap);
+    debugPrint("questionBody ${questionBody}");
+
     final responseSurvey =
-        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-        await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
+        await http.post(Uri.parse(surveyCampaignURL), body: questionBody, headers: requestHeaders);
+        // await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
     var dataSurvey =
         SurveyQuestionnaireResponse.fromJson(json.decode(responseSurvey.body));
 
