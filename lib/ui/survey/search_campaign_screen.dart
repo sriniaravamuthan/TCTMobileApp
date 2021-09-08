@@ -1,12 +1,14 @@
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/api/Search_Campaign_api.dart';
+import 'package:tct_demographics/api/request/search_campaign_request.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
@@ -22,17 +24,19 @@ class SearchCampaignScreen extends StatefulWidget {
 }
 
 class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
-  Language language;
+  String language;
   String dropDownLang;
   var height, width;
   String userName = "";
   String userMail = "";
+  List<String> campaignIdList = [], campaignNameList = [];
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var villageCodeController = TextEditingController();
   var campaignNameController = TextEditingController();
   Future<bool> internetConnection;
   bool isInternet;
+  Future apiCampaignList;
   var _formKey;
 
   @override
@@ -42,6 +46,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
+    getLanguage();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -51,9 +57,29 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
     _formKey = GlobalKey<FormState>();
 
     internetConnection = checkInternetConnection();
-    internetConnection.then(
-        (value) => {isInternet = value, debugPrint("isInternet: $value")});
+    internetConnection.then((value) => {
+          isInternet = value,
+          debugPrint("isInternet: $value"),
+          if (isInternet)
+            {
+              apiCampaignList = getSearchCampaignAPI(
+                  SearchCampaignRequest(
+                      campaignID: campaignIDController.text,
+                      campaignName: campaignNameController.text,
+                      villageCode: villageCodeController.text,
+                      languageCode: "ta"),
+                  campaignIdList,
+                  campaignNameList),
+              debugPrint("apiCampaignList$apiCampaignList")
+            }
+        });
+
     super.initState();
+  }
+
+  void getLanguage() async {
+    language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
   }
 
   @override
@@ -220,50 +246,74 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                   ),
                                   Expanded(
                                     flex: 6,
-                                    child: TextFormField(
-                                      controller: campaignIDController,
-                                      textInputAction: TextInputAction.next,
-                                      enableSuggestions: true,
-                                      decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.symmetric(
-                                              vertical: 2.0, horizontal: 2.0),
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.white),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.white),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          suffixIcon: Icon(Icons.search),
-                                          fillColor: Colors.white),
-                                      keyboardType: TextInputType.text,
-                                      onSaved: (String val) {
-                                        setState(() {
-                                          campaignIDController.text = val;
-                                        });
-                                      },
-/*                                      validator: (value) {
-                                        if (value.isEmpty) {
-                                          debugPrint("empid :yes");
-                                          return 'Campaign ID must not be empty';
-                                        }
-                                        return null;
-                                      }*/
-                                    ),
+                                    child: AutoCompleteTextField(
+                                        controller: campaignIDController,
+                                        clearOnSubmit: false,
+                                        itemSubmitted: (item) {
+                                          campaignIDController.text = item;
+                                          for (int i = 0;
+                                              i < campaignIdList.length;
+                                              i++) {
+                                            if (item == campaignIdList[i]) {
+                                              setState(() {
+                                                campaignNameController.text =
+                                                    campaignNameList[i];
+                                              });
+                                              break;
+                                            }
+                                          }
+                                        },
+                                        suggestions: campaignIdList,
+                                        style: TextStyle(
+                                          color: Color(0xFF222222),
+                                          fontSize: 14,
+                                        ),
+                                        decoration: InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 2.0,
+                                                    horizontal: 2.0),
+                                            filled: true,
+                                            border: OutlineInputBorder(
+                                              borderSide: BorderSide.none,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.red),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide:
+                                                  BorderSide(color: Colors.red),
+                                            ),
+                                            suffixIcon: Icon(Icons.search),
+                                            fillColor: Colors.white),
+                                        itemBuilder: (context, item) {
+                                          return new Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: TextWidget(
+                                                text: item,
+                                                color: darkColor,
+                                                size: 14,
+                                                weight: FontWeight.w600,
+                                              ));
+                                        },
+                                        itemSorter: (a, b) {
+                                          return a.compareTo(b);
+                                        },
+                                        itemFilter: (item, query) {
+                                          return item
+                                              .toLowerCase()
+                                              .startsWith(query.toLowerCase());
+                                        }),
                                   ),
                                   Spacer(
                                     flex: 2,
@@ -300,46 +350,76 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     ),
                                   ),
                                   Expanded(
-                                    flex: 6,
-                                    child: TextFormField(
-                                      controller: campaignNameController,
-                                      textInputAction: TextInputAction.next,
-                                      enableSuggestions: true,
-                                      decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.symmetric(
-                                              vertical: 2.0, horizontal: 2.0),
-                                          filled: true,
-                                          border: OutlineInputBorder(
-                                            borderSide: BorderSide.none,
+                                      flex: 6,
+                                      child: AutoCompleteTextField(
+                                          controller: campaignNameController,
+                                          clearOnSubmit: false,
+                                          itemSubmitted: (item) {
+                                            campaignNameController.text = item;
+                                            for (int i = 0;
+                                                i < campaignNameList.length;
+                                                i++) {
+                                              if (item == campaignNameList[i]) {
+                                                setState(() {
+                                                  campaignIDController.text =
+                                                      campaignIdList[i];
+                                                });
+                                                break;
+                                              }
+                                            }
+                                          },
+                                          suggestions: campaignNameList,
+                                          style: TextStyle(
+                                            color: Color(0xFF222222),
+                                            fontSize: 14,
                                           ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.white),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.white),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          suffixIcon: Icon(Icons.search),
-                                          fillColor: Colors.white),
-
-                                      keyboardType: TextInputType.text,
-                                      onSaved: (String val) {
-                                        setState(() {
-                                          campaignNameController.text = val;
-                                        });
-                                      },
-                                    ),
-                                  ),
+                                          decoration: InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 2.0,
+                                                      horizontal: 2.0),
+                                              filled: true,
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.white),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.white),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.red),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    color: Colors.red),
+                                              ),
+                                              suffixIcon: Icon(Icons.search),
+                                              fillColor: Colors.white),
+                                          itemBuilder: (context, item) {
+                                            return new Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: TextWidget(
+                                                  text: item,
+                                                  color: darkColor,
+                                                  size: 14,
+                                                  weight: FontWeight.w600,
+                                                ));
+                                          },
+                                          itemSorter: (a, b) {
+                                            return a.compareTo(b);
+                                          },
+                                          itemFilter: (item, query) {
+                                            return item
+                                                .toLowerCase()
+                                                .startsWith(
+                                                    query.toLowerCase());
+                                          })),
                                   Spacer(
                                     flex: 2,
                                   )

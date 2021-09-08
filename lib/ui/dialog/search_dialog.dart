@@ -76,10 +76,8 @@ class _SearchDialogState extends State<SearchDialog> {
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: TextWidget(
-                                text:DemoLocalization.of(
-                                    context)
-                                    .translate(
-                                    'Contact Person'),
+                                text: DemoLocalization.of(context)
+                                    .translate('Contact Person'),
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
@@ -89,70 +87,45 @@ class _SearchDialogState extends State<SearchDialog> {
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: TextFormField(
-                                  controller:
-                                  contactPersonController,
-                                  textInputAction:
-                                  TextInputAction.next,
+                                  controller: contactPersonController,
+                                  textInputAction: TextInputAction.next,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
-                                      border:
-                                      OutlineInputBorder(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide.none,
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      enabledBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedErrorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      errorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
-                                      ),
-                                      fillColor:
-                                      lightGreyColor),
+                                      fillColor: lightGreyColor),
 
-                                  keyboardType:
-                                  TextInputType.text,
+                                  keyboardType: TextInputType.text,
                                   onSaved: (String val) {
                                     setState(() {
-                                      contactPersonController
-                                          .text = val;
+                                      contactPersonController.text = val;
                                     });
                                   },
                                   // validator: (value) {
@@ -182,10 +155,8 @@ class _SearchDialogState extends State<SearchDialog> {
                             Padding(
                               padding: const EdgeInsets.all(4.0),
                               child: TextWidget(
-                                text:DemoLocalization.of(
-                                    context)
-                                    .translate(
-                                    'Family Head Name'),
+                                text: DemoLocalization.of(context)
+                                    .translate('Family Head Name'),
                                 size: 14,
                                 weight: FontWeight.w600,
                               ),
@@ -194,71 +165,45 @@ class _SearchDialogState extends State<SearchDialog> {
                               height: 54,
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
-
                                 child: TextFormField(
-                                  controller:
-                                  familyHeadController,
-                                  textInputAction:
-                                  TextInputAction.next,
+                                  controller: familyHeadController,
+                                  textInputAction: TextInputAction.next,
                                   enableSuggestions: true,
                                   decoration: InputDecoration(
-                                      border:
-                                      OutlineInputBorder(
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide.none,
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      enabledBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedErrorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      errorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color:
-                                            lightGreyColor),
-                                      ),
-                                      fillColor:
-                                      lightGreyColor),
-                                  keyboardType:
-                                  TextInputType.text,
+                                      fillColor: lightGreyColor),
+                                  keyboardType: TextInputType.text,
                                   onSaved: (String val) {
                                     setState(() {
-                                      familyHeadController
-                                          .text = val;
+                                      familyHeadController.text = val;
                                     });
                                   },
                                   // validator: (value) {
@@ -489,22 +434,11 @@ class _SearchDialogState extends State<SearchDialog> {
                             SizedBox(
                               height: 58,
                               child: Padding(
-                                  padding: const EdgeInsets.only(left:2.0,right: 2),
+                                  padding: const EdgeInsets.only(
+                                      left: 2.0, right: 2),
                                   child: AutoCompleteTextField(
                                       controller: villageNameController,
                                       clearOnSubmit: false,
-                                      /*textChanged: (data) {
-                                        villageNameController.text = data;
-                                        for(int i = 0; i < villageNameList.length; i++) {
-                                          if (data == villageNameList[i]) {
-                                            setState(() {
-                                              villageCodeController.text = villageCodeList[i];
-                                              panchayatCodeController.text = panchayatCodeList[i];
-                                            });
-                                            break;
-                                          };
-                                        }
-                                      },*/
                                       itemSubmitted: (item) {
                                         villageNameController.text = item;
                                         for (int i = 0;
@@ -617,16 +551,15 @@ class _SearchDialogState extends State<SearchDialog> {
                                         villageCodeList.clear();
                                         villageNameList.clear();
                                         snap.forEach((element) {
-                                          if (element
-                                                  ["panchayatCode"]
+                                          if (element["panchayatCode"]
                                                   .toString() ==
                                               item) {
-                                            villageCodeList.add(element
-                                                ["villageCode"]
-                                                .toString());
-                                            villageNameList.add(element
-                                                ["villageName"][language]
-                                                .toString());
+                                            villageCodeList.add(
+                                                element["villageCode"]
+                                                    .toString());
+                                            villageNameList.add(
+                                                element["villageName"][language]
+                                                    .toString());
                                           }
                                         });
                                       });
@@ -735,7 +668,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                     side: BorderSide(color: Colors.black45)))),
                     onPressed: () {
                       widget.search(
-                        contactPersonController.text,
+                          contactPersonController.text,
                           familyHeadController.text,
                           mobileNoController.text,
                           villageCodeController.text,
