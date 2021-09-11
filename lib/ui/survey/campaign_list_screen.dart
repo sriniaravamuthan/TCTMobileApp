@@ -76,14 +76,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: language));
+          languageCode: language,
+          searchKey: ""),
+          );
       debugPrint("apiCampaignList$apiCampaignList");
     } else {
       apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
           campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: language));
+          languageCode: language,
+          searchKey: ""));
     }
   }
   void getLanguage() async {
@@ -522,7 +525,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                 campaignID: arguments[0],
                                     campaignName: arguments[1],
                                     villageCode: arguments[2],
-                                    languageCode: language))
+                                    languageCode: language,
+                            searchKey: ""))
                                 .then((value)  {
                                   debugPrint("SearchCampaignRequest:${value.data}");
                                       snackBarAlert(success, "Campaign List is ready for Offline", successColor);});
@@ -1013,7 +1017,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                   campaignID: arguments[0],
                                       campaignName: arguments[1],
                                       villageCode: arguments[2],
-                                      languageCode: language))
+                                      languageCode: language,
+                                       searchKey: ""))
                                   .then((value) => {
                                         snackBarAlert(
                                             success,
@@ -1357,18 +1362,31 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         keyboardType: TextInputType.text,
         onChanged: (String val) {
           setState(() {
-            _searchCampaignListRequest.searchKey = val;
             debugPrint("SearchCampaignList: $campaignList");
             if (val != "") {
-              dataCampaign.campaignList = campaignList
+             /* dataCampaign.campaignList = campaignList
                   .where((campaignList) =>
                       campaignList.familyHeadName.contains(val.capitalize) ||
                       campaignList.respondentName.contains(val.capitalize))
-                  .toList();
+                  .toList();*/
+              apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+                  campaignID: arguments[0],
+                  campaignName: arguments[1],
+                  villageCode: arguments[2],
+                  languageCode: language,
+                  searchKey: val.capitalize),
+              );
             } else {
-              dataCampaign.campaignList.clear();
+           /* dataCampaign.campaignList.clear();
               dataCampaign.campaignList = searchList;
-              debugPrint("Search___:$searchList");
+              debugPrint("Search___:$searchList");*/
+              apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+                  campaignID: arguments[0],
+                  campaignName: arguments[1],
+                  villageCode: arguments[2],
+                  languageCode: language,
+                  searchKey: ""),
+              );
             }
             debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
           });

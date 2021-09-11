@@ -19,7 +19,7 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
   debugPrint("setSearchCampaignAPI");
   searchCampaignRequest.campaignID ="1"; searchCampaignRequest.campaignName ="1";
   searchCampaignRequest.villageCode="1";
-  searchCampaignRequest.searchKey ="";
+  // searchCampaignRequest.searchKey ="";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
   debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
@@ -37,10 +37,10 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     "campaignName": searchCampaignRequest.campaignName,
     "villageCode": searchCampaignRequest.villageCode,
     "languageCode": searchCampaignRequest.languageCode,
-    "searchKey": null
+    "searchKey": searchCampaignRequest.searchKey
   };
   String body = json.encode(map);
-  debugPrint("Search:$body");
+  debugPrint("Search_body:$body");
   final response =
       // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
       await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
