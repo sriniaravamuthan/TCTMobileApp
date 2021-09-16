@@ -47,13 +47,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int _currentSortColumn = 0;
   bool _isAscending = true;
   List<CampaignList> campaignList;
-  List<CampaignList> searchList;
+  List<CampaignList> searchList=[];
   String searchString = "";
 
   @override
   void initState() {
     campaignList = [];
-    searchList = [];
     _searchCampaignListRequest = SearchCampaignRequest();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -1363,30 +1362,32 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         onChanged: (String val) {
           setState(() {
             debugPrint("SearchCampaignList: $campaignList");
-            if (val != "") {
-             /* dataCampaign.campaignList = campaignList
-                  .where((campaignList) =>
-                      campaignList.familyHeadName.contains(val.capitalize) ||
-                      campaignList.respondentName.contains(val.capitalize))
-                  .toList();*/
-              apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
-                  campaignID: arguments[0],
-                  campaignName: arguments[1],
-                  villageCode: arguments[2],
-                  languageCode: language,
-                  searchKey: val.capitalize),
-              );
+            if (val =="") {
+              setState(() {
+                searchString=val;
+                dataCampaign.campaignList = campaignList
+                    .where((campaignList) =>
+                campaignList.familyHeadName.contains(val.capitalize) ||
+                    campaignList.respondentName.contains(val.capitalize))
+                    .toList();
+              });
             } else {
+              setState(() {
+                searchController.clear();
+                searchString="";
+                dataCampaign.campaignList = campaignList;
+              });
+
            /* dataCampaign.campaignList.clear();
               dataCampaign.campaignList = searchList;
               debugPrint("Search___:$searchList");*/
-              apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+              /*apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
                   campaignID: arguments[0],
                   campaignName: arguments[1],
                   villageCode: arguments[2],
                   languageCode: language,
                   searchKey: ""),
-              );
+              );*/
             }
             debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
           });

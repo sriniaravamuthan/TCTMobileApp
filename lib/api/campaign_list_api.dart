@@ -17,8 +17,8 @@ import 'package:tct_demographics/util/snack_bar.dart';
 Future<SearchCampaignResponse> setSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("setSearchCampaignAPI");
-  searchCampaignRequest.campaignID ="1"; searchCampaignRequest.campaignName ="1";
-  searchCampaignRequest.villageCode="1";
+  searchCampaignRequest.campaignID =""; searchCampaignRequest.campaignName ="";
+  searchCampaignRequest.villageCode="";
   // searchCampaignRequest.searchKey ="";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
