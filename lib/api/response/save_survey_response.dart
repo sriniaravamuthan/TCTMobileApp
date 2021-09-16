@@ -1,21 +1,21 @@
 class SaveSurveyResponse {
-  String aPIName;
-  bool isError;
-  String data;
+  String message;
+  bool error;
+  String apiname;
 
-  SaveSurveyResponse({this.aPIName, this.isError, this.data});
+  SaveSurveyResponse({this.message, this.error, this.apiname});
 
   SaveSurveyResponse.fromJson(Map<String, dynamic> json) {
-    aPIName = json['APIName'];
-    isError = json['isError'];
-    data = json['data'];
+    message = json['message'];
+    error = json['error'];
+    apiname = json['apiname'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['APIName'] = this.aPIName;
-    data['isError'] = this.isError;
-    data['data'] = this.data;
+    data['message'] = this.message;
+    data['error'] = this.error;
+    data['apiname'] = this.apiname;
     return data;
   }
 }

@@ -17,8 +17,6 @@ import 'package:tct_demographics/util/snack_bar.dart';
 Future<SearchCampaignResponse> setSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("setSearchCampaignAPI");
-  searchCampaignRequest.campaignID =""; searchCampaignRequest.campaignName ="";
-  searchCampaignRequest.villageCode="";
   // searchCampaignRequest.searchKey ="";
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
@@ -156,10 +154,14 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                     debugPrint("Value:${value}");
 
                     var surveyFamilyId=key.split("/").last;
-                    final responseSurveySave =
+                    String body = json.encode(value);
+                    debugPrint("SaveSurveyRequestBody $body");
+
+                    final responseSurveySave = await http.post(Uri.parse(surveySaveCampaignURL), headers: requestHeaders,body:body );
+                  /*  final responseSurveySave =
                         // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
                         await http.get(Uri.parse(surveySaveCampaignURL),
-                            headers: requestHeaders);
+                            headers: requestHeaders);*/
                     debugPrint("statusCode ${responseSurveySave.statusCode}");
                     debugPrint("Response12 ${responseSurveySave.body}");
 
@@ -169,7 +171,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                         json.decode(responseSurveySave.body.toString()));*/
                     if (responseSurveySave.statusCode == 200) {
                       // debugPrint("Response12 ${data.toJson()}");
-                      if (!dataSaveSurvey.isError) {
+                      if (!dataSaveSurvey.error) {
                         try {
                           db
                               .collection('survey_list')

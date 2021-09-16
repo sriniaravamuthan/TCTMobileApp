@@ -226,7 +226,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint("SearchCampaign Response : ${projectSnap.data}");
+                debugPrint("SearchCampaign Response : ${projectSnap.data.data}");
 
                 dataCampaign = projectSnap.data.data.first;
                 if (dataCampaign != null) {
@@ -685,7 +685,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
                                 campaignList?.familyId,
                                 dataCampaign?.campaignId,
-                                isInternet
+                                isInternet,
+                                arguments[2]
                               ]);
                             },
                             cells: <DataCell>[
@@ -1199,7 +1200,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
                                 campaignList?.familyId,
                                 dataCampaign?.campaignId,
-                                isInternet
+                                isInternet,
+                                arguments[2]
                               ]);
                             },
                             cells: <DataCell>[
