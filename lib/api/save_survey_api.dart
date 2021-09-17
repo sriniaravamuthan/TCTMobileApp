@@ -14,26 +14,31 @@ import 'package:tct_demographics/util/snack_bar.dart';
 void setSaveSurveyAPI(
     SaveSurveyRequest surveyQuestionnaireRequest, BuildContext context) async {
   // String token = await SharedPref().getStringPref(SharedPref().token);
-  // debugPrint("Token:$token");
+  debugPrint("surveyQuestionnaireRequest:$surveyQuestionnaireRequest");
+
+
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
   debugPrint("URl $surveySaveCampaignURL");
-  final response = await http.get(Uri.parse(surveySaveCampaignURL), headers: requestHeaders);
+  String body = json.encode(surveyQuestionnaireRequest);
+  debugPrint("SaveSurveyRequestBody $body");
+
+  final response = await http.post(Uri.parse(surveySaveCampaignURL), headers: requestHeaders,body:body );
   var data = SaveSurveyResponse.fromJson(json.decode(response.body));
 
-  debugPrint("product: ${data.data}");
+  debugPrint("product: ${data.message}");
 
   if (response.statusCode == 200) {
-    if (!data.isError) {
+    if (!data.error) {
       Get.back();
     } else {
-      snackBarAlert(warning, data.data.toString(), yellowColor);
+      snackBarAlert(warning, data.message.toString(), yellowColor);
     }
 
     debugPrint("product: ${response.body}");
   } else {
-    snackBarAlert(error, data.data.toString(), errorColor);
+    snackBarAlert(error, data.message.toString(), errorColor);
   }
 }
 

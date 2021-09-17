@@ -1,17 +1,24 @@
 class SaveSurveyRequest {
   String campaignId;
+  String objectiveId;
   String familyId;
+  String villageCode;
   String languageCode;
   List<Questions> questions;
 
-  // List<Sections> sections;
-
   SaveSurveyRequest(
-      {this.campaignId, this.familyId, this.languageCode, this.questions});
+      {this.campaignId,
+        this.objectiveId,
+        this.familyId,
+        this.villageCode,
+        this.languageCode,
+        this.questions});
 
   SaveSurveyRequest.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
+    objectiveId = json['objectiveId'];
     familyId = json['familyId'];
+    villageCode = json['villageCode'];
     languageCode = json['languageCode'];
     if (json['questions'] != null) {
       questions = new List<Questions>();
@@ -24,7 +31,9 @@ class SaveSurveyRequest {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['campaignId'] = this.campaignId;
+    data['objectiveId'] = this.objectiveId;
     data['familyId'] = this.familyId;
+    data['villageCode'] = this.villageCode;
     data['languageCode'] = this.languageCode;
     if (this.questions != null) {
       data['questions'] = this.questions.map((v) => v.toJson()).toList();
@@ -32,31 +41,6 @@ class SaveSurveyRequest {
     return data;
   }
 }
-
-/*class Sections {
-  String sectionId;
-
-  Sections({this.sectionId, this.questions});
-
-  Sections.fromJson(Map<String, dynamic> json) {
-    sectionId = json['sectionId'];
-    if (json['questions'] != null) {
-      questions = new List<Questions>();
-      json['questions'].forEach((v) {
-        questions.add(new Questions.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sectionId'] = this.sectionId;
-    if (this.questions != null) {
-      data['questions'] = this.questions.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}*/
 
 class Questions {
   String questionId;

@@ -45,7 +45,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   List<String> listItem, optionId;
   Future apiSurveyQuestion, apiSync;
   SurveyResponse.Data dataSurveyQues;
-  bool isInternet, checkedValue = false;
+  bool isInternet=false, checkedValue = false;
   List<TextEditingController> controllers = [];
   String dropDown = "";
   TextFieldModel textFieldModel = TextFieldModel();
@@ -66,7 +66,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-    getLanguage();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -75,35 +74,45 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       DeviceOrientation.portraitDown,
     ]);
 
-
-    arguments = Get.arguments;
-    debugPrint("Arguments $arguments");
+    getLanguage();
     super.initState();
-
-    debugPrint("isInternet: ${arguments[2]}");
-    isInternet = arguments[2];
-
-    if (isInternet) {
-      apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
-          familyId: arguments[0],
-          campaignId: arguments[1],
-          languageCode:language));
-
-    } else {
-      apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
-          familyId: arguments[0],
-          campaignId: arguments[1],
-          languageCode:language));
-    }
-    saveSurveyRequest.campaignId = arguments[1].toString();
-    saveSurveyRequest.familyId = arguments[0].toString();
-    saveSurveyRequest.languageCode = language.toString();
-    debugPrint("language:$language");
 
   }
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
+    debugPrint("language:$language");
+
+    getQuestionnaire();
+
   }
+  void getQuestionnaire() {
+    setState(() {
+      arguments = Get.arguments;
+      debugPrint("Arguments $arguments");
+
+      debugPrint("isInternet: ${arguments[2]}");
+      isInternet = arguments[2];
+
+      if (isInternet) {
+        apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
+            familyId: arguments[0],
+            campaignId: arguments[1],
+            languageCode:language));
+
+      } else {
+        apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
+            familyId: arguments[0],
+            campaignId: arguments[1],
+            languageCode:language));
+      }
+      saveSurveyRequest.campaignId = arguments[1].toString();
+      saveSurveyRequest.familyId = arguments[0].toString();
+      saveSurveyRequest.languageCode = language.toString();
+      saveSurveyRequest.villageCode=arguments[3].toString();
+    });
+
+  }
+
   @override
   dispose() {
     SystemChrome.setPreferredOrientations([
@@ -232,6 +241,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ConnectionState.done) {
                   debugPrint("Survey Response : ${projectSnap.data}");
                   dataSurveyQues = projectSnap.data?.data?.first;
+                  saveSurveyRequest.objectiveId=dataSurveyQues.objectiveId.toString();
                   return _portraitMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -249,6 +259,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   debugPrint(
                       "Survey Response : ${projectSnap.data.data[0].campaignName}");
                   dataSurveyQues = projectSnap.data?.data?.first;
+                  saveSurveyRequest.objectiveId=dataSurveyQues.objectiveId.toString();
                   return _landscapeMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -711,4 +722,5 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       ),
     );
   }
+
 }

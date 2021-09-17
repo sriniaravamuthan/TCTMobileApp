@@ -1,6 +1,6 @@
 class SurveyQuestionnaireResponse {
   List<Data> data;
-  String message;
+  Null message;
   bool error;
   String apiname;
 
@@ -36,6 +36,7 @@ class Data {
   String campaignName;
   String campaignDescription;
   String objectiveName;
+  String objectiveId;
   String respondentName;
   String respondentId;
   List<Sections> sections;
@@ -45,6 +46,7 @@ class Data {
         this.campaignName,
         this.campaignDescription,
         this.objectiveName,
+        this.objectiveId,
         this.respondentName,
         this.respondentId,
         this.sections});
@@ -54,6 +56,7 @@ class Data {
     campaignName = json['campaignName'];
     campaignDescription = json['campaignDescription'];
     objectiveName = json['objectiveName'];
+    objectiveId = json['objectiveId'];
     respondentName = json['respondentName'];
     respondentId = json['respondentId'];
     if (json['sections'] != null) {
@@ -63,12 +66,14 @@ class Data {
       });
     }
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['campaignId'] = this.campaignId;
     data['campaignName'] = this.campaignName;
     data['campaignDescription'] = this.campaignDescription;
     data['objectiveName'] = this.objectiveName;
+    data['objectiveId'] = this.objectiveId;
     data['respondentName'] = this.respondentName;
     data['respondentId'] = this.respondentId;
     if (this.sections != null) {

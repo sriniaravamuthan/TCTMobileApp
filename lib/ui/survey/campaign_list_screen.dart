@@ -47,13 +47,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int _currentSortColumn = 0;
   bool _isAscending = true;
   List<CampaignList> campaignList;
-  List<CampaignList> searchList;
+  List<CampaignList> searchList=[];
   String searchString = "";
 
   @override
   void initState() {
     campaignList = [];
-    searchList = [];
     _searchCampaignListRequest = SearchCampaignRequest();
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -76,14 +75,17 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: language));
+          languageCode: language,
+          searchKey: ""),
+          );
       debugPrint("apiCampaignList$apiCampaignList");
     } else {
       apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
           campaignID: arguments[0],
           campaignName: arguments[1],
           villageCode: arguments[2],
-          languageCode: language));
+          languageCode: language,
+          searchKey: ""));
     }
   }
   void getLanguage() async {
@@ -224,7 +226,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               if (projectSnap.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint("SearchCampaign Response : ${projectSnap.data}");
+                debugPrint("SearchCampaign Response : ${projectSnap.data.data}");
 
                 dataCampaign = projectSnap.data.data.first;
                 if (dataCampaign != null) {
@@ -522,7 +524,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                 campaignID: arguments[0],
                                     campaignName: arguments[1],
                                     villageCode: arguments[2],
-                                    languageCode: language))
+                                    languageCode: language,
+                            searchKey: ""))
                                 .then((value)  {
                                   debugPrint("SearchCampaignRequest:${value.data}");
                                       snackBarAlert(success, "Campaign List is ready for Offline", successColor);});
@@ -682,7 +685,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
                                 campaignList?.familyId,
                                 dataCampaign?.campaignId,
-                                isInternet
+                                isInternet,
+                                arguments[2]
                               ]);
                             },
                             cells: <DataCell>[
@@ -1013,7 +1017,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                   campaignID: arguments[0],
                                       campaignName: arguments[1],
                                       villageCode: arguments[2],
-                                      languageCode: language))
+                                      languageCode: language,
+                                       searchKey: ""))
                                   .then((value) => {
                                         snackBarAlert(
                                             success,
@@ -1195,7 +1200,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               Get.toNamed('/SurveyQuestionnaire', arguments: [
                                 campaignList?.familyId,
                                 dataCampaign?.campaignId,
-                                isInternet
+                                isInternet,
+                                arguments[2]
                               ]);
                             },
                             cells: <DataCell>[
@@ -1357,18 +1363,33 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         keyboardType: TextInputType.text,
         onChanged: (String val) {
           setState(() {
-            _searchCampaignListRequest.searchKey = val;
             debugPrint("SearchCampaignList: $campaignList");
-            if (val != "") {
-              dataCampaign.campaignList = campaignList
-                  .where((campaignList) =>
-                      campaignList.familyHeadName.contains(val.capitalize) ||
-                      campaignList.respondentName.contains(val.capitalize))
-                  .toList();
+            if (val =="") {
+              setState(() {
+                searchString=val;
+                dataCampaign.campaignList = campaignList
+                    .where((campaignList) =>
+                campaignList.familyHeadName.contains(val.capitalize) ||
+                    campaignList.respondentName.contains(val.capitalize))
+                    .toList();
+              });
             } else {
-              dataCampaign.campaignList.clear();
+              setState(() {
+                searchController.clear();
+                searchString="";
+                dataCampaign.campaignList = campaignList;
+              });
+
+           /* dataCampaign.campaignList.clear();
               dataCampaign.campaignList = searchList;
-              debugPrint("Search___:$searchList");
+              debugPrint("Search___:$searchList");*/
+              /*apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+                  campaignID: arguments[0],
+                  campaignName: arguments[1],
+                  villageCode: arguments[2],
+                  languageCode: language,
+                  searchKey: ""),
+              );*/
             }
             debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
           });
