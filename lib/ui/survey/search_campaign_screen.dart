@@ -226,6 +226,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Form(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -513,17 +514,21 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           if (_formKey.currentState
                                               .validate()) {
                                             if (_formKey != null) {
-                                              _formKey.currentState.save();
-                                              Get.toNamed('/CampaignListScreen',
-                                                  arguments: [
-                                                    campaignIDController.text
-                                                        .toString(),
-                                                    campaignNameController.text
-                                                        .toString(),
-                                                    villageCodeController.text
-                                                        .toString(),
-                                                    isInternet
-                                                  ]);
+                                              if(campaignIDController.text.isNotEmpty || campaignNameController.text.isNotEmpty ){
+                                                _formKey.currentState.save();
+                                                Get.toNamed('/CampaignListScreen',
+                                                    arguments: [
+                                                      campaignIDController.text
+                                                          .toString(),
+                                                      campaignNameController.text
+                                                          .toString(),
+                                                      villageCodeController.text
+                                                          .toString(),
+                                                      isInternet
+                                                    ]);
+                                              }else{
+                                                return "Campaign details must not empty";
+                                              }
                                             }
                                           }
                                         });
