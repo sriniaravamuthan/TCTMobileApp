@@ -47,7 +47,6 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
       debugPrint("userEmail:$userMail");
     }
     getLanguage();
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
