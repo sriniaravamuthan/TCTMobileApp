@@ -15,7 +15,7 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 
 Future<SearchCampaignResponse> setSearchCampaignAPI(
-    SearchCampaignRequest searchCampaignRequest) async {
+    SearchCampaignRequest searchCampaignRequest, int total) async {
   debugPrint("setSearchCampaignAPI");
   // searchCampaignRequest.searchKey ="";
   searchCampaignRequest.languageCode =
@@ -35,7 +35,9 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     "campaignName": searchCampaignRequest.campaignName,
     "villageCode": searchCampaignRequest.villageCode,
     "languageCode": searchCampaignRequest.languageCode,
-    "searchKey": searchCampaignRequest.searchKey
+    "searchKey": searchCampaignRequest.searchKey,
+    "limit":searchCampaignRequest.limit,
+    "page":searchCampaignRequest.page
   };
   String body = json.encode(map);
   debugPrint("Search_body:$body");
@@ -50,6 +52,10 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
   if (response.statusCode == 200) {
     debugPrint("Response ${data.toJson()}");
     if (!data.error) {
+
+      total = int.tryParse(data.data[0].totalRecords);
+      debugPrint("total1 $total");
+
       return data;
     } else {
       debugPrint("Response2 ${data.data}");
