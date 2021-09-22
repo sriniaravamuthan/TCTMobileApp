@@ -57,21 +57,21 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
 
     internetConnection = checkInternetConnection();
     internetConnection.then((value) => {
-          isInternet = value,
-          debugPrint("isInternet: $value"),
-          if (isInternet)
-            {
-              apiCampaignList = getSearchCampaignAPI(
-                  SearchCampaignRequest(
-                      campaignID: campaignIDController.text,
-                      campaignName: campaignNameController.text,
-                      villageCode: villageCodeController.text,
-                      languageCode: "ta"),
-                  campaignIdList,
-                  campaignNameList),
-              debugPrint("apiCampaignList$apiCampaignList")
-            }
-        });
+      isInternet = value,
+      debugPrint("isInternet: $value"),
+      if (isInternet)
+        {
+          apiCampaignList = getSearchCampaignAPI(
+              SearchCampaignRequest(
+                  campaignID: campaignIDController.text,
+                  campaignName: campaignNameController.text,
+                  villageCode: villageCodeController.text,
+                  languageCode: "ta"),
+              campaignIdList,
+              campaignNameList),
+          debugPrint("apiCampaignList$apiCampaignList")
+        }
+    });
 
     super.initState();
   }
@@ -166,15 +166,15 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                           ),
                           userMail != null
                               ? Text(
-                                  userMail,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                )
+                            userMail,
+                            style:
+                            TextStyle(fontSize: 16, color: darkColor),
+                          )
                               : Text(
-                                  userName,
-                                  style:
-                                      TextStyle(fontSize: 16, color: darkColor),
-                                ),
+                            userName,
+                            style:
+                            TextStyle(fontSize: 16, color: darkColor),
+                          ),
                         ],
                       )),
                   SizedBox(
@@ -226,6 +226,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: Form(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           key: _formKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -251,12 +252,12 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                         itemSubmitted: (item) {
                                           campaignIDController.text = item;
                                           for (int i = 0;
-                                              i < campaignIdList.length;
-                                              i++) {
+                                          i < campaignIdList.length;
+                                          i++) {
                                             if (item == campaignIdList[i]) {
                                               setState(() {
                                                 campaignNameController.text =
-                                                    campaignNameList[i];
+                                                campaignNameList[i];
                                               });
                                               break;
                                             }
@@ -269,9 +270,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                         ),
                                         decoration: InputDecoration(
                                             contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 2.0,
-                                                    horizontal: 2.0),
+                                            EdgeInsets.symmetric(
+                                                vertical: 2.0,
+                                                horizontal: 2.0),
                                             filled: true,
                                             border: OutlineInputBorder(
                                               borderSide: BorderSide.none,
@@ -285,13 +286,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                   color: Colors.white),
                                             ),
                                             focusedErrorBorder:
-                                                OutlineInputBorder(
+                                            OutlineInputBorder(
                                               borderSide:
-                                                  BorderSide(color: Colors.red),
+                                              BorderSide(color: Colors.red),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide:
-                                                  BorderSide(color: Colors.red),
+                                              BorderSide(color: Colors.red),
                                             ),
                                             suffixIcon: Icon(Icons.search),
                                             fillColor: Colors.white),
@@ -356,12 +357,12 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           itemSubmitted: (item) {
                                             campaignNameController.text = item;
                                             for (int i = 0;
-                                                i < campaignNameList.length;
-                                                i++) {
+                                            i < campaignNameList.length;
+                                            i++) {
                                               if (item == campaignNameList[i]) {
                                                 setState(() {
                                                   campaignIDController.text =
-                                                      campaignIdList[i];
+                                                  campaignIdList[i];
                                                 });
                                                 break;
                                               }
@@ -374,9 +375,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                           ),
                                           decoration: InputDecoration(
                                               contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 2.0,
-                                                      horizontal: 2.0),
+                                              EdgeInsets.symmetric(
+                                                  vertical: 2.0,
+                                                  horizontal: 2.0),
                                               filled: true,
                                               border: OutlineInputBorder(
                                                 borderSide: BorderSide.none,
@@ -390,7 +391,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                     color: Colors.white),
                                               ),
                                               focusedErrorBorder:
-                                                  OutlineInputBorder(
+                                              OutlineInputBorder(
                                                 borderSide: BorderSide(
                                                     color: Colors.red),
                                               ),
@@ -417,7 +418,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                             return item
                                                 .toLowerCase()
                                                 .startsWith(
-                                                    query.toLowerCase());
+                                                query.toLowerCase());
                                           })),
                                   Spacer(
                                     flex: 2,
@@ -446,9 +447,9 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                         enableSuggestions: true,
                                         decoration: InputDecoration(
                                             contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    vertical: 2.0,
-                                                    horizontal: 2.0),
+                                            EdgeInsets.symmetric(
+                                                vertical: 2.0,
+                                                horizontal: 2.0),
                                             filled: true,
                                             border: OutlineInputBorder(
                                               borderSide: BorderSide.none,
@@ -462,13 +463,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                   color: Colors.white),
                                             ),
                                             focusedErrorBorder:
-                                                OutlineInputBorder(
+                                            OutlineInputBorder(
                                               borderSide:
-                                                  BorderSide(color: Colors.red),
+                                              BorderSide(color: Colors.red),
                                             ),
                                             errorBorder: OutlineInputBorder(
                                               borderSide:
-                                                  BorderSide(color: Colors.red),
+                                              BorderSide(color: Colors.red),
                                             ),
                                             suffixIcon: Icon(Icons.search),
                                             fillColor: Colors.white),
@@ -495,35 +496,39 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     child: OutlinedButton(
                                       style: ButtonStyle(
                                           foregroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.white),
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.white),
                                           backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color(0xff005aa8)),
+                                          MaterialStateProperty.all<Color>(
+                                              Color(0xff005aa8)),
                                           shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
+                                              RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
+                                                  BorderRadius.circular(
+                                                      5.0),
                                                   side:
-                                                      BorderSide(color: Colors.black45)))),
+                                                  BorderSide(color: Colors.black45)))),
                                       onPressed: () {
                                         setState(() {
                                           if (_formKey.currentState
                                               .validate()) {
                                             if (_formKey != null) {
-                                              _formKey.currentState.save();
-                                              Get.toNamed('/CampaignListScreen',
-                                                  arguments: [
-                                                    campaignIDController.text
-                                                        .toString(),
-                                                    campaignNameController.text
-                                                        .toString(),
-                                                    villageCodeController.text
-                                                        .toString(),
-                                                    isInternet
-                                                  ]);
+                                              if(campaignIDController.text.isNotEmpty || campaignNameController.text.isNotEmpty ){
+                                                _formKey.currentState.save();
+                                                Get.toNamed('/CampaignListScreen',
+                                                    arguments: [
+                                                      campaignIDController.text
+                                                          .toString(),
+                                                      campaignNameController.text
+                                                          .toString(),
+                                                      villageCodeController.text
+                                                          .toString(),
+                                                      isInternet
+                                                    ]);
+                                              }else{
+                                                return "Campaign details must not empty";
+                                              }
                                             }
                                           }
                                         });
@@ -550,13 +555,13 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                     child: OutlinedButton(
                                       style: ButtonStyle(
                                           foregroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.white),
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.white),
                                           backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color(0xff005aa8)),
+                                          MaterialStateProperty.all<Color>(
+                                              Color(0xff005aa8)),
                                           shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
+                                              RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                   borderRadius: BorderRadius.circular(
                                                       5.0),
