@@ -14,12 +14,12 @@ import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 
-Future<SearchCampaignResponse> setSearchCampaignAPI(
-    SearchCampaignRequest searchCampaignRequest, int total) async {
+/*Future<SearchCampaignResponse> setSearchCampaignAPI(
+    SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("setSearchCampaignAPI");
   // searchCampaignRequest.searchKey ="";
   searchCampaignRequest.languageCode =
-      await SharedPref().getStringPref(SharedPref().language);
+  await SharedPref().getStringPref(SharedPref().language);
   debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
 
   debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
@@ -35,15 +35,13 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     "campaignName": searchCampaignRequest.campaignName,
     "villageCode": searchCampaignRequest.villageCode,
     "languageCode": searchCampaignRequest.languageCode,
-    "searchKey": searchCampaignRequest.searchKey,
-    "limit":searchCampaignRequest.limit,
-    "page":searchCampaignRequest.page
+    "searchKey": searchCampaignRequest.searchKey
   };
   String body = json.encode(map);
   debugPrint("Search_body:$body");
   final response =
-      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-      await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
+  // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+  await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
   debugPrint("Search_Datas ${response.body}");
 
   var data = SearchCampaignResponse.fromJson(json.decode(response.body));
@@ -52,10 +50,6 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
   if (response.statusCode == 200) {
     debugPrint("Response ${data.toJson()}");
     if (!data.error) {
-
-      total = int.tryParse(data.data[0].totalRecords);
-      debugPrint("total1 $total");
-
       return data;
     } else {
       debugPrint("Response2 ${data.data}");
@@ -68,13 +62,13 @@ Future<SearchCampaignResponse> setSearchCampaignAPI(
     return null;
   }
   // }
-}
+}*/
 
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("syncSearchCampaignAPI");
   searchCampaignRequest.languageCode =
-      await SharedPref().getStringPref(SharedPref().language);
+  await SharedPref().getStringPref(SharedPref().language);
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
     // 'Access-token': '$token'
@@ -90,7 +84,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     return SearchCampaignResponse.fromJson(map);
   } else {
     Map map ={
-        "campaignID": searchCampaignRequest.campaignID,
+      "campaignID": searchCampaignRequest.campaignID,
       "campaignName": searchCampaignRequest.campaignName,
       "villageCode": searchCampaignRequest.villageCode,
       "languageCode": searchCampaignRequest.languageCode,
@@ -98,8 +92,8 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     };
     String body = json.encode(map);
     final responseSearchCampaign =
-        await http.post(Uri.parse(searchCampaignURL), body: body, headers: requestHeaders);
-        // await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
+    await http.post(Uri.parse(searchCampaignURL), body: body, headers: requestHeaders);
+    // await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
     var data = SearchCampaignResponse.fromJson(
         json.decode(responseSearchCampaign.body));
     Map questionMap ={
@@ -111,10 +105,10 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     debugPrint("questionBody ${questionBody}");
 
     final responseSurvey =
-        await http.post(Uri.parse(surveyCampaignURL), body: questionBody, headers: requestHeaders);
-        // await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
+    await http.post(Uri.parse(surveyCampaignURL), body: questionBody, headers: requestHeaders);
+    // await http.get(Uri.parse(surveyCampaignURL), headers: requestHeaders);
     var dataSurvey =
-        SurveyQuestionnaireResponse.fromJson(json.decode(responseSurvey.body));
+    SurveyQuestionnaireResponse.fromJson(json.decode(responseSurvey.body));
 
     if (responseSearchCampaign.statusCode == 200) {
       debugPrint("Response12 ${data.toJson()}");
@@ -134,7 +128,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
               .then((value) => {debugPrint("DB Added List: $value")});
 
           if (responseSurvey.statusCode == 200) {
-              debugPrint("Response1 ${dataSurvey.toJson()}");
+            debugPrint("Response1 ${dataSurvey.toJson()}");
             if (!dataSurvey.error) {
               try {
                 db
@@ -164,7 +158,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                     debugPrint("SaveSurveyRequestBody $body");
 
                     final responseSurveySave = await http.post(Uri.parse(surveySaveCampaignURL), headers: requestHeaders,body:body );
-                  /*  final responseSurveySave =
+                    /*  final responseSurveySave =
                         // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
                         await http.get(Uri.parse(surveySaveCampaignURL),
                             headers: requestHeaders);*/
@@ -173,7 +167,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
 
                     var dataSaveSurvey =
                     SaveSurveyResponse.fromJson(json.decode(responseSurveySave.body));
-                  /*  var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
+                    /*  var dataSaveSurvey = SurveyQuestionnaireResponse.fromJson(
                         json.decode(responseSurveySave.body.toString()));*/
                     if (responseSurveySave.statusCode == 200) {
                       // debugPrint("Response12 ${data.toJson()}");
