@@ -26,7 +26,7 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      widget.text,
+      widget.text ?? "",
       maxLines: 3,
       textAlign: TextAlign.start,
       style: GoogleFonts.roboto(

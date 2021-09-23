@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tct_demographics/api/campaign_list_api.dart';
 import 'package:tct_demographics/api/request/search_campaign_request.dart';
@@ -23,7 +24,6 @@ import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/survey_text_widget.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
-import 'package:http/http.dart' as http;
 
 class CampaignListScreen extends StatefulWidget {
   CampaignListScreen({Key key}) : super(key: key);
@@ -46,22 +46,23 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   bool isInternet;
   Future apiCampaignList, apiSync, apiSearchList;
   Data dataCampaign;
-  SearchCampaignResponse _searchCampaignResponse=SearchCampaignResponse();
+  SearchCampaignResponse _searchCampaignResponse;
   int _currentSortColumn = 0;
   bool _isAscending = true;
   List<CampaignList> campaignList;
-  List<CampaignList> searchList=[];
+  List<CampaignList> searchList = [];
   String searchString = "";
-  int currentPage=1;
-  int totalPages=0;
-  List<CampaignList> campaignLists=[];
+  int currentPage = 1;
+  int totalPages = 2;
+  List<CampaignList> campaignLists = [];
 
-  SearchCampaignRequest searchCampaignRequest=SearchCampaignRequest();
+  SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
-  RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: true);
   @override
   void initState() {
-
+    _searchCampaignResponse = SearchCampaignResponse(
+        data: List.filled(1, Data(campaignList: List.empty(growable: true))));
     campaignList = [];
     if (firebaseAuth.currentUser != null) {
       userName = firebaseAuth.currentUser.displayName;
@@ -77,14 +78,16 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     ]);
     arguments = Get.arguments;
     debugPrint("Arguments $arguments");
-    searchCampaignRequest=SearchCampaignRequest( campaignID: arguments[0],
+    searchCampaignRequest = SearchCampaignRequest(
+        campaignID: arguments[0],
         campaignName: arguments[1],
         villageCode: arguments[2],
         languageCode: language,
         searchKey: "",
-    limit: 2,page: 1);
-    super.initState();
+        limit: 2,
+        page: currentPage);
     isInternet = arguments[3];
+    super.initState();
 /*
     if (isInternet) {
       apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
@@ -106,8 +109,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 */
   }
 
-  Future<bool> setSearchCampaignAPI({bool keyRefresh=false}) async {
-    debugPrint("setSearchCampaignAPI");
+  Future<bool> setSearchCampaignAPI({bool keyRefresh}) async {
+    debugPrint("setSearchCampaignAPI ");
     if (keyRefresh) {
       currentPage = 1;
     } else {
@@ -118,53 +121,66 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     }
     // searchCampaignRequest.searchKey ="";
     searchCampaignRequest.languageCode =
-    await SharedPref().getStringPref(SharedPref().language);
-    debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
+        await SharedPref().getStringPref(SharedPref().language);
+    debugPrint(
+        "SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
 
-    debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
+    debugPrint(
+        "searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
     // String token = await SharedPref().getStringPref(SharedPref().token);
     Map<String, String> requestHeaders = {
       HttpHeaders.contentTypeHeader: 'application/json',
       // 'Access-token': '$token'
     };
     debugPrint("requestHeaders:$requestHeaders");
-    Map map ={
+    Map map = {
       "campaignID": searchCampaignRequest.campaignID,
       "campaignName": searchCampaignRequest.campaignName,
       "villageCode": searchCampaignRequest.villageCode,
       "languageCode": searchCampaignRequest.languageCode,
       "searchKey": searchCampaignRequest.searchKey,
-      "limit":searchCampaignRequest.limit,
-      "page":searchCampaignRequest.page
+      "limit": searchCampaignRequest.limit,
+      "page": searchCampaignRequest.page
     };
     String body = json.encode(map);
     debugPrint("Search_body:$body");
     final response =
-    // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-    await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
-    debugPrint("Search_Datas ${response.body}");
+        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+        await http.post(Uri.parse(searchCampaignURL),
+            headers: requestHeaders, body: body);
+    debugPrint("Search_Datas1 ${response.body}");
 
-    var data = SearchCampaignResponse.fromJson(json.decode(response.body));
+    SearchCampaignResponse data =
+        SearchCampaignResponse.fromJson(json.decode(response.body));
     debugPrint("Search_Data $data");
+    debugPrint("KEYFRESH $keyRefresh");
 
     if (response.statusCode == 200) {
       debugPrint("Response ${data.toJson()}");
       if (!data.error) {
         if (keyRefresh) {
           setState(() {
-            _searchCampaignResponse=data;
-            campaignLists = data.data[0].campaignList;
-            dataCampaign=data.data.first;
-            debugPrint("users: $campaignLists");
+            _searchCampaignResponse = data;
+            // campaignLists = data.data[0].campaignList;
+            // dataCampaign = data.data.first;
+            debugPrint(
+                "users: ${data.data.first.campaignList.first.familyHeadName}");
           });
-        }else{
+        } else {
           setState(() {
-            campaignLists.addAll(data.data[0].campaignList);
+            _searchCampaignResponse.data.first.campaignList
+                .addAll(data.data.first.campaignList);
 
+            data.data.first.campaignList.forEach((element) {
+              debugPrint("users1: ${element.familyHeadName}");
+            });
           });
         }
         currentPage++;
-        totalPages=data.data[0].pages;
+        debugPrint("totalPages: $totalPages");
+        totalPages = int.tryParse(data.data.first.totalRecords);
+        debugPrint("totalPages: $totalPages");
+
         setState(() {});
         return true;
       } else {
@@ -205,106 +221,122 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       debugShowCheckedModeBanner: false,
       theme: _buildShrineTheme(),
       home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            backgroundColor: lightColor,
-            automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed('/dashBoard');
-                      },
-                      child: SvgPicture.asset(
-                        svgTctLogo,
-                        semanticsLabel: "Logo",
-                        height: 40,
-                        width: 50,
-                        fit: BoxFit.contain,
-                        allowDrawingOutsideViewBox: true,
-                      ),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: lightColor,
+          automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed('/dashBoard');
+                    },
+                    child: SvgPicture.asset(
+                      svgTctLogo,
+                      semanticsLabel: "Logo",
+                      height: 40,
+                      width: 50,
+                      fit: BoxFit.contain,
+                      allowDrawingOutsideViewBox: true,
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    DropdownButton(
-                      underline: SizedBox(),
-                      icon: Icon(
-                        Icons.language,
-                        color: Colors.black87,
-                      ),
-                      items: ['தமிழ்', 'English'].map((val) {
-                        return new DropdownMenuItem<String>(
-                          value: val,
-                          child: new Text(val),
-                        );
-                      }).toList(),
-                      onChanged: (val) {
-                        setState(() {
-                          dropDownLang = val;
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DropdownButton(
+                    underline: SizedBox(),
+                    icon: Icon(
+                      Icons.language,
+                      color: Colors.black87,
+                    ),
+                    items: ['தமிழ்', 'English'].map((val) {
+                      return new DropdownMenuItem<String>(
+                        value: val,
+                        child: new Text(val),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        dropDownLang = val;
 
-                          _changeLanguage();
-                        });
-                        print("Language:$val");
-                      },
+                        _changeLanguage();
+                      });
+                      print("Language:$val");
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      child: Row(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(left: 8.0),
+                              height: 30,
+                              width: 30,
+                              decoration: new BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: new AssetImage(user)))),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          userMail != null
+                              ? Text(
+                                  userMail,
+                                  style:
+                                      TextStyle(fontSize: 16, color: darkColor),
+                                )
+                              : Text(
+                                  userName,
+                                  style:
+                                      TextStyle(fontSize: 16, color: darkColor),
+                                ),
+                        ],
+                      )),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      AuthenticationService(FirebaseAuth.instance)
+                          .signOut(context);
+                    },
+                    child: Icon(
+                      Icons.power_settings_new_outlined,
+                      color: darkColor,
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                        onTap: () {},
-                        child: Row(
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(left: 8.0),
-                                height: 30,
-                                width: 30,
-                                decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: new AssetImage(user)))),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            userMail != null
-                                ? Text(
-                              userMail,
-                              style: TextStyle(
-                                  fontSize: 16, color: darkColor),
-                            )
-                                : Text(
-                              userName,
-                              style: TextStyle(
-                                  fontSize: 16, color: darkColor),
-                            ),
-                          ],
-                        )),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        AuthenticationService(FirebaseAuth.instance)
-                            .signOut(context);
-                      },
-                      child: Icon(
-                        Icons.power_settings_new_outlined,
-                        color: darkColor,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+                  )
+                ],
+              ),
+            ],
           ),
-          body: checkOrientation()),
+        ),
+        body: checkOrientation(),
+/*
+          FutureBuilder(
+              future: Future.delayed(Duration(seconds: 5)),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  debugPrint(
+                      "CampaignList1:${_searchCampaignResponse?.data?.first?.campaignList}");
+                  return checkOrientation();
+                } else {
+                  return Text("Error ${snapshot.error}");
+                }
+              })
+*/
+      ),
     );
   }
 
@@ -312,7 +344,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return OrientationBuilder(
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
-         return _portraitMode();
+          return _portraitMode();
 /*
           return FutureBuilder<SearchCampaignResponse>(
             future: isInternet ? apiCampaignList : apiSync,
@@ -339,7 +371,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           );
 */
         } else {
-         return _landscapeMode();
+          return _landscapeMode();
 /*
           return FutureBuilder<SearchCampaignResponse>(
             future: isInternet ? apiCampaignList : apiSync,
@@ -379,7 +411,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ),
     );
   }
-  Widget header(){
+
+  Widget header() {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
       child: Card(
@@ -408,9 +441,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataCampaign?.campaignName,
+                          text: _searchCampaignResponse
+                              ?.data?.first?.campaignName,
                           size: 14,
                           color: lightColor,
                           maxLines: 3,
@@ -434,9 +468,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataCampaign?.campaignDescription,
+                          text: _searchCampaignResponse
+                              ?.data?.first?.campaignDescription,
                           size: 14,
                           color: lightColor,
                           maxLines: 2,
@@ -459,9 +494,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataCampaign?.objectiveName,
+                          text: _searchCampaignResponse
+                              ?.data?.first?.objectiveName,
                           size: 14,
                           maxLines: 2,
                           color: lightColor,
@@ -483,9 +519,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataCampaign?.campaignPopulation,
+                          text: _searchCampaignResponse
+                              ?.data?.first?.campaignPopulation,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
@@ -506,9 +543,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: TextWidget(
-                          text: dataCampaign?.complete,
+                          text: _searchCampaignResponse?.data?.first?.complete,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
@@ -522,16 +559,16 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   child: Wrap(
                     children: [
                       SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Pending:'),
+                        text:
+                            DemoLocalization.of(context).translate('Pending:'),
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w700,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:4.0),
+                        padding: const EdgeInsets.only(left: 4.0),
                         child: SurveyTextWidget(
-                          text: dataCampaign?.pending,
+                          text: _searchCampaignResponse?.data?.first?.pending,
                           size: 14,
                           color: lightColor,
                           weight: FontWeight.w400,
@@ -547,6 +584,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ),
     );
   }
+
   void _changeLanguage() async {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);
@@ -565,7 +603,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   }
 
   Widget _landscapeMode() {
-    debugPrint("CampaignList:${campaignLists}");
+    debugPrint(
+        "CampaignList....:${_searchCampaignResponse?.data?.first?.campaignList}");
     return Column(
       children: [
         header(),
@@ -612,21 +651,24 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color(0xff005aa8)),
                               shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
                           onPressed: () {
-
                             syncSearchCampaignAPI(SearchCampaignRequest(
-                                campaignID: arguments[0],
-                                campaignName: arguments[1],
-                                villageCode: arguments[2],
-                                languageCode: language,
-                                searchKey: ""))
-                                .then((value)  {
+                                    campaignID: arguments[0],
+                                    campaignName: arguments[1],
+                                    villageCode: arguments[2],
+                                    languageCode: language,
+                                    searchKey: ""))
+                                .then((value) {
                               debugPrint("SearchCampaignRequest:${value.data}");
-                              snackBarAlert(success, "Campaign List is ready for Offline", successColor);});
+                              snackBarAlert(
+                                  success,
+                                  "Campaign List is ready for Offline",
+                                  successColor);
+                            });
                           },
                           child: TextWidget(
                             text: DemoLocalization.of(context)
@@ -650,224 +692,224 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         ),
         Expanded(
           flex: 8,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SmartRefresher(
-                    controller: refreshController,
-                    enablePullUp: true,
-                    footer: CustomFooter(builder: (BuildContext context, LoadStatus status) {
-                      Widget body;
-                      if (status == LoadStatus.idle) {
-                        body = Text("pull up load");
-                      } else if (status == LoadStatus.loading) {
-                        body = CupertinoActivityIndicator(animating: true,);
-                      }  else if (status == LoadStatus.canLoading) {
-                        body = Text("release to load more");
-                      } else {
-                        body = Text("No more Data");
-                      }
-                      return Container(
-                        height: 55.0,
-                        child: Center(child: body),
-                      );
-                    },),
-                    onRefresh: () async {
-                      final result =  await setSearchCampaignAPI(keyRefresh: true);
-                      if (result != null) {
-                        debugPrint("onRefresh$result");
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+            child: SmartRefresher(
+              controller: refreshController,
+              enablePullDown: true,
+              enablePullUp: true,
+              footer: CustomFooter(
+                builder: (BuildContext context, LoadStatus status) {
+                  Widget body;
+                  if (status == LoadStatus.idle) {
+                    body = Text("pull up load");
+                  } else if (status == LoadStatus.loading) {
+                    body = CircularProgressIndicator.adaptive();
+                  } else if (status == LoadStatus.canLoading) {
+                    body = Text("release to load more");
+                  } else {
+                    body = Text("No more Data");
+                  }
+                  return Container(
+                    height: 55.0,
+                    child: Center(child: body),
+                  );
+                },
+              ),
+              onRefresh: () async {
+                final result = await setSearchCampaignAPI(keyRefresh: true);
+                if (result != null) {
+                  debugPrint("onRefresh$result");
 
-                        refreshController.refreshCompleted();
-                      } else {
-                        refreshController.refreshFailed();
-                      }
-                    },
-                    onLoading: () async {
-                      final result = await setSearchCampaignAPI();
-                      if (result != null) {
-                        debugPrint("onLoading$result");
-                        refreshController.loadComplete();
-                      } else {
-                        refreshController.loadFailed();
-                      }
-                    },
-                    child: DataTable(
-                      columnSpacing: 0.04,
-                      sortColumnIndex: _currentSortColumn,
-                      sortAscending: _isAscending,
-                      showCheckboxColumn: false,
-                      showBottomBorder: true,
-                      // horizontalMargin: 0.10,
-                      headingRowColor: MaterialStateColor.resolveWith(
-                              (states) => Color(0xff005aa8)),
-                      columns: <DataColumn>[
-                        DataColumn(
-                            label: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Family Head'),
-                              color: lightColor,
-                              size: 15,
-                              weight: FontWeight.w700,
-                            ),
-                            onSort: (columnIndex, _) {
-                              setState(() {
-                                _currentSortColumn = columnIndex;
-                                if (_isAscending == true) {
-                                  _isAscending = false;
-                                  campaignLists.sort((a, b) => a.familyHeadName
-                                      .compareTo(b.familyHeadName));
-                                } else {
-                                  _isAscending = true;
-                                  campaignLists.sort((a, b) => b.familyHeadName
-                                      .compareTo(a.familyHeadName));
+                  refreshController.refreshCompleted();
+                } else {
+                  refreshController.refreshFailed();
+                }
+              },
+              onLoading: () async {
+                final result = await setSearchCampaignAPI(keyRefresh: false);
+                if (result != null) {
+                  debugPrint("onLoading$result");
+                  refreshController.loadComplete();
+                } else {
+                  refreshController.loadFailed();
+                }
+              },
+              child: DataTable(
+                columnSpacing: 0.04,
+                sortColumnIndex: _currentSortColumn,
+                sortAscending: _isAscending,
+                dataRowHeight: 200,
+                showCheckboxColumn: false,
+                showBottomBorder: true,
+                // horizontalMargin: 0.10,
+                headingRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color(0xff005aa8)),
+                columns: <DataColumn>[
+                  DataColumn(
+                      label: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Family Head'),
+                        color: lightColor,
+                        size: 15,
+                        weight: FontWeight.w700,
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => a.familyHeadName
+                                    .compareTo(b.familyHeadName));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => b.familyHeadName
+                                    .compareTo(a.familyHeadName));
 
-                                  // sort the product list in Descending, order by Price
-                                }
-                              });
-                            }),
-                        DataColumn(
-                            label: SizedBox(
-                              width: 160,
-                              child: TextWidget(
-                                text: DemoLocalization.of(context)
-                                    .translate('Respondent Name'),
-                                color: lightColor,
-                                size: 15,
-                                weight: FontWeight.w700,
-                              ),
-                            ),
-                            onSort: (columnIndex, _) {
-                              setState(() {
-                                _currentSortColumn = columnIndex;
-                                if (_isAscending == true) {
-                                  _isAscending = false;
-                                  campaignLists.sort((a, b) => a.respondentName
-                                      .compareTo(b.respondentName));
-                                } else {
-                                  _isAscending = true;
-                                  campaignLists.sort((a, b) => b.respondentName
-                                      .compareTo(a.respondentName));
-
-                                  // sort the product list in Descending, order by Price
-                                }
-                              });
-                            }),
-                        DataColumn(
-                          label: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Mobile No'),
-                            color: lightColor,
-                            size: 15,
-                            weight: FontWeight.w700,
-                          ),
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                      label: SizedBox(
+                        width: 160,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Respondent Name'),
+                          color: lightColor,
+                          size: 15,
+                          weight: FontWeight.w700,
                         ),
-                        DataColumn(
-                            label: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Village Code'),
-                              color: lightColor,
-                              size: 15,
-                              weight: FontWeight.w700,
-                            ),
-                            onSort: (columnIndex, _) {
-                              setState(() {
-                                _currentSortColumn = columnIndex;
-                                if (_isAscending == true) {
-                                  _isAscending = false;
-                                  campaignLists.sort((a, b) =>
-                                      a.villageCode.compareTo(b.villageCode));
-                                } else {
-                                  _isAscending = true;
-                                  campaignLists.sort((a, b) =>
-                                      b.villageCode.compareTo(a.villageCode));
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => a.respondentName
+                                    .compareTo(b.respondentName));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => b.respondentName
+                                    .compareTo(a.respondentName));
 
-                                  // sort the product list in Descending, order by Price
-                                }
-                              });
-                            }),
-                        DataColumn(
-                            label: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Status'),
-                              color: lightColor,
-                              size: 15,
-                              weight: FontWeight.w700,
-                            ),
-                            onSort: (columnIndex, _) {
-                              setState(() {
-                                _currentSortColumn = columnIndex;
-                                if (_isAscending == true) {
-                                  _isAscending = false;
-                                  campaignLists.sort(
-                                          (a, b) => a.status.compareTo(b.status));
-                                } else {
-                                  _isAscending = true;
-                                  campaignLists.sort(
-                                          (a, b) => b.status.compareTo(a.status));
-
-                                  // sort the product list in Descending, order by Price
-                                }
-                              });
-                            })
-                      ],
-                      rows: campaignLists
-                          ?.map(
-                            (CampaignList campaignList) => DataRow(
-                          onSelectChanged: (bool selected) {
-                            Get.toNamed('/SurveyQuestionnaire', arguments: [
-                              campaignList?.familyId,
-                              dataCampaign?.campaignId,
-                              isInternet,
-                              arguments[2]
-                            ]);
-                          },
-                          cells: <DataCell>[
-                            DataCell(
-                              TextWidget(
-                                text: campaignLists[0].familyHeadName,
-                                color: darkColor,
-                                size: 14,
-                                weight: FontWeight.w400,
-                              ),
-                            ),
-                            DataCell(TextWidget(
-                              text:  campaignLists[0].respondentName,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            )),
-                            DataCell(TextWidget(
-                              text:  campaignLists[0].mobileNumber ?? "-",
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            )),
-                            DataCell(Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
-                              child: TextWidget(
-                                text:  campaignLists[0].villageCode,
-                                color: darkColor,
-                                size: 14,
-                                weight: FontWeight.w400,
-                              ),
-                            )),
-                            DataCell(TextWidget(
-                              text:  campaignLists[0].status,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            )),
-                          ],
-                        ),
-                      )
-                          ?.toList(),
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                    label: TextWidget(
+                      text: DemoLocalization.of(context).translate('Mobile No'),
+                      color: lightColor,
+                      size: 15,
+                      weight: FontWeight.w700,
                     ),
-                  )
+                  ),
+                  DataColumn(
+                      label: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Village Code'),
+                        color: lightColor,
+                        size: 15,
+                        weight: FontWeight.w700,
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) =>
+                                    a.villageCode.compareTo(b.villageCode));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) =>
+                                    b.villageCode.compareTo(a.villageCode));
+
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                      label: TextWidget(
+                        text: DemoLocalization.of(context).translate('Status'),
+                        color: lightColor,
+                        size: 15,
+                        weight: FontWeight.w700,
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => a.status.compareTo(b.status));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse.data.first.campaignList
+                                .sort((a, b) => b.status.compareTo(a.status));
+
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      })
                 ],
+                rows: _searchCampaignResponse?.data?.first?.campaignList
+                    ?.map(
+                      (CampaignList campaignList) => DataRow(
+                        onSelectChanged: (bool selected) {
+                          Get.toNamed('/SurveyQuestionnaire', arguments: [
+                            campaignList?.familyId,
+                            dataCampaign?.campaignId,
+                            isInternet,
+                            arguments[2]
+                          ]);
+                        },
+                        cells: <DataCell>[
+                          DataCell(
+                            TextWidget(
+                              text: campaignList.familyHeadName,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          ),
+                          DataCell(TextWidget(
+                            text: campaignList.respondentName,
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(TextWidget(
+                            text: campaignList.mobileNumber ?? "-",
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: campaignList.villageCode,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                          DataCell(TextWidget(
+                            text: campaignList.status,
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                        ],
+                      ),
+                    )
+                    ?.toList(),
               ),
             ),
           ),
@@ -894,8 +936,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               Container(),
               isLoading
                   ? Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Center(child: CircularProgressIndicator()))
+                      margin: EdgeInsets.only(left: 10),
+                      child: Center(child: CircularProgressIndicator()))
                   : Container(),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
@@ -1138,30 +1180,30 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           child: OutlinedButton(
                             style: ButtonStyle(
                                 foregroundColor:
-                                MaterialStateProperty.all<Color>(
-                                    Colors.white),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
                                 backgroundColor:
-                                MaterialStateProperty.all<Color>(
-                                    Color(0xff005aa8)),
+                                    MaterialStateProperty.all<Color>(
+                                        Color(0xff005aa8)),
                                 shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
+                                        RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                         borderRadius:
-                                        BorderRadius.circular(5.0),
+                                            BorderRadius.circular(5.0),
                                         side: BorderSide(color: Colors.red)))),
                             onPressed: () {
                               syncSearchCampaignAPI(SearchCampaignRequest(
-                                  campaignID: arguments[0],
-                                  campaignName: arguments[1],
-                                  villageCode: arguments[2],
-                                  languageCode: language,
-                                  searchKey: ""))
+                                      campaignID: arguments[0],
+                                      campaignName: arguments[1],
+                                      villageCode: arguments[2],
+                                      languageCode: language,
+                                      searchKey: ""))
                                   .then((value) => {
-                                snackBarAlert(
-                                    success,
-                                    "Campaign List is ready for Offline",
-                                    successColor)
-                              });
+                                        snackBarAlert(
+                                            success,
+                                            "Campaign List is ready for Offline",
+                                            successColor)
+                                      });
                             },
                             child: TextWidget(
                               text: DemoLocalization.of(context)
@@ -1194,7 +1236,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  dataCampaign.campaignList.length>0? DataTable(
+                  DataTable(
                     columnSpacing: MediaQuery.of(context).size.width / 72,
                     sortColumnIndex: _currentSortColumn,
                     sortAscending: _isAscending,
@@ -1202,9 +1244,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     horizontalMargin: 0.20,
                     showBottomBorder: true,
                     dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color(0xFFffffff)),
+                        (states) => Color(0xFFffffff)),
                     headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color(0xff005aa8)),
+                        (states) => Color(0xff005aa8)),
                     columns: <DataColumn>[
                       DataColumn(
                           label: Expanded(
@@ -1319,75 +1361,76 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                               if (_isAscending == true) {
                                 _isAscending = false;
                                 campaignList.sort(
-                                        (a, b) => a.status.compareTo(b.status));
+                                    (a, b) => a.status.compareTo(b.status));
                               } else {
                                 _isAscending = true;
                                 campaignList.sort(
-                                        (a, b) => b.status.compareTo(a.status));
+                                    (a, b) => b.status.compareTo(a.status));
 
                                 // sort the product list in Descending, order by Price
                               }
                             });
                           })
                     ],
-                    rows: dataCampaign?.campaignList
+                    rows: _searchCampaignResponse?.data?.first?.campaignList
                         ?.map(
                           (CampaignList campaignList) => DataRow(
-                        onSelectChanged: (bool selected) {
-                          Get.toNamed('/SurveyQuestionnaire', arguments: [
-                            campaignList?.familyId,
-                            dataCampaign?.campaignId,
-                            isInternet,
-                            arguments[2]
-                          ]);
-                        },
-                        cells: <DataCell>[
-                          DataCell(
-                            Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
-                              child: TextWidget(
-                                text: campaignList?.familyHeadName,
+                            onSelectChanged: (bool selected) {
+                              Get.toNamed('/SurveyQuestionnaire', arguments: [
+                                campaignList?.familyId,
+                                dataCampaign?.campaignId,
+                                isInternet,
+                                arguments[2]
+                              ]);
+                            },
+                            cells: <DataCell>[
+                              DataCell(
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 4.0),
+                                  child: TextWidget(
+                                    text: campaignList?.familyHeadName,
+                                    color: darkColor,
+                                    size: 14,
+                                    weight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              DataCell(TextWidget(
+                                text: campaignList?.respondentName,
                                 color: darkColor,
                                 size: 14,
                                 weight: FontWeight.w400,
-                              ),
-                            ),
+                              )),
+                              DataCell(TextWidget(
+                                text: campaignList.mobileNumber ?? "-",
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              )),
+                              DataCell(Padding(
+                                padding: const EdgeInsets.only(left: 4.0),
+                                child: TextWidget(
+                                  text: campaignList.villageCode,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              )),
+                              DataCell(Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: TextWidget(
+                                  text: campaignList?.status,
+                                  color: darkColor,
+                                  size: 14,
+                                  weight: FontWeight.w400,
+                                ),
+                              )),
+                            ],
                           ),
-                          DataCell(TextWidget(
-                            text: campaignList?.respondentName,
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(TextWidget(
-                            text: campaignList.mobileNumber ?? "-",
-                            color: darkColor,
-                            size: 14,
-                            weight: FontWeight.w400,
-                          )),
-                          DataCell(Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
-                            child: TextWidget(
-                              text: campaignList.villageCode,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
-                          )),
-                          DataCell(Padding(
-                            padding: const EdgeInsets.only(right: 4.0),
-                            child: TextWidget(
-                              text: campaignList?.status,
-                              color: darkColor,
-                              size: 14,
-                              weight: FontWeight.w400,
-                            ),
-                          )),
-                        ],
-                      ),
-                    )
+                        )
                         ?.toList(),
-                  ):_noData()
+                  )
+                  // : _noData()
                 ],
               ),
             ),
@@ -1415,8 +1458,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               Container(),
               isLoading
                   ? Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Center(child: CircularProgressIndicator()))
+                      margin: EdgeInsets.only(left: 10),
+                      child: Center(child: CircularProgressIndicator()))
                   : Container(),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
@@ -1477,7 +1520,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         enableSuggestions: true,
         decoration: InputDecoration(
             contentPadding:
-            EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
+                EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
             filled: true,
             hintText: "Search",
             border: OutlineInputBorder(
@@ -1501,33 +1544,33 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         onChanged: (String val) {
           setState(() {
             debugPrint("SearchCampaignList: $campaignList");
-            if (val =="") {
+            if (val == "") {
               setState(() {
-                searchString=val;
+                searchString = val;
                 dataCampaign.campaignList = campaignList
                     .where((campaignList) =>
-                campaignList.familyHeadName.contains(val.capitalize) ||
-                    campaignList.respondentName.contains(val.capitalize))
+                        campaignList.familyHeadName.contains(val.capitalize) ||
+                        campaignList.respondentName.contains(val.capitalize))
                     .toList();
               });
             }
-         /*   else {
+            /*   else {
               setState(() {
                 searchController.clear();
                 searchString="";
                 dataCampaign.campaignList = campaignList;
               });
 
-              *//* dataCampaign.campaignList.clear();
+              */ /* dataCampaign.campaignList.clear();
               dataCampaign.campaignList = searchList;
-              debugPrint("Search___:$searchList");*//*
-              *//*apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
+              debugPrint("Search___:$searchList");*/ /*
+              */ /*apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
                   campaignID: arguments[0],
                   campaignName: arguments[1],
                   villageCode: arguments[2],
                   languageCode: language,
                   searchKey: ""),
-              );*//*
+              );*/ /*
             }*/
             debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
           });

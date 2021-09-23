@@ -1,4 +1,4 @@
- /*
+/*
  * *
  *  Created by Dharmaraj, Kanmalai Technologies Pvt. Ltd on 31/3/21 10:37 AM.
  *  Copyright (c) 2021. All rights reserved.
@@ -15,9 +15,15 @@ class SurveyTextWidget extends StatefulWidget {
   final int size;
   final Color color;
   final FontWeight weight;
-  int maxLines =1;
+  int maxLines = 1;
 
-  SurveyTextWidget({Key key,  this.text,  this.size,  this.color,  this.weight, this.maxLines = 1})
+  SurveyTextWidget(
+      {Key key,
+      this.text,
+      this.size,
+      this.color,
+      this.weight,
+      this.maxLines = 1})
       : super(key: key);
 
   @override
@@ -28,7 +34,7 @@ class _SurveyTextWidgetState extends State<SurveyTextWidget> {
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
-      widget.text,
+      widget.text ?? "",
       minFontSize: 12,
       maxLines: widget.maxLines,
       textAlign: TextAlign.start,
@@ -40,7 +46,6 @@ class _SurveyTextWidgetState extends State<SurveyTextWidget> {
       overflow: TextOverflow.ellipsis,
       // softWrap: true,
       // stepGranularity: 0.1,
-
     );
   }
 }
