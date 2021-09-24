@@ -41,7 +41,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignNameController = TextEditingController();
   var searchController = TextEditingController();
-  bool isLoading = false;
   var arguments;
   bool isInternet;
   Future apiCampaignList, apiSync, apiSearchList;
@@ -51,9 +50,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   bool _isAscending = true;
   List<CampaignList> campaignList;
   List<CampaignList> searchList = [];
-  String searchString = "";
   int currentPage = 1;
-  int totalPages = 2;
+  int totalPages = 0;
   List<CampaignList> campaignLists = [];
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
@@ -108,9 +106,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     }
 */
   }
-
   Future<bool> setSearchCampaignAPI({bool keyRefresh}) async {
-    debugPrint("setSearchCampaignAPI ");
+    debugPrint("setSearchCampaignAPI :${searchCampaignRequest.page}");
     if (keyRefresh) {
       currentPage = 1;
     } else {
@@ -140,7 +137,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       "languageCode": searchCampaignRequest.languageCode,
       "searchKey": searchCampaignRequest.searchKey,
       "limit": searchCampaignRequest.limit,
-      "page": searchCampaignRequest.page
+      "page": currentPage
     };
     String body = json.encode(map);
     debugPrint("Search_body:$body");
@@ -161,7 +158,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         if (keyRefresh) {
           setState(() {
             _searchCampaignResponse = data;
-            // campaignLists = data.data[0].campaignList;
+            campaignLists = data?.data?.first?.campaignList;
             // dataCampaign = data.data.first;
             debugPrint(
                 "users: ${data.data.first.campaignList.first.familyHeadName}");
@@ -704,8 +701,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   if (status == LoadStatus.idle) {
                     body = Text("pull up load");
                   } else if (status == LoadStatus.loading) {
-                    body = CircularProgressIndicator.adaptive();
-                  } else if (status == LoadStatus.canLoading) {
+                    body = CupertinoActivityIndicator();
+                  } else if (status == LoadStatus.noMore) {
                     body = Text("release to load more");
                   } else {
                     body = Text("No more Data");
@@ -720,18 +717,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 final result = await setSearchCampaignAPI(keyRefresh: true);
                 if (result != null) {
                   debugPrint("onRefresh$result");
-
                   refreshController.refreshCompleted();
                 } else {
+                  return _noData();
                   refreshController.refreshFailed();
                 }
               },
               onLoading: () async {
-                final result = await setSearchCampaignAPI(keyRefresh: false);
+                final result = await setSearchCampaignAPI(keyRefresh: false):;
                 if (result != null) {
                   debugPrint("onLoading$result");
                   refreshController.loadComplete();
                 } else {
+                  return _noData();
                   refreshController.loadFailed();
                 }
               },
@@ -739,7 +737,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 columnSpacing: 0.04,
                 sortColumnIndex: _currentSortColumn,
                 sortAscending: _isAscending,
-                dataRowHeight: 200,
                 showCheckboxColumn: false,
                 showBottomBorder: true,
                 // horizontalMargin: 0.10,
@@ -865,7 +862,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         onSelectChanged: (bool selected) {
                           Get.toNamed('/SurveyQuestionnaire', arguments: [
                             campaignList?.familyId,
-                            dataCampaign?.campaignId,
+                            _searchCampaignResponse?.data?.first?.campaignId,
                             isInternet,
                             arguments[2]
                           ]);
@@ -914,68 +911,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             ),
           ),
         ),
-        InkWell(
-          onTap: () {
-/*
-            loadMore = true;
-            loadData = true;
-            if (snapshot.data.docs.length > 0) {
-              query = query
-                  .startAfterDocument(snapshot.data.docs[
-              snapshot.data.docs.length - 1])
-                  .limit(30);
-              setState(() {
-                isLoading = true;
-              });
-            }
-*/
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(),
-              isLoading
-                  ? Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Center(child: CircularProgressIndicator()))
-                  : Container(),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: Colors.black45,
-                      style: BorderStyle.solid,
-                      width: 1.0,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.more_horiz,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Show More'),
-                          color: darkColor,
-                          weight: FontWeight.w700,
-                          size: 14,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        )
       ],
     );
   }
@@ -1228,276 +1163,246 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         ),
         Expanded(
           flex: 8,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 6.0, right: 6, top: 4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  DataTable(
-                    columnSpacing: MediaQuery.of(context).size.width / 72,
-                    sortColumnIndex: _currentSortColumn,
-                    sortAscending: _isAscending,
-                    showCheckboxColumn: false,
-                    horizontalMargin: 0.20,
-                    showBottomBorder: true,
-                    dataRowColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xFFffffff)),
-                    headingRowColor: MaterialStateColor.resolveWith(
-                        (states) => Color(0xff005aa8)),
-                    columns: <DataColumn>[
-                      DataColumn(
-                          label: Expanded(
-                            flex: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 4.0),
-                              child: TextWidget(
-                                text: DemoLocalization.of(context)
-                                    .translate('Family Head'),
-                                color: lightColor,
-                                size: 14,
-                                weight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) => a.familyHeadName
-                                    .compareTo(b.familyHeadName));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) => b.familyHeadName
-                                    .compareTo(a.familyHeadName));
+          child: Padding(
+            padding: const EdgeInsets.only(left: 6.0, right: 6, top: 4),
+            child: SmartRefresher(
+              controller: refreshController,
+              enablePullDown: true,
+              enablePullUp: true,
+              footer: CustomFooter(
+                builder: (BuildContext context, LoadStatus status) {
+                  Widget body;
+                  if (status == LoadStatus.idle) {
+                    body = Text("pull up load");
+                  } else if (status == LoadStatus.loading) {
+                    body = CircularProgressIndicator.adaptive();
+                  } else if (status == LoadStatus.canLoading) {
+                    body = Text("release to load more");
+                  } else {
+                    body = Text("No more Data");
+                  }
+                  return Container(
+                    height: 55.0,
+                    child: Center(child: body),
+                  );
+                },
+              ),
+              onRefresh: () async {
+                final result = await setSearchCampaignAPI(keyRefresh: true);
+                if (result != null) {
+                  debugPrint("onRefresh$result");
 
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }),
-                      DataColumn(
-                          label: Expanded(
-                            flex: 1,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Respondent Name'),
-                              color: lightColor,
-                              size: 14,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) => a.respondentName
-                                    .compareTo(b.respondentName));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) => b.respondentName
-                                    .compareTo(a.respondentName));
-
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }),
-                      DataColumn(
-                        label: Expanded(
-                          flex: 1,
+                  refreshController.refreshCompleted();
+                } else {
+                  refreshController.refreshFailed();
+                }
+              },
+              onLoading: () async {
+                final result = await setSearchCampaignAPI(keyRefresh: false);
+                if (result != null) {
+                  debugPrint("onLoading$result");
+                  refreshController.loadComplete();
+                } else {
+                  refreshController.loadFailed();
+                }
+              },
+              child: DataTable(
+                columnSpacing: MediaQuery.of(context).size.width / 72,
+                sortColumnIndex: _currentSortColumn,
+                sortAscending: _isAscending,
+                showCheckboxColumn: false,
+                horizontalMargin: 0.20,
+                showBottomBorder: true,
+                dataRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color(0xFFffffff)),
+                headingRowColor: MaterialStateColor.resolveWith(
+                    (states) => Color(0xff005aa8)),
+                columns: <DataColumn>[
+                  DataColumn(
+                      label: Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
                           child: TextWidget(
                             text: DemoLocalization.of(context)
-                                .translate('Mobile No'),
+                                .translate('Family Head'),
                             color: lightColor,
                             size: 14,
                             weight: FontWeight.w700,
                           ),
                         ),
                       ),
-                      DataColumn(
-                          label: Expanded(
-                            flex: 1,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Village Code'),
-                              color: lightColor,
-                              size: 14,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort((a, b) =>
-                                    a.villageCode.compareTo(b.villageCode));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort((a, b) =>
-                                    b.villageCode.compareTo(a.villageCode));
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => a.familyHeadName
+                                .compareTo(b.familyHeadName));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => b.familyHeadName
+                                .compareTo(a.familyHeadName));
 
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          }),
-                      DataColumn(
-                          label: Expanded(
-                            flex: 1,
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Status'),
-                              color: lightColor,
-                              size: 14,
-                              weight: FontWeight.w700,
-                            ),
-                          ),
-                          onSort: (columnIndex, _) {
-                            setState(() {
-                              _currentSortColumn = columnIndex;
-                              if (_isAscending == true) {
-                                _isAscending = false;
-                                campaignList.sort(
-                                    (a, b) => a.status.compareTo(b.status));
-                              } else {
-                                _isAscending = true;
-                                campaignList.sort(
-                                    (a, b) => b.status.compareTo(a.status));
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                      label: Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Respondent Name'),
+                          color: lightColor,
+                          size: 14,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => a.respondentName
+                                .compareTo(b.respondentName));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => b.respondentName
+                                .compareTo(a.respondentName));
 
-                                // sort the product list in Descending, order by Price
-                              }
-                            });
-                          })
-                    ],
-                    rows: _searchCampaignResponse?.data?.first?.campaignList
-                        ?.map(
-                          (CampaignList campaignList) => DataRow(
-                            onSelectChanged: (bool selected) {
-                              Get.toNamed('/SurveyQuestionnaire', arguments: [
-                                campaignList?.familyId,
-                                dataCampaign?.campaignId,
-                                isInternet,
-                                arguments[2]
-                              ]);
-                            },
-                            cells: <DataCell>[
-                              DataCell(
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 4.0),
-                                  child: TextWidget(
-                                    text: campaignList?.familyHeadName,
-                                    color: darkColor,
-                                    size: 14,
-                                    weight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                              DataCell(TextWidget(
-                                text: campaignList?.respondentName,
-                                color: darkColor,
-                                size: 14,
-                                weight: FontWeight.w400,
-                              )),
-                              DataCell(TextWidget(
-                                text: campaignList.mobileNumber ?? "-",
-                                color: darkColor,
-                                size: 14,
-                                weight: FontWeight.w400,
-                              )),
-                              DataCell(Padding(
-                                padding: const EdgeInsets.only(left: 4.0),
-                                child: TextWidget(
-                                  text: campaignList.villageCode,
-                                  color: darkColor,
-                                  size: 14,
-                                  weight: FontWeight.w400,
-                                ),
-                              )),
-                              DataCell(Padding(
-                                padding: const EdgeInsets.only(right: 4.0),
-                                child: TextWidget(
-                                  text: campaignList?.status,
-                                  color: darkColor,
-                                  size: 14,
-                                  weight: FontWeight.w400,
-                                ),
-                              )),
-                            ],
-                          ),
-                        )
-                        ?.toList(),
-                  )
-                  // : _noData()
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                    label: Expanded(
+                      flex: 1,
+                      child: TextWidget(
+                        text: DemoLocalization.of(context)
+                            .translate('Mobile No'),
+                        color: lightColor,
+                        size: 14,
+                        weight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  DataColumn(
+                      label: Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Village Code'),
+                          color: lightColor,
+                          size: 14,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) =>
+                                a.villageCode.compareTo(b.villageCode));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) =>
+                                b.villageCode.compareTo(a.villageCode));
+
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      }),
+                  DataColumn(
+                      label: Expanded(
+                        flex: 1,
+                        child: TextWidget(
+                          text: DemoLocalization.of(context)
+                              .translate('Status'),
+                          color: lightColor,
+                          size: 14,
+                          weight: FontWeight.w700,
+                        ),
+                      ),
+                      onSort: (columnIndex, _) {
+                        setState(() {
+                          _currentSortColumn = columnIndex;
+                          if (_isAscending == true) {
+                            _isAscending = false;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort(
+                                (a, b) => a.status.compareTo(b.status));
+                          } else {
+                            _isAscending = true;
+                            _searchCampaignResponse?.data?.first?.campaignList?.sort(
+                                (a, b) => b.status.compareTo(a.status));
+
+                            // sort the product list in Descending, order by Price
+                          }
+                        });
+                      })
                 ],
+                rows: _searchCampaignResponse?.data?.first?.campaignList
+                    ?.map(
+                      (CampaignList campaignList) => DataRow(
+                        onSelectChanged: (bool selected) {
+                          Get.toNamed('/SurveyQuestionnaire', arguments: [
+                            campaignList?.familyId,
+                            _searchCampaignResponse?.data?.first?.campaignId,
+                            isInternet,
+                            arguments[2]
+                          ]);
+                        },
+                        cells: <DataCell>[
+                          DataCell(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: TextWidget(
+                                text: campaignList?.familyHeadName,
+                                color: darkColor,
+                                size: 14,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          DataCell(TextWidget(
+                            text: campaignList?.respondentName,
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(TextWidget(
+                            text: campaignList.mobileNumber ?? "-",
+                            color: darkColor,
+                            size: 14,
+                            weight: FontWeight.w400,
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(left: 4.0),
+                            child: TextWidget(
+                              text: campaignList.villageCode,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                          DataCell(Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: TextWidget(
+                              text: campaignList?.status,
+                              color: darkColor,
+                              size: 14,
+                              weight: FontWeight.w400,
+                            ),
+                          )),
+                        ],
+                      ),
+                    )
+                    ?.toList(),
               ),
             ),
           ),
         ),
-        InkWell(
-          onTap: () {
-/*
-            loadMore = true;
-            loadData = true;
-            if (snapshot.data.docs.length > 0) {
-              query = query
-                  .startAfterDocument(snapshot.data.docs[
-              snapshot.data.docs.length - 1])
-                  .limit(30);
-              setState(() {
-                isLoading = true;
-              });
-            }
-*/
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(),
-              isLoading
-                  ? Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: Center(child: CircularProgressIndicator()))
-                  : Container(),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 24, bottom: 8),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: Colors.black45,
-                      style: BorderStyle.solid,
-                      width: 1.0,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.more_horiz,
-                          color: Colors.black,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Show More'),
-                          color: darkColor,
-                          weight: FontWeight.w700,
-                          size: 14,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        )
       ],
     );
   }
@@ -1543,36 +1448,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         keyboardType: TextInputType.text,
         onChanged: (String val) {
           setState(() {
-            debugPrint("SearchCampaignList: $campaignList");
-            if (val == "") {
+            debugPrint("SearchCampaignList: $campaignLists");
+            if (val !="") {
               setState(() {
-                searchString = val;
-                dataCampaign.campaignList = campaignList
+                debugPrint("campaignLists!@@:$campaignLists");
+                _searchCampaignResponse?.data?.first?.campaignList = campaignLists
                     .where((campaignList) =>
                         campaignList.familyHeadName.contains(val.capitalize) ||
                         campaignList.respondentName.contains(val.capitalize))
                     .toList();
               });
+            }else{
+              refreshController.requestRefresh();
             }
-            /*   else {
-              setState(() {
-                searchController.clear();
-                searchString="";
-                dataCampaign.campaignList = campaignList;
-              });
-
-              */ /* dataCampaign.campaignList.clear();
-              dataCampaign.campaignList = searchList;
-              debugPrint("Search___:$searchList");*/ /*
-              */ /*apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
-                  campaignID: arguments[0],
-                  campaignName: arguments[1],
-                  villageCode: arguments[2],
-                  languageCode: language,
-                  searchKey: ""),
-              );*/ /*
-            }*/
-            debugPrint("SearchCampaignListAfter: ${dataCampaign.campaignList}");
           });
         },
       ),
