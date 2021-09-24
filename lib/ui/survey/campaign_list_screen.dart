@@ -724,7 +724,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 }
               },
               onLoading: () async {
-                final result = await setSearchCampaignAPI(keyRefresh: false):;
+                final result = await setSearchCampaignAPI(keyRefresh: false);
                 if (result != null) {
                   debugPrint("onLoading$result");
                   refreshController.loadComplete();
