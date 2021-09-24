@@ -43,13 +43,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   var searchController = TextEditingController();
   var arguments;
   bool isInternet;
-  Future apiCampaignList, apiSync, apiSearchList;
+  Future apiCampaignList, apiSync;
   Data dataCampaign;
   SearchCampaignResponse _searchCampaignResponse;
   int _currentSortColumn = 0;
   bool _isAscending = true;
   List<CampaignList> campaignList;
-  List<CampaignList> searchList = [];
   int currentPage = 1;
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
@@ -402,7 +401,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Center(
       child: TextWidget(
         text: 'No Data',
-        weight: FontWeight.w400,
+        weight: FontWeight.w700,
         size: 18,
         color: Colors.black87,
       ),
@@ -719,8 +718,9 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   debugPrint("onRefresh$result");
                   refreshController.refreshCompleted();
                 } else {
-                  return _noData();
                   refreshController.refreshFailed();
+                  return _noData();
+
                 }
               },
               onLoading: () async {
@@ -729,8 +729,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   debugPrint("onLoading$result");
                   refreshController.loadComplete();
                 } else {
-                  return _noData();
                   refreshController.loadFailed();
+                  return _noData();
                 }
               },
               child: DataTable(
@@ -1195,6 +1195,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   refreshController.refreshCompleted();
                 } else {
                   refreshController.refreshFailed();
+                  return _noData();
                 }
               },
               onLoading: () async {
@@ -1204,6 +1205,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   refreshController.loadComplete();
                 } else {
                   refreshController.loadFailed();
+                  return _noData();
                 }
               },
               child: DataTable(
