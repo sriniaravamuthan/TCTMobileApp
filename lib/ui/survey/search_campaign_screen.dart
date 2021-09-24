@@ -14,6 +14,7 @@ import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/check_internet.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
+import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class SearchCampaignScreen extends StatefulWidget {
@@ -527,7 +528,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                       isInternet
                                                     ]);
                                               }else{
-                                                return "Campaign details must not empty";
+                                                snackBarAlert("Error", "Campaign ID or Campaign Name must be Empty", errorColor);
                                               }
                                             }
                                           }
