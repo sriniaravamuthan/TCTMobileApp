@@ -14,7 +14,7 @@ import 'package:tct_demographics/util/snack_bar.dart';
 Future<SearchCampaignResponse> getSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest,
     List campaignIdList,
-    List<String> campaignNameList) async {
+    List<String> campaignNameList, List<String> villageCodeList) async {
   debugPrint("getSearchCampaignAPI");
   searchCampaignRequest.languageCode =
       await SharedPref().getStringPref(SharedPref().language);
@@ -55,6 +55,7 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
         campaignIdList.add(element.campaignId);
         campaignNameList.add(element.campaignName);
         debugPrint("SEARCH:$campaignIdList $campaignNameList");
+        villageCodeList.add(element.campaignList.first.villageCode);
       });
       return data;
     } else {

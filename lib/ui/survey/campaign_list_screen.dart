@@ -52,6 +52,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int currentPage = 1;
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
+  String searchString="";
+  int campaignListLength;
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
@@ -622,7 +624,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing 30 of 210 records',
+                        text: 'Showing ${searchString!=""?campaignListLength:searchCampaignRequest.limit} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1092,7 +1094,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing 30 of 210 records',
+                        text: 'Showing ${searchString!=""?campaignListLength:searchCampaignRequest.limit} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1453,12 +1455,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             debugPrint("SearchCampaignList: $campaignLists");
             if (val !="") {
               setState(() {
+                searchString=val;
                 debugPrint("campaignLists!@@:$campaignLists");
                 _searchCampaignResponse?.data?.first?.campaignList = campaignLists
                     .where((campaignList) =>
                         campaignList.familyHeadName.contains(val.capitalize) ||
                         campaignList.respondentName.contains(val.capitalize))
                     .toList();
+                campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
+                debugPrint("campaignList:${ _searchCampaignResponse?.data?.first?.campaignList?.length}");
               });
             }else{
               refreshController.requestRefresh();

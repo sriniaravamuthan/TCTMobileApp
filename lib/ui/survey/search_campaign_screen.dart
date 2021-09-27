@@ -30,7 +30,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
   var height, width;
   String userName = "";
   String userMail = "";
-  List<String> campaignIdList = [], campaignNameList = [];
+  List<String> campaignIdList = [], campaignNameList = [],villageCodeList=[];
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   var campaignIDController = TextEditingController();
   var villageCodeController = TextEditingController();
@@ -69,7 +69,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                   villageCode: villageCodeController.text,
                   languageCode: "ta"),
               campaignIdList,
-              campaignNameList),
+              campaignNameList,villageCodeList),
           debugPrint("apiCampaignList$apiCampaignList")
         }
     });
@@ -441,47 +441,78 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                       ),
                                     ),
                                     Expanded(
-                                      flex: 6,
-                                      child: TextFormField(
-                                        controller: villageCodeController,
-                                        textInputAction: TextInputAction.done,
-                                        enableSuggestions: true,
-                                        decoration: InputDecoration(
-                                            contentPadding:
-                                            EdgeInsets.symmetric(
-                                                vertical: 2.0,
-                                                horizontal: 2.0),
-                                            filled: true,
-                                            border: OutlineInputBorder(
-                                              borderSide: BorderSide.none,
+                                        flex: 6,
+                                        child: AutoCompleteTextField(
+                                            controller: villageCodeController,
+                                            clearOnSubmit: false,
+                                            itemSubmitted: (item) {
+                                              villageCodeController.text = item;
+                                              for (int i = 0;
+                                              i < villageCodeList.length;
+                                              i++) {
+                                                if (item == villageCodeList[i]) {
+                                                  setState(() {
+                                                    campaignIDController.text =
+                                                    campaignIdList[i];
+                                                    campaignNameController.text =
+                                                    campaignNameList[i];
+                                                  });
+                                                  break;
+                                                }
+                                              }
+                                            },
+                                            suggestions: villageCodeList,
+                                            style: TextStyle(
+                                              color: Color(0xFF222222),
+                                              fontSize: 14,
                                             ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.white),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.white),
-                                            ),
-                                            focusedErrorBorder:
-                                            OutlineInputBorder(
-                                              borderSide:
-                                              BorderSide(color: Colors.red),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderSide:
-                                              BorderSide(color: Colors.red),
-                                            ),
-                                            suffixIcon: Icon(Icons.search),
-                                            fillColor: Colors.white),
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (String val) {
-                                          setState(() {
-                                            villageCodeController.text = val;
-                                          });
-                                        },
-                                      ),
-                                    ),
+                                            decoration: InputDecoration(
+                                                contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    vertical: 2.0,
+                                                    horizontal: 2.0),
+                                                filled: true,
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide.none,
+                                                ),
+                                                enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                ),
+                                                focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                ),
+                                                focusedErrorBorder:
+                                                OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.red),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.red),
+                                                ),
+                                                suffixIcon: Icon(Icons.search),
+                                                fillColor: Colors.white),
+                                            itemBuilder: (context, item) {
+                                              return new Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: TextWidget(
+                                                    text: item,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                    weight: FontWeight.w600,
+                                                  ));
+                                            },
+                                            itemSorter: (a, b) {
+                                              return a.compareTo(b);
+                                            },
+                                            itemFilter: (item, query) {
+                                              return item
+                                                  .toLowerCase()
+                                                  .startsWith(
+                                                  query.toLowerCase());
+                                            })),
                                     Spacer(
                                       flex: 2,
                                     )
