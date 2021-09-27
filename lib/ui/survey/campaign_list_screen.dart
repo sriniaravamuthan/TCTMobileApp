@@ -624,7 +624,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing ${searchString!=""?campaignListLength:searchCampaignRequest.limit} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
+                        text: 'Showing ${searchString!=""?campaignListLength:_searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1094,7 +1094,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing ${searchString!=""?campaignListLength:searchCampaignRequest.limit} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
+                        text: 'Showing ${searchString!=""?campaignListLength:_searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,

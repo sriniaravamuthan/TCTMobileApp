@@ -259,6 +259,8 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                               setState(() {
                                                 campaignNameController.text =
                                                 campaignNameList[i];
+                                                villageCodeController.text=villageCodeList[i];
+
                                               });
                                               break;
                                             }
@@ -364,6 +366,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                 setState(() {
                                                   campaignIDController.text =
                                                   campaignIdList[i];
+                                                  villageCodeController.text=villageCodeList[i];
                                                 });
                                                 break;
                                               }
