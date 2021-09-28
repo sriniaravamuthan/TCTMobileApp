@@ -52,12 +52,13 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int currentPage = 1;
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
-  String searchString="";
+  String searchString = "";
   int campaignListLength;
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
+
   @override
   void initState() {
     _searchCampaignResponse = SearchCampaignResponse(
@@ -87,26 +88,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         page: currentPage);
     isInternet = arguments[3];
     super.initState();
-/*
-    if (isInternet) {
-      apiCampaignList = setSearchCampaignAPI(SearchCampaignRequest(
-          campaignID: arguments[0],
-          campaignName: arguments[1],
-          villageCode: arguments[2],
-          languageCode: language,
-          searchKey: ""),
-      );
-      debugPrint("apiCampaignList$apiCampaignList");
-    } else {
-      apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
-          campaignID: arguments[0],
-          campaignName: arguments[1],
-          villageCode: arguments[2],
-          languageCode: language,
-          searchKey: ""));
-    }
-*/
   }
+
   Future<bool> setSearchCampaignAPI({bool keyRefresh}) async {
     debugPrint("setSearchCampaignAPI :${searchCampaignRequest.page}");
     if (keyRefresh) {
@@ -142,55 +125,85 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     };
     String body = json.encode(map);
     debugPrint("Search_body:$body");
-    final response =
-        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-        await http.post(Uri.parse(searchCampaignURL),
-            headers: requestHeaders, body: body);
-    debugPrint("Search_Datas1 ${response.body}");
+    if(isInternet){
+      final response =
+      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+      await http.post(Uri.parse(searchCampaignURL),
+          headers: requestHeaders, body: body);
+      debugPrint("Search_Datas1 ${response.body}");
 
-    SearchCampaignResponse data =
-        SearchCampaignResponse.fromJson(json.decode(response.body));
-    debugPrint("Search_Data $data");
-    debugPrint("KEYFRESH $keyRefresh");
+      SearchCampaignResponse data =
+      SearchCampaignResponse.fromJson(json.decode(response.body));
+      debugPrint("Search_Data $data");
+      debugPrint("KEYFRESH $keyRefresh");
 
-    if (response.statusCode == 200) {
-      debugPrint("Response ${data.toJson()}");
-      if (!data.error) {
-        if (keyRefresh) {
-          setState(() {
-            _searchCampaignResponse = data;
-            campaignLists = data?.data?.first?.campaignList;
-            // dataCampaign = data.data.first;
-            debugPrint(
-                "users: ${data.data.first.campaignList.first.familyHeadName}");
-          });
-        } else {
-          setState(() {
-            _searchCampaignResponse.data.first.campaignList
-                .addAll(data.data.first.campaignList);
-
-            data.data.first.campaignList.forEach((element) {
-              debugPrint("users1: ${element.familyHeadName}");
+      if (response.statusCode == 200) {
+        debugPrint("Response ${data.toJson()}");
+        if (!data.error) {
+          if (keyRefresh) {
+            setState(() {
+              _searchCampaignResponse = data;
+              campaignLists = data?.data?.first?.campaignList;
+              // dataCampaign = data.data.first;
+              debugPrint(
+                  "users: ${data.data.first.campaignList.first.familyHeadName}");
             });
-          });
-        }
-        currentPage++;
-        debugPrint("totalPages: $totalPages");
-        totalPages = int.tryParse(data.data.first.totalRecords);
-        debugPrint("totalPages: $totalPages");
+          } else {
+            setState(() {
+              _searchCampaignResponse.data.first.campaignList
+                  .addAll(data.data.first.campaignList);
 
-        setState(() {});
-        return true;
+              data.data.first.campaignList.forEach((element) {
+                debugPrint("users1: ${element.familyHeadName}");
+              });
+            });
+          }
+          currentPage++;
+          debugPrint("totalPages: $totalPages");
+          totalPages = int.tryParse(data.data.first.totalRecords);
+          debugPrint("totalPages: $totalPages");
+
+          setState(() {});
+          return true;
+        } else {
+          debugPrint("Response2 ${data.data}");
+          snackBarAlert(warning, "API Error", errorColor);
+          return false;
+        }
       } else {
-        debugPrint("Response2 ${data.data}");
-        snackBarAlert(warning, "API Error", errorColor);
+        debugPrint("Response3 ${data.data}");
+        snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
         return false;
       }
-    } else {
-      debugPrint("Response3 ${data.data}");
-      snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
-      return false;
+    }else{
+      Map<String, dynamic> map = await db
+          .collection('campaign_list')
+          .doc(searchCampaignRequest.campaignID)
+          .get();
+      debugPrint("Offline List $map");
+      if(map!=null){
+        var data=SearchCampaignResponse.fromJson(map);
+        if (!data.error) {
+            setState(() {
+              _searchCampaignResponse = data;
+              campaignLists = data?.data?.first?.campaignList;
+              // dataCampaign = data.data.first;
+              debugPrint(
+                  "users: ${data.data.first.campaignList.first.familyHeadName}");
+            });
+          return true;
+        } else {
+          debugPrint("Response2 ${data.data}");
+          snackBarAlert(warning, "API Error", errorColor);
+          return false;
+        }
+      }else{
+        refreshController.loadComplete();
+         _noData();
+      }
+
     }
+
     // }
   }
 
@@ -624,7 +637,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing ${searchString!=""?campaignListLength:_searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
+                        text:
+                            'Showing ${searchString != "" ? campaignListLength : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -715,25 +729,44 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 },
               ),
               onRefresh: () async {
-                final result = await setSearchCampaignAPI(keyRefresh: true);
-                if (result != null) {
-                  debugPrint("onRefresh$result");
-                  refreshController.refreshCompleted();
-                } else {
-                  refreshController.refreshFailed();
-                  return _noData();
-
-                }
+              /*  if(isInternet){*/
+                  final result = await setSearchCampaignAPI(keyRefresh: true);
+                  if (result != null) {
+                    debugPrint("onRefresh$result");
+                    refreshController.refreshCompleted();
+                  } else {
+                    refreshController.refreshFailed();
+                    return _noData();
+                  }
+               /* }else{
+                  apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
+                      campaignID: arguments[0],
+                      campaignName: arguments[1],
+                      villageCode: arguments[2],
+                      languageCode: language,
+                      searchKey: ""));
+                }*/
               },
               onLoading: () async {
-                final result = await setSearchCampaignAPI(keyRefresh: false);
-                if (result != null) {
-                  debugPrint("onLoading$result");
-                  refreshController.loadComplete();
-                } else {
-                  refreshController.loadFailed();
-                  return _noData();
-                }
+              /*  if (isInternet) {*/
+                  final result = await setSearchCampaignAPI(keyRefresh: false);
+                  if (result != null) {
+                    debugPrint("onLoading$result");
+                    refreshController.loadComplete();
+
+                  } else {
+                    refreshController.loadFailed();
+                    return _noData();
+                  }
+                  debugPrint("apiCampaignList$apiCampaignList");
+               /* } else {
+                  apiSync =  syncSearchCampaignAPI(SearchCampaignRequest(
+                      campaignID: arguments[0],
+                      campaignName: arguments[1],
+                      villageCode: arguments[2],
+                      languageCode: language,
+                      searchKey: ""));
+                }*/
               },
               child: DataTable(
                 columnSpacing: 0.04,
@@ -1094,7 +1127,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
-                        text: 'Showing ${searchString!=""?campaignListLength:_searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords!=null?_searchCampaignResponse.data.first.totalRecords:0} records',
+                        text:
+                            'Showing ${searchString != "" ? campaignListLength : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1241,12 +1275,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           _currentSortColumn = columnIndex;
                           if (_isAscending == true) {
                             _isAscending = false;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => a.familyHeadName
-                                .compareTo(b.familyHeadName));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => a.familyHeadName
+                                    .compareTo(b.familyHeadName));
                           } else {
                             _isAscending = true;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => b.familyHeadName
-                                .compareTo(a.familyHeadName));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => b.familyHeadName
+                                    .compareTo(a.familyHeadName));
 
                             // sort the product list in Descending, order by Price
                           }
@@ -1268,12 +1304,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           _currentSortColumn = columnIndex;
                           if (_isAscending == true) {
                             _isAscending = false;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => a.respondentName
-                                .compareTo(b.respondentName));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => a.respondentName
+                                    .compareTo(b.respondentName));
                           } else {
                             _isAscending = true;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) => b.respondentName
-                                .compareTo(a.respondentName));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => b.respondentName
+                                    .compareTo(a.respondentName));
 
                             // sort the product list in Descending, order by Price
                           }
@@ -1283,8 +1321,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     label: Expanded(
                       flex: 1,
                       child: TextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Mobile No'),
+                        text:
+                            DemoLocalization.of(context).translate('Mobile No'),
                         color: lightColor,
                         size: 14,
                         weight: FontWeight.w700,
@@ -1307,12 +1345,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           _currentSortColumn = columnIndex;
                           if (_isAscending == true) {
                             _isAscending = false;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) =>
-                                a.villageCode.compareTo(b.villageCode));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) =>
+                                    a.villageCode.compareTo(b.villageCode));
                           } else {
                             _isAscending = true;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort((a, b) =>
-                                b.villageCode.compareTo(a.villageCode));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) =>
+                                    b.villageCode.compareTo(a.villageCode));
 
                             // sort the product list in Descending, order by Price
                           }
@@ -1322,8 +1362,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       label: Expanded(
                         flex: 1,
                         child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Status'),
+                          text:
+                              DemoLocalization.of(context).translate('Status'),
                           color: lightColor,
                           size: 14,
                           weight: FontWeight.w700,
@@ -1334,12 +1374,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                           _currentSortColumn = columnIndex;
                           if (_isAscending == true) {
                             _isAscending = false;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort(
-                                (a, b) => a.status.compareTo(b.status));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => a.status.compareTo(b.status));
                           } else {
                             _isAscending = true;
-                            _searchCampaignResponse?.data?.first?.campaignList?.sort(
-                                (a, b) => b.status.compareTo(a.status));
+                            _searchCampaignResponse?.data?.first?.campaignList
+                                ?.sort((a, b) => b.status.compareTo(a.status));
 
                             // sort the product list in Descending, order by Price
                           }
@@ -1453,19 +1493,24 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         onChanged: (String val) {
           setState(() {
             debugPrint("SearchCampaignList: $campaignLists");
-            if (val !="") {
+            if (val != "") {
               setState(() {
-                searchString=val;
+                searchString = val;
                 debugPrint("campaignLists!@@:$campaignLists");
-                _searchCampaignResponse?.data?.first?.campaignList = campaignLists
-                    .where((campaignList) =>
-                        campaignList.familyHeadName.contains(val.capitalize) ||
-                        campaignList.respondentName.contains(val.capitalize))
-                    .toList();
-                campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
-                debugPrint("campaignList:${ _searchCampaignResponse?.data?.first?.campaignList?.length}");
+                _searchCampaignResponse?.data?.first?.campaignList =
+                    campaignLists
+                        .where((campaignList) =>
+                            campaignList.familyHeadName
+                                .contains(val.capitalize) ||
+                            campaignList.respondentName
+                                .contains(val.capitalize))
+                        .toList();
+                campaignListLength =
+                    _searchCampaignResponse?.data?.first?.campaignList?.length;
+                debugPrint(
+                    "campaignList:${_searchCampaignResponse?.data?.first?.campaignList?.length}");
               });
-            }else{
+            } else {
               refreshController.requestRefresh();
             }
           });
