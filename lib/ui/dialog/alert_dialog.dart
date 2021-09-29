@@ -6,22 +6,20 @@
  * /
  */
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/localization/localization.dart';
-import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class AlertDialogWidget extends StatefulWidget {
-
-   Function deleteDoc;
-   int index;
+  Function deleteDoc;
+  int index;
 
   AlertDialogWidget(this.deleteDoc, this.index);
 
   @override
-  _AlertDialogWidgetState createState() => _AlertDialogWidgetState(deleteDoc, index);
+  _AlertDialogWidgetState createState() =>
+      _AlertDialogWidgetState(deleteDoc, index);
 }
 
 class _AlertDialogWidgetState extends State<AlertDialogWidget> {
@@ -52,7 +50,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
-                onPressed:() {
+                onPressed: () {
                   widget.deleteDoc(index);
                   Navigator.pop(context, false);
                 },

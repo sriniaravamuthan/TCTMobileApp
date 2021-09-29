@@ -28,7 +28,7 @@ class DemographicFamily {
     habits =
         json['habits'] != null ? new Habits.fromJson(json['habits']) : null;
     if (json['family'] != null) {
-      family = List<Family>();
+      family = <Family>[];
       json['family'].forEach((v) {
         family.add(new Family.fromJson(v));
       });
@@ -154,11 +154,15 @@ class Property {
       this.fourWheeler,
       this.others,
       this.ownLivestocks,
-        this.cow,
-        this.buffalo, this.bull, this.hen, this.pig, this.goat,
-        this.sheep, this.othersLive,
+      this.cow,
+      this.buffalo,
+      this.bull,
+      this.hen,
+      this.pig,
+      this.goat,
+      this.sheep,
+      this.othersLive,
       this.livestockCount});
-
 
   Property.fromJson(Map<String, dynamic> json) {
     statusofHouse = json['statusofHouse '];
@@ -252,8 +256,8 @@ class Habits {
 
 class Family {
   String name = "";
-  String position="";
-  String familyId="";
+  String position = "";
+  String familyId = "";
   String aadharNumber = "";
   String relationship = "";
   String gender = "";
@@ -285,12 +289,12 @@ class Family {
   String firstDose;
   String secondDose;
 
-  String isExpanded = "Show More";  //  For internal purpose
+  String isExpanded = "Show More"; //  For internal purpose
 
   Family(
       {this.name,
-        this.position,
-        this.familyId,
+      this.position,
+      this.familyId,
       this.aadharNumber,
       this.relationship,
       this.gender,
@@ -309,7 +313,6 @@ class Family {
       this.caste,
       this.physical,
       this.photo,
-
       this.anyMembersWhoSmoke,
       this.anyMembersWhoDrink,
       this.anyMembersWhoUseTobacco,
@@ -320,7 +323,7 @@ class Family {
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];
     position = json['position '];
-    familyId=json['familyId '];
+    familyId = json['familyId '];
     aadharNumber = json['aadharNumber '];
     relationship = json['relationship '];
     gender = json['gender '];

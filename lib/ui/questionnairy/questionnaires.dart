@@ -23,7 +23,6 @@ import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/services/firestore_service.dart';
 import 'package:tct_demographics/ui/questionnairy/familymember_details_portrait.dart';
-import 'package:tct_demographics/ui/questionnairy/stepper/habit_step.dart';
 import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
@@ -52,7 +51,10 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       noOfFamilyPersonController;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  bool villageName = false, villageCode = false, panchCode = false, panchNo = false;
+  bool villageName = false,
+      villageCode = false,
+      panchCode = false,
+      panchNo = false;
   var villageNameController;
   var villageCodeController;
   var panchayatCodeController = TextEditingController();
@@ -66,15 +68,15 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       demoLanList = [],
       originalVillageCodeList = [],
       originalVillageNameList = [];
-  List<String> panchayatCodeList = [], panchayatNoList = [],maxCountList=[];
+  List<String> panchayatCodeList = [], panchayatNoList = [], maxCountList = [];
   var height, width;
   List<String> streets = [];
   String documentId = "";
   bool isEdit = false;
   Function makeLoadData;
   final pageController = PageController(initialPage: 0);
-int maxCounts=0;
-String formNoMax="";
+  int maxCounts = 0;
+  String formNoMax = "";
   @override
   void initState() {
     villageNameList = [];
@@ -110,7 +112,6 @@ String formNoMax="";
     makeLoadData = arguments[4];
     debugPrint("isEdit" + isEdit.toString());
 
-
     print("GET____________________" + streets.toString());
 
     if (demographicFamily.location != null) {
@@ -123,26 +124,26 @@ String formNoMax="";
       /*if (location.villagesCode.toString().length > 6) {
         fillVillageData(location.villageName);
       } else {*/
-        villageNameController.text = location.villageName;
-        villageCodeController.text = location.villagesCode;
-        panchayatCodeController.text = location.panchayatCode;
-        panchayatNoController.text = location.panchayatNo;
+      villageNameController.text = location.villageName;
+      villageCodeController.text = location.villagesCode;
+      panchayatCodeController.text = location.panchayatCode;
+      panchayatNoController.text = location.panchayatNo;
 
       for (int i = 0; i < demographicFamily.family.length; i++) {
         fromNoController.text = demographicFamily.family[i].familyId;
-          debugPrint("location.formNo:${location.formNo}");
+        debugPrint("location.formNo:${location.formNo}");
       }
-      if(location.villageName!=""){
-          villageName=true;
-        }
-      if(location.villagesCode!=""){
-        villageCode=true;
+      if (location.villageName != "") {
+        villageName = true;
       }
-      if(location.panchayatCode!=""){
-        panchCode=true;
+      if (location.villagesCode != "") {
+        villageCode = true;
       }
-      if(location.panchayatNo!=""){
-        panchNo=true;
+      if (location.panchayatCode != "") {
+        panchCode = true;
+      }
+      if (location.panchayatNo != "") {
+        panchNo = true;
       }
       // }
     } else {
@@ -173,8 +174,8 @@ String formNoMax="";
       property.statusofHouse = "";
       property.typeofHouse = "";
       property.others = "";
-      property.cow= "";
-      property.buffalo="";
+      property.cow = "";
+      property.buffalo = "";
       property.bull = "";
       property.hen = "";
       property.goat = "";
@@ -205,8 +206,9 @@ String formNoMax="";
 
     super.initState();
   }
+
   @override
-  dispose(){
+  dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -232,14 +234,14 @@ String formNoMax="";
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context, false);
                   },
                   child: SvgPicture.asset(
                     svgTctLogo,
                     semanticsLabel: "Logo",
                     height: 40,
-                    width:50,
+                    width: 50,
                     fit: BoxFit.contain,
                     allowDrawingOutsideViewBox: true,
                   ),
@@ -261,24 +263,29 @@ String formNoMax="";
                             width: 35,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
+                                    BorderRadius.all(Radius.circular(50))),
                             child: firebaseAuth.currentUser.photoURL == null
-                                ? Image.asset(user,fit: BoxFit.fill)
-                                : Image.network(firebaseAuth.currentUser.photoURL,fit: BoxFit.fill,height: 100,width: 60,)),
+                                ? Image.asset(user, fit: BoxFit.fill)
+                                : Image.network(
+                                    firebaseAuth.currentUser.photoURL,
+                                    fit: BoxFit.fill,
+                                    height: 100,
+                                    width: 60,
+                                  )),
                         SizedBox(
                           width: 10,
                         ),
                         userMail != null
                             ? Text(
-                          userMail,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        )
+                                userMail,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              )
                             : Text(
-                          userName,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        ),
+                                userName,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              ),
                       ],
                     )),
                 SizedBox(
@@ -286,7 +293,8 @@ String formNoMax="";
                 ),
                 InkWell(
                   onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut(context);
+                    AuthenticationService(FirebaseAuth.instance)
+                        .signOut(context);
                   },
                   child: Icon(
                     Icons.power_settings_new_outlined,
@@ -316,8 +324,8 @@ String formNoMax="";
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: PageView (
-                  physics:new NeverScrollableScrollPhysics(),
+                child: PageView(
+                  physics: new NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   controller: pageController,
                   children: [
@@ -341,13 +349,14 @@ String formNoMax="";
                                         Get.back();
                                       },
                                       child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(left: 8.0, right: 8),
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8),
                                         child: Container(
                                             height: 30,
                                             width: 30,
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(24),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
                                               border: Border.all(
                                                 color: Colors.black45,
                                                 style: BorderStyle.solid,
@@ -386,7 +395,8 @@ String formNoMax="";
                                               TextSpan(
                                                 text: ' *',
                                                 style: TextStyle(
-                                                    color: Colors.red, fontSize: 14.0),
+                                                    color: Colors.red,
+                                                    fontSize: 14.0),
                                               ),
                                             ]),
                                       ),
@@ -397,8 +407,10 @@ String formNoMax="";
                             ),
                           ),
                           Padding(
-                            padding:  EdgeInsets.only( bottom: (height) * 0.01),
-                            child: Divider(height: 1,),
+                            padding: EdgeInsets.only(bottom: (height) * 0.01),
+                            child: Divider(
+                              height: 1,
+                            ),
                           ),
                           Form(
                             key: _formKey,
@@ -416,14 +428,14 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: TextWidget(
-                                                  text:
-                                                  DemoLocalization.of(context)
+                                                  text: DemoLocalization.of(
+                                                          context)
                                                       .translate('Form No'),
                                                   size: 14,
                                                   weight: FontWeight.w600,
@@ -432,80 +444,88 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 2,
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 2,
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: TextFormField(
-                                                    controller: fromNoController,
+                                                    controller:
+                                                        fromNoController,
                                                     readOnly: isEdit,
                                                     maxLength: 4,
                                                     textInputAction:
-                                                    TextInputAction.next,
+                                                        TextInputAction.next,
                                                     enableSuggestions: true,
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         border:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide.none,
+                                                              BorderSide.none,
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                         ),
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedErrorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         errorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         fillColor:
-                                                        lightGreyColor),
+                                                            lightGreyColor),
                                                     keyboardType:
-                                                    TextInputType.number,
+                                                        TextInputType.number,
                                                     onSaved: (String val) {
                                                       setState(() {
                                                         // demographicFamily.location.formNo = val;
                                                         location.formNo = val;
                                                         fromNoController.text =
                                                             val;
-                                                        debugPrint("formNo:${fromNoController.text}");
+                                                        debugPrint(
+                                                            "formNo:${fromNoController.text}");
                                                       });
                                                     },
                                                   ),
@@ -523,16 +543,16 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: TextWidget(
-                                                  text:
-                                                  DemoLocalization.of(context)
+                                                  text: DemoLocalization.of(
+                                                          context)
                                                       .translate(
-                                                      'Project Code No'),
+                                                          'Project Code No'),
                                                   size: 14,
                                                   weight: FontWeight.w600,
                                                 ),
@@ -540,73 +560,79 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: TextFormField(
                                                     controller:
-                                                    projectCodeController,
+                                                        projectCodeController,
                                                     readOnly: isEdit,
                                                     maxLength: 1,
                                                     textInputAction:
-                                                    TextInputAction.next,
+                                                        TextInputAction.next,
                                                     enableSuggestions: true,
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         border:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide.none,
+                                                              BorderSide.none,
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                         ),
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedErrorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         errorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         fillColor:
-                                                        lightGreyColor),
+                                                            lightGreyColor),
                                                     keyboardType:
-                                                    TextInputType.number,
+                                                        TextInputType.number,
                                                     onSaved: (String val) {
                                                       setState(() {
                                                         location.projectCode =
@@ -630,24 +656,24 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate(
-                                                          'Village Code'),
+                                                              'Village Code'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -662,155 +688,174 @@ String formNoMax="";
                                                 height: 58,
                                                 child: Padding(
                                                     padding:
-                                                    const EdgeInsets.only(
-                                                        right: 16.0,
-                                                        top: 2.0,
-                                                        bottom: 2.0),
-                                                    child: AutoCompleteTextField(
-                                                        controller:
-                                                        villageCodeController,
-                                                        clearOnSubmit: false,
-                                                        itemSubmitted: (item) {
-                                                          setState(() {
-                                                            villageCodeController.text = item;
-                                                            villageName = true;
-                                                            villageCode=true;
-                                                            panchCode=true;
-                                                            panchNo=true;
-                                                            for (int i = 0;
-                                                            i <
-                                                                originalVillageCodeList
-                                                                    .length;
-                                                            i++) {
-                                                              if (item ==
-                                                                  originalVillageCodeList[
-                                                                  i]) {
-                                                                maxCounts=int.tryParse(maxCountList[i]);
-                                                                if(maxCounts>0){
-                                                                  maxCounts=maxCounts+1;
-                                                                }
-
-                                                                formNoMax=item + maxCounts.toString();
-                                                                fromNoController.text=formNoMax;
-                                                                debugPrint("formNoMax:$formNoMax");
-
-                                                                debugPrint("MaximumCount:$maxCounts");
-                                                                panchayatCodeController
-                                                                    .text =
-                                                                panchayatCodeList[
-                                                                i];
-                                                                panchayatNoController
-                                                                    .text =
-                                                                panchayatNoList[
-                                                                i];
-                                                                break;
+                                                        const EdgeInsets.only(
+                                                            right: 16.0,
+                                                            top: 2.0,
+                                                            bottom: 2.0),
+                                                    child:
+                                                        AutoCompleteTextField(
+                                                      controller:
+                                                          villageCodeController,
+                                                      clearOnSubmit: false,
+                                                      itemSubmitted: (item) {
+                                                        setState(() {
+                                                          villageCodeController
+                                                              .text = item;
+                                                          villageName = true;
+                                                          villageCode = true;
+                                                          panchCode = true;
+                                                          panchNo = true;
+                                                          for (int i = 0;
+                                                              i <
+                                                                  originalVillageCodeList
+                                                                      .length;
+                                                              i++) {
+                                                            if (item ==
+                                                                originalVillageCodeList[
+                                                                    i]) {
+                                                              maxCounts =
+                                                                  int.tryParse(
+                                                                      maxCountList[
+                                                                          i]);
+                                                              if (maxCounts >
+                                                                  0) {
+                                                                maxCounts =
+                                                                    maxCounts +
+                                                                        1;
                                                               }
+
+                                                              formNoMax = item +
+                                                                  maxCounts
+                                                                      .toString();
+                                                              fromNoController
+                                                                      .text =
+                                                                  formNoMax;
+                                                              debugPrint(
+                                                                  "formNoMax:$formNoMax");
+
+                                                              debugPrint(
+                                                                  "MaximumCount:$maxCounts");
+                                                              panchayatCodeController
+                                                                      .text =
+                                                                  panchayatCodeList[
+                                                                      i];
+                                                              panchayatNoController
+                                                                      .text =
+                                                                  panchayatNoList[
+                                                                      i];
+                                                              break;
                                                             }
-                                                            for (int i = 0;
-                                                            i <
-                                                                villageCodeList
-                                                                    .length;
-                                                            i++) {
-                                                              if (item ==
-                                                                  villageCodeList[
-                                                                  i]) {
-                                                                villageNameController
-                                                                    .text =
-                                                                villageNameList[
-                                                                i];
-                                                                break;
-                                                              }
+                                                          }
+                                                          for (int i = 0;
+                                                              i <
+                                                                  villageCodeList
+                                                                      .length;
+                                                              i++) {
+                                                            if (item ==
+                                                                villageCodeList[
+                                                                    i]) {
+                                                              villageNameController
+                                                                      .text =
+                                                                  villageNameList[
+                                                                      i];
+                                                              break;
                                                             }
-                                                          });
-                                                        },
-                                                        suggestions:
-                                                        villageCodeList,
-                                                        style: TextStyle(
-                                                          color:
-                                                          Color(0xFF222222),
-                                                          fontSize: 16,
-                                                        ),
-                                                        decoration:
-                                                        InputDecoration(
-                                                            border:
-                                                            OutlineInputBorder(
-                                                              borderSide:
-                                                              BorderSide
-                                                                  .none,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                            ),
-                                                            enabledBorder:
-                                                            OutlineInputBorder(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                              borderSide:
-                                                              BorderSide(
-                                                                  color:
+                                                          }
+                                                        });
+                                                      },
+                                                      suggestions:
+                                                          villageCodeList,
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFF222222),
+                                                        fontSize: 16,
+                                                      ),
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
                                                                   lightGreyColor),
-                                                            ),
-                                                            focusedBorder:
-                                                            OutlineInputBorder(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                              borderSide:
-                                                              BorderSide(
-                                                                  color:
-                                                                  lightGreyColor),
-                                                            ),
-                                                            focusedErrorBorder:
-                                                            OutlineInputBorder(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                              borderSide:
-                                                              BorderSide(
-                                                                  color:
-                                                                  lightGreyColor),
-                                                            ),
-                                                            errorBorder:
-                                                            OutlineInputBorder(
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                  .circular(
-                                                                  10.0)),
-                                                              borderSide:
-                                                              BorderSide(
-                                                                  color:
-                                                                  lightGreyColor),
-                                                            ),
-                                                            fillColor:
-                                                            lightGreyColor),
-                                                        itemBuilder:
-                                                            (context, item) {
-                                                          return new Padding(
-                                                              padding:
-                                                              EdgeInsets.all(
-                                                                  8.0),
-                                                              child: TextWidget(
-                                                                text: item,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                                weight: FontWeight
-                                                                    .w600,
-                                                              ));
-                                                        },
-                                                        itemSorter: (a, b) {
-                                                          return a.compareTo(b);
-                                                        },
-                                                        itemFilter: (item, query) {
-                                                              villageCode = false;
-                                                              return item
-                                                                  .toLowerCase()
-                                                                  .startsWith(query.toLowerCase())|| item == "";
-                                                        },minLength: 0,)),
+                                                      itemBuilder:
+                                                          (context, item) {
+                                                        return new Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    8.0),
+                                                            child: TextWidget(
+                                                              text: item,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                              weight: FontWeight
+                                                                  .w600,
+                                                            ));
+                                                      },
+                                                      itemSorter: (a, b) {
+                                                        return a.compareTo(b);
+                                                      },
+                                                      itemFilter:
+                                                          (item, query) {
+                                                        villageCode = false;
+                                                        return item
+                                                                .toLowerCase()
+                                                                .startsWith(query
+                                                                    .toLowerCase()) ||
+                                                            item == "";
+                                                      },
+                                                      minLength: 0,
+                                                    )),
                                               ),
                                             ],
                                           ),
@@ -821,7 +866,7 @@ String formNoMax="";
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
                                       child: Align(
@@ -830,24 +875,24 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate(
-                                                          'Panchayat No'),
+                                                              'Panchayat No'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -861,151 +906,154 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 2,
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 2,
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: AutoCompleteTextField(
                                                       keyboardType:
-                                                      TextInputType.number,
+                                                          TextInputType.number,
                                                       controller:
-                                                      panchayatNoController,
+                                                          panchayatNoController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
-                                                        panchCode=true;
-                                                        panchNo=true;
-                                                        panchayatNoController.text = item;
+                                                        panchCode = true;
+                                                        panchNo = true;
+                                                        panchayatNoController
+                                                            .text = item;
                                                         setState(() {
                                                           villageNameController
                                                               .text = "";
                                                           villageCodeController
                                                               .text = "";
-                                                          villageCodeList.clear();
-                                                          villageNameList.clear();
-                                                          snap.forEach((element) {
-                                                            if (element
-                                                                [
-                                                            "panchayatNo"]
-                                                                .toString() ==
+                                                          villageCodeList
+                                                              .clear();
+                                                          villageNameList
+                                                              .clear();
+                                                          snap.forEach(
+                                                              (element) {
+                                                            if (element["panchayatNo"]
+                                                                    .toString() ==
                                                                 item) {
-                                                              villageCodeList.add(
-                                                                  element
-                                                                      [
-                                                                  "villageCode"]
+                                                              villageCodeList
+                                                                  .add(element[
+                                                                          "villageCode"]
                                                                       .toString());
                                                               villageNameList.add(
-                                                                  element
-                                                                      [
-                                                                  "villageName"]
-                                                                  [
-                                                                  language]
+                                                                  element["villageName"]
+                                                                          [
+                                                                          language]
                                                                       .toString());
                                                             }
                                                           });
                                                           for (int i = 0;
-                                                          i <
-                                                              panchayatNoList
-                                                                  .length;
-                                                          i++) {
+                                                              i <
+                                                                  panchayatNoList
+                                                                      .length;
+                                                              i++) {
                                                             if (item ==
                                                                 panchayatNoList[
-                                                                i]) {
+                                                                    i]) {
                                                               panchayatCodeController
-                                                                  .text =
-                                                              panchayatCodeList[
-                                                              i];
+                                                                      .text =
+                                                                  panchayatCodeList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
                                                         });
                                                       },
                                                       suggestions:
-                                                      panchayatNoList,
+                                                          panchayatNoList,
                                                       style: TextStyle(
-                                                        color: Color(0xFF222222),
+                                                        color:
+                                                            Color(0xFF222222),
                                                         fontSize: 16,
                                                       ),
-                                                      decoration: InputDecoration(
-                                                          border:
-                                                          OutlineInputBorder(
-                                                            borderSide:
-                                                            BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                          ),
-                                                          enabledBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          errorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          fillColor:
-                                                          lightGreyColor),
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
                                                             padding:
-                                                            EdgeInsets.all(
-                                                                8.0),
+                                                                EdgeInsets.all(
+                                                                    8.0),
                                                             child: TextWidget(
                                                               text: item,
                                                               color: darkColor,
                                                               size: 14,
-                                                              weight:
-                                                              FontWeight.w600,
+                                                              weight: FontWeight
+                                                                  .w600,
                                                             ));
                                                       },
                                                       itemSorter: (a, b) {
                                                         return a.compareTo(b);
                                                       },
-                                                      itemFilter: (item, query) {
+                                                      itemFilter:
+                                                          (item, query) {
                                                         panchNo = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
-                                                            .toLowerCase());
+                                                                .toLowerCase());
                                                       }),
                                                 ),
                                               ),
@@ -1021,24 +1069,24 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate(
-                                                          'Panchayat Code'),
+                                                              'Panchayat Code'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -1052,149 +1100,153 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: AutoCompleteTextField(
                                                       keyboardType:
-                                                      TextInputType.number,
+                                                          TextInputType.number,
                                                       controller:
-                                                      panchayatCodeController,
+                                                          panchayatCodeController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
                                                         panchayatCodeController
                                                             .text = item;
                                                         setState(() {
-                                                          panchCode=true;
-                                                          panchNo=true;
-                                                          villageNameController.text = "";
-                                                          villageCodeController.text = "";
-                                                          villageCodeList.clear();
-                                                          villageNameList.clear();
-                                                          snap.forEach((element) {
-                                                            if (element
-                                                                [
-                                                            "panchayatCode"]
-                                                                .toString() ==
+                                                          panchCode = true;
+                                                          panchNo = true;
+                                                          villageNameController
+                                                              .text = "";
+                                                          villageCodeController
+                                                              .text = "";
+                                                          villageCodeList
+                                                              .clear();
+                                                          villageNameList
+                                                              .clear();
+                                                          snap.forEach(
+                                                              (element) {
+                                                            if (element["panchayatCode"]
+                                                                    .toString() ==
                                                                 item) {
-                                                              villageCodeList.add(
-                                                                  element
-                                                                      [
-                                                                  "villageCode"]
+                                                              villageCodeList
+                                                                  .add(element[
+                                                                          "villageCode"]
                                                                       .toString());
                                                               villageNameList.add(
-                                                                  element
-                                                                      [
-                                                                  "villageName"]
-                                                                  [
-                                                                  language]
+                                                                  element["villageName"]
+                                                                          [
+                                                                          language]
                                                                       .toString());
                                                             }
                                                           });
                                                           for (int i = 0;
-                                                          i <
-                                                              panchayatCodeList
-                                                                  .length;
-                                                          i++) {
+                                                              i <
+                                                                  panchayatCodeList
+                                                                      .length;
+                                                              i++) {
                                                             if (item ==
                                                                 panchayatCodeList[
-                                                                i]) {
+                                                                    i]) {
                                                               panchayatNoController
-                                                                  .text =
-                                                              panchayatNoList[
-                                                              i];
+                                                                      .text =
+                                                                  panchayatNoList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
                                                         });
                                                       },
                                                       suggestions:
-                                                      panchayatCodeList,
+                                                          panchayatCodeList,
                                                       style: TextStyle(
-                                                        color: Color(0xFF222222),
+                                                        color:
+                                                            Color(0xFF222222),
                                                         fontSize: 16,
                                                       ),
-                                                      decoration: InputDecoration(
-                                                          border:
-                                                          OutlineInputBorder(
-                                                            borderSide:
-                                                            BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                          ),
-                                                          enabledBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          errorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          fillColor:
-                                                          lightGreyColor),
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
                                                             padding:
-                                                            EdgeInsets.all(
-                                                                8.0),
+                                                                EdgeInsets.all(
+                                                                    8.0),
                                                             child: TextWidget(
                                                               text: item,
                                                               color: darkColor,
                                                               size: 14,
-                                                              weight:
-                                                              FontWeight.w600,
+                                                              weight: FontWeight
+                                                                  .w600,
                                                             ));
                                                       },
                                                       itemSorter: (a, b) {
                                                         return a.compareTo(b);
                                                       },
-                                                      itemFilter: (item, query) {
+                                                      itemFilter:
+                                                          (item, query) {
                                                         panchCode = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
-                                                            .toLowerCase());
+                                                                .toLowerCase());
                                                       }),
                                                 ),
                                               ),
@@ -1210,24 +1262,24 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate(
-                                                          'Village Name'),
+                                                              'Village Name'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -1241,143 +1293,150 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      top: 0.0,
-                                                      bottom: 0.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 16.0,
+                                                          top: 0.0,
+                                                          bottom: 0.0),
                                                   child: AutoCompleteTextField(
-                                                      controller: villageNameController,
+                                                      controller:
+                                                          villageNameController,
                                                       clearOnSubmit: false,
                                                       itemSubmitted: (item) {
-                                                        villageNameController.text = item;
+                                                        villageNameController
+                                                            .text = item;
                                                         villageName = true;
-                                                        villageCode=true;
-                                                        panchCode=true;
-                                                        panchNo=true;
+                                                        villageCode = true;
+                                                        panchCode = true;
+                                                        panchNo = true;
                                                         setState(() {
                                                           for (int i = 0;
-                                                          i <
-                                                              originalVillageNameList
-                                                                  .length;
-                                                          i++) {
+                                                              i <
+                                                                  originalVillageNameList
+                                                                      .length;
+                                                              i++) {
                                                             if (item ==
                                                                 originalVillageNameList[
-                                                                i]) {
+                                                                    i]) {
                                                               panchayatCodeController
-                                                                  .text =
-                                                              panchayatCodeList[
-                                                              i];
+                                                                      .text =
+                                                                  panchayatCodeList[
+                                                                      i];
                                                               panchayatNoController
-                                                                  .text =
-                                                              panchayatNoList[
-                                                              i];
+                                                                      .text =
+                                                                  panchayatNoList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
                                                           for (int i = 0;
-                                                          i <
-                                                              villageNameList
-                                                                  .length;
-                                                          i++) {
+                                                              i <
+                                                                  villageNameList
+                                                                      .length;
+                                                              i++) {
                                                             if (item ==
                                                                 villageNameList[
-                                                                i]) {
+                                                                    i]) {
                                                               villageCodeController
-                                                                  .text =
-                                                              villageCodeList[
-                                                              i];
+                                                                      .text =
+                                                                  villageCodeList[
+                                                                      i];
                                                               break;
                                                             }
                                                           }
                                                         });
                                                       },
                                                       suggestions:
-                                                      villageNameList,
+                                                          villageNameList,
                                                       style: TextStyle(
-                                                        color: Color(0xFF222222),
+                                                        color:
+                                                            Color(0xFF222222),
                                                         fontSize: 16,
                                                       ),
-                                                      decoration: InputDecoration(
-                                                          border:
-                                                          OutlineInputBorder(
-                                                            borderSide:
-                                                            BorderSide.none,
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                          ),
-                                                          enabledBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          focusedErrorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          errorBorder:
-                                                          OutlineInputBorder(
-                                                            borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                    10.0)),
-                                                            borderSide: BorderSide(
-                                                                color:
-                                                                lightGreyColor),
-                                                          ),
-                                                          fillColor:
-                                                          lightGreyColor),
+                                                      decoration:
+                                                          InputDecoration(
+                                                              border:
+                                                                  OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none,
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                              ),
+                                                              enabledBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              focusedErrorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              errorBorder:
+                                                                  OutlineInputBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            10.0)),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                        color:
+                                                                            lightGreyColor),
+                                                              ),
+                                                              fillColor:
+                                                                  lightGreyColor),
                                                       itemBuilder:
                                                           (context, item) {
                                                         return new Padding(
                                                             padding:
-                                                            EdgeInsets.all(
-                                                                8.0),
+                                                                EdgeInsets.all(
+                                                                    8.0),
                                                             child: TextWidget(
                                                               text: item,
                                                               color: darkColor,
                                                               size: 14,
-                                                              weight:
-                                                              FontWeight.w600,
+                                                              weight: FontWeight
+                                                                  .w600,
                                                             ));
                                                       },
                                                       itemSorter: (a, b) {
                                                         return a.compareTo(b);
                                                       },
-                                                      itemFilter: (item, query) {
-                                                        debugPrint("item:$item");
+                                                      itemFilter:
+                                                          (item, query) {
+                                                        debugPrint(
+                                                            "item:$item");
                                                         villageName = false;
                                                         return item
                                                             .toLowerCase()
                                                             .startsWith(query
-                                                            .toLowerCase());
+                                                                .toLowerCase());
                                                       }),
                                                 ),
                                               ),
@@ -1390,26 +1449,27 @@ String formNoMax="";
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(2.0),
                                             child: RichText(
                                               text: TextSpan(
                                                   text: DemoLocalization.of(
-                                                      context)
+                                                          context)
                                                       .translate('Street Name'),
                                                   style: GoogleFonts.roboto(
                                                       fontSize: 14,
                                                       color: darkColor,
-                                                      fontStyle: FontStyle.normal,
+                                                      fontStyle:
+                                                          FontStyle.normal,
                                                       fontWeight:
-                                                      FontWeight.w600),
+                                                          FontWeight.w600),
                                                   children: [
                                                     TextSpan(
                                                       text: ' *',
@@ -1424,12 +1484,15 @@ String formNoMax="";
                                             height: 58,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  right: 16.0,),
+                                                right: 16.0,
+                                              ),
                                               child: AutoCompleteTextField(
-                                                  controller: streetNameController,
+                                                  controller:
+                                                      streetNameController,
                                                   clearOnSubmit: false,
                                                   itemSubmitted: (item) {
-                                                    streetNameController.text = item;
+                                                    streetNameController.text =
+                                                        item;
                                                   },
                                                   suggestions: streets,
                                                   style: TextStyle(
@@ -1437,44 +1500,67 @@ String formNoMax="";
                                                     fontSize: 16,
                                                   ),
                                                   decoration: InputDecoration(
-                                                      border: OutlineInputBorder(
-                                                        borderSide: BorderSide.none,
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
-                                                      ),
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
+                                                      border:
+                                                          OutlineInputBorder(
                                                         borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                            BorderSide.none,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
                                                       ),
-                                                      focusedBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      focusedErrorBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      errorBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(10.0)),
-                                                        borderSide:
-                                                        BorderSide(color: lightGreyColor),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
                                                       ),
-                                                      fillColor: lightGreyColor),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0)),
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                lightGreyColor),
+                                                      ),
+                                                      fillColor:
+                                                          lightGreyColor),
                                                   itemBuilder: (context, item) {
                                                     return new Padding(
-                                                        padding: EdgeInsets.all(8.0),
+                                                        padding:
+                                                            EdgeInsets.all(8.0),
                                                         child: TextWidget(
                                                           text: item,
                                                           color: darkColor,
                                                           size: 14,
-                                                          weight: FontWeight.w600,
+                                                          weight:
+                                                              FontWeight.w600,
                                                         ));
                                                   },
                                                   itemSorter: (a, b) {
@@ -1483,7 +1569,8 @@ String formNoMax="";
                                                   itemFilter: (item, query) {
                                                     return item
                                                         .toLowerCase()
-                                                        .startsWith(query.toLowerCase());
+                                                        .startsWith(query
+                                                            .toLowerCase());
                                                   }),
                                             ),
                                           ),
@@ -1497,23 +1584,23 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate('Door No'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -1527,72 +1614,80 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: TextFormField(
-                                                    controller: doorNoController,
+                                                    controller:
+                                                        doorNoController,
                                                     textInputAction:
-                                                    TextInputAction.next,
+                                                        TextInputAction.next,
                                                     enableSuggestions: true,
                                                     decoration: InputDecoration(
                                                         border:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide.none,
+                                                              BorderSide.none,
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                         ),
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedErrorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         errorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         fillColor:
-                                                        lightGreyColor),
+                                                            lightGreyColor),
                                                     keyboardType:
-                                                    TextInputType.text,
+                                                        TextInputType.text,
                                                     onSaved: (String val) {
                                                       setState(() {
-                                                        location.doorNumber = val;
+                                                        location.doorNumber =
+                                                            val;
                                                         doorNoController.text =
                                                             val;
                                                       });
@@ -1612,24 +1707,24 @@ String formNoMax="";
                                           widthFactor: 1,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: RichText(
                                                   text: TextSpan(
                                                       text: DemoLocalization.of(
-                                                          context)
+                                                              context)
                                                           .translate(
-                                                          'Contact Person'),
+                                                              'Contact Person'),
                                                       style: GoogleFonts.roboto(
                                                           fontSize: 14,
                                                           color: darkColor,
                                                           fontStyle:
-                                                          FontStyle.normal,
+                                                              FontStyle.normal,
                                                           fontWeight:
-                                                          FontWeight.w600),
+                                                              FontWeight.w600),
                                                       children: [
                                                         TextSpan(
                                                           text: ' *',
@@ -1643,69 +1738,75 @@ String formNoMax="";
                                               SizedBox(
                                                 height: 58,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      right: 16.0,
-                                                      ),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    right: 16.0,
+                                                  ),
                                                   child: TextFormField(
                                                     controller:
-                                                    contactPersonController,
+                                                        contactPersonController,
                                                     textInputAction:
-                                                    TextInputAction.next,
+                                                        TextInputAction.next,
                                                     enableSuggestions: true,
                                                     decoration: InputDecoration(
                                                         border:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide.none,
+                                                              BorderSide.none,
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                         ),
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedErrorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         errorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         fillColor:
-                                                        lightGreyColor),
+                                                            lightGreyColor),
                                                     keyboardType:
-                                                    TextInputType.text,
+                                                        TextInputType.text,
                                                     onSaved: (String val) {
                                                       setState(() {
                                                         location.contactPerson =
@@ -1726,7 +1827,7 @@ String formNoMax="";
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Expanded(
                                       child: Align(
@@ -1735,16 +1836,16 @@ String formNoMax="";
                                           widthFactor: 0.50,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(2.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: TextWidget(
                                                   text: DemoLocalization.of(
-                                                      context)
+                                                          context)
                                                       .translate(
-                                                      'Number of Family Members'),
+                                                          'Number of Family Members'),
                                                   size: 14,
                                                   weight: FontWeight.w600,
                                                 ),
@@ -1753,73 +1854,79 @@ String formNoMax="";
                                                 height: 58,
                                                 width: 150,
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 2,
-                                                      right: 16.0,
-                                                      top: 2.0,
-                                                      bottom: 2.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 2,
+                                                          right: 16.0,
+                                                          top: 2.0,
+                                                          bottom: 2.0),
                                                   child: TextFormField(
                                                     controller:
-                                                    noOfFamilyPersonController,
+                                                        noOfFamilyPersonController,
                                                     maxLength: 2,
                                                     textInputAction:
-                                                    TextInputAction.done,
+                                                        TextInputAction.done,
                                                     enableSuggestions: true,
                                                     decoration: InputDecoration(
                                                         counterText: "",
                                                         border:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderSide:
-                                                          BorderSide.none,
+                                                              BorderSide.none,
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                         ),
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         focusedErrorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         errorBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0)),
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10.0)),
                                                           borderSide: BorderSide(
                                                               color:
-                                                              lightGreyColor),
+                                                                  lightGreyColor),
                                                         ),
                                                         fillColor:
-                                                        lightGreyColor),
+                                                            lightGreyColor),
                                                     keyboardType:
-                                                    TextInputType.number,
+                                                        TextInputType.number,
                                                     onSaved: (String val) {
                                                       setState(() {
                                                         location.noOfFamilyMembers =
@@ -1856,30 +1963,60 @@ String formNoMax="";
                                             ),
                                             backgroundColor: lightColor,
                                             onPressed: () {
-                                              if (villageNameController.text != "" && !villageName) {
-                                                debugPrint("villageName:$villageName");
+                                              if (villageNameController.text !=
+                                                      "" &&
+                                                  !villageName) {
+                                                debugPrint(
+                                                    "villageName:$villageName");
                                                 setState(() {
-                                                  villageNameController.text="";
-                                                  snackBarAlert("Error", "Village Name must be in List", errorColor);
+                                                  villageNameController.text =
+                                                      "";
+                                                  snackBarAlert(
+                                                      "Error",
+                                                      "Village Name must be in List",
+                                                      errorColor);
                                                   return;
                                                 });
-                                              } else if (villageCodeController.text != "" && !villageCode) {
+                                              } else if (villageCodeController
+                                                          .text !=
+                                                      "" &&
+                                                  !villageCode) {
                                                 setState(() {
-                                                  villageCodeController.text="";
-                                                  snackBarAlert("Error", "Village Code must be in List", errorColor);
+                                                  villageCodeController.text =
+                                                      "";
+                                                  snackBarAlert(
+                                                      "Error",
+                                                      "Village Code must be in List",
+                                                      errorColor);
                                                   return;
                                                 });
-                                              } else if (panchayatCodeController.text != "" && !panchCode) {
+                                              } else if (panchayatCodeController
+                                                          .text !=
+                                                      "" &&
+                                                  !panchCode) {
                                                 setState(() {
-                                                  panchayatCodeController.text="";
-                                                  snackBarAlert("Error", "Panchayat Code must be in List", errorColor);                                                  return;
+                                                  panchayatCodeController.text =
+                                                      "";
+                                                  snackBarAlert(
+                                                      "Error",
+                                                      "Panchayat Code must be in List",
+                                                      errorColor);
+                                                  return;
                                                 });
-                                              } else if (panchayatNoController.text != "" && !panchNo) {
+                                              } else if (panchayatNoController
+                                                          .text !=
+                                                      "" &&
+                                                  !panchNo) {
                                                 setState(() {
-                                                  panchayatNoController.text="";
-                                                  snackBarAlert("Error", "Panchayat No must be in List", errorColor);                                                          return;
+                                                  panchayatNoController.text =
+                                                      "";
+                                                  snackBarAlert(
+                                                      "Error",
+                                                      "Panchayat No must be in List",
+                                                      errorColor);
+                                                  return;
                                                 });
-                                              }else{
+                                              } else {
                                                 continued();
                                               }
                                             },
@@ -1914,7 +2051,8 @@ String formNoMax="";
                         ],
                       ),
                     ),
-                    SingleChildScrollView(child: Column(
+                    SingleChildScrollView(
+                        child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
@@ -1933,13 +2071,14 @@ String formNoMax="";
                                       Get.back();
                                     },
                                     child: Padding(
-                                      padding:
-                                      const EdgeInsets.only(left: 8.0, right: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, right: 8),
                                       child: Container(
                                           height: 30,
                                           width: 30,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(24),
+                                            borderRadius:
+                                                BorderRadius.circular(24),
                                             border: Border.all(
                                               color: Colors.black45,
                                               style: BorderStyle.solid,
@@ -1978,7 +2117,8 @@ String formNoMax="";
                                             TextSpan(
                                               text: ' *',
                                               style: TextStyle(
-                                                  color: Colors.red, fontSize: 14.0),
+                                                  color: Colors.red,
+                                                  fontSize: 14.0),
                                             ),
                                           ]),
                                     ),
@@ -1989,10 +2129,16 @@ String formNoMax="";
                           ),
                         ),
                         Padding(
-                          padding:  EdgeInsets.only( bottom: (height) * 0.01),
-                          child: Divider(height: 1,),
+                          padding: EdgeInsets.only(bottom: (height) * 0.01),
+                          child: Divider(
+                            height: 1,
+                          ),
                         ),
-                        orientation == Orientation.portrait ?  FamilyMemberDetailsPortrait(demographicFamily, orientation) : FamilyMemberDetailsLandscape(demographicFamily, orientation),
+                        orientation == Orientation.portrait
+                            ? FamilyMemberDetailsPortrait(
+                                demographicFamily, orientation)
+                            : FamilyMemberDetailsLandscape(
+                                demographicFamily, orientation),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -2052,7 +2198,8 @@ String formNoMax="";
                         ),
                       ],
                     )),
-                    SingleChildScrollView(child: Column(
+                    SingleChildScrollView(
+                        child: Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.only(
@@ -2071,13 +2218,14 @@ String formNoMax="";
                                       Get.back();
                                     },
                                     child: Padding(
-                                      padding:
-                                      const EdgeInsets.only(left: 8.0, right: 8),
+                                      padding: const EdgeInsets.only(
+                                          left: 8.0, right: 8),
                                       child: Container(
                                           height: 30,
                                           width: 30,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(24),
+                                            borderRadius:
+                                                BorderRadius.circular(24),
                                             border: Border.all(
                                               color: Colors.black45,
                                               style: BorderStyle.solid,
@@ -2116,7 +2264,8 @@ String formNoMax="";
                                             TextSpan(
                                               text: ' *',
                                               style: TextStyle(
-                                                  color: Colors.red, fontSize: 14.0),
+                                                  color: Colors.red,
+                                                  fontSize: 14.0),
                                             ),
                                           ]),
                                     ),
@@ -2127,8 +2276,10 @@ String formNoMax="";
                           ),
                         ),
                         Padding(
-                          padding:  EdgeInsets.only( bottom: (height) * 0.01),
-                          child: Divider(height: 1,),
+                          padding: EdgeInsets.only(bottom: (height) * 0.01),
+                          child: Divider(
+                            height: 1,
+                          ),
                         ),
                         PropertyDetailStep(demographicFamily),
                         Row(
@@ -2209,9 +2360,9 @@ String formNoMax="";
   cancel() {
     _currentStep > 0
         ? setState(() {
-      _currentStep -= 1;
-      pageController.jumpToPage(_currentStep);
-    })
+            _currentStep -= 1;
+            pageController.jumpToPage(_currentStep);
+          })
         : null;
   }
 
@@ -2231,10 +2382,10 @@ String formNoMax="";
     panchayatNoController.text = snapShot["panchayatNo"].toString();
   }
 
-  void addData() async{
-    if(formNoMax!=null || formNoMax!=""){
+  void addData() async {
+    if (formNoMax != null || formNoMax != "") {
       location.formNo = fromNoController.text;
-    }else{
+    } else {
       location.formNo = "";
     }
 
@@ -2251,11 +2402,10 @@ String formNoMax="";
     setMaxCount(maxCounts, location.villagesCode);
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
-      demographicFamily.family[i].familyId= fromNoController.text;
-      if(demographicFamily.family[i].relationship=="Head"){
+      demographicFamily.family[i].familyId = fromNoController.text;
+      if (demographicFamily.family[i].relationship == "Head") {
         location.name = demographicFamily.family[i].name;
         debugPrint("location.name:${location.name}");
-
       }
     }
     for (int i = 0; i < demographicFamily.family.length; i++) {
@@ -2271,30 +2421,34 @@ String formNoMax="";
       FireStoreService fireStoreService = new FireStoreService();
 
       fireStoreService.createFamily(demographicFamily).then((value) => {
-        if (value) {
-          setCount()
-
-      } else {
-        snackBarAlert(error, "Failed to Add", errorColor)
-      }});
+            if (value)
+              {setCount()}
+            else
+              {snackBarAlert(error, "Failed to Add", errorColor)}
+          });
     } else {
       debugPrint("GET__________documentId:  $documentId");
       FireStoreService fireStoreService = new FireStoreService();
-      fireStoreService.updateFamily(demographicFamily,documentId).then((value) =>
-      {if (value) {
-          Navigator.pop(context, false),
-        makeLoadData(),
-        // Get.offAndToNamed('/homeScreen'),
-      showUpdateSuccess()
-      }  else {
-        snackBarAlert(error, "Failed to Update", errorColor)
-      }});
+      fireStoreService
+          .updateFamily(demographicFamily, documentId)
+          .then((value) => {
+                if (value)
+                  {
+                    Navigator.pop(context, false),
+                    makeLoadData(),
+                    // Get.offAndToNamed('/homeScreen'),
+                    showUpdateSuccess()
+                  }
+                else
+                  {snackBarAlert(error, "Failed to Update", errorColor)}
+              });
     }
   }
 
   void showAddSuccess() {
     snackBarAlert(success, "Added SuccessFully", successColor);
   }
+
   void showUpdateSuccess() {
     snackBarAlert(success, "Updated SuccessFully", successColor);
   }
@@ -2309,7 +2463,7 @@ String formNoMax="";
           querySnapshot.docs.map((doc) => doc["villageCode"]).toList();
 
       var maxCountDoc =
-      querySnapshot.docs.map((doc) => doc["maxCount"]).toList();
+          querySnapshot.docs.map((doc) => doc["maxCount"]).toList();
       debugPrint("MaxCount:$maxCountDoc");
 
       var villageNameDoc = querySnapshot.docs
@@ -2349,45 +2503,45 @@ String formNoMax="";
   }
 
   setCount() async {
-    var data = await FirebaseFirestore.instance.collection(collectionCount)
-        .get();
+    var data =
+        await FirebaseFirestore.instance.collection(collectionCount).get();
     for (int i = 0; i < data.docs.length; i++) {
       var totalLength = data.docs[i].data()['length'];
       debugPrint("totalLength$totalLength");
       addLength = totalLength + 1;
     }
-    FirebaseFirestore.instance.collection(collectionCount).doc(
-        'ZDuG7E8KkwuadT4WxGGb')
+    FirebaseFirestore.instance
+        .collection(collectionCount)
+        .doc('ZDuG7E8KkwuadT4WxGGb')
         .update({
       "length": addLength,
-    })
-        .then((value) { Navigator.pop(context, false);
-    makeLoadData();
-    showAddSuccess();})
-        .catchError((error) => false);
+    }).then((value) {
+      Navigator.pop(context, false);
+      makeLoadData();
+      showAddSuccess();
+    }).catchError((error) => false);
 
     debugPrint("addLength$addLength");
-
   }
 
-   setMaxCount(int maxCounts, villagesCode) async{
-     String villageDocumentId = "";
-     var data = await firestoreInstance.collection(collectionVillageName)
-         .where('villageCode', isEqualTo: villagesCode)
-         .get();
-     setState(() {
-       villageDocumentId = data.docs[0].id;
-     });
-     debugPrint("villageDocumentId:$villageDocumentId");
+  setMaxCount(int maxCounts, villagesCode) async {
+    String villageDocumentId = "";
+    var data = await firestoreInstance
+        .collection(collectionVillageName)
+        .where('villageCode', isEqualTo: villagesCode)
+        .get();
+    setState(() {
+      villageDocumentId = data.docs[0].id;
+    });
+    debugPrint("villageDocumentId:$villageDocumentId");
 
-
-     firestoreInstance
-         .collection(collectionVillageName).doc(villageDocumentId)
-         .update({
-       "maxCount":maxCounts,
-     })
-         .then((value) => debugPrint("Village Details Added Successfully"))
-         .catchError((error) => debugPrint("Village Details Failed to add"));
+    firestoreInstance
+        .collection(collectionVillageName)
+        .doc(villageDocumentId)
+        .update({
+          "maxCount": maxCounts,
+        })
+        .then((value) => debugPrint("Village Details Added Successfully"))
+        .catchError((error) => debugPrint("Village Details Failed to add"));
   }
-
 }

@@ -8,7 +8,7 @@ class SearchCampaignResponse {
 
   SearchCampaignResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -46,17 +46,17 @@ class Data {
 
   Data(
       {this.campaignId,
-        this.campaignName,
-        this.campaignDescription,
-        this.objectiveName,
-        this.campaignPopulation,
-        this.complete,
-        this.pending,
-        this.totalRecords,
-        this.limit,
-        this.page,
-        this.pages,
-        this.campaignList});
+      this.campaignName,
+      this.campaignDescription,
+      this.objectiveName,
+      this.campaignPopulation,
+      this.complete,
+      this.pending,
+      this.totalRecords,
+      this.limit,
+      this.page,
+      this.pages,
+      this.campaignList});
 
   Data.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
@@ -71,7 +71,7 @@ class Data {
     page = json['page'];
     pages = json['pages'];
     if (json['campaignList'] != null) {
-      campaignList = new List<CampaignList>();
+      campaignList = <CampaignList>[];
       json['campaignList'].forEach((v) {
         campaignList.add(new CampaignList.fromJson(v));
       });
@@ -108,11 +108,11 @@ class CampaignList {
 
   CampaignList(
       {this.familyId,
-        this.familyHeadName,
-        this.respondentName,
-        this.mobileNumber,
-        this.villageCode,
-        this.status});
+      this.familyHeadName,
+      this.respondentName,
+      this.mobileNumber,
+      this.villageCode,
+      this.status});
 
   CampaignList.fromJson(Map<String, dynamic> json) {
     familyId = json['familyId'];

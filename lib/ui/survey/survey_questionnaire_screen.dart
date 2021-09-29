@@ -45,7 +45,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   List<String> listItem, optionId;
   Future apiSurveyQuestion, apiSync;
   SurveyResponse.Data dataSurveyQues;
-  bool isInternet=false, checkedValue = false;
+  bool isInternet = false, checkedValue = false;
   List<TextEditingController> controllers = [];
   String dropDown = "";
   TextFieldModel textFieldModel = TextFieldModel();
@@ -76,15 +76,15 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
     getLanguage();
     super.initState();
-
   }
+
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
 
     getQuestionnaire();
-
   }
+
   void getQuestionnaire() {
     setState(() {
       arguments = Get.arguments;
@@ -97,20 +97,18 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
         apiSurveyQuestion = getSurveyQuestionAPI(SurveyQuestionnaireRequest(
             familyId: arguments[0],
             campaignId: arguments[1],
-            languageCode:language));
-
+            languageCode: language));
       } else {
         apiSync = getOfflineSurveyQuestionAPI(SurveyQuestionnaireRequest(
             familyId: arguments[0],
             campaignId: arguments[1],
-            languageCode:language));
+            languageCode: language));
       }
       saveSurveyRequest.campaignId = arguments[1].toString();
       saveSurveyRequest.familyId = arguments[0].toString();
       saveSurveyRequest.languageCode = language.toString();
-      saveSurveyRequest.villageCode=arguments[3].toString();
+      saveSurveyRequest.villageCode = arguments[3].toString();
     });
-
   }
 
   @override
@@ -142,7 +140,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.toNamed('/homeScreen');
+                    Get.toNamed('/dashBoard');
                   },
                   child: SvgPicture.asset(
                     svgTctLogo,
@@ -241,7 +239,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     ConnectionState.done) {
                   debugPrint("Survey Response : ${projectSnap.data}");
                   dataSurveyQues = projectSnap.data?.data?.first;
-                  saveSurveyRequest.objectiveId=dataSurveyQues.objectiveId.toString();
+                  saveSurveyRequest.objectiveId =
+                      dataSurveyQues.objectiveId.toString();
                   return _portraitMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -259,7 +258,8 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                   debugPrint(
                       "Survey Response : ${projectSnap.data.data[0].campaignName}");
                   dataSurveyQues = projectSnap.data?.data?.first;
-                  saveSurveyRequest.objectiveId=dataSurveyQues.objectiveId.toString();
+                  saveSurveyRequest.objectiveId =
+                      dataSurveyQues.objectiveId.toString();
                   return _landscapeMode();
                 } else {
                   return Text("Error ${projectSnap.error}");
@@ -600,8 +600,9 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                 ?.sections[index]?.questions[i]?.questionId
                 .toString(),
           ));
-      for(var j=0;j<saveSurveyRequest?.questions?.length;j++){
-        debugPrint("saveSurveyRequest${saveSurveyRequest.questions[j].toJson()}");
+      for (var j = 0; j < saveSurveyRequest?.questions?.length; j++) {
+        debugPrint(
+            "saveSurveyRequest${saveSurveyRequest.questions[j].toJson()}");
       }
       list.add(optionWidget(
           dataSurveyQues?.sections[index]?.questions[i], index, i));
@@ -625,32 +626,25 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
 
         break;
       case "RADIO BUTTON":
-        saveSurveyRequest.questions[i].options = [
-          SurveyRequest.Options()
-        ];
-        list.add(radioList(question,
-            saveSurveyRequest.questions[i].options[0]));
-        saveSurveyRequest.questions[i].answerName =
-            "".toString();
+        saveSurveyRequest.questions[i].options = [SurveyRequest.Options()];
+        list.add(
+            radioList(question, saveSurveyRequest.questions[i].options[0]));
+        saveSurveyRequest.questions[i].answerName = "".toString();
         controllers.add(TextEditingController(text: ""));
 
         break;
       case "CHECKBOX":
-        list.add(checkBoxList(
-            question, saveSurveyRequest.questions[i].options));
+        list.add(
+            checkBoxList(question, saveSurveyRequest.questions[i].options));
 
-        saveSurveyRequest.questions[i].answerName =
-            "".toString();
+        saveSurveyRequest.questions[i].answerName = "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
       case "DROPDOWN":
-        saveSurveyRequest.questions[i].options = [
-          SurveyRequest.Options()
-        ];
-        list.add(dropDownList(question,
-            saveSurveyRequest.questions[i].options[0]));
-        saveSurveyRequest.questions[i].answerName =
-            "".toString();
+        saveSurveyRequest.questions[i].options = [SurveyRequest.Options()];
+        list.add(
+            dropDownList(question, saveSurveyRequest.questions[i].options[0]));
+        saveSurveyRequest.questions[i].answerName = "".toString();
         controllers.add(TextEditingController(text: ""));
         break;
     }
@@ -722,5 +716,4 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       ),
     );
   }
-
 }

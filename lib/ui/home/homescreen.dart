@@ -20,7 +20,6 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/localization/localization.dart';
-import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/ui/dialog/alert_dialog.dart';
@@ -36,7 +35,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenScreenState extends State<HomeScreen> {
   BuildContext context;
-  int _rowPerPage = PaginatedDataTable.defaultRowsPerPage;
   CollectionReference demographydata =
       FirebaseFirestore.instance.collection('users');
   var deleteLength;
@@ -191,7 +189,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
           var mainDemograpicData =
               snapshot.data.docs.map((doc) => doc).toList();
-          debugPrint("family : ${mainDemograpicData}");
+          debugPrint("family : $mainDemograpicData");
 
           if (loadData && snapshot.connectionState == ConnectionState.active) {
             isLoading = false;
@@ -479,7 +477,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                 text:
                                     "${DemoLocalization.of(context).translate('TotalRecords')}" +
                                         " " "${(_demographicList.length)}" +
-                                        " / ${demoLength}",
+                                        " / $demoLength",
                                 color: darkColor,
                                 weight: FontWeight.w500,
                                 size: 16,
@@ -1132,6 +1130,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
     debugPrint("deleteLength$deleteLength");
   }
+
   totalLength() async {
     var data =
         await FirebaseFirestore.instance.collection(collectionCount).get();

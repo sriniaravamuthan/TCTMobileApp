@@ -9,7 +9,7 @@ class SurveyQuestionnaireResponse {
 
   SurveyQuestionnaireResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });
@@ -43,13 +43,13 @@ class Data {
 
   Data(
       {this.campaignId,
-        this.campaignName,
-        this.campaignDescription,
-        this.objectiveName,
-        this.objectiveId,
-        this.respondentName,
-        this.respondentId,
-        this.sections});
+      this.campaignName,
+      this.campaignDescription,
+      this.objectiveName,
+      this.objectiveId,
+      this.respondentName,
+      this.respondentId,
+      this.sections});
 
   Data.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
@@ -60,7 +60,7 @@ class Data {
     respondentName = json['respondentName'];
     respondentId = json['respondentId'];
     if (json['sections'] != null) {
-      sections = new List<Sections>();
+      sections = <Sections>[];
       json['sections'].forEach((v) {
         sections.add(new Sections.fromJson(v));
       });
@@ -94,7 +94,7 @@ class Sections {
     sectionId = json['sectionId'];
     sectionName = json['sectionName'];
     if (json['questions'] != null) {
-      questions = new List<Questions>();
+      questions = <Questions>[];
       json['questions'].forEach((v) {
         questions.add(new Questions.fromJson(v));
       });
@@ -126,7 +126,7 @@ class Questions {
     questionName = json['questionName'];
     responseType = json['responseType'];
     if (json['options'] != null) {
-      options = new List<Options>();
+      options = <Options>[];
       json['options'].forEach((v) {
         options.add(new Options.fromJson(v));
       });

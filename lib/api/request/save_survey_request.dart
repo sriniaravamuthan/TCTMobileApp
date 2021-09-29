@@ -8,11 +8,11 @@ class SaveSurveyRequest {
 
   SaveSurveyRequest(
       {this.campaignId,
-        this.objectiveId,
-        this.familyId,
-        this.villageCode,
-        this.languageCode,
-        this.questions});
+      this.objectiveId,
+      this.familyId,
+      this.villageCode,
+      this.languageCode,
+      this.questions});
 
   SaveSurveyRequest.fromJson(Map<String, dynamic> json) {
     campaignId = json['campaignId'];
@@ -21,7 +21,7 @@ class SaveSurveyRequest {
     villageCode = json['villageCode'];
     languageCode = json['languageCode'];
     if (json['questions'] != null) {
-      questions = new List<Questions>();
+      questions = <Questions>[];
       json['questions'].forEach((v) {
         questions.add(new Questions.fromJson(v));
       });
@@ -53,7 +53,7 @@ class Questions {
     questionId = json['questionId'];
     answerName = json['answerName'];
     if (json['options'] != null) {
-      options = new List<Options>();
+      options = <Options>[];
       json['options'].forEach((v) {
         options.add(new Options.fromJson(v));
       });

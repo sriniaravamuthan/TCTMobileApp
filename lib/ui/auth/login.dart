@@ -22,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   String userMail, userPassword;
   var height, width;
-  int _radioValue = 0;
   String selectedRadioTile = "English";
   int selectedRadio;
   setSelectedRadioTile(String val) {
@@ -30,9 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
       selectedRadioTile = val;
     });
   }
+
   @override
   void initState() {
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -40,11 +39,11 @@ class _LoginScreenState extends State<LoginScreen> {
       DeviceOrientation.portraitDown,
     ]);
 
-
     super.initState();
   }
+
   @override
-  dispose(){
+  dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -53,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ]);
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     textInputAction: TextInputAction.next,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
-                                      counterText: "",
+                                        counterText: "",
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.all(
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     textInputAction: TextInputAction.done,
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
-                                      counterText: "",
+                                        counterText: "",
                                         border: OutlineInputBorder(
                                           borderSide: BorderSide.none,
                                           borderRadius: BorderRadius.all(
@@ -235,7 +235,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onSaved: (String val) {
                                       setState(() {
                                         userPassword = val;
-                                        debugPrint("userPassword $userPassword");
+                                        debugPrint(
+                                            "userPassword $userPassword");
                                       });
                                     },
                                     validator: (value) {
@@ -251,7 +252,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 alignment: Alignment.center,
                                 child: Material(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40.0)),
+                                      borderRadius:
+                                          BorderRadius.circular(40.0)),
                                   elevation: 8.0,
                                   color: primaryColor,
                                   child: InkWell(
@@ -296,10 +298,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _changeLanguage(String selectedRadioTile) async {
-      setState(() {
-        MyApp.setLocale(context, Locale('en', 'US'));
-        SharedPref().setStringPref(SharedPref().language, 'en');
-      });
+    setState(() {
+      MyApp.setLocale(context, Locale('en', 'US'));
+      SharedPref().setStringPref(SharedPref().language, 'en');
+    });
     // }
   }
 }

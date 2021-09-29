@@ -7,7 +7,6 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tct_demographics/api/request/save_survey_request.dart';
 import 'package:tct_demographics/models/widget_models/textfield_list.dart';
 
@@ -40,7 +39,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       padding: const EdgeInsets.all(4.0),
       child: Container(
         height: 48,
-        width: MediaQuery.of(context).size.width/2,
+        width: MediaQuery.of(context).size.width / 2,
         child: TextFormField(
           controller: widget.controller,
           keyboardType: TextInputType.text,

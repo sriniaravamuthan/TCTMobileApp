@@ -7,7 +7,6 @@
  */
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tct_demographics/api/response/search_campaign_response.dart';
 
 class SharedPref {
   var language = "LANGUAGE";
