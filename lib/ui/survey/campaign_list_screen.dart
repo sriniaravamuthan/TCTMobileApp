@@ -648,7 +648,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ),
                   ),
                   Visibility(
-                    visible: isInternet,
+                    visible: _searchCampaignResponse
+                                .data.first.campaignList.isNotEmpty &&
+                            isInternet != false
+                        ? true
+                        : false,
                     maintainSize: true,
                     maintainAnimation: true,
                     maintainInteractivity: true,
@@ -1121,7 +1125,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   Expanded(
                     flex: 1,
                     child: Visibility(
-                      visible: isInternet,
+                      visible: _searchCampaignResponse
+                                  .data.first.campaignList.isNotEmpty &&
+                              isInternet != false
+                          ? true
+                          : false,
                       maintainSize: true,
                       maintainAnimation: true,
                       maintainInteractivity: true,

@@ -300,6 +300,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                             ),
                                             suffixIcon: Icon(Icons.search),
                                             fillColor: Colors.white),
+                                        keyboardType: TextInputType.number,
                                         itemBuilder: (context, item) {
                                           return new Padding(
                                               padding: EdgeInsets.all(8.0),
