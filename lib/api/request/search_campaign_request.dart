@@ -9,13 +9,12 @@ class SearchCampaignRequest {
 
   SearchCampaignRequest(
       {this.campaignID,
-        this.campaignName,
-        this.villageCode,
-        this.languageCode,
-        this.searchKey,
-        this.limit,
-        this.page});
-
+      this.campaignName,
+      this.villageCode,
+      this.languageCode,
+      this.searchKey,
+      this.limit,
+      this.page});
   SearchCampaignRequest.fromJson(Map<String, dynamic> json) {
     campaignID = json['campaignID'];
     campaignName = json['campaignName'];

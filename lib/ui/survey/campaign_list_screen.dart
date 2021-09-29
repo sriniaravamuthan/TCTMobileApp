@@ -125,21 +125,21 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     };
     String body = json.encode(map);
     debugPrint("Search_body:$body");
-    if(isInternet){
+    if (isInternet) {
       final response =
-      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-      await http.post(Uri.parse(searchCampaignURL),
-          headers: requestHeaders, body: body);
+          // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
+          await http.post(Uri.parse(searchCampaignURL),
+              headers: requestHeaders, body: body);
       debugPrint("Search_Datas1 ${response.body}");
 
       SearchCampaignResponse data =
-      SearchCampaignResponse.fromJson(json.decode(response.body));
+          SearchCampaignResponse.fromJson(json.decode(response.body));
       debugPrint("Search_Data $data");
       debugPrint("KEYFRESH $keyRefresh");
 
       if (response.statusCode == 200) {
         debugPrint("Response ${data.toJson()}");
-        if (!data.error) {
+        if (!data.error && data.data != null) {
           if (keyRefresh) {
             setState(() {
               _searchCampaignResponse = data;
@@ -167,41 +167,43 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           return true;
         } else {
           debugPrint("Response2 ${data.data}");
-          snackBarAlert(warning, "API Error", errorColor);
+          snackBarAlert(error, "${data.message}", errorColor);
+          refreshController.loadComplete();
+          _noData();
           return false;
         }
       } else {
         debugPrint("Response3 ${data.data}");
-        snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
+        snackBarAlert(
+            error, "Server Error - ${response.statusCode}", errorColor);
         return false;
       }
-    }else{
+    } else {
       Map<String, dynamic> map = await db
           .collection('campaign_list')
           .doc(searchCampaignRequest.campaignID)
           .get();
       debugPrint("Offline List $map");
-      if(map!=null){
-        var data=SearchCampaignResponse.fromJson(map);
+      if (map != null) {
+        var data = SearchCampaignResponse.fromJson(map);
         if (!data.error) {
-            setState(() {
-              _searchCampaignResponse = data;
-              campaignLists = data?.data?.first?.campaignList;
-              // dataCampaign = data.data.first;
-              debugPrint(
-                  "users: ${data.data.first.campaignList.first.familyHeadName}");
-            });
+          setState(() {
+            _searchCampaignResponse = data;
+            campaignLists = data?.data?.first?.campaignList;
+            // dataCampaign = data.data.first;
+            debugPrint(
+                "users: ${data.data.first.campaignList.first.familyHeadName}");
+          });
           return true;
         } else {
           debugPrint("Response2 ${data.data}");
           snackBarAlert(warning, "API Error", errorColor);
           return false;
         }
-      }else{
+      } else {
         refreshController.loadComplete();
-         _noData();
+        _noData();
       }
-
     }
 
     // }
@@ -714,11 +716,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 builder: (BuildContext context, LoadStatus status) {
                   Widget body;
                   if (status == LoadStatus.idle) {
-                    body = Text("pull up load");
+                    body = Text("Pull up load");
                   } else if (status == LoadStatus.loading) {
                     body = CupertinoActivityIndicator();
                   } else if (status == LoadStatus.noMore) {
-                    body = Text("release to load more");
+                    body = Text("Release to load more");
                   } else {
                     body = Text("No more Data");
                   }
@@ -729,44 +731,25 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 },
               ),
               onRefresh: () async {
-              /*  if(isInternet){*/
-                  final result = await setSearchCampaignAPI(keyRefresh: true);
-                  if (result != null) {
-                    debugPrint("onRefresh$result");
-                    refreshController.refreshCompleted();
-                  } else {
-                    refreshController.refreshFailed();
-                    return _noData();
-                  }
-               /* }else{
-                  apiSync = syncSearchCampaignAPI(SearchCampaignRequest(
-                      campaignID: arguments[0],
-                      campaignName: arguments[1],
-                      villageCode: arguments[2],
-                      languageCode: language,
-                      searchKey: ""));
-                }*/
+                final result = await setSearchCampaignAPI(keyRefresh: true);
+                if (result != null) {
+                  debugPrint("onRefresh$result");
+                  refreshController.refreshCompleted();
+                } else {
+                  refreshController.refreshFailed();
+                  return _noData();
+                }
               },
               onLoading: () async {
-              /*  if (isInternet) {*/
-                  final result = await setSearchCampaignAPI(keyRefresh: false);
-                  if (result != null) {
-                    debugPrint("onLoading$result");
-                    refreshController.loadComplete();
-
-                  } else {
-                    refreshController.loadFailed();
-                    return _noData();
-                  }
-                  debugPrint("apiCampaignList$apiCampaignList");
-               /* } else {
-                  apiSync =  syncSearchCampaignAPI(SearchCampaignRequest(
-                      campaignID: arguments[0],
-                      campaignName: arguments[1],
-                      villageCode: arguments[2],
-                      languageCode: language,
-                      searchKey: ""));
-                }*/
+                final result = await setSearchCampaignAPI(keyRefresh: false);
+                if (result != null) {
+                  debugPrint("onLoading$result");
+                  refreshController.loadComplete();
+                } else {
+                  refreshController.loadFailed();
+                  return _noData();
+                }
+                debugPrint("apiCampaignList$apiCampaignList");
               },
               child: DataTable(
                 columnSpacing: 0.04,
@@ -1209,11 +1192,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                 builder: (BuildContext context, LoadStatus status) {
                   Widget body;
                   if (status == LoadStatus.idle) {
-                    body = Text("pull up load");
+                    body = Text("Pull up load");
                   } else if (status == LoadStatus.loading) {
                     body = CircularProgressIndicator.adaptive();
                   } else if (status == LoadStatus.canLoading) {
-                    body = Text("release to load more");
+                    body = Text("Release to load more");
                   } else {
                     body = Text("No more Data");
                   }
