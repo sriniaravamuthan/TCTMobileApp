@@ -53,7 +53,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
   String searchString = "";
-  int campaignListLength;
+  int campaignListLength,searchListLength;
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
@@ -84,7 +84,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
         villageCode: arguments[2],
         languageCode: language,
         searchKey: "",
-        limit: 2,
+        limit: 10,
         page: currentPage);
     isInternet = arguments[3];
     super.initState();
@@ -617,7 +617,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
   Widget _landscapeMode() {
     debugPrint(
-        "CampaignList....:${_searchCampaignResponse?.data?.first?.campaignList}");
+        "CampaignList....:${_searchCampaignResponse?.data?.first?.campaignList?.length}");
     return Column(
       children: [
         header(),
@@ -640,7 +640,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
                         text:
-                            'Showing ${searchString != "" ? campaignListLength : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
+                            'Showing ${searchString.isNotEmpty? searchListLength : campaignListLength} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -722,7 +722,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   if (status == LoadStatus.idle) {
                     body = Text("Pull up load");
                   } else if (status == LoadStatus.loading) {
-                    body = CupertinoActivityIndicator();
+                    body = CircularProgressIndicator.adaptive();
                   } else if (status == LoadStatus.noMore) {
                     body = Text("Release to load more");
                   } else {
@@ -1115,7 +1115,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
                         text:
-                            'Showing ${searchString != "" ? campaignListLength : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
+                            'Showing ${searchString != "" ? searchListLength : "${_searchCampaignResponse?.data?.first?.campaignList?.length}"} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1496,13 +1496,16 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             campaignList.respondentName
                                 .contains(val.capitalize))
                         .toList();
-                campaignListLength =
+                searchListLength =
                     _searchCampaignResponse?.data?.first?.campaignList?.length;
                 debugPrint(
                     "campaignList:${_searchCampaignResponse?.data?.first?.campaignList?.length}");
               });
             } else {
-              refreshController.requestRefresh();
+              setState(() {
+                refreshController.requestRefresh();
+                campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
+              });
             }
           });
         },
