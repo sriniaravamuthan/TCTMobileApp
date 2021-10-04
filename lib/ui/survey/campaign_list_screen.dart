@@ -53,7 +53,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
   String searchString = "";
-  int campaignListLength,searchListLength;
+  int campaignListLength, searchListLength = 0;
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
@@ -640,7 +640,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
                         text:
-                            'Showing ${searchString.isNotEmpty? searchListLength : campaignListLength} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
+                            'Showing ${searchString.length != 0 ? _searchCampaignResponse?.data?.first?.campaignList?.length : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1115,7 +1115,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextWidget(
                         text:
-                            'Showing ${searchString != "" ? searchListLength : "${_searchCampaignResponse?.data?.first?.campaignList?.length}"} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
+                            'Showing ${searchString.length != 0 ? _searchCampaignResponse?.data?.first?.campaignList?.length : _searchCampaignResponse?.data?.first?.campaignList?.length} of ${_searchCampaignResponse.data.first.totalRecords != null ? _searchCampaignResponse.data.first.totalRecords : 0} records',
                         size: 14,
                         color: lightColor,
                         weight: FontWeight.w400,
@@ -1496,15 +1496,15 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             campaignList.respondentName
                                 .contains(val.capitalize))
                         .toList();
-                searchListLength =
-                    _searchCampaignResponse?.data?.first?.campaignList?.length;
+                // searchListLength =
+                //     _searchCampaignResponse?.data?.first?.campaignList?.length;
                 debugPrint(
                     "campaignList:${_searchCampaignResponse?.data?.first?.campaignList?.length}");
               });
             } else {
               setState(() {
                 refreshController.requestRefresh();
-                campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
+                // campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
               });
             }
           });
