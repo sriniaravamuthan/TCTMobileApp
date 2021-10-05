@@ -1048,7 +1048,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
-          .where("Location.name", isEqualTo: familyHead.toString().capitalize)
+          .where("Location.name",  isGreaterThanOrEqualTo:  familyHead.toString().capitalize,
+          isLessThan:  familyHead.toString().capitalize.substring(0,  familyHead.toString().capitalize.length - 1) +
+              String.fromCharCode( familyHead.toString().capitalize.codeUnitAt( familyHead.toString().capitalize.length - 1) + 1),)
           .limit(30);
       setState(() {});
       debugPrint("familyHead:${query}");

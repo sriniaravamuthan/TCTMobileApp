@@ -53,7 +53,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   int totalPages = 0;
   List<CampaignList> campaignLists = [];
   String searchString = "";
-  int campaignListLength, searchListLength = 0;
 
   SearchCampaignRequest searchCampaignRequest = SearchCampaignRequest();
   final RefreshController refreshController =
