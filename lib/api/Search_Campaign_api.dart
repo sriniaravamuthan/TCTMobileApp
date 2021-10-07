@@ -8,16 +8,16 @@ import 'package:tct_demographics/api/response/search_campaign_response.dart';
 import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_strings.dart';
-import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 
 Future<SearchCampaignResponse> getSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest,
     List campaignIdList,
-    List<String> campaignNameList, List<String> villageCodeList) async {
+    List<String> campaignNameList,
+    List<String> villageCodeList) async {
   debugPrint("getSearchCampaignAPI");
-  searchCampaignRequest.languageCode =
-      await SharedPref().getStringPref(SharedPref().language);
+  // searchCampaignRequest.languageCode =
+  //     await SharedPref().getStringPref(SharedPref().language);
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
 
@@ -54,7 +54,7 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
       data.data.forEach((element) {
         campaignIdList.add(element.campaignId);
         campaignNameList.add(element.campaignName);
-        debugPrint("SEARCH:$campaignIdList $campaignNameList");
+        debugPrint("SEARCH:$campaignNameList $campaignNameList");
         villageCodeList.add(element.campaignList.first.villageCode);
       });
       return data;
