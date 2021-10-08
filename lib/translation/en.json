@@ -57,6 +57,25 @@
  "Retirement": "Retirement",
  "Widowed Pension": "Widowed",
 
+ "Pregnant Status": "Pregnant Status?",
+ "Natal": "Natal",
+ "Pre Natal": "Pre Natal",
+ "Post Natal": "Post Natal",
+ "How many months": "How many months?",
+ "Drinking Usage": "Drinking Usage?",
+ "Occasional": "Occasional",
+ "Moderate": "Moderate",
+ "Heavy": "Heavy",
+ "Stopped": "Stopped",
+ "Stopped by": "Stopped by?",
+ "Treatment": "Treatment",
+ "Own": "Own",
+ "No of years": "No of years",
+ "When you had a treatment": "When you had a treatment?",
+ "Where you had a treatment": "Where you had a treatment?",
+
+
+
  "Thirumalai Charity Trust":"Thirumalai Charity Trust",
  "User Name":"User Name",
  "Password":"Password",
