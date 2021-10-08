@@ -67,7 +67,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                       campaignID: campaignIDController.text,
                       campaignName: campaignNameController.text,
                       villageCode: villageCodeController.text,
-                      languageCode: "ta"),
+                      languageCode: language),
                   campaignIdList,
                   campaignNameList,
                   villageCodeList),
@@ -80,7 +80,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
 
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
-    debugPrint("language:$language");
+    debugPrint("language1:$language");
   }
 
   @override
@@ -412,7 +412,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                             return new Padding(
                                                 padding: EdgeInsets.all(8.0),
                                                 child: TextWidget(
-                                                  text: item,
+                                                  text: item.toString(),
                                                   color: darkColor,
                                                   size: 14,
                                                   weight: FontWeight.w600,
