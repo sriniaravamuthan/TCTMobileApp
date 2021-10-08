@@ -264,6 +264,8 @@ class Family {
   String dob = "";
   int age = 0;
   String maritalStatus = "";
+  double pregnantStatus=0;
+  String pregnantMonths="";
   String bloodGroup = "";
   double physicallyChallenge = 0;
   String education = "";
@@ -284,6 +286,14 @@ class Family {
 
   double anyMembersWhoSmoke = 0;
   double anyMembersWhoDrink = 0;
+  double drinkingUsage = 0;
+  double stoppedBy = 0;
+  String noOfYears = "";
+  String whereTreatment = "";
+  String whenTreatment = "";
+
+
+
   double anyMembersWhoUseTobacco = 0;
   double isVaccinationDone = 0;
   String firstDose;
