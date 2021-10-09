@@ -338,6 +338,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   _family.maritalStatus = "";
                 else
                   _family.maritalStatus = family[i]["maritalStatus"];
+                  _family.pregnantStatus = family[i]["pregnantStatus"];
+                  _family.pregnantMonths = family[i]["pregnantMonth"];
+                  _family.drinkingUsage = family[i]["drinkingUsage"];
+                  _family.noOfYears = family[i]["noOfYears"];
+                  _family.stoppedBy = family[i]["stoppedBy"];
+                  _family.whenTreatment = family[i]["whenTreatment"];
+                  _family.whereTreatment = family[i]["whereTreatment"];
+
                 _family.mobileNumber = family[i]["mobileNumber"];
                 _family.name = family[i]["name"];
                 _family.occupation = family[i]["occupation"];
@@ -422,7 +430,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
               demographicData.docId = element.id;
               documentId.add(element.id);
-
               _demographicList.add(demographicData);
               users.add(data);
 

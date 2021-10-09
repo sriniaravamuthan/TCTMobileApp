@@ -68,7 +68,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   String annualIncomeVal;
   var mobileNumberController = TextEditingController();
   var mailController = TextEditingController();
-  String smartphone = "";
+  String smartphone = "", maritalStatusValue;
   var communityController = TextEditingController();
   var casteController = TextEditingController();
   var physicalController = TextEditingController();
@@ -1149,9 +1149,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 controller: maritalStatusController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
-                                  maritalStatusController.text =
-                                      item;
-                                  isMaritalStatus=true;
+                                  setState(() {
+                                    maritalStatusController.text =
+                                        item;
+                                    maritalStatusValue=item;
+                                    isMaritalStatus=true;
+                                  });
                                 },
                                 suggestions: maritalLangList,
                                 style: TextStyle(
@@ -1272,9 +1275,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   min: 0,
                                   max: 2,
                                   divisions: 2,
-                                  onChanged: (value) {
+                                  onChanged:maritalStatusController.text=="Married"? (value) {
                                     togglePregnantStatus(value);
-                                  },
+                                  }:null,
                                 ),
                               ),
                               TextWidget(
@@ -2495,7 +2498,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 ):Container(),
               ],
             ),
-            textDrink=="Yes" ||  textDrink=="ஆம்"?Row(
+            textDrink=="Yes" || textDrink=="ஆம்"?Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 textDrinkUsage=="Stopped" ||  textDrinkUsage=="நிறுத்தப்பட்டது"? Expanded(
@@ -2674,7 +2677,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     borderSide: BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               onSaved: (String val) {
                                 setState(() {});
                               },
@@ -2746,7 +2749,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   borderSide: BorderSide(color: lightGreyColor),
                                 ),
                                 fillColor: lightGreyColor),
-                            keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.text,
                             onSaved: (String val) {
                               setState(() {});
                             },
@@ -2757,51 +2760,53 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ):Container(),
                 Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Any Members who use Tobacco?'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: primaryColor,
-                              inactiveTrackColor: Colors.lightBlueAccent,
-                              trackShape: RectangularSliderTrackShape(),
-                              trackHeight: 4.0,
-                              thumbColor: primaryColor,
-                              thumbShape: RoundSliderThumbShape(
-                                  enabledThumbRadius: 12.0),
-                              overlayColor: Colors.white.withAlpha(32),
-                              overlayShape: RoundSliderOverlayShape(
-                                  overlayRadius: 28.0),
-                            ),
-                            child: Slider(
-                              value: family.anyMembersWhoUseTobacco,
-                              min: 0,
-                              max: 2,
-                              divisions: 2,
-                              onChanged: (value) {
-                                toggleSwitch2(value);
-                              },
-                            ),
-                          ),
-                          TextWidget(
-                            text: textTobacco,
+                  child: SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Any Members who use Tobacco?'),
                             size: 14,
                             weight: FontWeight.w600,
-                          )
-                        ],
-                      ),
-                    ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.anyMembersWhoUseTobacco,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch2(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: textTobacco,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
