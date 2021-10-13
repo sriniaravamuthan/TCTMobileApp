@@ -16,7 +16,6 @@ void setSaveSurveyAPI(
   // String token = await SharedPref().getStringPref(SharedPref().token);
   debugPrint("surveyQuestionnaireRequest:$surveyQuestionnaireRequest");
 
-
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
@@ -24,14 +23,16 @@ void setSaveSurveyAPI(
   String body = json.encode(surveyQuestionnaireRequest);
   debugPrint("SaveSurveyRequestBody $body");
 
-  final response = await http.post(Uri.parse(surveySaveCampaignURL), headers: requestHeaders,body:body );
+  final response = await http.post(Uri.parse(surveySaveCampaignURL),
+      headers: requestHeaders, body: body);
   var data = SaveSurveyResponse.fromJson(json.decode(response.body));
 
   debugPrint("product: ${data.message}");
 
   if (response.statusCode == 200) {
     if (!data.error) {
-      Get.back();
+      snackBarAlert(success, data.message.toString(), successColor);
+      Future.delayed(Duration(seconds: 2)).then((value) => Get.back());
     } else {
       snackBarAlert(warning, data.message.toString(), yellowColor);
     }
@@ -52,7 +53,7 @@ void setSaveOfflineSurveyAPI(
       .set(surveyQuestionnaireRequest.toJson())
       .then((value) {
     debugPrint("DB Added Survey: $value");
-    Get.back();
-
-  } );
+    snackBarAlert(success, "Survey Added Successfully", successColor);
+    Future.delayed(Duration(seconds: 2)).then((value) => Get.back());
+  });
 }

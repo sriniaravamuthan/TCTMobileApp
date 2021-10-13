@@ -121,6 +121,7 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
         } catch (error) {
           debugPrint("Error $error");
         } finally {
+          debugPrint("data.toJson(): ${data.toJson()}");
           db
               .collection('campaign_list')
               .doc(searchCampaignRequest.campaignID)

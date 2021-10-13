@@ -93,7 +93,10 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     debugPrint("setSearchCampaignAPI :${searchCampaignRequest.page}");
     if (keyRefresh) {
       currentPage = 1;
+      debugPrint("keyRefresh :$keyRefresh");
     } else {
+      debugPrint("currentPage :$currentPage");
+
       if (currentPage >= totalPages) {
         refreshController.loadNoData();
         return false;
@@ -138,7 +141,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
       if (response.statusCode == 200) {
         debugPrint("Response ${data.toJson()}");
-        if (!data.error && data.data != null) {
+        if (!data.error && data.data != null && data.data.isNotEmpty) {
           if (keyRefresh) {
             setState(() {
               _searchCampaignResponse = data;
@@ -151,7 +154,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
             setState(() {
               _searchCampaignResponse.data.first.campaignList
                   .addAll(data.data.first.campaignList);
-
               data.data.first.campaignList.forEach((element) {
                 debugPrint("users1: ${element.familyHeadName}");
               });
@@ -161,12 +163,11 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           debugPrint("totalPages: $totalPages");
           totalPages = int.tryParse(data.data.first.totalRecords);
           debugPrint("totalPages: $totalPages");
-
           setState(() {});
           return true;
         } else {
           debugPrint("Response2 ${data.data}");
-          snackBarAlert(error, "${data.message}", errorColor);
+          snackBarAlert(error, "${"No Data Found"}", errorColor);
           refreshController.loadComplete();
           _noData();
           return false;
@@ -182,20 +183,19 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           .collection('campaign_list')
           .doc(searchCampaignRequest.campaignID)
           .get();
-      debugPrint("Offline List $map");
+      debugPrint("Offline List ${map.length}");
       if (map != null) {
         var data = SearchCampaignResponse.fromJson(map);
-        if (!data.error) {
+        if (!data.error && data.data.isNotEmpty) {
           setState(() {
             _searchCampaignResponse = data;
             campaignLists = data?.data?.first?.campaignList;
             // dataCampaign = data.data.first;
-            debugPrint(
-                "users: ${data.data.first.campaignList.first.familyHeadName}");
+            debugPrint("users: ${data.data.first.campaignList.length}");
           });
           return true;
         } else {
-          debugPrint("Response2 ${data.data}");
+          debugPrint("Response2 ${"No Data Found"}");
           snackBarAlert(warning, "API Error", errorColor);
           return false;
         }
@@ -735,8 +735,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               ),
               onRefresh: () async {
                 final result = await setSearchCampaignAPI(keyRefresh: true);
-                if (result != null) {
-                  debugPrint("onRefresh$result");
+                debugPrint("onRefresh$result");
+                if (result != false && result != null) {
                   refreshController.refreshCompleted();
                 } else {
                   refreshController.refreshFailed();
@@ -745,7 +745,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               },
               onLoading: () async {
                 final result = await setSearchCampaignAPI(keyRefresh: false);
-                if (result != null) {
+                if (result != false && result != null) {
                   debugPrint("onLoading$result");
                   refreshController.loadComplete();
                 } else {
@@ -1215,7 +1215,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               ),
               onRefresh: () async {
                 final result = await setSearchCampaignAPI(keyRefresh: true);
-                if (result != null) {
+                if (result != false && result != null) {
                   debugPrint("onRefresh$result");
 
                   refreshController.refreshCompleted();
@@ -1226,7 +1226,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
               },
               onLoading: () async {
                 final result = await setSearchCampaignAPI(keyRefresh: false);
-                if (result != null) {
+                if (result != false && result != null) {
                   debugPrint("onLoading$result");
                   refreshController.loadComplete();
                 } else {
