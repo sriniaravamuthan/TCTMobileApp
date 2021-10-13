@@ -34,11 +34,11 @@ class FamilyMemberStep extends StatefulWidget {
   int familyIndex;
   List<Family> familyList;
   FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList,
-      this.cancelFields, this.deleteFields,this.familyList);
+      this.cancelFields, this.deleteFields, this.familyList);
 
   @override
   _FamilyMemberStepState createState() =>
-      _FamilyMemberStepState(family, familyIndex,familyList);
+      _FamilyMemberStepState(family, familyIndex, familyList);
 }
 
 class _FamilyMemberStepState extends State<FamilyMemberStep> {
@@ -46,11 +46,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   bool isRelationShip = false,
       isGender = false,
       isMaritalStatus = false,
+      isMaritalHide = false,
       isBloodGrp = false,
       isEducation = false,
       isBusiness = false,
       isSection = false,
-      isPhysical=false,isPregnant=false;
+      isPhysical = false,
+      isPregnant = false;
   var nameController = TextEditingController();
   var aadharNumberController = TextEditingController();
   var relationshipController = TextEditingController();
@@ -60,7 +62,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var maritalStatusController = TextEditingController(text: "");
   var pregnantMonthController = TextEditingController();
   var bloodGroupController = TextEditingController();
-  String physicallyChallenge = "",pregnantStatus="";
+  String physicallyChallenge = "", pregnantStatus = "";
   var educationController = TextEditingController();
   var occupationController = TextEditingController();
   var annualController = TextEditingController();
@@ -153,15 +155,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   double getSwitchValues(String value) {
     if (value == DemoLocalization.of(context).translate('Yes'))
       return 2;
-    else if (value == DemoLocalization.of(context).translate('No'))
-      return 1;
+    else if (value == DemoLocalization.of(context).translate('No')) return 1;
     return 0;
   }
+
   double getPregnantStatus(String pregnantStatus) {
     if (pregnantStatus == DemoLocalization.of(context).translate('Post Natal'))
       return 2;
-    else if (pregnantStatus == DemoLocalization.of(context).translate('Pre Natal'))
-      return 1;
+    else if (pregnantStatus ==
+        DemoLocalization.of(context).translate('Pre Natal')) return 1;
     return 0;
   }
 /*
@@ -177,7 +179,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 */
 
   Future uploadFile() async {
-    if(family.position==null || family.position=="" ) {
+    if (family.position == null || family.position == "") {
       position = familyList.length + 1;
       family.position = position.toString();
     }
@@ -188,8 +190,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.dob = dobController.text;
     family.age = int.tryParse(ageController.text);
     family.maritalStatus = maritalStatusController.text;
-    family.pregnantStatus=getPregnantStatus(pregnantStatus);
-    family.pregnantMonths=pregnantMonthController.text;
+    family.pregnantStatus = getPregnantStatus(pregnantStatus);
+    family.pregnantMonths = pregnantMonthController.text;
     family.bloodGroup = bloodGroupController.text;
     family.physicallyChallenge = getSwitchValues(physicallyChallenge);
     family.education = educationController.text;
@@ -206,9 +208,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.oldPension = getSwitchValues(oldPension);
     family.widowedPension = getSwitchValues(widowedPension);
     family.retirementPension = getSwitchValues(retirementPension);
-    family.noOfYears=noOfYearsController.text;
-    family.whenTreatment=whenTreatmentController.text;
-    family.whereTreatment=whereTreatmentController.text;
+    family.noOfYears = noOfYearsController.text;
+    family.whenTreatment = whenTreatmentController.text;
+    family.whereTreatment = whereTreatmentController.text;
 
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
@@ -308,25 +310,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -370,41 +372,41 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               enableSuggestions: true,
                               /*inputFormatters: [
                                 // MaskTextInputFormatter(mask: "********####", filter: {"*": RegExp(r'[0-9]')})
-                                *//*MaskedTextInputFormatterShifter(
+                                */ /*MaskedTextInputFormatterShifter(
                                     maskONE:"********XXXX",
                                     maskTWO:"XXX.XXX/XXXX-XX"
-                                ),*//*
+                                ),*/ /*
                                 ],*/
                               decoration: InputDecoration(
                                   counterText: "",
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               keyboardType: TextInputType.number,
@@ -449,7 +451,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           height: 58,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                right: 16.0,  top: 1.0, bottom: 1.0),
+                                right: 16.0, top: 1.0, bottom: 1.0),
                             child: AutoCompleteTextField(
                               controller: relationshipController,
                               clearOnSubmit: false,
@@ -465,32 +467,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
                                     borderSide:
-                                    BorderSide(color: lightGreyColor),
+                                        BorderSide(color: lightGreyColor),
                                   ),
                                   fillColor: lightGreyColor),
                               itemBuilder: (context, item) {
@@ -510,9 +512,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 isRelationShip = false;
 
                                 return item
-                                    .toLowerCase()
-                                    .startsWith(query.toLowerCase())|| item == "";
-                              },minLength: 0,),
+                                        .toLowerCase()
+                                        .startsWith(query.toLowerCase()) ||
+                                    item == "";
+                              },
+                              minLength: 0,
+                            ),
                           ),
                         ),
                       ],
@@ -547,8 +552,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     TextSpan(
                                       text: ' *',
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 14.0),
+                                          color: Colors.red, fontSize: 14.0),
                                     ),
                                   ]),
                             ),
@@ -559,13 +563,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 padding: const EdgeInsets.only(
                                     left: 2,
                                     right: 16.0,
-                                    top: 1.0, bottom: 1.0),
+                                    top: 1.0,
+                                    bottom: 1.0),
                                 child: AutoCompleteTextField(
                                   controller: genderController,
                                   clearOnSubmit: false,
                                   itemSubmitted: (item) {
                                     genderController.text = item;
-                                    isGender=true;
+                                    isGender = true;
                                     debugPrint(
                                         "stringList1:${genderController.text}");
                                   },
@@ -577,52 +582,37 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                         borderSide: BorderSide.none,
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
                                       ),
-                                      enabledBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color: lightGreyColor),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color: lightGreyColor),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      focusedErrorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color: lightGreyColor),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
-                                      errorBorder:
-                                      OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(
-                                            Radius.circular(
-                                                10.0)),
-                                        borderSide: BorderSide(
-                                            color: lightGreyColor),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide:
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
                                   itemBuilder: (context, item) {
                                     return new Padding(
-                                        padding:
-                                        EdgeInsets.all(8.0),
+                                        padding: EdgeInsets.all(8.0),
                                         child: TextWidget(
                                           text: item,
                                           color: darkColor,
@@ -634,13 +624,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     return a.compareTo(b);
                                   },
                                   itemFilter: (item, query) {
-                                    isGender=false;
+                                    isGender = false;
 
                                     return item
-                                        .toLowerCase()
-                                        .startsWith(
-                                        query.toLowerCase()) || item == "";
-                                  },minLength: 0,)),
+                                            .toLowerCase()
+                                            .startsWith(query.toLowerCase()) ||
+                                        item == "";
+                                  },
+                                  minLength: 0,
+                                )),
                           ),
                         ],
                       ),
@@ -670,8 +662,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     TextSpan(
                                       text: ' *',
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 14.0),
+                                          color: Colors.red, fontSize: 14.0),
                                     ),
                                   ]),
                             ),
@@ -696,27 +687,26 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedErrorBorder:
-                                    OutlineInputBorder(
+                                    focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -733,11 +723,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                  DateFormat("d-MMMM-y")
-                                      .format(date);
+                                      DateFormat("d-MMMM-y").format(date);
                                   datePicker.text = dateFormat;
-                                  dobController.text =
-                                      datePicker.text;
+                                  dobController.text = datePicker.text;
                                   calculateAge(date);
                                 },
                               ),
@@ -771,8 +759,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     TextSpan(
                                       text: ' *',
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 14.0),
+                                          color: Colors.red, fontSize: 14.0),
                                     ),
                                   ]),
                             ),
@@ -782,7 +769,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             width: 100,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 maxLength: 3,
                                 controller: ageController,
@@ -799,27 +786,26 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedErrorBorder:
-                                    OutlineInputBorder(
+                                    focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.number,
@@ -864,13 +850,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 width: 150,
                                 decoration: BoxDecoration(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(50))),
+                                        BorderRadius.all(Radius.circular(50))),
                                 child: family.photo == ""
                                     ? _image == null
-                                    ? Image.asset(imgCamera)
-                                    : Image.file(_image)
+                                        ? Image.asset(imgCamera)
+                                        : Image.file(_image)
                                     : Image.network(family.photo,
-                                    fit: BoxFit.fill)),
+                                        fit: BoxFit.fill)),
                           ),
                         ),
                       ],
@@ -909,7 +895,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   bloodGroupController.text = item;
-                                  isBloodGrp=true;
+                                  isBloodGrp = true;
                                 },
                                 suggestions: bloodGrpLangList,
                                 style: TextStyle(
@@ -919,45 +905,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
-                                    enabledBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedErrorBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
@@ -974,12 +947,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  isBloodGrp=false;
+                                  isBloodGrp = false;
                                   return item
-                                      .toLowerCase()
-                                      .startsWith(
-                                      query.toLowerCase())|| item == "";
-                                },minLength: 0,),
+                                          .toLowerCase()
+                                          .startsWith(query.toLowerCase()) ||
+                                      item == "";
+                                },
+                                minLength: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -1007,21 +982,16 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Column(
                             children: [
                               SliderTheme(
-                                data:
-                                SliderTheme.of(context).copyWith(
+                                data: SliderTheme.of(context).copyWith(
                                   activeTrackColor: primaryColor,
-                                  inactiveTrackColor:
-                                  Colors.lightBlueAccent,
-                                  trackShape:
-                                  RectangularSliderTrackShape(),
+                                  inactiveTrackColor: Colors.lightBlueAccent,
+                                  trackShape: RectangularSliderTrackShape(),
                                   trackHeight: 4.0,
                                   thumbColor: primaryColor,
                                   thumbShape: RoundSliderThumbShape(
                                       enabledThumbRadius: 12.0),
-                                  overlayColor:
-                                  Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(
+                                  overlayColor: Colors.white.withAlpha(32),
+                                  overlayShape: RoundSliderOverlayShape(
                                       overlayRadius: 28.0),
                                 ),
                                 child: Slider(
@@ -1046,76 +1016,79 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                physicallyChallenge=="Yes" ||  physicallyChallenge=="ஆம்"? Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Physically challenged'),
-                              size: 14,
-                              weight: FontWeight.w600,
+                physicallyChallenge == "Yes" || physicallyChallenge == "ஆம்"
+                    ? Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: FractionallySizedBox(
+                            widthFactor: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate('Physically challenged'),
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 58,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16.0, top: 1.0, bottom: 1.0),
+                                    child: TextFormField(
+                                      controller: physicalController,
+                                      textInputAction: TextInputAction.next,
+                                      autocorrect: true,
+                                      enableSuggestions: true,
+                                      decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          fillColor: lightGreyColor),
+                                      keyboardType: TextInputType.text,
+                                      onSaved: (String val) {
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            height: 58,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
-                              child: TextFormField(
-                                controller: physicalController,
-                                textInputAction: TextInputAction.next,
-                                autocorrect: true,
-                                enableSuggestions: true,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      borderSide:
-                                      BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                keyboardType: TextInputType.text,
-                                onSaved: (String val) {
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ):Container(),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
             Row(
@@ -1144,16 +1117,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2.0,
                                   right: 16.0,
-                                  top: 1.0, bottom: 1.0),
+                                  top: 1.0,
+                                  bottom: 1.0),
                               child: AutoCompleteTextField(
                                 controller: maritalStatusController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   setState(() {
-                                    maritalStatusController.text =
-                                        item;
-                                    maritalStatusValue=item;
-                                    isMaritalStatus=true;
+                                    maritalStatusController.text = item;
+                                    isMaritalStatus = true;
                                   });
                                 },
                                 suggestions: maritalLangList,
@@ -1164,45 +1136,32 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
                                     ),
-                                    enabledBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
-                                    focusedErrorBorder:
-                                    OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(
-                                          Radius.circular(
-                                              10.0)),
-                                      borderSide: BorderSide(
-                                          color: lightGreyColor),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
@@ -1218,14 +1177,28 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 itemSorter: (a, b) {
                                   return a.compareTo(b);
                                 },
+                                onFocusChanged: (value) {
+                                  debugPrint(
+                                      "maritalStatusValue:${maritalStatusController.text}");
+
+                                  isMaritalHide =
+                                      maritalStatusController.text ==
+                                                  "Married" ||
+                                              maritalStatusController.text ==
+                                                  "திருமணமானவர்"
+                                          ? true
+                                          : false;
+                                },
                                 itemFilter: (item, query) {
-                                  isMaritalStatus=false;
+                                  isMaritalHide = false;
 
                                   return item
-                                      .toLowerCase()
-                                      .startsWith(
-                                      query.toLowerCase())|| item == "";
-                                },minLength: 0,),
+                                          .toLowerCase()
+                                          .startsWith(query.toLowerCase()) ||
+                                      item == "";
+                                },
+                                minLength: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -1233,137 +1206,147 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                 Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Pregnant Status'),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SliderTheme(
-                                data:
-                                SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor:
-                                  Colors.lightBlueAccent,
-                                  trackShape:
-                                  RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape: RoundSliderThumbShape(
-                                      enabledThumbRadius: 12.0),
-                                  overlayColor:
-                                  Colors.white.withAlpha(32),
-                                  overlayShape:
-                                  RoundSliderOverlayShape(
-                                      overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: family.pregnantStatus,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged:maritalStatusController.text=="Married"? (value) {
-                                    togglePregnantStatus(value);
-                                  }:null,
-                                ),
-                              ),
-                              TextWidget(
-                                text: pregnantStatus,
+                Visibility(
+                  visible: isMaritalHide,
+                  replacement: Expanded(child: Container()),
+                  child: Expanded(
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: FractionallySizedBox(
+                        widthFactor: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: TextWidget(
+                                text: DemoLocalization.of(context)
+                                    .translate('Pregnant Status'),
                                 size: 14,
                                 weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
-                        ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    activeTrackColor: primaryColor,
+                                    inactiveTrackColor: Colors.lightBlueAccent,
+                                    trackShape: RectangularSliderTrackShape(),
+                                    trackHeight: 4.0,
+                                    thumbColor: primaryColor,
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: 12.0),
+                                    overlayColor: Colors.white.withAlpha(32),
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: 28.0),
+                                  ),
+                                  child: Slider(
+                                    value: family.pregnantStatus,
+                                    min: 0,
+                                    max: 2,
+                                    divisions: 2,
+                                    onChanged: (value) {
+                                      togglePregnantStatus(value);
+                                    },
+                                  ),
+                                ),
+                                TextWidget(
+                                  text: pregnantStatus,
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('How many months'),
-                              size: 14,
-                              weight: FontWeight.w600,
+                pregnantStatus == "Pre Natal" ||
+                        pregnantStatus == "பிறப்புக்கு முன்"
+                    ? Expanded(
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: FractionallySizedBox(
+                            widthFactor: 1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate('How many months'),
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16.0),
+                                  child: SizedBox(
+                                    height: 50,
+                                    child: TextFormField(
+                                      controller: pregnantMonthController,
+                                      onChanged: (value) {
+                                        family.pregnantMonths = value;
+                                      },
+                                      readOnly: pregnantStatus == "Pre Natal" ||
+                                              pregnantStatus ==
+                                                  "பிறப்புக்கு முன்"
+                                          ? false
+                                          : true,
+                                      textInputAction: TextInputAction.next,
+                                      autocorrect: true,
+                                      maxLength: 2,
+                                      enableSuggestions: true,
+                                      decoration: InputDecoration(
+                                          counterText: "",
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide.none,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0)),
+                                            borderSide: BorderSide(
+                                                color: lightGreyColor),
+                                          ),
+                                          fillColor: lightGreyColor),
+                                      keyboardType: TextInputType.number,
+                                      onSaved: (String val) {
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 16.0),
-                            child: SizedBox(
-                              height: 50,
-                              child: TextFormField(
-                                controller: pregnantMonthController,
-                                onChanged: (value) {
-                                  family.pregnantMonths = value;
-                                },
-                                readOnly: pregnantStatus=="Pre Natal" ||  pregnantStatus=="பிறப்புக்கு முன்"?false:true,
-                                textInputAction: TextInputAction.next,
-                                autocorrect: true,
-                                maxLength: 2,
-                                enableSuggestions: true,
-                                decoration: InputDecoration(
-                                    counterText: "",
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                      borderSide: BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                      borderSide: BorderSide(color: lightGreyColor),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                      borderSide: BorderSide(color: lightGreyColor),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0)),
-                                      borderSide: BorderSide(color: lightGreyColor),
-                                    ),
-                                    fillColor: lightGreyColor),
-                                keyboardType: TextInputType.number,
-                                onSaved: (String val) {
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                        ),
+                      )
+                    : Expanded(child: Container())
               ],
             ),
             Row(
@@ -1390,16 +1373,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 2,
-                                  right: 16.0,
-                                  top: 1.0, bottom: 1.0
-                              ),
+                                  left: 2, right: 16.0, top: 1.0, bottom: 1.0),
                               child: AutoCompleteTextField(
                                 controller: educationController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   educationController.text = item;
-                                  isEducation=true;
+                                  isEducation = true;
                                   debugPrint(
                                       "stringList1:${educationController.text}");
                                 },
@@ -1418,25 +1398,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
@@ -1453,12 +1433,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  isEducation=false;
+                                  isEducation = false;
 
                                   return item
-                                      .toLowerCase()
-                                      .startsWith(query.toLowerCase())|| item == "";
-                                },minLength: 0,),
+                                          .toLowerCase()
+                                          .startsWith(query.toLowerCase()) ||
+                                      item == "";
+                                },
+                                minLength: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -1487,13 +1470,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: AutoCompleteTextField(
                                 controller: occupationController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   occupationController.text = item;
-                                  isBusiness=true;
+                                  isBusiness = true;
                                 },
                                 suggestions: businessLangList,
                                 style: TextStyle(
@@ -1510,25 +1493,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
@@ -1545,11 +1528,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  isBusiness=false;
+                                  isBusiness = false;
                                   return item
-                                      .toLowerCase()
-                                      .startsWith(query.toLowerCase())|| item == "";
-                                },minLength: 0,),
+                                          .toLowerCase()
+                                          .startsWith(query.toLowerCase()) ||
+                                      item == "";
+                                },
+                                minLength: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -1578,7 +1564,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: AutoCompleteTextField(
                                   keyboardType: TextInputType.number,
                                   controller: annualController,
@@ -1601,25 +1587,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
                                   itemBuilder: (context, item) {
@@ -1676,7 +1662,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2.0,
                                   right: 16.0,
-                                  top: 1.0, bottom: 1.0),
+                                  top: 1.0,
+                                  bottom: 1.0),
                               child: TextFormField(
                                   controller: mobileNumberController,
                                   textInputAction: TextInputAction.next,
@@ -1694,25 +1681,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       errorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10.0)),
                                         borderSide:
-                                        BorderSide(color: lightGreyColor),
+                                            BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
                                   keyboardType: TextInputType.phone,
@@ -1754,7 +1741,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 controller: mailController,
                                 textInputAction: TextInputAction.next,
@@ -1770,25 +1757,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.emailAddress,
@@ -1906,14 +1893,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               padding: const EdgeInsets.only(
                                   left: 2.0,
                                   right: 16.0,
-                                  top: 1.0, bottom: 1.0
-                              ),
+                                  top: 1.0,
+                                  bottom: 1.0),
                               child: AutoCompleteTextField(
                                 controller: communityController,
                                 clearOnSubmit: false,
                                 itemSubmitted: (item) {
                                   communityController.text = item;
-                                  isSection=true;
+                                  isSection = true;
                                 },
                                 suggestions: sectionLangList,
                                 style: TextStyle(
@@ -1930,25 +1917,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 itemBuilder: (context, item) {
@@ -1965,11 +1952,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   return a.compareTo(b);
                                 },
                                 itemFilter: (item, query) {
-                                  isSection=false;
+                                  isSection = false;
                                   return item
-                                      .toLowerCase()
-                                      .startsWith(query.toLowerCase())|| item == "";
-                                },minLength: 0,),
+                                          .toLowerCase()
+                                          .startsWith(query.toLowerCase()) ||
+                                      item == "";
+                                },
+                                minLength: 0,
+                              ),
                             ),
                           ),
                         ],
@@ -1988,8 +1978,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           Padding(
                             padding: const EdgeInsets.only(top: 4.0),
                             child: TextWidget(
-                              text: DemoLocalization.of(context).translate(
-                                  'Caste'),
+                              text: DemoLocalization.of(context)
+                                  .translate('Caste'),
                               size: 14,
                               weight: FontWeight.w600,
                             ),
@@ -1998,7 +1988,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,  top: 1.0, bottom: 1.0),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 controller: casteController,
                                 textInputAction: TextInputAction.next,
@@ -2014,25 +2004,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -2052,7 +2042,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 )
               ],
             ),
-            Divider(thickness: 1,),
+            Divider(
+              thickness: 1,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -2298,11 +2290,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                               children: [
                                 SizedBox(
                                   width: 250,
-
                                   child: SliderTheme(
                                     data: SliderTheme.of(context).copyWith(
                                       activeTrackColor: primaryColor,
-                                      inactiveTrackColor: Colors.lightBlueAccent,
+                                      inactiveTrackColor:
+                                          Colors.lightBlueAccent,
                                       trackShape: RectangularSliderTrackShape(),
                                       trackHeight: 4.0,
                                       thumbColor: primaryColor,
@@ -2339,10 +2331,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 Container(
                   width: 180,
                 )
-
               ],
             ),
-            Divider(thickness: 1,),
+            Divider(
+              thickness: 1,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -2387,6 +2380,56 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             ),
                             TextWidget(
                               text: textSmoke,
+                              size: 14,
+                              weight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: TextWidget(
+                            text: DemoLocalization.of(context)
+                                .translate('Any Members who use Tobacco?'),
+                            size: 14,
+                            weight: FontWeight.w600,
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: primaryColor,
+                                inactiveTrackColor: Colors.lightBlueAccent,
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 4.0,
+                                thumbColor: primaryColor,
+                                thumbShape: RoundSliderThumbShape(
+                                    enabledThumbRadius: 12.0),
+                                overlayColor: Colors.white.withAlpha(32),
+                                overlayShape: RoundSliderOverlayShape(
+                                    overlayRadius: 28.0),
+                              ),
+                              child: Slider(
+                                value: family.anyMembersWhoUseTobacco,
+                                min: 0,
+                                max: 2,
+                                divisions: 2,
+                                onChanged: (value) {
+                                  toggleSwitch2(value);
+                                },
+                              ),
+                            ),
+                            TextWidget(
+                              text: textTobacco,
                               size: 14,
                               weight: FontWeight.w600,
                             )
@@ -2446,372 +2489,359 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                textDrink=="Yes" ||  textDrink=="ஆம்"?Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 1.05,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Drinking Usage'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                value: family.drinkingUsage,
-                                min: 0,
-                                max: 3,
-                                divisions: 3,
-                                onChanged: (value) {
-                                  toggleDrinking(value);
-                                },
-                              ),
-                            ),
-                            TextWidget(
-                              text: textDrinkUsage,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ):Container(),
               ],
             ),
-            textDrink=="Yes" || textDrink=="ஆம்"?Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textDrinkUsage=="Stopped" ||  textDrinkUsage=="நிறுத்தப்பட்டது"? Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 1.05,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Stopped by'),
-                            size: 14,
-                            color: darkColor,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 28.0),
-                              ),
-                              child: Slider(
-                                value: family.stoppedBy,
-                                min: 0,
-                                max: 2,
-                                divisions: 1,
-                                onChanged: (value) {
-                                  toggleStopped(value);
-                                },
-                              ),
-                            ),
-                            TextWidget(
-                              text: textStopped,
-                              size: 14,
-                              weight: FontWeight.w600,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ):Container(),
-                Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 0.75,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('No of years'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0),
-                          child: SizedBox(
-                            height: 50,
-                            child: TextFormField(
-                              controller: noOfYearsController,
-                              onChanged: (value) {
-                                family.noOfYears = value;
-                              },
-                              textInputAction: TextInputAction.next,
-                              autocorrect: true,
-                              maxLength: 2,
-                              enableSuggestions: true,
-                              decoration: InputDecoration(
-                                  counterText: "",
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              keyboardType: TextInputType.number,
-                              onSaved: (String val) {
-                                setState(() {});
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                textStopped=="Treatment" ||  textStopped=="சிகிச்சை"? Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 0.75,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('When you had a treatment'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              right: 16.0),
-                          child: SizedBox(
-                            height: 50,
-                            child: TextFormField(
-                              controller: whenTreatmentController,
-                              onChanged: (value) {
-                                family.whenTreatment = value;
-                              },
-                              textInputAction: TextInputAction.next,
-                              autocorrect: true,
-                              maxLength: 2,
-                              enableSuggestions: true,
-                              decoration: InputDecoration(
-                                  counterText: "",
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                    borderSide: BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              keyboardType: TextInputType.text,
-                              onSaved: (String val) {
-                                setState(() {});
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ):Container(),
-              ],
-            ):Container(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textStopped=="Treatment" ||  textStopped=="சிகிச்சை"? Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            textDrink == "Yes" || textDrink == "ஆம்"
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextWidget(
-                          text: DemoLocalization.of(context)
-                              .translate('Where you had a treatment'),
-                          size: 14,
-                          weight: FontWeight.w600,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16.0),
-                        child: SizedBox(
-                          height: 50,
-                          child: TextFormField(
-                            controller: whereTreatmentController,
-                            onChanged: (value) {
-                              family.whereTreatment = value;
-                            },
-                            textInputAction: TextInputAction.next,
-                            autocorrect: true,
-                            maxLength: 2,
-                            enableSuggestions: true,
-                            decoration: InputDecoration(
-                                counterText: "",
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                      textDrink == "Yes" || textDrink == "ஆம்"
+                          ? Expanded(
+                              child: FractionallySizedBox(
+                                widthFactor: 1.05,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Drinking Usage'),
+                                        size: 14,
+                                        weight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        SliderTheme(
+                                          data:
+                                              SliderTheme.of(context).copyWith(
+                                            activeTrackColor: primaryColor,
+                                            inactiveTrackColor:
+                                                Colors.lightBlueAccent,
+                                            trackShape:
+                                                RectangularSliderTrackShape(),
+                                            trackHeight: 4.0,
+                                            thumbColor: primaryColor,
+                                            thumbShape: RoundSliderThumbShape(
+                                                enabledThumbRadius: 12.0),
+                                            overlayColor:
+                                                Colors.white.withAlpha(32),
+                                            overlayShape:
+                                                RoundSliderOverlayShape(
+                                                    overlayRadius: 28.0),
+                                          ),
+                                          child: Slider(
+                                            value: family.drinkingUsage,
+                                            min: 0,
+                                            max: 3,
+                                            divisions: 3,
+                                            onChanged: (value) {
+                                              toggleDrinking(value);
+                                            },
+                                          ),
+                                        ),
+                                        TextWidget(
+                                          text: textDrinkUsage,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                                  borderSide: BorderSide(color: lightGreyColor),
-                                ),
-                                fillColor: lightGreyColor),
-                            keyboardType: TextInputType.text,
-                            onSaved: (String val) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ):Container(),
-                Expanded(
-                  child: SizedBox(
-                    width: 200,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Any Members who use Tobacco?'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            SliderTheme(
-                              data: SliderTheme.of(context).copyWith(
-                                activeTrackColor: primaryColor,
-                                inactiveTrackColor: Colors.lightBlueAccent,
-                                trackShape: RectangularSliderTrackShape(),
-                                trackHeight: 4.0,
-                                thumbColor: primaryColor,
-                                thumbShape: RoundSliderThumbShape(
-                                    enabledThumbRadius: 12.0),
-                                overlayColor: Colors.white.withAlpha(32),
-                                overlayShape: RoundSliderOverlayShape(
-                                    overlayRadius: 28.0),
                               ),
-                              child: Slider(
-                                value: family.anyMembersWhoUseTobacco,
-                                min: 0,
-                                max: 2,
-                                divisions: 2,
-                                onChanged: (value) {
-                                  toggleSwitch2(value);
-                                },
-                              ),
-                            ),
-                            TextWidget(
-                              text: textTobacco,
-                              size: 14,
-                              weight: FontWeight.w600,
                             )
-                          ],
+                          : Expanded(child: Container()),
+                      textDrinkUsage == "Stopped" ||
+                              textDrinkUsage == "நிறுத்தப்பட்டது"
+                          ? Expanded(
+                              child: FractionallySizedBox(
+                                widthFactor: 1.05,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Stopped by'),
+                                        size: 14,
+                                        color: darkColor,
+                                        weight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Column(
+                                      children: [
+                                        SliderTheme(
+                                          data:
+                                              SliderTheme.of(context).copyWith(
+                                            activeTrackColor: primaryColor,
+                                            inactiveTrackColor:
+                                                Colors.lightBlueAccent,
+                                            trackShape:
+                                                RectangularSliderTrackShape(),
+                                            trackHeight: 4.0,
+                                            thumbColor: primaryColor,
+                                            thumbShape: RoundSliderThumbShape(
+                                                enabledThumbRadius: 12.0),
+                                            overlayColor:
+                                                Colors.white.withAlpha(32),
+                                            overlayShape:
+                                                RoundSliderOverlayShape(
+                                                    overlayRadius: 28.0),
+                                          ),
+                                          child: Slider(
+                                            value: family.stoppedBy,
+                                            min: 0,
+                                            max: 2,
+                                            divisions: 1,
+                                            onChanged: (value) {
+                                              toggleStopped(value);
+                                            },
+                                          ),
+                                        ),
+                                        TextWidget(
+                                          text: textStopped,
+                                          size: 14,
+                                          weight: FontWeight.w600,
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Expanded(child: Container()),
+                      textDrinkUsage == "Stopped" ||
+                              textDrinkUsage == "நிறுத்தப்பட்டது"
+                          ? Expanded(
+                              child: FractionallySizedBox(
+                                widthFactor: 0.75,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('No of years'),
+                                        size: 14,
+                                        weight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: SizedBox(
+                                        height: 50,
+                                        child: TextFormField(
+                                          controller: noOfYearsController,
+                                          onChanged: (value) {
+                                            family.noOfYears = value;
+                                          },
+                                          textInputAction: TextInputAction.next,
+                                          autocorrect: true,
+                                          maxLength: 2,
+                                          enableSuggestions: true,
+                                          decoration: InputDecoration(
+                                              counterText: "",
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              fillColor: lightGreyColor),
+                                          keyboardType: TextInputType.number,
+                                          onSaved: (String val) {
+                                            setState(() {});
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Expanded(child: Container()),
+                    ],
+                  )
+                : Container(),
+            textStopped == "Treatment" || textStopped == "சிகிச்சை"
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: FractionallySizedBox(
+                          widthFactor: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('When you had a treatment'),
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: TextFormField(
+                                    controller: whenTreatmentController,
+                                    onChanged: (value) {
+                                      family.whenTreatment = value;
+                                    },
+                                    textInputAction: TextInputAction.next,
+                                    autocorrect: true,
+                                    maxLength: 2,
+                                    enableSuggestions: true,
+                                    decoration: InputDecoration(
+                                        counterText: "",
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide.none,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        fillColor: lightGreyColor),
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (String val) {
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                      ),
+                      Expanded(
+                        child: FractionallySizedBox(
+                          widthFactor: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Where you had a treatment'),
+                                  size: 14,
+                                  weight: FontWeight.w600,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16.0),
+                                child: SizedBox(
+                                  height: 50,
+                                  child: TextFormField(
+                                    controller: whereTreatmentController,
+                                    onChanged: (value) {
+                                      family.whereTreatment = value;
+                                    },
+                                    textInputAction: TextInputAction.next,
+                                    autocorrect: true,
+                                    maxLength: 2,
+                                    enableSuggestions: true,
+                                    decoration: InputDecoration(
+                                        counterText: "",
+                                        border: OutlineInputBorder(
+                                          borderSide: BorderSide.none,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                          borderSide:
+                                              BorderSide(color: lightGreyColor),
+                                        ),
+                                        fillColor: lightGreyColor),
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (String val) {
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                : Container(),
+            Divider(
+              thickness: 1,
             ),
-            Divider(thickness: 1,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -2905,25 +2935,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -2939,7 +2969,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                  DateFormat(" d-MMMM-y").format(date);
+                                      DateFormat(" d-MMMM-y").format(date);
                                   family.firstDose = dateFormat;
                                   firstDosePicker.text = dateFormat;
                                 },
@@ -2972,9 +3002,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             height: 58,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  right: 16.0,
-                                  top: 1.0, bottom: 1.0
-                              ),
+                                  right: 16.0, top: 1.0, bottom: 1.0),
                               child: TextFormField(
                                 textInputAction: TextInputAction.next,
                                 autocorrect: true,
@@ -2990,25 +3018,25 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
                                       borderSide:
-                                      BorderSide(color: lightGreyColor),
+                                          BorderSide(color: lightGreyColor),
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
@@ -3025,7 +3053,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2022));
                                   String dateFormat =
-                                  DateFormat(" d-MMMM-y").format(date);
+                                      DateFormat(" d-MMMM-y").format(date);
                                   secondDosePicker.text = dateFormat;
                                   family.secondDose = dateFormat;
                                   // "${date.day}/${date.month}/${date.year}";
@@ -3050,23 +3078,24 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                       if (_stepTwoKey.currentState.validate()) {
                         // if (_stepTwoKey != null) {
                         _stepTwoKey.currentState.save();
-                        print("GET_____________________________" + isRelationShip.toString());
-                        if (relationshipController.text != "" && !isRelationShip) {
+                        print("GET_____________________________" +
+                            isRelationShip.toString());
+                        if (relationshipController.text != "" &&
+                            !isRelationShip) {
                           setState(() {
                             relationshipController.text = "";
                             snackBarAlert("Error",
                                 "RelatiionShip  must be in List", errorColor);
                             return;
                           });
-                        }  else if (genderController.text != "" &&
-                            !isGender) {
+                        } else if (genderController.text != "" && !isGender) {
                           setState(() {
                             genderController.text = "";
-                            snackBarAlert("Error",
-                                "Gender  must be in List", errorColor);
+                            snackBarAlert(
+                                "Error", "Gender  must be in List", errorColor);
                             return;
                           });
-                        }else if (maritalStatusController.text != "" &&
+                        } else if (maritalStatusController.text != "" &&
                             !isMaritalStatus) {
                           setState(() {
                             maritalStatusController.text = "";
@@ -3074,7 +3103,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 "Marital Status  must be in List", errorColor);
                             return;
                           });
-                        }else if (bloodGroupController.text != "" &&
+                        } else if (bloodGroupController.text != "" &&
                             !isBloodGrp) {
                           setState(() {
                             bloodGroupController.text = "";
@@ -3082,37 +3111,38 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 "Blood Group  must be in List", errorColor);
                             return;
                           });
-                        }else if (educationController.text != "" &&
+                        } else if (educationController.text != "" &&
                             !isEducation) {
                           setState(() {
                             educationController.text = "";
-                            snackBarAlert("Error",
-                                "Education Qualification must be in List", errorColor);
+                            snackBarAlert(
+                                "Error",
+                                "Education Qualification must be in List",
+                                errorColor);
                             return;
                           });
-                        }else if (occupationController.text != "" &&
+                        } else if (occupationController.text != "" &&
                             !isBusiness) {
                           setState(() {
                             occupationController.text = "";
-                            snackBarAlert("Error",
-                                "Business must be in List", errorColor);
+                            snackBarAlert("Error", "Business must be in List",
+                                errorColor);
                             return;
                           });
-                        }else if (communityController.text != "" &&
+                        } else if (communityController.text != "" &&
                             !isSection) {
                           setState(() {
                             communityController.text = "";
-                            snackBarAlert("Error",
-                                "Section must be in List", errorColor);
+                            snackBarAlert(
+                                "Error", "Section must be in List", errorColor);
                             return;
                           });
-                        }
-                        else {
+                        } else {
                           setState(() {
                             this.isLoading = true;
                           });
                           uploadFile();
-                        }                          // }
+                        } // }
                       }
                     },
                     child: Container(
@@ -3179,46 +3209,46 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                   familyIndex >= 0
                       ? Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: InkWell(
-                      onTap: () {
-                        widget.deleteFields(family);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            color: Colors.black45,
-                            style: BorderStyle.solid,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.delete_forever_outlined,
-                              color: errorColor,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: TextWidget(
-                                text: DemoLocalization.of(context)
-                                    .translate('Delete'),
-                                color: darkColor,
-                                weight: FontWeight.w700,
-                                size: 14,
+                          margin: EdgeInsets.only(left: 10),
+                          child: InkWell(
+                            onTap: () {
+                              widget.deleteFields(family);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: Colors.black45,
+                                  style: BorderStyle.solid,
+                                  width: 1.0,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.delete_forever_outlined,
+                                    color: errorColor,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: TextWidget(
+                                      text: DemoLocalization.of(context)
+                                          .translate('Delete'),
+                                      color: darkColor,
+                                      weight: FontWeight.w700,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
+                          ),
+                        )
                       : Container(),
                   isLoading
                       ? Container(
-                      margin: EdgeInsets.only(left: 10),
-                      child: CircularProgressIndicator())
+                          margin: EdgeInsets.only(left: 10),
+                          child: CircularProgressIndicator())
                       : Visibility(visible: false, child: Text("Saving")),
                   Container()
                 ],
@@ -3229,21 +3259,19 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       ),
     );
   }
+
   void togglePregnantStatus(double value) {
     family.pregnantStatus = value;
     setState(() {
       if (value == 0)
-        pregnantStatus =
-            DemoLocalization.of(context).translate('Natal');
+        pregnantStatus = DemoLocalization.of(context).translate('Natal');
       else if (value == 1) {
         pregnantStatus = DemoLocalization.of(context).translate('Pre Natal');
         debugPrint("isPregnant$isPhysical");
-
       } else {
         pregnantStatus = DemoLocalization.of(context).translate('Post Natal');
-        isPregnant=true;
+        isPregnant = true;
         debugPrint("isPregnant$isPhysical");
-
       }
     });
   }
@@ -3257,24 +3285,23 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       else if (value == 1) {
         physicallyChallenge = DemoLocalization.of(context).translate('No');
         debugPrint("isPhysical2$isPhysical");
-
       } else {
         physicallyChallenge = DemoLocalization.of(context).translate('Yes');
-        isPhysical=true;
+        isPhysical = true;
         debugPrint("isPhysical1$isPhysical");
-
       }
     });
   }
+
   void toggleDrinking(double value) {
     family.drinkingUsage = value;
     setState(() {
       if (value == 0)
         textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
       if (value == 1)
-        textDrinkUsage  = DemoLocalization.of(context).translate('Moderate');
+        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
       if (value == 2)
-        textDrinkUsage  = DemoLocalization.of(context).translate('Heavy');
+        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
       if (value == 3)
         textDrinkUsage = DemoLocalization.of(context).translate('Stopped');
     });
@@ -3364,6 +3391,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         textSmoke = DemoLocalization.of(context).translate('Yes');
     });
   }
+
   void toggleStopped(double value) {
     family.stoppedBy = value;
     setState(() {
@@ -3413,7 +3441,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getGender() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionGender).get();
+        await firestoreInstance.collection(collectionGender).get();
     genderList = querySnapshot.docs.map((doc) => doc.data()).toList();
     genderList.forEach((element) {
       LinkedHashMap<String, dynamic> genderData = element[collectionGender];
@@ -3429,7 +3457,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getRelationShip() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionRelation).get();
+        await firestoreInstance.collection(collectionRelation).get();
     relationList = querySnapshot.docs.map((doc) => doc.data()).toList();
     relationList.forEach((element) {
       LinkedHashMap<String, dynamic> relationData = element[mapRelation];
@@ -3445,11 +3473,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getEducation() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionEducation).get();
+        await firestoreInstance.collection(collectionEducation).get();
     educationList = querySnapshot.docs.map((doc) => doc.data()).toList();
     educationList.forEach((element) {
       LinkedHashMap<String, dynamic> educationData =
-      element[collectionEducation];
+          element[collectionEducation];
       debugPrint("educationData:$educationData");
       if (educationData != null) {
         qualificationVal = educationData[language];
@@ -3462,11 +3490,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getMaritalStatus() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionMaritalStatus).get();
+        await firestoreInstance.collection(collectionMaritalStatus).get();
     maritalList = querySnapshot.docs.map((doc) => doc.data()).toList();
     maritalList.forEach((element) {
       LinkedHashMap<String, dynamic> maritalData =
-      element[collectionMaritalStatus];
+          element[collectionMaritalStatus];
       debugPrint("maritalData:$maritalData");
       if (maritalData != null) {
         maritalStatusVal = maritalData[language];
@@ -3479,7 +3507,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getBusiness() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionBusiness).get();
+        await firestoreInstance.collection(collectionBusiness).get();
     businessList = querySnapshot.docs.map((doc) => doc.data()).toList();
     businessList.forEach((element) {
       LinkedHashMap<String, dynamic> businessData = element[collectionBusiness];
@@ -3495,7 +3523,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getIncome() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionAnnualIncome).get();
+        await firestoreInstance.collection(collectionAnnualIncome).get();
     incomeList = querySnapshot.docs.map((doc) => doc.data()).toList();
     incomeList.forEach((element) {
       final incomeData = element[mapAnnualIncome];
@@ -3510,7 +3538,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getSection() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionSection).get();
+        await firestoreInstance.collection(collectionSection).get();
     sectionList = querySnapshot.docs.map((doc) => doc.data()).toList();
     sectionList.forEach((element) {
       LinkedHashMap<String, dynamic> sectionData = element[collectionSection];
@@ -3526,7 +3554,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   getBloodGroup() async {
     // Get docs from collection reference
     QuerySnapshot querySnapshot =
-    await firestoreInstance.collection(collectionBloodGroup).get();
+        await firestoreInstance.collection(collectionBloodGroup).get();
     bloodGrpList = querySnapshot.docs.map((doc) => doc.data()).toList();
     debugPrint("bloodGrpList:$bloodGrpList");
 
@@ -3591,8 +3619,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         physicallyChallenge = DemoLocalization.of(context).translate('Yes');
 
       if (family.pregnantStatus == 0)
-        pregnantStatus =
-            DemoLocalization.of(context).translate('Natal');
+        pregnantStatus = DemoLocalization.of(context).translate('Natal');
       else if (family.pregnantStatus == 1)
         pregnantStatus = DemoLocalization.of(context).translate('Pre Natal');
       else
@@ -3650,11 +3677,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
 
       if (family.drinkingUsage == 0)
         textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
-      if (family.drinkingUsage  == 1)
-        textDrinkUsage  = DemoLocalization.of(context).translate('Moderate');
-      if (family.drinkingUsage  == 2)
-        textDrinkUsage  = DemoLocalization.of(context).translate('Heavy');
-      if (family.drinkingUsage  == 3)
+      if (family.drinkingUsage == 1)
+        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
+      if (family.drinkingUsage == 2)
+        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
+      if (family.drinkingUsage == 3)
         textDrinkUsage = DemoLocalization.of(context).translate('Stopped');
 
       if (family.stoppedBy == 0)
@@ -3684,7 +3711,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       datePicker.text = family.dob.toString();
       ageController.text = family.age.toString();
       maritalStatusController.text = family.maritalStatus.toString();
-      pregnantMonthController.text=family.pregnantMonths.toString();
+      pregnantMonthController.text = family.pregnantMonths.toString();
       bloodGroupController.text = family.bloodGroup.toString();
       educationController.text = family.education.toString();
       occupationController.text = family.occupation.toString();
@@ -3695,9 +3722,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
       physicalController.text = family.physical.toString();
-      noOfYearsController.text=family.noOfYears.toString();
-      whenTreatmentController.text=family.whereTreatment.toString();
-      whereTreatmentController.text=family.whereTreatment.toString();
+      noOfYearsController.text = family.noOfYears.toString();
+      whenTreatmentController.text = family.whereTreatment.toString();
+      whereTreatmentController.text = family.whereTreatment.toString();
       debugPrint("physically:${family.physical.toString()}");
       if (family.relationship != "") {
         isRelationShip = true;
@@ -3735,7 +3762,4 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     getIncome();
     setState(() {});
   }
-
-
-
 }
