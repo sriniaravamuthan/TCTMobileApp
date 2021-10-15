@@ -122,6 +122,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       "villageCode": searchCampaignRequest.villageCode,
       "languageCode": searchCampaignRequest.languageCode,
       "searchKey": searchCampaignRequest.searchKey,
+      "offline":false,
       "limit": searchCampaignRequest.limit,
       "page": currentPage
     };

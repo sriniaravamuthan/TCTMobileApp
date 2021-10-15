@@ -88,7 +88,8 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
       "campaignName": searchCampaignRequest.campaignName,
       "villageCode": searchCampaignRequest.villageCode,
       "languageCode": searchCampaignRequest.languageCode,
-      "searchKey": null
+      "searchKey": null,
+      "offline":true
     };
     String body = json.encode(map);
     final responseSearchCampaign = await http.post(Uri.parse(searchCampaignURL),
