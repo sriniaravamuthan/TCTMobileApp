@@ -1043,12 +1043,28 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
       setState(() {});
-    } else if (contactPerson != "" && villageName != "") {
+    } else if (familyHead != "" && villageCode != "") {
+      isSearch = true;
+      query = firestoreInstance
+          .collection('testCollection')
+          .where("Location.name", isEqualTo: familyHead.toString().capitalize)
+          .where("Location.villagesCode", isEqualTo: villageCode)
+          .limit(30);
+      setState(() {});
+    }else if (contactPerson != "" && villageCode != "") {
+      isSearch = true;
+      query = firestoreInstance
+          .collection('testCollection')
+          .where("Location.name", isEqualTo: familyHead.toString().capitalize)
+          .where("Location.villagesCode", isEqualTo: villageCode)
+          .limit(30);
+      setState(() {});
+    }else if (contactPerson != "" && villageCode != "") {
       isSearch = true;
       query = firestoreInstance
           .collection('testCollection')
           .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
-          .where("Location.villageName", isEqualTo: villageName)
+          .where("Location.villagesCode", isEqualTo: villageCode)
           .limit(30);
       setState(() {});
     } else if (familyHead != "") {

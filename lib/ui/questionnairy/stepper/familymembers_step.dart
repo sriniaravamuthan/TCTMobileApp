@@ -2730,7 +2730,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     },
                                     textInputAction: TextInputAction.next,
                                     autocorrect: true,
-                                    maxLength: 2,
+                                    maxLength: 4,
                                     enableSuggestions: true,
                                     decoration: InputDecoration(
                                         counterText: "",
@@ -2801,7 +2801,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     },
                                     textInputAction: TextInputAction.next,
                                     autocorrect: true,
-                                    maxLength: 2,
                                     enableSuggestions: true,
                                     decoration: InputDecoration(
                                         counterText: "",
