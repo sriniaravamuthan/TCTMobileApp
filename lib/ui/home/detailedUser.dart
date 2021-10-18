@@ -1289,6 +1289,25 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 SizedBox(height: 10,),
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
+                                                  child: TextWidget(
+                                                    text:  DemoLocalization.of(context).translate('Physically challenged'),
+                                                    weight: FontWeight.w800,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: TextWidget(
+                                                    text: getPhysical(demographicList.family[index]),
+                                                    weight: FontWeight.w400,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                  ),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
                                                   child: SizedBox(
                                                     width: 150,
                                                     child: TextWidget(
