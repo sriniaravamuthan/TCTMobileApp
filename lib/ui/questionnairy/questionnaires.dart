@@ -42,7 +42,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   String language;
   Location location = new Location();
   var addLength;
-
   var fromNoController,
       projectCodeController,
       streetNameController,
@@ -50,7 +49,6 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       contactPersonController,
       noOfFamilyPersonController;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
   bool villageName = false,
       villageCode = false,
       panchCode = false,
@@ -72,7 +70,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   var height, width;
   List<String> streets = [];
   String documentId = "";
-  bool isEdit = false;
+  bool isEdit = false,  isMemberStatus = false;
   Function makeLoadData;
   final pageController = PageController(initialPage: 0);
   int maxCounts = 0;
@@ -110,6 +108,8 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     documentId = arguments[2];
     isEdit = arguments[3];
     makeLoadData = arguments[4];
+    isMemberStatus = arguments[5];
+
     debugPrint("isEdit" + isEdit.toString());
 
     print("GET____________________" + streets.toString());

@@ -293,6 +293,9 @@ class Family {
   String whenTreatment = "";
 
   double anyMembersWhoUseTobacco = 0;
+  double died=0;
+  double migrate=0;
+  String migrateReason="";
   double isVaccinationDone = 0;
   String firstDose;
   String secondDose;

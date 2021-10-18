@@ -548,7 +548,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                           streets,
                                           "",
                                           false,
-                                          makeLoadData
+                                          makeLoadData,
+                                          false
                                         ],
                                       ) /*.then((value) async => {clearSearch()})*/;
                                     },
@@ -847,7 +848,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                                               streets,
                                                               documentId[index],
                                                               true,
-                                                              makeLoadData
+                                                              makeLoadData,
+                                                            true
                                                             ],
                                                           ) /*.then((value) => clearSearch())*/;
                                                         },
