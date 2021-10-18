@@ -3732,7 +3732,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       casteController.text = family.caste.toString();
       physicalController.text = family.physical.toString();
       noOfYearsController.text = family.noOfYears.toString();
-      whenTreatmentController.text = family.whereTreatment.toString();
+      whenTreatmentController.text = family.whenTreatment.toString();
       whereTreatmentController.text = family.whereTreatment.toString();
       debugPrint("physically:${family.physical.toString()}");
       if (family.relationship != "") {
