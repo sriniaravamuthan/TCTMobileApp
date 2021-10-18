@@ -169,7 +169,7 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       newFamily.stoppedBy = 0;
       newFamily.noOfYears = "";
       newFamily.whenTreatment = "";
-      newFamily.whenTreatment = "";
+      newFamily.whereTreatment = "";
       newFamily.anyMembersWhoSmoke = 0;
 
     } else {
@@ -669,6 +669,34 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                   size: 14,
                                 ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: SizedBox(
+                                  width: 150,
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate(
+                                        'Any Members who use Tobacco?'),
+                                    weight: FontWeight.w800,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: getSliderValue(
+                                      familyList[index]
+                                          .anyMembersWhoUseTobacco),
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -678,34 +706,6 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               crossAxisAlignment:
                               CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: SizedBox(
-                                    width: 150,
-                                    child: TextWidget(
-                                      text: DemoLocalization.of(context)
-                                          .translate(
-                                          'Any Members who use Tobacco?'),
-                                      weight: FontWeight.w800,
-                                      color: darkColor,
-                                      size: 14,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: TextWidget(
-                                    text: getSliderValue(
-                                        familyList[index]
-                                            .anyMembersWhoUseTobacco),
-                                    weight: FontWeight.w400,
-                                    color: darkColor,
-                                    size: 14,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: TextWidget(
@@ -793,6 +793,28 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                     size: 14,
                                   ),
                                 ),
+                                SizedBox(height: 10,),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: SizedBox(
+                                    width: 150,
+                                    child: TextWidget(
+                                      text: DemoLocalization.of(context).translate('When you had a treatment'),
+                                      weight: FontWeight.w800,
+                                      color: darkColor,
+                                      size: 14,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: TextWidget(
+                                    text:familyList[index].whenTreatment,
+                                    weight: FontWeight.w400,
+                                    color: darkColor,
+                                    size: 14,
+                                  ),
+                                ),
                               ],
                             )),
                         Padding(
@@ -801,27 +823,6 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                             crossAxisAlignment:
                             CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: SizedBox(
-                                  width: 150,
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context).translate('When you had a treatment'),
-                                    weight: FontWeight.w800,
-                                    color: darkColor,
-                                    size: 14,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: TextWidget(
-                                  text:familyList[index].whenTreatment,
-                                  weight: FontWeight.w400,
-                                  color: darkColor,
-                                  size: 14,
-                                ),
-                              ),
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: SizedBox(
