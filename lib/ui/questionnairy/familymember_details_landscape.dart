@@ -138,6 +138,8 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       newFamily.dob = "";
       newFamily.age = 0;
       newFamily.maritalStatus = "";
+      newFamily.pregnantStatus=0;
+      newFamily.pregnantMonths="";
       newFamily.bloodGroup = "";
       newFamily.physicallyChallenge = 0;
       newFamily.physical="";
@@ -163,7 +165,13 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       newFamily.firstDose = "";
       newFamily.secondDose = "";
       newFamily.anyMembersWhoDrink = 0;
+      newFamily.drinkingUsage = 0;
+      newFamily.stoppedBy = 0;
+      newFamily.noOfYears = "";
+      newFamily.whenTreatment = "";
+      newFamily.whenTreatment = "";
       newFamily.anyMembersWhoSmoke = 0;
+
     } else {
       newFamily = familyList[familyIndex];
     }
@@ -342,6 +350,15 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
                                   text: getTexts(familyList[index]),
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
+                                  text: getPregnant(familyList[index]),
                                   weight: FontWeight.w400,
                                   color: darkColor,
                                   size: 14,
@@ -925,6 +942,15 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
                               Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: TextWidget(
+                                  text: getPregnant(familyList[index]),
+                                  weight: FontWeight.w400,
+                                  color: darkColor,
+                                  size: 14,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: TextWidget(
                                   text: familyList[index].mobileNumber,
                                   weight: FontWeight.w400,
                                   color: darkColor,
@@ -1461,5 +1487,15 @@ class _FamilyMemberDetailsLandscapeState extends State<FamilyMemberDetailsLandsc
       return "*******" +    aadharNumber;
     }
 
+  }
+
+  getPregnant(Family family) {
+    String pregnant="";
+    if (family.pregnantStatus == 1)
+      pregnant += DemoLocalization.of(context).translate('Pre Natal');
+    if (pregnant != "") pregnant += ", ";
+    pregnant +=  family.pregnantMonths != ""?family.pregnantMonths + "" "months" :"";
+
+    return pregnant;
   }
 }

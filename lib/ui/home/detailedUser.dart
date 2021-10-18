@@ -1028,6 +1028,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(2.0),
                                                   child: TextWidget(
+                                                    text: getPregnant(demographicList.family[index]),
+                                                    weight: FontWeight.w400,
+                                                    color: darkColor,
+                                                    size: 14,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: TextWidget(
                                                     text: demographicList.family[index].mobileNumber,
                                                     weight: FontWeight.w400,
                                                     color: darkColor,
@@ -2311,6 +2320,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                                           Padding(
                                                             padding: const EdgeInsets.all(2.0),
                                                             child: TextWidget(
+                                                              text: getPregnant(demographicList.family[index]),
+                                                              weight: FontWeight.w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding: const EdgeInsets.all(2.0),
+                                                            child: TextWidget(
                                                               text: demographicList.family[index].mobileNumber,
                                                               weight: FontWeight.w400,
                                                               color: darkColor,
@@ -2809,6 +2827,15 @@ class _DetailScreenState extends State<DetailScreen> {
       return "*******" +    aadharNumber;
     }
 
+  }
+  getPregnant(Family family) {
+    String pregnant="";
+    if (family.pregnantStatus == 1)
+      pregnant += DemoLocalization.of(context).translate('Pre Natal');
+    if (pregnant != "") pregnant += ", ";
+    pregnant +=  family.pregnantMonths != ""?family.pregnantMonths + "" "months" :"";
+
+    return pregnant;
   }
 
    getDOB(String dob) {

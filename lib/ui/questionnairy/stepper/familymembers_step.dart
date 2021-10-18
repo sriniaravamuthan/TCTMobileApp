@@ -45,6 +45,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   GlobalKey<FormState> _stepTwoKey = new GlobalKey<FormState>();
   bool isRelationShip = false,
       isGender = false,
+      isGenderHide = false,
       isMaritalStatus = false,
       isMaritalHide = false,
       isBloodGrp = false,
@@ -620,6 +621,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           weight: FontWeight.w600,
                                         ));
                                   },
+                                    onFocusChanged: (value) {
+                                      isGenderHide =
+                                      genderController.text ==
+                                          "Female" ||
+                                          genderController.text ==
+                                              "பெண்"
+                                          ? true
+                                          : false;
+                                    },
                                   itemSorter: (a, b) {
                                     return a.compareTo(b);
                                   },
@@ -1207,7 +1217,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Visibility(
-                  visible: isMaritalHide,
+                  visible: isGenderHide && isMaritalHide,
                   replacement: Expanded(child: Container()),
                   child: Expanded(
                     child: Align(
