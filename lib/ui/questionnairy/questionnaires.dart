@@ -70,7 +70,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
   var height, width;
   List<String> streets = [];
   String documentId = "";
-  bool isEdit = false,  isMemberStatus = false;
+  bool isEdit = false, isMemberStatus = false;
   Function makeLoadData;
   final pageController = PageController(initialPage: 0);
   int maxCounts = 0;
@@ -110,7 +110,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     makeLoadData = arguments[4];
     isMemberStatus = arguments[5];
 
-    debugPrint("isEdit" + isEdit.toString());
+    debugPrint("isMemberStatus" + isMemberStatus.toString());
 
     print("GET____________________" + streets.toString());
 
@@ -2136,9 +2136,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                         ),
                         orientation == Orientation.portrait
                             ? FamilyMemberDetailsPortrait(
-                                demographicFamily, orientation)
+                                demographicFamily, orientation, isMemberStatus)
                             : FamilyMemberDetailsLandscape(
-                                demographicFamily, orientation),
+                                demographicFamily, orientation, isMemberStatus),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [

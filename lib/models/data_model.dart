@@ -1,6 +1,6 @@
 /*
  * *
- *  Created by Dharmaraj, Kanmalai Technologies Pvt. Ltd on 10/4/21 4:00 PM.
+ *  Created by Gayathri Technologies Pvt. Ltd on 10/4/21 4:00 PM.
  *  Copyright (c) 2021. All rights reserved.
  *  Last modified 10/4/21 4:00 PM by Kanmalai.
  * /
@@ -293,15 +293,16 @@ class Family {
   String whenTreatment = "";
 
   double anyMembersWhoUseTobacco = 0;
-  double died=0;
-  double migrate=0;
-  String migrateReason="";
+  double died = 0;
+  double migrate = 0;
+  String migrateReason = "";
+  String diedUpdateBy = "";
+  String diedUpdateDate = "";
   double isVaccinationDone = 0;
   String firstDose;
   String secondDose;
 
   String isExpanded = "Show More"; //  For internal purpose
-
   Family(
       {this.name,
       this.position,
@@ -312,6 +313,8 @@ class Family {
       this.dob,
       this.age,
       this.maritalStatus,
+      this.pregnantStatus,
+      this.pregnantMonths,
       this.bloodGroup,
       this.physicallyChallenge,
       this.education,
@@ -324,12 +327,26 @@ class Family {
       this.caste,
       this.physical,
       this.photo,
+      this.govtInsurance,
+      this.privateInsurance,
+      this.oldPension,
+      this.widowedPension,
+      this.retirementPension,
       this.anyMembersWhoSmoke,
       this.anyMembersWhoDrink,
+      this.drinkingUsage,
+      this.stoppedBy,
+      this.noOfYears,
+      this.whereTreatment,
+      this.whenTreatment,
       this.anyMembersWhoUseTobacco,
+      this.migrateReason,
+      this.diedUpdateBy,
+      this.diedUpdateDate,
       this.isVaccinationDone,
       this.firstDose,
-      this.secondDose});
+      this.secondDose,
+      this.isExpanded});
 
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];
@@ -353,7 +370,6 @@ class Family {
     caste = json['caste  '];
     physical = json['physical  '];
     photo = json['photo  '];
-
     anyMembersWhoSmoke = json['anyMembersWhoSmoke'];
     anyMembersWhoDrink = json['anyMembersWhoDrink '];
     anyMembersWhoUseTobacco = json['anyMembersWhoUseTobacco'];

@@ -20,8 +20,9 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 class FamilyMemberDetailsPortrait extends StatefulWidget {
   DemographicFamily demographicFamily;
   Orientation orientation;
-
-  FamilyMemberDetailsPortrait(this.demographicFamily, this.orientation);
+  bool isMemberStatus;
+  FamilyMemberDetailsPortrait(
+      this.demographicFamily, this.orientation, this.isMemberStatus);
 
   @override
   _FamilyMemberDetailsPortraitState createState() =>
@@ -128,8 +129,14 @@ class _FamilyMemberDetailsPortraitState
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex,
-                  refreshFamilyList, cancelFields, deleteFields, familyList)),
+              child: FamilyMemberStep(
+                  getDefaultFamily(),
+                  familyIndex,
+                  refreshFamilyList,
+                  cancelFields,
+                  deleteFields,
+                  familyList,
+                  widget.isMemberStatus)),
         ),
       ],
     );

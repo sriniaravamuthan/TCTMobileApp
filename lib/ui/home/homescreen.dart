@@ -73,7 +73,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    query = firestoreInstance.collection('demographicData').limit(30);
+    query = firestoreInstance.collection('testCollection').limit(30);
     super.initState();
   }
 
@@ -376,6 +376,9 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.isVaccinationDone =
                     family[i]['isVaccinationDone'].toDouble();
                 _family.secondDose = family[i]['secondDose'];
+                _family.died = family[i]['isDead'];
+                _family.migrate = family[i]['migrate'];
+                _family.migrateReason = family[i]['migrateReason'];
                 _family.isExpanded = 'Show More';
                 _familyList.sort((a, b) => a.position.compareTo(b.position));
 
@@ -1004,7 +1007,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     _demographicList.clear();
     streets.clear();
     documentId.clear();
-    query = firestoreInstance.collection('demographicData').limit(30);
+    query = firestoreInstance.collection('testCollection').limit(30);
     setState(() {});
   }
 
@@ -1036,12 +1039,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
         villageCode == "" &&
         villageName == "" &&
         panchayatCode == "") {
-      query = firestoreInstance.collection('demographicData').limit(30);
+      query = firestoreInstance.collection('testCollection').limit(30);
       setState(() {});
     } else if (familyHead != "" && villageName != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.name", isEqualTo: familyHead.toString().capitalize)
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
@@ -1049,7 +1052,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     } else if (familyHead != "" && villageCode != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.name", isEqualTo: familyHead.toString().capitalize)
           .where("Location.villagesCode", isEqualTo: villageCode)
           .limit(30);
@@ -1057,7 +1060,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     } else if (contactPerson != "" && villageCode != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
           .where("Location.villagesCode", isEqualTo: villageCode)
           .limit(30);
@@ -1065,7 +1068,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     } else if (contactPerson != "" && villageName != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
@@ -1073,7 +1076,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     } else if (familyHead != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where(
             "Location.name",
             isGreaterThanOrEqualTo: familyHead.toString().capitalize,
@@ -1090,33 +1093,33 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       debugPrint("familyHead:${query}");
     } else if (contactPerson != "") {
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.contactPerson", isEqualTo: contactPerson.capitalize)
           .limit(30);
       setState(() {});
     } else if (mobileNo != "") {
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.contactNumber", isEqualTo: mobileNo.trim());
       setState(() {});
     } else if (villageCode != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.villagesCode", isEqualTo: villageCode)
           .limit(30);
       setState(() {});
     } else if (villageName != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.villageName", isEqualTo: villageName)
           .limit(30);
       setState(() {});
     } else if (panchayatCode != "") {
       isSearch = true;
       query = firestoreInstance
-          .collection('demographicData')
+          .collection('testCollection')
           .where("Location.panchayatCode", isEqualTo: panchayatCode)
           .limit(30);
       setState(() {});
@@ -1133,7 +1136,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
     FirebaseFirestore.instance
-        .collection('demographicData')
+        .collection('testCollection')
         .doc(documentId[index])
         .delete()
         .then((value) {

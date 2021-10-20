@@ -20,8 +20,9 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 class FamilyMemberDetailsLandscape extends StatefulWidget {
   DemographicFamily demographicFamily;
   Orientation orientation;
-
-  FamilyMemberDetailsLandscape(this.demographicFamily, this.orientation);
+bool isMemberStatus;
+  FamilyMemberDetailsLandscape(
+      this.demographicFamily, this.orientation, this.isMemberStatus);
 
   @override
   _FamilyMemberDetailsLandscapeState createState() =>
@@ -128,7 +129,7 @@ class _FamilyMemberDetailsLandscapeState
           child: Visibility(
               visible: addfamily,
               child: FamilyMemberStep(getDefaultFamily(), familyIndex,
-                  refreshFamilyList, cancelFields, deleteFields, familyList)),
+                  refreshFamilyList, cancelFields, deleteFields, familyList, widget.isMemberStatus)),
         ),
       ],
     );

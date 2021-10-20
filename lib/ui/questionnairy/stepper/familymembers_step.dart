@@ -33,8 +33,15 @@ class FamilyMemberStep extends StatefulWidget {
   Family family;
   int familyIndex;
   List<Family> familyList;
-  FamilyMemberStep(this.family, this.familyIndex, this.refreshFamilyList,
-      this.cancelFields, this.deleteFields, this.familyList);
+  bool isMemberStatus;
+  FamilyMemberStep(
+      this.family,
+      this.familyIndex,
+      this.refreshFamilyList,
+      this.cancelFields,
+      this.deleteFields,
+      this.familyList,
+      this.isMemberStatus);
 
   @override
   _FamilyMemberStepState createState() =>
@@ -215,6 +222,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.noOfYears = noOfYearsController.text;
     family.whenTreatment = whenTreatmentController.text;
     family.whereTreatment = whereTreatmentController.text;
+    family.migrateReason = migrateReasonController.text;
 
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
@@ -624,15 +632,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           weight: FontWeight.w600,
                                         ));
                                   },
-                                    onFocusChanged: (value) {
-                                      isGenderHide =
-                                      genderController.text ==
-                                          "Female" ||
-                                          genderController.text ==
-                                              "பெண்"
-                                          ? true
-                                          : false;
-                                    },
+                                  onFocusChanged: (value) {
+                                    isGenderHide =
+                                        genderController.text == "Female" ||
+                                                genderController.text == "பெண்"
+                                            ? true
+                                            : false;
+                                  },
                                   itemSorter: (a, b) {
                                     return a.compareTo(b);
                                   },
@@ -2854,188 +2860,199 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
             Divider(
               thickness: 1,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 1.05,
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate("Died"),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape: RoundSliderThumbShape(
-                                      enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape: RoundSliderOverlayShape(
-                                      overlayRadius: 28.0),
+            widget.isMemberStatus == true
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: FractionallySizedBox(
+                          widthFactor: 1.05,
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate("Died"),
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
                                 ),
-                                child: Slider(
-                                  value: family.died,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleDead(value);
-                                  },
+                                Column(
+                                  children: [
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: primaryColor,
+                                        inactiveTrackColor:
+                                            Colors.lightBlueAccent,
+                                        trackShape:
+                                            RectangularSliderTrackShape(),
+                                        trackHeight: 4.0,
+                                        thumbColor: primaryColor,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 12.0),
+                                        overlayColor:
+                                            Colors.white.withAlpha(32),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 28.0),
+                                      ),
+                                      child: Slider(
+                                        value: family.died,
+                                        min: 0,
+                                        max: 1,
+                                        divisions: 1,
+                                        onChanged: (value) {
+                                          toggleDead(value);
+                                        },
+                                      ),
+                                    ),
+                                    TextWidget(
+                                      text: textDied,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    )
+                                  ],
                                 ),
-                              ),
-                              TextWidget(
-                                text: textDied,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 1.05,
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate("Migrate"),
-                              size: 14,
-                              weight: FontWeight.w600,
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SliderTheme(
-                                data: SliderTheme.of(context).copyWith(
-                                  activeTrackColor: primaryColor,
-                                  inactiveTrackColor: Colors.lightBlueAccent,
-                                  trackShape: RectangularSliderTrackShape(),
-                                  trackHeight: 4.0,
-                                  thumbColor: primaryColor,
-                                  thumbShape: RoundSliderThumbShape(
-                                      enabledThumbRadius: 12.0),
-                                  overlayColor: Colors.white.withAlpha(32),
-                                  overlayShape: RoundSliderOverlayShape(
-                                      overlayRadius: 28.0),
-                                ),
-                                child: Slider(
-                                  value: family.migrate,
-                                  min: 0,
-                                  max: 2,
-                                  divisions: 2,
-                                  onChanged: (value) {
-                                    toggleMigrate(value);
-                                  },
-                                ),
-                              ),
-                              TextWidget(
-                                text: textMigrate,
-                                size: 14,
-                                weight: FontWeight.w600,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                textMigrate == "Yes" || textMigrate == "ஆம்"?
-                Expanded(
-                  child: FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: TextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Migrate Reason'),
-                            size: 14,
-                            weight: FontWeight.w600,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: SizedBox(
-                            height: 50,
-                            child: TextFormField(
-                              controller: migrateReasonController,
-                              onChanged: (value) {
-                                family.migrateReason = value;
-                              },
-                              textInputAction: TextInputAction.next,
-                              autocorrect: true,
-                              enableSuggestions: true,
-                              decoration: InputDecoration(
-                                  counterText: "",
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                    borderSide:
-                                    BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                    borderSide:
-                                    BorderSide(color: lightGreyColor),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                    borderSide:
-                                    BorderSide(color: lightGreyColor),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                    borderSide:
-                                    BorderSide(color: lightGreyColor),
-                                  ),
-                                  fillColor: lightGreyColor),
-                              keyboardType: TextInputType.text,
-                              onSaved: (String val) {
-                                setState(() {});
-                              },
+                              ],
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ):Expanded(child: Container()),
-              ],
-            ),
+                      ),
+                      Expanded(
+                        child: FractionallySizedBox(
+                          widthFactor: 1.05,
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: TextWidget(
+                                    text: DemoLocalization.of(context)
+                                        .translate("Migrate"),
+                                    size: 14,
+                                    weight: FontWeight.w600,
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    SliderTheme(
+                                      data: SliderTheme.of(context).copyWith(
+                                        activeTrackColor: primaryColor,
+                                        inactiveTrackColor:
+                                            Colors.lightBlueAccent,
+                                        trackShape:
+                                            RectangularSliderTrackShape(),
+                                        trackHeight: 4.0,
+                                        thumbColor: primaryColor,
+                                        thumbShape: RoundSliderThumbShape(
+                                            enabledThumbRadius: 12.0),
+                                        overlayColor:
+                                            Colors.white.withAlpha(32),
+                                        overlayShape: RoundSliderOverlayShape(
+                                            overlayRadius: 28.0),
+                                      ),
+                                      child: Slider(
+                                        value: family.migrate,
+                                        min: 0,
+                                        max: 1,
+                                        divisions: 1,
+                                        onChanged: (value) {
+                                          toggleMigrate(value);
+                                        },
+                                      ),
+                                    ),
+                                    TextWidget(
+                                      text: textMigrate,
+                                      size: 14,
+                                      weight: FontWeight.w600,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      textMigrate == "Yes" || textMigrate == "ஆம்"
+                          ? Expanded(
+                              child: FractionallySizedBox(
+                                widthFactor: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate('Migrate Reason'),
+                                        size: 14,
+                                        weight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 16.0),
+                                      child: SizedBox(
+                                        height: 50,
+                                        child: TextFormField(
+                                          controller: migrateReasonController,
+                                          onChanged: (value) {
+                                            family.migrateReason = value;
+                                          },
+                                          textInputAction: TextInputAction.next,
+                                          autocorrect: true,
+                                          enableSuggestions: true,
+                                          decoration: InputDecoration(
+                                              counterText: "",
+                                              border: OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10.0)),
+                                                borderSide: BorderSide(
+                                                    color: lightGreyColor),
+                                              ),
+                                              fillColor: lightGreyColor),
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (String val) {
+                                            setState(() {});
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : Expanded(child: Container()),
+                    ],
+                  )
+                : Container(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -3631,26 +3648,24 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         textVaccine = DemoLocalization.of(context).translate('Yes');
     });
   }
+
   void toggleDead(double value) {
     family.died = value;
     setState(() {
       if (value == 0)
-        textTobacco = DemoLocalization.of(context).translate('Not Answer');
-    else if (value == 1)
         textDied = DemoLocalization.of(context).translate('No');
       else
-       textDied = DemoLocalization.of(context).translate('Yes');
+        textDied = DemoLocalization.of(context).translate('Yes');
     });
   }
+
   void toggleMigrate(double value) {
     family.migrate = value;
     setState(() {
       if (value == 0)
-        textTobacco = DemoLocalization.of(context).translate('Not Answer');
-      else  if (value == 1)
         textMigrate = DemoLocalization.of(context).translate('No');
       else
-         textMigrate = DemoLocalization.of(context).translate('Yes');
+        textMigrate = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -3919,16 +3934,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       else
         textVaccine = DemoLocalization.of(context).translate('Yes');
 
-      if (family.died  == 0)
-        textTobacco = DemoLocalization.of(context).translate('Not Answer');
-      else if (family.died == 1)
+      if (family.died == 0)
         textDied = DemoLocalization.of(context).translate('No');
       else
         textDied = DemoLocalization.of(context).translate('Yes');
 
       if (family.migrate == 0)
-        textTobacco = DemoLocalization.of(context).translate('Not Answer');
-      else if (family.migrate == 1)
         textMigrate = DemoLocalization.of(context).translate('No');
       else
         textMigrate = DemoLocalization.of(context).translate('Yes');
