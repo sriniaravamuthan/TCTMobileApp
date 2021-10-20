@@ -32,7 +32,7 @@ class _DetailScreenState extends State<DetailScreen> {
   String userMail = "";
   int familyIndex = -1;
   List<String> streets = [];
-  String documentId ="";
+  String documentId = "";
   bool isEdit = false;
   bool isStatus = false;
 
@@ -51,7 +51,7 @@ class _DetailScreenState extends State<DetailScreen> {
     documentId = arguments[2];
     isEdit = arguments[3];
     makeLoadData = arguments[4];
-    isStatus=arguments[5];
+    isStatus = arguments[5];
 
     debugPrint("demographicList:${demographicList.location.contactPerson}");
     super.initState();
@@ -72,14 +72,14 @@ class _DetailScreenState extends State<DetailScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context, false);
                   },
                   child: SvgPicture.asset(
                     svgTctLogo,
                     semanticsLabel: "Logo",
                     height: 40,
-                    width:50,
+                    width: 50,
                     fit: BoxFit.contain,
                     allowDrawingOutsideViewBox: true,
                   ),
@@ -101,24 +101,25 @@ class _DetailScreenState extends State<DetailScreen> {
                             width: 35,
                             decoration: BoxDecoration(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
+                                    BorderRadius.all(Radius.circular(50))),
                             child: firebaseAuth.currentUser.photoURL == null
-                                ? Image.asset(user,fit: BoxFit.fill)
-                                : Image.network(firebaseAuth.currentUser.photoURL)),
+                                ? Image.asset(user, fit: BoxFit.fill)
+                                : Image.network(
+                                    firebaseAuth.currentUser.photoURL)),
                         SizedBox(
                           width: 10,
                         ),
                         userMail != null
                             ? Text(
-                          userMail,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        )
+                                userMail,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              )
                             : Text(
-                          userName,
-                          style:
-                          TextStyle(fontSize: 16, color: darkColor),
-                        ),
+                                userName,
+                                style:
+                                    TextStyle(fontSize: 16, color: darkColor),
+                              ),
                       ],
                     )),
                 SizedBox(
@@ -126,7 +127,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    AuthenticationService(FirebaseAuth.instance).signOut(context);
+                    AuthenticationService(FirebaseAuth.instance)
+                        .signOut(context);
                   },
                   child: Icon(
                     Icons.power_settings_new_outlined,
@@ -140,9 +142,9 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       body: OrientationBuilder(
         builder: (context, orientation) {
-          if(orientation == Orientation.portrait){
+          if (orientation == Orientation.portrait) {
             return _portraitMode();
-          }else{
+          } else {
             return _landscapeMode();
           }
         },
@@ -157,9 +159,18 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
           backgroundColor: primaryColor,
           onPressed: () {
-            Get.offAndToNamed('/questionnery', arguments: [demographicList , streets, documentId, true, makeLoadData],);
-            setState(() {
-            });
+            Get.offAndToNamed(
+              '/questionnery',
+              arguments: [
+                demographicList,
+                streets,
+                documentId,
+                true,
+                makeLoadData,
+                true
+              ],
+            );
+            setState(() {});
           },
         ),
       ),
@@ -171,8 +182,7 @@ class _DetailScreenState extends State<DetailScreen> {
     if (family.privateInsurance == 2)
       insurance += DemoLocalization.of(context).translate('Private');
     if (family.govtInsurance == 2) {
-      if (insurance != "")
-        insurance += ", ";
+      if (insurance != "") insurance += ", ";
       insurance += DemoLocalization.of(context).translate('Government');
     }
     return insurance;
@@ -181,14 +191,40 @@ class _DetailScreenState extends State<DetailScreen> {
   String getLiveStock(Property property) {
     String liveStock = "";
     if (property.ownLivestocks == 2) {
-      liveStock +=DemoLocalization.of(context).translate('Cow') + "-" + property.cow.toString() + "," " " + "${DemoLocalization.of(context).translate('Buffalo')}" + """-""" +
-          property.buffalo + "," " "+ "${DemoLocalization.of(context).translate('Bull')}" + "-" + property.bull.toString() + "," " " "\n${DemoLocalization.of(context).translate('Hen')}" + "-" + property.hen.toString()
-          + "," " "+ "${DemoLocalization.of(context).translate('Goat')}" + "-" + property.goat.toString() + "," " "+  "${DemoLocalization.of(context).translate('Sheep')}" + "-" + property.sheep.toString()
-          + "," " "+  "\n${DemoLocalization.of(context).translate('Pig')}" + "-" + property.pig.toString() + "," " "+  "${DemoLocalization.of(context).translate('Others')}" + "-" + property.othersLive.toString();
+      liveStock += DemoLocalization.of(context).translate('Cow') +
+          "-" +
+          property.cow.toString() +
+          "," " " +
+          "${DemoLocalization.of(context).translate('Buffalo')}" +
+          """-""" +
+          property.buffalo +
+          "," " " +
+          "${DemoLocalization.of(context).translate('Bull')}" +
+          "-" +
+          property.bull.toString() +
+          "," " " "\n${DemoLocalization.of(context).translate('Hen')}" +
+          "-" +
+          property.hen.toString() +
+          "," " " +
+          "${DemoLocalization.of(context).translate('Goat')}" +
+          "-" +
+          property.goat.toString() +
+          "," " " +
+          "${DemoLocalization.of(context).translate('Sheep')}" +
+          "-" +
+          property.sheep.toString() +
+          "," " " +
+          "\n${DemoLocalization.of(context).translate('Pig')}" +
+          "-" +
+          property.pig.toString() +
+          "," " " +
+          "${DemoLocalization.of(context).translate('Others')}" +
+          "-" +
+          property.othersLive.toString();
       return liveStock;
     } else if (property.ownLivestocks == 1) {
       return DemoLocalization.of(context).translate('No');
-    }else if(property.ownLivestocks == 0){
+    } else if (property.ownLivestocks == 0) {
       return DemoLocalization.of(context).translate('Not Answered');
     }
   }
@@ -196,13 +232,22 @@ class _DetailScreenState extends State<DetailScreen> {
   String getVehicle(Property property) {
     String vehicles = "";
     if (property.ownVehicle == 2) {
-      vehicles += DemoLocalization.of(context).translate('Two Wheeler') + "-" + property.twoWheeler.toString() + "," " "+ "\n${DemoLocalization.of(context).translate('Three Wheeler')}" + """-""" +
-          property.threeWheeler + "," " "+ "\n${DemoLocalization.of(context).translate('Four Wheeler')}" + "-" + property.fourWheeler.toString();
+      vehicles += DemoLocalization.of(context).translate('Two Wheeler') +
+          "-" +
+          property.twoWheeler.toString() +
+          "," " " +
+          "\n${DemoLocalization.of(context).translate('Three Wheeler')}" +
+          """-""" +
+          property.threeWheeler +
+          "," " " +
+          "\n${DemoLocalization.of(context).translate('Four Wheeler')}" +
+          "-" +
+          property.fourWheeler.toString();
       debugPrint("vehicles:$vehicles");
       return vehicles;
     } else if (property.ownVehicle == 1) {
       return DemoLocalization.of(context).translate('No');
-    } else if(property.ownVehicle == 0){
+    } else if (property.ownVehicle == 0) {
       return DemoLocalization.of(context).translate('Not Answered');
     }
   }
@@ -212,25 +257,26 @@ class _DetailScreenState extends State<DetailScreen> {
     if (family.oldPension == 2)
       pension += DemoLocalization.of(context).translate('Old Age');
     if (family.retirementPension == 2) {
-      if (pension != "")
-        pension += ", ";
+      if (pension != "") pension += ", ";
       pension += DemoLocalization.of(context).translate('Retirement');
     }
     if (family.widowedPension == 2) {
-      if (pension != "")
-        pension += ", ";
+      if (pension != "") pension += ", ";
       pension += DemoLocalization.of(context).translate('Widowed Pension');
     }
     return pension;
   }
+
   String getPhysical(Family family) {
     String physical = "";
-    if (family.physicallyChallenge == 2 && family.physical!="") {
-      physical += DemoLocalization.of(context).translate('Yes') + "-" + family.physical.toString();
+    if (family.physicallyChallenge == 2 && family.physical != "") {
+      physical += DemoLocalization.of(context).translate('Yes') +
+          "-" +
+          family.physical.toString();
       return physical;
     } else if (family.physicallyChallenge == 1)
       return DemoLocalization.of(context).translate('No');
-    else if(family.physicallyChallenge == 0){
+    else if (family.physicallyChallenge == 0) {
       return DemoLocalization.of(context).translate('Not Answered');
     }
   }
@@ -239,150 +285,490 @@ class _DetailScreenState extends State<DetailScreen> {
     if (value == 2)
       return DemoLocalization.of(context).translate('Yes');
     else if (value == 1)
-      return  DemoLocalization.of(context).translate('No');
+      return DemoLocalization.of(context).translate('No');
     else
       return DemoLocalization.of(context).translate('Not Answered');
   }
+
   String getDrinkingUsage(double value) {
-    if (value == 0)
-      return DemoLocalization.of(context).translate('Occasional');
-    if (value == 1)
-      return DemoLocalization.of(context).translate('Moderate');
-    if (value == 2)
-      return DemoLocalization.of(context).translate('Heavy');
-    if (value == 3)
-      return DemoLocalization.of(context).translate('Stopped');
+    if (value == 0) return DemoLocalization.of(context).translate('Occasional');
+    if (value == 1) return DemoLocalization.of(context).translate('Moderate');
+    if (value == 2) return DemoLocalization.of(context).translate('Heavy');
+    if (value == 3) return DemoLocalization.of(context).translate('Stopped');
   }
+
   String getStoppedValue(double value) {
     if (value == 0)
       return DemoLocalization.of(context).translate('Own');
-    else
+    else if (value == 1)
       return DemoLocalization.of(context).translate('Treatment');
+    else {
+      return "-";
+    }
   }
 
   Widget _portraitMode() {
-    return  SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-      decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(imgBG),
-              fit: BoxFit.cover,
-            ),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imgBG),
+            fit: BoxFit.cover,
           ),
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: (height) * 0.02,
-                              left: (width) * 0.02,
-                              right: (width) * 0.02,
-                              bottom: (height) * 0.02,
-                            ),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8.0),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(24),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
+        ),
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: (height) * 0.02,
+                            left: (width) * 0.02,
+                            right: (width) * 0.02,
+                            bottom: (height) * 0.02,
+                          ),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                          color: Colors.black45,
+                                          style: BorderStyle.solid,
+                                          width: 1.0,
                                         ),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          size: 20,
-                                        )),
-                                  ),
+                                      ),
+                                      child: Icon(
+                                        Icons.keyboard_arrow_left,
+                                        size: 20,
+                                      )),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                TextWidget(
-                                  text: demographicList.location.name,
-                                  color: darkColor,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              TextWidget(
+                                text: demographicList.location.name,
+                                color: darkColor,
+                                weight: FontWeight.w600,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30.0),
+                          child: isStatus == true
+                              ? TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Completed'),
+                                  color: successColor,
+                                  weight: FontWeight.w600,
+                                  size: 18,
+                                )
+                              : TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('In Progress'),
+                                  color: yellowColor,
                                   weight: FontWeight.w600,
                                   size: 18,
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
-                            child: isStatus==true?TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Completed'),
-                              color: successColor,
-                              weight: FontWeight.w600,
-                              size: 18,
-                            ):TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('In Progress'),
-                              color: yellowColor,
-                              weight: FontWeight.w600,
-                              size: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, top: 8),
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Location'),
-                                    size: 16,
-                                    weight: FontWeight.w800,
-                                    color: darkColor,
-                                  ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 1,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Location'),
+                                  size: 16,
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 80,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Form No'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                          .location.formNo ==
+                                                      ""
+                                                  ? " -"
+                                                  : demographicList
+                                                      .location.formNo,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Panchayat No'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList.location
+                                                          .panchayatNo ==
+                                                      ""
+                                                  ? " -"
+                                                  : demographicList
+                                                      .location.panchayatNo
+                                                      .toString(),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Door No'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList.location
+                                                          .doorNumber ==
+                                                      ""
+                                                  ? " -"
+                                                  : demographicList
+                                                      .location.doorNumber,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Project Code No'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList.location
+                                                          .projectCode ==
+                                                      ""
+                                                  ? " -"
+                                                  : demographicList
+                                                      .location.projectCode,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Panchayat Code'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                  .location.panchayatCode,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Street Name'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                  .location.streetName,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Village Code'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                  .location.villagesCode
+                                                  .toString(),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Village Name'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                  .location.villageName
+                                                  .toString(),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: DemoLocalization.of(context)
+                                                  .translate('Contact Person'),
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: SizedBox(
+                                            width: 120,
+                                            child: TextWidget(
+                                              text: demographicList
+                                                  .location.contactPerson,
+                                              size: 14,
+                                              color: darkColor,
+                                              weight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Property Details'),
+                                  size: 16,
+                                  color: darkColor,
+                                  weight: FontWeight.w800,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, top: 8, bottom: 8, right: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 4, right: 4),
+                                      padding: const EdgeInsets.only(
+                                          left: 4, right: 4, bottom: 4),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
-                                              width: 80,
+                                              width: 125,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Form No'),
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate(
+                                                            'Status of House'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -394,7 +780,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.formNo==""?" -": demographicList.location.formNo,
+                                                text: demographicList
+                                                    .property.statusofHouse,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -405,12 +792,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                             height: 10,
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Panchayat No'),
+                                                text:
+                                                    DemoLocalization.of(context)
+                                                        .translate(
+                                                            'Vehicle Details'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -418,12 +807,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
-                                              width: 120,
+                                              width: 150,
                                               child: TextWidget(
-                                                text: demographicList.location.panchayatNo==""?" -":demographicList.location.panchayatNo.toString(),
+                                                text: getVehicle(
+                                                    demographicList.property),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -434,12 +823,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                             height: 10,
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Door No'),
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate('Type of House'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -447,12 +837,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text:demographicList.location.doorNumber==""?" -":demographicList.location.doorNumber,
+                                                text: demographicList
+                                                    .property.typeofHouse,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -464,18 +854,20 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 4, right: 4),
+                                          right: 4, bottom: 4),
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
-                                              width: 120,
+                                              width: 150,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Project Code No'),
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate(
+                                                        'Toilet Facility at Home'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -483,12 +875,45 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.projectCode==""?" -":demographicList.location.projectCode,
+                                                text: getSliderValue(
+                                                    demographicList.property
+                                                        .toiletFacility),
+                                                size: 14,
+                                                color: darkColor,
+                                                weight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          SizedBox(
+                                            width: 120,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextWidget(
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate(
+                                                        'Wet Land Holding(In Acres)'),
+                                                size: 14,
+                                                color: darkColor,
+                                                weight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: SizedBox(
+                                              width: 120,
+                                              child: TextWidget(
+                                                text: demographicList
+                                                    .property.wetLandInAcres,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -499,12 +924,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                             height: 10,
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Panchayat Code'),
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate(
+                                                        'Livestock Details'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -512,41 +939,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
-                                              width: 120,
+                                              width: 150,
                                               child: TextWidget(
-                                                text:demographicList.location.panchayatCode,
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Street Name'),
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: demographicList.location.streetName,
+                                                text: getLiveStock(
+                                                    demographicList.property),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -558,18 +956,22 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 4, right: 4),
+                                          left: 4, right: 4, bottom: 4),
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Village Code'),
+                                                text: DemoLocalization.of(
+                                                        context)
+                                                    .translate(
+                                                        'Dry Land Holding(In Acres)'),
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w700,
@@ -577,12 +979,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
+                                            padding: const EdgeInsets.all(4.0),
                                             child: SizedBox(
                                               width: 120,
                                               child: TextWidget(
-                                                text: demographicList.location.villagesCode.toString(),
+                                                text: demographicList
+                                                    .property.dryLandInAcres,
                                                 size: 14,
                                                 color: darkColor,
                                                 weight: FontWeight.w400,
@@ -592,2447 +994,3254 @@ class _DetailScreenState extends State<DetailScreen> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Village Name'),
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: demographicList.location.villageName.toString(),
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: DemoLocalization.of(context).translate('Contact Person'),
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                            const EdgeInsets.all(4.0),
-                                            child: SizedBox(
-                                              width: 120,
-                                              child: TextWidget(
-                                                text: demographicList.location.contactPerson,
-                                                size: 14,
-                                                color: darkColor,
-                                                weight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
+                                          Container(
+                                            height: 100,
+                                          )
                                         ],
                                       ),
                                     ),
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2,
-                          ),
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, top: 8.0),
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Property Details'),
-                                    size: 16,
-                                    color: darkColor,
-                                    weight: FontWeight.w800,
-                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left:16.0,top:8,bottom: 8,right: 8),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, right: 4, bottom: 4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 125,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Status of House'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text:demographicList.property.statusofHouse,
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Vehicle Details'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 150,
-                                                child: TextWidget(
-                                                  text:getVehicle(demographicList.property),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Type of House'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: demographicList.property.typeofHouse,
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 4, bottom: 4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 150,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Toilet Facility at Home'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text:getSliderValue( demographicList.property.toiletFacility),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              width: 120,
-                                              child: Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Wet Land Holding(In Acres)'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: demographicList.property.wetLandInAcres,
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Livestock Details'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 150,
-                                                child: TextWidget(
-                                                  text:getLiveStock(demographicList.property),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, right: 4, bottom: 4),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: DemoLocalization.of(
-                                                      context)
-                                                      .translate(
-                                                      'Dry Land Holding(In Acres)'),
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-
-                                            Padding(
-                                              padding:
-                                              const EdgeInsets.all(4.0),
-                                              child: SizedBox(
-                                                width: 120,
-                                                child: TextWidget(
-                                                  text: demographicList.property.dryLandInAcres,
-                                                  size: 14,
-                                                  color: darkColor,
-                                                  weight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(height: 10,),
-                                            Container(height: 100,)
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
-                          Divider(
-                            thickness: 2,
-                          ),
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-                        child: TextWidget(
-                          text: "${
-                                    DemoLocalization.of(context)
-                                        .translate('Family Members')
-                                  }" + " ""(${demographicList.family.length})",
-                          size: 16,
-                          color: darkColor,
-                          weight: FontWeight.w800,
                         ),
-                      ),
-                      ListView.builder(
-                        itemCount: demographicList.family.length,
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          debugPrint("familyPhoto:${demographicList.family[index].photo}");
-                          demographicList.family.sort((a, b) => a.position.compareTo(b.position));
-                          debugPrint("demographicList:${demographicList.family[index].position}");
-                          return Column(
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      familyIndex = index;
-                                    });
-                                  },
-                                  child: Column(
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8.0),
+                                child: TextWidget(
+                                  text: "${DemoLocalization.of(context).translate('Family Members')}" +
+                                      " " "(${demographicList.family.length})",
+                                  size: 16,
+                                  color: darkColor,
+                                  weight: FontWeight.w800,
+                                ),
+                              ),
+                              ListView.builder(
+                                itemCount: demographicList.family.length,
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  debugPrint(
+                                      "familyPhoto:${demographicList.family[index].photo}");
+                                  demographicList.family.sort((a, b) =>
+                                      a.position.compareTo(b.position));
+                                  debugPrint(
+                                      "demographicList:${demographicList.family[index].position}");
+                                  return Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
-                                            child:Container(
-                                                height: 140,
-                                                width: 140,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius.all(Radius.circular(50))),
-                                                child:  demographicList.family[index].photo!= ""
-                                                    ?Image.network( demographicList.family[index].photo,fit: BoxFit.fill)
-                                                    :demographicList.family[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill):demographicList.family[index].gender=="Male" || demographicList.family[index].gender=="ஆண்"?SvgPicture.asset(
-                                                  svgMan,
-                                                  semanticsLabel: "Logo",
-                                                  height: height / 12,
-                                                  width: width / 8,
-                                                  fit: BoxFit.contain,
-                                                  allowDrawingOutsideViewBox: true,
-                                                ):demographicList.family[index].gender=="Transgender" || demographicList.family[index].gender=="திருநங்கை"?SvgPicture.asset(
-                                                  svgGender,
-                                                  semanticsLabel: "Logo",
-                                                  height: height / 12,
-                                                  width: width / 8,
-                                                  fit: BoxFit.contain,
-                                                  allowDrawingOutsideViewBox: true,
-                                                ):SvgPicture.asset(
-                                                  svgWoman,
-                                                  semanticsLabel: "Logo",
-                                                  height: height / 10,
-                                                  width: width / 10,
-                                                  fit: BoxFit.contain,
-                                                  allowDrawingOutsideViewBox: true,
-                                                ) ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:demographicList.family[index].position + ")" + " " + demographicList.family[index].name,
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", "+ getDOB(demographicList.family[index].dob.toString()) : ""}",
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getTexts(demographicList.family[index]),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getPregnant(demographicList.family[index]),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].mobileNumber,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].mail,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context)
-                                                        .translate('Aadhaar No'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getMaskedNo(demographicList.family[index].aadharNumber),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate('Education Qualification'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text: demographicList.family[index].education,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate('Section'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 120,
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].community,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(left:2.0,top:2,bottom: 2,right:24),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text:  DemoLocalization.of(context)
-                                                          .translate('Caste'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    child: TextWidget(
-                                                      text: demographicList.family[index].caste,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Business'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-
-                                                    child: TextWidget(
-                                                      text: demographicList.family[index].occupation,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Annual Income'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 120,
-                                                    child: TextWidget(
-                                                      text: demographicList.family[index].annualIncome.toString(),
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Spacer(),
-
-                                        ],
-                                      ),
-                                      demographicList.family[index].isExpanded == "Show Less" ? Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context)
-                                                        .translate('Smart phone'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getSliderValue(demographicList.family[index].smartphone),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context)
-                                                        .translate('Pension'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    child: TextWidget(
-                                                      text: getPension(demographicList.family[index]),
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate('Insurance'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getInsurance(demographicList.family[index]),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate('Physically challenged'),
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: getPhysical(demographicList.family[index]),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Any Members who Smoke?'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:getSliderValue(demographicList.family[index].anyMembersWhoSmoke),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Any Members who use Tobacco?'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:getSliderValue(demographicList.family[index].anyMembersWhoUseTobacco),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-
-                                          Padding(
-                                              padding: const EdgeInsets.all(2.0),
-                                              child: Column (
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                      Container(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              familyIndex = index;
+                                            });
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Row(
                                                 children: [
                                                   Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Any Members who Drink?'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 8.0,
+                                                            bottom: 8.0),
+                                                    child: Container(
+                                                        height: 140,
+                                                        width: 140,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        50))),
+                                                        child:
+                                                            demographicList.family[index].photo !=
+                                                                    ""
+                                                                ? Image.network(
+                                                                    demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .photo,
+                                                                    fit: BoxFit
+                                                                        .fill)
+                                                                : demographicList.family[index].gender ==
+                                                                        ""
+                                                                    ? Image.asset(
+                                                                        imgCamera,
+                                                                        fit: BoxFit
+                                                                            .fill)
+                                                                    : demographicList.family[index].gender == "Male" || demographicList.family[index].gender == "ஆண்"
+                                                                        ? SvgPicture.asset(
+                                                                            svgMan,
+                                                                            semanticsLabel:
+                                                                                "Logo",
+                                                                            height:
+                                                                                height / 12,
+                                                                            width:
+                                                                                width / 8,
+                                                                            fit:
+                                                                                BoxFit.contain,
+                                                                            allowDrawingOutsideViewBox:
+                                                                                true,
+                                                                          )
+                                                                        : demographicList.family[index].gender == "Transgender" || demographicList.family[index].gender == "திருநங்கை"
+                                                                            ? SvgPicture.asset(
+                                                                                svgGender,
+                                                                                semanticsLabel: "Logo",
+                                                                                height: height / 12,
+                                                                                width: width / 8,
+                                                                                fit: BoxFit.contain,
+                                                                                allowDrawingOutsideViewBox: true,
+                                                                              )
+                                                                            : SvgPicture.asset(
+                                                                                svgWoman,
+                                                                                semanticsLabel: "Logo",
+                                                                                height: height / 10,
+                                                                                width: width / 10,
+                                                                                fit: BoxFit.contain,
+                                                                                allowDrawingOutsideViewBox: true,
+                                                                              )),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .position +
+                                                                ")" +
+                                                                " " +
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .name,
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text:
+                                                                "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getTexts(
+                                                                demographicList
+                                                                        .family[
+                                                                    index]),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getPregnant(
+                                                                demographicList
+                                                                        .family[
+                                                                    index]),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: demographicList
+                                                                .family[index]
+                                                                .mobileNumber,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text:
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .mail,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Aadhaar No'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getMaskedNo(
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .aadharNumber),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Education Qualification'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text:
+                                                                  demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .education,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text:getSliderValue(demographicList.family[index].anyMembersWhoDrink),
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Section'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 120,
+                                                          child: TextWidget(
+                                                            text:
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .community,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 2.0,
+                                                                  top: 2,
+                                                                  bottom: 2,
+                                                                  right: 24),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text: DemoLocalization
+                                                                      .of(
+                                                                          context)
+                                                                  .translate(
+                                                                      'Caste'),
+                                                              weight: FontWeight
+                                                                  .w800,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 150,
+                                                            child: TextWidget(
+                                                              text:
+                                                                  demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .caste,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Business'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text: demographicList
+                                                                  .family[index]
+                                                                  .occupation,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text: DemoLocalization
+                                                                      .of(
+                                                                          context)
+                                                                  .translate(
+                                                                      'Annual Income'),
+                                                              weight: FontWeight
+                                                                  .w800,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text: demographicList
+                                                                  .family[index]
+                                                                  .annualIncome
+                                                                  .toString(),
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  SizedBox(height: 10,),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Drinking Usage'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text:getDrinkingUsage(demographicList.family[index].drinkingUsage),
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10,),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: SizedBox(
-                                                      width: 150,
-                                                      child: TextWidget(
-                                                        text: DemoLocalization.of(context).translate('Stopped by'),
-                                                        weight: FontWeight.w800,
-                                                        color: darkColor,
-                                                        size: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text:getStoppedValue(demographicList.family[index].stoppedBy),
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10,),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: SizedBox(
-                                                      width: 150,
-                                                      child: TextWidget(
-                                                        text: DemoLocalization.of(context).translate('No of years'),
-                                                        weight: FontWeight.w800,
-                                                        color: darkColor,
-                                                        size: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text:demographicList.family[index].noOfYears,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
-                                                  SizedBox(height: 10,),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: SizedBox(
-                                                      width: 150,
-                                                      child: TextWidget(
-                                                        text: DemoLocalization.of(context).translate('When you had a treatment'),
-                                                        weight: FontWeight.w800,
-                                                        color: darkColor,
-                                                        size: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(2.0),
-                                                    child: TextWidget(
-                                                      text:demographicList.family[index].whenTreatment,
-                                                      weight: FontWeight.w400,
-                                                      color: darkColor,
-                                                      size: 14,
-                                                    ),
-                                                  ),
+                                                  Spacer(),
                                                 ],
-                                              )
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: SizedBox(
-                                                    width: 150,
+                                              ),
+                                              demographicList.family[index]
+                                                          .isExpanded ==
+                                                      "Show Less"
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'Smart phone'),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getSliderValue(demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .smartphone),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'Pension'),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child: SizedBox(
+                                                                  width: 150,
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getPension(
+                                                                        demographicList
+                                                                            .family[index]),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'Insurance'),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getInsurance(
+                                                                      demographicList
+                                                                              .family[
+                                                                          index]),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'Physically challenged'),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getPhysical(
+                                                                      demographicList
+                                                                              .family[
+                                                                          index]),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child: SizedBox(
+                                                                  width: 150,
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Any Members who Smoke?'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getSliderValue(demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .anyMembersWhoSmoke),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child: SizedBox(
+                                                                  width: 150,
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Any Members who use Tobacco?'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getSliderValue(demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .anyMembersWhoUseTobacco),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(2.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Any Members who Drink?'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getSliderValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .anyMembersWhoDrink),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Drinking Usage'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getDrinkingUsage(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .drinkingUsage),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Stopped by'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getStoppedValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .stoppedBy),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'No of years'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .noOfYears,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'When you had a treatment'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .whenTreatment,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            )),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child: SizedBox(
+                                                                  width: 150,
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Where you had a treatment'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .whereTreatment,
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          "Vaccination Done"),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getSliderValue(demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .isVaccinationDone),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          "1st Dose Date"),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: demographicList
+                                                                              .family[
+                                                                                  index]
+                                                                              .firstDose ==
+                                                                          ""
+                                                                      ? DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Not Answered')
+                                                                      : demographicList
+                                                                          .family[
+                                                                              index]
+                                                                          .firstDose,
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          "2nd Dose Date"),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: demographicList
+                                                                              .family[
+                                                                                  index]
+                                                                              .secondDose ==
+                                                                          ""
+                                                                      ? DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Not Answered')
+                                                                      : demographicList
+                                                                          .family[
+                                                                              index]
+                                                                          .secondDose,
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                height: 50,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Container(),
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (demographicList
+                                                            .family[index]
+                                                            .isExpanded ==
+                                                        "Show More")
+                                                      demographicList
+                                                              .family[index]
+                                                              .isExpanded =
+                                                          "Show Less";
+                                                    else
+                                                      demographicList
+                                                              .family[index]
+                                                              .isExpanded =
+                                                          "Show More";
+                                                  });
+                                                },
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.bottomRight,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 16.0,
+                                                            bottom: 8),
                                                     child: TextWidget(
-                                                      text: DemoLocalization.of(context).translate('Where you had a treatment'),
-                                                      weight: FontWeight.w800,
-                                                      color: darkColor,
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              demographicList
+                                                                  .family[index]
+                                                                  .isExpanded),
+                                                      weight: FontWeight.w600,
+                                                      color: primaryColor,
                                                       size: 14,
                                                     ),
                                                   ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:demographicList.family[index].whereTreatment,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate("Vaccination Done") ,
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:getSliderValue(demographicList.family[index].isVaccinationDone),
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 10,),
-
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:  DemoLocalization.of(context).translate("1st Dose Date") ,
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: demographicList.family[index].firstDose == ""? DemoLocalization.of(context).translate('Not Answered'): demographicList.family[index].firstDose,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 20,),
-
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate("2nd Dose Date") ,
-                                                    weight: FontWeight.w800,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2.0),
-                                                  child: TextWidget(
-                                                    text:demographicList.family[index].secondDose == "" ? DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].secondDose,
-                                                    weight: FontWeight.w400,
-                                                    color: darkColor,
-                                                    size: 14,
-                                                  ),
-                                                ),
-                                                Container(height: 50,)
-
-                                              ],
-                                            ),
-                                          ),
-
-                                        ],
-                                      ) : Container(),
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            if (demographicList.family[index].isExpanded == "Show More")
-                                              demographicList.family[index].isExpanded = "Show Less";
-                                            else
-                                              demographicList.family[index].isExpanded = "Show More";
-                                          });
-                                        },
-                                        child: Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right:16.0,bottom:8),
-                                            child: TextWidget(
-                                              text: DemoLocalization.of(context).translate(demographicList.family[index].isExpanded),
-                                              weight: FontWeight.w600,
-                                              color: primaryColor,
-                                              size: 14,
-                                            ),
+                                              ),
+                                              SizedBox(
+                                                height: 2,
+                                              ),
+                                              Divider(
+                                                height: 1,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 2,),
                                       Divider(
                                         height: 1,
                                       ),
                                     ],
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
-                              Divider(height: 1,),
                             ],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              )),
-        ),
-      );
-
+              ),
+            )),
+      ),
+    );
   }
 
   Widget _landscapeMode() {
-    return  SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(imgBG),
-              fit: BoxFit.cover,
-            ),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(imgBG),
+            fit: BoxFit.cover,
           ),
-          child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 8,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              top: (height) * 0.02,
-                              left: (width) * 0.02,
-                              right: (width) * 0.02,
-                              bottom: (height) * 0.02,
-                            ),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8.0),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(24),
-                                          border: Border.all(
-                                            color: Colors.black45,
-                                            style: BorderStyle.solid,
-                                            width: 1.0,
-                                          ),
+        ),
+        child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: (height) * 0.02,
+                            left: (width) * 0.02,
+                            right: (width) * 0.02,
+                            bottom: (height) * 0.02,
+                          ),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
+                                  child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(24),
+                                        border: Border.all(
+                                          color: Colors.black45,
+                                          style: BorderStyle.solid,
+                                          width: 1.0,
                                         ),
-                                        child: Icon(
-                                          Icons.keyboard_arrow_left,
-                                          size: 20,
-                                        )),
-                                  ),
+                                      ),
+                                      child: Icon(
+                                        Icons.keyboard_arrow_left,
+                                        size: 20,
+                                      )),
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                TextWidget(
-                                  text: demographicList.location.contactPerson,
-                                  color: darkColor,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              TextWidget(
+                                text: demographicList.location.contactPerson,
+                                color: darkColor,
+                                weight: FontWeight.w600,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30.0),
+                          child: isStatus == true
+                              ? TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Completed'),
+                                  color: successColor,
+                                  weight: FontWeight.w600,
+                                  size: 18,
+                                )
+                              : TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('In Progress'),
+                                  color: yellowColor,
                                   weight: FontWeight.w600,
                                   size: 18,
                                 ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
-                            child: isStatus==true?TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('Completed'),
-                              color: successColor,
-                              weight: FontWeight.w600,
-                              size: 18,
-                            ):TextWidget(
-                              text: DemoLocalization.of(context)
-                                  .translate('In Progress'),
-                              color: yellowColor,
-                              weight: FontWeight.w600,
-                              size: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        height: 1,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, top: 8),
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
-                                        .translate('Location'),
-                                    size: 16,
-                                    weight: FontWeight.w800,
-                                    color: darkColor,
-                                  ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 1,
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Location'),
+                                  size: 16,
+                                  weight: FontWeight.w800,
+                                  color: darkColor,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4, right: 4),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Form No'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.formNo==null||demographicList.location.formNo==""?" -": demographicList.location.formNo,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Panchayat No'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.panchayatNo==""?" -":demographicList.location.panchayatNo.toString(),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Door No'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:demographicList.location.doorNumber==""?" -":demographicList.location.doorNumber,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Project Code No'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.projectCode==""?" -":demographicList.location.projectCode,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4, right: 4),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Panchayat Code'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:demographicList.location.panchayatCode,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Street Name'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.streetName,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Village Code'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.villagesCode.toString(),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Village Name'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.villageName.toString(),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4, right: 4),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Contact Person'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.location.contactPerson,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
-                                        Container(width: 580,)
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2,
-                          ),
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context).translate('Property Details'),
-                                    size: 16,
-                                    color: darkColor,
-                                    weight: FontWeight.w800,
-                                  ),
-                                ),
-                                Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(context).translate('Status of House'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:demographicList.property.statusofHouse,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Vehicle Details'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:getVehicle(demographicList.property),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Type of House'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.all(8.0),
-                                                    child: TextWidget(
-                                                      text: demographicList.property.typeofHouse,
-                                                      size: 14,
-                                                      color: darkColor,
-                                                      weight: FontWeight.w400,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Toilet Facility at Home'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:getSliderValue( demographicList.property.toiletFacility),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 4, bottom: 4),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Wet Land Holding(In Acres)'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.property.wetLandInAcres,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Livestock Details'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text:getLiveStock(demographicList.property),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: DemoLocalization.of(
-                                                        context)
-                                                        .translate(
-                                                        'Dry Land Holding(In Acres)'),
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                const EdgeInsets.all(4.0),
-                                                child: SizedBox(
-                                                  width: 150,
-                                                  child: TextWidget(
-                                                    text: demographicList.property.dryLandInAcres,
-                                                    size: 14,
-                                                    color: darkColor,
-                                                    weight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Container(width: 170,)
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2,
-                          ),
-                            Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16.0, top: 8.0),
-                                  child: TextWidget(
-                                    text: "${
-                                        DemoLocalization.of(context)
-                                            .translate('Family Members')
-                                    }" + " ""(${demographicList.family.length})",
-                                    size: 16,
-                                    color: darkColor,
-                                    weight: FontWeight.w800,
-                                  ),
-                                ),
-                                ListView.builder(
-                                  itemCount: demographicList.family.length,
-                                  physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    debugPrint("familyPhoto:${demographicList.family[index].education}");
-                                    demographicList.family.sort((a, b) => a.position.compareTo(b.position));
-                                    debugPrint("demographicList:${demographicList.family[index].position}");
-                                    return Column(
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Form No'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList.location
+                                                                  .formNo ==
+                                                              null ||
+                                                          demographicList
+                                                                  .location
+                                                                  .formNo ==
+                                                              ""
+                                                      ? " -"
+                                                      : demographicList
+                                                          .location.formNo,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Panchayat No'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList.location
+                                                              .panchayatNo ==
+                                                          ""
+                                                      ? " -"
+                                                      : demographicList
+                                                          .location.panchayatNo
+                                                          .toString(),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Door No'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList.location
+                                                              .doorNumber ==
+                                                          ""
+                                                      ? " -"
+                                                      : demographicList
+                                                          .location.doorNumber,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Project Code No'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList.location
+                                                              .projectCode ==
+                                                          ""
+                                                      ? " -"
+                                                      : demographicList
+                                                          .location.projectCode,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Panchayat Code'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .location.panchayatCode,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate('Street Name'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .location.streetName,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Village Code'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .location.villagesCode
+                                                      .toString(),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Village Name'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .location.villageName
+                                                      .toString(),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Contact Person'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .location.contactPerson,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         Container(
-                                          child: InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                familyIndex = index;
-                                              });
-                                            },
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(4.0),
-                                                      child:Container(
-                                                          height: 140,
-                                                          width: 120,
-                                                          decoration: BoxDecoration(
-                                                              borderRadius:
-                                                              BorderRadius.all(Radius.circular(50))),
-                                                          child:  demographicList.family[index].photo!= ""
-                                                              ?Padding(
-                                                                padding: const EdgeInsets.all(8.0),
-                                                                child: Image.network( demographicList.family[index].photo,fit: BoxFit.fill),
-                                                              )
-                                                              :demographicList.family[index].gender==""?Image.asset(imgCamera,fit: BoxFit.fill):demographicList.family[index].gender=="Male" || demographicList.family[index].gender=="ஆண்"?SvgPicture.asset(
-                                                            svgMan,
-                                                            semanticsLabel: "Logo",
-                                                            height: height / 12,
-                                                            width: width / 8,
-                                                            fit: BoxFit.contain,
-                                                            allowDrawingOutsideViewBox: true,
-                                                          ):demographicList.family[index].gender=="Transgender" || demographicList.family[index].gender=="திருநங்கை"?SvgPicture.asset(
-                                                            svgGender,
-                                                            semanticsLabel: "Logo",
-                                                            height: height / 12,
-                                                            width: width / 8,
-                                                            fit: BoxFit.contain,
-                                                            allowDrawingOutsideViewBox: true,
-                                                          ):SvgPicture.asset(
-                                                            svgWoman,
-                                                            semanticsLabel: "Logo",
-                                                            height: height / 10,
-                                                            width: width / 10,
-                                                            fit: BoxFit.contain,
-                                                            allowDrawingOutsideViewBox: true,
-                                                          ) ),
+                                          width: 580,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8.0),
+                                child: TextWidget(
+                                  text: DemoLocalization.of(context)
+                                      .translate('Property Details'),
+                                  size: 16,
+                                  color: darkColor,
+                                  weight: FontWeight.w800,
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 4, right: 4, bottom: 4),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Status of House'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .property.statusofHouse,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Vehicle Details'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: getVehicle(
+                                                      demographicList.property),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Type of House'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: TextWidget(
+                                                    text: demographicList
+                                                        .property.typeofHouse,
+                                                    size: 14,
+                                                    color: darkColor,
+                                                    weight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Toilet Facility at Home'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: getSliderValue(
+                                                      demographicList.property
+                                                          .toiletFacility),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 4, bottom: 4),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Wet Land Holding(In Acres)'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .property.wetLandInAcres,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Livestock Details'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: getLiveStock(
+                                                      demographicList.property),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: DemoLocalization.of(
+                                                          context)
+                                                      .translate(
+                                                          'Dry Land Holding(In Acres)'),
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: SizedBox(
+                                                width: 150,
+                                                child: TextWidget(
+                                                  text: demographicList
+                                                      .property.dryLandInAcres,
+                                                  size: 14,
+                                                  color: darkColor,
+                                                  weight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 170,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16.0, top: 8.0),
+                                child: TextWidget(
+                                  text: "${DemoLocalization.of(context).translate('Family Members')}" +
+                                      " " "(${demographicList.family.length})",
+                                  size: 16,
+                                  color: darkColor,
+                                  weight: FontWeight.w800,
+                                ),
+                              ),
+                              ListView.builder(
+                                itemCount: demographicList.family.length,
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  debugPrint(
+                                      "familyPhoto:${demographicList.family[index].education}");
+                                  demographicList.family.sort((a, b) =>
+                                      a.position.compareTo(b.position));
+                                  debugPrint(
+                                      "demographicList:${demographicList.family[index].position}");
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              familyIndex = index;
+                                            });
+                                          },
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child: Container(
+                                                        height: 140,
+                                                        width: 120,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        50))),
+                                                        child:
+                                                            demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .photo !=
+                                                                    ""
+                                                                ? Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            8.0),
+                                                                    child: Image.network(
+                                                                        demographicList
+                                                                            .family[
+                                                                                index]
+                                                                            .photo,
+                                                                        fit: BoxFit
+                                                                            .fill),
+                                                                  )
+                                                                : demographicList
+                                                                            .family[
+                                                                                index]
+                                                                            .gender ==
+                                                                        ""
+                                                                    ? Image.asset(
+                                                                        imgCamera,
+                                                                        fit: BoxFit
+                                                                            .fill)
+                                                                    : demographicList.family[index].gender == "Male" ||
+                                                                            demographicList.family[index].gender ==
+                                                                                "ஆண்"
+                                                                        ? SvgPicture.asset(
+                                                                            svgMan,
+                                                                            semanticsLabel:
+                                                                                "Logo",
+                                                                            height:
+                                                                                height / 12,
+                                                                            width:
+                                                                                width / 8,
+                                                                            fit:
+                                                                                BoxFit.contain,
+                                                                            allowDrawingOutsideViewBox:
+                                                                                true,
+                                                                          )
+                                                                        : demographicList.family[index].gender == "Transgender" || demographicList.family[index].gender == "திருநங்கை"
+                                                                            ? SvgPicture.asset(
+                                                                                svgGender,
+                                                                                semanticsLabel: "Logo",
+                                                                                height: height / 12,
+                                                                                width: width / 8,
+                                                                                fit: BoxFit.contain,
+                                                                                allowDrawingOutsideViewBox: true,
+                                                                              )
+                                                                            : SvgPicture.asset(
+                                                                                svgWoman,
+                                                                                semanticsLabel: "Logo",
+                                                                                height: height / 10,
+                                                                                width: width / 10,
+                                                                                fit: BoxFit.contain,
+                                                                                allowDrawingOutsideViewBox: true,
+                                                                              )),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .position +
+                                                                ")" +
+                                                                " " +
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .name,
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text:
+                                                                  "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getTexts(
+                                                                demographicList
+                                                                        .family[
+                                                                    index]),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getPregnant(
+                                                                demographicList
+                                                                        .family[
+                                                                    index]),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: demographicList
+                                                                .family[index]
+                                                                .mobileNumber,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text:
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .mail,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Aadhaar No'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: getMaskedNo(
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .aadharNumber),
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(4.0),
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Education Qualification'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
                                                             child: TextWidget(
-                                                              text:demographicList.family[index].position + ")" + " " + demographicList.family[index].name,
-                                                              weight: FontWeight.w800,
+                                                              text:
+                                                                  demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .education,
+                                                              weight: FontWeight
+                                                                  .w400,
                                                               color: darkColor,
                                                               size: 14,
                                                             ),
                                                           ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text: "${demographicList.family[index].age == 0 ? "" : demographicList.family[index].age.toString() + "yrs"}${demographicList.family[index].dob.toString().length > 0 ? ", " + getDOB(demographicList.family[index].dob.toString()) : ""}",
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Business'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
                                                           ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: getTexts(demographicList.family[index]),
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: getPregnant(demographicList.family[index]),
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: demographicList.family[index].mobileNumber,
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: demographicList.family[index].mail,
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text:  DemoLocalization.of(context)
-                                                                  .translate('Aadhaar No'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: getMaskedNo(demographicList.family[index].aadharNumber),
-                                                              weight: FontWeight.w400,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(4.0),
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text:  DemoLocalization.of(context).translate('Education Qualification'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].education,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 10,),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: DemoLocalization.of(context).translate('Business'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 150,
-
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].occupation,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 10,),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text: DemoLocalization.of(context).translate('Annual Income'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].annualIncome.toString(),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Spacer(),
-                                                    Padding(
-                                                      padding: const EdgeInsets.all(2.0),
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: TextWidget(
-                                                              text:  DemoLocalization.of(context).translate('Section'),
-                                                              weight: FontWeight.w800,
-                                                              color: darkColor,
-                                                              size: 14,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
                                                             width: 150,
                                                             child: TextWidget(
-                                                              text: demographicList.family[index].community,
-                                                              weight: FontWeight.w400,
+                                                              text: demographicList
+                                                                  .family[index]
+                                                                  .occupation,
+                                                              weight: FontWeight
+                                                                  .w400,
                                                               color: darkColor,
                                                               size: 14,
                                                             ),
                                                           ),
-                                                          SizedBox(height: 10,),
-
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context)
-                                                                    .translate('Caste'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Annual Income'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
                                                           ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 120,
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].caste,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 10,),
-
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
                                                             child: TextWidget(
-                                                              text:  DemoLocalization.of(context)
-                                                                  .translate('Pension'),
-                                                              weight: FontWeight.w800,
+                                                              text: demographicList
+                                                                  .family[index]
+                                                                  .annualIncome
+                                                                  .toString(),
+                                                              weight: FontWeight
+                                                                  .w400,
                                                               color: darkColor,
                                                               size: 14,
                                                             ),
                                                           ),
-                                                          Padding(
-                                                            padding: const EdgeInsets.all(2.0),
-                                                            child: SizedBox(
-                                                              width: 150,
-                                                              child: TextWidget(
-                                                                text: getPension(demographicList.family[index]),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Spacer(),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Section'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 150,
+                                                          child: TextWidget(
+                                                            text:
+                                                                demographicList
+                                                                    .family[
+                                                                        index]
+                                                                    .community,
+                                                            weight:
+                                                                FontWeight.w400,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text: DemoLocalization
+                                                                      .of(
+                                                                          context)
+                                                                  .translate(
+                                                                      'Caste'),
+                                                              weight: FontWeight
+                                                                  .w800,
+                                                              color: darkColor,
+                                                              size: 14,
                                                             ),
                                                           ),
-
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 120,
+                                                            child: TextWidget(
+                                                              text:
+                                                                  demographicList
+                                                                      .family[
+                                                                          index]
+                                                                      .caste,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: TextWidget(
+                                                            text: DemoLocalization
+                                                                    .of(context)
+                                                                .translate(
+                                                                    'Pension'),
+                                                            weight:
+                                                                FontWeight.w800,
+                                                            color: darkColor,
+                                                            size: 14,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          child: SizedBox(
+                                                            width: 150,
+                                                            child: TextWidget(
+                                                              text: getPension(
+                                                                  demographicList
+                                                                          .family[
+                                                                      index]),
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                              color: darkColor,
+                                                              size: 14,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Spacer(),
+                                                  Container(
+                                                    height: 50,
+                                                    width: 20,
+                                                  ),
+                                                  Spacer(),
+                                                ],
+                                              ),
+                                              demographicList.family[index]
+                                                          .isExpanded ==
+                                                      "Show Less"
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4.0),
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(2.0),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Insurance'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: getInsurance(
+                                                                          demographicList
+                                                                              .family[index]),
+                                                                      weight: FontWeight
+                                                                          .w400,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Smart phone'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: getSliderValue(demographicList
+                                                                          .family[
+                                                                              index]
+                                                                          .smartphone),
+                                                                      weight: FontWeight
+                                                                          .w400,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Physically challenged'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: getPhysical(
+                                                                          demographicList
+                                                                              .family[index]),
+                                                                      weight: FontWeight
+                                                                          .w400,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Any Members who Smoke?'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            2.0),
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: getSliderValue(demographicList
+                                                                          .family[
+                                                                              index]
+                                                                          .anyMembersWhoSmoke),
+                                                                      weight: FontWeight
+                                                                          .w400,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(2.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Any Members who use Tobacco?'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getSliderValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .anyMembersWhoUseTobacco),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Any Members who Drink?'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getSliderValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .anyMembersWhoDrink),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            'Drinking Usage'),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getDrinkingUsage(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .drinkingUsage),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Stopped by'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getStoppedValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .stoppedBy),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(2.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'No of years'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .noOfYears,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'When you had a treatment'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .whenTreatment,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Where you had a treatment'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .whereTreatment,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(2.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            "Vaccination Done"),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getSliderValue(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .isVaccinationDone),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            "1st Dose Date"),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList.family[index].firstDose ==
+                                                                            ""
+                                                                        ? DemoLocalization.of(context).translate(
+                                                                            'Not Answered')
+                                                                        : demographicList
+                                                                            .family[index]
+                                                                            .firstDose,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 120,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              "2nd Dose Date"),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList.family[index].secondDose ==
+                                                                            ""
+                                                                        ? DemoLocalization.of(context).translate(
+                                                                            'Not Answered')
+                                                                        : demographicList
+                                                                            .family[index]
+                                                                            .secondDose,
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            height: 50,
+                                                            width: 60,
+                                                          )
                                                         ],
                                                       ),
-                                                    ),
-                                                    Spacer(),
-
-                                                    Container(height: 50,width: 20,),
-                                                    Spacer(),
-
-                                                  ],
-                                                ),
-                                                demographicList.family[index].isExpanded == "Show Less" ? Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                    children: [
-                                                      Padding(
-                                                          padding: const EdgeInsets.all(2.0),
-                                                        child: Column (
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context).translate('Insurance'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: getInsurance(demographicList.family[index]),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context)
-                                                                    .translate('Smart phone'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: getSliderValue(demographicList.family[index].smartphone),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context).translate('Physically challenged'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: getPhysical(demographicList.family[index]),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate('Any Members who Smoke?'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getSliderValue(demographicList.family[index].anyMembersWhoSmoke),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-
-                                                          ],
-                                                        )
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(2.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Any Members who use Tobacco?'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getSliderValue(demographicList.family[index].anyMembersWhoUseTobacco),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Any Members who Drink?'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getSliderValue(demographicList.family[index].anyMembersWhoDrink),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              height: 10,
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate('Drinking Usage'),
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getDrinkingUsage(demographicList.family[index].drinkingUsage),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Stopped by'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getStoppedValue(demographicList.family[index].stoppedBy),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(2.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('No of years'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:demographicList.family[index].noOfYears,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('When you had a treatment'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:demographicList.family[index].whenTreatment,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 150,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate('Where you had a treatment'),
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:demographicList.family[index].whereTreatment,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(2.0),
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: DemoLocalization.of(context).translate("Vaccination Done") ,
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:getSliderValue(demographicList.family[index].isVaccinationDone),
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:  DemoLocalization.of(context).translate("1st Dose Date") ,
-                                                                weight: FontWeight.w800,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text: demographicList.family[index].firstDose == "" ?  DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].firstDose,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                            SizedBox(height: 10,),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: SizedBox(
-                                                                width: 120,
-                                                                child: TextWidget(
-                                                                  text: DemoLocalization.of(context).translate("2nd Dose Date") ,
-                                                                  weight: FontWeight.w800,
-                                                                  color: darkColor,
-                                                                  size: 14,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(2.0),
-                                                              child: TextWidget(
-                                                                text:demographicList.family[index].secondDose == "" ?  DemoLocalization.of(context).translate('Not Answered') : demographicList.family[index].secondDose,
-                                                                weight: FontWeight.w400,
-                                                                color: darkColor,
-                                                                size: 14,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Container(height: 50,width: 60,)
-                                                    ],
-                                                  ),
-                                                ) : Container(),
-                                                InkWell(
-                                                  onTap: () {
+                                                    )
+                                                  : Container(),
+                                              InkWell(
+                                                onTap: () {
                                                   setState(() {
-                                                    if (demographicList.family[index].isExpanded == "Show More")
-                                                      demographicList.family[index].isExpanded = "Show Less";
+                                                    if (demographicList
+                                                            .family[index]
+                                                            .isExpanded ==
+                                                        "Show More")
+                                                      demographicList
+                                                              .family[index]
+                                                              .isExpanded =
+                                                          "Show Less";
                                                     else
-                                                      demographicList.family[index].isExpanded = "Show More";
+                                                      demographicList
+                                                              .family[index]
+                                                              .isExpanded =
+                                                          "Show More";
                                                   });
-                                                    },
-                                                  child: Align(
-                                                    alignment: Alignment.bottomRight,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(right:16.0,bottom:8),
-                                                      child: TextWidget(
-                                                        text: DemoLocalization.of(context).translate(demographicList.family[index].isExpanded),
-                                                        weight: FontWeight.w600,
-                                                        color: primaryColor,
-                                                        size: 14,
-                                                      ),
+                                                },
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.bottomRight,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 16.0,
+                                                            bottom: 8),
+                                                    child: TextWidget(
+                                                      text: DemoLocalization.of(
+                                                              context)
+                                                          .translate(
+                                                              demographicList
+                                                                  .family[index]
+                                                                  .isExpanded),
+                                                      weight: FontWeight.w600,
+                                                      color: primaryColor,
+                                                      size: 14,
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(height: 2,),
-                                                Divider(
-                                                  height: 1,
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                              SizedBox(
+                                                height: 2,
+                                              ),
+                                              Divider(
+                                                height: 1,
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Divider(height: 1,),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
+                                      ),
+                                      Divider(
+                                        height: 1,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )),
-        ),
-      );
-
+              ),
+            )),
+      ),
+    );
   }
 
   getTexts(Family family) {
@@ -3041,7 +4250,9 @@ class _DetailScreenState extends State<DetailScreen> {
       toReturn += ", ";
     }
     toReturn += family.bloodGroup;
-    if (toReturn.length > 0 && family.maritalStatus != null && family.maritalStatus.length > 0) {
+    if (toReturn.length > 0 &&
+        family.maritalStatus != null &&
+        family.maritalStatus.length > 0) {
       toReturn += ", ";
     }
     toReturn += family.maritalStatus;
@@ -3049,43 +4260,39 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   getMaskedNo(String aadharNumber) {
-
-    if(aadharNumber==""){
-      return aadharNumber= " -";
-    }else{
+    if (aadharNumber == "") {
+      return aadharNumber = " -";
+    } else {
       aadharNumber = aadharNumber.replaceRange(0, aadharNumber.length - 4, "*");
-      return "*******" +    aadharNumber;
+      return "*******" + aadharNumber;
     }
-
   }
+
   getPregnant(Family family) {
-    String pregnant="";
+    String pregnant = "";
     if (family.pregnantStatus == 1)
       pregnant += DemoLocalization.of(context).translate('Pre Natal');
     if (pregnant != "") pregnant += ", ";
-    pregnant +=  family.pregnantMonths != ""?family.pregnantMonths + "" "months" :"";
+    pregnant += family.pregnantMonths != "" && family.pregnantMonths != null
+        ? "${family.pregnantMonths} months"
+        : "";
 
     return pregnant;
   }
 
-   getDOB(String dob) {
-
-    if(dob==""){
-      return dob="";
-    }else{
+  getDOB(String dob) {
+    if (dob == "") {
+      return dob = "";
+    } else {
       try {
         var inputFormat = DateFormat('dd-MM-yyyy');
         var inputDate = inputFormat.parse(dob);
         var outputFormat = DateFormat('d-MMMM-y');
         var outputDate = outputFormat.format(inputDate);
         return outputDate;
-
       } on Exception catch (_) {
-       return dob;
+        return dob;
       }
-
     }
-
   }
-
 }
