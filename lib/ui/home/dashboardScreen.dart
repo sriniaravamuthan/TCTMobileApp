@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,8 +51,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     super.initState();
   }
+
   @override
-  dispose(){
+  dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -62,6 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     ]);
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -87,7 +88,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 svgTctLogo,
                 semanticsLabel: "Logo",
                 height: 40,
-                width:50,
+                width: 50,
                 fit: BoxFit.contain,
                 allowDrawingOutsideViewBox: true,
               ),
@@ -152,7 +153,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      AuthenticationService(FirebaseAuth.instance).signOut(context);
+                      AuthenticationService(FirebaseAuth.instance)
+                          .signOut(context);
                     },
                     child: Icon(
                       Icons.power_settings_new_outlined,
@@ -254,7 +256,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       String villageCode = element['villageCode'];
       int panchayatCode = element['panchayatCode'];
       int panchayatNo = element['panchayatNo'];
-      int maxCount=element['maxCount'];
+      int maxCount = element['maxCount'];
       String villageNameTa = element['villageName']['ta'];
       String villageNameEn = element['villageName']['en'];
 
@@ -270,7 +272,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             "villageCode": villageCode,
             "panchayatCode": panchayatCode,
             "panchayatNo": panchayatNo,
-            "maxCount":maxCount,
+            "maxCount": maxCount,
             "villageName": {"en": villageNameEn, "ta": villageNameTa}
           })
           .then((value) => debugPrint("Village Details Added Successfully"))

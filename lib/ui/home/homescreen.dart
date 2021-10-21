@@ -38,6 +38,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
   CollectionReference demographydata =
       FirebaseFirestore.instance.collection('users');
   var deleteLength;
+  var deleteLengthCount;
   var demoLength = 0;
   List users = [];
   String language;
@@ -1166,8 +1167,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       makeLoadData();
       showDeleteSuccess();
     }).catchError((error) => false);
-
-    debugPrint("deleteLength$deleteLength");
+    /* var totalLengthCount;
+    var maxCountData = await FirebaseFirestore.instance
+        .collection(collectionVillageName)
+        .get();
+    for (int i = 0; i < maxCountData.docs.length; i++) {
+      totalLengthCount = maxCountData.docs[i].data()['maxCount'];
+      debugPrint("totalLengthCount$totalLengthCount");
+      debugPrint("totalLengthCount1$deleteLengthCount");
+    }
+    deleteLengthCount = totalLengthCount - 1;*/
   }
 
   totalLength() async {
