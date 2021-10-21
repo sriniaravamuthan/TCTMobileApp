@@ -11,6 +11,7 @@ import 'dart:io';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -223,7 +224,19 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.whenTreatment = whenTreatmentController.text;
     family.whereTreatment = whereTreatmentController.text;
     family.migrateReason = migrateReasonController.text;
-
+    debugPrint("died:${family.died}");
+    if (family.died == 1.0) {
+      family.diedUpdateDate = FirebaseAuth.instance.currentUser.uid;
+      family.diedUpdateBy = DateTime.now().toString();
+    }
+    if (family.anyMembersWhoDrink == 0 && family.anyMembersWhoDrink == 1) {
+      family.noOfYears = "";
+      family.whenTreatment = "";
+      family.whereTreatment = "";
+      family.migrateReason = "";
+      family.drinkingUsage = 0;
+      family.stoppedBy = 0;
+    }
     if (_image != null) {
       firebase_storage.Reference storageReference = FirebaseStorage.instance
           .ref()
@@ -633,11 +646,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                         ));
                                   },
                                   onFocusChanged: (value) {
-                                    isGenderHide =
-                                        genderController.text == "Female" ||
-                                                genderController.text == "பெண்"
-                                            ? true
-                                            : false;
+                                    setState(() {
+                                      isGenderHide = genderController.text ==
+                                                  "Female" ||
+                                              genderController.text == "பெண்"
+                                          ? true
+                                          : false;
+                                    });
                                   },
                                   itemSorter: (a, b) {
                                     return a.compareTo(b);
@@ -1199,14 +1214,15 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 onFocusChanged: (value) {
                                   debugPrint(
                                       "maritalStatusValue:${maritalStatusController.text}");
-
-                                  isMaritalHide =
-                                      maritalStatusController.text ==
-                                                  "Married" ||
-                                              maritalStatusController.text ==
-                                                  "திருமணமானவர்"
-                                          ? true
-                                          : false;
+                                  setState(() {
+                                    isMaritalHide =
+                                        maritalStatusController.text ==
+                                                    "Married" ||
+                                                maritalStatusController.text ==
+                                                    "திருமணமானவர்"
+                                            ? true
+                                            : false;
+                                  });
                                 },
                                 itemFilter: (item, query) {
                                   isMaritalHide = false;
@@ -2552,8 +2568,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                           child: Slider(
                                             value: family.drinkingUsage,
                                             min: 0,
-                                            max: 3,
-                                            divisions: 3,
+                                            max: 4,
+                                            divisions: 4,
                                             onChanged: (value) {
                                               toggleDrinking(value);
                                             },
@@ -2612,7 +2628,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             value: family.stoppedBy,
                                             min: 0,
                                             max: 2,
-                                            divisions: 1,
+                                            divisions: 2,
                                             onChanged: (value) {
                                               toggleStopped(value);
                                             },
@@ -2709,11 +2725,13 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ],
                   )
                 : Container(),
-            textStopped == "Treatment" || textStopped == "சிகிச்சை"
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                textStopped == "Treatment" ||
+                        textStopped == "சிகிச்சை" && textDrink == "Yes" ||
+                        textDrink == "ஆம்"
+                    ? Expanded(
                         child: FractionallySizedBox(
                           widthFactor: 1,
                           child: Column(
@@ -2783,8 +2801,12 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                             ],
                           ),
                         ),
-                      ),
-                      Expanded(
+                      )
+                    : Expanded(child: Container()),
+                textStopped == "Treatment" ||
+                        textStopped == "சிகிச்சை" && textDrink == "Yes" ||
+                        textDrink == "ஆம்"
+                    ? Expanded(
                         child: FractionallySizedBox(
                           widthFactor: 1,
                           child: Column(
@@ -2854,9 +2876,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                           ),
                         ),
                       )
-                    ],
-                  )
-                : Container(),
+                    : Expanded(child: Container())
+              ],
+            ),
             Divider(
               thickness: 1,
             ),
@@ -3508,12 +3530,14 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.drinkingUsage = value;
     setState(() {
       if (value == 0)
-        textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
+        textDrinkUsage = DemoLocalization.of(context).translate('Not Answer');
       if (value == 1)
-        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
+        textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
       if (value == 2)
-        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
+        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
       if (value == 3)
+        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
+      if (value == 4)
         textDrinkUsage = DemoLocalization.of(context).translate('Stopped');
     });
   }
@@ -3607,6 +3631,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.stoppedBy = value;
     setState(() {
       if (value == 0)
+        textSmoke = DemoLocalization.of(context).translate('Not Answer');
+      else if (value == 1)
         textStopped = DemoLocalization.of(context).translate('Own');
       else
         textStopped = DemoLocalization.of(context).translate('Treatment');
@@ -3907,15 +3933,19 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         textDrink = DemoLocalization.of(context).translate('Yes');
 
       if (family.drinkingUsage == 0)
-        textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
+        textDrinkUsage = DemoLocalization.of(context).translate('Not Answer');
       if (family.drinkingUsage == 1)
-        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
+        textDrinkUsage = DemoLocalization.of(context).translate('Occasional');
       if (family.drinkingUsage == 2)
-        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
+        textDrinkUsage = DemoLocalization.of(context).translate('Moderate');
       if (family.drinkingUsage == 3)
+        textDrinkUsage = DemoLocalization.of(context).translate('Heavy');
+      if (family.drinkingUsage == 4)
         textDrinkUsage = DemoLocalization.of(context).translate('Stopped');
 
       if (family.stoppedBy == 0)
+        textStopped = DemoLocalization.of(context).translate('Not Answer');
+      else if (family.stoppedBy == 1)
         textStopped = DemoLocalization.of(context).translate('Own');
       else
         textStopped = DemoLocalization.of(context).translate('Treatment');

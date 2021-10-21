@@ -300,11 +300,8 @@ class _DetailScreenState extends State<DetailScreen> {
   String getStoppedValue(double value) {
     if (value == 0)
       return DemoLocalization.of(context).translate('Own');
-    else if (value == 1)
+    else
       return DemoLocalization.of(context).translate('Treatment');
-    else {
-      return "-";
-    }
   }
 
   Widget _portraitMode() {

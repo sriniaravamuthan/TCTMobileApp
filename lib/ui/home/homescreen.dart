@@ -339,11 +339,11 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   _family.maritalStatus = "";
                 else
                   _family.maritalStatus = family[i]["maritalStatus"];
-                _family.pregnantStatus = family[i]["pregnantStatus"];
+                _family.pregnantStatus = family[i]["pregnantStatus"].toDouble();
                 _family.pregnantMonths = family[i]["pregnantMonth"];
-                _family.drinkingUsage = family[i]["drinkingUsage"];
+                _family.drinkingUsage = family[i]["drinkingUsage"].toDouble();
                 _family.noOfYears = family[i]["noOfYears"];
-                _family.stoppedBy = family[i]["stoppedBy"];
+                _family.stoppedBy = family[i]["stoppedBy"].toDouble();
                 _family.whenTreatment = family[i]["whenTreatment"];
                 _family.whereTreatment = family[i]["whereTreatment"];
 
@@ -376,8 +376,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.isVaccinationDone =
                     family[i]['isVaccinationDone'].toDouble();
                 _family.secondDose = family[i]['secondDose'];
-                _family.died = family[i]['isDead'];
-                _family.migrate = family[i]['migrate'];
+                _family.died = family[i]['isDead'].toDouble();
+                _family.migrate = family[i]['migrate'].toDouble();
                 _family.migrateReason = family[i]['migrateReason'];
                 _family.isExpanded = 'Show More';
                 _familyList.sort((a, b) => a.position.compareTo(b.position));
