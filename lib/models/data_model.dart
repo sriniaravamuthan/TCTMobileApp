@@ -345,8 +345,7 @@ class Family {
       this.diedUpdateDate,
       this.isVaccinationDone,
       this.firstDose,
-      this.secondDose,
-      this.migrate});
+      this.secondDose});
 
   Family.fromJson(Map<String, dynamic> json) {
     name = json['Name '];

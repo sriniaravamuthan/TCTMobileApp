@@ -277,6 +277,23 @@ class _FamilyMemberDetailsPortraitState
     }
   }
 
+  String getDied(double value) {
+    if (value == 1)
+      return DemoLocalization.of(context).translate('Yes');
+    else if (value == 0) return DemoLocalization.of(context).translate('No');
+  }
+
+  String getMigrate(Family family) {
+    String migrate = "";
+    if (family.migrate == 1 && family.migrateReason != "") {
+      migrate += DemoLocalization.of(context).translate('Yes') +
+          "-" +
+          family.migrateReason.toString();
+      return migrate;
+    } else if (family.physicallyChallenge == 1)
+      return DemoLocalization.of(context).translate('No');
+  }
+
   getTexts(Family family) {
     String toReturn = family.gender;
     if (toReturn.length > 0 && family.bloodGroup.length > 0) {
@@ -850,7 +867,41 @@ class _FamilyMemberDetailsPortraitState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].whenTreatment,
+                                          text: familyList[index]
+                                                      .whenTreatment !=
+                                                  ""
+                                              ? familyList[index].whenTreatment
+                                              : "-",
+                                          weight: FontWeight.w400,
+                                          color: darkColor,
+                                          size: 14,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: SizedBox(
+                                          width: 150,
+                                          child: TextWidget(
+                                            text: DemoLocalization.of(context)
+                                                .translate(
+                                                    'Where you had a treatment'),
+                                            weight: FontWeight.w800,
+                                            color: darkColor,
+                                            size: 14,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: TextWidget(
+                                          text: familyList[index]
+                                                      .whereTreatment !=
+                                                  ""
+                                              ? familyList[index].whereTreatment
+                                              : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -865,22 +916,18 @@ class _FamilyMemberDetailsPortraitState
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
-                                      child: SizedBox(
-                                        width: 150,
-                                        child: TextWidget(
-                                          text: DemoLocalization.of(context)
-                                              .translate(
-                                                  'Where you had a treatment'),
-                                          weight: FontWeight.w800,
-                                          color: darkColor,
-                                          size: 14,
-                                        ),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate("Died"),
+                                        weight: FontWeight.w800,
+                                        color: darkColor,
+                                        size: 14,
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text: familyList[index].whereTreatment,
+                                        text: getDied(familyList[index].died),
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -888,6 +935,25 @@ class _FamilyMemberDetailsPortraitState
                                     ),
                                     SizedBox(
                                       height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextWidget(
+                                        text: DemoLocalization.of(context)
+                                            .translate("Migrate"),
+                                        weight: FontWeight.w800,
+                                        color: darkColor,
+                                        size: 14,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: TextWidget(
+                                        text: getMigrate(familyList[index]),
+                                        weight: FontWeight.w400,
+                                        color: darkColor,
+                                        size: 14,
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
@@ -1636,6 +1702,25 @@ class _FamilyMemberDetailsPortraitState
                                           size: 14,
                                         ),
                                       ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: TextWidget(
+                                          text: DemoLocalization.of(context)
+                                              .translate("Died"),
+                                          weight: FontWeight.w800,
+                                          color: darkColor,
+                                          size: 14,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: TextWidget(
+                                          text: getDied(familyList[index].died),
+                                          weight: FontWeight.w400,
+                                          color: darkColor,
+                                          size: 14,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -1645,6 +1730,25 @@ class _FamilyMemberDetailsPortraitState
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: TextWidget(
+                                          text: DemoLocalization.of(context)
+                                              .translate("Migrate"),
+                                          weight: FontWeight.w800,
+                                          color: darkColor,
+                                          size: 14,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: TextWidget(
+                                          text: getMigrate(familyList[index]),
+                                          weight: FontWeight.w400,
+                                          color: darkColor,
+                                          size: 14,
+                                        ),
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
