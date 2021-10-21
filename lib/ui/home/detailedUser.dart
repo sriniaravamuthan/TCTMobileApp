@@ -291,14 +291,18 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   String getDrinkingUsage(double value) {
-    if (value == 0) return DemoLocalization.of(context).translate('Occasional');
-    if (value == 1) return DemoLocalization.of(context).translate('Moderate');
-    if (value == 2) return DemoLocalization.of(context).translate('Heavy');
-    if (value == 3) return DemoLocalization.of(context).translate('Stopped');
+    if (value == 0)
+      return DemoLocalization.of(context).translate('Not Answered');
+    if (value == 1) return DemoLocalization.of(context).translate('Occasional');
+    if (value == 2) return DemoLocalization.of(context).translate('Moderate');
+    if (value == 3) return DemoLocalization.of(context).translate('Heavy');
+    if (value == 4) return DemoLocalization.of(context).translate('Stopped');
   }
 
   String getStoppedValue(double value) {
     if (value == 0)
+      return DemoLocalization.of(context).translate('Not Answered');
+    else if (value == 1)
       return DemoLocalization.of(context).translate('Own');
     else
       return DemoLocalization.of(context).translate('Treatment');
@@ -1882,10 +1886,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                           2.0),
                                                                   child:
                                                                       TextWidget(
-                                                                    text: demographicList
-                                                                        .family[
-                                                                            index]
-                                                                        .noOfYears,
+                                                                    text: demographicList.family[index].noOfYears !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .noOfYears
+                                                                        : "-",
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,
@@ -1926,10 +1932,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                           2.0),
                                                                   child:
                                                                       TextWidget(
-                                                                    text: demographicList
-                                                                        .family[
-                                                                            index]
-                                                                        .whenTreatment,
+                                                                    text: demographicList.family[index].whenTreatment !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .whenTreatment
+                                                                        : "-",
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,
@@ -1979,9 +1987,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                 child:
                                                                     TextWidget(
                                                                   text: demographicList
-                                                                      .family[
-                                                                          index]
-                                                                      .whereTreatment,
+                                                                              .family[
+                                                                                  index]
+                                                                              .whereTreatment !=
+                                                                          ""
+                                                                      ? demographicList
+                                                                          .family[
+                                                                              index]
+                                                                          .whereTreatment
+                                                                      : "-",
                                                                   weight:
                                                                       FontWeight
                                                                           .w400,
@@ -3919,10 +3933,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                           2.0),
                                                                   child:
                                                                       TextWidget(
-                                                                    text: demographicList
-                                                                        .family[
-                                                                            index]
-                                                                        .noOfYears,
+                                                                    text: demographicList.family[index].noOfYears !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .noOfYears
+                                                                        : "-",
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,
@@ -3963,10 +3979,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                           2.0),
                                                                   child:
                                                                       TextWidget(
-                                                                    text: demographicList
-                                                                        .family[
-                                                                            index]
-                                                                        .whenTreatment,
+                                                                    text: demographicList.family[index].whenTreatment !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .whenTreatment
+                                                                        : "-",
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,
@@ -4007,10 +4025,12 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                           2.0),
                                                                   child:
                                                                       TextWidget(
-                                                                    text: demographicList
-                                                                        .family[
-                                                                            index]
-                                                                        .whereTreatment,
+                                                                    text: demographicList.family[index].whereTreatment !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .whereTreatment
+                                                                        : "-",
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,

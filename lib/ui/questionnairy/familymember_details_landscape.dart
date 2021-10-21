@@ -20,7 +20,7 @@ import 'package:tct_demographics/widgets/text_widget.dart';
 class FamilyMemberDetailsLandscape extends StatefulWidget {
   DemographicFamily demographicFamily;
   Orientation orientation;
-bool isMemberStatus;
+  bool isMemberStatus;
   FamilyMemberDetailsLandscape(
       this.demographicFamily, this.orientation, this.isMemberStatus);
 
@@ -128,8 +128,14 @@ class _FamilyMemberDetailsLandscapeState
           alignment: Alignment.bottomCenter,
           child: Visibility(
               visible: addfamily,
-              child: FamilyMemberStep(getDefaultFamily(), familyIndex,
-                  refreshFamilyList, cancelFields, deleteFields, familyList, widget.isMemberStatus)),
+              child: FamilyMemberStep(
+                  getDefaultFamily(),
+                  familyIndex,
+                  refreshFamilyList,
+                  cancelFields,
+                  deleteFields,
+                  familyList,
+                  widget.isMemberStatus)),
         ),
       ],
     );
@@ -167,8 +173,6 @@ class _FamilyMemberDetailsLandscapeState
       newFamily.widowedPension = 0;
       newFamily.retirementPension = 0;
       //habit
-      newFamily.firstDose = "";
-      newFamily.secondDose = "";
       newFamily.anyMembersWhoUseTobacco = 0;
       newFamily.isVaccinationDone = 0;
       newFamily.firstDose = "";
@@ -808,7 +812,10 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].noOfYears,
+                                          text:
+                                              familyList[index].noOfYears != ""
+                                                  ? familyList[index].noOfYears
+                                                  : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -834,7 +841,11 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].whenTreatment,
+                                          text: familyList[index]
+                                                      .whenTreatment !=
+                                                  ""
+                                              ? familyList[index].whenTreatment
+                                              : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -864,7 +875,11 @@ class _FamilyMemberDetailsLandscapeState
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text: familyList[index].whereTreatment,
+                                        text: familyList[index]
+                                                    .whereTreatment !=
+                                                ""
+                                            ? familyList[index].whereTreatment
+                                            : "-",
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -909,10 +924,10 @@ class _FamilyMemberDetailsLandscapeState
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text:
-                                            familyList[index].firstDose == null
-                                                ? ""
-                                                : familyList[index].firstDose,
+                                        text: familyList[index].firstDose == ""
+                                            ? DemoLocalization.of(context)
+                                                .translate('Not Answered')
+                                            : familyList[index].firstDose,
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -934,10 +949,10 @@ class _FamilyMemberDetailsLandscapeState
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text:
-                                            familyList[index].secondDose == null
-                                                ? ""
-                                                : familyList[index].secondDose,
+                                        text: familyList[index].secondDose == ""
+                                            ? DemoLocalization.of(context)
+                                                .translate('Not Answered')
+                                            : familyList[index].secondDose,
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -1551,7 +1566,10 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].noOfYears,
+                                          text:
+                                              familyList[index].noOfYears != ""
+                                                  ? familyList[index].noOfYears
+                                                  : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -1577,7 +1595,11 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].whenTreatment,
+                                          text: familyList[index]
+                                                      .whenTreatment !=
+                                                  ""
+                                              ? familyList[index].whenTreatment
+                                              : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -1603,8 +1625,11 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text:
-                                              familyList[index].whereTreatment,
+                                          text: familyList[index]
+                                                      .whereTreatment !=
+                                                  ""
+                                              ? familyList[index].whereTreatment
+                                              : "-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -1655,10 +1680,11 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].firstDose ==
-                                                  null
-                                              ? ""
-                                              : familyList[index].firstDose,
+                                          text:
+                                              familyList[index].firstDose == ""
+                                                  ? DemoLocalization.of(context)
+                                                      .translate('Not Answered')
+                                                  : familyList[index].firstDose,
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
@@ -1681,8 +1707,9 @@ class _FamilyMemberDetailsLandscapeState
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
                                           text: familyList[index].secondDose ==
-                                                  null
-                                              ? ""
+                                                  ""
+                                              ? DemoLocalization.of(context)
+                                                  .translate('Not Answered')
                                               : familyList[index].secondDose,
                                           weight: FontWeight.w400,
                                           color: darkColor,
@@ -1776,19 +1803,19 @@ class _FamilyMemberDetailsLandscapeState
     }
   }
 
-  getDrinkingUsage(double value) {
+  String getDrinkingUsage(double value) {
     if (value == 0)
-      return DemoLocalization.of(context).translate('Occasional');
-    else if (value == 1)
-      return DemoLocalization.of(context).translate('Moderate');
-    else if (value == 2)
-      return DemoLocalization.of(context).translate('Heavy');
-    else if (value == 3)
-      return DemoLocalization.of(context).translate('Stopped');
+      return DemoLocalization.of(context).translate('Not Answered');
+    if (value == 1) return DemoLocalization.of(context).translate('Occasional');
+    if (value == 2) return DemoLocalization.of(context).translate('Moderate');
+    if (value == 3) return DemoLocalization.of(context).translate('Heavy');
+    if (value == 4) return DemoLocalization.of(context).translate('Stopped');
   }
 
-  getStoppedValue(double value) {
+  String getStoppedValue(double value) {
     if (value == 0)
+      return DemoLocalization.of(context).translate('Not Answered');
+    else if (value == 1)
       return DemoLocalization.of(context).translate('Own');
     else
       return DemoLocalization.of(context).translate('Treatment');

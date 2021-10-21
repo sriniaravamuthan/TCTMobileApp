@@ -229,7 +229,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       family.diedUpdateDate = FirebaseAuth.instance.currentUser.uid;
       family.diedUpdateBy = DateTime.now().toString();
     }
-    if (family.anyMembersWhoDrink == 0 && family.anyMembersWhoDrink == 1) {
+    if (family.anyMembersWhoDrink == 0 || family.anyMembersWhoDrink == 1.0) {
       family.noOfYears = "";
       family.whenTreatment = "";
       family.whereTreatment = "";
