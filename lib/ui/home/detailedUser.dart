@@ -281,6 +281,17 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
+  String getMigrate(Family family) {
+    String migrate = "";
+    if (family.migrate == 1 && family.migrateReason != "") {
+      migrate += DemoLocalization.of(context).translate('Yes') +
+          "-" +
+          family.migrateReason.toString();
+      return migrate;
+    } else if (family.physicallyChallenge == 1)
+      return DemoLocalization.of(context).translate('No');
+  }
+
   String getSliderValue(double value) {
     if (value == 2)
       return DemoLocalization.of(context).translate('Yes');
@@ -288,6 +299,12 @@ class _DetailScreenState extends State<DetailScreen> {
       return DemoLocalization.of(context).translate('No');
     else
       return DemoLocalization.of(context).translate('Not Answered');
+  }
+
+  String getDied(double value) {
+    if (value == 1)
+      return DemoLocalization.of(context).translate('Yes');
+    else if (value == 0) return DemoLocalization.of(context).translate('No');
   }
 
   String getDrinkingUsage(double value) {
@@ -1946,6 +1963,52 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                     size: 14,
                                                                   ),
                                                                 ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 150,
+                                                                    child:
+                                                                        TextWidget(
+                                                                      text: DemoLocalization.of(
+                                                                              context)
+                                                                          .translate(
+                                                                              'Where you had a treatment'),
+                                                                      weight: FontWeight
+                                                                          .w800,
+                                                                      color:
+                                                                          darkColor,
+                                                                      size: 14,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: demographicList.family[index].whereTreatment !=
+                                                                            ""
+                                                                        ? demographicList
+                                                                            .family[index]
+                                                                            .whereTreatment
+                                                                        : "-",
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
                                                               ],
                                                             )),
                                                         Padding(
@@ -1962,21 +2025,18 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                     const EdgeInsets
                                                                             .all(
                                                                         2.0),
-                                                                child: SizedBox(
-                                                                  width: 150,
-                                                                  child:
-                                                                      TextWidget(
-                                                                    text: DemoLocalization.of(
-                                                                            context)
-                                                                        .translate(
-                                                                            'Where you had a treatment'),
-                                                                    weight:
-                                                                        FontWeight
-                                                                            .w800,
-                                                                    color:
-                                                                        darkColor,
-                                                                    size: 14,
-                                                                  ),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          "Died"),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
                                                                 ),
                                                               ),
                                                               Padding(
@@ -1986,16 +2046,52 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                         2.0),
                                                                 child:
                                                                     TextWidget(
-                                                                  text: demographicList
-                                                                              .family[
-                                                                                  index]
-                                                                              .whereTreatment !=
-                                                                          ""
-                                                                      ? demographicList
+                                                                  text: getDied(
+                                                                      demographicList
                                                                           .family[
                                                                               index]
-                                                                          .whereTreatment
-                                                                      : "-",
+                                                                          .died),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: DemoLocalization.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          "Migrate"),
+                                                                  weight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  color:
+                                                                      darkColor,
+                                                                  size: 14,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        2.0),
+                                                                child:
+                                                                    TextWidget(
+                                                                  text: getMigrate(
+                                                                      demographicList
+                                                                              .family[
+                                                                          index]),
                                                                   weight:
                                                                       FontWeight
                                                                           .w400,
@@ -4039,6 +4135,44 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                     size: 14,
                                                                   ),
                                                                 ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            "Died"),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getDied(demographicList
+                                                                        .family[
+                                                                            index]
+                                                                        .died),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
@@ -4051,6 +4185,46 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: DemoLocalization.of(
+                                                                            context)
+                                                                        .translate(
+                                                                            "Migrate"),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          2.0),
+                                                                  child:
+                                                                      TextWidget(
+                                                                    text: getMigrate(
+                                                                        demographicList
+                                                                            .family[index]),
+                                                                    weight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color:
+                                                                        darkColor,
+                                                                    size: 14,
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 10,
+                                                                ),
                                                                 Padding(
                                                                   padding:
                                                                       const EdgeInsets

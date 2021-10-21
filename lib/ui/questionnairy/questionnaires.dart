@@ -2415,9 +2415,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
         break;
       }
     }
-
     demographicFamily.location = location;
-
     if (!isEdit) {
       FireStoreService fireStoreService = new FireStoreService();
 
