@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -38,7 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-/*     WidgetsBinding.instance.addPostFrameCallback((_) async {
+   /*  WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getJson();
     });*/
 
@@ -246,8 +249,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
-/*
-  getJson() async {
+/*  getJson() async {
     String data =
         await rootBundle.loadString('assets/json/tct_villagelist.json');
     jsonResult = json.decode(data);
@@ -278,6 +280,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
           .then((value) => debugPrint("Village Details Added Successfully"))
           .catchError((error) => debugPrint("Village Details Failed to add"));
     });
-  }
-*/
+  }*/
 }
