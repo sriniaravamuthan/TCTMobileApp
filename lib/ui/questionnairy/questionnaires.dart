@@ -1805,6 +1805,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         ),
                                                         fillColor:
                                                             lightGreyColor),
+                                                    textCapitalization:TextCapitalization.sentences,
                                                     keyboardType:
                                                         TextInputType.text,
                                                     onSaved: (String val) {

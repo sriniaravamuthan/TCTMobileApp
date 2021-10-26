@@ -357,6 +357,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                     ),
                                     fillColor: lightGreyColor),
                                 keyboardType: TextInputType.text,
+                                textCapitalization:TextCapitalization.sentences,
                                 onSaved: (String val) {
                                   setState(() {});
                                 },
