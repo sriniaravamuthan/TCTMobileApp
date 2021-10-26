@@ -200,6 +200,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                             BorderSide(color: lightGreyColor),
                                       ),
                                       fillColor: lightGreyColor),
+                                  textCapitalization: TextCapitalization.sentences,
                                   keyboardType: TextInputType.text,
                                   onSaved: (String val) {
                                     setState(() {

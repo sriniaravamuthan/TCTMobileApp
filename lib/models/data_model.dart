@@ -341,8 +341,6 @@ class Family {
       this.whenTreatment,
       this.anyMembersWhoUseTobacco,
       this.migrateReason,
-        this.died,
-        this.migrate,
       this.diedUpdateBy,
       this.diedUpdateDate,
       this.isVaccinationDone,
