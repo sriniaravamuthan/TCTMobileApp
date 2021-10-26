@@ -225,7 +225,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.whereTreatment = whereTreatmentController.text;
     family.migrateReason = migrateReasonController.text;
     debugPrint("died:${family.died}");
-    if (family.died == 1.0) {
+    if (family.died == 1) {
       family.diedUpdateDate = FirebaseAuth.instance.currentUser.uid;
       family.diedUpdateBy = DateTime.now().toString();
     }
