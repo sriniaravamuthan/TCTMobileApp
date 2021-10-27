@@ -1805,7 +1805,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
                                                         ),
                                                         fillColor:
                                                             lightGreyColor),
-                                                    textCapitalization:TextCapitalization.sentences,
+                                                    textCapitalization:
+                                                        TextCapitalization
+                                                            .sentences,
                                                     keyboardType:
                                                         TextInputType.text,
                                                     onSaved: (String val) {
@@ -2400,7 +2402,9 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     location.panchayatNo = panchayatNoController.text;
     location.panchayatCode = panchayatCodeController.text;
     location.villageName = villageNameController.text;
-    setMaxCount(maxCounts, location.villagesCode);
+    if (!isEdit) {
+      setMaxCount(maxCounts, location.villagesCode);
+    }
 
     for (int i = 0; i < demographicFamily.family.length; i++) {
       demographicFamily.family[i].familyId = fromNoController.text;

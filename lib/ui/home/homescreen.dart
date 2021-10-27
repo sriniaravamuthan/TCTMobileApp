@@ -189,12 +189,13 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting && !loadMore)
             return Center(child: CircularProgressIndicator());
           // var mainDemograpicData = snapshot.data.docs.map((doc) => doc.data()).toList();
-          var mainDemograpicData =
-              snapshot.data.docs.map((doc) => doc).toList();
-          debugPrint("family : $mainDemograpicData");
-
-          if (loadData && snapshot.connectionState == ConnectionState.active) {
+          if (loadData &&
+              snapshot.connectionState == ConnectionState.active &&
+              snapshot.hasData) {
             isLoading = false;
+            var mainDemograpicData =
+                snapshot.data.docs.map((doc) => doc).toList();
+            debugPrint("family : $mainDemograpicData");
             if (!loadMore) {
               streets.clear();
               documentId.clear();
@@ -342,11 +343,16 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                   _family.maritalStatus = family[i]["maritalStatus"];
                 _family.pregnantStatus = family[i]["pregnantStatus"] == null
                     ? 0
-                    :  _family.pregnantStatus = family[i]["pregnantStatus"].toDouble();
+                    : _family.pregnantStatus =
+                        family[i]["pregnantStatus"].toDouble();
                 _family.pregnantMonths = family[i]["pregnantMonth"];
-                _family.drinkingUsage = family[i]["drinkingUsage"]==null?0:family[i]["drinkingUsage"].toDouble();
+                _family.drinkingUsage = family[i]["drinkingUsage"] == null
+                    ? 0
+                    : family[i]["drinkingUsage"].toDouble();
                 _family.noOfYears = family[i]["noOfYears"];
-                _family.stoppedBy = family[i]["stoppedBy"]==null?0:family[i]["stoppedBy"].toDouble();
+                _family.stoppedBy = family[i]["stoppedBy"] == null
+                    ? 0
+                    : family[i]["stoppedBy"].toDouble();
                 _family.whenTreatment = family[i]["whenTreatment"];
                 _family.whereTreatment = family[i]["whereTreatment"];
 
@@ -380,8 +386,12 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                     family[i]['isVaccinationDone'].toDouble();
                 _family.secondDose = family[i]['secondDose'];
                 debugPrint("IsDead:${family[i]['isDead']}");
-                _family.died = family[i]['isDead']==null?0:family[i]['isDead'].toDouble();
-                _family.migrate =family[i]['migrate']==null?0: family[i]['migrate'].toDouble();
+                _family.died = family[i]['isDead'] == null
+                    ? 0
+                    : family[i]['isDead'].toDouble();
+                _family.migrate = family[i]['migrate'] == null
+                    ? 0
+                    : family[i]['migrate'].toDouble();
                 _family.migrateReason = family[i]['migrateReason'];
                 _family.isExpanded = 'Show More';
                 _familyList.sort((a, b) => a.position.compareTo(b.position));
@@ -1019,7 +1029,6 @@ class _HomeScreenScreenState extends State<HomeScreen> {
 
   Future<void> search(String contactPerson, familyHead, mobileNo, villageCode,
       villageName, panchayatCode) async {
-
     print("GET_______" +
         contactPerson.trim() +
         " " +
@@ -1046,43 +1055,106 @@ class _HomeScreenScreenState extends State<HomeScreen> {
       debugPrint("Empty");
       query = firestoreInstance.collection('demographicData').limit(30);
       setState(() {});
-    } if (contactPerson != "") {
-      debugPrint("contactPerson");
-      query = firestoreInstance
-          .collection('demographicData')
-          .where(
-        "Location.contactPerson",
-        isGreaterThanOrEqualTo:  contactPerson.capitalize,
-        isLessThan:  contactPerson.capitalize
-            .substring(0, contactPerson.capitalize.length - 1) +
-            String.fromCharCode( contactPerson.capitalize.codeUnitAt(
-                contactPerson.capitalize.length - 1) +
-                1),
-      ).limit(30);
-      setState(() {});
-      return;
-    } if (familyHead != "") {
-      debugPrint("familyHead");
-
+    }
+    if (contactPerson != "" && villageName != "") {
+      debugPrint("contactPerson && villageName");
       isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
           .where(
-        "Location.name",
-        isGreaterThanOrEqualTo: familyHead.toString(),
-        isLessThan: familyHead
-            .toString()
-            .substring(0, familyHead.toString().length - 1) +
-            String.fromCharCode(familyHead.toString().codeUnitAt(
-                familyHead.toString().length - 1) +
-                1),
-      )
+            "Location.contactPerson",
+            isGreaterThanOrEqualTo: contactPerson.capitalize,
+            isLessThan: contactPerson.capitalize
+                    .substring(0, contactPerson.capitalize.length - 1) +
+                String.fromCharCode(contactPerson.capitalize
+                        .codeUnitAt(contactPerson.capitalize.length - 1) +
+                    1),
+          )
+          .where("Location.villageName", isEqualTo: villageName)
+          .limit(30);
+      setState(() {});
+      return;
+    }
+    if (familyHead != "" && villageCode != "") {
+      debugPrint("familyHead && villageCode");
+      isSearch = true;
+      query = firestoreInstance
+          .collection('demographicData')
+          .where(
+            "Location.name",
+            isGreaterThanOrEqualTo: familyHead.toString().capitalize,
+            isLessThan: familyHead
+                    .toString()
+                    .capitalize
+                    .substring(0, familyHead.toString().capitalize.length - 1) +
+                String.fromCharCode(familyHead.toString().capitalize.codeUnitAt(
+                        familyHead.toString().capitalize.length - 1) +
+                    1),
+          )
+          .where("Location.villagesCode", isEqualTo: villageCode)
+          .limit(30);
+      // return;
+    }
+    if (familyHead != "" && villageName != "") {
+      debugPrint("familyHead && villageName");
+      isSearch = true;
+      query = firestoreInstance
+          .collection('demographicData')
+          .where(
+            "Location.name",
+            isGreaterThanOrEqualTo: familyHead.toString(),
+            isLessThan: familyHead
+                    .toString()
+                    .substring(0, familyHead.toString().length - 1) +
+                String.fromCharCode(familyHead
+                        .toString()
+                        .codeUnitAt(familyHead.toString().length - 1) +
+                    1),
+          )
+          .where("Location.villageName", isEqualTo: villageName)
+          .limit(30);
+      setState(() {});
+      return;
+    }
+    if (contactPerson != "") {
+      debugPrint("contactPerson");
+      query = firestoreInstance
+          .collection('demographicData')
+          .where(
+            "Location.contactPerson",
+            isGreaterThanOrEqualTo: contactPerson.capitalize,
+            isLessThan: contactPerson.capitalize
+                    .substring(0, contactPerson.capitalize.length - 1) +
+                String.fromCharCode(contactPerson.capitalize
+                        .codeUnitAt(contactPerson.capitalize.length - 1) +
+                    1),
+          )
+          .limit(30);
+      setState(() {});
+      return;
+    }
+    if (familyHead != "") {
+      debugPrint("familyHead");
+      isSearch = true;
+      query = firestoreInstance
+          .collection('demographicData')
+          .where(
+            "Location.name",
+            isGreaterThanOrEqualTo: familyHead.toString().capitalize,
+            isLessThan: familyHead
+                    .toString()
+                    .capitalize
+                    .substring(0, familyHead.toString().capitalize.length - 1) +
+                String.fromCharCode(familyHead.toString().capitalize.codeUnitAt(
+                        familyHead.toString().capitalize.length - 1) +
+                    1),
+          )
           .limit(30);
       setState(() {});
       debugPrint("familyHead:${query}");
       return;
-
-    }  if (mobileNo != "") {
+    }
+    if (mobileNo != "") {
       debugPrint("mobileNo");
 
       query = firestoreInstance
@@ -1090,8 +1162,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .where("Location.contactNumber", isEqualTo: mobileNo.trim());
       setState(() {});
       return;
-
-    }  if (villageCode != "") {
+    }
+    if (villageCode != "") {
       debugPrint("villageCode");
 
       isSearch = true;
@@ -1101,8 +1173,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .limit(30);
       setState(() {});
       return;
-
-    }  if (villageName != "") {
+    }
+    if (villageName != "") {
       debugPrint("villageName");
 
       isSearch = true;
@@ -1112,7 +1184,8 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .limit(30);
       setState(() {});
       return;
-    }  if (panchayatCode != "") {
+    }
+    if (panchayatCode != "") {
       debugPrint("panchayatCode");
       isSearch = true;
       query = firestoreInstance
@@ -1121,73 +1194,22 @@ class _HomeScreenScreenState extends State<HomeScreen> {
           .limit(30);
       setState(() {});
       return;
-    } if (contactPerson != "" && villageCode != "") {
+    }
+    if (contactPerson != "" && villageCode != "") {
       debugPrint("contactPerson && villageCode");
       isSearch = true;
-      query =  firestoreInstance
-          .collection('demographicData')
-          .where(
-        "Location.contactPerson",
-        isGreaterThanOrEqualTo:  contactPerson.capitalize,
-        isLessThan:  contactPerson.capitalize
-            .substring(0, contactPerson.capitalize.length - 1) +
-            String.fromCharCode( contactPerson.capitalize.codeUnitAt(
-                contactPerson.capitalize.length - 1) +
-                1),
-      ).where("Location.villagesCode", isEqualTo: villageCode)
-          .limit(30);
-      setState(() {});
-      return;
-    }
-    if (contactPerson != "" && villageName != "") {
-      debugPrint("contactPerson && villageName");
-      isSearch = true;
       query = firestoreInstance
           .collection('demographicData')
           .where(
-        "Location.contactPerson",
-        isGreaterThanOrEqualTo:  contactPerson.capitalize,
-        isLessThan:  contactPerson.capitalize
-            .substring(0, contactPerson.capitalize.length - 1) +
-            String.fromCharCode( contactPerson.capitalize.codeUnitAt(
-                contactPerson.capitalize.length - 1) +
-                1),
-      ).where("Location.villageName", isEqualTo: villageName)
-          .limit(30);
-      setState(() {});
-      return;
-    }if (familyHead != "" && villageCode != "") {
-      debugPrint("familyHead && villageCode");
-      isSearch = true;
-      query= firestoreInstance
-          .collection('demographicData')
-          .where(
-        "Location.name",
-        isGreaterThanOrEqualTo: familyHead.toString(),
-        isLessThan: familyHead
-            .toString()
-            .substring(0, familyHead.toString().length - 1) +
-            String.fromCharCode(familyHead.toString().codeUnitAt(
-                familyHead.toString().length - 1) +
-                1),
-      ).where("Location.villagesCode", isEqualTo: villageCode)
-          .limit(30);
-      return;
-    }if (familyHead != "" && villageName != "") {
-      debugPrint("familyHead && villageName");
-      isSearch = true;
-      query = firestoreInstance
-          .collection('demographicData')
-          .where(
-        "Location.name",
-        isGreaterThanOrEqualTo: familyHead.toString(),
-        isLessThan: familyHead
-            .toString()
-            .substring(0, familyHead.toString().length - 1) +
-            String.fromCharCode(familyHead.toString().codeUnitAt(
-                familyHead.toString().length - 1) +
-                1),
-      ).where("Location.villageName", isEqualTo: villageName)
+            "Location.contactPerson",
+            isGreaterThanOrEqualTo: contactPerson.capitalize,
+            isLessThan: contactPerson.capitalize
+                    .substring(0, contactPerson.capitalize.length - 1) +
+                String.fromCharCode(contactPerson.capitalize
+                        .codeUnitAt(contactPerson.capitalize.length - 1) +
+                    1),
+          )
+          .where("Location.villagesCode", isEqualTo: villageCode)
           .limit(30);
       setState(() {});
       return;

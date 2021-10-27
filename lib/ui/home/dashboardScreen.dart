@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:tct_demographics/constants/api_constants.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/language_item.dart';
@@ -41,7 +38,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
       userMail = firebaseAuth.currentUser.email;
       debugPrint("userEmail:$userMail");
     }
-   /*  WidgetsBinding.instance.addPostFrameCallback((_) async {
+
+    // For VillageCode List Collection
+    /* WidgetsBinding.instance.addPostFrameCallback((_) async {
       await getJson();
     });*/
 
@@ -249,11 +248,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
-/*  getJson() async {
+/*
+  getJson() async {
     String data =
         await rootBundle.loadString('assets/json/tct_villagelist.json');
     jsonResult = json.decode(data);
-    debugPrint("${jsonResult.length}");
+    debugPrint("Json Length ${jsonResult.length}");
+    int i = 0;
     jsonResult.forEach((element) {
       String villageCode = element['villageCode'];
       int panchayatCode = element['panchayatCode'];
@@ -261,8 +262,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       int maxCount = element['maxCount'];
       String villageNameTa = element['villageName']['ta'];
       String villageNameEn = element['villageName']['en'];
-
-      debugPrint("Get_____ :$villageCode");
+      i++;
+      debugPrint("Get_____ :$villageCode   $i");
       // debugPrint("Get_____ :$panchayatCode");
       // debugPrint("Get_____ :$panchayatNo");
       // debugPrint("Get_____ :$villageNameEn");
@@ -277,8 +278,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             "maxCount": maxCount,
             "villageName": {"en": villageNameEn, "ta": villageNameTa}
           })
-          .then((value) => debugPrint("Village Details Added Successfully"))
+          .then(
+              (value) => debugPrint("Village Details Added Successfully$value"))
           .catchError((error) => debugPrint("Village Details Failed to add"));
     });
-  }*/
+  }
+*/
 }
