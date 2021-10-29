@@ -277,6 +277,7 @@ class Family {
   String community = "";
   String caste = "";
   String physical = "";
+  String dateOfDemise = "";
   String photo = "";
   double govtInsurance = 0;
   double privateInsurance = 0;

@@ -152,6 +152,8 @@ class _FamilyMemberDetailsPortraitState
       newFamily.gender = "";
       newFamily.dob = "";
       newFamily.age = 0;
+      newFamily.died=0;
+      newFamily.dateOfDemise="";
       newFamily.maritalStatus = "";
       newFamily.pregnantStatus = 0;
       newFamily.pregnantMonths = "";
@@ -172,6 +174,9 @@ class _FamilyMemberDetailsPortraitState
       newFamily.oldPension = 0;
       newFamily.widowedPension = 0;
       newFamily.retirementPension = 0;
+      newFamily.migrate = 0;
+      newFamily.migrateReason = "";
+
       //habit
       newFamily.anyMembersWhoUseTobacco = 0;
       newFamily.isVaccinationDone = 0;
@@ -277,10 +282,15 @@ class _FamilyMemberDetailsPortraitState
     }
   }
 
-  String getDied(double value) {
-    if (value == 1)
-      return DemoLocalization.of(context).translate('Yes');
-    else if (value == 0) return DemoLocalization.of(context).translate('No');
+  String getDied(Family family) {
+    String died="";
+    if (family.died == 1 && family.dateOfDemise != "") {
+      died += DemoLocalization.of(context).translate('Died') +
+          "-" +
+          family.dateOfDemise.toString();
+      return died;
+    } else if (family.died == 0)
+      return DemoLocalization.of(context).translate('alive');
   }
 
   String getMigrate(Family family) {
@@ -290,7 +300,7 @@ class _FamilyMemberDetailsPortraitState
           "-" +
           family.migrateReason.toString();
       return migrate;
-    } else if (family.physicallyChallenge == 1)
+    } else if (family.migrate == 0)
       return DemoLocalization.of(context).translate('No');
   }
 
@@ -918,7 +928,7 @@ class _FamilyMemberDetailsPortraitState
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
                                         text: DemoLocalization.of(context)
-                                            .translate("Died"),
+                                            .translate("Status?"),
                                         weight: FontWeight.w800,
                                         color: darkColor,
                                         size: 14,
@@ -927,7 +937,7 @@ class _FamilyMemberDetailsPortraitState
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text: getDied(familyList[index].died),
+                                        text: getDied(familyList[index]),
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -1706,7 +1716,7 @@ class _FamilyMemberDetailsPortraitState
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
                                           text: DemoLocalization.of(context)
-                                              .translate("Died"),
+                                              .translate("Status?"),
                                           weight: FontWeight.w800,
                                           color: darkColor,
                                           size: 14,
@@ -1715,7 +1725,7 @@ class _FamilyMemberDetailsPortraitState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: getDied(familyList[index].died),
+                                          text: getDied(familyList[index]),
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,

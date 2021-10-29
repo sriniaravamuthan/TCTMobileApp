@@ -73,9 +73,12 @@
  "No of years": "No of years Stopped?",
  "When you had a treatment": "When you had a treatment?",
  "Where you had a treatment": "Where you had a treatment?",
- "Died":"Died?",
+ "Died":"Died",
  "Migrate": "Migrate?",
  "Migrate Reason": "Migrate Reason",
+ "alive": "Alive",
+ "Status?":"Status?",
+ "Date of demise":"Date of demise",
 
 
  "Thirumalai Charity Trust":"Thirumalai Charity Trust",
@@ -122,7 +125,7 @@
  "Insurance": "Insurance",
  "Vehicle Details":"Vehicle Details",
  "Save": "Save",
-"Vaccination Done":"Vaccination Done?",
+ "Vaccination Done":"Vaccination Done?",
  "1st Dose Date":"1st Dose Date",
  "2nd Dose Date":"2nd Dose Date",
  "Show More": "Show more",

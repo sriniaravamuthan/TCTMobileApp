@@ -83,6 +83,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   var communityController = TextEditingController();
   var casteController = TextEditingController();
   var physicalController = TextEditingController();
+  var dataDemiseController = TextEditingController();
   var noOfYearsController = TextEditingController();
   var whenTreatmentController = TextEditingController();
   var whereTreatmentController = TextEditingController();
@@ -133,6 +134,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityVal;
   int ageVal;
   TextEditingController datePicker = TextEditingController();
+  TextEditingController dateDemisePicker = TextEditingController();
 
   // DateTime date = DateTime.parse("2019-04-16 12:18:06.018950");
   String gender = "";
@@ -214,7 +216,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.smartphone = getSwitchValues(smartphone);
     family.community = communityController.text;
     family.caste = casteController.text;
-    family.physical = physicalController.text;
+    family.dateOfDemise = dataDemiseController.text;
     family.govtInsurance = getSwitchValues(govtInsurance);
     family.privateInsurance = getSwitchValues(privateInsurance);
     family.oldPension = getSwitchValues(oldPension);
@@ -900,6 +902,153 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                 )
               ],
             ),
+            widget.isMemberStatus == true?
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: FractionallySizedBox(
+                    widthFactor: 1.05,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate("Status?"),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              SliderTheme(
+                                data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: primaryColor,
+                                  inactiveTrackColor:
+                                  Colors.lightBlueAccent,
+                                  trackShape:
+                                  RectangularSliderTrackShape(),
+                                  trackHeight: 4.0,
+                                  thumbColor: primaryColor,
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 12.0),
+                                  overlayColor:
+                                  Colors.white.withAlpha(32),
+                                  overlayShape: RoundSliderOverlayShape(
+                                      overlayRadius: 28.0),
+                                ),
+                                child: Slider(
+                                  value: family.died,
+                                  min: 0,
+                                  max: 1,
+                                  divisions: 1,
+                                  onChanged: (value) {
+                                    toggleDead(value);
+                                  },
+                                ),
+                              ),
+                              TextWidget(
+                                text: textDied,
+                                size: 14,
+                                weight: FontWeight.w600,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                textDied == "Died" || textDied == "இறந்தார்"
+                    ? Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: TextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Date of demise'),
+                              size: 14,
+                              weight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 58,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 1.0, top: 1, bottom: 1),
+                              child: TextFormField(
+                                textInputAction: TextInputAction.next,
+                                autocorrect: true,
+                                controller: dateDemisePicker,
+                                enableSuggestions: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      borderSide:
+                                      BorderSide(color: lightGreyColor),
+                                    ),
+                                    fillColor: lightGreyColor),
+                                keyboardType: TextInputType.text,
+                                onSaved: (String val) {
+                                  setState(() {});
+                                },
+                                onTap: () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+
+                                  date = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2022));
+                                  String dateFormat =
+                                  DateFormat("d/MMMM/y").format(date);
+                                  dateDemisePicker.text = dateFormat;
+                                  dataDemiseController.text = dateDemisePicker.text;
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ): Expanded(child: Container()),
+              ],
+            ):Container(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -1328,11 +1477,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       onChanged: (value) {
                                         family.pregnantMonths = value;
                                       },
-                                      // readOnly: pregnantStatus == "Yes" ||
-                                      //         pregnantStatus ==
-                                      //             "ஆம்"
-                                      //     ? false
-                                      //     : true,
                                       textInputAction: TextInputAction.next,
                                       autocorrect: true,
                                       maxLength: 2,
@@ -2898,62 +3042,6 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: TextWidget(
                                     text: DemoLocalization.of(context)
-                                        .translate("Died"),
-                                    size: 14,
-                                    weight: FontWeight.w600,
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    SliderTheme(
-                                      data: SliderTheme.of(context).copyWith(
-                                        activeTrackColor: primaryColor,
-                                        inactiveTrackColor:
-                                            Colors.lightBlueAccent,
-                                        trackShape:
-                                            RectangularSliderTrackShape(),
-                                        trackHeight: 4.0,
-                                        thumbColor: primaryColor,
-                                        thumbShape: RoundSliderThumbShape(
-                                            enabledThumbRadius: 12.0),
-                                        overlayColor:
-                                            Colors.white.withAlpha(32),
-                                        overlayShape: RoundSliderOverlayShape(
-                                            overlayRadius: 28.0),
-                                      ),
-                                      child: Slider(
-                                        value: family.died,
-                                        min: 0,
-                                        max: 1,
-                                        divisions: 1,
-                                        onChanged: (value) {
-                                          toggleDead(value);
-                                        },
-                                      ),
-                                    ),
-                                    TextWidget(
-                                      text: textDied,
-                                      size: 14,
-                                      weight: FontWeight.w600,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: FractionallySizedBox(
-                          widthFactor: 1.05,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: TextWidget(
-                                    text: DemoLocalization.of(context)
                                         .translate("Migrate"),
                                     size: 14,
                                     weight: FontWeight.w600,
@@ -3674,9 +3762,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.died = value;
     setState(() {
       if (value == 0)
-        textDied = DemoLocalization.of(context).translate('No');
+        textDied = DemoLocalization.of(context).translate('alive');
       else
-        textDied = DemoLocalization.of(context).translate('Yes');
+        textDied = DemoLocalization.of(context).translate('Died');
     });
   }
 
@@ -3958,9 +4046,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         textVaccine = DemoLocalization.of(context).translate('Yes');
 
       if (family.died == 0)
-        textDied = DemoLocalization.of(context).translate('No');
+        textDied = DemoLocalization.of(context).translate('alive');
       else
-        textDied = DemoLocalization.of(context).translate('Yes');
+        textDied = DemoLocalization.of(context).translate('Died');
 
       if (family.migrate == 0)
         textMigrate = DemoLocalization.of(context).translate('No');
@@ -3986,6 +4074,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
       communityController.text = family.community.toString();
       casteController.text = family.caste.toString();
       physicalController.text = family.physical.toString();
+      dateDemisePicker.text = family.dateOfDemise.toString();
       noOfYearsController.text = family.noOfYears.toString();
       whenTreatmentController.text = family.whenTreatment.toString();
       whereTreatmentController.text = family.whereTreatment.toString();

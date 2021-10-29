@@ -301,10 +301,15 @@ class _DetailScreenState extends State<DetailScreen> {
       return DemoLocalization.of(context).translate('Not Answered');
   }
 
-  String getDied(double value) {
-    if (value == 1)
-      return DemoLocalization.of(context).translate('Yes');
-    else if (value == 0) return DemoLocalization.of(context).translate('No');
+  String getDied(Family family) {
+    String died="";
+    if (family.died == 1 && family.dateOfDemise != "") {
+      died += DemoLocalization.of(context).translate('Died') +
+          "-" +
+          family.dateOfDemise.toString();
+      return died;
+    } else if (family.died == 0)
+      return DemoLocalization.of(context).translate('alive');
   }
 
   String getDrinkingUsage(double value) {
@@ -2030,7 +2035,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                   text: DemoLocalization.of(
                                                                           context)
                                                                       .translate(
-                                                                          "Died"),
+                                                                          "Status?"),
                                                                   weight:
                                                                       FontWeight
                                                                           .w800,
@@ -2049,8 +2054,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                   text: getDied(
                                                                       demographicList
                                                                           .family[
-                                                                              index]
-                                                                          .died),
+                                                                              index]),
                                                                   weight:
                                                                       FontWeight
                                                                           .w400,
@@ -4145,7 +4149,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                     text: DemoLocalization.of(
                                                                             context)
                                                                         .translate(
-                                                                            "Died"),
+                                                                            "Status?"),
                                                                     weight:
                                                                         FontWeight
                                                                             .w800,
@@ -4163,8 +4167,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                                       TextWidget(
                                                                     text: getDied(demographicList
                                                                         .family[
-                                                                            index]
-                                                                        .died),
+                                                                            index]),
                                                                     weight:
                                                                         FontWeight
                                                                             .w400,

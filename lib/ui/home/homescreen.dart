@@ -389,6 +389,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                 _family.died = family[i]['isDead'] == null
                     ? 0
                     : family[i]['isDead'].toDouble();
+                _family.dateOfDemise=family[i]['dateOfDemise'];
                 _family.migrate = family[i]['migrate'] == null
                     ? 0
                     : family[i]['migrate'].toDouble();

@@ -152,6 +152,8 @@ class _FamilyMemberDetailsLandscapeState
       newFamily.gender = "";
       newFamily.dob = "";
       newFamily.age = 0;
+      newFamily.died=0;
+      newFamily.dateOfDemise="";
       newFamily.maritalStatus = "";
       newFamily.pregnantStatus = 0;
       newFamily.pregnantMonths = "";
@@ -184,6 +186,8 @@ class _FamilyMemberDetailsLandscapeState
       newFamily.whenTreatment = "";
       newFamily.whereTreatment = "";
       newFamily.anyMembersWhoSmoke = 0;
+      newFamily.migrate = 0;
+      newFamily.migrateReason = "";
     } else {
       newFamily = familyList[familyIndex];
     }
@@ -208,10 +212,15 @@ class _FamilyMemberDetailsLandscapeState
     });
   }
 
-  String getDied(double value) {
-    if (value == 1)
-      return DemoLocalization.of(context).translate('Yes');
-    else if (value == 0) return DemoLocalization.of(context).translate('No');
+  String getDied(Family family) {
+    String died="";
+    if (family.died == 1 && family.dateOfDemise != "") {
+      died += DemoLocalization.of(context).translate('Died') +
+          "-" +
+          family.dateOfDemise.toString();
+      return died;
+    } else if (family.died == 0)
+      return DemoLocalization.of(context).translate('alive');
   }
 
   String getMigrate(Family family) {
@@ -915,7 +924,7 @@ class _FamilyMemberDetailsLandscapeState
                                     Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: TextWidget(
-                                        text: getDied(familyList[index].died),
+                                        text: getDied(familyList[index]),
                                         weight: FontWeight.w400,
                                         color: darkColor,
                                         size: 14,
@@ -1703,7 +1712,7 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: getDied(familyList[index].died),
+                                          text: getDied(familyList[index]),
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,
