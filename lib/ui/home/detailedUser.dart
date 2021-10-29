@@ -4462,7 +4462,7 @@ class _DetailScreenState extends State<DetailScreen> {
   getPregnant(Family family) {
     String pregnant = "";
     if (family.pregnantStatus == 1)
-      pregnant += DemoLocalization.of(context).translate('Pre Natal');
+      pregnant += DemoLocalization.of(context).translate('Yes');
     if (pregnant != "") pregnant += ", ";
     pregnant += family.pregnantMonths != "" && family.pregnantMonths != null
         ? "${family.pregnantMonths} months"

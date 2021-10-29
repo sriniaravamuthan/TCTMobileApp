@@ -172,10 +172,10 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
   }
 
   double getPregnantStatus(String pregnantStatus) {
-    if (pregnantStatus == DemoLocalization.of(context).translate('Post Natal'))
-      return 2;
-    else if (pregnantStatus ==
-        DemoLocalization.of(context).translate('Pre Natal')) return 1;
+    debugPrint("pregnantStatus");
+    if (pregnantStatus == DemoLocalization.of(context).translate('Yes'))
+      return 1;
+    else
     return 0;
   }
 /*
@@ -1212,7 +1212,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                 itemSorter: (a, b) {
                                   return a.compareTo(b);
                                 },
-                                onFocusChanged: (value) {
+/*                                onFocusChanged: (value) {
                                   debugPrint(
                                       "maritalStatusValue:${maritalStatusController.text}");
                                   setState(() {
@@ -1224,7 +1224,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                             ? true
                                             : false;
                                   });
-                                },
+                                }*/
                                 itemFilter: (item, query) {
                                   isMaritalHide = false;
 
@@ -1243,7 +1243,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Visibility(
-                  visible: isGenderHide && isMaritalHide,
+                  visible: isGenderHide,
                   replacement: Expanded(child: Container()),
                   child: Expanded(
                     child: Align(
@@ -1280,8 +1280,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                   child: Slider(
                                     value: family.pregnantStatus,
                                     min: 0,
-                                    max: 2,
-                                    divisions: 2,
+                                    max: 1,
+                                    divisions: 1,
                                     onChanged: (value) {
                                       togglePregnantStatus(value);
                                     },
@@ -1300,8 +1300,8 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                     ),
                   ),
                 ),
-                pregnantStatus == "Pre Natal" ||
-                        pregnantStatus == "பிறப்புக்கு முன்"
+                pregnantStatus == "Yes" ||
+                        pregnantStatus == "ஆம்"
                     ? Expanded(
                         child: Align(
                           alignment: Alignment.topRight,
@@ -1328,11 +1328,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                                       onChanged: (value) {
                                         family.pregnantMonths = value;
                                       },
-                                      readOnly: pregnantStatus == "Pre Natal" ||
-                                              pregnantStatus ==
-                                                  "பிறப்புக்கு முன்"
-                                          ? false
-                                          : true,
+                                      // readOnly: pregnantStatus == "Yes" ||
+                                      //         pregnantStatus ==
+                                      //             "ஆம்"
+                                      //     ? false
+                                      //     : true,
                                       textInputAction: TextInputAction.next,
                                       autocorrect: true,
                                       maxLength: 2,
@@ -3498,15 +3498,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.pregnantStatus = value;
     setState(() {
       if (value == 0)
-        pregnantStatus = DemoLocalization.of(context).translate('Natal');
-      else if (value == 1) {
-        pregnantStatus = DemoLocalization.of(context).translate('Pre Natal');
-        debugPrint("isPregnant$isPhysical");
-      } else {
-        pregnantStatus = DemoLocalization.of(context).translate('Post Natal');
-        isPregnant = true;
-        debugPrint("isPregnant$isPhysical");
-      }
+        pregnantStatus = DemoLocalization.of(context).translate('No');
+      else
+        pregnantStatus = DemoLocalization.of(context).translate('Yes');
     });
   }
 
@@ -3850,7 +3844,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     debugPrint("language:$language");
     smartphone = DemoLocalization.of(context).translate('Not Answer');
     physicallyChallenge = DemoLocalization.of(context).translate('Not Answer');
-    pregnantStatus = DemoLocalization.of(context).translate('Natal');
+    pregnantStatus = DemoLocalization.of(context).translate('No');
     govtInsurance = DemoLocalization.of(context).translate('Not Answer');
     privateInsurance = DemoLocalization.of(context).translate('Not Answer');
     oldPension = DemoLocalization.of(context).translate('Not Answer');
@@ -3877,11 +3871,9 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
         physicallyChallenge = DemoLocalization.of(context).translate('Yes');
 
       if (family.pregnantStatus == 0)
-        pregnantStatus = DemoLocalization.of(context).translate('Natal');
-      else if (family.pregnantStatus == 1)
-        pregnantStatus = DemoLocalization.of(context).translate('Pre Natal');
+        pregnantStatus = DemoLocalization.of(context).translate('No');
       else
-        pregnantStatus = DemoLocalization.of(context).translate('Post Natal');
+        pregnantStatus = DemoLocalization.of(context).translate('Yes');
 
       if (family.govtInsurance == 0)
         govtInsurance = DemoLocalization.of(context).translate('Not Answer');
