@@ -426,175 +426,205 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
   }
 
   Widget header() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-      child: Card(
-        color: Theme.of(context).accentColor,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: double.infinity,
-            child: Wrap(
-              direction: Axis.horizontal,
-              alignment: WrapAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(
+                left: 8.0, right: 4.0),
+            child: Container(
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: Colors.black45,
+                    style: BorderStyle.solid,
+                    width: 1.0,
+                  ),
+                ),
+                child: Icon(
+                  Icons.keyboard_arrow_left,
+                  size: 28,
+                  color: darkColor,
+                )),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
+            child: Card(
+              color: Theme.of(context).accentColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
                   child: Wrap(
                     direction: Axis.horizontal,
+                    alignment: WrapAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Name'),
-                        size: 14,
-                        maxLines: 1,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SurveyTextWidget(
-                          text: _searchCampaignResponse
-                              ?.data?.first?.campaignName,
-                          size: 14,
-                          color: lightColor,
-                          maxLines: 3,
-                          weight: FontWeight.w400,
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          children: [
+                            SurveyTextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Name'),
+                              size: 14,
+                              maxLines: 1,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: SurveyTextWidget(
+                                text: _searchCampaignResponse
+                                    ?.data?.first?.campaignName,
+                                size: 14,
+                                color: lightColor,
+                                maxLines: 3,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          direction: Axis.horizontal,
+                          children: [
+                            SurveyTextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Description'),
+                              size: 14,
+                              maxLines: 3,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: SurveyTextWidget(
+                                text: _searchCampaignResponse
+                                    ?.data?.first?.campaignDescription,
+                                size: 14,
+                                color: lightColor,
+                                maxLines: 2,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          children: [
+                            SurveyTextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Objective Name'),
+                              size: 14,
+                              maxLines: 1,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: SurveyTextWidget(
+                                text: _searchCampaignResponse
+                                    ?.data?.first?.objectiveName,
+                                size: 14,
+                                maxLines: 2,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          children: [
+                            SurveyTextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Campaign Population'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: SurveyTextWidget(
+                                text: _searchCampaignResponse
+                                    ?.data?.first?.campaignPopulation,
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          children: [
+                            SurveyTextWidget(
+                              text: DemoLocalization.of(context)
+                                  .translate('Completed:'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: TextWidget(
+                                text: _searchCampaignResponse?.data?.first?.complete,
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Wrap(
+                          children: [
+                            SurveyTextWidget(
+                              text:
+                                  DemoLocalization.of(context).translate('Pending:'),
+                              size: 14,
+                              color: lightColor,
+                              weight: FontWeight.w700,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4.0),
+                              child: SurveyTextWidget(
+                                text: _searchCampaignResponse?.data?.first?.pending,
+                                size: 14,
+                                color: lightColor,
+                                weight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    children: [
-                      SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Description'),
-                        size: 14,
-                        maxLines: 3,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SurveyTextWidget(
-                          text: _searchCampaignResponse
-                              ?.data?.first?.campaignDescription,
-                          size: 14,
-                          color: lightColor,
-                          maxLines: 2,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Objective Name'),
-                        size: 14,
-                        maxLines: 1,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SurveyTextWidget(
-                          text: _searchCampaignResponse
-                              ?.data?.first?.objectiveName,
-                          size: 14,
-                          maxLines: 2,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Campaign Population'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SurveyTextWidget(
-                          text: _searchCampaignResponse
-                              ?.data?.first?.campaignPopulation,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      SurveyTextWidget(
-                        text: DemoLocalization.of(context)
-                            .translate('Completed:'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: TextWidget(
-                          text: _searchCampaignResponse?.data?.first?.complete,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      SurveyTextWidget(
-                        text:
-                            DemoLocalization.of(context).translate('Pending:'),
-                        size: 14,
-                        color: lightColor,
-                        weight: FontWeight.w700,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: SurveyTextWidget(
-                          text: _searchCampaignResponse?.data?.first?.pending,
-                          size: 14,
-                          color: lightColor,
-                          weight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 
