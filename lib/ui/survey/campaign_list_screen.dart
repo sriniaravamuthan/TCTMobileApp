@@ -882,12 +882,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ?.map(
                       (CampaignList campaignList) => DataRow(
                         onSelectChanged: (bool selected) {
-                          Get.toNamed('/SurveyQuestionnaire', arguments: [
-                            campaignList?.familyId,
-                            _searchCampaignResponse?.data?.first?.campaignId,
-                            isInternet,
-                            arguments[2]
-                          ]);
+                          if(campaignList.status=="Pending"){
+                            Get.toNamed('/SurveyQuestionnaire', arguments: [
+                              campaignList?.familyId,
+                              _searchCampaignResponse?.data?.first?.campaignId,
+                              isInternet,
+                              arguments[2]
+                            ]);
+                          }
                         },
                         cells: <DataCell>[
                           DataCell(
@@ -1381,12 +1383,14 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                     ?.map(
                       (CampaignList campaignList) => DataRow(
                         onSelectChanged: (bool selected) {
-                          Get.toNamed('/SurveyQuestionnaire', arguments: [
-                            campaignList?.familyId,
-                            _searchCampaignResponse?.data?.first?.campaignId,
-                            isInternet,
-                            arguments[2]
-                          ]);
+                          if(campaignList.status=="Pending"){
+                            Get.toNamed('/SurveyQuestionnaire', arguments: [
+                              campaignList?.familyId,
+                              _searchCampaignResponse?.data?.first?.campaignId,
+                              isInternet,
+                              arguments[2]
+                            ]);
+                          }
                         },
                         cells: <DataCell>[
                           DataCell(
