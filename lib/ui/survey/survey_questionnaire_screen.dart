@@ -300,14 +300,11 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
                     top: 4.0,
                     bottom: 4,
                   ),
-                  child: SizedBox(
-                    width: 100,
-                    child: TextWidget(
-                      text: dataSurveyQues?.respondentName,
-                      size: 14,
-                      color: darkColor,
-                      weight: FontWeight.w400,
-                    ),
+                  child: TextWidget(
+                    text: dataSurveyQues?.respondentName,
+                    size: 14,
+                    color: darkColor,
+                    weight: FontWeight.w400,
                   ),
                 ),
               ],
@@ -690,30 +687,62 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
   }
 
   Widget submitButton() {
-    return Align(
-      alignment: Alignment.bottomRight,
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: OutlinedButton(
-          style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      side: BorderSide(color: Colors.red)))),
-          onPressed: () {
-            mapData();
-          },
-          child: TextWidget(
-            text: DemoLocalization.of(context).translate('Submit'),
-            color: lightColor,
-            weight: FontWeight.w400,
-            size: 14,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: OutlinedButton(
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(color: Colors.red)))),
+            onPressed: () {
+              mapData();
+            },
+            child: TextWidget(
+              text: DemoLocalization.of(context).translate('Submit'),
+              color: lightColor,
+              weight: FontWeight.w400,
+              size: 14,
+            ),
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: OutlinedButton(
+            style: ButtonStyle(
+                foregroundColor:
+                MaterialStateProperty.all<Color>(
+                    Colors.white),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(
+                    Color(0xff005aa8)),
+                shape: MaterialStateProperty.all<
+                    RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            5.0),
+                        side: BorderSide(
+                            color: Colors.red)))),
+            onPressed: () {
+              Navigator.pop(context, false);
+            },
+            child: TextWidget(
+              text: DemoLocalization.of(context)
+                  .translate('cancel'),
+              color: lightColor,
+              weight: FontWeight.w400,
+              size: 14,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
