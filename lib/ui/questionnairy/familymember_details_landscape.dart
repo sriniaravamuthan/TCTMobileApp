@@ -838,7 +838,10 @@ class _FamilyMemberDetailsLandscapeState
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
                                         child: TextWidget(
-                                          text: familyList[index].noOfYears,
+                                          text: familyList[index]
+                                              .noOfYears !=
+                                              ""
+                                              ? familyList[index].noOfYears:"-",
                                           weight: FontWeight.w400,
                                           color: darkColor,
                                           size: 14,

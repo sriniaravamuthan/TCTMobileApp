@@ -54,7 +54,7 @@ class FireStoreService {
         "whenTreatment": element.whenTreatment,
         "whereTreatment": element.whereTreatment,
         'anyMembersWhoUseTobacco': element.anyMembersWhoUseTobacco,
-        'memberStatus': element.died,
+        'isDead': element.died,
         'dateOfDeath': element.dateOfDemise,
         'migrate': element.migrate,
         'migrateReason': element.migrateReason,

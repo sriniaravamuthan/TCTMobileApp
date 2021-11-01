@@ -205,7 +205,11 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
     family.age = int.tryParse(ageController.text);
     family.maritalStatus = maritalStatusController.text;
     family.pregnantStatus = getPregnantStatus(pregnantStatus);
-    family.pregnantMonths = pregnantMonthController.text;
+    if(family.pregnantStatus==1.0){
+      family.pregnantMonths = pregnantMonthController.text;
+    }else{
+      family.pregnantMonths="";
+    }
     family.bloodGroup = bloodGroupController.text;
     family.physicallyChallenge = getSwitchValues(physicallyChallenge);
     family.education = educationController.text;
@@ -1392,7 +1396,7 @@ class _FamilyMemberStepState extends State<FamilyMemberStep> {
                   ),
                 ),
                 Visibility(
-                  visible: isGenderHide,
+                  visible: isGenderHide || genderController.text=="Female" ||  genderController.text=="பெண்",
                   replacement: Expanded(child: Container()),
                   child: Expanded(
                     child: Align(

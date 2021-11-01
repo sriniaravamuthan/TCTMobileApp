@@ -288,7 +288,7 @@ class _DetailScreenState extends State<DetailScreen> {
           "-" +
           family.migrateReason.toString();
       return migrate;
-    } else if (family.physicallyChallenge == 1)
+    } else if (family.migrate == 0)
       return DemoLocalization.of(context).translate('No');
   }
 
