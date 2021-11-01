@@ -695,28 +695,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
           padding: const EdgeInsets.all(4.0),
           child: OutlinedButton(
             style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xff005aa8)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        side: BorderSide(color: Colors.red)))),
-            onPressed: () {
-              mapData();
-            },
-            child: TextWidget(
-              text: DemoLocalization.of(context).translate('Submit'),
-              color: lightColor,
-              weight: FontWeight.w400,
-              size: 14,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: OutlinedButton(
-            style: ButtonStyle(
                 foregroundColor:
                 MaterialStateProperty.all<Color>(
                     Colors.white),
@@ -736,6 +714,28 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
             child: TextWidget(
               text: DemoLocalization.of(context)
                   .translate('cancel'),
+              color: lightColor,
+              weight: FontWeight.w400,
+              size: 14,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: OutlinedButton(
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(Color(0xff005aa8)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        side: BorderSide(color: Colors.red)))),
+            onPressed: () {
+              mapData();
+            },
+            child: TextWidget(
+              text: DemoLocalization.of(context).translate('Submit'),
               color: lightColor,
               weight: FontWeight.w400,
               size: 14,
