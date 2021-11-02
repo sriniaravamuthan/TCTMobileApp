@@ -13,7 +13,6 @@ import 'package:tct_demographics/util/snack_bar.dart';
 
 void setSaveSurveyAPI(
     SaveSurveyRequest surveyQuestionnaireRequest, BuildContext context) async {
-  // String token = await SharedPref().getStringPref(SharedPref().token);
   debugPrint("surveyQuestionnaireRequest:$surveyQuestionnaireRequest");
 
   Map<String, String> requestHeaders = {

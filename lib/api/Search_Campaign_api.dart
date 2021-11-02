@@ -16,8 +16,7 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
     List<String> campaignNameList,
     List<String> villageCodeList) async {
   debugPrint("getSearchCampaignAPI");
-  // searchCampaignRequest.languageCode =
-  //     await SharedPref().getStringPref(SharedPref().language);
+
   debugPrint(
       "SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
 
@@ -27,7 +26,6 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
   // String token = await SharedPref().getStringPref(SharedPref().token);
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
-    // 'Access-token': '$token'
   };
   debugPrint("requestHeaders:$requestHeaders");
   Map map = {
@@ -40,7 +38,6 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
   String body = json.encode(map);
   debugPrint("Search:$body");
   final response =
-      // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
       await http.post(Uri.parse(searchCampaignURL),
           headers: requestHeaders, body: body);
   debugPrint("Search_Datas ${response.body}");
@@ -68,5 +65,5 @@ Future<SearchCampaignResponse> getSearchCampaignAPI(
     snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
     return null;
   }
-  // }
+
 }

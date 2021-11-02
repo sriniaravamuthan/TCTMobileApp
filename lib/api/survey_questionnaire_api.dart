@@ -11,8 +11,7 @@ import 'package:tct_demographics/util/shared_preference.dart';
 
 Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     SurveyQuestionnaireRequest surveyQuestionnaireRequest) async {
-  // String token = await SharedPref().getStringPref(SharedPref().token);
-  // debugPrint("Token:$token");
+
   Map<String, String> requestHeaders = {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
@@ -34,12 +33,9 @@ Future<SurveyQuestionnaireResponse> getSurveyQuestionAPI(
     if (!data.error) {
       return data;
     } else {
-      // snackBarAlert(warning, data.isError.toString());
       return null;
     }
   } else {
-    // snackBarAlert(
-    //     error, data.message.toString(), Icon(Icons.error_outline), errorColor);
     return null;
   }
 }

@@ -14,11 +14,11 @@ import 'package:tct_demographics/util/shared_preference.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
-  //final snackBar = SnackBar(content: Text('username or password is incorrect'));
   AuthenticationService(this._firebaseAuth);
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
+  //For verifying email & password from the firebase
   Future<String> signIn({String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -43,7 +43,7 @@ class AuthenticationService {
       return e.message;
     }
   }
-
+// For logout user
   Future<void> signOut(context) async {
     await _firebaseAuth.signOut();
     SharedPref().setStringPref(SharedPref().language, "");

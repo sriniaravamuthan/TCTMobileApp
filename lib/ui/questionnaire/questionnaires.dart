@@ -22,13 +22,13 @@ import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/services/firestore_service.dart';
-import 'package:tct_demographics/ui/questionnairy/familymember_details_portrait.dart';
-import 'package:tct_demographics/ui/questionnairy/stepper/property_step.dart';
+import 'package:tct_demographics/ui/questionnaire/stepper/property_step.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 import 'familymember_details_landscape.dart';
+import 'familymember_details_portrait.dart';
 
 class QuestionnairesScreen extends StatefulWidget {
   @override
@@ -2341,7 +2341,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
       setState(() => _currentStep = step);
     }
   }
-
+// It will save current page Data and navigate to next page
   continued() {
     if (_currentStep < 1) {
       setState(() {
@@ -2359,7 +2359,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     pageController.jumpToPage(_currentStep);
     debugPrint("_currentStep: $_currentStep");
   }
-
+// it will jump to previous page
   cancel() {
     _currentStep > 0
         ? setState(() {
@@ -2384,7 +2384,7 @@ class _QuestionnairesScreenState extends State<QuestionnairesScreen> {
     panchayatCodeController.text = snapShot["panchayatCode"].toString();
     panchayatNoController.text = snapShot["panchayatNo"].toString();
   }
-
+// it will save the data in firebase
   void addData() async {
     if (formNoMax != null || formNoMax != "") {
       location.formNo = fromNoController.text;

@@ -14,56 +14,6 @@ import 'package:tct_demographics/constants/app_strings.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
 import 'package:tct_demographics/util/snack_bar.dart';
 
-/*Future<SearchCampaignResponse> setSearchCampaignAPI(
-    SearchCampaignRequest searchCampaignRequest) async {
-  debugPrint("setSearchCampaignAPI");
-  // searchCampaignRequest.searchKey ="";
-  searchCampaignRequest.languageCode =
-  await SharedPref().getStringPref(SharedPref().language);
-  debugPrint("SearchCampaign Request : ${searchCampaignRequest.campaignID} ${searchCampaignRequest.campaignName} ${searchCampaignRequest.villageCode} ${searchCampaignRequest.languageCode}");
-
-  debugPrint("searchCampaignRequest.languageCode:${searchCampaignRequest.languageCode}");
-  debugPrint("URl122 $searchCampaignURL");
-  // String token = await SharedPref().getStringPref(SharedPref().token);
-  Map<String, String> requestHeaders = {
-    HttpHeaders.contentTypeHeader: 'application/json',
-    // 'Access-token': '$token'
-  };
-  debugPrint("requestHeaders:$requestHeaders");
-  Map map ={
-    "campaignID": searchCampaignRequest.campaignID,
-    "campaignName": searchCampaignRequest.campaignName,
-    "villageCode": searchCampaignRequest.villageCode,
-    "languageCode": searchCampaignRequest.languageCode,
-    "searchKey": searchCampaignRequest.searchKey
-  };
-  String body = json.encode(map);
-  debugPrint("Search_body:$body");
-  final response =
-  // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-  await http.post(Uri.parse(searchCampaignURL), headers: requestHeaders,body:body);
-  debugPrint("Search_Datas ${response.body}");
-
-  var data = SearchCampaignResponse.fromJson(json.decode(response.body));
-  debugPrint("Search_Data $data");
-
-  if (response.statusCode == 200) {
-    debugPrint("Response ${data.toJson()}");
-    if (!data.error) {
-      return data;
-    } else {
-      debugPrint("Response2 ${data.data}");
-      snackBarAlert(warning, "API Error", errorColor);
-      return null;
-    }
-  } else {
-    debugPrint("Response3 ${data.data}");
-    snackBarAlert(error, "Server Error - ${response.statusCode}", errorColor);
-    return null;
-  }
-  // }
-}*/
-
 Future<SearchCampaignResponse> syncSearchCampaignAPI(
     SearchCampaignRequest searchCampaignRequest) async {
   debugPrint("syncSearchCampaignAPI");
@@ -94,7 +44,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
     String body = json.encode(map);
     final responseSearchCampaign = await http.post(Uri.parse(searchCampaignURL),
         body: body, headers: requestHeaders);
-    // await http.get(Uri.parse(searchCampaignURL), headers: requestHeaders);
     var data = SearchCampaignResponse.fromJson(
         json.decode(responseSearchCampaign.body));
     Map questionMap = {
@@ -163,10 +112,6 @@ Future<SearchCampaignResponse> syncSearchCampaignAPI(
                         Uri.parse(surveySaveCampaignURL),
                         headers: requestHeaders,
                         body: body);
-                    /*  final responseSurveySave =
-                        // await http.post(Uri.parse(url), body: body, headers: requestHeaders);
-                        await http.get(Uri.parse(surveySaveCampaignURL),
-                            headers: requestHeaders);*/
                     debugPrint("statusCode ${responseSurveySave.statusCode}");
                     debugPrint("Response12 ${responseSurveySave.body}");
 

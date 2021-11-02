@@ -56,6 +56,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
     ]);
     _formKey = GlobalKey<FormState>();
 
+//Check internet connection
     internetConnection = checkInternetConnection();
     internetConnection.then((value) => {
           isInternet = value,
@@ -77,7 +78,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
 
     super.initState();
   }
-
+// Get Selected Language
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language1:$language");
@@ -551,6 +552,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
                                                           5.0),
                                                   side:
                                                       BorderSide(color: Colors.black45)))),
+                                     // Search Campaign List
                                       onPressed: () {
                                         setState(() {
                                           if (_formKey.currentState
@@ -643,7 +645,7 @@ class _SearchCampaignScreenState extends State<SearchCampaignScreen> {
           ),
         ));
   }
-
+// Change App Language
   void _changeLanguage() async {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);

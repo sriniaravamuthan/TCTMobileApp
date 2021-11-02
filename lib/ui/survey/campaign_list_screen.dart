@@ -89,6 +89,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     super.initState();
   }
 
+  // Get Campaign List from API
   Future<bool> setSearchCampaignAPI({bool keyRefresh}) async {
     debugPrint("setSearchCampaignAPI :${searchCampaignRequest.page}");
     if (keyRefresh) {
@@ -208,7 +209,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
 
     // }
   }
-
+//get selected Language
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
@@ -334,86 +335,22 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
           ),
         ),
         body: checkOrientation(),
-/*
-          FutureBuilder(
-              future: Future.delayed(Duration(seconds: 5)),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  debugPrint(
-                      "CampaignList1:${_searchCampaignResponse?.data?.first?.campaignList}");
-                  return checkOrientation();
-                } else {
-                  return Text("Error ${snapshot.error}");
-                }
-              })
-*/
       ),
     );
   }
-
+// Change Orientation
   Widget checkOrientation() {
     return OrientationBuilder(
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return _portraitMode();
-/*
-          return FutureBuilder<SearchCampaignResponse>(
-            future: isInternet ? apiCampaignList : apiSync,
-            builder: (context, projectSnap) {
-              if (projectSnap.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint("SearchCampaign Response : ${projectSnap.data.data}");
-
-                dataCampaign = projectSnap.data.data.first;
-                if (dataCampaign != null) {
-                  campaignList = dataCampaign.campaignList;
-                  searchList = dataCampaign.campaignList;
-                  return _portraitMode();
-                } else {
-                  campaignList = [];
-                  searchList = [];
-                  return _noData();
-                }
-              } else {
-                return Text("Error ${projectSnap.error}");
-              }
-            },
-          );
-*/
         } else {
           return _landscapeMode();
-/*
-          return FutureBuilder<SearchCampaignResponse>(
-            future: isInternet ? apiCampaignList : apiSync,
-            builder: (context, projectSnap) {
-              if (projectSnap.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (projectSnap.connectionState == ConnectionState.done) {
-                debugPrint("SearchCampaign Response : ${projectSnap.data}");
-                dataCampaign = projectSnap.data?.data?.first;
-                if (dataCampaign != null) {
-                  campaignList = dataCampaign.campaignList;
-                  searchList = dataCampaign.campaignList;
-                  return _landscapeMode();
-                } else {
-                  campaignList = [];
-                  searchList = [];
-                  return _noData();
-                }
-              } else {
-                return Text("Error ${projectSnap.error}");
-              }
-            },
-          );
-*/
         }
       },
     );
   }
-
+// If list is empty show call this function
   Widget _noData() {
     return Center(
       child: TextWidget(
@@ -464,8 +401,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                   child: Wrap(
                     direction: Axis.horizontal,
                     alignment: WrapAlignment.start,
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -627,11 +562,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       ],
     );
   }
-
+// Change app language
   void _changeLanguage() async {
-    // Locale _temp = await setLocale(language.languageCode);
-    // SplashScreen.setLocale(context, _temp);
-
     if (dropDownLang == "தமிழ்") {
       setState(() {
         MyApp.setLocale(context, Locale('ta', 'IN'));
@@ -704,6 +636,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                       borderRadius: BorderRadius.circular(5.0),
                                       side: BorderSide(color: Colors.red)))),
                           onPressed: () {
+                            // Store campaign list in offline
                             syncSearchCampaignAPI(SearchCampaignRequest(
                                     campaignID: arguments[0],
                                     campaignName: arguments[1],
@@ -803,6 +736,8 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                         size: 15,
                         weight: FontWeight.w700,
                       ),
+                      // sort the Campaign list in Descending & Ascending
+
                       onSort: (columnIndex, _) {
                         setState(() {
                           _currentSortColumn = columnIndex;
@@ -816,8 +751,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             _searchCampaignResponse.data.first.campaignList
                                 .sort((a, b) => b.familyHeadName
                                     .compareTo(a.familyHeadName));
-
-                            // sort the product list in Descending, order by Price
                           }
                         });
                       }),
@@ -845,8 +778,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             _searchCampaignResponse.data.first.campaignList
                                 .sort((a, b) => b.respondentName
                                     .compareTo(a.respondentName));
-
-                            // sort the product list in Descending, order by Price
                           }
                         });
                       }),
@@ -903,7 +834,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             _searchCampaignResponse.data.first.campaignList
                                 .sort((a, b) => b.status.compareTo(a.status));
 
-                            // sort the product list in Descending, order by Price
                           }
                         });
                       })
@@ -973,162 +903,6 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
     return Column(
       children: [
         header(),
-/*
-        Container(
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8, top: 4),
-            child: Card(
-              color: Theme.of(context).accentColor,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Name'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignName,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 3,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Description'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignDescription,
-                            size: 14,
-                            color: lightColor,
-                            maxLines: 3,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8,top:4),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Flexible(
-                          flex: 3,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Objective Name'),
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.objectiveName,
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Campaign Population'),
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.campaignPopulation,
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Completed:'),
-                            size: 14,
-                            maxLines: 1,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.complete,
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: SurveyTextWidget(
-                            text: DemoLocalization.of(context)
-                                .translate('Pending:'),
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w700,
-                          ),
-                        ),
-                        Flexible(
-                          child: SurveyTextWidget(
-                            text: dataCampaign?.pending,
-                            size: 14,
-                            maxLines: 2,
-                            color: lightColor,
-                            weight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-*/
         Container(
           width: MediaQuery.of(context).size.width,
           child: Padding(
@@ -1186,6 +960,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                                             BorderRadius.circular(5.0),
                                         side: BorderSide(color: Colors.red)))),
                             onPressed: () {
+                              // Store campaign list in offline
                               syncSearchCampaignAPI(SearchCampaignRequest(
                                       campaignID: arguments[0],
                                       campaignName: arguments[1],
@@ -1482,7 +1257,7 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
       iconTheme: _customIconTheme(base.iconTheme),
     );
   }
-
+//search Campaign List
   Widget _searchList() {
     return Expanded(
       flex: 1,
@@ -1530,15 +1305,12 @@ class _CampaignListScreenState extends State<CampaignListScreen> {
                             campaignList.respondentName
                                 .contains(val.capitalize))
                         .toList();
-                // searchListLength =
-                //     _searchCampaignResponse?.data?.first?.campaignList?.length;
                 debugPrint(
                     "campaignList:${_searchCampaignResponse?.data?.first?.campaignList?.length}");
               });
             } else {
               setState(() {
                 refreshController.requestRefresh();
-                // campaignListLength=_searchCampaignResponse?.data?.first?.campaignList?.length;
               });
             }
           });

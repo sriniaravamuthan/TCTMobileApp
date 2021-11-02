@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
-import 'package:tct_demographics/localization/language_item.dart';
 import 'package:tct_demographics/main.dart';
 import 'package:tct_demographics/services/authendication_service.dart';
 import 'package:tct_demographics/util/shared_preference.dart';
@@ -21,7 +20,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  Language language;
   String dropDownLang;
   var height, width;
   String userName = "";
@@ -178,6 +176,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 130,
               child: InkWell(
                 onTap: () {
+                  // Navigate to home screen
                   Get.toNamed('/homeScreen');
                 },
                 child: Card(
@@ -204,6 +203,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               height: 130,
               child: InkWell(
                 onTap: () {
+                  // Navigate to Search campaign screen
                   Get.toNamed('/SearchCampaignScreen');
                 },
                 child: Card(
@@ -230,7 +230,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
+//For localization call setLocale function
   void _changeLanguage() async {
     // Locale _temp = await setLocale(language.languageCode);
     // SplashScreen.setLocale(context, _temp);
@@ -248,6 +248,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  // Village Details Collection
 /*
   getJson() async {
     String data =

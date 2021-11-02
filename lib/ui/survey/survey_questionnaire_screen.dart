@@ -77,7 +77,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     getLanguage();
     super.initState();
   }
-
+  // Get selected language
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
@@ -85,6 +85,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     getQuestionnaire();
   }
 
+  // Get family id, Campaign Name, isInternet through argument
   void getQuestionnaire() {
     setState(() {
       arguments = Get.arguments;
@@ -463,7 +464,7 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
       ),
     );
   }
-
+  // Save Questionnaire
   void mapData() {
     debugPrint("Size ${saveSurveyRequest.toJson()}");
     debugPrint("SaveLanguage:${saveSurveyRequest.languageCode}");
@@ -474,38 +475,6 @@ class _SurveyQuestionnaireScreenState extends State<SurveyQuestionnaireScreen> {
     } else {
       setSaveOfflineSurveyAPI(saveSurveyRequest, context);
     }
-    /* saveSurveyRequest.sections.forEach((section) {
-      Map<String, dynamic> sections = Map();
-      sections['sectionId'] = section.sectionId;
-      List<Map<String, dynamic>> questionItems = [];
-      for (int i = 0; i < section.questions.length; i++) {
-        Map<String, dynamic> questions = Map();
-        questions['questionId'] = section.questions[i].questionId;
-        debugPrint("Controllers ${saveQuestion[i].answerName}");
-        switch (section.questions[i].options[i].optionId) {
-          case 'Text':
-            questions['answerName'] = controllers[i].text.toString();
-            break;
-          case 'Drop-Down':
-            questions['optionId'] = dropDown;
-            break;
-          default:
-            questions['answerName'] = "";
-            break;
-        }
-        List<Map<String, dynamic>> optionItems = [];
-        section.questions[i].options.forEach((option) {
-          Map<String, dynamic> options = Map();
-          options['optionId'] = "OptionID";
-          optionItems.add(options);
-        });
-        questions['options'] = optionItems;
-        questionItems.add(questions);
-      }
-      sections['questions'] = questionItems;
-      sectionItems.add(sections);
-    });
-    debugPrint("Survey Result ${sectionItems.asMap().toString()}");*/
   }
 
   void _changeLanguage() async {

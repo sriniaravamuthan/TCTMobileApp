@@ -559,6 +559,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
                                   ),
                                   InkWell(
                                     onTap: () {
+                                      // Navigate to questionnaire screen
                                       loadData = true;
                                       Get.toNamed(
                                         '/questionnery',
@@ -1016,6 +1017,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     totalLength();
   }
 
+//Clear Searched values
   void clearSearch() {
     loadData = true;
     users.clear();
@@ -1217,13 +1219,14 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     }
   }
 
+// get Selected language
   void getLanguage() async {
     language = await SharedPref().getStringPref(SharedPref().language);
     debugPrint("language:$language");
     // demoLength = await totalLength();
     totalLength();
   }
-
+// delete family member from list
   void deleteDoc(int index) {
     debugPrint("delete DocumetId:${documentId[index]}");
     FirebaseFirestore.instance
@@ -1240,6 +1243,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     snackBarAlert(success, "Deleted SuccessFully", successColor);
   }
 
+  // Minus Count from total records count
   deleteCount() async {
     var data =
         await FirebaseFirestore.instance.collection(collectionCount).get();
@@ -1268,7 +1272,7 @@ class _HomeScreenScreenState extends State<HomeScreen> {
     }
     deleteLengthCount = totalLengthCount - 1;*/
   }
-
+// To get total records
   totalLength() async {
     var data =
         await FirebaseFirestore.instance.collection(collectionCount).get();

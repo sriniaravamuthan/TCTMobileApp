@@ -14,7 +14,7 @@ import 'package:tct_demographics/constants/app_colors.dart';
 import 'package:tct_demographics/constants/app_images.dart';
 import 'package:tct_demographics/localization/localization.dart';
 import 'package:tct_demographics/models/data_model.dart';
-import 'package:tct_demographics/ui/questionnairy/stepper/familymembers_step.dart';
+import 'package:tct_demographics/ui/questionnaire/stepper/familymembers_step.dart';
 import 'package:tct_demographics/widgets/text_widget.dart';
 
 class FamilyMemberDetailsPortrait extends StatefulWidget {

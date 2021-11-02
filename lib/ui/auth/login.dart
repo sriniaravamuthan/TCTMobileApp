@@ -296,12 +296,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
+  //Change App language
   void _changeLanguage(String selectedRadioTile) async {
     setState(() {
       MyApp.setLocale(context, Locale('en', 'US'));
       SharedPref().setStringPref(SharedPref().language, 'en');
     });
-    // }
   }
 }
