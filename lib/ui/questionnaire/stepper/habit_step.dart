@@ -17,7 +17,6 @@ class HabitsStep extends StatefulWidget {
   DemographicFamily demographicFamily;
 
   HabitsStep(this.demographicFamily);
-
   @override
   _HabitsStepState createState() => _HabitsStepState(demographicFamily);
 }
